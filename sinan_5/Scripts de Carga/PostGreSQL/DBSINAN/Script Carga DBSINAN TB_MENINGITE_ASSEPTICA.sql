@@ -1,0 +1,15 @@
+insert into dbsinan.tb_meningite_asseptica (co_seq_asseptica, ds_asseptica) values  (37,'Caxumba');
+insert into dbsinan.tb_meningite_asseptica (co_seq_asseptica, ds_asseptica) values  (38,'Sarampo');
+insert into dbsinan.tb_meningite_asseptica (co_seq_asseptica, ds_asseptica) values  (39,'Herpes simples');
+insert into dbsinan.tb_meningite_asseptica (co_seq_asseptica, ds_asseptica) values  (40,'Varicela/Catapora/ Herpes Zoster');
+insert into dbsinan.tb_meningite_asseptica (co_seq_asseptica, ds_asseptica) values  (41,'Rubeola');
+insert into dbsinan.tb_meningite_asseptica (co_seq_asseptica, ds_asseptica) values  (55,'Influenza');
+insert into dbsinan.tb_meningite_asseptica (co_seq_asseptica, ds_asseptica) values  (70,'Adenovirus');
+insert into dbsinan.tb_meningite_asseptica (co_seq_asseptica, ds_asseptica) values  (56,'Echovirus');
+insert into dbsinan.tb_meningite_asseptica (co_seq_asseptica, ds_asseptica) values  (63,'Coxasackie');
+insert into dbsinan.tb_meningite_asseptica (co_seq_asseptica, ds_asseptica) values  (59,'Outros Enterovirus');
+insert into dbsinan.tb_meningite_asseptica (co_seq_asseptica, ds_asseptica) values  (71,'Virus do Nilo Ocidental');
+insert into dbsinan.tb_meningite_asseptica (co_seq_asseptica, ds_asseptica) values  (72,'Dengue');
+insert into dbsinan.tb_meningite_asseptica (co_seq_asseptica, ds_asseptica) values  (73,'Outros Arbovirus');
+insert into dbsinan.tb_meningite_asseptica (co_seq_asseptica, ds_asseptica) values  (74,'Outros virus');
+insert into dbsinan.tb_meningite_asseptica (co_seq_asseptica, ds_asseptica) values  (75,'Nao Identificado');

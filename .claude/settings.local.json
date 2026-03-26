@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"import pdfplumber; pdf = pdfplumber.open\\(''C:/assistente_sinan/violencia_v5.pdf''\\); [print\\(f''=== PAGE {i+1} ==='', p.extract_text\\(\\)\\) for i, p in enumerate\\(pdf.pages\\)]; pdf.close\\(\\)\")",
+      "Bash(python -c \"import pdfplumber; pdf = pdfplumber.open\\(''C:/assistente_sinan/violencia_v5.pdf''\\); [print\\(f''=== PAGE {i+1} ==='', p.extract_text\\(\\)\\) for i, p in enumerate\\(pdf.pages\\)]; pdf.close\\(\\)\")",
+      "Bash(python:*)",
+      "Bash(pip install:*)",
+      "Bash(python -c \"import pdfplumber; pdf = pdfplumber.open\\(''''C:/assistente_sinan/violencia_v5.pdf''''\\); [print\\(f''''=== PAGE {i+1} ===\\\\n'''', p.extract_text\\(\\), ''''\\\\n\\\\nWORDS:'''', [\\(w[''''text''''], round\\(w[''''x0'''']\\), round\\(w[''''top'''']\\)\\) for w in \\(p.extract_words\\(\\) or []\\)]\\) for i, p in enumerate\\(pdf.pages\\)]; pdf.close\\(\\)\")"
+    ]
+  }
+}

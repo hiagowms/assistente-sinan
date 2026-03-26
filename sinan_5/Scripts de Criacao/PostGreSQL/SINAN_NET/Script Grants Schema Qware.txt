@@ -1,0 +1,5 @@
+/*DBQWARE ( SCHEMA DO DBQWARE ) */
+
+GRANT ALL ON SCHEMA dbqware TO postgres;
+GRANT ALL ON SCHEMA dbqware TO public;
+GRANT ALL ON SCHEMA dbqware TO qware;

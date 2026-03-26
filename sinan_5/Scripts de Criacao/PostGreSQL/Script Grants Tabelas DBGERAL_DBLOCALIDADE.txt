@@ -1,0 +1,155 @@
+-- SCRIPT RESPONSAVEL POR DAR PERMISSÃO ÀS TABELAS
+-- POSTGRESQL
+
+/*DBCSPU ( SCHEMA DO CSPU WEB )*/
+
+
+GRANT ALL ON TABLE dbcspu.rl_funcao_grupo_permissao TO cspuweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.rl_funcao_grupo_permissao TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.rl_funcao_grupo_permissao TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.rl_grupo_usuario TO cspuweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.rl_grupo_usuario TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.rl_grupo_usuario TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.rl_usuario_sistema TO cspuweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.rl_usuario_sistema TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.rl_usuario_sistema TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_funcao TO cspuweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_funcao TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_funcao TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_grupo TO cspuweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_grupo TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_grupo TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_log TO cspuweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_log TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_log TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_modulo TO cspuweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_modulo TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_modulo TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_sistema TO cspuweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_sistema TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_sistema TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_usuario TO cspuweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_usuario TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_usuario TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.rl_funcao_grupo_permissao TO sisnetweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.rl_grupo_usuario TO sisnetweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.rl_usuario_sistema TO sisnetweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_funcao TO sisnetweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_grupo TO sisnetweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_log TO sisnetweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_modulo TO sisnetweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_sistema TO sisnetweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.tb_usuario TO sisnetweb WITH GRANT OPTION;
+
+
+
+--SEQUENCE
+GRANT ALL ON TABLE dbcspu.seq_funcao TO cspuweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.seq_funcao TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.seq_funcao TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.seq_grupo TO cspuweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.seq_grupo TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.seq_grupo TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.seq_log TO cspuweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.seq_log TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.seq_log TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.seq_modulo TO cspuweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.seq_modulo TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.seq_modulo TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.seq_sistema TO cspuweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.seq_sistema TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.seq_sistema TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.seq_usuario TO cspuweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.seq_usuario TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dbcspu.seq_usuario TO localidadeweb WITH GRANT OPTION;
+
+
+
+/*DBGERAL ( SCHEMA DO DBGERAL )*/
+
+
+GRANT SELECT ON TABLE dbgeral.tb_cid10 TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbgeral.tb_cid10 TO geral WITH GRANT OPTION;
+GRANT SELECT ON TABLE dbgeral.tb_municipio TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbgeral.tb_municipio TO geral WITH GRANT OPTION;
+GRANT SELECT ON TABLE dbgeral.tb_pais TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbgeral.tb_pais TO geral WITH GRANT OPTION;
+GRANT SELECT ON TABLE dbgeral.tb_regiao TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbgeral.tb_regiao TO geral WITH GRANT OPTION;
+GRANT SELECT ON TABLE dbgeral.tb_regional_saude TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbgeral.tb_regional_saude TO geral WITH GRANT OPTION;
+GRANT SELECT ON TABLE dbgeral.tb_uf TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbgeral.tb_uf TO geral WITH GRANT OPTION;
+GRANT REFERENCES ON TABLE dbgeral.tb_cid10 TO localidadeweb WITH GRANT OPTION;
+GRANT REFERENCES ON TABLE dbgeral.tb_municipio TO localidadeweb WITH GRANT OPTION;
+GRANT REFERENCES ON TABLE dbgeral.tb_pais TO localidadeweb WITH GRANT OPTION;
+GRANT REFERENCES ON TABLE dbgeral.tb_regiao TO localidadeweb WITH GRANT OPTION;
+GRANT REFERENCES ON TABLE dbgeral.tb_regional_saude TO localidadeweb WITH GRANT OPTION;
+GRANT REFERENCES ON TABLE dbgeral.tb_uf TO localidadeweb WITH GRANT OPTION;
+
+GRANT SELECT, REFERENCES ON TABLE dbgeral.tb_cid10 TO sisnetweb WITH GRANT OPTION;
+GRANT SELECT, REFERENCES ON TABLE dbgeral.tb_municipio TO sisnetweb WITH GRANT OPTION;
+GRANT SELECT, REFERENCES ON TABLE dbgeral.tb_pais TO sisnetweb WITH GRANT OPTION;
+GRANT SELECT, REFERENCES ON TABLE dbgeral.tb_regiao TO sisnetweb WITH GRANT OPTION;
+GRANT SELECT, REFERENCES ON TABLE dbgeral.tb_regional_saude TO sisnetweb WITH GRANT OPTION;
+GRANT SELECT, REFERENCES ON TABLE dbgeral.tb_uf TO sisnetweb WITH GRANT OPTION;
+
+
+
+/*DBLOCALIDADE ( SCHEMA DA LOCALIDADE )*/
+
+GRANT ALL ON TABLE dblocalidade.rl_regional_municipio_svs TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.rl_regional_municipio_svs TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_cartorio TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_cartorio TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_categoria_localidade TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_categoria_localidade TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_estabelecimento_saude TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_estabelecimento_saude TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_estatistica_ibge TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_estatistica_ibge TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_localidade TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_localidade TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_naturalidade TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_naturalidade TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_ocupacao TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_ocupacao TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_regional_svs TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_regional_svs TO localidadeweb WITH GRANT OPTION;
+
+GRANT ALL ON TABLE dblocalidade.rl_regional_municipio_svs TO sisnetweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_cartorio TO sisnetweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_categoria_localidade TO sisnetweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_estabelecimento_saude TO sisnetweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_estatistica_ibge TO sisnetweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_localidade TO sisnetweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_naturalidade TO sisnetweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_ocupacao TO sisnetweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_regional_svs TO sisnetweb WITH GRANT OPTION;
+
+GRANT ALL ON TABLE dblocalidade.tb_distrito_svs TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_distrito_svs TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.tb_distrito_svs TO sisnetweb WITH GRANT OPTION;
+
+GRANT ALL ON TABLE dblocalidade.rl_estab_saude_distrito TO geral WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.rl_estab_saude_distrito TO localidadeweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dblocalidade.rl_estab_saude_distrito TO sisnetweb WITH GRANT OPTION;
+
+
+
+/*DBSISNET ( SCHEMA DO SISNET WEB )*/
+
+GRANT ALL ON TABLE dbsisnet.tb_controle_recebimento TO sisnetweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbsisnet.tb_identificacao_remetente TO sisnetweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbsisnet.tb_erro TO sisnetweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbsisnet.tb_sistema_local TO sisnetweb WITH GRANT OPTION;
+
+GRANT ALL ON TABLE dbsisnet.tb_controle_recebimento TO cspuweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbsisnet.tb_erro TO cspuweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbsisnet.tb_identificacao_remetente TO cspuweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbsisnet.tb_sistema_local TO cspuweb WITH GRANT OPTION;
+
+--SEQUENCE
+
+GRANT ALL ON TABLE dbsisnet.sq_coseqrecebimento TO sisnetweb WITH GRANT OPTION;
+GRANT ALL ON TABLE dbsisnet.sq_coseqrecebimento TO cspuweb WITH GRANT OPTION;

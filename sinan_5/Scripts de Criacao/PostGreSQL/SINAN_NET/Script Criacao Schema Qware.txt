@@ -1,0 +1,2 @@
+CREATE SCHEMA dbqware AUTHORIZATION postgres;
+COMMENT ON SCHEMA dbqware IS 'Esquema do repositório de informações do Sistema Q-Ware';

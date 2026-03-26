@@ -1,0 +1,199 @@
+
+CREATE TABLE DBGERAL.TB_CID10 (
+CO_CATEGORIA_SUBCATEGORIA VARCHAR(5)           NOT NULL,
+CO_AGRUPAMENTO NUMERIC(4)                      NOT NULL,         
+CO_CATEGORIA_PAI     VARCHAR(5)                NULL,
+NO_CATEGORIA_SUBCATEGORIA VARCHAR(275)         NOT NULL,
+ST_CRUZ              VARCHAR(1)                NULL,
+ST_ASTERISCO         VARCHAR(1)                NULL,
+CO_CATEG_SUBCATEG_SP VARCHAR(4)                NOT NULL
+  constraint NN_CID10_COCATEGSUBCATEGSP check (CO_CATEG_SUBCATEG_SP IS NOT NULL)
+);
+
+ALTER TABLE DBGERAL.TB_CID10
+   ADD CONSTRAINT PK_CID10 PRIMARY KEY (CO_CATEGORIA_SUBCATEGORIA);
+
+ALTER TABLE DBGERAL.TB_CID10
+   ADD CONSTRAINT UC_CID10_CATEGSUBCATEGSP UNIQUE (CO_CATEG_SUBCATEG_SP);
+
+
+CREATE TABLE DBGERAL.TB_MUNICIPIO (
+  co_municipio_ibge varchar(6) NOT NULL,
+  co_regional_saude varchar(4) NULL,
+  sg_uf varchar(2) NULL,
+  co_uf_ibge varchar(2) NULL,
+  no_municipio varchar(60) NOT NULL,
+  sg_municipio varchar(3) NULL,
+  nu_ddd varchar(4) NULL,
+  nu_cep varchar(8) NULL,
+  dv_municipio_ibge varchar(1) NULL,
+  co_municipio_siafi varchar(4) NULL,
+  co_municipio_siape varchar(10) NULL,
+  co_sinpas varchar(5) NULL,
+  co_regiao_correio varchar(5) NULL,
+  st_municipio varchar(10) NULL,
+  st_amazonia varchar(1) NULL,
+  st_fronteira varchar(1) NULL,
+  co_sucessor varchar(6) NULL,
+  no_anterior varchar(60) NULL,
+  st_comunidade_solidaria varchar(1) NULL,
+  st_seca varchar(1) NULL,
+  st_semi_arido varchar(1) NULL,
+  st_prmi varchar(1) NULL,
+  st_calamidade varchar(1) NULL,
+  st_indigena varchar(1) NULL,
+  nu_distancia_capital numeric(6,2) NULL,
+  st_capital varchar(1) NULL,
+  nu_latitude varchar(10) NULL,
+  nu_longitude varchar(10) NULL,
+  nu_altitude numeric(4) NULL,
+  st_registro_ativo varchar(1) NULL,
+  co_municipio_correio varchar(6) NULL,
+  co_municipio_inss varchar(5) NULL,
+  st_pits varchar(1) NULL,
+  st_quilombola varchar(1) NULL,
+  co_seq_antigo numeric(6) NULL,
+  nu_ano_extincao varchar(4) NULL,
+  nu_ano_instalacao varchar(4) NULL,
+  no_popular varchar(100) NULL,
+  st_ibge varchar(1) NULL,
+  co_municipio_svs numeric(6) NULL,
+  co_macrorregional varchar(4) NULL,
+  co_mesorregiao varchar(4) NULL,
+  co_microrregiao varchar(5) NULL,
+  co_microrregional_saude varchar(5) NULL,
+  co_regiao_metropolitana varchar(4) NULL,
+  co_aglomerado_urbano varchar(4) NULL,
+  nu_area numeric(10,3) NULL,
+  nu_idh numeric(5,4) NULL
+);
+
+ALTER TABLE DBGERAL.TB_MUNICIPIO
+   ADD CONSTRAINT PK_MUNICIPIO PRIMARY KEY (CO_MUNICIPIO_IBGE);
+
+
+CREATE  INDEX ITM_MUNICIPIO_NOMUNICIPIO ON DBGERAL.TB_MUNICIPIO (
+NO_MUNICIPIO
+);
+
+
+CREATE TABLE DBGERAL.TB_PAIS (
+CO_SEQ_PAIS          NUMERIC(4)           NOT NULL,
+NO_PAIS              VARCHAR(50)          NOT NULL,
+CO_GRUPO_PAIS        NUMERIC(6)           NULL,        --ADICIONADO
+DS_NACIONALIDADE     VARCHAR(50)          NULL,
+CO_PAIS_SIAPE        VARCHAR(3)           NULL,
+ST_REGISTRO_ATIVO    VARCHAR(1)           NULL,
+SG_MOEDA             VARCHAR(10)          NULL,
+DS_MOEDA             VARCHAR(20)          NULL,
+CO_PAIS_SIAFI        VARCHAR(3)           NULL,
+SG_PAIS              VARCHAR(3)           NULL,
+CO_CONTINENTE        NUMERIC(1)           NULL,        --ADICIONADO
+ST_AMERICA_LATINA    VARCHAR(1)           NULL,
+ST_MERCOSUL          VARCHAR(1)           NULL,
+CO_PAIS_CEF          VARCHAR(3)           NULL,
+CO_SEQ_ANTIGO        NUMERIC(6)           NULL,
+CO_PAIS_SVS          NUMERIC(4)           NULL,
+CO_CIDADE_CAPITAL    NUMERIC(6)           NULL
+);
+
+ALTER TABLE DBGERAL.TB_PAIS
+   ADD CONSTRAINT PK_PAIS PRIMARY KEY (CO_SEQ_PAIS);
+
+
+CREATE TABLE DBGERAL.TB_REGIAO (
+CO_REGIAO            VARCHAR(1)           NOT NULL,
+NO_REGIAO            VARCHAR(15)          NULL,
+SG_REGIAO            VARCHAR(2)           NULL,
+ST_REGISTRO_ATIVO    VARCHAR(1)           NULL,
+CO_REGIAO_SVS        NUMERIC(4)           NULL
+);
+
+ALTER TABLE DBGERAL.TB_REGIAO
+   ADD CONSTRAINT PK_REGIAO PRIMARY KEY (CO_REGIAO);
+
+
+
+CREATE TABLE DBGERAL.TB_REGIONAL_SAUDE (
+CO_REGIONAL_SAUDE    VARCHAR(4)           NOT NULL,
+CO_UF_IBGE           VARCHAR(2)           NULL,
+CO_MACRORREGIONAL    VARCHAR(4)           NULL,         --ADICIONADO
+NO_REGIONAL_SAUDE    VARCHAR(100)         NULL,
+NO_ABREVIADO_REGIONAL_SAUDE VARCHAR(25)   NULL,
+ST_REGISTRO_ATIVO    VARCHAR(1)           NULL
+);
+
+ALTER TABLE DBGERAL.TB_REGIONAL_SAUDE
+   ADD CONSTRAINT PK_REGIONALSAUDE PRIMARY KEY (CO_REGIONAL_SAUDE);
+
+
+
+CREATE TABLE DBGERAL.TB_UF (
+CO_UF_IBGE           VARCHAR(2)           NOT NULL,
+SG_UF                VARCHAR(2)           NOT NULL,
+CO_REGIAO            VARCHAR(1)           NULL,
+CO_PAIS              NUMERIC(4)           NULL,
+NO_UF                VARCHAR(30)          NULL,
+CO_UF_SINPAS         VARCHAR(2)           NULL,
+NU_AREA              NUMERIC(11,3)        NULL,
+CO_UF_LDO            VARCHAR(4)           NULL,
+NU_LATITUDE          VARCHAR(10)          NULL,
+CO_UF_INSS           VARCHAR(2)           NULL,
+CO_UF_SIAFI          VARCHAR(2)           NULL,
+NU_LONGITUDE         VARCHAR(10)          NULL,
+NU_ORDEM_REGIAO      NUMERIC(2)           NULL,
+DS_NATURALIDADE      VARCHAR(50)          NULL,
+CO_MUNICIPIO_IBGE_CAPITAL VARCHAR(6)           NULL
+  constraint nn_uf_comunicibgecapital check (CO_MUNICIPIO_IBGE_CAPITAL IS NOT NULL),
+ST_REGISTRO_ATIVO    VARCHAR(1)           NULL,
+CO_ESTADO_SVS        NUMERIC(2)           NULL
+);
+
+ALTER TABLE DBGERAL.TB_UF
+   ADD CONSTRAINT PK_UF PRIMARY KEY (CO_UF_IBGE);
+
+ALTER TABLE DBGERAL.TB_UF
+   ADD CONSTRAINT UK_UF_SGUF UNIQUE (SG_UF);
+
+
+ALTER TABLE DBGERAL.TB_CID10
+   ADD CONSTRAINT FK_CID10_CID10 FOREIGN KEY (CO_CATEGORIA_PAI)
+      REFERENCES DBGERAL.TB_CID10 (CO_CATEGORIA_SUBCATEGORIA)
+      ON DELETE SET NULL ON UPDATE RESTRICT;
+
+ALTER TABLE DBGERAL.TB_MUNICIPIO
+   ADD CONSTRAINT FK_MUNICIPIO_REGSAUDE FOREIGN KEY (CO_REGIONAL_SAUDE)
+      REFERENCES DBGERAL.TB_REGIONAL_SAUDE (CO_REGIONAL_SAUDE)
+      ON DELETE SET NULL ON UPDATE RESTRICT;
+
+ALTER TABLE DBGERAL.TB_MUNICIPIO
+   ADD CONSTRAINT FK_MUNICIPIO_SGUF FOREIGN KEY (SG_UF)
+      REFERENCES DBGERAL.TB_UF (SG_UF)
+      ON DELETE SET NULL ON UPDATE RESTRICT;
+
+ALTER TABLE DBGERAL.TB_MUNICIPIO
+   ADD CONSTRAINT FK_MUNICIPIO_UF_CODIBGE FOREIGN KEY (CO_UF_IBGE)
+      REFERENCES DBGERAL.TB_UF (CO_UF_IBGE)
+      ON DELETE SET NULL ON UPDATE RESTRICT;
+
+
+ALTER TABLE DBGERAL.TB_REGIONAL_SAUDE
+   ADD CONSTRAINT FK_REGSAUDE_UF FOREIGN KEY (CO_UF_IBGE)
+      REFERENCES DBGERAL.TB_UF (CO_UF_IBGE)
+      ON DELETE SET NULL ON UPDATE RESTRICT;
+
+
+ALTER TABLE DBGERAL.TB_UF
+   ADD CONSTRAINT FK_UF_MUNICIPIO FOREIGN KEY (CO_MUNICIPIO_IBGE_CAPITAL)
+      REFERENCES DBGERAL.TB_MUNICIPIO (CO_MUNICIPIO_IBGE)
+      ON DELETE SET NULL ON UPDATE RESTRICT;
+
+ALTER TABLE DBGERAL.TB_UF
+   ADD CONSTRAINT FK_UF_PAIS FOREIGN KEY (CO_PAIS)
+      REFERENCES DBGERAL.TB_PAIS (CO_SEQ_PAIS)
+      ON DELETE SET NULL ON UPDATE RESTRICT;
+
+ALTER TABLE DBGERAL.TB_UF
+   ADD CONSTRAINT FK_UF_REGIAO FOREIGN KEY (CO_REGIAO)
+      REFERENCES DBGERAL.TB_REGIAO (CO_REGIAO)
+      ON DELETE SET NULL ON UPDATE RESTRICT;

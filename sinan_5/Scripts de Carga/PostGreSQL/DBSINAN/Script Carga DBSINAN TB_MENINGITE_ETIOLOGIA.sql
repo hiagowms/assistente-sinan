@@ -1,0 +1,10 @@
+insert into dbsinan.tb_meningite_etiologia (co_seq_etiologia, ds_etiologia) values (42,'Outros fungos');
+insert into dbsinan.tb_meningite_etiologia (co_seq_etiologia, ds_etiologia) values (43,'Cryptococcus/Torula');
+insert into dbsinan.tb_meningite_etiologia (co_seq_etiologia, ds_etiologia) values (44,'Candida albicans, sp');
+insert into dbsinan.tb_meningite_etiologia (co_seq_etiologia, ds_etiologia) values (47,'Tripanossoma cruzi');
+insert into dbsinan.tb_meningite_etiologia (co_seq_etiologia, ds_etiologia) values (48,'Toxoplasma (Gondii, sp)');
+insert into dbsinan.tb_meningite_etiologia (co_seq_etiologia, ds_etiologia) values (50,'Cisticerco');
+insert into dbsinan.tb_meningite_etiologia (co_seq_etiologia, ds_etiologia) values (52,'Outros Parasitas');
+insert into dbsinan.tb_meningite_etiologia (co_seq_etiologia, ds_etiologia) values (76,'Plasmodium sp');
+insert into dbsinan.tb_meningite_etiologia (co_seq_etiologia, ds_etiologia) values (77,'Taenia Solium');
+insert into dbsinan.tb_meningite_etiologia (co_seq_etiologia, ds_etiologia) values (64,'Aspergillus');
