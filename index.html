@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assistente SINAN — PET Saúde Digital</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f0f4f8;color:#1a2a3a;min-height:100vh}
+
+/* HEADER */
+#hdr{background:linear-gradient(135deg,#0d2c4a 0%,#1a5276 55%,#1a6b45 100%);padding:28px 40px 28px;position:relative;overflow:hidden}
+#hdr::after{content:'';position:absolute;top:-60%;right:-5%;width:600px;height:600px;background:radial-gradient(circle,rgba(255,255,255,.04) 0%,transparent 65%);pointer-events:none}
+.hdr-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:24px}
+.hdr-logo{height:56px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))}
+.hdr-vline{width:1px;height:46px;background:rgba(255,255,255,.22)}
+.hdr-text h1{color:#fff;font-size:24px;font-weight:800;letter-spacing:-.3px}
+.hdr-text p{color:rgba(255,255,255,.7);font-size:13px;margin-top:4px;line-height:1.5}
+.pet-chip{display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.85);font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;letter-spacing:.3px}
+
+/* DISCLAIMER */
+.disclaimer{background:#fff3cd;border-bottom:1px solid #ffd047;padding:12px 40px}
+.disclaimer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;gap:12px;font-size:13px;color:#7d5a00;line-height:1.6}
+.disclaimer strong{color:#5c4200}
+
+/* MAIN */
+main{max-width:1100px;margin:0 auto;padding:32px 24px 60px}
+
+/* LEGAL BOX */
+.legal-box{background:#fff;border-radius:12px;border:1px solid #e0eaf2;padding:18px 22px;margin-bottom:28px;display:flex;gap:14px;align-items:flex-start;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.legal-box .ico{font-size:22px;flex-shrink:0;margin-top:2px}
+.legal-box h3{font-size:13px;font-weight:700;color:#1a3a5c;margin-bottom:5px}
+.legal-box p{font-size:12px;color:#5a7a9a;line-height:1.65}
+.legal-box a{color:#1a5276}
+
+/* SECTION TITLE */
+.sec-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.4px;color:#4a7a9b;margin:32px 0 14px;display:flex;align-items:center;gap:10px}
+.sec-title::after{content:'';flex:1;height:1px;background:#d8e8f0}
+
+/* FICHA CARDS GRID */
+.fichas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+
+/* FICHA CARD */
+.card{background:#fff;border-radius:14px;border:1px solid #e0eaf2;box-shadow:0 2px 12px rgba(0,0,0,.06);overflow:hidden;transition:box-shadow .2s,transform .2s;display:flex;flex-direction:column}
+.card.active{border-color:#1a5276}
+.card.active:hover{box-shadow:0 8px 28px rgba(26,82,118,.15);transform:translateY(-3px)}
+.card-strip{height:4px;background:#d8e8f0}
+.card.active .card-strip{background:linear-gradient(90deg,#1a5276,#1a6b45)}
+.card-main{padding:18px 20px;flex:1}
+.card-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.card-icon{font-size:26px;line-height:1;flex-shrink:0}
+.card-title{font-size:14px;font-weight:700;color:#1a2a3a;line-height:1.35}
+.card-title.dim{color:#5a7a9a}
+.card-status{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;margin-top:4px;letter-spacing:.3px}
+.status-active{background:#e8f5e9;color:#1e8449}
+.status-wip{background:#f5f0ff;color:#7b5ea7}
+.status-noficha{background:#fff3e0;color:#e65100}
+
+/* DEFINIÇÃO (collapsible) */
+details.def{margin-top:10px;border-top:1px solid #eef3f8;padding-top:8px}
+details.def summary{font-size:11px;font-weight:700;color:#4a7a9b;cursor:pointer;user-select:none;list-style:none;display:flex;align-items:center;gap:6px}
+details.def summary::-webkit-details-marker{display:none}
+details.def summary::before{content:'▸';transition:transform .2s;display:inline-block}
+details[open].def summary::before{transform:rotate(90deg)}
+details.def summary:hover{color:#1a5276}
+.def-text{font-size:12px;color:#5a7a9a;line-height:1.65;margin-top:8px;padding:10px 12px;background:#f7fafd;border-radius:6px;border-left:3px solid #bed3e8}
+
+/* CARD ACTIONS */
+.card-actions{padding:12px 20px 16px;display:flex;gap:8px;flex-wrap:wrap;border-top:1px solid #f0f4f8}
+.btn-assistente{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#1a5276,#1a6b45);color:#fff;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;border:none;cursor:pointer;transition:opacity .15s}
+.btn-assistente:hover{opacity:.88}
+.btn-download{display:inline-flex;align-items:center;gap:6px;background:#f0f6fb;color:#1a5276;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;border:1.5px solid #c5ddef;cursor:pointer;transition:background .15s}
+.btn-download:hover{background:#e0edf8}
+.btn-wip{display:inline-flex;align-items:center;gap:6px;background:#f7f3ff;color:#9b7ec8;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;border:1.5px solid #ddd5f0;cursor:not-allowed;opacity:.8}
+.btn-noficha{display:inline-flex;align-items:center;gap:6px;background:#fff8f0;color:#c07020;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #f0d8b0;cursor:default;opacity:.85}
+
+/* FOOTER */
+footer{background:#fff;border-top:1px solid #e0eaf2;padding:24px 40px;text-align:center}
+footer p{font-size:12px;color:#8aabb8;line-height:1.7}
+footer strong{color:#4a7a9b}
+footer a{color:#1a5276;text-decoration:none}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="hdr-inner">
+    <img class="hdr-logo" src="assets/img/pet-saude-logo-png.png" alt="PET Saúde Digital">
+    <div class="hdr-vline"></div>
+    <div class="hdr-text">
+      <h1>Assistente SINAN</h1>
+      <p>Apoio ao preenchimento das fichas de notificação compulsória de interesse em Saúde do Trabalhador</p>
+      <span class="pet-chip">PET Saúde Digital — Programa de Educação pelo Trabalho para a Saúde</span>
+    </div>
+  </div>
+</header>
+
+<div class="disclaimer">
+  <div class="disclaimer-inner">
+    <span style="font-size:20px;flex-shrink:0">⚠️</span>
+    <div>
+      <strong>Esta ferramenta NÃO é oficial.</strong> Ela exibe uma versão adaptada das fichas do SINAN com o objetivo exclusivo de facilitar o preenchimento manual e a <strong>posterior digitação no SINAN NET</strong>, sistema oficial do Ministério da Saúde. As informações aqui inseridas não são transmitidas a nenhum sistema — o preenchimento no SINAN NET permanece obrigatório para que os dados sejam efetivamente incorporados à vigilância epidemiológica nacional.
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- LEGAL BASIS -->
+  <div class="legal-box">
+    <span class="ico">📜</span>
+    <div>
+      <h3>Base Legal — Notificação Compulsória</h3>
+      <p>A notificação compulsória é <strong>obrigatória para médicos, demais profissionais de saúde e responsáveis por serviços públicos e privados</strong>, diante da <strong>suspeita ou confirmação</strong> de doença ou agravo listado na relação nacional — mesmo que ainda não confirmado, todo caso suspeito deve ser notificado imediatamente.<br>
+      <strong>Portaria de Consolidação nº 4, de 28/09/2017</strong>, Seção II, Art. 3º e §1º · Atualizada pela <strong>Portaria GM/MS nº 10.175, de 23/01/2026</strong></p>
+    </div>
+  </div>
+
+  <!-- FICHAS DE SAÚDE DO TRABALHADOR -->
+  <div class="sec-title">🏭 Doenças Relacionadas ao Trabalho</div>
+
+  <div class="fichas-grid">
+
+    <!-- ACIDENTE TRABALHO GRAVE -->
+    <div class="card">
+      <div class="card-strip"></div>
+      <div class="card-main">
+        <div class="card-head">
+          <span class="card-icon">🚨</span>
+          <div>
+            <div class="card-title dim">Acidente de Trabalho Grave</div>
+            <span class="card-status status-wip">🔧 Assistente em construção</span>
+          </div>
+        </div>
+        <details class="def">
+          <summary>Ver definição de caso</summary>
+          <div class="def-text">Todo caso de acidente de trabalho por causas não naturais (Capítulo XX da CID-10: V01–Y98), ocorrido no ambiente de trabalho ou durante o exercício do trabalho, que provoca lesão corporal ou perturbação funcional, podendo causar a perda ou redução — temporária ou permanente — da capacidade para o trabalho, ou morte. Inclui acidentes <strong>típicos</strong> (no trabalho ou a serviço do empregador) e de <strong>trajeto</strong> (entre residência e trabalho).</div>
+        </details>
+      </div>
+      <div class="card-actions">
+        <a class="btn-download" href="fichas/DRT_Acidente_Trabalho_Grave.pdf" download>⬇ Ficha em branco</a>
+        <span class="btn-wip">🔧 Em construção</span>
+      </div>
+    </div>
+
+    <!-- ACIDENTE MATERIAL BIOLÓGICO -->
+    <div class="card">
+      <div class="card-strip"></div>
+      <div class="card-main">
+        <div class="card-head">
+          <span class="card-icon">🧪</span>
+          <div>
+            <div class="card-title dim">Acidente de Trabalho com Exposição a Material Biológico</div>
+            <span class="card-status status-wip">🔧 Assistente em construção</span>
+          </div>
+        </div>
+        <details class="def">
+          <summary>Ver definição de caso</summary>
+          <div class="def-text">Todo caso de acidente de trabalho ocorrido com quaisquer categorias profissionais, envolvendo exposição direta ou indireta do trabalhador a <strong>material biológico (orgânico) potencialmente contaminado por patógenos</strong> (vírus, bactérias, fungos, príons e protozoários), por meio de material perfuro-cortante ou não.</div>
+        </details>
+      </div>
+      <div class="card-actions">
+        <a class="btn-download" href="fichas/DRT_Acidente_Trabalho_Biologico.pdf" download>⬇ Ficha em branco</a>
+        <span class="btn-wip">🔧 Em construção</span>
+      </div>
+    </div>
+
+    <!-- CÂNCER -->
+    <div class="card">
+      <div class="card-strip"></div>
+      <div class="card-main">
+        <div class="card-head">
+          <span class="card-icon">🔬</span>
+          <div>
+            <div class="card-title dim">Câncer Relacionado ao Trabalho</div>
+            <span class="card-status status-wip">🔧 Assistente em construção</span>
+          </div>
+        </div>
+        <details class="def">
+          <summary>Ver definição de caso</summary>
+          <div class="def-text">Todo caso de câncer que tem entre seus elementos causais a <strong>exposição a fatores, agentes e situações de risco presentes no ambiente e processo de trabalho</strong>, mesmo após a cessação da exposição.</div>
+        </details>
+      </div>
+      <div class="card-actions">
+        <a class="btn-download" href="fichas/DRT_CANCER.pdf" download>⬇ Ficha em branco</a>
+        <span class="btn-wip">🔧 Em construção</span>
+      </div>
+    </div>
+
+    <!-- DERMATOSES -->
+    <div class="card">
+      <div class="card-strip"></div>
+      <div class="card-main">
+        <div class="card-head">
+          <span class="card-icon">🩺</span>
+          <div>
+            <div class="card-title dim">Dermatoses Ocupacionais</div>
+            <span class="card-status status-wip">🔧 Assistente em construção</span>
+          </div>
+        </div>
+        <details class="def">
+          <summary>Ver definição de caso</summary>
+          <div class="def-text">Toda alteração da pele, mucosas e anexos, direta ou indiretamente causadas, mantidas ou agravadas pelo trabalho, relacionadas à <strong>exposição a agentes químicos, biológicos ou físicos</strong>, e ainda a quadros psíquicos, podendo ocasionar afecções do tipo irritativa (a maioria) ou sensibilizante, confirmada por critérios clínicos, epidemiológicos ou laboratoriais.</div>
+        </details>
+      </div>
+      <div class="card-actions">
+        <a class="btn-download" href="fichas/DRT_DERMATOSES.pdf" download>⬇ Ficha em branco</a>
+        <span class="btn-wip">🔧 Em construção</span>
+      </div>
+    </div>
+
+    <!-- LER/DORT -->
+    <div class="card">
+      <div class="card-strip"></div>
+      <div class="card-main">
+        <div class="card-head">
+          <span class="card-icon">💪</span>
+          <div>
+            <div class="card-title dim">LER/DORT</div>
+            <span class="card-status status-wip">🔧 Assistente em construção</span>
+          </div>
+        </div>
+        <details class="def">
+          <summary>Ver definição de caso</summary>
+          <div class="def-text">Todas as doenças, lesões e síndromes que afetam o <strong>sistema músculo-esquelético</strong>, causadas, mantidas ou agravadas pelo trabalho (CID-10: G50–59, G90–99, M00–99). Caracteriza-se por sintomas como dor crônica, parestesia e fadiga muscular, manifestando-se principalmente no pescoço, coluna vertebral, cintura escapular e membros.</div>
+        </details>
+      </div>
+      <div class="card-actions">
+        <a class="btn-download" href="fichas/DRT_LERDORT.pdf" download>⬇ Ficha em branco</a>
+        <span class="btn-wip">🔧 Em construção</span>
+      </div>
+    </div>
+
+    <!-- PAIR -->
+    <div class="card">
+      <div class="card-strip"></div>
+      <div class="card-main">
+        <div class="card-head">
+          <span class="card-icon">👂</span>
+          <div>
+            <div class="card-title dim">PAIR — Perda Auditiva Induzida por Ruído</div>
+            <span class="card-status status-wip">🔧 Assistente em construção</span>
+          </div>
+        </div>
+        <details class="def">
+          <summary>Ver definição de caso</summary>
+          <div class="def-text">Todos os casos de diminuição gradual da acuidade auditiva decorrente da <strong>exposição continuada ao ruído</strong>, associado ou não a substâncias químicas, no ambiente de trabalho. É sempre <strong>neurossensorial, geralmente bilateral, irreversível</strong> e passível de não progressão após cessada a exposição.</div>
+        </details>
+      </div>
+      <div class="card-actions">
+        <a class="btn-download" href="fichas/DRT_PAIR.pdf" download>⬇ Ficha em branco</a>
+        <span class="btn-wip">🔧 Em construção</span>
+      </div>
+    </div>
+
+    <!-- PNEUMOCONIOSES -->
+    <div class="card">
+      <div class="card-strip"></div>
+      <div class="card-main">
+        <div class="card-head">
+          <span class="card-icon">🫁</span>
+          <div>
+            <div class="card-title dim">Pneumoconioses</div>
+            <span class="card-status status-wip">🔧 Assistente em construção</span>
+          </div>
+        </div>
+        <details class="def">
+          <summary>Ver definição de caso</summary>
+          <div class="def-text">Todas as doenças pulmonares causadas pela <strong>inalação e acúmulo de poeiras inorgânicas</strong> nos pulmões com reação tissular à presença dessas poeiras, devido à exposição no ambiente ou processo de trabalho. Exemplos: asbestose, silicose, beriliose, estanhose, siderose, entre outras.</div>
+        </details>
+      </div>
+      <div class="card-actions">
+        <a class="btn-download" href="fichas/DRT_Pneumoconioses.pdf" download>⬇ Ficha em branco</a>
+        <span class="btn-wip">🔧 Em construção</span>
+      </div>
+    </div>
+
+    <!-- TRANSTORNOS MENTAIS -->
+    <div class="card">
+      <div class="card-strip"></div>
+      <div class="card-main">
+        <div class="card-head">
+          <span class="card-icon">🧠</span>
+          <div>
+            <div class="card-title dim">Transtornos Mentais Relacionados ao Trabalho</div>
+            <span class="card-status status-wip">🔧 Assistente em construção</span>
+          </div>
+        </div>
+        <details class="def">
+          <summary>Ver definição de caso</summary>
+          <div class="def-text">Todo caso de sofrimento emocional em suas diversas formas (choro fácil, tristeza, medo excessivo, ansiedade, irritação, taquicardia, insegurança etc.) que pode indicar o desenvolvimento ou agravo de <strong>transtornos mentais com elementos causais relacionados ao trabalho</strong>, incluindo sua organização, gestão ou exposição a agentes tóxicos — CID-10: F00–F99, Y90–Y91, Z73.0, R40–R46, Z55–Z65, Y96 e X60–X84.</div>
+        </details>
+      </div>
+      <div class="card-actions">
+        <a class="btn-download" href="fichas/DRT_TranstornosMentais.pdf" download>⬇ Ficha em branco</a>
+        <span class="btn-wip">🔧 Em construção</span>
+      </div>
+    </div>
+
+    <!-- DISTÚRBIO DE VOZ -->
+    <div class="card">
+      <div class="card-strip"></div>
+      <div class="card-main">
+        <div class="card-head">
+          <span class="card-icon">🎙️</span>
+          <div>
+            <div class="card-title dim">Distúrbio de Voz Relacionado ao Trabalho</div>
+            <span class="card-status status-noficha">⚠ Sem ficha oficial</span>
+          </div>
+        </div>
+        <details class="def">
+          <summary>Ver definição</summary>
+          <div class="def-text">Qualquer forma de <strong>desvio vocal relacionado à atividade profissional</strong> que diminua, comprometa ou impeça a atuação ou a comunicação do trabalhador, podendo ou não haver alteração orgânica da laringe. <em>Este agravo não possui ficha de notificação própria no SINAN</em> — a notificação pode ser realizada como transtorno relacionado ao trabalho.</div>
+        </details>
+      </div>
+      <div class="card-actions">
+        <a class="btn-download" href="fichas/disturbio_voz.pdf" download>⬇ Ficha de referência</a>
+        <span class="btn-noficha">⚠ Sem ficha oficial</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- VIOLÊNCIA + INTOXICAÇÃO -->
+  <div class="sec-title" style="margin-top:36px">📋 Outras Notificações Compulsórias</div>
+
+  <div class="fichas-grid">
+
+    <!-- VIOLÊNCIA — ATIVA -->
+    <div class="card active">
+      <div class="card-strip"></div>
+      <div class="card-main">
+        <div class="card-head">
+          <span class="card-icon">🛡️</span>
+          <div>
+            <div class="card-title">Violência Doméstica, Sexual e/ou Outras Violências Interpessoais</div>
+            <span class="card-status status-active">✓ Assistente disponível</span>
+          </div>
+        </div>
+        <details class="def">
+          <summary>Ver definição de caso</summary>
+          <div class="def-text">Toda violência doméstica, sexual e/ou outra violência interpessoal (física, psicológica/moral, sexual, tráfico de pessoas, trabalho infantil, tortura, financeira/econômica, negligência/abandono ou intervenção legal) praticada contra qualquer pessoa, independentemente de sexo, idade ou vínculo com o agressor.</div>
+        </details>
+      </div>
+      <div class="card-actions">
+        <a class="btn-assistente" href="sinan_violencia.html">✏️ Usar assistente</a>
+        <a class="btn-download" href="fichas/violencia_editavel.pdf" download>⬇ Ficha editável</a>
+        <a class="btn-download" href="fichas/violencia.pdf" download>⬇ Ficha em branco</a>
+      </div>
+    </div>
+
+    <!-- INTOXICAÇÃO EXÓGENA -->
+    <div class="card">
+      <div class="card-strip"></div>
+      <div class="card-main">
+        <div class="card-head">
+          <span class="card-icon">⚗️</span>
+          <div>
+            <div class="card-title dim">Intoxicação Exógena</div>
+            <span class="card-status status-wip">🔧 Assistente em construção</span>
+          </div>
+        </div>
+        <details class="def">
+          <summary>Ver definição de caso</summary>
+          <div class="def-text"><strong>Caso suspeito:</strong> todo indivíduo que, tendo sido exposto a substâncias químicas (agrotóxicos, medicamentos, produtos domésticos, cosméticos, produtos industriais, drogas, plantas ou alimentos/bebidas), apresente sinais e sintomas clínicos de intoxicação e/ou alterações laboratoriais provavelmente ou possivelmente compatíveis.</div>
+        </details>
+      </div>
+      <div class="card-actions">
+        <a class="btn-download" href="fichas/Intoxicacao_Exogena_v5.pdf" download>⬇ Ficha em branco</a>
+        <span class="btn-wip">🔧 Em construção</span>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  <img src="assets/img/pet-logo-branca.png" alt="PET" style="height:36px;opacity:.5;margin-bottom:10px;display:block;margin-left:auto;margin-right:auto">
+  <p><strong>Assistente SINAN</strong> — PET Saúde Digital — Programa de Educação pelo Trabalho para a Saúde</p>
+  <p>Ferramenta educacional sem vínculo oficial com o Ministério da Saúde · Base legal: <a href="#" target="_blank">Portaria GM/MS nº 10.175/2026</a></p>
+  <p style="margin-top:6px;font-size:11px">Desenvolvido em formato HTML/CSS/JS puro para uso offline em navegador</p>
+</footer>
+
+</body>
+</html>
