@@ -6,7 +6,7 @@
 <title>Assistente SINAN — PET Saúde Digital</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f0f4f8;color:#1a2a3a;min-height:100vh}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f0f4f8;color:#1a2a3a;min-height:100vh;font-size:16px;line-height:1.5}
 
 /* HEADER */
 #hdr{background:linear-gradient(135deg,#0d2c4a 0%,#1a5276 55%,#1a6b45 100%);padding:28px 40px 28px;position:relative;overflow:hidden}
@@ -14,31 +14,42 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f0f4f
 .hdr-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:24px}
 .hdr-logo{height:56px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))}
 .hdr-vline{width:1px;height:46px;background:rgba(255,255,255,.22)}
-.hdr-text h1{color:#fff;font-size:24px;font-weight:800;letter-spacing:-.3px}
-.hdr-text p{color:rgba(255,255,255,.7);font-size:13px;margin-top:4px;line-height:1.5}
-.pet-chip{display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.85);font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;letter-spacing:.3px}
+.hdr-text h1{color:#fff;font-size:26px;font-weight:800;letter-spacing:-.3px}
+.hdr-text p{color:rgba(255,255,255,.75);font-size:14px;margin-top:4px;line-height:1.5}
+.pet-chip{display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.85);font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;letter-spacing:.3px}
 
 /* DISCLAIMER */
-.disclaimer{background:#fff3cd;border-bottom:1px solid #ffd047;padding:12px 40px}
-.disclaimer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;gap:12px;font-size:13px;color:#7d5a00;line-height:1.6}
+.disclaimer{background:#fff3cd;border-bottom:1px solid #ffd047;padding:14px 40px}
+.disclaimer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;gap:12px;font-size:14px;color:#7d5a00;line-height:1.6}
 .disclaimer strong{color:#5c4200}
 
 /* MAIN */
 main{max-width:1100px;margin:0 auto;padding:32px 24px 60px}
 
+/* ABOUT BOX */
+.about-box{background:#fff;border-radius:14px;border:1px solid #e0eaf2;padding:22px 26px;margin-bottom:28px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.about-box h2{font-size:18px;font-weight:800;color:#1a3a5c;margin-bottom:10px}
+.about-box p{font-size:14px;color:#4b5563;line-height:1.7;margin-bottom:12px}
+.about-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.about-chip{font-size:13px;font-weight:700;padding:5px 14px;border-radius:20px}
+.chip-green{background:#e8f5e9;color:#1e8449}
+.chip-blue{background:#eff6ff;color:#1e40af}
+.chip-yellow{background:#fef9e7;color:#c07000}
+.chip-purple{background:#f3e8ff;color:#7c3aed}
+
 /* LEGAL BOX */
 .legal-box{background:#fff;border-radius:12px;border:1px solid #e0eaf2;padding:18px 22px;margin-bottom:28px;display:flex;gap:14px;align-items:flex-start;box-shadow:0 2px 10px rgba(0,0,0,.05)}
 .legal-box .ico{font-size:22px;flex-shrink:0;margin-top:2px}
-.legal-box h3{font-size:13px;font-weight:700;color:#1a3a5c;margin-bottom:5px}
-.legal-box p{font-size:12px;color:#5a7a9a;line-height:1.65}
+.legal-box h3{font-size:14px;font-weight:700;color:#1a3a5c;margin-bottom:5px}
+.legal-box p{font-size:13px;color:#5a7a9a;line-height:1.65}
 .legal-box a{color:#1a5276}
 
 /* SECTION TITLE */
-.sec-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.4px;color:#4a7a9b;margin:32px 0 14px;display:flex;align-items:center;gap:10px}
+.sec-title{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1.4px;color:#4a7a9b;margin:0 0 16px;display:flex;align-items:center;gap:10px}
 .sec-title::after{content:'';flex:1;height:1px;background:#d8e8f0}
 
 /* FICHA CARDS GRID */
-.fichas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.fichas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;margin-bottom:20px}
 
 /* FICHA CARD */
 .card{background:#fff;border-radius:14px;border:1px solid #e0eaf2;box-shadow:0 2px 12px rgba(0,0,0,.06);overflow:hidden;transition:box-shadow .2s,transform .2s;display:flex;flex-direction:column}
@@ -46,37 +57,37 @@ main{max-width:1100px;margin:0 auto;padding:32px 24px 60px}
 .card.active:hover{box-shadow:0 8px 28px rgba(26,82,118,.15);transform:translateY(-3px)}
 .card-strip{height:4px;background:#d8e8f0}
 .card.active .card-strip{background:linear-gradient(90deg,#1a5276,#1a6b45)}
-.card-main{padding:18px 20px;flex:1}
-.card-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
-.card-icon{font-size:26px;line-height:1;flex-shrink:0}
-.card-title{font-size:14px;font-weight:700;color:#1a2a3a;line-height:1.35}
+.card-main{padding:20px 22px;flex:1}
+.card-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px}
+.card-icon{font-size:28px;line-height:1;flex-shrink:0}
+.card-title{font-size:15px;font-weight:700;color:#1a2a3a;line-height:1.35}
 .card-title.dim{color:#5a7a9a}
-.card-status{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;margin-top:4px;letter-spacing:.3px}
+.card-status{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;margin-top:5px;letter-spacing:.3px}
 .status-active{background:#e8f5e9;color:#1e8449}
 .status-wip{background:#f5f0ff;color:#7b5ea7}
 .status-noficha{background:#fff3e0;color:#e65100}
 
 /* DEFINIÇÃO (collapsible) */
 details.def{margin-top:10px;border-top:1px solid #eef3f8;padding-top:8px}
-details.def summary{font-size:11px;font-weight:700;color:#4a7a9b;cursor:pointer;user-select:none;list-style:none;display:flex;align-items:center;gap:6px}
+details.def summary{font-size:12px;font-weight:700;color:#4a7a9b;cursor:pointer;user-select:none;list-style:none;display:flex;align-items:center;gap:6px}
 details.def summary::-webkit-details-marker{display:none}
 details.def summary::before{content:'▸';transition:transform .2s;display:inline-block}
 details[open].def summary::before{transform:rotate(90deg)}
 details.def summary:hover{color:#1a5276}
-.def-text{font-size:12px;color:#5a7a9a;line-height:1.65;margin-top:8px;padding:10px 12px;background:#f7fafd;border-radius:6px;border-left:3px solid #bed3e8}
+.def-text{font-size:13px;color:#5a7a9a;line-height:1.65;margin-top:8px;padding:10px 12px;background:#f7fafd;border-radius:6px;border-left:3px solid #bed3e8}
 
 /* CARD ACTIONS */
-.card-actions{padding:12px 20px 16px;display:flex;gap:8px;flex-wrap:wrap;border-top:1px solid #f0f4f8}
-.btn-assistente{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#1a5276,#1a6b45);color:#fff;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;border:none;cursor:pointer;transition:opacity .15s}
+.card-actions{padding:14px 22px 18px;display:flex;gap:8px;flex-wrap:wrap;border-top:1px solid #f0f4f8}
+.btn-assistente{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#1a5276,#1a6b45);color:#fff;padding:10px 18px;border-radius:8px;font-size:14px;font-weight:700;text-decoration:none;border:none;cursor:pointer;transition:opacity .15s}
 .btn-assistente:hover{opacity:.88}
-.btn-download{display:inline-flex;align-items:center;gap:6px;background:#f0f6fb;color:#1a5276;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;border:1.5px solid #c5ddef;cursor:pointer;transition:background .15s}
+.btn-download{display:inline-flex;align-items:center;gap:6px;background:#f0f6fb;color:#1a5276;padding:10px 16px;border-radius:8px;font-size:14px;font-weight:700;text-decoration:none;border:1.5px solid #c5ddef;cursor:pointer;transition:background .15s}
 .btn-download:hover{background:#e0edf8}
-.btn-wip{display:inline-flex;align-items:center;gap:6px;background:#f7f3ff;color:#9b7ec8;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;border:1.5px solid #ddd5f0;cursor:not-allowed;opacity:.8}
-.btn-noficha{display:inline-flex;align-items:center;gap:6px;background:#fff8f0;color:#c07020;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;border:1.5px solid #f0d8b0;cursor:default;opacity:.85}
+.btn-wip{display:inline-flex;align-items:center;gap:6px;background:#f7f3ff;color:#9b7ec8;padding:10px 16px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;border:1.5px solid #ddd5f0;cursor:not-allowed;opacity:.8}
+.btn-noficha{display:inline-flex;align-items:center;gap:6px;background:#fff8f0;color:#c07020;padding:10px 16px;border-radius:8px;font-size:13px;font-weight:600;border:1.5px solid #f0d8b0;cursor:default;opacity:.85}
 
 /* FOOTER */
 footer{background:#fff;border-top:1px solid #e0eaf2;padding:24px 40px;text-align:center}
-footer p{font-size:12px;color:#8aabb8;line-height:1.7}
+footer p{font-size:13px;color:#8aabb8;line-height:1.7}
 footer strong{color:#4a7a9b}
 footer a{color:#1a5276;text-decoration:none}
 </style>
@@ -106,6 +117,19 @@ footer a{color:#1a5276;text-decoration:none}
 
 <main>
 
+  <!-- ABOUT BOX -->
+  <div class="about-box">
+    <h2>🎯 Sobre este assistente</h2>
+    <p>O objetivo deste assistente é <strong>tornar mais fácil e visualmente agradável o processo de preenchimento das fichas SINAN</strong>. Os campos apresentados correspondem exatamente ao que aparece no SINAN NET no momento da digitação, obtidos dos arquivos de instalação do SINAN NET.</p>
+    <div class="about-chips">
+      <span class="about-chip chip-green">✓ Campos idênticos ao SINAN NET</span>
+      <span class="about-chip chip-blue">✓ Busca de município por nome</span>
+      <span class="about-chip chip-yellow">✓ Busca por sinônimos de ocupação (CBO) — Digite o nome informal e o assistente encontra a ocupação correta do SINAN NET</span>
+      <span class="about-chip chip-purple">✓ Gera PDF para impressão</span>
+    </div>
+    <p style="font-size:13px;color:#6b7280;margin-bottom:0">A ficha impressa <strong>não substitui a digitação no SINAN NET</strong> — ela serve como apoio visual e rascunho para posterior registro oficial.</p>
+  </div>
+
   <!-- LEGAL BASIS -->
   <div class="legal-box">
     <span class="ico">📜</span>
@@ -116,29 +140,52 @@ footer a{color:#1a5276;text-decoration:none}
     </div>
   </div>
 
-  <!-- FICHAS DE SAÚDE DO TRABALHADOR -->
-  <div class="sec-title">🏭 Doenças Relacionadas ao Trabalho</div>
+  <!-- ALL FICHAS — FLAT LIST -->
+  <div class="sec-title">📋 Fichas de Notificação SINAN</div>
 
   <div class="fichas-grid">
 
-    <!-- ACIDENTE TRABALHO GRAVE -->
+    <!-- VIOLÊNCIA — ATIVA (primeiro: mais completo e disponível) -->
+    <div class="card active">
+      <div class="card-strip"></div>
+      <div class="card-main">
+        <div class="card-head">
+          <span class="card-icon">🛡️</span>
+          <div>
+            <div class="card-title">Violência Doméstica, Sexual e/ou Outras Violências Interpessoais</div>
+            <span class="card-status status-active">✓ Assistente disponível</span>
+          </div>
+        </div>
+        <details class="def">
+          <summary>Ver definição de caso</summary>
+          <div class="def-text">Toda violência doméstica, sexual e/ou outra violência interpessoal (física, psicológica/moral, sexual, tráfico de pessoas, trabalho infantil, tortura, financeira/econômica, negligência/abandono ou intervenção legal) praticada contra qualquer pessoa, independentemente de sexo, idade ou vínculo com o agressor.</div>
+        </details>
+      </div>
+      <div class="card-actions">
+        <a class="btn-assistente" href="sinan_violencia.html">✏️ Usar assistente</a>
+        <a class="btn-download" href="fichas/violencia_editavel.pdf" download>⬇ Ficha editável</a>
+        <a class="btn-download" href="fichas/violencia.pdf" download>⬇ Ficha em branco</a>
+      </div>
+    </div>
+
+    <!-- INTOXICAÇÃO EXÓGENA -->
     <div class="card">
       <div class="card-strip"></div>
       <div class="card-main">
         <div class="card-head">
-          <span class="card-icon">🚨</span>
+          <span class="card-icon">⚗️</span>
           <div>
-            <div class="card-title dim">Acidente de Trabalho Grave</div>
+            <div class="card-title dim">Intoxicação Exógena</div>
             <span class="card-status status-wip">🔧 Assistente em construção</span>
           </div>
         </div>
         <details class="def">
           <summary>Ver definição de caso</summary>
-          <div class="def-text">Todo caso de acidente de trabalho por causas não naturais (Capítulo XX da CID-10: V01–Y98), ocorrido no ambiente de trabalho ou durante o exercício do trabalho, que provoca lesão corporal ou perturbação funcional, podendo causar a perda ou redução — temporária ou permanente — da capacidade para o trabalho, ou morte. Inclui acidentes <strong>típicos</strong> (no trabalho ou a serviço do empregador) e de <strong>trajeto</strong> (entre residência e trabalho).</div>
+          <div class="def-text"><strong>Caso suspeito:</strong> todo indivíduo que, tendo sido exposto a substâncias químicas (agrotóxicos, medicamentos, produtos domésticos, cosméticos, produtos industriais, drogas, plantas ou alimentos/bebidas), apresente sinais e sintomas clínicos de intoxicação e/ou alterações laboratoriais provavelmente ou possivelmente compatíveis.</div>
         </details>
       </div>
       <div class="card-actions">
-        <a class="btn-download" href="fichas/DRT_Acidente_Trabalho_Grave.pdf" download>⬇ Ficha em branco</a>
+        <a class="btn-download" href="fichas/Intoxicacao_Exogena_v5.pdf" download>⬇ Ficha em branco</a>
         <span class="btn-wip">🔧 Em construção</span>
       </div>
     </div>
@@ -165,46 +212,24 @@ footer a{color:#1a5276;text-decoration:none}
       </div>
     </div>
 
-    <!-- CÂNCER -->
+    <!-- ACIDENTE TRABALHO GRAVE -->
     <div class="card">
       <div class="card-strip"></div>
       <div class="card-main">
         <div class="card-head">
-          <span class="card-icon">🔬</span>
+          <span class="card-icon">🚨</span>
           <div>
-            <div class="card-title dim">Câncer Relacionado ao Trabalho</div>
+            <div class="card-title dim">Acidente de Trabalho Grave</div>
             <span class="card-status status-wip">🔧 Assistente em construção</span>
           </div>
         </div>
         <details class="def">
           <summary>Ver definição de caso</summary>
-          <div class="def-text">Todo caso de câncer que tem entre seus elementos causais a <strong>exposição a fatores, agentes e situações de risco presentes no ambiente e processo de trabalho</strong>, mesmo após a cessação da exposição.</div>
+          <div class="def-text">Todo caso de acidente de trabalho por causas não naturais (Capítulo XX da CID-10: V01–Y98), ocorrido no ambiente de trabalho ou durante o exercício do trabalho, que provoca lesão corporal ou perturbação funcional, podendo causar a perda ou redução — temporária ou permanente — da capacidade para o trabalho, ou morte. Inclui acidentes <strong>típicos</strong> (no trabalho ou a serviço do empregador) e de <strong>trajeto</strong> (entre residência e trabalho).</div>
         </details>
       </div>
       <div class="card-actions">
-        <a class="btn-download" href="fichas/DRT_CANCER.pdf" download>⬇ Ficha em branco</a>
-        <span class="btn-wip">🔧 Em construção</span>
-      </div>
-    </div>
-
-    <!-- DERMATOSES -->
-    <div class="card">
-      <div class="card-strip"></div>
-      <div class="card-main">
-        <div class="card-head">
-          <span class="card-icon">🩺</span>
-          <div>
-            <div class="card-title dim">Dermatoses Ocupacionais</div>
-            <span class="card-status status-wip">🔧 Assistente em construção</span>
-          </div>
-        </div>
-        <details class="def">
-          <summary>Ver definição de caso</summary>
-          <div class="def-text">Toda alteração da pele, mucosas e anexos, direta ou indiretamente causadas, mantidas ou agravadas pelo trabalho, relacionadas à <strong>exposição a agentes químicos, biológicos ou físicos</strong>, e ainda a quadros psíquicos, podendo ocasionar afecções do tipo irritativa (a maioria) ou sensibilizante, confirmada por critérios clínicos, epidemiológicos ou laboratoriais.</div>
-        </details>
-      </div>
-      <div class="card-actions">
-        <a class="btn-download" href="fichas/DRT_DERMATOSES.pdf" download>⬇ Ficha em branco</a>
+        <a class="btn-download" href="fichas/DRT_Acidente_Trabalho_Grave.pdf" download>⬇ Ficha em branco</a>
         <span class="btn-wip">🔧 Em construção</span>
       </div>
     </div>
@@ -227,6 +252,50 @@ footer a{color:#1a5276;text-decoration:none}
       </div>
       <div class="card-actions">
         <a class="btn-download" href="fichas/DRT_LERDORT.pdf" download>⬇ Ficha em branco</a>
+        <span class="btn-wip">🔧 Em construção</span>
+      </div>
+    </div>
+
+    <!-- TRANSTORNOS MENTAIS -->
+    <div class="card">
+      <div class="card-strip"></div>
+      <div class="card-main">
+        <div class="card-head">
+          <span class="card-icon">🧠</span>
+          <div>
+            <div class="card-title dim">Transtornos Mentais Relacionados ao Trabalho</div>
+            <span class="card-status status-wip">🔧 Assistente em construção</span>
+          </div>
+        </div>
+        <details class="def">
+          <summary>Ver definição de caso</summary>
+          <div class="def-text">Todo caso de sofrimento emocional em suas diversas formas (choro fácil, tristeza, medo excessivo, ansiedade, irritação, taquicardia, insegurança etc.) que pode indicar o desenvolvimento ou agravo de <strong>transtornos mentais com elementos causais relacionados ao trabalho</strong>, incluindo sua organização, gestão ou exposição a agentes tóxicos — CID-10: F00–F99, Y90–Y91, Z73.0, R40–R46, Z55–Z65, Y96 e X60–X84.</div>
+        </details>
+      </div>
+      <div class="card-actions">
+        <a class="btn-download" href="fichas/DRT_TranstornosMentais.pdf" download>⬇ Ficha em branco</a>
+        <span class="btn-wip">🔧 Em construção</span>
+      </div>
+    </div>
+
+    <!-- DERMATOSES -->
+    <div class="card">
+      <div class="card-strip"></div>
+      <div class="card-main">
+        <div class="card-head">
+          <span class="card-icon">🩺</span>
+          <div>
+            <div class="card-title dim">Dermatoses Ocupacionais</div>
+            <span class="card-status status-wip">🔧 Assistente em construção</span>
+          </div>
+        </div>
+        <details class="def">
+          <summary>Ver definição de caso</summary>
+          <div class="def-text">Toda alteração da pele, mucosas e anexos, direta ou indiretamente causadas, mantidas ou agravadas pelo trabalho, relacionadas à <strong>exposição a agentes químicos, biológicos ou físicos</strong>, e ainda a quadros psíquicos, podendo ocasionar afecções do tipo irritativa (a maioria) ou sensibilizante, confirmada por critérios clínicos, epidemiológicos ou laboratoriais.</div>
+        </details>
+      </div>
+      <div class="card-actions">
+        <a class="btn-download" href="fichas/DRT_DERMATOSES.pdf" download>⬇ Ficha em branco</a>
         <span class="btn-wip">🔧 Em construção</span>
       </div>
     </div>
@@ -275,24 +344,24 @@ footer a{color:#1a5276;text-decoration:none}
       </div>
     </div>
 
-    <!-- TRANSTORNOS MENTAIS -->
+    <!-- CÂNCER -->
     <div class="card">
       <div class="card-strip"></div>
       <div class="card-main">
         <div class="card-head">
-          <span class="card-icon">🧠</span>
+          <span class="card-icon">🔬</span>
           <div>
-            <div class="card-title dim">Transtornos Mentais Relacionados ao Trabalho</div>
+            <div class="card-title dim">Câncer Relacionado ao Trabalho</div>
             <span class="card-status status-wip">🔧 Assistente em construção</span>
           </div>
         </div>
         <details class="def">
           <summary>Ver definição de caso</summary>
-          <div class="def-text">Todo caso de sofrimento emocional em suas diversas formas (choro fácil, tristeza, medo excessivo, ansiedade, irritação, taquicardia, insegurança etc.) que pode indicar o desenvolvimento ou agravo de <strong>transtornos mentais com elementos causais relacionados ao trabalho</strong>, incluindo sua organização, gestão ou exposição a agentes tóxicos — CID-10: F00–F99, Y90–Y91, Z73.0, R40–R46, Z55–Z65, Y96 e X60–X84.</div>
+          <div class="def-text">Todo caso de câncer que tem entre seus elementos causais a <strong>exposição a fatores, agentes e situações de risco presentes no ambiente e processo de trabalho</strong>, mesmo após a cessação da exposição.</div>
         </details>
       </div>
       <div class="card-actions">
-        <a class="btn-download" href="fichas/DRT_TranstornosMentais.pdf" download>⬇ Ficha em branco</a>
+        <a class="btn-download" href="fichas/DRT_CANCER.pdf" download>⬇ Ficha em branco</a>
         <span class="btn-wip">🔧 Em construção</span>
       </div>
     </div>
@@ -321,65 +390,13 @@ footer a{color:#1a5276;text-decoration:none}
 
   </div>
 
-  <!-- VIOLÊNCIA + INTOXICAÇÃO -->
-  <div class="sec-title" style="margin-top:36px">📋 Outras Notificações Compulsórias</div>
-
-  <div class="fichas-grid">
-
-    <!-- VIOLÊNCIA — ATIVA -->
-    <div class="card active">
-      <div class="card-strip"></div>
-      <div class="card-main">
-        <div class="card-head">
-          <span class="card-icon">🛡️</span>
-          <div>
-            <div class="card-title">Violência Doméstica, Sexual e/ou Outras Violências Interpessoais</div>
-            <span class="card-status status-active">✓ Assistente disponível</span>
-          </div>
-        </div>
-        <details class="def">
-          <summary>Ver definição de caso</summary>
-          <div class="def-text">Toda violência doméstica, sexual e/ou outra violência interpessoal (física, psicológica/moral, sexual, tráfico de pessoas, trabalho infantil, tortura, financeira/econômica, negligência/abandono ou intervenção legal) praticada contra qualquer pessoa, independentemente de sexo, idade ou vínculo com o agressor.</div>
-        </details>
-      </div>
-      <div class="card-actions">
-        <a class="btn-assistente" href="sinan_violencia.html">✏️ Usar assistente</a>
-        <a class="btn-download" href="fichas/violencia_editavel.pdf" download>⬇ Ficha editável</a>
-        <a class="btn-download" href="fichas/violencia.pdf" download>⬇ Ficha em branco</a>
-      </div>
-    </div>
-
-    <!-- INTOXICAÇÃO EXÓGENA -->
-    <div class="card">
-      <div class="card-strip"></div>
-      <div class="card-main">
-        <div class="card-head">
-          <span class="card-icon">⚗️</span>
-          <div>
-            <div class="card-title dim">Intoxicação Exógena</div>
-            <span class="card-status status-wip">🔧 Assistente em construção</span>
-          </div>
-        </div>
-        <details class="def">
-          <summary>Ver definição de caso</summary>
-          <div class="def-text"><strong>Caso suspeito:</strong> todo indivíduo que, tendo sido exposto a substâncias químicas (agrotóxicos, medicamentos, produtos domésticos, cosméticos, produtos industriais, drogas, plantas ou alimentos/bebidas), apresente sinais e sintomas clínicos de intoxicação e/ou alterações laboratoriais provavelmente ou possivelmente compatíveis.</div>
-        </details>
-      </div>
-      <div class="card-actions">
-        <a class="btn-download" href="fichas/Intoxicacao_Exogena_v5.pdf" download>⬇ Ficha em branco</a>
-        <span class="btn-wip">🔧 Em construção</span>
-      </div>
-    </div>
-
-  </div>
-
 </main>
 
 <footer>
   <img src="assets/img/pet-logo-branca.png" alt="PET" style="height:36px;opacity:.5;margin-bottom:10px;display:block;margin-left:auto;margin-right:auto">
   <p><strong>Assistente SINAN</strong> — PET Saúde Digital — Programa de Educação pelo Trabalho para a Saúde</p>
   <p>Ferramenta educacional sem vínculo oficial com o Ministério da Saúde · Base legal: <a href="#" target="_blank">Portaria GM/MS nº 10.175/2026</a></p>
-  <p style="margin-top:6px;font-size:11px">Desenvolvido em formato HTML/CSS/JS puro para uso offline em navegador</p>
+  <p style="margin-top:6px;font-size:12px">Desenvolvido em formato HTML/CSS/JS puro para uso offline em navegador</p>
 </footer>
 
 </body>

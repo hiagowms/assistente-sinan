@@ -9,33 +9,36 @@
   RESET
 ==============================================================*/
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#eef2f7;color:#1a2a3a;min-height:100vh}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f6;color:#1f2937;min-height:100vh;font-size:15px;line-height:1.5}
 
 /*==============================================================
   STICKY HEADER + PROGRESS GAMIFICATION
 ==============================================================*/
-#hdr{position:sticky;top:0;z-index:300;background:linear-gradient(135deg,#0d2540 0%,#1a4d72 55%,#145a32 100%);box-shadow:0 4px 20px rgba(0,0,0,.28)}
+#hdr{position:sticky;top:0;z-index:300;background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 55%,#1e40af 100%);box-shadow:0 4px 20px rgba(0,0,0,.28)}
 .hdr-row{display:flex;align-items:center;gap:16px;padding:10px 28px;max-width:1180px;margin:0 auto}
 .hdr-logo{height:38px;object-fit:contain}
 .hdr-vline{width:1px;height:32px;background:rgba(255,255,255,.2);flex-shrink:0}
 .hdr-title{flex:1}
-.hdr-title h1{color:#fff;font-size:14px;font-weight:700;line-height:1.3}
-.hdr-title p{color:rgba(255,255,255,.55);font-size:11px;margin-top:1px}
+.hdr-title h1{color:#fff;font-size:16px;font-weight:700;line-height:1.3}
+.hdr-title p{color:rgba(255,255,255,.65);font-size:13px;margin-top:2px}
 
 /* PROGRESS DISPLAY */
-.hdr-progress{display:flex;align-items:center;gap:14px;flex-shrink:0}
-.prog-ring-wrap{position:relative;width:52px;height:52px;flex-shrink:0}
+.hdr-progress{display:flex;align-items:center;gap:16px;flex-shrink:0}
+.prog-ring-wrap{position:relative;width:72px;height:72px;flex-shrink:0}
 .prog-ring-wrap svg{transform:rotate(-90deg)}
-.prog-ring-bg{fill:none;stroke:rgba(255,255,255,.15);stroke-width:4}
-.prog-ring-fill{fill:none;stroke:#2ecc71;stroke-width:4;stroke-linecap:round;stroke-dasharray:132;stroke-dashoffset:132;transition:stroke-dashoffset .5s ease,stroke .5s ease}
+.prog-ring-bg{fill:none;stroke:rgba(255,255,255,.15);stroke-width:5}
+.prog-ring-fill{fill:none;stroke:#2ecc71;stroke-width:5;stroke-linecap:round;stroke-dasharray:182;stroke-dashoffset:182;transition:stroke-dashoffset .5s ease,stroke .5s ease}
 .prog-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.prog-pct{font-size:12px;font-weight:800;color:#fff;line-height:1}
+.prog-pct{font-size:16px;font-weight:900;color:#fff;line-height:1}
 .prog-meta{text-align:right}
-.prog-meta .prog-status{font-size:11px;font-weight:700;color:rgba(255,255,255,.9);line-height:1.3}
-.prog-meta .prog-count{font-size:10px;color:rgba(255,255,255,.55);margin-top:2px}
+.prog-meta .prog-status{font-size:13px;font-weight:700;color:rgba(255,255,255,.95);line-height:1.3}
+.prog-meta .prog-count{font-size:12px;color:rgba(255,255,255,.65);margin-top:3px}
+/* GLOBAL PROGRESS BAR STRIP */
+#prog-bar-strip{height:6px;background:rgba(255,255,255,.1);overflow:hidden;transition:background .3s}
+#prog-bar-fill{height:100%;width:0%;background:#2ecc71;transition:width .5s ease,background .5s ease;border-radius:0 4px 4px 0}
 
 /* GERAR PDF BUTTON */
-.hdr-btn{background:linear-gradient(135deg,#27ae60,#2ecc71);color:#fff;border:none;padding:10px 22px;border-radius:30px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.hdr-btn{background:linear-gradient(135deg,#27ae60,#2ecc71);color:#fff;border:none;padding:12px 26px;border-radius:30px;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.2)}
 .hdr-btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.25)}
 .hdr-btn:disabled{background:#5a8870;box-shadow:none;cursor:not-allowed;transform:none}
 .hdr-back{color:rgba(255,255,255,.65);font-size:12px;text-decoration:none;padding:6px 10px;border-radius:20px;border:1px solid rgba(255,255,255,.15);transition:all .15s;white-space:nowrap}
@@ -47,31 +50,31 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#eef2f
 .wrapper{max-width:1180px;margin:0 auto;padding:20px 20px 60px}
 
 /* DISCLAIMER */
-.banner-warn{background:#fff3cd;border:1px solid #ffd047;border-radius:10px;padding:12px 18px;margin-bottom:18px;display:flex;gap:12px;align-items:flex-start;font-size:12px;color:#7d5a00;line-height:1.6}
+.banner-warn{background:#fff3cd;border:1px solid #ffd047;border-radius:10px;padding:14px 20px;margin-bottom:20px;display:flex;gap:14px;align-items:flex-start;font-size:14px;color:#7d5a00;line-height:1.7}
 .banner-warn strong{color:#5c4200}
 
 /* INTRO */
-.intro{background:#fff;border-radius:12px;border:1px solid #e0eaf2;padding:16px 20px;margin-bottom:22px;display:flex;gap:16px;align-items:flex-start;font-size:13px;color:#5a7a9a;line-height:1.6;box-shadow:0 2px 10px rgba(0,0,0,.05)}
-.intro h2{font-size:14px;font-weight:700;color:#1a3a5c;margin-bottom:5px}
-.intro a{color:#1a5276}
+.intro{background:#ffffff;border-radius:14px;border:1px solid #e5e7eb;padding:20px 24px;margin-bottom:24px;display:flex;gap:18px;align-items:flex-start;font-size:14px;color:#4b5563;line-height:1.7;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.intro h2{font-size:16px;font-weight:800;color:#1f2937;margin-bottom:8px}
+.intro a{color:#2563eb}
 
 /*==============================================================
   SECTION CARDS
 ==============================================================*/
-.sec{background:#fff;border-radius:14px;border:1px solid #e0eaf2;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:20px;overflow:hidden}
+.sec{background:#ffffff;border-radius:14px;border:1px solid #e5e7eb;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:20px;overflow:hidden}
 
 /* Section header — NOT clickable (no accordion) */
-.sec-hdr{display:flex;align-items:center;gap:14px;padding:16px 22px 14px;border-bottom:2px solid #f0f5fa;border-left:5px solid #c5d8e8;transition:border-color .4s}
+.sec-hdr{display:flex;align-items:center;gap:14px;padding:16px 22px 14px;border-bottom:2px solid #f3f4f6;border-left:5px solid #d1d5db;transition:border-color .4s}
 .sec.done .sec-hdr{border-left-color:#27ae60;background:linear-gradient(90deg,rgba(39,174,96,.04) 0%,transparent 60%)}
 .sec.partial .sec-hdr{border-left-color:#f39c12;background:linear-gradient(90deg,rgba(243,156,18,.04) 0%,transparent 60%)}
-.sec-num{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;background:#5a8aaa;transition:background .4s}
+.sec-num{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;background:#6b7280;transition:background .4s}
 .sec.done .sec-num{background:#27ae60}
 .sec.partial .sec-num{background:#f39c12}
 .sec-info{flex:1}
-.sec-info h3{font-size:14px;font-weight:700;color:#1a2a3a}
-.sec-info p{font-size:11px;color:#8aabb8;margin-top:2px}
-.sec-badge{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.3px;white-space:nowrap;transition:all .4s}
-.badge-empty{background:#f0f4f8;color:#7a9ab8}
+.sec-info h3{font-size:16px;font-weight:700;color:#1f2937}
+.sec-info p{font-size:13px;color:#9ca3af;margin-top:3px}
+.sec-badge{font-size:13px;font-weight:700;padding:5px 12px;border-radius:20px;letter-spacing:.3px;white-space:nowrap;transition:all .4s}
+.badge-empty{background:#f3f4f6;color:#6b7280}
 .badge-partial{background:#fef9e7;color:#c07000}
 .badge-done{background:#e8f5e9;color:#1e8449}
 
@@ -87,76 +90,77 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#eef2f
 .col-3{grid-column:span 3}
 
 .fld{display:flex;flex-direction:column;gap:5px}
-.fld label{font-size:11px;font-weight:700;color:#3a5a7a;line-height:1.3;display:flex;align-items:baseline;gap:4px;flex-wrap:wrap}
-.fld label .req{color:#c0392b;font-size:13px;line-height:1}
-.fld label .cn{font-size:10px;color:#a0b8c8;font-weight:600}
-.fld input,.fld select,.fld textarea{padding:9px 12px;border:1.5px solid #d0dce8;border-radius:8px;font-size:13px;font-family:inherit;background:#fff;color:#1a2a3a;outline:none;transition:border-color .15s,box-shadow .15s;width:100%}
-.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:#1a5276;box-shadow:0 0 0 3px rgba(26,82,118,.1)}
+.fld label{font-size:13px;font-weight:700;color:#374151;line-height:1.4;display:flex;align-items:baseline;gap:4px;flex-wrap:wrap}
+.fld label .req{color:#c0392b;font-size:15px;line-height:1}
+.fld label .cn{font-size:11px;color:#9ca3af;font-weight:600}
+.fld input,.fld select,.fld textarea{padding:11px 14px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:15px;font-family:inherit;background:#f9fafb;color:#1f2937;outline:none;transition:border-color .15s,box-shadow .15s;width:100%}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
 .fld input.filled{border-color:#27ae60}
 .fld input.error,.fld select.error{border-color:#e74c3c!important;box-shadow:0 0 0 3px rgba(231,76,60,.1)!important}
-.fld select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238aabb8'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;cursor:pointer}
+.fld select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239ca3af'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;cursor:pointer}
 .fld textarea{resize:vertical;min-height:80px}
 
 /* Sublabel dentro de seção */
-.sublabel{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:#4a7a9b;padding:16px 0 8px;border-bottom:1px solid #eaf0f6;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.sublabel{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:#4b5563;padding:16px 0 10px;border-bottom:1px solid #e5e7eb;margin-bottom:14px;display:flex;align-items:center;gap:6px}
 .sublabel .req-mark{color:#c0392b;font-size:14px;font-weight:700}
 
 /*==============================================================
   PILLS (radio / checkbox)
 ==============================================================*/
 .pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:2px}
-.pill{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:8px;border:1.5px solid #d0dce8;cursor:pointer;font-size:12px;font-weight:600;color:#3a5a7a;background:#fff;transition:all .15s;user-select:none}
-.pill:hover{border-color:#1a5276;background:#f0f6fb}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:8px;border:1.5px solid #e5e7eb;cursor:pointer;font-size:14px;font-weight:600;color:#374151;background:#ffffff;transition:all .15s;user-select:none}
+.pill:hover{border-color:#2563eb;background:#eff6ff}
 .pill input{position:absolute;opacity:0;pointer-events:none;width:0;height:0}
-.pill.checked{border-color:#1a5276;background:#e8f2fb;color:#1a3a6a}
+.pill.checked{border-color:#2563eb;background:#eff6ff;color:#1e40af}
 .pill.checked-danger{border-color:#e74c3c;background:#fdf2f2;color:#c0392b}
 
 /*==============================================================
   INFO / WARN / DANGER BOXES
 ==============================================================*/
-.info{background:#ebf5fb;border:1px solid #b8d6ef;border-radius:8px;padding:10px 14px;font-size:12px;color:#1a4a6a;line-height:1.6;margin-bottom:12px;display:flex;gap:10px}
-.info .ico{flex-shrink:0;font-size:16px;line-height:1.4}
-.warn{background:#fef9e7;border:1px solid #f9e79f;border-radius:8px;padding:10px 14px;font-size:12px;color:#7d6608;line-height:1.6;margin-bottom:12px;display:flex;gap:10px}
-.danger-alert{background:#fdf2f2;border:1.5px solid #f5b7b1;border-radius:8px;padding:12px 14px;font-size:12px;color:#922b21;line-height:1.65;margin-bottom:12px;display:none;gap:10px}
+.info{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:12px 16px;font-size:14px;color:#1e40af;line-height:1.7;margin-bottom:14px;display:flex;gap:12px}
+.info .ico{flex-shrink:0;font-size:18px;line-height:1.4}
+.warn{background:#fef9e7;border:1px solid #f9e79f;border-radius:8px;padding:12px 16px;font-size:14px;color:#7d6608;line-height:1.7;margin-bottom:14px;display:flex;gap:12px}
+.danger-alert{background:#fdf2f2;border:1.5px solid #f5b7b1;border-radius:8px;padding:14px 16px;font-size:14px;color:#922b21;line-height:1.7;margin-bottom:14px;display:none;gap:12px}
 .danger-alert .ico{flex-shrink:0;font-size:18px;line-height:1.3}
 
 /*==============================================================
   TOAST
 ==============================================================*/
-#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(10px);padding:12px 24px;border-radius:30px;font-size:13px;font-weight:700;opacity:0;transition:all .35s;z-index:800;pointer-events:none;white-space:nowrap;box-shadow:0 8px 28px rgba(0,0,0,.25);background:#1a2a3a;color:#fff}
+#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(10px);padding:12px 24px;border-radius:30px;font-size:13px;font-weight:700;opacity:0;transition:all .35s;z-index:800;pointer-events:none;white-space:nowrap;box-shadow:0 8px 28px rgba(0,0,0,.25);background:#1f2937;color:#fff}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 #toast.t-ok{background:#1e8449}
 #toast.t-warn{background:#c07000}
 #toast.t-err{background:#c0392b}
-#toast.t-mile{background:linear-gradient(135deg,#1a5276,#1e8449)}
+#toast.t-mile{background:linear-gradient(135deg,#2563eb,#1e8449)}
 
 /*==============================================================
   VALIDATION MODAL
 ==============================================================*/
 .ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:900;align-items:center;justify-content:center}
 .ov.show{display:flex}
-.modal{background:#fff;border-radius:18px;padding:28px 32px;max-width:460px;width:94%;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal{background:#ffffff;border-radius:18px;padding:28px 32px;max-width:460px;width:94%;box-shadow:0 20px 60px rgba(0,0,0,.2)}
 .modal-ico{font-size:40px;text-align:center;margin-bottom:10px}
-.modal h2{font-size:17px;font-weight:800;color:#1a3a5c;margin-bottom:8px;text-align:center}
-.modal p{font-size:13px;color:#5a7a9a;line-height:1.6;text-align:center}
+.modal h2{font-size:17px;font-weight:800;color:#1f2937;margin-bottom:8px;text-align:center}
+.modal p{font-size:13px;color:#6b7280;line-height:1.6;text-align:center}
 .err-list{margin-top:14px;display:flex;flex-direction:column;gap:5px;max-height:280px;overflow-y:auto}
 .err-item{background:#fef3f2;border:1px solid #f5b7b1;border-radius:6px;padding:7px 12px;font-size:12px;color:#922b21}
 .modal-actions{display:flex;justify-content:center;gap:10px;margin-top:22px}
 .mbtn{padding:10px 28px;border-radius:30px;font-size:13px;font-weight:700;cursor:pointer;border:none}
-.mbtn-p{background:linear-gradient(135deg,#1a5276,#1e8449);color:#fff}
-.mbtn-s{background:#f0f4f8;color:#5a7a9a}
+.mbtn-p{background:linear-gradient(135deg,#2563eb,#1e8449);color:#fff}
+.mbtn-s{background:#f3f4f6;color:#6b7280}
 
 /*==============================================================
   AUTOCOMPLETE (municipio / CID10)
 ==============================================================*/
 .ac-wrap{position:relative}
-.ac-drop{position:absolute;top:100%;left:0;right:0;z-index:500;background:#fff;border:1.5px solid #1a5276;border-top:none;border-radius:0 0 8px 8px;box-shadow:0 6px 20px rgba(0,0,0,.15);max-height:220px;overflow-y:auto;display:none}
+.ac-drop{position:absolute;top:100%;left:0;right:0;z-index:500;background:#ffffff;border:1.5px solid #2563eb;border-top:none;border-radius:0 0 8px 8px;box-shadow:0 6px 20px rgba(0,0,0,.15);max-height:220px;overflow-y:auto;display:none}
 .ac-drop.show{display:block}
-.ac-item{padding:8px 12px;font-size:12px;cursor:pointer;border-bottom:1px solid #f0f4f8;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ac-item{padding:10px 14px;font-size:14px;cursor:pointer;border-bottom:1px solid #f3f4f6;line-height:1.5;overflow:hidden;text-overflow:ellipsis}
+.ac-item.ac-synonym{background:#fef9e7;border-left:3px solid #f39c12}
 .ac-item:last-child{border-bottom:none}
-.ac-item:hover,.ac-item.focused{background:#eaf3fb}
-.ac-item b{color:#1a5276}
-.fld input[readonly]{background:#f8fbff;color:#6a8aa8;cursor:default}
+.ac-item:hover,.ac-item.focused{background:#eff6ff}
+.ac-item b{color:#2563eb}
+.fld input[readonly]{background:#f3f4f6;color:#6b7280;cursor:default}
 </style>
 </head>
 <body>
@@ -174,9 +178,9 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#eef2f
     <!-- PROGRESS RING -->
     <div class="hdr-progress">
       <div class="prog-ring-wrap">
-        <svg width="52" height="52" viewBox="0 0 52 52">
-          <circle class="prog-ring-bg" cx="26" cy="26" r="21"/>
-          <circle class="prog-ring-fill" id="prog-ring" cx="26" cy="26" r="21"/>
+        <svg width="72" height="72" viewBox="0 0 72 72">
+          <circle class="prog-ring-bg" cx="36" cy="36" r="29"/>
+          <circle class="prog-ring-fill" id="prog-ring" cx="36" cy="36" r="29"/>
         </svg>
         <div class="prog-center">
           <span class="prog-pct" id="prog-pct">0%</span>
@@ -184,7 +188,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#eef2f
       </div>
       <div class="prog-meta">
         <div class="prog-status" id="prog-status">Pronto para iniciar</div>
-        <div class="prog-count" id="prog-count">0 / 0 campos obrigatórios</div>
+        <div class="prog-count" id="prog-count">0 / 0 campos preenchidos</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.45);margin-top:2px" id="prog-req-count">0 obrigatórios completos</div>
       </div>
     </div>
 
@@ -192,6 +197,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#eef2f
     <a class="hdr-back" href="index.html">← Voltar</a>
   </div>
 </header>
+<div id="prog-bar-strip"><div id="prog-bar-fill"></div></div>
 
 <div class="wrapper">
 
@@ -203,10 +209,17 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#eef2f
 
 <!-- INTRO -->
 <div class="intro">
-  <div>
-    <h2>Como usar</h2>
-    Preencha todos os campos abaixo. Campos com <strong style="color:#c0392b">*</strong> são obrigatórios. Todo texto é convertido automaticamente para <strong>maiúsculas sem acentos</strong> (padrão SINAN) — exceto o campo de Observações. Ao final, clique em <strong>Gerar PDF</strong> no topo para baixar a ficha preenchida.<br>
-    <span style="font-size:11px;color:#8aabb8;margin-top:4px;display:block">Fonte de referência: <a href="https://www.youtube.com/watch?v=qt6r5SDq8Rw" target="_blank" rel="noopener">Como preencher o SINAN de Violência — YouTube ↗</a> · Portaria GM/MS nº 10.175/2026</span>
+  <div style="width:100%">
+    <h2>🎯 Sobre este assistente</h2>
+    <p style="margin-bottom:10px">O objetivo deste assistente é <strong>tornar mais fácil e visualmente agradável o preenchimento das fichas SINAN</strong>. Os campos apresentados correspondem <strong>exatamente ao que aparece no SINAN NET</strong> no momento da digitação — obtidos diretamente dos arquivos de instalação do SINAN NET.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+      <span style="background:#e8f5e9;color:#1e8449;font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px">✓ Campos idênticos ao SINAN NET</span>
+      <span style="background:#eff6ff;color:#1e40af;font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px">✓ Busca de município por nome</span>
+      <span style="background:#fef9e7;color:#c07000;font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px">✓ Sinônimos de ocupação (CBO)</span>
+      <span style="background:#f3e8ff;color:#7c3aed;font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px">✓ Gera PDF para impressão</span>
+    </div>
+    <p style="font-size:13px;color:#6b7280">Campos com <strong style="color:#c0392b">*</strong> são obrigatórios. Todo texto é convertido para <strong>maiúsculas sem acentos</strong> (padrão SINAN). A ficha impressa <strong>não substitui a digitação no SINAN NET</strong>.<br>
+    <span style="font-size:12px;color:#9ca3af;margin-top:4px;display:block">Referência: <a href="https://www.youtube.com/watch?v=qt6r5SDq8Rw" target="_blank" rel="noopener">Como preencher o SINAN de Violência — YouTube ↗</a> · Portaria GM/MS nº 10.175/2026</span></p>
   </div>
 </div>
 
@@ -395,7 +408,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#eef2f
 
     <div class="row row-full">
       <div class="fld">
-        <label>Nome da Mãe <span class="cn">[Campo 18]</span> <span style="font-weight:400;color:#8aabb8">(sem abreviações)</span></label>
+        <label>Nome da Mãe <span class="cn">[Campo 18]</span> <span style="font-weight:400;color:#9ca3af">(sem abreviações)</span></label>
         <input type="text" id="f_mae" placeholder="Nome completo da mãe — se desconhecido, IGNORADO" data-caps>
       </div>
     </div>
@@ -511,7 +524,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#eef2f
           <input type="text" id="f_ocupacao" data-caps autocomplete="off" placeholder="Nome ou código CBO (ex: ENFERMEIRO, 223505)">
           <div class="ac-drop" id="f_ocupacao-drop"></div>
         </div>
-        <span id="f_ocupacao_hint" style="font-size:10px;color:#5a7a9a;margin-top:3px;display:none;line-height:1.4"></span>
+        <span id="f_ocupacao_hint" style="font-size:12px;color:#2563eb;margin-top:4px;display:none;line-height:1.4;font-weight:600"></span>
       </div>
       <div class="fld">
         <label>Situação Conjugal <span class="cn">[C.35]</span></label>
@@ -657,6 +670,12 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#eef2f
         </select>
       </div>
     </div>
+    <div id="box_local_outro" style="display:none;margin-bottom:14px">
+      <div class="fld">
+        <label>Especificar "Outro" local <span class="cn">[C.52]</span></label>
+        <input type="text" id="f_local_outro" data-caps placeholder="Descreva o local de ocorrência">
+      </div>
+    </div>
     <div class="row">
       <div class="fld">
         <label>Ocorreu outras vezes? <span class="cn">[C.53]</span></label>
@@ -733,9 +752,15 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#eef2f
       <label class="pill" data-val="9" data-name="tipo_viol"><input type="checkbox" name="tipo_viol" value="9" onchange="onTipoViol()"> Intervenção legal</label>
       <label class="pill" data-val="10" data-name="tipo_viol"><input type="checkbox" name="tipo_viol" value="10" onchange="onTipoViol()"> Outros</label>
     </div>
+    <div id="box_tipo_viol_outros" style="display:none;margin-bottom:14px">
+      <div class="fld">
+        <label>Especificar "Outros" tipos <span class="cn">[C.56]</span></label>
+        <input type="text" id="f_tipo_viol_outros" data-caps placeholder="Descreva outros tipos de violência">
+      </div>
+    </div>
 
     <!-- C57 — Meio de Agressão -->
-    <div class="sublabel">Campo 57 — Meio de Agressão <span class="req-mark">*</span><span style="font-size:10px;font-weight:400;color:#7a9ab8;margin-left:6px;text-transform:none">Se "Outro", especifique nas observações</span></div>
+    <div class="sublabel">Campo 57 — Meio de Agressão <span class="req-mark">*</span><span style="font-size:10px;font-weight:400;color:#9ca3af;margin-left:6px;text-transform:none">Se "Outro", especifique nas observações</span></div>
     <div class="pills" id="grp_meio_agr" style="margin-bottom:14px">
       <label class="pill" data-val="1" data-name="meio_agr"><input type="checkbox" name="meio_agr" value="1"> Força corporal / espancamento</label>
       <label class="pill" data-val="2" data-name="meio_agr"><input type="checkbox" name="meio_agr" value="2"> Enforcamento</label>
@@ -747,6 +772,12 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#eef2f
       <label class="pill" data-val="8" data-name="meio_agr"><input type="checkbox" name="meio_agr" value="8"> Ameaça</label>
       <label class="pill" data-val="9" data-name="meio_agr"><input type="checkbox" name="meio_agr" value="9"> Outro</label>
     </div>
+    <div id="box_meio_agr_outro" style="display:none;margin-bottom:14px">
+      <div class="fld">
+        <label>Especificar "Outro" meio <span class="cn">[C.57]</span></label>
+        <input type="text" id="f_meio_agr_outro" data-caps placeholder="Descreva o outro meio de agressão">
+      </div>
+    </div>
 
     <!-- C58 — Violência Sexual (condicional) -->
     <div id="sec_viol_sex" style="display:none">
@@ -757,6 +788,12 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#eef2f
         <label class="pill" data-val="3" data-name="viol_sex"><input type="checkbox" name="viol_sex" value="3"> Pornografia infantil</label>
         <label class="pill" data-val="4" data-name="viol_sex"><input type="checkbox" name="viol_sex" value="4"> Exploração sexual</label>
         <label class="pill" data-val="5" data-name="viol_sex"><input type="checkbox" name="viol_sex" value="5"> Outros</label>
+      </div>
+      <div id="box_viol_sex_outros" style="display:none;margin-bottom:14px">
+        <div class="fld">
+          <label>Especificar "Outros" tipos sexuais <span class="cn">[C.58]</span></label>
+          <input type="text" id="f_viol_sex_outros" data-caps placeholder="Descreva outros tipos de violência sexual">
+        </div>
       </div>
       <div class="sublabel">Campo 59 — Procedimentos Realizados</div>
       <div class="pills" id="grp_proc" style="margin-bottom:14px">
@@ -913,6 +950,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#eef2f
           <input type="text" id="f_cid10" placeholder="Digite o código (ex: W19) ou nome da condição" data-caps autocomplete="off">
           <div class="ac-drop" id="f_cid10-drop"></div>
         </div>
+        <span id="f_cid10_hint" style="font-size:11px;color:#2563eb;margin-top:3px;display:none;line-height:1.4;font-weight:500"></span>
       </div>
     </div>
 
@@ -923,7 +961,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#eef2f
       </div>
       <div class="fld" style="justify-content:flex-end">
         <label style="opacity:0;user-select:none">.</label>
-        <button onclick="copiarDataNotif()" style="padding:9px 14px;background:#f0f6fb;border:1.5px solid #d0dce8;border-radius:8px;font-size:12px;font-weight:700;color:#1a5276;cursor:pointer;white-space:nowrap">
+        <button onclick="copiarDataNotif()" style="padding:9px 14px;background:#eff6ff;border:1.5px solid #e5e7eb;border-radius:8px;font-size:12px;font-weight:700;color:#2563eb;cursor:pointer;white-space:nowrap">
           = Copiar data da notificação
         </button>
       </div>
@@ -963,7 +1001,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#eef2f
       </div>
     </div>
 
-    <div class="sublabel">Observações Adicionais <span style="font-size:10px;font-weight:600;color:#27ae60;text-transform:none;margin-left:6px">✓ Campo presente no SINAN NET</span> <span style="font-size:10px;font-weight:400;color:#8aabb8;text-transform:none;margin-left:6px">— aceita acentos e letras minúsculas</span></div>
+    <div class="sublabel">Observações Adicionais <span style="font-size:10px;font-weight:600;color:#27ae60;text-transform:none;margin-left:6px">✓ Campo presente no SINAN NET</span> <span style="font-size:10px;font-weight:400;color:#9ca3af;text-transform:none;margin-left:6px">— aceita acentos e letras minúsculas</span></div>
     <div class="fld">
       <textarea id="f_obs" placeholder="Observações relevantes para a notificação..." rows="4"></textarea>
     </div>
@@ -1007,6 +1045,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#eef2f
 <script src="data/tb_municipios.js"></script>
 <script src="data/tb_agravo.js"></script>
 <script src="data/tb_ocupacao.js"></script>
+<script src="data/cbo_sinonimos_map.js"></script>
 <!-- tb_cnae.js carregado apenas nas fichas DRT (Saude do Trabalhador) -->
 <script src="lib/pdf-lib.min.js"></script>
 <script>
@@ -1064,9 +1103,28 @@ document.querySelectorAll('[name="defic"]').forEach(function(r){
 });
 
 function onTipoViol(){
-  var has = Array.from(document.querySelectorAll('[name="tipo_viol"]:checked')).some(function(c){return c.value==='4';});
-  document.getElementById('sec_viol_sex').style.display = has?'block':'none';
+  var checked = Array.from(document.querySelectorAll('[name="tipo_viol"]:checked'));
+  document.getElementById('sec_viol_sex').style.display = checked.some(function(c){return c.value==='4';}) ? 'block' : 'none';
+  document.getElementById('box_tipo_viol_outros').style.display = checked.some(function(c){return c.value==='10';}) ? 'block' : 'none';
 }
+
+document.querySelectorAll('[name="meio_agr"]').forEach(function(chk){
+  chk.addEventListener('change', function(){
+    var has = Array.from(document.querySelectorAll('[name="meio_agr"]:checked')).some(function(c){return c.value==='9';});
+    document.getElementById('box_meio_agr_outro').style.display = has ? 'block' : 'none';
+  });
+});
+
+document.querySelectorAll('[name="viol_sex"]').forEach(function(chk){
+  chk.addEventListener('change', function(){
+    var has = Array.from(document.querySelectorAll('[name="viol_sex"]:checked')).some(function(c){return c.value==='5';});
+    document.getElementById('box_viol_sex_outros').style.display = has ? 'block' : 'none';
+  });
+});
+
+document.getElementById('f_local_oc').addEventListener('change', function(){
+  document.getElementById('box_local_outro').style.display = this.value === '09' ? 'block' : 'none';
+});
 
 function onAutoProv(){
   var v = document.querySelector('[name="auto_prov"]:checked');
@@ -1157,7 +1215,7 @@ function acSetup(inputId, dropId, datafn, matchfn, labelFn, selectFn){
       var n = m.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
       return n.indexOf(q) === 0 || n.indexOf(' '+q) !== -1;
     },
-    function(m){ return '<b>' + m.nome + '</b> <span style="color:#8aabb8;font-size:11px">' + m.uf + ' &mdash; ' + m.ibge + '</span>'; },
+    function(m){ return '<b>' + m.nome + '</b> <span style="color:#9ca3af;font-size:11px">' + m.uf + ' &mdash; ' + m.ibge + '</span>'; },
     function(inp, m){
       inp.value = m.nome;
       // Auto-preenche UF a partir do município selecionado
@@ -1183,19 +1241,72 @@ function acSetup(inputId, dropId, datafn, matchfn, labelFn, selectFn){
 });
 
 // Autocomplete de CID-10
+// Normaliza código removendo ponto para comparação (M751 == M75.1)
+function normCid(s){ return s.replace('.',''); }
 acSetup(
   'f_cid10', 'f_cid10-drop',
   function(){ return window.SINAN_AGRAVOS || []; },
   function(a, q){
+    var qn = normCid(q);
     var nome = a.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-    return a.cid.indexOf(q) === 0 || nome.indexOf(q) !== -1;
+    return normCid(a.cid).indexOf(qn) === 0 || nome.indexOf(q) !== -1;
   },
   function(a){ return '<b>' + a.cid + '</b> &mdash; ' + a.nome; },
-  function(inp, a){ inp.value = a.cid; }
+  function(inp, a){
+    inp.value = a.cid;
+    var hint = document.getElementById('f_cid10_hint');
+    if(hint){ hint.textContent = a.nome; hint.style.display = 'block'; }
+  }
 );
+// Esconde hint ao limpar o campo manualmente
+document.getElementById('f_cid10').addEventListener('input', function(){
+  if(!this.value.trim()){ var h=document.getElementById('f_cid10_hint'); if(h){h.style.display='none';h.textContent='';} }
+});
 
 // Autocomplete de Ocupação / CBO (Campo 34)
 // SINAN_CBOS disponível em data/tb_ocupacao.js
+// cboSinonimosMap disponível em data/cbo_sinonimos_map.js
+
+// Monta mapa reverso: SINONIMO_NORMALIZADO -> { cboCode, synonymText }
+var _cboRevSyn = null;
+function buildCboRevSyn(){
+  if(_cboRevSyn) return _cboRevSyn;
+  _cboRevSyn = {};
+  var map = window.cboSinonimosMap || {};
+  Object.keys(map).forEach(function(code){
+    (map[code]||[]).forEach(function(syn){
+      var key = syn.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim();
+      if(!_cboRevSyn[key]) _cboRevSyn[key] = [];
+      _cboRevSyn[key].push({cboCode: code, synonymText: syn});
+    });
+  });
+  return _cboRevSyn;
+}
+
+// Busca sinônimos para uma query
+function searchCboSynonyms(q){
+  var revMap = buildCboRevSyn();
+  var cbos = window.SINAN_CBOS || [];
+  var results = [];
+  var seen = {};
+  // Busca por prefixo ou substring nos sinônimos
+  Object.keys(revMap).forEach(function(key){
+    if(key.indexOf(q) === 0 || key.indexOf(' '+q) !== -1 || key.indexOf(q) !== -1){
+      revMap[key].forEach(function(entry){
+        if(seen[entry.cboCode]) return;
+        seen[entry.cboCode] = true;
+        // Encontrar o nome SINAN correspondente
+        var cboItem = cbos.find ? cbos.find(function(c){ return c.cbo === entry.cboCode; }) : null;
+        if(!cboItem){ for(var i=0;i<cbos.length;i++){ if(cbos[i].cbo===entry.cboCode){cboItem=cbos[i];break;} } }
+        if(cboItem){
+          results.push({ cbo: cboItem.cbo, nome: cboItem.nome, synonymText: entry.synonymText, isSynonym: true });
+        }
+      });
+    }
+  });
+  return results;
+}
+
 acSetup(
   'f_ocupacao', 'f_ocupacao-drop',
   function(){ return window.SINAN_CBOS || []; },
@@ -1203,13 +1314,93 @@ acSetup(
     var nome = c.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
     return c.cbo.indexOf(q) === 0 || nome.indexOf(q) !== -1;
   },
-  function(c){ return '<b>' + c.cbo + '</b> &mdash; ' + c.nome; },
+  function(c){
+    if(c.isSynonym){
+      return '<span class="ac-synonym-badge" style="font-size:11px;background:#f39c12;color:#fff;padding:1px 6px;border-radius:4px;margin-right:4px">sinônimo</span><b>' + c.cbo + '</b> &mdash; ' + c.nome + ' <span style="color:#9ca3af;font-size:12px">(você digitou: ' + c.synonymText + ')</span>';
+    }
+    return '<b>' + c.cbo + '</b> &mdash; ' + c.nome;
+  },
   function(inp, c){
-    inp.value = c.nome; // descrição da ocupação (padrão SINAN NET)
+    inp.value = c.nome; // descrição da ocupação (padrão SINAN NET) — NUNCA o sinônimo
     var hint = document.getElementById('f_ocupacao_hint');
-    if(hint){ hint.textContent = 'CBO: ' + c.cbo; hint.style.display = 'block'; }
+    if(hint){
+      var txt = 'CBO: ' + c.cbo;
+      if(c.isSynonym) txt += ' · Inserido: nome oficial SINAN NET';
+      hint.textContent = txt;
+      hint.style.display = 'block';
+    }
   }
 );
+
+// Sobrescreve o comportamento do input de ocupação para buscar também sinônimos
+(function(){
+  var inp = document.getElementById('f_ocupacao');
+  var drop = document.getElementById('f_ocupacao-drop');
+  if(!inp||!drop) return;
+  var _origInput = null;
+  // Captura o input event APÓS o acSetup para adicionar busca de sinônimos
+  inp.addEventListener('input', function(){
+    var q = inp.value.trim().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    if(q.length < 2) return;
+    // Aguarda um microtask para o acSetup processar primeiro
+    setTimeout(function(){
+      var cbos = window.SINAN_CBOS || [];
+      // Verifica quantos resultados diretos existem
+      var directCount = cbos.filter(function(c){
+        var nome = c.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+        return c.cbo.indexOf(q) === 0 || nome.indexOf(q) !== -1;
+      }).length;
+      // Busca sinônimos
+      var synonymResults = searchCboSynonyms(q).slice(0, 5);
+      if(synonymResults.length === 0) return;
+      // Adiciona sinônimos ao dropdown se houver espaço ou se não houver resultados diretos
+      var existingItems = drop.querySelectorAll('.ac-item');
+      if(existingItems.length === 0 && synonymResults.length > 0){
+        // Sem resultados diretos — mostra sinônimos com cabeçalho
+        var header = '<div style="padding:6px 14px;font-size:11px;font-weight:800;color:#9ca3af;text-transform:uppercase;letter-spacing:.5px;background:#f9fafb;border-bottom:1px solid #f3f4f6">Sinônimos encontrados</div>';
+        drop.innerHTML = header + synonymResults.map(function(c, i){
+          return '<div class="ac-item ac-synonym" data-i="syn-'+i+'">' +
+            '<span style="font-size:11px;background:#f39c12;color:#fff;padding:1px 6px;border-radius:4px;margin-right:4px">sinônimo</span>' +
+            '<b>' + c.cbo + '</b> &mdash; ' + c.nome +
+            ' <span style="color:#9ca3af;font-size:12px">(você digitou: ' + c.synonymText + ')</span>' +
+            '</div>';
+        }).join('');
+        drop.classList.add('show');
+        drop.querySelectorAll('.ac-item').forEach(function(el, i){
+          el.addEventListener('mousedown', function(e){
+            e.preventDefault();
+            var c = synonymResults[i];
+            inp.value = c.nome;
+            var hint = document.getElementById('f_ocupacao_hint');
+            if(hint){ hint.textContent = 'CBO: ' + c.cbo + ' · Nome oficial SINAN NET'; hint.style.display = 'block'; }
+            drop.classList.remove('show');
+            updateProgress();
+          });
+        });
+      } else if(directCount < 8 && synonymResults.length > 0){
+        // Há resultados diretos mas poucos — acrescenta sinônimos ao final
+        var sepDiv = document.createElement('div');
+        sepDiv.style.cssText = 'padding:4px 14px;font-size:11px;font-weight:800;color:#9ca3af;text-transform:uppercase;letter-spacing:.5px;background:#f9fafb;border-top:1px solid #f3f4f6;border-bottom:1px solid #f3f4f6';
+        sepDiv.textContent = 'Sinônimos';
+        drop.appendChild(sepDiv);
+        synonymResults.forEach(function(c){
+          var el = document.createElement('div');
+          el.className = 'ac-item ac-synonym';
+          el.innerHTML = '<span style="font-size:11px;background:#f39c12;color:#fff;padding:1px 6px;border-radius:4px;margin-right:4px">sinônimo</span><b>' + c.cbo + '</b> &mdash; ' + c.nome + ' <span style="color:#9ca3af;font-size:12px">(você digitou: ' + c.synonymText + ')</span>';
+          el.addEventListener('mousedown', function(e){
+            e.preventDefault();
+            inp.value = c.nome;
+            var hint = document.getElementById('f_ocupacao_hint');
+            if(hint){ hint.textContent = 'CBO: ' + c.cbo + ' · Nome oficial SINAN NET'; hint.style.display = 'block'; }
+            drop.classList.remove('show');
+            updateProgress();
+          });
+          drop.appendChild(el);
+        });
+      }
+    }, 0);
+  });
+})();
 
 /*==========================================================
   AUTO-IDADE (calcula a partir da data de nascimento)
@@ -1282,19 +1473,26 @@ function showToast(msg, type, dur){
 /*==========================================================
   PROGRESS + GAMIFICATION
 ==========================================================*/
-var CIRCUMFERENCE = 2 * Math.PI * 21; // r=21
+var CIRCUMFERENCE = 2 * Math.PI * 29; // r=29
 var _prevPct = -1;
 var _sectionMilestones = {}; // track completed sections
 var _globalMilestones = {25:false,50:false,75:false,100:false};
 
+// IDs excluídos do progresso (não existem no SINAN NET ou são metadados)
+var PROG_EXCLUDE_IDS = {'f_num_notif':1,'f_acomp_nome':1,'f_acomp_vinc':1,'f_acomp_tel':1};
+
 var STATUS_MSGS = [
-  [0,   'Pronto para iniciar'],
-  [1,   'Começando... 💪'],
-  [25,  'Bom início!'],
-  [50,  'Na metade! Continue!'],
-  [75,  'Quase lá! 🎯'],
-  [99,  'Finalizando...'],
-  [100, '🎉 Pronto para gerar!']
+  [0,   'Pronto para iniciar ✏️'],
+  [1,   'Ótimo, começando!'],
+  [10,  'Continue assim! 💪'],
+  [25,  '25% — bom ritmo!'],
+  [40,  'Quase na metade!'],
+  [50,  '50% — na metade! 🔥'],
+  [65,  'Mais da metade! Quase lá!'],
+  [75,  '75% — falta pouco! 🎯'],
+  [90,  'Finalizando...'],
+  [99,  'Último campo!'],
+  [100, '🎉 Ficha completa!']
 ];
 
 function getStatusMsg(pct){
@@ -1305,13 +1503,28 @@ function getStatusMsg(pct){
   return msg;
 }
 
-function updateProgress(){
-  var reqs = document.querySelectorAll('[data-req]');
-  var total = reqs.length;
-  var filled = 0;
-  reqs.forEach(function(el){ if(el.value&&el.value.trim()) filled++; });
+function getAllProgressFields(){
+  // Coleta todos input/select (excluídos os IDs fora do escopo)
+  var els = Array.from(document.querySelectorAll('input:not([type=radio]):not([type=checkbox]):not([type=hidden]), select'));
+  return els.filter(function(el){
+    if(PROG_EXCLUDE_IDS[el.id]) return false;
+    if(el.readOnly) return false;
+    return true;
+  });
+}
 
+function updateProgress(){
+  // --- Progresso GERAL (todos os campos relevantes) ---
+  var allFields = getAllProgressFields();
+  var total = allFields.length;
+  var filled = 0;
+  allFields.forEach(function(el){ if(el.value&&el.value.trim()) filled++; });
   var pct = total>0 ? Math.round(filled/total*100) : 0;
+
+  // --- Campos obrigatórios (para validação) ---
+  var reqs = document.querySelectorAll('[data-req]');
+  var reqFilled = 0;
+  reqs.forEach(function(el){ if(el.value&&el.value.trim()) reqFilled++; });
 
   // Ring
   var offset = CIRCUMFERENCE - (pct/100)*CIRCUMFERENCE;
@@ -1325,19 +1538,31 @@ function updateProgress(){
   // Text
   document.getElementById('prog-pct').textContent = pct+'%';
   document.getElementById('prog-status').textContent = getStatusMsg(pct);
-  document.getElementById('prog-count').textContent = filled+' / '+total+' obrigatórios';
+  document.getElementById('prog-count').textContent = filled+' / '+total+' campos preenchidos';
+  var reqEl = document.getElementById('prog-req-count');
+  if(reqEl) reqEl.textContent = reqFilled+' / '+reqs.length+' obrigatórios';
+
+  // Progress bar strip
+  var barFill = document.getElementById('prog-bar-fill');
+  if(barFill){ barFill.style.width = pct+'%'; barFill.style.background = color; }
+  var barStrip = document.getElementById('prog-bar-strip');
+  if(barStrip){ barStrip.style.background = pct>0?'rgba(0,0,0,.1)':'rgba(255,255,255,.08)'; }
 
   // Milestone toasts
   [25,50,75].forEach(function(m){
     if(pct>=m && !_globalMilestones[m]){
       _globalMilestones[m]=true;
-      var msgs = {25:'Bom começo! 25% preenchido 👏', 50:'Metade concluída! Continue assim! 💪', 75:'75% — quase pronto! 🎯'};
-      showToast(msgs[m], 't-mile', 3500);
+      var msgs = {
+        25:'🎯 25% da ficha preenchida — ótimo começo!',
+        50:'🔥 Metade concluída! Continue assim!',
+        75:'⚡ 75% — você está quase terminando!'
+      };
+      showToast(msgs[m], 't-mile', 3800);
     }
   });
   if(pct===100 && !_globalMilestones[100]){
     _globalMilestones[100]=true;
-    showToast('🎉 Tudo preenchido! Agora gere o PDF!', 't-ok', 4000);
+    showToast('🎉 Ficha totalmente preenchida! Clique em Gerar PDF!', 't-ok', 4500);
   }
   if(pct<100) _globalMilestones[100]=false;
 
@@ -1353,35 +1578,55 @@ function updateSectionBadges(){
     var badge = document.getElementById('badge'+s);
     if(!secEl||!badge) continue;
 
+    // Contagem de campos obrigatórios
     var reqs = secEl.querySelectorAll('[data-req]');
-    if(reqs.length===0){
+    var reqFilled=0;
+    reqs.forEach(function(el){ if(el.value&&el.value.trim()) reqFilled++; });
+
+    // Contagem de TODOS os campos da seção (exclui IDs fora de escopo)
+    var allInSec = Array.from(secEl.querySelectorAll('input:not([type=radio]):not([type=checkbox]):not([type=hidden]),select'))
+      .filter(function(el){ return !PROG_EXCLUDE_IDS[el.id] && !el.readOnly; });
+    var allFilled=0;
+    allInSec.forEach(function(el){ if(el.value&&el.value.trim()) allFilled++; });
+    var allTotal = allInSec.length;
+
+    if(allTotal===0){
       badge.textContent = '—';
       badge.className = 'sec-badge badge-empty';
       secEl.classList.remove('done','partial');
       continue;
     }
-    var filled=0;
-    reqs.forEach(function(el){ if(el.value&&el.value.trim()) filled++; });
-    var total=reqs.length;
 
-    if(filled===total){
+    // Seção completa: todos os obrigatórios preenchidos E a maioria dos opcionais
+    var reqsDone = reqs.length===0 || reqFilled===reqs.length;
+    var allDone = allFilled===allTotal;
+
+    if(allDone){
       badge.textContent = '✓ Completo';
       badge.className = 'sec-badge badge-done';
-      // Fire section-complete milestone once
       if(!_sectionMilestones[s]){
         _sectionMilestones[s]=true;
-        showToast('Seção '+s+' concluída! ✓', 't-ok', 2200);
+        showToast('✅ Seção '+s+' totalmente preenchida!', 't-ok', 2500);
       }
       secEl.classList.remove('partial');
       secEl.classList.add('done');
-    } else if(filled>0){
-      badge.textContent = filled+'/'+total+' campos';
+    } else if(reqsDone && allFilled>0){
+      badge.textContent = '✓ Obrig. · '+allFilled+'/'+allTotal;
+      badge.className = 'sec-badge badge-done';
+      if(!_sectionMilestones[s]){
+        _sectionMilestones[s]=true;
+        showToast('✅ Seção '+s+' — campos obrigatórios concluídos!', 't-ok', 2500);
+      }
+      secEl.classList.remove('partial');
+      secEl.classList.add('done');
+    } else if(allFilled>0){
+      badge.textContent = allFilled+'/'+allTotal+' campos';
       badge.className = 'sec-badge badge-partial';
       _sectionMilestones[s]=false;
       secEl.classList.remove('done');
       secEl.classList.add('partial');
     } else {
-      badge.textContent = total+' obrigatório'+(total>1?'s':'');
+      badge.textContent = reqs.length>0?(reqs.length+' obrigatório'+(reqs.length>1?'s':'')):'Não iniciado';
       badge.className = 'sec-badge badge-empty';
       _sectionMilestones[s]=false;
       secEl.classList.remove('done','partial');
@@ -1390,7 +1635,7 @@ function updateSectionBadges(){
 }
 
 // Attach to all interactable elements
-document.querySelectorAll('input,select').forEach(function(el){
+document.querySelectorAll('input,select,textarea').forEach(function(el){
   el.addEventListener('input', updateProgress);
   el.addEventListener('change', updateProgress);
 });
@@ -1530,17 +1775,29 @@ async function gerarPDF(){
     setTxt('54', getRadio('auto_prov'));
     // Seção 6
     setTxt('55', tv('f_motiv'));
-    setChkGroup('56', getChecks('tipo_viol'));
-    setChkGroup('57', getChecks('meio_agr'));
-    setChkGroup('58', getChecks('viol_sex'));
-    setChkGroup('59', getChecks('proc'));
+    // C.56 — Tipo de Violência (10 opções, quadradinhos 1=sim 2=não)
+    var _tv56 = getChecks('tipo_viol').map(String);
+    for(var _i56=1;_i56<=10;_i56++){ setTxt('56_'+_i56, _tv56.indexOf(String(_i56))!==-1?'1':'2'); }
+    // C.57 — Meio de Agressão (9 opções)
+    var _tv57 = getChecks('meio_agr').map(String);
+    for(var _i57=1;_i57<=9;_i57++){ setTxt('57_'+_i57, _tv57.indexOf(String(_i57))!==-1?'1':'2'); }
+    // C.58 — Violência Sexual (5 opções)
+    var _tv58 = getChecks('viol_sex').map(String);
+    for(var _i58=1;_i58<=5;_i58++){ setTxt('58_'+_i58, _tv58.indexOf(String(_i58))!==-1?'1':'2'); }
+    // C.59 — Procedimentos (8 opções)
+    var _tv59 = getChecks('proc').map(String);
+    for(var _i59=1;_i59<=8;_i59++){ setTxt('59_'+_i59, _tv59.indexOf(String(_i59))!==-1?'1':'2'); }
     // C.60/62/63/66/67 — quadradinhos
     setTxt('60', getRadio('nenv'));
-    setChkGroup('61', getChecks('vinc'));
+    // C.61 — Vínculo (18 opções)
+    var _tv61 = getChecks('vinc').map(String);
+    for(var _i61=1;_i61<=18;_i61++){ setTxt('61_'+_i61, _tv61.indexOf(String(_i61))!==-1?'1':'2'); }
     setTxt('62', getRadio('sex_autor'));
     setTxt('63', getRadio('alcool'));
     setTxt('64', tv('f_ciclo'));
-    setChkGroup('65', getChecks('encam'));
+    // C.65 — Encaminhamento (14 opções)
+    var _tv65 = getChecks('encam').map(String);
+    for(var _i65=1;_i65<=14;_i65++){ setTxt('65_'+_i65, _tv65.indexOf(String(_i65))!==-1?'1':'2'); }
     setTxt('66', getRadio('viol_trab'));
     setTxt('67', getRadio('cat'));
     // C.68 — CID: envia apenas o código (sem descrição)
