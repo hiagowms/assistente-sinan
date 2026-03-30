@@ -41,8 +41,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 .hdr-btn{background:linear-gradient(135deg,#27ae60,#2ecc71);color:#fff;border:none;padding:12px 26px;border-radius:30px;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.2)}
 .hdr-btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.25)}
 .hdr-btn:disabled{background:#5a8870;box-shadow:none;cursor:not-allowed;transform:none}
-.hdr-back{color:rgba(255,255,255,.65);font-size:12px;text-decoration:none;padding:6px 10px;border-radius:20px;border:1px solid rgba(255,255,255,.15);transition:all .15s;white-space:nowrap}
-.hdr-back:hover{background:rgba(255,255,255,.1);color:#fff}
+.hdr-back{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.85);font-size:13px;font-weight:600;text-decoration:none;padding:8px 16px;border-radius:30px;border:1.5px solid rgba(255,255,255,.3);background:rgba(255,255,255,.07);transition:all .2s;white-space:nowrap;flex-shrink:0}
+.hdr-back:hover{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.55);transform:translateX(-2px)}
 
 /*==============================================================
   LAYOUT
@@ -194,7 +194,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
     </div>
 
     <button class="hdr-btn" id="btn-gerar" onclick="gerarPDF()">📄 Gerar PDF</button>
-    <a class="hdr-back" href="index.html">← Voltar</a>
+    <a class="hdr-back" href="index.html">&#8592; Menu</a>
   </div>
 </header>
 <div id="prog-bar-strip"><div id="prog-bar-fill"></div></div>
@@ -1164,7 +1164,7 @@ function acSetup(inputId, dropId, datafn, matchfn, labelFn, selectFn){
 
   function render(items){
     _items = items; _active = -1;
-    if(!items.length){ drop.classList.remove('show'); return; }
+    if(!items.length){ drop.innerHTML = ''; drop.classList.remove('show'); return; }
     drop.innerHTML = items.map(function(it, i){
       return '<div class="ac-item" data-i="' + i + '">' + labelFn(it) + '</div>';
     }).join('');
@@ -1397,6 +1397,7 @@ acSetup(
           });
           drop.appendChild(el);
         });
+        drop.classList.add('show');
       }
     }, 0);
   });

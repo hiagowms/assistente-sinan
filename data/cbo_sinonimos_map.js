@@ -1,4 +1,4 @@
-const cboSinonimosMap = {
+var cboSinonimosMap = {
    "010105": [
       "Brigadeiro",
       "Major-brigadeiro",
