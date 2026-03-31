@@ -2263,6 +2263,14 @@ function carregarPaciente(idx){
   Object.keys(p.checks||{}).forEach(function(name){ _setChecks(name, p.checks[name]); });
   _applyVisibility();
   updateProgress();
+  // Re-aplica nomes de município (podem ter sido apagados pelo handler de change da UF)
+  ['notif','res','oc'].forEach(function(suf){
+    var id = 'f_mun_' + suf;
+    if(p.fields && p.fields[id]){
+      var el = document.getElementById(id);
+      if(el) el.value = p.fields[id];
+    }
+  });
   // Fecha todos os dropdowns de autocomplete abertos durante o preenchimento
   document.querySelectorAll('.ac-drop').forEach(function(d){ d.innerHTML=''; d.classList.remove('show'); });
   // Define hint de CBO se o campo de ocupação foi preenchido
