@@ -122,6 +122,66 @@ footer{background:#fff;border-top:1px solid #dce8f0;padding:22px 40px;text-align
 footer p{font-size:12px;color:#8aabb8;line-height:1.8}
 footer strong{color:#4a7a9b}
 footer a{color:#1a5276;text-decoration:none}
+
+/*==============================================================
+  MOBILE RESPONSIVE — @media max-width:768px
+  Todas as regras abaixo NÃO afetam o layout desktop
+==============================================================*/
+@media(max-width:768px){
+
+  /* ── HEADER ────────────────────────────────────────────── */
+  #hdr{padding:16px 18px}
+  .hdr-inner{gap:12px}
+  .hdr-logo{height:36px}
+  .hdr-vline{display:none}
+  .hdr-text h1{font-size:17px;letter-spacing:-.2px}
+  .hdr-text p{font-size:12px;margin-top:3px}
+  .pet-chip{font-size:10px;padding:3px 10px;margin-top:6px}
+
+  /* ── DISCLAIMER ─────────────────────────────────────────── */
+  .disclaimer-inner{padding:11px 18px;font-size:12px;gap:9px}
+
+  /* ── MAIN ───────────────────────────────────────────────── */
+  main{padding:14px 14px 36px}
+
+  /* ── ABOUT / LEGAL BOXES ────────────────────────────────── */
+  .about-box{padding:14px 16px;margin-bottom:14px}
+  .about-box h2{font-size:14px;margin-bottom:8px}
+  .about-box p{font-size:12px}
+  .about-chips{gap:5px;margin-bottom:10px}
+  .about-chip{font-size:11px;padding:3px 9px}
+  .legal-box{padding:12px 14px;margin-bottom:18px;gap:10px}
+  .legal-box h3{font-size:12px}
+  .legal-box p{font-size:11px}
+
+  /* ── SECTION TITLE ──────────────────────────────────────── */
+  .sec-title{font-size:10px;margin-bottom:12px;letter-spacing:1.3px}
+
+  /* ── GRID — coluna única no mobile ─────────────────────── */
+  .fichas-grid{grid-template-columns:1fr;gap:9px;margin-bottom:16px}
+
+  /* ── CARDS ──────────────────────────────────────────────── */
+  .card{border-radius:9px}
+  .card-main{padding:14px 16px}
+  .card-head{gap:10px;margin-bottom:8px}
+  .card-icon-wrap{width:34px;height:34px;border-radius:6px;flex-shrink:0}
+  .card-title{font-size:13px}
+  .card-status{font-size:10px;padding:2px 8px;margin-top:5px}
+  details.def summary{font-size:10px}
+  .def-text{font-size:11px;padding:8px 10px}
+
+  /* ── CARD ACTIONS ───────────────────────────────────────── */
+  .card-actions{padding:9px 16px 12px;gap:7px;flex-wrap:wrap}
+  .btn-assistente,.btn-download,.btn-wip,.btn-noficha{
+    padding:10px 14px;font-size:13px;border-radius:6px
+  }
+  .btn-assistente{flex:1;justify-content:center;min-height:44px}
+  .btn-download{min-height:44px}
+
+  /* ── FOOTER ─────────────────────────────────────────────── */
+  footer{padding:16px 18px}
+  footer p{font-size:11px}
+}
 </style>
 </head>
 <body>

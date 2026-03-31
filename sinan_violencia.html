@@ -196,6 +196,155 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 .ac-item:hover,.ac-item.focused{background:#eff6ff}
 .ac-item b{color:#2563eb}
 .fld input[readonly]{background:#f3f4f6;color:#6b7280;cursor:default}
+
+/*==============================================================
+  MOBILE BOTTOM BAR — oculta no desktop, visível no mobile
+==============================================================*/
+#mob-bottom{display:none}
+
+/*==============================================================
+  MOBILE RESPONSIVE — @media max-width:768px
+  Todas as regras abaixo NÃO afetam o layout desktop
+==============================================================*/
+@media(max-width:768px){
+
+  /* ── HEADER ────────────────────────────────────────────── */
+  .hdr-row{padding:8px 14px;gap:8px;flex-wrap:nowrap}
+  .hdr-logo{height:26px}
+  .hdr-vline{display:none}
+  .hdr-title h1{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px}
+  .hdr-title p{display:none}
+
+  /* Progress ring — reduzido */
+  .hdr-progress{gap:8px}
+  .prog-ring-wrap{width:42px;height:42px}
+  .prog-ring-wrap svg{width:42px;height:42px}
+  .prog-pct{font-size:11px;font-weight:800}
+  .prog-meta{display:none}
+
+  /* Botão PDF e botão Voltar — escondidos no header (movidos para barra inferior) */
+  .hdr-btn{display:none}
+  .hdr-back{display:none}
+
+  /* ── TOOLS BAR ─────────────────────────────────────────── */
+  .tools-inner{
+    padding:5px 10px;gap:3px;
+    flex-wrap:nowrap;overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none
+  }
+  .tools-inner::-webkit-scrollbar{display:none}
+  .tools-label{display:none}
+  .tb-sep{display:none}
+  .tb-group{gap:3px}
+  .tb-btn{padding:7px 10px;font-size:12px;min-height:36px;white-space:nowrap}
+
+  /* Dropdown paciente: fixo na base da tela */
+  .tb-menu{
+    position:fixed;top:auto;
+    bottom:64px;left:10px;right:10px;
+    width:auto;min-width:unset;
+    max-height:55vh;overflow-y:auto;
+    border-radius:14px;
+    box-shadow:0 -6px 28px rgba(0,0,0,.2)
+  }
+
+  /* ── LAYOUT ─────────────────────────────────────────────── */
+  .wrapper{padding:12px 12px 76px}
+
+  /* ── SEÇÕES ─────────────────────────────────────────────── */
+  .sec{border-radius:10px;margin-bottom:10px}
+  .sec-hdr{padding:12px 14px;gap:10px}
+  .sec-body{padding:14px 12px 16px}
+  .sec-num{width:28px;height:28px;font-size:12px}
+  .sec-info h3{font-size:14px}
+  .sec-info p{font-size:11px}
+  .sec-badge{font-size:11px;padding:3px 8px}
+
+  /* ── GRADE DE FORMULÁRIO — coluna única ─────────────────── */
+  .row{grid-template-columns:1fr!important;gap:10px;margin-bottom:10px}
+  .row.row-wide{grid-template-columns:1fr!important}
+  .col-2,.col-3{grid-column:span 1!important}
+
+  /* ── CAMPOS ─────────────────────────────────────────────── */
+  /* font-size 16px evita o zoom automático do iOS */
+  .fld input,.fld select,.fld textarea{
+    font-size:16px!important;
+    padding:11px 13px;
+    min-height:46px
+  }
+  .fld label{font-size:12px}
+  .fld label .cn{font-size:10px}
+  .sublabel{font-size:11px;padding:10px 0 7px;letter-spacing:.4px}
+
+  /* ── PILLS ──────────────────────────────────────────────── */
+  .pills{gap:7px}
+  .pill{padding:10px 14px;font-size:14px;min-height:44px;border-radius:8px}
+
+  /* ── CAIXAS INFO / ALERTA ───────────────────────────────── */
+  .info,.warn,.danger-alert{font-size:13px;padding:10px 12px}
+  .banner-warn{font-size:13px;padding:12px 14px}
+  .intro{flex-direction:column;padding:14px 14px;font-size:13px}
+  .intro h2{font-size:14px}
+
+  /* ── MODAIS ─────────────────────────────────────────────── */
+  .modal{padding:20px 18px;border-radius:14px}
+  .cm-box{padding:22px 18px}
+  .cm-actions{flex-direction:column;gap:8px}
+  .cm-cancel,.cm-ok{width:100%;padding:13px}
+
+  /* ── AUTOCOMPLETE ───────────────────────────────────────── */
+  .ac-drop{max-height:180px}
+  .ac-item{padding:12px 14px;font-size:14px;min-height:44px;display:flex;align-items:center}
+
+  /* ── TOAST ──────────────────────────────────────────────── */
+  #toast{
+    font-size:12px;padding:10px 16px;
+    max-width:88vw;white-space:normal;
+    text-align:center;bottom:70px
+  }
+
+  /* ── BARRA INFERIOR MOBILE ──────────────────────────────── */
+  #mob-bottom{
+    display:flex!important;
+    position:fixed;bottom:0;left:0;right:0;
+    z-index:400;height:58px;
+    background:#fff;
+    border-top:1px solid #e2e8f0;
+    box-shadow:0 -4px 20px rgba(0,0,0,.1);
+    align-items:center;justify-content:space-between;
+    padding:0 12px;gap:8px
+  }
+  #mob-back-btn{
+    display:flex;align-items:center;gap:5px;
+    color:#475569;font-size:12px;font-weight:600;
+    text-decoration:none;padding:8px 11px;
+    border-radius:7px;border:1px solid #e2e8f0;
+    background:#f8fafc;white-space:nowrap;flex-shrink:0
+  }
+  #mob-prog-wrap{
+    flex:1;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:1px
+  }
+  #mob-prog-pct{
+    font-size:15px;font-weight:800;color:#1f2937;line-height:1
+  }
+  #mob-prog-label{
+    font-size:10px;color:#94a3b8;font-weight:600;
+    text-transform:uppercase;letter-spacing:.5px
+  }
+  #mob-pdf-btn{
+    display:flex;align-items:center;gap:6px;
+    background:linear-gradient(135deg,#27ae60,#2ecc71);
+    color:#fff;border:none;padding:10px 15px;
+    border-radius:8px;font-size:13px;font-weight:700;
+    cursor:pointer;white-space:nowrap;flex-shrink:0;
+    box-shadow:0 2px 8px rgba(39,174,96,.35)
+  }
+  #mob-pdf-btn:disabled{
+    background:#8fb8a0;box-shadow:none;cursor:not-allowed
+  }
+}
 </style>
 </head>
 <body>
@@ -2334,6 +2483,58 @@ function importarRascunho(input){
   };
   reader.readAsText(file);
 }
+</script>
+
+<!-- BARRA INFERIOR — visível apenas em mobile (CSS oculta no desktop) -->
+<div id="mob-bottom">
+  <a id="mob-back-btn" href="index.html">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15,18 9,12 15,6"/></svg>
+    Menu
+  </a>
+  <div id="mob-prog-wrap">
+    <span id="mob-prog-pct">0%</span>
+    <span id="mob-prog-label">preenchido</span>
+  </div>
+  <button id="mob-pdf-btn" onclick="gerarPDF()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+    Gerar PDF
+  </button>
+</div>
+
+<script>
+/* ── MOBILE SYNC ──────────────────────────────────────────────
+   Sincroniza barra inferior com estado do botão e progresso
+──────────────────────────────────────────────────────────── */
+(function(){
+  var btnGerar = document.getElementById('btn-gerar');
+  var mobBtn   = document.getElementById('mob-pdf-btn');
+  var mobPct   = document.getElementById('mob-prog-pct');
+  var srcPct   = document.getElementById('prog-pct');
+  if(!mobBtn || !btnGerar || !srcPct) return;
+
+  // Sincroniza estado disabled
+  new MutationObserver(function(){
+    mobBtn.disabled = btnGerar.disabled;
+  }).observe(btnGerar, {attributes:true, attributeFilter:['disabled']});
+
+  // Sincroniza porcentagem de progresso
+  new MutationObserver(function(){
+    if(mobPct) mobPct.textContent = srcPct.textContent || '0%';
+  }).observe(srcPct, {childList:true, characterData:true, subtree:true});
+
+  /* ── INPUTMODE — teclados corretos no celular ──────────── */
+  var numericIds = ['f_sus','f_cnes','f_ibge_notif','f_ibge_res','f_cep','f_num_res',
+                    'f_num_oc','f_hora_oc'];
+  var telIds     = ['f_tel_res','f_acomp_tel'];
+  numericIds.forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.setAttribute('inputmode','numeric');
+  });
+  telIds.forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.setAttribute('inputmode','tel');
+  });
+})();
 </script>
 </body>
 </html>
