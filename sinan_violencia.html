@@ -1937,70 +1937,236 @@ var FAKE_PATIENTS = [
   {
     label:"João Pedro, 6 anos",
     sub:"Física + Negligência · padrasto · São Paulo/SP",
-    fields:{f_data_notif:"2025-06-10",f_data_ocorr:"2025-06-09",f_tipo_un:"1",f_nome_un:"UPA NORTE",f_mun_notif:"SAO PAULO",f_uf_notif:"SP",f_nome:"JOAO PEDRO SOUZA SILVA",f_nasc:"2019-03-15",f_raca:"4",f_escol:"10",f_mae:"MARIA DA CONCEICAO SOUZA",f_mun_res:"SAO PAULO",f_uf_res:"SP",f_bairro_res:"JARDIM BRASIL",f_logr_res:"RUA DAS FLORES",f_num_res:"45",f_zona_res:"1",f_or_sex:"8",f_id_gen:"8",f_mun_oc:"SAO PAULO",f_uf_oc:"SP",f_bairro_oc:"JARDIM BRASIL",f_logr_oc:"RUA DAS FLORES",f_num_oc:"45",f_hora_oc:"19:30",f_zona_oc:"1",f_local_oc:"01",f_motiv:"06",f_ciclo:"4",f_data_enc:"2025-06-10"},
+    fields:{
+      f_data_notif:"2025-06-10",f_data_ocorr:"2025-06-09",
+      f_tipo_un:"1",f_nome_un:"UPA NORTE",f_cnes:"2078015",
+      f_mun_notif:"SAO PAULO",f_uf_notif:"SP",f_ibge_notif:"355030",
+      f_nome:"JOAO PEDRO SOUZA SILVA",f_nasc:"2019-03-15",f_raca:"4",f_escol:"10",
+      f_sus:"706012300000001",f_mae:"MARIA DA CONCEICAO SOUZA",
+      f_mun_res:"SAO PAULO",f_uf_res:"SP",f_ibge_res:"355030",
+      f_bairro_res:"JARDIM BRASIL",f_logr_res:"RUA DAS FLORES",f_num_res:"45",
+      f_cep:"02177-030",f_tel_res:"(11) 98765-1234",f_zona_res:"1",
+      f_pref_res:"PROXIMO A ESCOLA ESTADUAL JARDIM BRASIL",
+      f_or_sex:"8",f_id_gen:"8",
+      f_mun_oc:"SAO PAULO",f_uf_oc:"SP",f_bairro_oc:"JARDIM BRASIL",
+      f_logr_oc:"RUA DAS FLORES",f_num_oc:"45",
+      f_hora_oc:"19:30",f_zona_oc:"1",f_local_oc:"01",f_motiv:"06",f_ciclo:"4",
+      f_cid10:"T74.1",
+      f_acomp_nome:"MARIA DA CONCEICAO SOUZA",f_acomp_vinc:"MAE",f_acomp_tel:"(11) 98765-1234",
+      f_data_enc:"2025-06-10"
+    },
     radios:{sexo:"M",defic:"2",outr_vez:"1",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"1",viol_trab:"2",cat:"2"},
     checks:{tipo_viol:["1","7"],meio_agr:["1"],vinc:["3"],encam:["1","5","14"]}
   },
   {
     label:"Ana Claudia, 32 anos",
     sub:"Física + Psicológica · cônjuge · Rio de Janeiro/RJ",
-    fields:{f_data_notif:"2025-08-14",f_data_ocorr:"2025-08-13",f_tipo_un:"1",f_nome_un:"UPA CENTRAL",f_mun_notif:"RIO DE JANEIRO",f_uf_notif:"RJ",f_nome:"ANA CLAUDIA FERREIRA MENDES",f_nasc:"1992-07-22",f_raca:"1",f_escol:"6",f_gest:"5",f_mae:"LUCIA APARECIDA FERREIRA",f_est_civil:"2",f_ocupacao:"EMPREGADO DOMESTICO NOS SERVICOS GERAIS",f_or_sex:"1",f_id_gen:"8",f_mun_res:"RIO DE JANEIRO",f_uf_res:"RJ",f_bairro_res:"SANTA CRUZ",f_logr_res:"RUA SENADOR CAMARA",f_num_res:"312",f_zona_res:"1",f_tel_res:"(21) 98765-4321",f_mun_oc:"RIO DE JANEIRO",f_uf_oc:"RJ",f_bairro_oc:"SANTA CRUZ",f_logr_oc:"RUA SENADOR CAMARA",f_num_oc:"312",f_hora_oc:"22:15",f_zona_oc:"1",f_local_oc:"01",f_motiv:"01",f_ciclo:"4",f_data_enc:"2025-08-14"},
+    fields:{
+      f_data_notif:"2025-08-14",f_data_ocorr:"2025-08-13",
+      f_tipo_un:"1",f_nome_un:"UPA CENTRAL",f_cnes:"2089011",
+      f_mun_notif:"RIO DE JANEIRO",f_uf_notif:"RJ",f_ibge_notif:"330455",
+      f_nome:"ANA CLAUDIA FERREIRA MENDES",f_nasc:"1992-07-22",f_raca:"1",f_escol:"6",f_gest:"5",
+      f_sus:"706012300000002",f_mae:"LUCIA APARECIDA FERREIRA",
+      f_est_civil:"2",f_ocupacao:"EMPREGADO DOMESTICO NOS SERVICOS GERAIS",
+      f_or_sex:"1",f_id_gen:"8",
+      f_mun_res:"RIO DE JANEIRO",f_uf_res:"RJ",f_ibge_res:"330455",
+      f_bairro_res:"SANTA CRUZ",f_logr_res:"RUA SENADOR CAMARA",f_num_res:"312",
+      f_compl_res:"APTO 4 BL B",f_cep:"23565-170",f_tel_res:"(21) 98765-4321",f_zona_res:"1",
+      f_pref_res:"PROXIMO A PADARIA SAO JORGE",
+      f_mun_oc:"RIO DE JANEIRO",f_uf_oc:"RJ",f_bairro_oc:"SANTA CRUZ",
+      f_logr_oc:"RUA SENADOR CAMARA",f_num_oc:"312",
+      f_hora_oc:"22:15",f_zona_oc:"1",f_local_oc:"01",f_motiv:"01",f_ciclo:"4",
+      f_cid10:"Y07.0",
+      f_data_enc:"2025-08-14"
+    },
     radios:{sexo:"F",defic:"2",outr_vez:"1",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"1",viol_trab:"2",cat:"2"},
     checks:{tipo_viol:["1","2"],meio_agr:["1","3"],vinc:["5"],encam:["1","7"]}
   },
   {
     label:"José Antonio, 72 anos",
     sub:"Financeira + Psicológica · filho · Belo Horizonte/MG",
-    fields:{f_data_notif:"2025-04-03",f_data_ocorr:"2025-04-01",f_tipo_un:"2",f_nome_un:"CRAS LESTE",f_mun_notif:"BELO HORIZONTE",f_uf_notif:"MG",f_nome:"JOSE ANTONIO DA COSTA",f_nasc:"1952-11-08",f_raca:"1",f_escol:"3",f_mae:"CONCEICAO DA COSTA",f_est_civil:"3",f_or_sex:"1",f_id_gen:"8",f_mun_res:"BELO HORIZONTE",f_uf_res:"MG",f_bairro_res:"CENTRO",f_logr_res:"AVENIDA AFONSO PENA",f_num_res:"1500",f_zona_res:"1",f_mun_oc:"BELO HORIZONTE",f_uf_oc:"MG",f_bairro_oc:"CENTRO",f_local_oc:"01",f_motiv:"06",f_ciclo:"5",f_data_enc:"2025-04-03"},
+    fields:{
+      f_data_notif:"2025-04-03",f_data_ocorr:"2025-04-01",
+      f_tipo_un:"2",f_nome_un:"CRAS LESTE",f_cnes:"3502345",
+      f_mun_notif:"BELO HORIZONTE",f_uf_notif:"MG",f_ibge_notif:"310620",
+      f_nome:"JOSE ANTONIO DA COSTA",f_nasc:"1952-11-08",f_raca:"1",f_escol:"3",
+      f_sus:"706012300000003",f_mae:"CONCEICAO DA COSTA",
+      f_est_civil:"3",f_or_sex:"1",f_id_gen:"8",
+      f_mun_res:"BELO HORIZONTE",f_uf_res:"MG",f_ibge_res:"310620",
+      f_bairro_res:"CENTRO",f_logr_res:"AVENIDA AFONSO PENA",f_num_res:"1500",
+      f_compl_res:"APTO 203",f_cep:"30130-010",f_tel_res:"(31) 98765-5678",f_zona_res:"1",
+      f_pref_res:"EM FRENTE AO TRIBUNAL DE JUSTICA DE MINAS GERAIS",
+      f_mun_oc:"BELO HORIZONTE",f_uf_oc:"MG",f_bairro_oc:"CENTRO",
+      f_logr_oc:"AVENIDA AFONSO PENA",f_num_oc:"1500",
+      f_zona_oc:"1",f_local_oc:"01",f_motiv:"06",f_ciclo:"5",
+      f_cid10:"T74.3",
+      f_acomp_nome:"ANTONIO DA COSTA JUNIOR",f_acomp_vinc:"FILHO",f_acomp_tel:"(31) 97654-3210",
+      f_data_enc:"2025-04-03"
+    },
     radios:{sexo:"M",defic:"2",outr_vez:"1",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"2",viol_trab:"2",cat:"2"},
     checks:{tipo_viol:["6","2"],meio_agr:["8"],vinc:["9"],encam:["6","8","2"]}
   },
   {
     label:"Beatriz Oliveira, 15 anos",
     sub:"Sexual (estupro) · desconhecido · Salvador/BA",
-    fields:{f_data_notif:"2025-07-22",f_data_ocorr:"2025-07-21",f_tipo_un:"1",f_nome_un:"HOSPITAL REGIONAL",f_mun_notif:"SALVADOR",f_uf_notif:"BA",f_nome:"BEATRIZ OLIVEIRA SANTOS",f_nasc:"2009-04-30",f_raca:"2",f_escol:"4",f_gest:"9",f_mae:"CLAUDIA SANTOS",f_est_civil:"1",f_or_sex:"1",f_id_gen:"8",f_mun_res:"SALVADOR",f_uf_res:"BA",f_bairro_res:"LIBERDADE",f_logr_res:"RUA JOAO DAS BOTAS",f_zona_res:"1",f_mun_oc:"SALVADOR",f_uf_oc:"BA",f_bairro_oc:"LIBERDADE",f_hora_oc:"23:45",f_zona_oc:"1",f_local_oc:"06",f_motiv:"01",f_ciclo:"2",f_data_enc:"2025-07-22"},
+    fields:{
+      f_data_notif:"2025-07-22",f_data_ocorr:"2025-07-21",
+      f_tipo_un:"1",f_nome_un:"HOSPITAL REGIONAL",f_cnes:"2256789",
+      f_mun_notif:"SALVADOR",f_uf_notif:"BA",f_ibge_notif:"292740",
+      f_nome:"BEATRIZ OLIVEIRA SANTOS",f_nasc:"2009-04-30",f_raca:"2",f_escol:"4",f_gest:"9",
+      f_sus:"706012300000004",f_mae:"CLAUDIA SANTOS",
+      f_est_civil:"1",f_or_sex:"1",f_id_gen:"8",
+      f_mun_res:"SALVADOR",f_uf_res:"BA",f_ibge_res:"292740",
+      f_bairro_res:"LIBERDADE",f_logr_res:"RUA JOAO DAS BOTAS",f_num_res:"82",
+      f_compl_res:"CASA FUNDO",f_cep:"40200-025",f_tel_res:"(71) 99876-2345",f_zona_res:"1",
+      f_pref_res:"EM FRENTE AO SUPERMERCADO BARATAO",
+      f_mun_oc:"SALVADOR",f_uf_oc:"BA",f_bairro_oc:"LIBERDADE",
+      f_logr_oc:"RUA JOAO DAS BOTAS",f_num_oc:"82",
+      f_hora_oc:"23:45",f_zona_oc:"1",f_local_oc:"06",f_motiv:"01",f_ciclo:"2",
+      f_cid10:"T74.2",
+      f_acomp_nome:"CLAUDIA SANTOS",f_acomp_vinc:"MAE",f_acomp_tel:"(71) 99876-2345",
+      f_data_enc:"2025-07-22"
+    },
     radios:{sexo:"F",defic:"2",outr_vez:"2",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"9",viol_trab:"2",cat:"2"},
     checks:{tipo_viol:["4"],meio_agr:["1"],viol_sex:["2"],proc:["1","2","3","4","7"],vinc:["12"],encam:["1","7","12"]}
   },
   {
     label:"Carlos Eduardo, 27 anos",
     sub:"Física, arma de fogo · desconhecido · Fortaleza/CE",
-    fields:{f_data_notif:"2025-09-05",f_data_ocorr:"2025-09-04",f_tipo_un:"1",f_nome_un:"HOSPITAL DE BASE",f_mun_notif:"FORTALEZA",f_uf_notif:"CE",f_nome:"CARLOS EDUARDO LIMA BARBOSA",f_nasc:"1997-09-12",f_raca:"4",f_escol:"5",f_mae:"RAIMUNDA LIMA",f_est_civil:"1",f_ocupacao:"PEDREIRO",f_or_sex:"1",f_id_gen:"8",f_mun_res:"FORTALEZA",f_uf_res:"CE",f_bairro_res:"CONJUNTO CEARA",f_logr_res:"RUA AUGUSTO CALS",f_num_res:"88",f_zona_res:"1",f_mun_oc:"FORTALEZA",f_uf_oc:"CE",f_bairro_oc:"CONJUNTO CEARA",f_hora_oc:"21:00",f_zona_oc:"1",f_local_oc:"06",f_motiv:"09",f_ciclo:"3",f_data_enc:"2025-09-05"},
+    fields:{
+      f_data_notif:"2025-09-05",f_data_ocorr:"2025-09-04",
+      f_tipo_un:"1",f_nome_un:"HOSPITAL DE BASE",f_cnes:"2304401",
+      f_mun_notif:"FORTALEZA",f_uf_notif:"CE",f_ibge_notif:"230440",
+      f_nome:"CARLOS EDUARDO LIMA BARBOSA",f_nasc:"1997-09-12",f_raca:"4",f_escol:"5",
+      f_sus:"706012300000005",f_mae:"RAIMUNDA LIMA",
+      f_est_civil:"1",f_ocupacao:"PEDREIRO",f_or_sex:"1",f_id_gen:"8",
+      f_mun_res:"FORTALEZA",f_uf_res:"CE",f_ibge_res:"230440",
+      f_bairro_res:"CONJUNTO CEARA",f_logr_res:"RUA AUGUSTO CALS",f_num_res:"88",
+      f_cep:"60536-070",f_tel_res:"(85) 99234-6789",f_zona_res:"1",
+      f_pref_res:"ESQUINA COM RUA PAULO SARASATE",
+      f_mun_oc:"FORTALEZA",f_uf_oc:"CE",f_bairro_oc:"CONJUNTO CEARA",
+      f_logr_oc:"AVENIDA JOAO PESSOA",f_num_oc:"S/N",
+      f_hora_oc:"21:00",f_zona_oc:"1",f_local_oc:"06",f_motiv:"09",f_ciclo:"3",
+      f_cid10:"X93.4",
+      f_data_enc:"2025-09-05"
+    },
     radios:{sexo:"M",defic:"2",outr_vez:"2",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"9",viol_trab:"2",cat:"2"},
     checks:{tipo_viol:["1"],meio_agr:["6"],vinc:["12"],encam:["1","9"]}
   },
   {
     label:"Fernanda Cristina, 46 anos",
     sub:"Psicológica + Física · ex-cônjuge · Recife/PE",
-    fields:{f_data_notif:"2025-05-20",f_data_ocorr:"2025-05-19",f_tipo_un:"6",f_nome_un:"CRAM MUNICIPAL",f_mun_notif:"RECIFE",f_uf_notif:"PE",f_nome:"FERNANDA CRISTINA ALVES PEREIRA",f_nasc:"1979-02-28",f_raca:"4",f_escol:"8",f_gest:"5",f_mae:"SONIA ALVES",f_est_civil:"4",f_ocupacao:"RECEPCIONISTA, EM GERAL",f_or_sex:"1",f_id_gen:"8",f_mun_res:"RECIFE",f_uf_res:"PE",f_bairro_res:"BOA VIAGEM",f_logr_res:"AVENIDA BOA VIAGEM",f_num_res:"700",f_zona_res:"1",f_tel_res:"(81) 99234-5678",f_mun_oc:"RECIFE",f_uf_oc:"PE",f_bairro_oc:"BOA VIAGEM",f_hora_oc:"08:30",f_zona_oc:"1",f_local_oc:"01",f_motiv:"01",f_ciclo:"4",f_data_enc:"2025-05-20"},
+    fields:{
+      f_data_notif:"2025-05-20",f_data_ocorr:"2025-05-19",
+      f_tipo_un:"6",f_nome_un:"CRAM MUNICIPAL",f_cnes:"2612345",
+      f_mun_notif:"RECIFE",f_uf_notif:"PE",f_ibge_notif:"261160",
+      f_nome:"FERNANDA CRISTINA ALVES PEREIRA",f_nasc:"1979-02-28",f_raca:"4",f_escol:"8",f_gest:"5",
+      f_sus:"706012300000006",f_mae:"SONIA ALVES",
+      f_est_civil:"4",f_ocupacao:"RECEPCIONISTA, EM GERAL",f_or_sex:"1",f_id_gen:"8",
+      f_mun_res:"RECIFE",f_uf_res:"PE",f_ibge_res:"261160",
+      f_bairro_res:"BOA VIAGEM",f_logr_res:"AVENIDA BOA VIAGEM",f_num_res:"700",
+      f_compl_res:"APTO 204",f_cep:"51111-010",f_tel_res:"(81) 99234-5678",f_zona_res:"1",
+      f_pref_res:"EM FRENTE AO HOTEL INTERNACIONAL",
+      f_mun_oc:"RECIFE",f_uf_oc:"PE",f_bairro_oc:"BOA VIAGEM",
+      f_logr_oc:"AVENIDA BOA VIAGEM",f_num_oc:"700",
+      f_hora_oc:"08:30",f_zona_oc:"1",f_local_oc:"01",f_motiv:"01",f_ciclo:"4",
+      f_cid10:"T74.8",
+      f_data_enc:"2025-05-20"
+    },
     radios:{sexo:"F",defic:"2",outr_vez:"1",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"2",viol_trab:"2",cat:"2"},
     checks:{tipo_viol:["2","1"],meio_agr:["8","1"],vinc:["6"],encam:["1","7","4"]}
   },
   {
     label:"Matheus Rodrigues, 9 anos",
     sub:"Física + Tortura · pai · Porto Alegre/RS",
-    fields:{f_data_notif:"2025-03-15",f_data_ocorr:"2025-03-14",f_tipo_un:"1",f_nome_un:"UBS CRIANCAS SAUDAVEIS",f_mun_notif:"PORTO ALEGRE",f_uf_notif:"RS",f_nome:"MATHEUS RODRIGUES GOMES",f_nasc:"2015-08-10",f_raca:"1",f_escol:"10",f_mae:"TATIANA GOMES",f_or_sex:"8",f_id_gen:"8",f_mun_res:"PORTO ALEGRE",f_uf_res:"RS",f_bairro_res:"CRUZEIRO DO SUL",f_logr_res:"RUA IPIRANGA",f_zona_res:"1",f_mun_oc:"PORTO ALEGRE",f_uf_oc:"RS",f_bairro_oc:"CRUZEIRO DO SUL",f_local_oc:"01",f_motiv:"06",f_ciclo:"4",f_data_enc:"2025-03-15"},
+    fields:{
+      f_data_notif:"2025-03-15",f_data_ocorr:"2025-03-14",
+      f_tipo_un:"1",f_nome_un:"UBS CRIANCAS SAUDAVEIS",f_cnes:"4314901",
+      f_mun_notif:"PORTO ALEGRE",f_uf_notif:"RS",f_ibge_notif:"431490",
+      f_nome:"MATHEUS RODRIGUES GOMES",f_nasc:"2015-08-10",f_raca:"1",f_escol:"10",
+      f_sus:"706012300000007",f_mae:"TATIANA GOMES",
+      f_or_sex:"8",f_id_gen:"8",
+      f_mun_res:"PORTO ALEGRE",f_uf_res:"RS",f_ibge_res:"431490",
+      f_bairro_res:"CRUZEIRO DO SUL",f_logr_res:"RUA IPIRANGA",f_num_res:"234",
+      f_compl_res:"APTO 12",f_cep:"91150-040",f_tel_res:"(51) 99345-6789",f_zona_res:"1",
+      f_pref_res:"PROXIMO A CRECHE MUNICIPAL TURMA DO BAIRRO",
+      f_mun_oc:"PORTO ALEGRE",f_uf_oc:"RS",f_bairro_oc:"CRUZEIRO DO SUL",
+      f_logr_oc:"RUA IPIRANGA",f_num_oc:"234",
+      f_zona_oc:"1",f_local_oc:"01",f_motiv:"06",f_ciclo:"4",
+      f_cid10:"T74.1",
+      f_acomp_nome:"TATIANA GOMES",f_acomp_vinc:"MAE",f_acomp_tel:"(51) 99345-6789",
+      f_data_enc:"2025-03-15"
+    },
     radios:{sexo:"M",defic:"2",outr_vez:"1",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"1",viol_trab:"2",cat:"2"},
     checks:{tipo_viol:["1","3"],meio_agr:["1","3"],vinc:["1"],encam:["1","5","14"]}
   },
   {
     label:"Camila Rodrigues, 23 anos (trans)",
     sub:"Física + Psicológica · transfobia · Curitiba/PR",
-    fields:{f_data_notif:"2025-10-08",f_data_ocorr:"2025-10-07",f_tipo_un:"1",f_nome_un:"UPA SUL",f_mun_notif:"CURITIBA",f_uf_notif:"PR",f_nome:"CAMILA RODRIGUES",f_nasc:"2001-06-15",f_raca:"2",f_escol:"5",f_gest:"6",f_mae:"APARECIDA RODRIGUES",f_est_civil:"1",f_ocupacao:"FAXINEIRO",f_or_sex:"1",f_id_gen:"2",f_mun_res:"CURITIBA",f_uf_res:"PR",f_bairro_res:"CENTRO",f_logr_res:"RUA XV DE NOVEMBRO",f_num_res:"120",f_zona_res:"1",f_mun_oc:"CURITIBA",f_uf_oc:"PR",f_bairro_oc:"CENTRO",f_hora_oc:"01:20",f_zona_oc:"1",f_local_oc:"06",f_motiv:"02",f_ciclo:"3",f_data_enc:"2025-10-08"},
+    fields:{
+      f_data_notif:"2025-10-08",f_data_ocorr:"2025-10-07",
+      f_tipo_un:"1",f_nome_un:"UPA SUL",f_cnes:"4106901",
+      f_mun_notif:"CURITIBA",f_uf_notif:"PR",f_ibge_notif:"410690",
+      f_nome:"CAMILA RODRIGUES",f_nome_social:"CAMILA",f_nasc:"2001-06-15",f_raca:"2",f_escol:"5",f_gest:"6",
+      f_sus:"706012300000008",f_mae:"APARECIDA RODRIGUES",
+      f_est_civil:"1",f_ocupacao:"FAXINEIRO",f_or_sex:"1",f_id_gen:"2",
+      f_mun_res:"CURITIBA",f_uf_res:"PR",f_ibge_res:"410690",
+      f_bairro_res:"CENTRO",f_logr_res:"RUA XV DE NOVEMBRO",f_num_res:"120",
+      f_compl_res:"QUARTO 5",f_cep:"80010-010",f_tel_res:"(41) 99876-5432",f_zona_res:"1",
+      f_pref_res:"PROXIMO AO LARGO DA ORDEM",
+      f_mun_oc:"CURITIBA",f_uf_oc:"PR",f_bairro_oc:"CENTRO",
+      f_logr_oc:"RUA XV DE NOVEMBRO",f_num_oc:"488",
+      f_hora_oc:"01:20",f_zona_oc:"1",f_local_oc:"06",f_motiv:"02",f_ciclo:"3",
+      f_cid10:"Y04.4",
+      f_data_enc:"2025-10-08"
+    },
     radios:{sexo:"F",defic:"2",outr_vez:"2",auto_prov:"2",nenv:"2",sex_autor:"1",alcool:"1",viol_trab:"2",cat:"2"},
     checks:{tipo_viol:["1","2"],meio_agr:["1","3"],vinc:["12"],encam:["1","9","10"]}
   },
   {
     label:"Conceição Pereira, 80 anos",
     sub:"Negligência + Física · cuidador · Manaus/AM",
-    fields:{f_data_notif:"2025-02-14",f_data_ocorr:"2025-02-13",f_tipo_un:"1",f_nome_un:"HOSPITAL MUNICIPAL",f_mun_notif:"MANAUS",f_uf_notif:"AM",f_nome:"CONCEICAO APARECIDA PEREIRA",f_nasc:"1944-12-01",f_raca:"4",f_escol:"0",f_gest:"6",f_mae:"SEBASTIANA PEREIRA",f_est_civil:"3",f_or_sex:"1",f_id_gen:"8",f_mun_res:"MANAUS",f_uf_res:"AM",f_bairro_res:"COMPENSA",f_logr_res:"RUA FLORIANO PEIXOTO",f_zona_res:"1",f_mun_oc:"MANAUS",f_uf_oc:"AM",f_bairro_oc:"COMPENSA",f_local_oc:"01",f_motiv:"06",f_ciclo:"5",f_data_enc:"2025-02-14"},
+    fields:{
+      f_data_notif:"2025-02-14",f_data_ocorr:"2025-02-13",
+      f_tipo_un:"1",f_nome_un:"HOSPITAL MUNICIPAL",f_cnes:"1302601",
+      f_mun_notif:"MANAUS",f_uf_notif:"AM",f_ibge_notif:"130260",
+      f_nome:"CONCEICAO APARECIDA PEREIRA",f_nasc:"1944-12-01",f_raca:"4",f_escol:"0",f_gest:"6",
+      f_sus:"706012300000009",f_mae:"SEBASTIANA PEREIRA",
+      f_est_civil:"3",f_or_sex:"1",f_id_gen:"8",
+      f_mun_res:"MANAUS",f_uf_res:"AM",f_ibge_res:"130260",
+      f_bairro_res:"COMPENSA",f_logr_res:"RUA FLORIANO PEIXOTO",f_num_res:"78",
+      f_cep:"69036-010",f_tel_res:"(92) 98654-3210",f_zona_res:"1",
+      f_pref_res:"PROXIMO AO MERCADINHO ESPERANCA",
+      f_mun_oc:"MANAUS",f_uf_oc:"AM",f_bairro_oc:"COMPENSA",
+      f_logr_oc:"RUA FLORIANO PEIXOTO",f_num_oc:"78",
+      f_zona_oc:"1",f_local_oc:"01",f_motiv:"06",f_ciclo:"5",
+      f_cid10:"T74.0",
+      f_acomp_nome:"IRACI PEREIRA DOS SANTOS",f_acomp_vinc:"VIZINHA",f_acomp_tel:"(92) 98765-4321",
+      f_data_enc:"2025-02-14"
+    },
     radios:{sexo:"F",defic:"1",outr_vez:"1",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"2",viol_trab:"2",cat:"2"},
     checks:{tipo_viol:["7","1"],meio_agr:["1"],tdefic:["1"],vinc:["13"],encam:["1","6","8","2"]}
   },
   {
     label:"Larissa Silva, 17 anos",
     sub:"Exploração sexual + Tráfico · Belém/PA",
-    fields:{f_data_notif:"2025-11-03",f_data_ocorr:"2025-10-30",f_tipo_un:"1",f_nome_un:"HOSPITAL GERAL",f_mun_notif:"BELEM",f_uf_notif:"PA",f_nome:"LARISSA SILVA NASCIMENTO",f_nasc:"2007-03-20",f_raca:"4",f_escol:"3",f_gest:"9",f_mae:"ROSA NASCIMENTO",f_est_civil:"1",f_ocupacao:"VENDEDOR DE COMERCIO VAREJISTA",f_or_sex:"1",f_id_gen:"8",f_mun_res:"BELEM",f_uf_res:"PA",f_bairro_res:"GUAMA",f_logr_res:"AVENIDA PERIMETRAL",f_num_res:"534",f_zona_res:"1",f_mun_oc:"BELEM",f_uf_oc:"PA",f_hora_oc:"23:00",f_zona_oc:"1",f_local_oc:"07",f_motiv:"01",f_ciclo:"2",f_data_enc:"2025-11-03"},
+    fields:{
+      f_data_notif:"2025-11-03",f_data_ocorr:"2025-10-30",
+      f_tipo_un:"1",f_nome_un:"HOSPITAL GERAL",f_cnes:"1501401",
+      f_mun_notif:"BELEM",f_uf_notif:"PA",f_ibge_notif:"150140",
+      f_nome:"LARISSA SILVA NASCIMENTO",f_nasc:"2007-03-20",f_raca:"4",f_escol:"3",f_gest:"9",
+      f_sus:"706012300000010",f_mae:"ROSA NASCIMENTO",
+      f_est_civil:"1",f_ocupacao:"VENDEDOR DE COMERCIO VAREJISTA",f_or_sex:"1",f_id_gen:"8",
+      f_mun_res:"BELEM",f_uf_res:"PA",f_ibge_res:"150140",
+      f_bairro_res:"GUAMA",f_logr_res:"AVENIDA PERIMETRAL",f_num_res:"534",
+      f_cep:"66075-110",f_tel_res:"(91) 99345-7890",f_zona_res:"1",
+      f_pref_res:"ESQUINA COM TRAVESSA MAURITI",
+      f_mun_oc:"BELEM",f_uf_oc:"PA",f_bairro_oc:"COMERCIO",
+      f_logr_oc:"RUA JOAO ALFREDO",f_num_oc:"S/N",
+      f_hora_oc:"23:00",f_zona_oc:"1",f_local_oc:"07",f_motiv:"01",f_ciclo:"2",
+      f_cid10:"T74.2",
+      f_data_enc:"2025-11-03"
+    },
     radios:{sexo:"F",defic:"2",outr_vez:"1",auto_prov:"2",nenv:"2",sex_autor:"1",alcool:"9",viol_trab:"2",cat:"2"},
     checks:{tipo_viol:["4","5"],meio_agr:["8","9"],viol_sex:["4"],proc:["1","2","7"],vinc:["14","18"],encam:["1","11","12","13"]}
   }
@@ -2097,8 +2263,24 @@ function carregarPaciente(idx){
   Object.keys(p.checks||{}).forEach(function(name){ _setChecks(name, p.checks[name]); });
   _applyVisibility();
   updateProgress();
+  // Fecha todos os dropdowns de autocomplete abertos durante o preenchimento
+  document.querySelectorAll('.ac-drop').forEach(function(d){ d.innerHTML=''; d.classList.remove('show'); });
+  // Define hint de CBO se o campo de ocupação foi preenchido
+  var ocEl = document.getElementById('f_ocupacao');
+  var ocHint = document.getElementById('f_ocupacao_hint');
+  if(ocEl && ocHint && ocEl.value && window.SINAN_CBOS){
+    var ocMatch = (window.SINAN_CBOS||[]).filter(function(c){ return c.nome === ocEl.value; })[0];
+    if(ocMatch){ ocHint.textContent='CBO: '+ocMatch.cbo; ocHint.style.display='block'; }
+  }
+  // Define hint de CID-10 se o campo foi preenchido
+  var cidEl = document.getElementById('f_cid10');
+  var cidHint = document.getElementById('f_cid10_hint');
+  if(cidEl && cidHint && cidEl.value && window.SINAN_AGRAVOS){
+    var cidMatch = (window.SINAN_AGRAVOS||[]).filter(function(a){ return a.cid === cidEl.value; })[0];
+    if(cidMatch){ cidHint.textContent=cidMatch.nome; cidHint.style.display='block'; }
+  }
   window.scrollTo({top:0, behavior:'smooth'});
-  showToast('🧪 Paciente fictício carregado: '+p.label,'t-ok',3500);
+  showToast('Paciente fictício carregado: '+p.label,'t-ok',3500);
 }
 
 // ------ Exportar Rascunho ------
