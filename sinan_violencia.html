@@ -44,6 +44,36 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 .hdr-back{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.85);font-size:13px;font-weight:600;text-decoration:none;padding:8px 16px;border-radius:30px;border:1.5px solid rgba(255,255,255,.3);background:rgba(255,255,255,.07);transition:all .2s;white-space:nowrap;flex-shrink:0}
 .hdr-back:hover{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.55);transform:translateX(-2px)}
 
+/* TOOLS BAR */
+#tools-bar{background:rgba(0,0,0,.2);border-bottom:1px solid rgba(255,255,255,.06)}
+.tools-inner{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 28px;max-width:1180px;margin:0 auto;flex-wrap:wrap}
+.tb-group{display:flex;align-items:center;gap:6px}
+.tb-btn{background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.18);padding:5px 13px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .15s;line-height:1.4}
+.tb-btn:hover{background:rgba(255,255,255,.16);color:#fff;border-color:rgba(255,255,255,.35)}
+.tb-danger{background:rgba(220,38,38,.2);border-color:rgba(239,68,68,.35);color:#fca5a5}
+.tb-danger:hover{background:rgba(220,38,38,.38);color:#fff;border-color:rgba(239,68,68,.6)}
+.tb-dd{position:relative}
+.tb-menu{position:absolute;top:calc(100% + 6px);left:0;background:#fff;border:1.5px solid #e5e7eb;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.18);z-index:600;min-width:280px;overflow:hidden;display:none}
+.tb-menu.open{display:block}
+.tb-menu-hdr{padding:8px 16px 4px;font-size:10px;font-weight:800;color:#9ca3af;text-transform:uppercase;letter-spacing:.6px;background:#f9fafb;border-bottom:1px solid #f3f4f6}
+.tb-mi{padding:10px 16px;font-size:13px;color:#1f2937;cursor:pointer;border-bottom:1px solid #f3f4f6;line-height:1.4;transition:background .1s}
+.tb-mi:last-child{border-bottom:none}
+.tb-mi:hover{background:#eff6ff;color:#1e40af}
+.tb-mi-name{font-weight:700;display:block}
+.tb-mi-sub{font-size:11px;color:#6b7280;margin-top:1px}
+/* CONFIRM MODAL */
+#confirm-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9000;align-items:center;justify-content:center}
+#confirm-modal.show{display:flex}
+.cm-box{background:#fff;border-radius:16px;padding:32px;max-width:360px;width:92%;box-shadow:0 24px 64px rgba(0,0,0,.3);text-align:center}
+.cm-icon{font-size:40px;margin-bottom:12px}
+.cm-box h3{font-size:17px;font-weight:800;color:#1f2937;margin-bottom:8px}
+.cm-box p{font-size:13px;color:#6b7280;line-height:1.6;margin-bottom:22px}
+.cm-actions{display:flex;gap:10px;justify-content:center}
+.cm-cancel{background:#f3f4f6;color:#374151;border:none;padding:10px 22px;border-radius:30px;font-size:14px;font-weight:600;cursor:pointer;transition:background .15s}
+.cm-cancel:hover{background:#e5e7eb}
+.cm-ok{background:linear-gradient(135deg,#dc2626,#ef4444);color:#fff;border:none;padding:10px 22px;border-radius:30px;font-size:14px;font-weight:600;cursor:pointer;transition:opacity .15s}
+.cm-ok:hover{opacity:.88}
+
 /*==============================================================
   LAYOUT
 ==============================================================*/
@@ -198,6 +228,23 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
   </div>
 </header>
 <div id="prog-bar-strip"><div id="prog-bar-fill"></div></div>
+
+<div id="tools-bar">
+  <div class="tools-inner">
+    <div class="tb-group">
+      <div class="tb-dd" id="dd-pac">
+        <button class="tb-btn" onclick="togglePacMenu(event)">🧪 Paciente Teste ▾</button>
+        <div class="tb-menu" id="pac-menu"></div>
+      </div>
+      <button class="tb-btn" onclick="document.getElementById('f-import').click()">📂 Importar Rascunho</button>
+      <input type="file" id="f-import" accept=".json" style="display:none" onchange="importarRascunho(this)">
+    </div>
+    <div class="tb-group">
+      <button class="tb-btn" onclick="exportarRascunho()">💾 Exportar Rascunho</button>
+      <button class="tb-btn tb-danger" onclick="abrirModalNova()">🗑 Nova Ficha</button>
+    </div>
+  </div>
+</div>
 
 <div class="wrapper">
 
@@ -1831,6 +1878,235 @@ async function gerarPDF(){
 
   btn.disabled=false;
   btn.innerHTML='📄 Gerar PDF';
+}
+</script>
+
+<!-- CONFIRM MODAL -->
+<div id="confirm-modal">
+  <div class="cm-box">
+    <div class="cm-icon">🗑️</div>
+    <h3>Apagar tudo e começar do zero?</h3>
+    <p>Todos os dados inseridos serão perdidos. Se quiser preservá-los, use <strong>Exportar Rascunho</strong> antes de continuar.</p>
+    <div class="cm-actions">
+      <button class="cm-cancel" onclick="fecharModalNova()">Cancelar</button>
+      <button class="cm-ok" onclick="novaFichaConfirmado()">Apagar tudo</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/*==========================================================
+  TOOLS — Paciente Teste | Exportar | Importar | Nova Ficha
+==========================================================*/
+
+var FAKE_PATIENTS = [
+  {
+    label:"João Pedro, 6 anos",
+    sub:"Física + Negligência · padrasto · São Paulo/SP",
+    fields:{f_data_notif:"2025-06-10",f_data_ocorr:"2025-06-09",f_tipo_un:"1",f_nome_un:"UPA NORTE",f_mun_notif:"SAO PAULO",f_uf_notif:"SP",f_nome:"JOAO PEDRO SOUZA SILVA",f_nasc:"2019-03-15",f_raca:"4",f_escol:"10",f_mae:"MARIA DA CONCEICAO SOUZA",f_mun_res:"SAO PAULO",f_uf_res:"SP",f_bairro_res:"JARDIM BRASIL",f_logr_res:"RUA DAS FLORES",f_num_res:"45",f_zona_res:"1",f_or_sex:"8",f_id_gen:"8",f_mun_oc:"SAO PAULO",f_uf_oc:"SP",f_bairro_oc:"JARDIM BRASIL",f_logr_oc:"RUA DAS FLORES",f_num_oc:"45",f_hora_oc:"19:30",f_zona_oc:"1",f_local_oc:"01",f_motiv:"06",f_ciclo:"4",f_data_enc:"2025-06-10"},
+    radios:{sexo:"M",defic:"2",outr_vez:"1",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"1",viol_trab:"2",cat:"2"},
+    checks:{tipo_viol:["1","7"],meio_agr:["1"],vinc:["3"],encam:["1","5","14"]}
+  },
+  {
+    label:"Ana Claudia, 32 anos",
+    sub:"Física + Psicológica · cônjuge · Rio de Janeiro/RJ",
+    fields:{f_data_notif:"2025-08-14",f_data_ocorr:"2025-08-13",f_tipo_un:"1",f_nome_un:"UPA CENTRAL",f_mun_notif:"RIO DE JANEIRO",f_uf_notif:"RJ",f_nome:"ANA CLAUDIA FERREIRA MENDES",f_nasc:"1992-07-22",f_raca:"1",f_escol:"6",f_gest:"5",f_mae:"LUCIA APARECIDA FERREIRA",f_est_civil:"2",f_or_sex:"1",f_id_gen:"8",f_mun_res:"RIO DE JANEIRO",f_uf_res:"RJ",f_bairro_res:"SANTA CRUZ",f_logr_res:"RUA SENADOR CAMARA",f_num_res:"312",f_zona_res:"1",f_mun_oc:"RIO DE JANEIRO",f_uf_oc:"RJ",f_bairro_oc:"SANTA CRUZ",f_logr_oc:"RUA SENADOR CAMARA",f_num_oc:"312",f_hora_oc:"22:15",f_zona_oc:"1",f_local_oc:"01",f_motiv:"01",f_ciclo:"4",f_data_enc:"2025-08-14"},
+    radios:{sexo:"F",defic:"2",outr_vez:"1",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"1",viol_trab:"2",cat:"2"},
+    checks:{tipo_viol:["1","2"],meio_agr:["1","3"],vinc:["5"],encam:["1","7"]}
+  },
+  {
+    label:"José Antonio, 72 anos",
+    sub:"Financeira + Psicológica · filho · Belo Horizonte/MG",
+    fields:{f_data_notif:"2025-04-03",f_data_ocorr:"2025-04-01",f_tipo_un:"2",f_nome_un:"CRAS LESTE",f_mun_notif:"BELO HORIZONTE",f_uf_notif:"MG",f_nome:"JOSE ANTONIO DA COSTA",f_nasc:"1952-11-08",f_raca:"1",f_escol:"3",f_mae:"CONCEICAO DA COSTA",f_est_civil:"3",f_or_sex:"1",f_id_gen:"8",f_mun_res:"BELO HORIZONTE",f_uf_res:"MG",f_bairro_res:"CENTRO",f_logr_res:"AVENIDA AFONSO PENA",f_num_res:"1500",f_zona_res:"1",f_mun_oc:"BELO HORIZONTE",f_uf_oc:"MG",f_bairro_oc:"CENTRO",f_local_oc:"01",f_motiv:"06",f_ciclo:"5",f_data_enc:"2025-04-03"},
+    radios:{sexo:"M",defic:"2",outr_vez:"1",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"2",viol_trab:"2",cat:"2"},
+    checks:{tipo_viol:["6","2"],meio_agr:["8"],vinc:["9"],encam:["6","8","2"]}
+  },
+  {
+    label:"Beatriz Oliveira, 15 anos",
+    sub:"Sexual (estupro) · desconhecido · Salvador/BA",
+    fields:{f_data_notif:"2025-07-22",f_data_ocorr:"2025-07-21",f_tipo_un:"1",f_nome_un:"HOSPITAL REGIONAL",f_mun_notif:"SALVADOR",f_uf_notif:"BA",f_nome:"BEATRIZ OLIVEIRA SANTOS",f_nasc:"2009-04-30",f_raca:"2",f_escol:"4",f_gest:"9",f_mae:"CLAUDIA SANTOS",f_est_civil:"1",f_or_sex:"1",f_id_gen:"8",f_mun_res:"SALVADOR",f_uf_res:"BA",f_bairro_res:"LIBERDADE",f_logr_res:"RUA JOAO DAS BOTAS",f_zona_res:"1",f_mun_oc:"SALVADOR",f_uf_oc:"BA",f_bairro_oc:"LIBERDADE",f_hora_oc:"23:45",f_zona_oc:"1",f_local_oc:"06",f_motiv:"01",f_ciclo:"2",f_data_enc:"2025-07-22"},
+    radios:{sexo:"F",defic:"2",outr_vez:"2",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"9",viol_trab:"2",cat:"2"},
+    checks:{tipo_viol:["4"],meio_agr:["1"],viol_sex:["2"],proc:["1","2","3","4","7"],vinc:["12"],encam:["1","7","12"]}
+  },
+  {
+    label:"Carlos Eduardo, 27 anos",
+    sub:"Física, arma de fogo · desconhecido · Fortaleza/CE",
+    fields:{f_data_notif:"2025-09-05",f_data_ocorr:"2025-09-04",f_tipo_un:"1",f_nome_un:"HOSPITAL DE BASE",f_mun_notif:"FORTALEZA",f_uf_notif:"CE",f_nome:"CARLOS EDUARDO LIMA BARBOSA",f_nasc:"1997-09-12",f_raca:"4",f_escol:"5",f_mae:"RAIMUNDA LIMA",f_est_civil:"1",f_or_sex:"1",f_id_gen:"8",f_mun_res:"FORTALEZA",f_uf_res:"CE",f_bairro_res:"CONJUNTO CEARA",f_logr_res:"RUA AUGUSTO CALS",f_zona_res:"1",f_mun_oc:"FORTALEZA",f_uf_oc:"CE",f_bairro_oc:"CONJUNTO CEARA",f_hora_oc:"21:00",f_zona_oc:"1",f_local_oc:"06",f_motiv:"09",f_ciclo:"3",f_data_enc:"2025-09-05"},
+    radios:{sexo:"M",defic:"2",outr_vez:"2",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"9",viol_trab:"2",cat:"2"},
+    checks:{tipo_viol:["1"],meio_agr:["6"],vinc:["12"],encam:["1","9"]}
+  },
+  {
+    label:"Fernanda Cristina, 46 anos",
+    sub:"Psicológica + Física · ex-cônjuge · Recife/PE",
+    fields:{f_data_notif:"2025-05-20",f_data_ocorr:"2025-05-19",f_tipo_un:"6",f_nome_un:"CRAM MUNICIPAL",f_mun_notif:"RECIFE",f_uf_notif:"PE",f_nome:"FERNANDA CRISTINA ALVES PEREIRA",f_nasc:"1979-02-28",f_raca:"4",f_escol:"8",f_gest:"5",f_mae:"SONIA ALVES",f_est_civil:"4",f_or_sex:"1",f_id_gen:"8",f_mun_res:"RECIFE",f_uf_res:"PE",f_bairro_res:"BOA VIAGEM",f_logr_res:"AVENIDA BOA VIAGEM",f_num_res:"700",f_zona_res:"1",f_mun_oc:"RECIFE",f_uf_oc:"PE",f_bairro_oc:"BOA VIAGEM",f_hora_oc:"08:30",f_zona_oc:"1",f_local_oc:"01",f_motiv:"01",f_ciclo:"4",f_data_enc:"2025-05-20"},
+    radios:{sexo:"F",defic:"2",outr_vez:"1",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"2",viol_trab:"2",cat:"2"},
+    checks:{tipo_viol:["2","1"],meio_agr:["8","1"],vinc:["6"],encam:["1","7","4"]}
+  },
+  {
+    label:"Matheus Rodrigues, 9 anos",
+    sub:"Física + Tortura · pai · Porto Alegre/RS",
+    fields:{f_data_notif:"2025-03-15",f_data_ocorr:"2025-03-14",f_tipo_un:"1",f_nome_un:"UBS CRIANCAS SAUDAVEIS",f_mun_notif:"PORTO ALEGRE",f_uf_notif:"RS",f_nome:"MATHEUS RODRIGUES GOMES",f_nasc:"2015-08-10",f_raca:"1",f_escol:"10",f_mae:"TATIANA GOMES",f_or_sex:"8",f_id_gen:"8",f_mun_res:"PORTO ALEGRE",f_uf_res:"RS",f_bairro_res:"CRUZEIRO DO SUL",f_logr_res:"RUA IPIRANGA",f_zona_res:"1",f_mun_oc:"PORTO ALEGRE",f_uf_oc:"RS",f_bairro_oc:"CRUZEIRO DO SUL",f_local_oc:"01",f_motiv:"06",f_ciclo:"4",f_data_enc:"2025-03-15"},
+    radios:{sexo:"M",defic:"2",outr_vez:"1",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"1",viol_trab:"2",cat:"2"},
+    checks:{tipo_viol:["1","3"],meio_agr:["1","3"],vinc:["1"],encam:["1","5","14"]}
+  },
+  {
+    label:"Camila Rodrigues, 23 anos (trans)",
+    sub:"Física + Psicológica · transfobia · Curitiba/PR",
+    fields:{f_data_notif:"2025-10-08",f_data_ocorr:"2025-10-07",f_tipo_un:"1",f_nome_un:"UPA SUL",f_mun_notif:"CURITIBA",f_uf_notif:"PR",f_nome:"CAMILA RODRIGUES",f_nasc:"2001-06-15",f_raca:"2",f_escol:"5",f_gest:"6",f_mae:"APARECIDA RODRIGUES",f_est_civil:"1",f_or_sex:"1",f_id_gen:"2",f_mun_res:"CURITIBA",f_uf_res:"PR",f_bairro_res:"CENTRO",f_logr_res:"RUA XV DE NOVEMBRO",f_zona_res:"1",f_mun_oc:"CURITIBA",f_uf_oc:"PR",f_bairro_oc:"CENTRO",f_hora_oc:"01:20",f_zona_oc:"1",f_local_oc:"06",f_motiv:"02",f_ciclo:"3",f_data_enc:"2025-10-08"},
+    radios:{sexo:"F",defic:"2",outr_vez:"2",auto_prov:"2",nenv:"2",sex_autor:"1",alcool:"1",viol_trab:"2",cat:"2"},
+    checks:{tipo_viol:["1","2"],meio_agr:["1","3"],vinc:["12"],encam:["1","9","10"]}
+  },
+  {
+    label:"Conceição Pereira, 80 anos",
+    sub:"Negligência + Física · cuidador · Manaus/AM",
+    fields:{f_data_notif:"2025-02-14",f_data_ocorr:"2025-02-13",f_tipo_un:"1",f_nome_un:"HOSPITAL MUNICIPAL",f_mun_notif:"MANAUS",f_uf_notif:"AM",f_nome:"CONCEICAO APARECIDA PEREIRA",f_nasc:"1944-12-01",f_raca:"4",f_escol:"0",f_gest:"6",f_mae:"SEBASTIANA PEREIRA",f_est_civil:"3",f_or_sex:"1",f_id_gen:"8",f_mun_res:"MANAUS",f_uf_res:"AM",f_bairro_res:"COMPENSA",f_logr_res:"RUA FLORIANO PEIXOTO",f_zona_res:"1",f_mun_oc:"MANAUS",f_uf_oc:"AM",f_bairro_oc:"COMPENSA",f_local_oc:"01",f_motiv:"06",f_ciclo:"5",f_data_enc:"2025-02-14"},
+    radios:{sexo:"F",defic:"1",outr_vez:"1",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"2",viol_trab:"2",cat:"2"},
+    checks:{tipo_viol:["7","1"],meio_agr:["1"],tdefic:["1"],vinc:["13"],encam:["1","6","8","2"]}
+  },
+  {
+    label:"Larissa Silva, 17 anos",
+    sub:"Exploração sexual + Tráfico · Belém/PA",
+    fields:{f_data_notif:"2025-11-03",f_data_ocorr:"2025-10-30",f_tipo_un:"1",f_nome_un:"HOSPITAL GERAL",f_mun_notif:"BELEM",f_uf_notif:"PA",f_nome:"LARISSA SILVA NASCIMENTO",f_nasc:"2007-03-20",f_raca:"4",f_escol:"3",f_gest:"9",f_mae:"ROSA NASCIMENTO",f_est_civil:"1",f_or_sex:"1",f_id_gen:"8",f_mun_res:"BELEM",f_uf_res:"PA",f_bairro_res:"GUAMA",f_logr_res:"AVENIDA PERIMETRAL",f_zona_res:"1",f_mun_oc:"BELEM",f_uf_oc:"PA",f_hora_oc:"23:00",f_zona_oc:"1",f_local_oc:"07",f_motiv:"01",f_ciclo:"2",f_data_enc:"2025-11-03"},
+    radios:{sexo:"F",defic:"2",outr_vez:"1",auto_prov:"2",nenv:"2",sex_autor:"1",alcool:"9",viol_trab:"2",cat:"2"},
+    checks:{tipo_viol:["4","5"],meio_agr:["8","9"],viol_sex:["4"],proc:["1","2","7"],vinc:["14","18"],encam:["1","11","12","13"]}
+  }
+];
+
+// Monta menu de pacientes
+(function(){
+  var menu = document.getElementById('pac-menu');
+  if(!menu) return;
+  menu.innerHTML = '<div class="tb-menu-hdr">Selecione um perfil fictício</div>' +
+    FAKE_PATIENTS.map(function(p,i){
+      return '<div class="tb-mi" onclick="carregarPaciente('+i+');togglePacMenu()">' +
+        '<span class="tb-mi-name">'+p.label+'</span>' +
+        '<span class="tb-mi-sub">'+p.sub+'</span></div>';
+    }).join('');
+})();
+
+function togglePacMenu(e){
+  if(e) e.stopPropagation();
+  document.getElementById('pac-menu').classList.toggle('open');
+}
+document.addEventListener('click', function(){ document.getElementById('pac-menu').classList.remove('open'); });
+
+// ------ helpers ------
+
+function _setField(id, val){
+  var el = document.getElementById(id);
+  if(!el || val === undefined || val === null || val === '') return;
+  el.value = val;
+  el.dispatchEvent(new Event('input',{bubbles:true}));
+  el.dispatchEvent(new Event('change',{bubbles:true}));
+}
+
+function _setRadio(name, val){
+  var inp = document.querySelector('input[name="'+name+'"][value="'+val+'"]');
+  if(!inp) return;
+  inp.closest('.pill').click();
+  inp.dispatchEvent(new Event('change',{bubbles:true}));
+}
+
+function _setChecks(name, vals){
+  document.querySelectorAll('input[name="'+name+'"]:checked').forEach(function(inp){
+    inp.closest('.pill').click();
+  });
+  (vals||[]).forEach(function(v){
+    var inp = document.querySelector('input[name="'+name+'"][value="'+v+'"]');
+    if(inp && !inp.checked){ inp.closest('.pill').click(); inp.dispatchEvent(new Event('change',{bubbles:true})); }
+  });
+}
+
+function _applyVisibility(){
+  onSexoChange();
+  onTipoViol();
+  onAutoProv();
+  var deficEl = document.querySelector('[name="defic"]:checked');
+  document.getElementById('row_defic_tipos').style.display = (deficEl && deficEl.value==='1') ? 'block' : 'none';
+  var meioOutro = Array.from(document.querySelectorAll('[name="meio_agr"]:checked')).some(function(c){return c.value==='9';});
+  document.getElementById('box_meio_agr_outro').style.display = meioOutro ? 'block' : 'none';
+  var vsOutro = Array.from(document.querySelectorAll('[name="viol_sex"]:checked')).some(function(c){return c.value==='5';});
+  var vsBox = document.getElementById('box_viol_sex_outros'); if(vsBox) vsBox.style.display = vsOutro ? 'block' : 'none';
+  document.getElementById('box_local_outro').style.display = (document.getElementById('f_local_oc').value==='09') ? 'block' : 'none';
+  var tdOutro = Array.from(document.querySelectorAll('[name="tdefic"]:checked')).some(function(c){return c.value==='7';});
+  var tdBox = document.getElementById('box_tdefic_outras'); if(tdBox) tdBox.style.display = tdOutro ? 'block' : 'none';
+}
+
+// ------ Nova Ficha ------
+
+function _clearForm(){
+  document.querySelectorAll('.pill input:checked').forEach(function(inp){ inp.closest('.pill').click(); });
+  document.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]):not(#f-import):not([readonly]), select, textarea')
+    .forEach(function(el){ el.value=''; });
+  var ov = document.getElementById('ov-auto'); if(ov) ov.classList.remove('show');
+  ['row_gest','row_defic_tipos','sec_viol_sex','box_local_outro','box_auto_prov',
+   'box_tipo_viol_outros','box_meio_agr_outro','box_viol_sex_outros','box_tdefic_outras']
+  .forEach(function(id){ var el=document.getElementById(id); if(el) el.style.display='none'; });
+  var h=document.getElementById('f_ocupacao_hint'); if(h){h.textContent='';h.style.display='none';}
+  var h2=document.getElementById('f_cid10_hint'); if(h2){h2.textContent='';h2.style.display='none';}
+  updateProgress();
+}
+
+function abrirModalNova(){ document.getElementById('confirm-modal').classList.add('show'); }
+function fecharModalNova(){ document.getElementById('confirm-modal').classList.remove('show'); }
+function novaFichaConfirmado(){ fecharModalNova(); _clearForm(); }
+
+// ------ Carregar paciente fictício ------
+
+function carregarPaciente(idx){
+  var p = FAKE_PATIENTS[idx]; if(!p) return;
+  _clearForm();
+  Object.keys(p.fields||{}).forEach(function(id){ _setField(id, p.fields[id]); });
+  Object.keys(p.radios||{}).forEach(function(name){ _setRadio(name, p.radios[name]); });
+  Object.keys(p.checks||{}).forEach(function(name){ _setChecks(name, p.checks[name]); });
+  _applyVisibility();
+  updateProgress();
+  window.scrollTo({top:0, behavior:'smooth'});
+  showToast('🧪 Paciente fictício carregado: '+p.label,'t-ok',3500);
+}
+
+// ------ Exportar Rascunho ------
+
+function exportarRascunho(){
+  var data = {v:1, ts:new Date().toISOString(), fields:{}, radios:{}, checks:{}};
+  document.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]):not(#f-import), select, textarea')
+    .forEach(function(el){ if(el.id && el.value!=='') data.fields[el.id]=el.value; });
+  document.querySelectorAll('input[type="radio"]:checked').forEach(function(inp){ data.radios[inp.name]=inp.value; });
+  document.querySelectorAll('input[type="checkbox"]:checked').forEach(function(inp){
+    if(!data.checks[inp.name]) data.checks[inp.name]=[];
+    data.checks[inp.name].push(inp.value);
+  });
+  var blob = new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'rascunho-sinan-violencia-'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
+  showToast('💾 Rascunho exportado com sucesso!','t-ok',3000);
+}
+
+// ------ Importar Rascunho ------
+
+function importarRascunho(input){
+  var file = input.files[0]; if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e){
+    try{
+      var data = JSON.parse(e.target.result);
+      if(!data.fields && !data.radios && !data.checks) throw new Error('formato inválido');
+      _clearForm();
+      Object.keys(data.fields||{}).forEach(function(id){ _setField(id, data.fields[id]); });
+      Object.keys(data.radios||{}).forEach(function(name){ _setRadio(name, data.radios[name]); });
+      Object.keys(data.checks||{}).forEach(function(name){ _setChecks(name, data.checks[name]); });
+      _applyVisibility();
+      updateProgress();
+      showToast('📂 Rascunho importado com sucesso!','t-ok',3000);
+    }catch(err){
+      showToast('Arquivo inválido ou corrompido','t-err',4000);
+    }
+    input.value='';
+  };
+  reader.readAsText(file);
 }
 </script>
 </body>
