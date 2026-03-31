@@ -909,6 +909,12 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
       <label class="pill" data-val="17" data-name="vinc"><input type="checkbox" name="vinc" value="17"> Própria pessoa</label>
       <label class="pill" data-val="18" data-name="vinc"><input type="checkbox" name="vinc" value="18"> Outros</label>
     </div>
+    <div id="box_vinc_outro" style="display:none;margin-bottom:14px">
+      <div class="fld">
+        <label>Especificar "Outros" vínculo <span class="cn">[C.61]</span></label>
+        <input type="text" id="f_vinc_outro" data-caps placeholder="Descreva o outro vínculo/parentesco">
+      </div>
+    </div>
 
     <!-- C62 + C63 — Dados do autor -->
     <div class="row">
@@ -1179,6 +1185,13 @@ document.querySelectorAll('[name="meio_agr"]').forEach(function(chk){
   chk.addEventListener('change', function(){
     var has = Array.from(document.querySelectorAll('[name="meio_agr"]:checked')).some(function(c){return c.value==='9';});
     document.getElementById('box_meio_agr_outro').style.display = has ? 'block' : 'none';
+  });
+});
+
+document.querySelectorAll('[name="vinc"]').forEach(function(chk){
+  chk.addEventListener('change', function(){
+    var has = Array.from(document.querySelectorAll('[name="vinc"]:checked')).some(function(c){return c.value==='18';});
+    document.getElementById('box_vinc_outro').style.display = has ? 'block' : 'none';
   });
 });
 
@@ -1860,6 +1873,7 @@ async function gerarPDF(){
     // C.61 — Vínculo (18 opções)
     var _tv61 = getChecks('vinc').map(String);
     for(var _i61=1;_i61<=18;_i61++){ setTxt('61_'+_i61, _tv61.indexOf(String(_i61))!==-1?'1':'2'); }
+    setTxt('61_18_outro', tv('f_vinc_outro'));
     setTxt('62', getRadio('sex_autor'));
     setTxt('63', getRadio('alcool'));
     setTxt('64', tv('f_ciclo'));
@@ -2045,6 +2059,8 @@ function _applyVisibility(){
   document.getElementById('row_defic_tipos').style.display = (deficEl && deficEl.value==='1') ? 'block' : 'none';
   var meioOutro = Array.from(document.querySelectorAll('[name="meio_agr"]:checked')).some(function(c){return c.value==='9';});
   document.getElementById('box_meio_agr_outro').style.display = meioOutro ? 'block' : 'none';
+  var vincOutro = Array.from(document.querySelectorAll('[name="vinc"]:checked')).some(function(c){return c.value==='18';});
+  document.getElementById('box_vinc_outro').style.display = vincOutro ? 'block' : 'none';
   var vsOutro = Array.from(document.querySelectorAll('[name="viol_sex"]:checked')).some(function(c){return c.value==='5';});
   var vsBox = document.getElementById('box_viol_sex_outros'); if(vsBox) vsBox.style.display = vsOutro ? 'block' : 'none';
   document.getElementById('box_local_outro').style.display = (document.getElementById('f_local_oc').value==='09') ? 'block' : 'none';
@@ -2060,7 +2076,7 @@ function _clearForm(){
     .forEach(function(el){ el.value=''; });
   var ov = document.getElementById('ov-auto'); if(ov) ov.classList.remove('show');
   ['row_gest','row_defic_tipos','sec_viol_sex','box_local_outro','box_auto_prov',
-   'box_tipo_viol_outros','box_meio_agr_outro','box_viol_sex_outros','box_tdefic_outras']
+   'box_tipo_viol_outros','box_meio_agr_outro','box_viol_sex_outros','box_tdefic_outras','box_vinc_outro']
   .forEach(function(id){ var el=document.getElementById(id); if(el) el.style.display='none'; });
   var h=document.getElementById('f_ocupacao_hint'); if(h){h.textContent='';h.style.display='none';}
   var h2=document.getElementById('f_cid10_hint'); if(h2){h2.textContent='';h2.style.display='none';}
