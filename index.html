@@ -6,88 +6,120 @@
 <title>Assistente SINAN — PET Saúde Digital</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f0f4f8;color:#1a2a3a;min-height:100vh;font-size:16px;line-height:1.5}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f0f4f8;color:#1a2a3a;min-height:100vh;font-size:15px;line-height:1.5}
 
 /* HEADER */
-#hdr{background:linear-gradient(135deg,#0d2c4a 0%,#1a5276 55%,#1a6b45 100%);padding:28px 40px 28px;position:relative;overflow:hidden}
+#hdr{background:linear-gradient(135deg,#0d2c4a 0%,#1a5276 55%,#1a6b45 100%);padding:28px 40px;position:relative;overflow:hidden}
 #hdr::after{content:'';position:absolute;top:-60%;right:-5%;width:600px;height:600px;background:radial-gradient(circle,rgba(255,255,255,.04) 0%,transparent 65%);pointer-events:none}
 .hdr-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:24px}
-.hdr-logo{height:56px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))}
-.hdr-vline{width:1px;height:46px;background:rgba(255,255,255,.22)}
-.hdr-text h1{color:#fff;font-size:26px;font-weight:800;letter-spacing:-.3px}
-.hdr-text p{color:rgba(255,255,255,.75);font-size:14px;margin-top:4px;line-height:1.5}
-.pet-chip{display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.85);font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;letter-spacing:.3px}
+.hdr-logo{height:54px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))}
+.hdr-vline{width:1px;height:46px;background:rgba(255,255,255,.22);flex-shrink:0}
+.hdr-text h1{color:#fff;font-size:24px;font-weight:800;letter-spacing:-.3px}
+.hdr-text p{color:rgba(255,255,255,.7);font-size:13px;margin-top:4px;line-height:1.5}
+.pet-chip{display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.8);font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;letter-spacing:.3px}
 
 /* DISCLAIMER */
-.disclaimer{background:#fff3cd;border-bottom:1px solid #ffd047;padding:14px 40px}
-.disclaimer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;gap:12px;font-size:14px;color:#7d5a00;line-height:1.6}
-.disclaimer strong{color:#5c4200}
+.disclaimer{background:#fffbeb;border-bottom:1px solid #fcd34d}
+.disclaimer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;gap:12px;font-size:13px;color:#78350f;line-height:1.6;padding:13px 40px}
+.disclaimer strong{color:#451a03}
+.disclaimer-icon{flex-shrink:0;margin-top:1px;color:#d97706}
 
 /* MAIN */
-main{max-width:1100px;margin:0 auto;padding:32px 24px 60px}
+main{max-width:1100px;margin:0 auto;padding:28px 24px 60px}
 
 /* ABOUT BOX */
-.about-box{background:#fff;border-radius:14px;border:1px solid #e0eaf2;padding:22px 26px;margin-bottom:28px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
-.about-box h2{font-size:18px;font-weight:800;color:#1a3a5c;margin-bottom:10px}
-.about-box p{font-size:14px;color:#4b5563;line-height:1.7;margin-bottom:12px}
-.about-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
-.about-chip{font-size:13px;font-weight:700;padding:5px 14px;border-radius:20px}
-.chip-green{background:#e8f5e9;color:#1e8449}
-.chip-blue{background:#eff6ff;color:#1e40af}
-.chip-yellow{background:#fef9e7;color:#c07000}
-.chip-purple{background:#f3e8ff;color:#7c3aed}
+.about-box{background:#fff;border-radius:12px;border:1px solid #dce8f0;padding:22px 26px;margin-bottom:20px;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.about-box h2{font-size:16px;font-weight:800;color:#0f2d4a;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.about-box h2::before{content:'';display:block;width:3px;height:18px;background:linear-gradient(180deg,#1a5276,#1a6b45);border-radius:2px;flex-shrink:0}
+.about-box p{font-size:13px;color:#4b5563;line-height:1.7;margin-bottom:10px}
+.about-chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px}
+.about-chip{font-size:12px;font-weight:700;padding:4px 12px;border-radius:4px;letter-spacing:.1px}
+.chip-green{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}
+.chip-blue{background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe}
+.chip-yellow{background:#fefce8;color:#854d0e;border:1px solid #fef08a}
+.chip-purple{background:#f5f3ff;color:#6d28d9;border:1px solid #ddd6fe}
 
 /* LEGAL BOX */
-.legal-box{background:#fff;border-radius:12px;border:1px solid #e0eaf2;padding:18px 22px;margin-bottom:28px;display:flex;gap:14px;align-items:flex-start;box-shadow:0 2px 10px rgba(0,0,0,.05)}
-.legal-box .ico{font-size:22px;flex-shrink:0;margin-top:2px}
-.legal-box h3{font-size:14px;font-weight:700;color:#1a3a5c;margin-bottom:5px}
-.legal-box p{font-size:13px;color:#5a7a9a;line-height:1.65}
-.legal-box a{color:#1a5276}
+.legal-box{background:#fff;border-radius:12px;border:1px solid #dce8f0;padding:16px 20px;margin-bottom:24px;display:flex;gap:14px;align-items:flex-start;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.legal-icon{flex-shrink:0;margin-top:2px;color:#1a5276}
+.legal-box h3{font-size:13px;font-weight:700;color:#0f2d4a;margin-bottom:4px}
+.legal-box p{font-size:12px;color:#5a7a9a;line-height:1.6}
+.legal-box a{color:#1a5276;text-decoration:none}
 
 /* SECTION TITLE */
-.sec-title{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1.4px;color:#4a7a9b;margin:0 0 16px;display:flex;align-items:center;gap:10px}
-.sec-title::after{content:'';flex:1;height:1px;background:#d8e8f0}
+.sec-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.6px;color:#4a7a9b;margin:0 0 16px;display:flex;align-items:center;gap:10px}
+.sec-title::after{content:'';flex:1;height:1px;background:#d2e3ef}
 
-/* FICHA CARDS GRID */
-.fichas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;margin-bottom:20px}
+/* GRID */
+.fichas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px;margin-bottom:20px}
 
-/* FICHA CARD */
-.card{background:#fff;border-radius:14px;border:1px solid #e0eaf2;box-shadow:0 2px 12px rgba(0,0,0,.06);overflow:hidden;transition:box-shadow .2s,transform .2s;display:flex;flex-direction:column}
-.card.active{border-color:#1a5276}
-.card.active:hover{box-shadow:0 8px 28px rgba(26,82,118,.15);transform:translateY(-3px)}
-.card-strip{height:4px;background:#d8e8f0}
-.card.active .card-strip{background:linear-gradient(90deg,#1a5276,#1a6b45)}
-.card-main{padding:20px 22px;flex:1}
+/* CARD */
+.card{background:#fff;border-radius:10px;border:1px solid #dce8f0;box-shadow:0 1px 4px rgba(0,0,0,.05);overflow:hidden;transition:box-shadow .2s,transform .2s;display:flex;flex-direction:column;border-left:3px solid #dce8f0}
+.card.active{border-left-color:#1a5276}
+.card.active:hover{box-shadow:0 6px 22px rgba(26,82,118,.12);transform:translateY(-2px)}
+/* Category left borders */
+.cat-violence{border-left-color:#1e40af}
+.cat-intox{border-left-color:#b45309}
+.cat-bio{border-left-color:#7c3aed}
+.cat-accident{border-left-color:#c2410c}
+.cat-lerdort{border-left-color:#0f766e}
+.cat-mental{border-left-color:#4338ca}
+.cat-derm{border-left-color:#be185d}
+.cat-pair{border-left-color:#0369a1}
+.cat-pneumo{border-left-color:#475569}
+.cat-cancer{border-left-color:#dc2626}
+.cat-voice{border-left-color:#6b7280}
+
+.card-main{padding:18px 20px;flex:1}
 .card-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px}
-.card-icon{font-size:28px;line-height:1;flex-shrink:0}
-.card-title{font-size:15px;font-weight:700;color:#1a2a3a;line-height:1.35}
-.card-title.dim{color:#5a7a9a}
-.card-status{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;margin-top:5px;letter-spacing:.3px}
-.status-active{background:#e8f5e9;color:#1e8449}
-.status-wip{background:#f5f0ff;color:#7b5ea7}
-.status-noficha{background:#fff3e0;color:#e65100}
+.card-icon-wrap{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:#f0f5fa}
+.cat-violence .card-icon-wrap{background:#eff6ff;color:#1e40af}
+.cat-intox .card-icon-wrap{background:#fef9e7;color:#b45309}
+.cat-bio .card-icon-wrap{background:#f5f3ff;color:#7c3aed}
+.cat-accident .card-icon-wrap{background:#fff7ed;color:#c2410c}
+.cat-lerdort .card-icon-wrap{background:#f0fdfa;color:#0f766e}
+.cat-mental .card-icon-wrap{background:#eef2ff;color:#4338ca}
+.cat-derm .card-icon-wrap{background:#fdf2f8;color:#be185d}
+.cat-pair .card-icon-wrap{background:#f0f9ff;color:#0369a1}
+.cat-pneumo .card-icon-wrap{background:#f8fafc;color:#475569}
+.cat-cancer .card-icon-wrap{background:#fef2f2;color:#dc2626}
+.cat-voice .card-icon-wrap{background:#f9fafb;color:#6b7280}
 
-/* DEFINIÇÃO (collapsible) */
-details.def{margin-top:10px;border-top:1px solid #eef3f8;padding-top:8px}
-details.def summary{font-size:12px;font-weight:700;color:#4a7a9b;cursor:pointer;user-select:none;list-style:none;display:flex;align-items:center;gap:6px}
+.card-info{flex:1;min-width:0}
+.card-title{font-size:14px;font-weight:700;color:#0f2d4a;line-height:1.35}
+.card-title.dim{color:#4a6a8a}
+.card-status{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:2px 9px;border-radius:3px;margin-top:6px;letter-spacing:.2px}
+.status-active{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}
+.status-wip{background:#f5f3ff;color:#6d28d9;border:1px solid #ddd6fe}
+.status-noficha{background:#fff7ed;color:#9a3412;border:1px solid #fed7aa}
+.status-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.status-active .status-dot{background:#16a34a}
+.status-wip .status-dot{background:#7c3aed}
+.status-noficha .status-dot{background:#ea580c}
+
+/* DEFINITION */
+details.def{margin-top:8px;border-top:1px solid #eef3f8;padding-top:7px}
+details.def summary{font-size:11px;font-weight:700;color:#4a7a9b;cursor:pointer;user-select:none;list-style:none;display:flex;align-items:center;gap:6px;letter-spacing:.2px}
 details.def summary::-webkit-details-marker{display:none}
-details.def summary::before{content:'▸';transition:transform .2s;display:inline-block}
+details.def summary::before{content:'›';font-size:14px;transition:transform .2s;display:inline-block;line-height:1}
 details[open].def summary::before{transform:rotate(90deg)}
 details.def summary:hover{color:#1a5276}
-.def-text{font-size:13px;color:#5a7a9a;line-height:1.65;margin-top:8px;padding:10px 12px;background:#f7fafd;border-radius:6px;border-left:3px solid #bed3e8}
+.def-text{font-size:12px;color:#5a7a9a;line-height:1.65;margin-top:7px;padding:10px 12px;background:#f7fafd;border-radius:4px;border-left:2px solid #c5ddef}
 
-/* CARD ACTIONS */
-.card-actions{padding:14px 22px 18px;display:flex;gap:8px;flex-wrap:wrap;border-top:1px solid #f0f4f8}
-.btn-assistente{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#1a5276,#1a6b45);color:#fff;padding:10px 18px;border-radius:8px;font-size:14px;font-weight:700;text-decoration:none;border:none;cursor:pointer;transition:opacity .15s}
+/* ACTIONS */
+.card-actions{padding:12px 20px 16px;display:flex;gap:7px;flex-wrap:wrap;border-top:1px solid #f0f4f8}
+.btn-assistente{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#1a5276,#1a6b45);color:#fff;padding:8px 16px;border-radius:6px;font-size:13px;font-weight:700;text-decoration:none;border:none;cursor:pointer;transition:opacity .15s}
 .btn-assistente:hover{opacity:.88}
-.btn-download{display:inline-flex;align-items:center;gap:6px;background:#f0f6fb;color:#1a5276;padding:10px 16px;border-radius:8px;font-size:14px;font-weight:700;text-decoration:none;border:1.5px solid #c5ddef;cursor:pointer;transition:background .15s}
-.btn-download:hover{background:#e0edf8}
-.btn-wip{display:inline-flex;align-items:center;gap:6px;background:#f7f3ff;color:#9b7ec8;padding:10px 16px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;border:1.5px solid #ddd5f0;cursor:not-allowed;opacity:.8}
-.btn-noficha{display:inline-flex;align-items:center;gap:6px;background:#fff8f0;color:#c07020;padding:10px 16px;border-radius:8px;font-size:13px;font-weight:600;border:1.5px solid #f0d8b0;cursor:default;opacity:.85}
+.btn-assistente svg{opacity:.9}
+.btn-download{display:inline-flex;align-items:center;gap:6px;background:#f5f8fc;color:#1a5276;padding:8px 14px;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;border:1px solid #c5ddef;cursor:pointer;transition:background .15s}
+.btn-download:hover{background:#e8f0f9}
+.btn-download svg{opacity:.7}
+.btn-wip{display:inline-flex;align-items:center;gap:6px;background:#f9f8ff;color:#8b7ec8;padding:8px 14px;border-radius:6px;font-size:12px;font-weight:600;border:1px solid #e0d9f5;cursor:not-allowed;opacity:.75}
+.btn-noficha{display:inline-flex;align-items:center;gap:6px;background:#fff8f0;color:#b07030;padding:8px 14px;border-radius:6px;font-size:12px;font-weight:600;border:1px solid #f0d8b0;cursor:default;opacity:.85}
 
 /* FOOTER */
-footer{background:#fff;border-top:1px solid #e0eaf2;padding:24px 40px;text-align:center}
-footer p{font-size:13px;color:#8aabb8;line-height:1.7}
+footer{background:#fff;border-top:1px solid #dce8f0;padding:22px 40px;text-align:center}
+footer p{font-size:12px;color:#8aabb8;line-height:1.8}
 footer strong{color:#4a7a9b}
 footer a{color:#1a5276;text-decoration:none}
 </style>
@@ -108,7 +140,7 @@ footer a{color:#1a5276;text-decoration:none}
 
 <div class="disclaimer">
   <div class="disclaimer-inner">
-    <span style="font-size:20px;flex-shrink:0">⚠️</span>
+    <svg class="disclaimer-icon" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2L2 17h16L10 2z"/><line x1="10" y1="9" x2="10" y2="13"/><circle cx="10" cy="15.5" r=".5" fill="currentColor"/></svg>
     <div>
       <strong>Esta ferramenta NÃO é oficial.</strong> Ela exibe uma versão adaptada das fichas do SINAN com o objetivo exclusivo de facilitar o preenchimento manual e a <strong>posterior digitação no SINAN NET</strong>, sistema oficial do Ministério da Saúde. As informações aqui inseridas não são transmitidas a nenhum sistema — o preenchimento no SINAN NET permanece obrigatório para que os dados sejam efetivamente incorporados à vigilância epidemiológica nacional.
     </div>
@@ -119,20 +151,20 @@ footer a{color:#1a5276;text-decoration:none}
 
   <!-- ABOUT BOX -->
   <div class="about-box">
-    <h2>🎯 Sobre este assistente</h2>
+    <h2>Sobre este assistente</h2>
     <p>O objetivo deste assistente é <strong>tornar mais fácil e visualmente agradável o processo de preenchimento das fichas SINAN</strong>. Os campos apresentados correspondem exatamente ao que aparece no SINAN NET no momento da digitação, obtidos dos arquivos de instalação do SINAN NET.</p>
     <div class="about-chips">
-      <span class="about-chip chip-green">✓ Campos idênticos ao SINAN NET</span>
-      <span class="about-chip chip-blue">✓ Busca de município por nome</span>
-      <span class="about-chip chip-yellow">✓ Busca por sinônimos de ocupação (CBO)</span>
-      <span class="about-chip chip-purple">✓ Gera PDF para impressão</span>
+      <span class="about-chip chip-green">Campos idênticos ao SINAN NET</span>
+      <span class="about-chip chip-blue">Busca de município por nome</span>
+      <span class="about-chip chip-yellow">Busca por sinônimos de ocupação (CBO)</span>
+      <span class="about-chip chip-purple">Gera PDF para impressão</span>
     </div>
-    <p style="font-size:13px;color:#6b7280;margin-bottom:0">A ficha impressa <strong>não substitui a digitação no SINAN NET</strong> — ela serve como apoio visual e rascunho para posterior registro oficial.</p>
+    <p style="font-size:12px;color:#6b7280;margin-bottom:0">A ficha impressa <strong>não substitui a digitação no SINAN NET</strong> — ela serve como apoio visual e rascunho para posterior registro oficial.</p>
   </div>
 
   <!-- LEGAL BASIS -->
   <div class="legal-box">
-    <span class="ico">📜</span>
+    <svg class="legal-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="12" height="16" rx="1.5"/><line x1="7" y1="7" x2="13" y2="7"/><line x1="7" y1="10" x2="13" y2="10"/><line x1="7" y1="13" x2="10" y2="13"/></svg>
     <div>
       <h3>Base Legal — Notificação Compulsória</h3>
       <p>A notificação compulsória é <strong>obrigatória para médicos, demais profissionais de saúde e responsáveis por serviços públicos e privados</strong>, diante da <strong>suspeita ou confirmação</strong> de doença ou agravo listado na relação nacional — mesmo que ainda não confirmado, todo caso suspeito deve ser notificado imediatamente.<br>
@@ -140,251 +172,304 @@ footer a{color:#1a5276;text-decoration:none}
     </div>
   </div>
 
-  <!-- ALL FICHAS — FLAT LIST -->
-  <div class="sec-title">📋 Fichas de Notificação SINAN</div>
+  <div class="sec-title">Fichas de Notificação SINAN</div>
 
   <div class="fichas-grid">
 
-    <!-- VIOLÊNCIA — ATIVA (primeiro: mais completo e disponível) -->
-    <div class="card active">
-      <div class="card-strip"></div>
+    <!-- VIOLÊNCIA -->
+    <div class="card active cat-violence">
       <div class="card-main">
         <div class="card-head">
-          <span class="card-icon">🛡️</span>
-          <div>
+          <div class="card-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2L3.5 5v5c0 4.1 2.9 7.2 6.5 8.2 3.6-1 6.5-4.1 6.5-8.2V5L10 2z"/></svg>
+          </div>
+          <div class="card-info">
             <div class="card-title">Violência Doméstica, Sexual e/ou Outras Violências Interpessoais</div>
-            <span class="card-status status-active">✓ Assistente disponível</span>
+            <span class="card-status status-active"><span class="status-dot"></span>Assistente disponível</span>
           </div>
         </div>
         <details class="def">
-          <summary>Ver definição de caso</summary>
+          <summary>Definição de caso</summary>
           <div class="def-text">Toda violência doméstica, sexual e/ou outra violência interpessoal (física, psicológica/moral, sexual, tráfico de pessoas, trabalho infantil, tortura, financeira/econômica, negligência/abandono ou intervenção legal) praticada contra qualquer pessoa, independentemente de sexo, idade ou vínculo com o agressor.</div>
         </details>
       </div>
       <div class="card-actions">
-        <a class="btn-assistente" href="sinan_violencia.html">✏️ Usar assistente</a>
-        <a class="btn-download" href="fichas/violencia_editavel.pdf" download>⬇ Ficha editável</a>
-        <a class="btn-download" href="fichas/violencia.pdf" download>⬇ Ficha em branco</a>
+        <a class="btn-assistente" href="sinan_violencia.html">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
+          Usar assistente
+        </a>
+        <a class="btn-download" href="fichas/violencia_editavel.pdf" download>
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+          Ficha editável
+        </a>
+        <a class="btn-download" href="fichas/violencia.pdf" download>
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+          Ficha em branco
+        </a>
       </div>
     </div>
 
     <!-- INTOXICAÇÃO EXÓGENA -->
-    <div class="card">
-      <div class="card-strip"></div>
+    <div class="card cat-intox">
       <div class="card-main">
         <div class="card-head">
-          <span class="card-icon">⚗️</span>
-          <div>
+          <div class="card-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 2h5M8.5 2v5L5 14.5A1.5 1.5 0 006.5 17h7a1.5 1.5 0 001.5-2.5L11.5 7V2"/><line x1="6" y1="12" x2="14" y2="12"/></svg>
+          </div>
+          <div class="card-info">
             <div class="card-title dim">Intoxicação Exógena</div>
-            <span class="card-status status-wip">🔧 Assistente em construção</span>
+            <span class="card-status status-wip"><span class="status-dot"></span>Em construção</span>
           </div>
         </div>
         <details class="def">
-          <summary>Ver definição de caso</summary>
+          <summary>Definição de caso</summary>
           <div class="def-text"><strong>Caso suspeito:</strong> todo indivíduo que, tendo sido exposto a substâncias químicas (agrotóxicos, medicamentos, produtos domésticos, cosméticos, produtos industriais, drogas, plantas ou alimentos/bebidas), apresente sinais e sintomas clínicos de intoxicação e/ou alterações laboratoriais provavelmente ou possivelmente compatíveis.</div>
         </details>
       </div>
       <div class="card-actions">
-        <a class="btn-download" href="fichas/Intoxicacao_Exogena_v5.pdf" download>⬇ Ficha em branco</a>
-        <span class="btn-wip">🔧 Em construção</span>
+        <a class="btn-download" href="fichas/Intoxicacao_Exogena_v5.pdf" download>
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+          Ficha em branco
+        </a>
+        <span class="btn-wip">Assistente em construção</span>
       </div>
     </div>
 
     <!-- ACIDENTE MATERIAL BIOLÓGICO -->
-    <div class="card">
-      <div class="card-strip"></div>
+    <div class="card cat-bio">
       <div class="card-main">
         <div class="card-head">
-          <span class="card-icon">🧪</span>
-          <div>
+          <div class="card-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="2"/><path d="M10 8A3.5 3.5 0 116.5 12M10 8A3.5 3.5 0 1113.5 12M10 12v2.5"/><circle cx="8" cy="15.5" r="1"/><circle cx="12" cy="15.5" r="1"/></svg>
+          </div>
+          <div class="card-info">
             <div class="card-title dim">Acidente de Trabalho com Exposição a Material Biológico</div>
-            <span class="card-status status-wip">🔧 Assistente em construção</span>
+            <span class="card-status status-wip"><span class="status-dot"></span>Em construção</span>
           </div>
         </div>
         <details class="def">
-          <summary>Ver definição de caso</summary>
+          <summary>Definição de caso</summary>
           <div class="def-text">Todo caso de acidente de trabalho ocorrido com quaisquer categorias profissionais, envolvendo exposição direta ou indireta do trabalhador a <strong>material biológico (orgânico) potencialmente contaminado por patógenos</strong> (vírus, bactérias, fungos, príons e protozoários), por meio de material perfuro-cortante ou não.</div>
         </details>
       </div>
       <div class="card-actions">
-        <a class="btn-download" href="fichas/DRT_Acidente_Trabalho_Biologico.pdf" download>⬇ Ficha em branco</a>
-        <span class="btn-wip">🔧 Em construção</span>
+        <a class="btn-download" href="fichas/DRT_Acidente_Trabalho_Biologico.pdf" download>
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+          Ficha em branco
+        </a>
+        <span class="btn-wip">Assistente em construção</span>
       </div>
     </div>
 
     <!-- ACIDENTE TRABALHO GRAVE -->
-    <div class="card">
-      <div class="card-strip"></div>
+    <div class="card cat-accident">
       <div class="card-main">
         <div class="card-head">
-          <span class="card-icon">🚨</span>
-          <div>
+          <div class="card-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h12v2H4zM5 11V9a5 5 0 0110 0v2"/><rect x="3" y="13" width="14" height="3" rx="1"/><line x1="8" y1="9" x2="8" y2="11"/><line x1="12" y1="9" x2="12" y2="11"/></svg>
+          </div>
+          <div class="card-info">
             <div class="card-title dim">Acidente de Trabalho Grave</div>
-            <span class="card-status status-wip">🔧 Assistente em construção</span>
+            <span class="card-status status-wip"><span class="status-dot"></span>Em construção</span>
           </div>
         </div>
         <details class="def">
-          <summary>Ver definição de caso</summary>
-          <div class="def-text">Todo caso de acidente de trabalho por causas não naturais (Capítulo XX da CID-10: V01–Y98), ocorrido no ambiente de trabalho ou durante o exercício do trabalho, que provoca lesão corporal ou perturbação funcional, podendo causar a perda ou redução — temporária ou permanente — da capacidade para o trabalho, ou morte. Inclui acidentes <strong>típicos</strong> (no trabalho ou a serviço do empregador) e de <strong>trajeto</strong> (entre residência e trabalho).</div>
+          <summary>Definição de caso</summary>
+          <div class="def-text">Todo caso de acidente de trabalho por causas não naturais (Capítulo XX da CID-10: V01–Y98), ocorrido no ambiente de trabalho ou durante o exercício do trabalho, que provoca lesão corporal ou perturbação funcional, podendo causar a perda ou redução — temporária ou permanente — da capacidade para o trabalho, ou morte.</div>
         </details>
       </div>
       <div class="card-actions">
-        <a class="btn-download" href="fichas/DRT_Acidente_Trabalho.pdf" download>⬇ Ficha em branco</a>
-        <span class="btn-wip">🔧 Em construção</span>
+        <a class="btn-download" href="fichas/DRT_Acidente_Trabalho.pdf" download>
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+          Ficha em branco
+        </a>
+        <span class="btn-wip">Assistente em construção</span>
       </div>
     </div>
 
     <!-- LER/DORT -->
-    <div class="card">
-      <div class="card-strip"></div>
+    <div class="card cat-lerdort">
       <div class="card-main">
         <div class="card-head">
-          <span class="card-icon">💪</span>
-          <div>
+          <div class="card-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17V9M13 17V9M7 9a3 3 0 006 0"/><path d="M5 17h10"/><ellipse cx="10" cy="7" rx="4" ry="2"/></svg>
+          </div>
+          <div class="card-info">
             <div class="card-title dim">LER/DORT</div>
-            <span class="card-status status-wip">🔧 Assistente em construção</span>
+            <span class="card-status status-wip"><span class="status-dot"></span>Em construção</span>
           </div>
         </div>
         <details class="def">
-          <summary>Ver definição de caso</summary>
+          <summary>Definição de caso</summary>
           <div class="def-text">Todas as doenças, lesões e síndromes que afetam o <strong>sistema músculo-esquelético</strong>, causadas, mantidas ou agravadas pelo trabalho (CID-10: G50–59, G90–99, M00–99). Caracteriza-se por sintomas como dor crônica, parestesia e fadiga muscular, manifestando-se principalmente no pescoço, coluna vertebral, cintura escapular e membros.</div>
         </details>
       </div>
       <div class="card-actions">
-        <a class="btn-download" href="fichas/DRT_LERDORT.pdf" download>⬇ Ficha em branco</a>
-        <span class="btn-wip">🔧 Em construção</span>
+        <a class="btn-download" href="fichas/DRT_LERDORT.pdf" download>
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+          Ficha em branco
+        </a>
+        <a class="btn-download" href="fichas/DRT_LERDORT_editavel.pdf" download>
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+          Ficha editável
+        </a>
+        <span class="btn-wip">Assistente em construção</span>
       </div>
     </div>
 
     <!-- TRANSTORNOS MENTAIS -->
-    <div class="card">
-      <div class="card-strip"></div>
+    <div class="card cat-mental">
       <div class="card-main">
         <div class="card-head">
-          <span class="card-icon">🧠</span>
-          <div>
+          <div class="card-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3a4.5 4.5 0 014.5 4.5c0 2-.9 3.2-1.5 4v1.5h-6V11.5C6.4 10.7 5.5 9.5 5.5 7.5A4.5 4.5 0 0110 3z"/><line x1="7.5" y1="13" x2="12.5" y2="13"/><line x1="8" y1="16" x2="12" y2="16"/></svg>
+          </div>
+          <div class="card-info">
             <div class="card-title dim">Transtornos Mentais Relacionados ao Trabalho</div>
-            <span class="card-status status-wip">🔧 Assistente em construção</span>
+            <span class="card-status status-wip"><span class="status-dot"></span>Em construção</span>
           </div>
         </div>
         <details class="def">
-          <summary>Ver definição de caso</summary>
-          <div class="def-text">Todo caso de sofrimento emocional em suas diversas formas (choro fácil, tristeza, medo excessivo, ansiedade, irritação, taquicardia, insegurança etc.) que pode indicar o desenvolvimento ou agravo de <strong>transtornos mentais com elementos causais relacionados ao trabalho</strong>, incluindo sua organização, gestão ou exposição a agentes tóxicos — CID-10: F00–F99, Y90–Y91, Z73.0, R40–R46, Z55–Z65, Y96 e X60–X84.</div>
+          <summary>Definição de caso</summary>
+          <div class="def-text">Todo caso de sofrimento emocional em suas diversas formas (choro fácil, tristeza, medo excessivo, ansiedade, irritação, taquicardia, insegurança etc.) que pode indicar o desenvolvimento ou agravo de <strong>transtornos mentais com elementos causais relacionados ao trabalho</strong>, incluindo sua organização, gestão ou exposição a agentes tóxicos — CID-10: F00–F99.</div>
         </details>
       </div>
       <div class="card-actions">
-        <a class="btn-download" href="fichas/DRT_TranstornosMentais.pdf" download>⬇ Ficha em branco</a>
-        <span class="btn-wip">🔧 Em construção</span>
+        <a class="btn-download" href="fichas/DRT_TranstornosMentais.pdf" download>
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+          Ficha em branco
+        </a>
+        <span class="btn-wip">Assistente em construção</span>
       </div>
     </div>
 
     <!-- DERMATOSES -->
-    <div class="card">
-      <div class="card-strip"></div>
+    <div class="card cat-derm">
       <div class="card-main">
         <div class="card-head">
-          <span class="card-icon">🩺</span>
-          <div>
+          <div class="card-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="14" height="8" rx="1.5"/><path d="M6 9V7a4 4 0 018 0v2"/><line x1="3" y1="12" x2="17" y2="12"/><line x1="3" y1="15" x2="17" y2="15"/></svg>
+          </div>
+          <div class="card-info">
             <div class="card-title dim">Dermatoses Ocupacionais</div>
-            <span class="card-status status-wip">🔧 Assistente em construção</span>
+            <span class="card-status status-wip"><span class="status-dot"></span>Em construção</span>
           </div>
         </div>
         <details class="def">
-          <summary>Ver definição de caso</summary>
-          <div class="def-text">Toda alteração da pele, mucosas e anexos, direta ou indiretamente causadas, mantidas ou agravadas pelo trabalho, relacionadas à <strong>exposição a agentes químicos, biológicos ou físicos</strong>, e ainda a quadros psíquicos, podendo ocasionar afecções do tipo irritativa (a maioria) ou sensibilizante, confirmada por critérios clínicos, epidemiológicos ou laboratoriais.</div>
+          <summary>Definição de caso</summary>
+          <div class="def-text">Toda alteração da pele, mucosas e anexos, direta ou indiretamente causadas, mantidas ou agravadas pelo trabalho, relacionadas à <strong>exposição a agentes químicos, biológicos ou físicos</strong>, e ainda a quadros psíquicos, podendo ocasionar afecções do tipo irritativa (a maioria) ou sensibilizante.</div>
         </details>
       </div>
       <div class="card-actions">
-        <a class="btn-download" href="fichas/DRT_DERMATOSES.pdf" download>⬇ Ficha em branco</a>
-        <span class="btn-wip">🔧 Em construção</span>
+        <a class="btn-download" href="fichas/DRT_DERMATOSES.pdf" download>
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+          Ficha em branco
+        </a>
+        <span class="btn-wip">Assistente em construção</span>
       </div>
     </div>
 
     <!-- PAIR -->
-    <div class="card">
-      <div class="card-strip"></div>
+    <div class="card cat-pair">
       <div class="card-main">
         <div class="card-head">
-          <span class="card-icon">👂</span>
-          <div>
+          <div class="card-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3a5.5 5.5 0 015.5 5.5c0 2.5-1.5 4-2 5.5v1H9l-1-2c-.8-1.3-.5-3.5.5-4.5"/><path d="M10 9a2 2 0 011 3.5"/><path d="M16.5 5.5a8 8 0 010 9M18 4a10.5 10.5 0 010 12"/></svg>
+          </div>
+          <div class="card-info">
             <div class="card-title dim">PAIR — Perda Auditiva Induzida por Ruído</div>
-            <span class="card-status status-wip">🔧 Assistente em construção</span>
+            <span class="card-status status-wip"><span class="status-dot"></span>Em construção</span>
           </div>
         </div>
         <details class="def">
-          <summary>Ver definição de caso</summary>
+          <summary>Definição de caso</summary>
           <div class="def-text">Todos os casos de diminuição gradual da acuidade auditiva decorrente da <strong>exposição continuada ao ruído</strong>, associado ou não a substâncias químicas, no ambiente de trabalho. É sempre <strong>neurossensorial, geralmente bilateral, irreversível</strong> e passível de não progressão após cessada a exposição.</div>
         </details>
       </div>
       <div class="card-actions">
-        <a class="btn-download" href="fichas/DRT_PAIR.pdf" download>⬇ Ficha em branco</a>
-        <span class="btn-wip">🔧 Em construção</span>
+        <a class="btn-download" href="fichas/DRT_PAIR.pdf" download>
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+          Ficha em branco
+        </a>
+        <span class="btn-wip">Assistente em construção</span>
       </div>
     </div>
 
     <!-- PNEUMOCONIOSES -->
-    <div class="card">
-      <div class="card-strip"></div>
+    <div class="card cat-pneumo">
       <div class="card-main">
         <div class="card-head">
-          <span class="card-icon">🫁</span>
-          <div>
+          <div class="card-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4v12"/><path d="M7 8c-3.5 1-4.5 3-4.5 5.5 0 1.5 1 2 2.5 2C7 15.5 7 14 7 13V8z"/><path d="M13 8c3.5 1 4.5 3 4.5 5.5 0 1.5-1 2-2.5 2C13 15.5 13 14 13 13V8z"/></svg>
+          </div>
+          <div class="card-info">
             <div class="card-title dim">Pneumoconioses</div>
-            <span class="card-status status-wip">🔧 Assistente em construção</span>
+            <span class="card-status status-wip"><span class="status-dot"></span>Em construção</span>
           </div>
         </div>
         <details class="def">
-          <summary>Ver definição de caso</summary>
+          <summary>Definição de caso</summary>
           <div class="def-text">Todas as doenças pulmonares causadas pela <strong>inalação e acúmulo de poeiras inorgânicas</strong> nos pulmões com reação tissular à presença dessas poeiras, devido à exposição no ambiente ou processo de trabalho. Exemplos: asbestose, silicose, beriliose, estanhose, siderose, entre outras.</div>
         </details>
       </div>
       <div class="card-actions">
-        <a class="btn-download" href="fichas/DRT_Pneumoconioses.pdf" download>⬇ Ficha em branco</a>
-        <span class="btn-wip">🔧 Em construção</span>
+        <a class="btn-download" href="fichas/DRT_Pneumoconioses.pdf" download>
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+          Ficha em branco
+        </a>
+        <span class="btn-wip">Assistente em construção</span>
       </div>
     </div>
 
     <!-- CÂNCER -->
-    <div class="card">
-      <div class="card-strip"></div>
+    <div class="card cat-cancer">
       <div class="card-main">
         <div class="card-head">
-          <span class="card-icon">🔬</span>
-          <div>
+          <div class="card-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="10" cy="10" r="3.5"/><line x1="10" y1="2" x2="10" y2="5"/><line x1="10" y1="15" x2="10" y2="18"/><line x1="2" y1="10" x2="5" y2="10"/><line x1="15" y1="10" x2="18" y2="10"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="13.66" y1="13.66" x2="15.78" y2="15.78"/><line x1="4.22" y1="15.78" x2="6.34" y2="13.66"/><line x1="13.66" y1="6.34" x2="15.78" y2="4.22"/></svg>
+          </div>
+          <div class="card-info">
             <div class="card-title dim">Câncer Relacionado ao Trabalho</div>
-            <span class="card-status status-wip">🔧 Assistente em construção</span>
+            <span class="card-status status-wip"><span class="status-dot"></span>Em construção</span>
           </div>
         </div>
         <details class="def">
-          <summary>Ver definição de caso</summary>
+          <summary>Definição de caso</summary>
           <div class="def-text">Todo caso de câncer que tem entre seus elementos causais a <strong>exposição a fatores, agentes e situações de risco presentes no ambiente e processo de trabalho</strong>, mesmo após a cessação da exposição.</div>
         </details>
       </div>
       <div class="card-actions">
-        <a class="btn-download" href="fichas/DRT_CANCER.pdf" download>⬇ Ficha em branco</a>
-        <span class="btn-wip">🔧 Em construção</span>
+        <a class="btn-download" href="fichas/DRT_CANCER.pdf" download>
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+          Ficha em branco
+        </a>
+        <span class="btn-wip">Assistente em construção</span>
       </div>
     </div>
 
     <!-- DISTÚRBIO DE VOZ -->
-    <div class="card">
-      <div class="card-strip"></div>
+    <div class="card cat-voice">
       <div class="card-main">
         <div class="card-head">
-          <span class="card-icon">🎙️</span>
-          <div>
+          <div class="card-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7l-3 2.5v1L7 13V7z"/><rect x="7" y="6" width="4" height="8" rx="1"/><path d="M13 8.5a2.5 2.5 0 010 3"/><path d="M14.5 6.5a5 5 0 010 7"/></svg>
+          </div>
+          <div class="card-info">
             <div class="card-title dim">Distúrbio de Voz Relacionado ao Trabalho</div>
-            <span class="card-status status-noficha">⚠ Sem ficha oficial</span>
+            <span class="card-status status-noficha"><span class="status-dot"></span>Sem ficha oficial</span>
           </div>
         </div>
         <details class="def">
-          <summary>Ver definição</summary>
+          <summary>Definição</summary>
           <div class="def-text">Qualquer forma de <strong>desvio vocal relacionado à atividade profissional</strong> que diminua, comprometa ou impeça a atuação ou a comunicação do trabalhador, podendo ou não haver alteração orgânica da laringe. <em>Este agravo não possui ficha de notificação própria no SINAN</em> — a notificação pode ser realizada como transtorno relacionado ao trabalho.</div>
         </details>
       </div>
       <div class="card-actions">
-        <a class="btn-download" href="fichas/disturbio_voz.pdf" download>⬇ Ficha de referência</a>
-        <span class="btn-noficha">⚠ Sem ficha oficial</span>
+        <a class="btn-download" href="fichas/disturbio_voz.pdf" download>
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+          Ficha de referência
+        </a>
+        <span class="btn-noficha">Sem ficha oficial</span>
       </div>
     </div>
 
@@ -393,10 +478,10 @@ footer a{color:#1a5276;text-decoration:none}
 </main>
 
 <footer>
-  <img src="assets/img/pet-logo-branca.png" alt="PET" style="height:36px;opacity:.5;margin-bottom:10px;display:block;margin-left:auto;margin-right:auto">
+  <img src="assets/img/pet-logo-branca.png" alt="PET" style="height:32px;opacity:.4;margin-bottom:10px;display:block;margin-left:auto;margin-right:auto">
   <p><strong>Assistente SINAN</strong> — PET Saúde Digital — Programa de Educação pelo Trabalho para a Saúde</p>
   <p>Ferramenta educacional sem vínculo oficial com o Ministério da Saúde · Base legal: <a href="#" target="_blank">Portaria GM/MS nº 10.175/2026</a></p>
-  <p style="margin-top:6px;font-size:12px">Desenvolvido em formato HTML/CSS/JS puro para uso offline em navegador</p>
+  <p style="margin-top:4px;font-size:11px">Desenvolvido em formato HTML/CSS/JS puro para uso offline em navegador</p>
 </footer>
 
 </body>

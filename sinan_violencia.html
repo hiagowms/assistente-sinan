@@ -45,13 +45,18 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 .hdr-back:hover{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.55);transform:translateX(-2px)}
 
 /* TOOLS BAR */
-#tools-bar{background:rgba(0,0,0,.2);border-bottom:1px solid rgba(255,255,255,.06)}
+#tools-bar{background:#f1f5f9;border-bottom:1px solid #dde3ec}
 .tools-inner{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 28px;max-width:1180px;margin:0 auto;flex-wrap:wrap}
-.tb-group{display:flex;align-items:center;gap:6px}
-.tb-btn{background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.18);padding:5px 13px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .15s;line-height:1.4}
-.tb-btn:hover{background:rgba(255,255,255,.16);color:#fff;border-color:rgba(255,255,255,.35)}
-.tb-danger{background:rgba(220,38,38,.2);border-color:rgba(239,68,68,.35);color:#fca5a5}
-.tb-danger:hover{background:rgba(220,38,38,.38);color:#fff;border-color:rgba(239,68,68,.6)}
+.tools-label{font-size:10.5px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.7px;margin-right:4px;flex-shrink:0}
+.tb-group{display:flex;align-items:center;gap:2px}
+.tb-sep{width:1px;height:16px;background:#cbd5e1;margin:0 6px;flex-shrink:0}
+.tb-btn{background:transparent;color:#475569;border:1px solid transparent;padding:5px 11px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .15s;line-height:1.4;display:flex;align-items:center;gap:6px}
+.tb-btn svg{flex-shrink:0;opacity:.7;transition:opacity .15s}
+.tb-btn:hover{background:#fff;color:#1e3a8a;border-color:#cbd5e1;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.tb-btn:hover svg{opacity:1}
+.tb-danger{color:#b91c1c}
+.tb-danger svg{color:#dc2626}
+.tb-danger:hover{background:#fff5f5;color:#991b1b;border-color:#fecaca;box-shadow:0 1px 3px rgba(220,38,38,.1)}
 .tb-dd{position:relative}
 .tb-menu{position:absolute;top:calc(100% + 6px);left:0;background:#fff;border:1.5px solid #e5e7eb;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.18);z-index:600;min-width:280px;overflow:hidden;display:none}
 .tb-menu.open{display:block}
@@ -65,7 +70,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 #confirm-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9000;align-items:center;justify-content:center}
 #confirm-modal.show{display:flex}
 .cm-box{background:#fff;border-radius:16px;padding:32px;max-width:360px;width:92%;box-shadow:0 24px 64px rgba(0,0,0,.3);text-align:center}
-.cm-icon{font-size:40px;margin-bottom:12px}
+.cm-icon{width:48px;height:48px;background:#fee2e2;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;color:#dc2626}
 .cm-box h3{font-size:17px;font-weight:800;color:#1f2937;margin-bottom:8px}
 .cm-box p{font-size:13px;color:#6b7280;line-height:1.6;margin-bottom:22px}
 .cm-actions{display:flex;gap:10px;justify-content:center}
@@ -232,16 +237,31 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 <div id="tools-bar">
   <div class="tools-inner">
     <div class="tb-group">
+      <span class="tools-label">Ferramentas</span>
       <div class="tb-dd" id="dd-pac">
-        <button class="tb-btn" onclick="togglePacMenu(event)">🧪 Paciente Teste ▾</button>
+        <button class="tb-btn" onclick="togglePacMenu(event)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5.5 20c0-3.5 2.9-6 6.5-6s6.5 2.5 6.5 6"/></svg>
+          Paciente Teste
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:.55"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
         <div class="tb-menu" id="pac-menu"></div>
       </div>
-      <button class="tb-btn" onclick="document.getElementById('f-import').click()">📂 Importar Rascunho</button>
+      <span class="tb-sep"></span>
+      <button class="tb-btn" onclick="document.getElementById('f-import').click()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17,8 12,3 7,8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Importar Rascunho
+      </button>
       <input type="file" id="f-import" accept=".json" style="display:none" onchange="importarRascunho(this)">
+      <button class="tb-btn" onclick="exportarRascunho()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Exportar Rascunho
+      </button>
     </div>
     <div class="tb-group">
-      <button class="tb-btn" onclick="exportarRascunho()">💾 Exportar Rascunho</button>
-      <button class="tb-btn tb-danger" onclick="abrirModalNova()">🗑 Nova Ficha</button>
+      <button class="tb-btn tb-danger" onclick="abrirModalNova()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,4 1,10 7,10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg>
+        Nova Ficha
+      </button>
     </div>
   </div>
 </div>
@@ -1884,7 +1904,7 @@ async function gerarPDF(){
 <!-- CONFIRM MODAL -->
 <div id="confirm-modal">
   <div class="cm-box">
-    <div class="cm-icon">🗑️</div>
+    <div class="cm-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,4 1,10 7,10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg></div>
     <h3>Apagar tudo e começar do zero?</h3>
     <p>Todos os dados inseridos serão perdidos. Se quiser preservá-los, use <strong>Exportar Rascunho</strong> antes de continuar.</p>
     <div class="cm-actions">
@@ -1910,7 +1930,7 @@ var FAKE_PATIENTS = [
   {
     label:"Ana Claudia, 32 anos",
     sub:"Física + Psicológica · cônjuge · Rio de Janeiro/RJ",
-    fields:{f_data_notif:"2025-08-14",f_data_ocorr:"2025-08-13",f_tipo_un:"1",f_nome_un:"UPA CENTRAL",f_mun_notif:"RIO DE JANEIRO",f_uf_notif:"RJ",f_nome:"ANA CLAUDIA FERREIRA MENDES",f_nasc:"1992-07-22",f_raca:"1",f_escol:"6",f_gest:"5",f_mae:"LUCIA APARECIDA FERREIRA",f_est_civil:"2",f_or_sex:"1",f_id_gen:"8",f_mun_res:"RIO DE JANEIRO",f_uf_res:"RJ",f_bairro_res:"SANTA CRUZ",f_logr_res:"RUA SENADOR CAMARA",f_num_res:"312",f_zona_res:"1",f_mun_oc:"RIO DE JANEIRO",f_uf_oc:"RJ",f_bairro_oc:"SANTA CRUZ",f_logr_oc:"RUA SENADOR CAMARA",f_num_oc:"312",f_hora_oc:"22:15",f_zona_oc:"1",f_local_oc:"01",f_motiv:"01",f_ciclo:"4",f_data_enc:"2025-08-14"},
+    fields:{f_data_notif:"2025-08-14",f_data_ocorr:"2025-08-13",f_tipo_un:"1",f_nome_un:"UPA CENTRAL",f_mun_notif:"RIO DE JANEIRO",f_uf_notif:"RJ",f_nome:"ANA CLAUDIA FERREIRA MENDES",f_nasc:"1992-07-22",f_raca:"1",f_escol:"6",f_gest:"5",f_mae:"LUCIA APARECIDA FERREIRA",f_est_civil:"2",f_ocupacao:"EMPREGADO DOMESTICO NOS SERVICOS GERAIS",f_or_sex:"1",f_id_gen:"8",f_mun_res:"RIO DE JANEIRO",f_uf_res:"RJ",f_bairro_res:"SANTA CRUZ",f_logr_res:"RUA SENADOR CAMARA",f_num_res:"312",f_zona_res:"1",f_tel_res:"(21) 98765-4321",f_mun_oc:"RIO DE JANEIRO",f_uf_oc:"RJ",f_bairro_oc:"SANTA CRUZ",f_logr_oc:"RUA SENADOR CAMARA",f_num_oc:"312",f_hora_oc:"22:15",f_zona_oc:"1",f_local_oc:"01",f_motiv:"01",f_ciclo:"4",f_data_enc:"2025-08-14"},
     radios:{sexo:"F",defic:"2",outr_vez:"1",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"1",viol_trab:"2",cat:"2"},
     checks:{tipo_viol:["1","2"],meio_agr:["1","3"],vinc:["5"],encam:["1","7"]}
   },
@@ -1931,14 +1951,14 @@ var FAKE_PATIENTS = [
   {
     label:"Carlos Eduardo, 27 anos",
     sub:"Física, arma de fogo · desconhecido · Fortaleza/CE",
-    fields:{f_data_notif:"2025-09-05",f_data_ocorr:"2025-09-04",f_tipo_un:"1",f_nome_un:"HOSPITAL DE BASE",f_mun_notif:"FORTALEZA",f_uf_notif:"CE",f_nome:"CARLOS EDUARDO LIMA BARBOSA",f_nasc:"1997-09-12",f_raca:"4",f_escol:"5",f_mae:"RAIMUNDA LIMA",f_est_civil:"1",f_or_sex:"1",f_id_gen:"8",f_mun_res:"FORTALEZA",f_uf_res:"CE",f_bairro_res:"CONJUNTO CEARA",f_logr_res:"RUA AUGUSTO CALS",f_zona_res:"1",f_mun_oc:"FORTALEZA",f_uf_oc:"CE",f_bairro_oc:"CONJUNTO CEARA",f_hora_oc:"21:00",f_zona_oc:"1",f_local_oc:"06",f_motiv:"09",f_ciclo:"3",f_data_enc:"2025-09-05"},
+    fields:{f_data_notif:"2025-09-05",f_data_ocorr:"2025-09-04",f_tipo_un:"1",f_nome_un:"HOSPITAL DE BASE",f_mun_notif:"FORTALEZA",f_uf_notif:"CE",f_nome:"CARLOS EDUARDO LIMA BARBOSA",f_nasc:"1997-09-12",f_raca:"4",f_escol:"5",f_mae:"RAIMUNDA LIMA",f_est_civil:"1",f_ocupacao:"PEDREIRO",f_or_sex:"1",f_id_gen:"8",f_mun_res:"FORTALEZA",f_uf_res:"CE",f_bairro_res:"CONJUNTO CEARA",f_logr_res:"RUA AUGUSTO CALS",f_num_res:"88",f_zona_res:"1",f_mun_oc:"FORTALEZA",f_uf_oc:"CE",f_bairro_oc:"CONJUNTO CEARA",f_hora_oc:"21:00",f_zona_oc:"1",f_local_oc:"06",f_motiv:"09",f_ciclo:"3",f_data_enc:"2025-09-05"},
     radios:{sexo:"M",defic:"2",outr_vez:"2",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"9",viol_trab:"2",cat:"2"},
     checks:{tipo_viol:["1"],meio_agr:["6"],vinc:["12"],encam:["1","9"]}
   },
   {
     label:"Fernanda Cristina, 46 anos",
     sub:"Psicológica + Física · ex-cônjuge · Recife/PE",
-    fields:{f_data_notif:"2025-05-20",f_data_ocorr:"2025-05-19",f_tipo_un:"6",f_nome_un:"CRAM MUNICIPAL",f_mun_notif:"RECIFE",f_uf_notif:"PE",f_nome:"FERNANDA CRISTINA ALVES PEREIRA",f_nasc:"1979-02-28",f_raca:"4",f_escol:"8",f_gest:"5",f_mae:"SONIA ALVES",f_est_civil:"4",f_or_sex:"1",f_id_gen:"8",f_mun_res:"RECIFE",f_uf_res:"PE",f_bairro_res:"BOA VIAGEM",f_logr_res:"AVENIDA BOA VIAGEM",f_num_res:"700",f_zona_res:"1",f_mun_oc:"RECIFE",f_uf_oc:"PE",f_bairro_oc:"BOA VIAGEM",f_hora_oc:"08:30",f_zona_oc:"1",f_local_oc:"01",f_motiv:"01",f_ciclo:"4",f_data_enc:"2025-05-20"},
+    fields:{f_data_notif:"2025-05-20",f_data_ocorr:"2025-05-19",f_tipo_un:"6",f_nome_un:"CRAM MUNICIPAL",f_mun_notif:"RECIFE",f_uf_notif:"PE",f_nome:"FERNANDA CRISTINA ALVES PEREIRA",f_nasc:"1979-02-28",f_raca:"4",f_escol:"8",f_gest:"5",f_mae:"SONIA ALVES",f_est_civil:"4",f_ocupacao:"RECEPCIONISTA, EM GERAL",f_or_sex:"1",f_id_gen:"8",f_mun_res:"RECIFE",f_uf_res:"PE",f_bairro_res:"BOA VIAGEM",f_logr_res:"AVENIDA BOA VIAGEM",f_num_res:"700",f_zona_res:"1",f_tel_res:"(81) 99234-5678",f_mun_oc:"RECIFE",f_uf_oc:"PE",f_bairro_oc:"BOA VIAGEM",f_hora_oc:"08:30",f_zona_oc:"1",f_local_oc:"01",f_motiv:"01",f_ciclo:"4",f_data_enc:"2025-05-20"},
     radios:{sexo:"F",defic:"2",outr_vez:"1",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"2",viol_trab:"2",cat:"2"},
     checks:{tipo_viol:["2","1"],meio_agr:["8","1"],vinc:["6"],encam:["1","7","4"]}
   },
@@ -1952,7 +1972,7 @@ var FAKE_PATIENTS = [
   {
     label:"Camila Rodrigues, 23 anos (trans)",
     sub:"Física + Psicológica · transfobia · Curitiba/PR",
-    fields:{f_data_notif:"2025-10-08",f_data_ocorr:"2025-10-07",f_tipo_un:"1",f_nome_un:"UPA SUL",f_mun_notif:"CURITIBA",f_uf_notif:"PR",f_nome:"CAMILA RODRIGUES",f_nasc:"2001-06-15",f_raca:"2",f_escol:"5",f_gest:"6",f_mae:"APARECIDA RODRIGUES",f_est_civil:"1",f_or_sex:"1",f_id_gen:"2",f_mun_res:"CURITIBA",f_uf_res:"PR",f_bairro_res:"CENTRO",f_logr_res:"RUA XV DE NOVEMBRO",f_zona_res:"1",f_mun_oc:"CURITIBA",f_uf_oc:"PR",f_bairro_oc:"CENTRO",f_hora_oc:"01:20",f_zona_oc:"1",f_local_oc:"06",f_motiv:"02",f_ciclo:"3",f_data_enc:"2025-10-08"},
+    fields:{f_data_notif:"2025-10-08",f_data_ocorr:"2025-10-07",f_tipo_un:"1",f_nome_un:"UPA SUL",f_mun_notif:"CURITIBA",f_uf_notif:"PR",f_nome:"CAMILA RODRIGUES",f_nasc:"2001-06-15",f_raca:"2",f_escol:"5",f_gest:"6",f_mae:"APARECIDA RODRIGUES",f_est_civil:"1",f_ocupacao:"FAXINEIRO",f_or_sex:"1",f_id_gen:"2",f_mun_res:"CURITIBA",f_uf_res:"PR",f_bairro_res:"CENTRO",f_logr_res:"RUA XV DE NOVEMBRO",f_num_res:"120",f_zona_res:"1",f_mun_oc:"CURITIBA",f_uf_oc:"PR",f_bairro_oc:"CENTRO",f_hora_oc:"01:20",f_zona_oc:"1",f_local_oc:"06",f_motiv:"02",f_ciclo:"3",f_data_enc:"2025-10-08"},
     radios:{sexo:"F",defic:"2",outr_vez:"2",auto_prov:"2",nenv:"2",sex_autor:"1",alcool:"1",viol_trab:"2",cat:"2"},
     checks:{tipo_viol:["1","2"],meio_agr:["1","3"],vinc:["12"],encam:["1","9","10"]}
   },
@@ -1966,7 +1986,7 @@ var FAKE_PATIENTS = [
   {
     label:"Larissa Silva, 17 anos",
     sub:"Exploração sexual + Tráfico · Belém/PA",
-    fields:{f_data_notif:"2025-11-03",f_data_ocorr:"2025-10-30",f_tipo_un:"1",f_nome_un:"HOSPITAL GERAL",f_mun_notif:"BELEM",f_uf_notif:"PA",f_nome:"LARISSA SILVA NASCIMENTO",f_nasc:"2007-03-20",f_raca:"4",f_escol:"3",f_gest:"9",f_mae:"ROSA NASCIMENTO",f_est_civil:"1",f_or_sex:"1",f_id_gen:"8",f_mun_res:"BELEM",f_uf_res:"PA",f_bairro_res:"GUAMA",f_logr_res:"AVENIDA PERIMETRAL",f_zona_res:"1",f_mun_oc:"BELEM",f_uf_oc:"PA",f_hora_oc:"23:00",f_zona_oc:"1",f_local_oc:"07",f_motiv:"01",f_ciclo:"2",f_data_enc:"2025-11-03"},
+    fields:{f_data_notif:"2025-11-03",f_data_ocorr:"2025-10-30",f_tipo_un:"1",f_nome_un:"HOSPITAL GERAL",f_mun_notif:"BELEM",f_uf_notif:"PA",f_nome:"LARISSA SILVA NASCIMENTO",f_nasc:"2007-03-20",f_raca:"4",f_escol:"3",f_gest:"9",f_mae:"ROSA NASCIMENTO",f_est_civil:"1",f_ocupacao:"VENDEDOR DE COMERCIO VAREJISTA",f_or_sex:"1",f_id_gen:"8",f_mun_res:"BELEM",f_uf_res:"PA",f_bairro_res:"GUAMA",f_logr_res:"AVENIDA PERIMETRAL",f_num_res:"534",f_zona_res:"1",f_mun_oc:"BELEM",f_uf_oc:"PA",f_hora_oc:"23:00",f_zona_oc:"1",f_local_oc:"07",f_motiv:"01",f_ciclo:"2",f_data_enc:"2025-11-03"},
     radios:{sexo:"F",defic:"2",outr_vez:"1",auto_prov:"2",nenv:"2",sex_autor:"1",alcool:"9",viol_trab:"2",cat:"2"},
     checks:{tipo_viol:["4","5"],meio_agr:["8","9"],viol_sex:["4"],proc:["1","2","7"],vinc:["14","18"],encam:["1","11","12","13"]}
   }
