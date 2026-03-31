@@ -197,10 +197,48 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 .ac-item b{color:#2563eb}
 .fld input[readonly]{background:#f3f4f6;color:#6b7280;cursor:default}
 
+/* ⭐ CAMPO ESSENCIAL (substitui asterisco vermelho) */
+.req-star{color:#d97706;font-size:13px;line-height:1;vertical-align:middle;margin-left:1px}
+.sublabel .req-star{font-size:13px;margin-left:2px}
+/* Ocultar estilos antigos de obrigatório */
+.fld label .req{display:none!important}
+.sublabel .req-mark{display:none!important}
+
+/* LEGENDA DOS CAMPOS ESSENCIAIS */
+.legend-ess{background:linear-gradient(135deg,#fffbeb,#fef3c7);border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:#92400e;line-height:1.6;display:flex;gap:10px;align-items:flex-start}
+.legend-ess .leg-ico{font-size:18px;flex-shrink:0;line-height:1.3}
+
+/* NÍVEL DE PROGRESSO */
+.prog-level{font-size:11px;font-weight:800;padding:3px 10px;border-radius:12px;background:rgba(255,255,255,.13);color:rgba(255,255,255,.85);white-space:nowrap;transition:all .5s;letter-spacing:.3px;margin-top:4px;display:inline-block}
+
+/* TOOLTIP DE PROPÓSITO (ícone i) */
+.tip-wrap{position:relative;display:inline-flex;align-items:center;margin-left:4px;vertical-align:middle}
+.tip-btn{width:15px;height:15px;border-radius:50%;background:#e2e8f0;border:none;font-size:9px;font-weight:800;color:#64748b;cursor:pointer;padding:0;display:inline-flex;align-items:center;justify-content:center;line-height:1;flex-shrink:0;transition:background .15s;font-style:italic}
+.tip-btn:hover,.tip-btn.open{background:#2563eb;color:#fff}
+.tip-pop{display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1e293b;color:#e2e8f0;font-size:12px;font-weight:400;line-height:1.55;padding:9px 13px;border-radius:8px;width:250px;max-width:80vw;box-shadow:0 4px 18px rgba(0,0,0,.35);z-index:700;text-align:left;pointer-events:none;font-style:normal}
+.tip-pop::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1e293b}
+.tip-wrap.open .tip-pop{display:block}
+
+/* ANIMAÇÃO 80% */
+@keyframes celebrate80{0%{transform:scale(1)}25%{transform:scale(1.18)}60%{transform:scale(.93)}100%{transform:scale(1)}}
+.prog-ring-wrap.celebrate{animation:celebrate80 .55s ease}
+
 /*==============================================================
   MOBILE BOTTOM BAR — oculta no desktop, visível no mobile
 ==============================================================*/
 #mob-bottom{display:none}
+
+/* BOTTOM SHEET MOBILE — menu de pacientes (fix iOS Safari) */
+#pac-mob-sheet{display:none;position:fixed;inset:0;z-index:2000}
+#pac-mob-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.45)}
+#pac-mob-panel{position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:18px 18px 0 0;max-height:65vh;overflow-y:auto;box-shadow:0 -6px 32px rgba(0,0,0,.22);-webkit-overflow-scrolling:touch}
+#pac-mob-panel .tb-menu-hdr{padding:14px 18px 6px;font-size:11px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:.7px;background:#f9fafb;border-bottom:1px solid #f3f4f6;position:sticky;top:0;z-index:1}
+#pac-mob-panel .tb-mi{padding:13px 18px;font-size:14px;color:#1f2937;cursor:pointer;border-bottom:1px solid #f3f4f6;line-height:1.4;transition:background .1s}
+#pac-mob-panel .tb-mi:last-child{border-bottom:none}
+#pac-mob-panel .tb-mi:hover{background:#eff6ff;color:#1e40af}
+#pac-mob-panel .tb-mi-name{font-weight:700;display:block}
+#pac-mob-panel .tb-mi-sub{font-size:12px;color:#6b7280;margin-top:2px}
+#pac-mob-sheet.show{display:block}
 
 /*==============================================================
   MOBILE RESPONSIVE — @media max-width:768px
@@ -239,15 +277,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
   .tb-group{gap:3px}
   .tb-btn{padding:7px 10px;font-size:12px;min-height:36px;white-space:nowrap}
 
-  /* Dropdown paciente: fixo na base da tela */
-  .tb-menu{
-    position:fixed;top:auto;
-    bottom:64px;left:10px;right:10px;
-    width:auto;min-width:unset;
-    max-height:55vh;overflow-y:auto;
-    border-radius:14px;
-    box-shadow:0 -6px 28px rgba(0,0,0,.2)
-  }
+  /* Dropdown paciente: desabilitado no mobile — usa bottom sheet (#pac-mob-sheet) */
+  .tb-menu{ display:none!important }
 
   /* ── LAYOUT ─────────────────────────────────────────────── */
   .wrapper{padding:12px 12px 76px}
@@ -373,7 +404,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
       <div class="prog-meta">
         <div class="prog-status" id="prog-status">Pronto para iniciar</div>
         <div class="prog-count" id="prog-count">0 / 0 campos preenchidos</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.45);margin-top:2px" id="prog-req-count">0 obrigatórios completos</div>
+        <span class="prog-level" id="prog-level">Ficha Inicial</span>
       </div>
     </div>
 
@@ -388,22 +419,22 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
     <div class="tb-group">
       <span class="tools-label">Ferramentas</span>
       <div class="tb-dd" id="dd-pac">
-        <button class="tb-btn" onclick="togglePacMenu(event)">
+        <button class="tb-btn" id="btn-pac-menu" onclick="togglePacMenu(event)" style="background:#eff6ff;border-color:#bfdbfe;color:#1e40af;font-weight:700">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5.5 20c0-3.5 2.9-6 6.5-6s6.5 2.5 6.5 6"/></svg>
-          Paciente Teste
+          Carregar Caso Didático
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:.55"><polyline points="6,9 12,15 18,9"/></svg>
         </button>
         <div class="tb-menu" id="pac-menu"></div>
       </div>
       <span class="tb-sep"></span>
-      <button class="tb-btn" onclick="document.getElementById('f-import').click()">
+      <button class="tb-btn" onclick="document.getElementById('f-import').click()" title="Importar rascunho salvo (.json)">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17,8 12,3 7,8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-        Importar Rascunho
+        📂 Importar
       </button>
       <input type="file" id="f-import" accept=".json" style="display:none" onchange="importarRascunho(this)">
-      <button class="tb-btn" onclick="exportarRascunho()">
+      <button class="tb-btn" onclick="exportarRascunho()" title="Salvar rascunho como arquivo .json">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Exportar Rascunho
+        💾 Exportar
       </button>
     </div>
     <div class="tb-group">
@@ -434,9 +465,15 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
       <span style="background:#fef9e7;color:#c07000;font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px">✓ Sinônimos de ocupação (CBO)</span>
       <span style="background:#f3e8ff;color:#7c3aed;font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px">✓ Gera PDF para impressão</span>
     </div>
-    <p style="font-size:13px;color:#6b7280">Campos com <strong style="color:#c0392b">*</strong> são obrigatórios. Todo texto é convertido para <strong>maiúsculas sem acentos</strong> (padrão SINAN). A ficha impressa <strong>não substitui a digitação no SINAN NET</strong>.<br>
+    <p style="font-size:13px;color:#6b7280">Campos com <strong style="color:#d97706">⭐</strong> são essenciais — mas você pode baixar o PDF a qualquer momento e terminar de preencher no arquivo. Todo texto é convertido para <strong>maiúsculas sem acentos</strong> (padrão SINAN). A ficha impressa <strong>não substitui a digitação no SINAN NET</strong>.<br>
     <span style="font-size:12px;color:#9ca3af;margin-top:4px;display:block">Referência: <a href="https://www.youtube.com/watch?v=qt6r5SDq8Rw" target="_blank" rel="noopener">Como preencher o SINAN de Violência — YouTube ↗</a> · Portaria GM/MS nº 10.175/2026</span></p>
   </div>
+</div>
+
+<!-- LEGENDA ⭐ -->
+<div class="legend-ess">
+  <span class="leg-ico">⭐</span>
+  <div><strong>Campos essenciais para o SINAN</strong> — Campos marcados com ⭐ são os mais importantes para a qualidade do registro epidemiológico. Preencha-os aqui para poupar tempo, ou termine de preencher diretamente no PDF gerado. <strong>Você pode baixar o PDF a qualquer momento</strong> — mesmo com campos em branco.</div>
 </div>
 
 <!-- =========================================================
@@ -461,12 +498,12 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
         <input type="text" id="f_num_notif" placeholder="Fornecido pela VE local">
       </div>
       <div class="fld">
-        <label>Data da Notificação <span class="req">*</span><span class="cn">[Campo 3]</span></label>
-        <input type="date" id="f_data_notif" data-req data-label="Data da notificação" data-sec="1">
+        <label>Data da Notificação <span class="req-star">⭐</span><span class="cn">[Campo 3]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">A data da notificação define o prazo para ações de proteção. Notificações tardias comprometem a vigilância epidemiológica local.</span></span></label>
+        <input type="date" id="f_data_notif" data-ess data-label="Data da notificação">
       </div>
       <div class="fld">
-        <label>Data da Ocorrência <span class="req">*</span><span class="cn">[Campo 9]</span></label>
-        <input type="date" id="f_data_ocorr" data-req data-label="Data da ocorrência" data-sec="1">
+        <label>Data da Ocorrência <span class="req-star">⭐</span><span class="cn">[Campo 9]</span></label>
+        <input type="date" id="f_data_ocorr" data-ess data-label="Data da ocorrência">
       </div>
     </div>
 
@@ -490,8 +527,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 
     <div class="row row-wide">
       <div class="fld col-2">
-        <label>Tipo de Unidade Notificadora <span class="req">*</span><span class="cn">[Campo 6]</span></label>
-        <select id="f_tipo_un" data-req data-label="Tipo de unidade notificadora" data-sec="1">
+        <label>Tipo de Unidade Notificadora <span class="req-star">⭐</span><span class="cn">[Campo 6]</span></label>
+        <select id="f_tipo_un" data-ess data-label="Tipo de unidade notificadora">
           <option value="">— Selecione —</option>
           <option value="1">1 — Unidade de Saúde</option>
           <option value="2">2 — Unidade de Assistência Social</option>
@@ -536,8 +573,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 
     <div class="row row-full">
       <div class="fld">
-        <label>Nome Completo da Vítima <span class="req">*</span><span class="cn">[Campo 10]</span></label>
-        <input type="text" id="f_nome" placeholder="Nome completo — ou IGNORADO se desconhecido" data-caps data-req data-label="Nome do paciente" data-sec="2">
+        <label>Nome Completo da Vítima <span class="req-star">⭐</span><span class="cn">[Campo 10]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">O nome da vítima é necessário para vincular notificações e evitar duplicidade no SINAN. Se desconhecido, escreva IGNORADO.</span></span></label>
+        <input type="text" id="f_nome" placeholder="Nome completo — ou IGNORADO se desconhecido" data-caps data-ess data-label="Nome do paciente">
       </div>
     </div>
 
@@ -561,7 +598,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
         </select>
       </div>
       <div class="fld">
-        <label>Sexo <span class="req">*</span><span class="cn">[Campo 13]</span></label>
+        <label>Sexo <span class="req-star">⭐</span><span class="cn">[Campo 13]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">O sexo é essencial para análise epidemiológica de violências de gênero e para cálculo de indicadores nacionais.</span></span></label>
         <div class="pills" id="grp_sexo">
           <label class="pill" data-val="M"><input type="radio" name="sexo" value="M" onchange="onSexoChange()"> Masculino</label>
           <label class="pill" data-val="F"><input type="radio" name="sexo" value="F" onchange="onSexoChange()"> Feminino</label>
@@ -588,8 +625,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 
     <div class="row">
       <div class="fld">
-        <label>Raça/Cor <span class="req">*</span><span class="cn">[Campo 15]</span></label>
-        <select id="f_raca" data-req data-label="Raça/Cor" data-sec="2">
+        <label>Raça/Cor <span class="req-star">⭐</span><span class="cn">[Campo 15]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">Raça/Cor (autodeclarada) é essencial para criar políticas públicas de proteção a grupos vulneráveis e para análise de desigualdades raciais na violência.</span></span></label>
+        <select id="f_raca" data-ess data-label="Raça/Cor">
           <option value="">— Selecione —</option>
           <option value="1">1 — Branca</option>
           <option value="2">2 — Preta</option>
@@ -647,9 +684,9 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
   <div class="sec-body">
     <div class="row">
       <div class="fld col-2">
-        <label>Município <span class="cn">[Campo 20]</span></label>
+        <label>Município <span class="req-star">⭐</span><span class="cn">[Campo 20]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">Município de residência permite que a vigilância local acompanhe e intervenha no caso, e é essencial para georeferenciamento dos dados.</span></span></label>
         <div class="ac-wrap">
-          <input type="text" id="f_mun_res" placeholder="Digite para buscar — UF preenchida automaticamente" data-caps autocomplete="off">
+          <input type="text" id="f_mun_res" data-ess data-label="Município de residência" placeholder="Digite para buscar — UF preenchida automaticamente" data-caps autocomplete="off">
           <div class="ac-drop" id="f_mun_res-drop"></div>
         </div>
       </div>
@@ -735,7 +772,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
         <input type="text" id="f_nome_social" data-caps placeholder="Se diferente do nome civil">
       </div>
       <div class="fld col-2">
-        <label>Ocupação (CBO) <span class="cn">[C.34]</span></label>
+        <label>Ocupação (CBO) <span class="cn">[C.34]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">Informar a ocupação ajuda o SUS a mapear e prevenir violências no ambiente de trabalho, e orienta políticas de proteção ao trabalhador.</span></span></label>
         <div class="ac-wrap">
           <input type="text" id="f_ocupacao" data-caps autocomplete="off" placeholder="Nome ou código CBO (ex: ENFERMEIRO, 223505)">
           <div class="ac-drop" id="f_ocupacao-drop"></div>
@@ -758,8 +795,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 
     <div class="row">
       <div class="fld">
-        <label>Orientação Sexual <span class="req">*</span><span class="cn">[Campo 36]</span></label>
-        <select id="f_or_sex" data-req data-label="Orientação sexual" data-sec="4">
+        <label>Orientação Sexual <span class="req-star">⭐</span><span class="cn">[Campo 36]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">Orientação sexual permite identificar violências por LGBTfobia e direcionar políticas específicas de proteção para esses grupos.</span></span></label>
+        <select id="f_or_sex" data-ess data-label="Orientação sexual">
           <option value="">— Selecione —</option>
           <option value="1">1 — Heterossexual</option>
           <option value="2">2 — Homossexual (gay / lésbica)</option>
@@ -769,8 +806,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
         </select>
       </div>
       <div class="fld">
-        <label>Identidade de Gênero <span class="req">*</span><span class="cn">[Campo 37]</span></label>
-        <select id="f_id_gen" data-req data-label="Identidade de gênero" data-sec="4">
+        <label>Identidade de Gênero <span class="req-star">⭐</span><span class="cn">[Campo 37]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">Identidade de gênero permite mapear violências transfóbicas e criar políticas de proteção para pessoas trans e travestis.</span></span></label>
+        <select id="f_id_gen" data-ess data-label="Identidade de gênero">
           <option value="">— Selecione —</option>
           <option value="1">1 — Travesti</option>
           <option value="2">2 — Mulher transexual</option>
@@ -902,7 +939,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
         </div>
       </div>
       <div class="fld">
-        <label>Lesão autoprovocada? <span class="req">*</span><span class="cn">[Campo 54]</span></label>
+        <label>Lesão autoprovocada? <span class="req-star">⭐</span><span class="cn">[Campo 54]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">Lesão autoprovocada exige notificação em 24h e aciona protocolos específicos de saúde mental e suicidologia do SUS.</span></span></label>
         <div class="pills" id="grp_auto_prov">
           <label class="pill" data-val="1"><input type="radio" name="auto_prov" value="1" onchange="onAutoProv()"> Sim</label>
           <label class="pill" data-val="2"><input type="radio" name="auto_prov" value="2" onchange="onAutoProv()"> Não</label>
@@ -935,9 +972,9 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
     <!-- C55 — Motivação -->
     <div class="row row-wide">
       <div class="fld col-2">
-        <label>Motivação (perspectiva da vítima) <span class="req">*</span><span class="cn">[Campo 55]</span></label>
+        <label>Motivação (perspectiva da vítima) <span class="req-star">⭐</span><span class="cn">[Campo 55]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">A motivação da violência direciona políticas de prevenção específicas — racismo, LGBTfobia, violência de gênero etc. Preencha conforme o relato da vítima.</span></span></label>
         <div class="info" style="margin-bottom:6px"><span class="ico">💡</span><div>Preencha conforme o <strong>relato da própria vítima</strong>.</div></div>
-        <select id="f_motiv" data-req data-label="Motivação da violência" data-sec="6">
+        <select id="f_motiv" data-ess data-label="Motivação da violência">
           <option value="">— Selecione —</option>
           <option value="01">01 — Sexismo</option>
           <option value="02">02 — Homofobia / Lesbofobia / Bifobia / Transfobia</option>
@@ -955,7 +992,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
     </div>
 
     <!-- C56 — Tipo de Violência -->
-    <div class="sublabel">Campo 56 — Tipo de Violência <span class="req-mark">*</span></div>
+    <div class="sublabel">Campo 56 — Tipo de Violência <span class="req-star">⭐</span><span class="tip-wrap" style="margin-left:6px"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">Classificar o tipo de violência garante o encaminhamento correto da vítima e alimenta indicadores epidemiológicos nacionais.</span></span></div>
     <div class="pills" id="grp_tipo_viol" style="margin-bottom:14px">
       <label class="pill" data-val="1" data-name="tipo_viol"><input type="checkbox" name="tipo_viol" value="1" onchange="onTipoViol()"> Física</label>
       <label class="pill" data-val="2" data-name="tipo_viol"><input type="checkbox" name="tipo_viol" value="2" onchange="onTipoViol()"> Psicológica / Moral</label>
@@ -976,7 +1013,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
     </div>
 
     <!-- C57 — Meio de Agressão -->
-    <div class="sublabel">Campo 57 — Meio de Agressão <span class="req-mark">*</span><span style="font-size:10px;font-weight:400;color:#9ca3af;margin-left:6px;text-transform:none">Se "Outro", especifique nas observações</span></div>
+    <div class="sublabel">Campo 57 — Meio de Agressão <span class="req-star">⭐</span><span class="tip-wrap" style="margin-left:6px"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">O meio de agressão fornece dados para vigilância — armas de fogo informam políticas de desarmamento; força corporal indica padrões domésticos.</span></span><span style="font-size:10px;font-weight:400;color:#9ca3af;margin-left:6px;text-transform:none">Se "Outro", especifique nas observações</span></div>
     <div class="pills" id="grp_meio_agr" style="margin-bottom:14px">
       <label class="pill" data-val="1" data-name="meio_agr"><input type="checkbox" name="meio_agr" value="1"> Força corporal / espancamento</label>
       <label class="pill" data-val="2" data-name="meio_agr"><input type="checkbox" name="meio_agr" value="2"> Enforcamento</label>
@@ -1115,7 +1152,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
   </div>
   <div class="sec-body">
     <div style="height:10px"></div>
-    <div class="info"><span class="ico">ℹ️</span><div>Campo obrigatório — indique para onde a vítima foi encaminhada após o atendimento. É possível marcar mais de uma opção.</div></div>
+    <div class="info"><span class="ico">ℹ️</span><div>Indique para onde a vítima foi encaminhada após o atendimento. É possível marcar mais de uma opção.</div></div>
     <div class="pills" id="grp_encam">
       <label class="pill" data-val="1" data-name="encam"><input type="checkbox" name="encam" value="1"> Rede de Saúde</label>
       <label class="pill" data-val="2" data-name="encam"><input type="checkbox" name="encam" value="2"> Rede de Assistência Social</label>
@@ -1178,8 +1215,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 
     <div class="row">
       <div class="fld">
-        <label>Data de Encerramento <span class="req">*</span><span class="cn">[Campo 69]</span></label>
-        <input type="date" id="f_data_enc" data-req data-label="Data de encerramento" data-sec="8">
+        <label>Data de Encerramento <span class="req-star">⭐</span><span class="cn">[Campo 69]</span></label>
+        <input type="date" id="f_data_enc" data-ess data-label="Data de encerramento">
       </div>
       <div class="fld" style="justify-content:flex-end">
         <label style="opacity:0;user-select:none">.</label>
@@ -1236,15 +1273,16 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 <!-- TOAST -->
 <div id="toast"></div>
 
-<!-- MODAL VALIDAÇÃO -->
-<div class="ov" id="ov-err">
+<!-- MODAL "QUASE LÁ" — campos essenciais faltando -->
+<div class="ov" id="ov-quase">
   <div class="modal">
-    <div class="modal-ico">⚠️</div>
-    <h2>Campos Obrigatórios</h2>
-    <p>Preencha os campos abaixo antes de gerar o PDF:</p>
-    <div class="err-list" id="err-list"></div>
-    <div class="modal-actions">
-      <button class="mbtn mbtn-p" onclick="closeModal('ov-err')">Revisar</button>
+    <div class="modal-ico">⭐</div>
+    <h2>Sua ficha está quase pronta!</h2>
+    <p>Alguns campos essenciais (⭐) ainda estão em branco. Você pode <strong>voltar e preenchê-los agora</strong> para um registro mais completo, ou <strong>baixar o PDF assim mesmo</strong> e terminar de preencher depois diretamente no arquivo ou no SINAN NET.</p>
+    <div class="err-list" id="ov-quase-list" style="margin-top:12px"></div>
+    <div class="modal-actions" style="flex-direction:column;gap:8px">
+      <button class="mbtn mbtn-p" onclick="closeModal('ov-quase')" style="width:100%">← Voltar e preencher agora</button>
+      <button class="mbtn mbtn-s" id="ov-quase-dl" style="width:100%">Baixar PDF e preencher depois</button>
     </div>
   </div>
 </div>
@@ -1706,94 +1744,160 @@ function showToast(msg, type, dur){
 var CIRCUMFERENCE = 2 * Math.PI * 29; // r=29
 var _prevPct = -1;
 var _sectionMilestones = {}; // track completed sections
-var _globalMilestones = {25:false,50:false,75:false,100:false};
+var _globalMilestones = {25:false,50:false,80:false,100:false};
+var _celebrated80 = false;
 
-// IDs excluídos do progresso (não existem no SINAN NET ou são metadados)
+// IDs excluídos do progresso
 var PROG_EXCLUDE_IDS = {'f_num_notif':1,'f_acomp_nome':1,'f_acomp_vinc':1,'f_acomp_tel':1};
 
-var STATUS_MSGS = [
-  [0,   'Pronto para iniciar ✏️'],
-  [1,   'Ótimo, começando!'],
-  [10,  'Continue assim! 💪'],
-  [25,  '25% — bom ritmo!'],
-  [40,  'Quase na metade!'],
-  [50,  '50% — na metade! 🔥'],
-  [65,  'Mais da metade! Quase lá!'],
-  [75,  '75% — falta pouco! 🎯'],
-  [90,  'Finalizando...'],
-  [99,  'Último campo!'],
-  [100, '🎉 Ficha completa!']
-];
+// Campos essenciais (⭐) — peso alto
+var ESS_IDS = {'f_data_notif':1,'f_data_ocorr':1,'f_tipo_un':1,'f_nome':1,'f_raca':1,'f_or_sex':1,'f_id_gen':1,'f_motiv':1,'f_data_enc':1,'f_mun_res':1};
+var ESS_W = 8; // peso de cada campo essencial
+var STD_W = 1; // peso de campo padrão
 
+// Grupos essenciais (radio/checkbox) — checar se algum está marcado
+var ESS_GROUPS = ['sexo','tipo_viol','meio_agr','auto_prov'];
+// Grupos padrão (não essenciais, não condicionais)
+var STD_GROUPS = ['outr_vez','nenv','sex_autor','alcool','defic','viol_trab','cat','vinc','encam'];
+// Grupos condicionais (só contam quando container visível)
+var COND_GROUPS = {viol_sex:'sec_viol_sex',proc:'sec_viol_sex',tdefic:'row_defic_tipos'};
+
+// Verifica se elemento está visível (nenhum ancestral com display:none até .wrapper)
+function isElemVisible(el){
+  var node = el;
+  while(node && node.className !== 'wrapper'){
+    if(node.style && node.style.display === 'none') return false;
+    node = node.parentElement;
+  }
+  return true;
+}
+
+// Verifica se grupo (radio/checkbox) tem pelo menos um marcado
+function groupHasCheck(name){
+  return !!document.querySelector('[name="'+name+'"]:checked');
+}
+
+var STATUS_MSGS = [
+  [0,'Pronto para iniciar ✏️'],[1,'Ótimo, começando!'],[10,'Continue assim! 💪'],
+  [25,'25% — bom ritmo!'],[40,'Quase na metade!'],[50,'50% — na metade! 🔥'],
+  [65,'Mais da metade! Quase lá!'],[79,'Faltam poucos campos essenciais!'],[90,'Finalizando...'],
+  [99,'Último campo!'],[100,'🎉 Ficha completa!']
+];
 function getStatusMsg(pct){
   var msg = STATUS_MSGS[0][1];
-  for(var i=0;i<STATUS_MSGS.length;i++){
-    if(pct >= STATUS_MSGS[i][0]) msg = STATUS_MSGS[i][1];
-  }
+  for(var i=0;i<STATUS_MSGS.length;i++){ if(pct>=STATUS_MSGS[i][0]) msg=STATUS_MSGS[i][1]; }
   return msg;
 }
 
-function getAllProgressFields(){
-  // Coleta todos input/select (excluídos os IDs fora do escopo)
-  var els = Array.from(document.querySelectorAll('input:not([type=radio]):not([type=checkbox]):not([type=hidden]), select'));
-  return els.filter(function(el){
-    if(PROG_EXCLUDE_IDS[el.id]) return false;
-    if(el.readOnly) return false;
-    return true;
-  });
+// Nível de progresso
+var PROG_LEVELS = [
+  [0,  'Ficha Inicial',  '#9ca3af'],
+  [26, 'Ficha Básica',   '#60a5fa'],
+  [51, 'Ficha Útil',     '#2563eb'],
+  [80, 'Padrão Ouro ✅', '#22c55e'],
+  [100,'Diamante 💎',    '#d97706']
+];
+function getLevel(pct){
+  var lv = PROG_LEVELS[0];
+  for(var i=0;i<PROG_LEVELS.length;i++){ if(pct>=PROG_LEVELS[i][0]) lv=PROG_LEVELS[i]; }
+  return lv;
 }
 
 function updateProgress(){
-  // --- Progresso GERAL (todos os campos relevantes) ---
-  var allFields = getAllProgressFields();
-  var total = allFields.length;
-  var filled = 0;
-  allFields.forEach(function(el){ if(el.value&&el.value.trim()) filled++; });
-  var pct = total>0 ? Math.round(filled/total*100) : 0;
+  var totalW = 0, filledW = 0;
+  var essTotal = 0, essFilled = 0;
 
-  // --- Campos obrigatórios (para validação) ---
-  var reqs = document.querySelectorAll('[data-req]');
-  var reqFilled = 0;
-  reqs.forEach(function(el){ if(el.value&&el.value.trim()) reqFilled++; });
+  // --- Campos essenciais (texto/select) ---
+  Object.keys(ESS_IDS).forEach(function(id){
+    var el = document.getElementById(id);
+    if(!el) return;
+    totalW += ESS_W; essTotal++;
+    if(el.value && el.value.trim()){ filledW += ESS_W; essFilled++; }
+  });
+
+  // --- Grupos essenciais ---
+  ESS_GROUPS.forEach(function(name){
+    totalW += ESS_W; essTotal++;
+    if(groupHasCheck(name)){ filledW += ESS_W; essFilled++; }
+  });
+
+  // --- Campos padrão (text/select, não essenciais, não excluídos) ---
+  var stdEls = Array.from(document.querySelectorAll('input:not([type=radio]):not([type=checkbox]):not([type=hidden]),select'));
+  stdEls.forEach(function(el){
+    if(PROG_EXCLUDE_IDS[el.id] || el.readOnly) return;
+    if(ESS_IDS[el.id]) return; // já contou
+    if(!isElemVisible(el)) return; // condicional oculto
+    totalW += STD_W;
+    if(el.value && el.value.trim()) filledW += STD_W;
+  });
+
+  // --- Grupos padrão ---
+  STD_GROUPS.forEach(function(name){
+    var grpEl = document.querySelector('[name="'+name+'"]');
+    if(!grpEl || !isElemVisible(grpEl)) return;
+    totalW += STD_W;
+    if(groupHasCheck(name)) filledW += STD_W;
+  });
+
+  // --- Grupos condicionais ---
+  Object.keys(COND_GROUPS).forEach(function(name){
+    var cont = document.getElementById(COND_GROUPS[name]);
+    if(!cont || cont.style.display === 'none') return;
+    totalW += STD_W;
+    if(groupHasCheck(name)) filledW += STD_W;
+  });
+
+  var pct = totalW > 0 ? Math.round(filledW/totalW*100) : 0;
+  // contagem exibida: campos de texto/select preenchidos para display
+  var allTextEls = stdEls.filter(function(el){ return !PROG_EXCLUDE_IDS[el.id] && !el.readOnly && isElemVisible(el); });
+  var allFilled = allTextEls.filter(function(el){ return el.value && el.value.trim(); }).length;
+
+  // Nível
+  var level = getLevel(pct);
 
   // Ring
   var offset = CIRCUMFERENCE - (pct/100)*CIRCUMFERENCE;
   var ring = document.getElementById('prog-ring');
   ring.style.strokeDashoffset = offset;
+  ring.style.stroke = level[2];
 
-  // Ring color
-  var color = pct<25?'#e74c3c':pct<50?'#f39c12':pct<75?'#f1c40f':pct<100?'#2ecc71':'#27ae60';
-  ring.style.stroke = color;
-
-  // Text
+  // Text + level name
   document.getElementById('prog-pct').textContent = pct+'%';
   document.getElementById('prog-status').textContent = getStatusMsg(pct);
-  document.getElementById('prog-count').textContent = filled+' / '+total+' campos preenchidos';
-  var reqEl = document.getElementById('prog-req-count');
-  if(reqEl) reqEl.textContent = reqFilled+' / '+reqs.length+' obrigatórios';
+  document.getElementById('prog-count').textContent = essFilled+'/'+essTotal+' essenciais · '+allFilled+' campos';
+  var lvEl = document.getElementById('prog-level');
+  if(lvEl){ lvEl.textContent = level[0]; lvEl.style.background = level[2]+'30'; lvEl.style.color = pct>=80?'#fff':'rgba(255,255,255,.85)'; }
 
   // Progress bar strip
   var barFill = document.getElementById('prog-bar-fill');
-  if(barFill){ barFill.style.width = pct+'%'; barFill.style.background = color; }
+  if(barFill){ barFill.style.width = pct+'%'; barFill.style.background = level[2]; }
   var barStrip = document.getElementById('prog-bar-strip');
   if(barStrip){ barStrip.style.background = pct>0?'rgba(0,0,0,.1)':'rgba(255,255,255,.08)'; }
 
+  // Mobile bottom bar
+  var mobPct = document.getElementById('mob-prog-pct');
+  if(mobPct) mobPct.textContent = pct+'%';
+  var mobLabel = document.getElementById('mob-prog-label');
+  if(mobLabel) mobLabel.textContent = level[0];
+
   // Milestone toasts
-  [25,50,75].forEach(function(m){
+  [25,50].forEach(function(m){
     if(pct>=m && !_globalMilestones[m]){
       _globalMilestones[m]=true;
-      var msgs = {
-        25:'🎯 25% da ficha preenchida — ótimo começo!',
-        50:'🔥 Metade concluída! Continue assim!',
-        75:'⚡ 75% — você está quase terminando!'
-      };
-      showToast(msgs[m], 't-mile', 3800);
+      showToast(m===25?'🎯 25% da ficha preenchida — ótimo começo!':'🔥 Metade concluída! Continue assim!','t-mile',3800);
     }
   });
+  if(pct>=80 && !_globalMilestones[80]){
+    _globalMilestones[80]=true;
+    showToast('🏆 Padrão Ouro! Todos os campos essenciais preenchidos!','t-ok',4500);
+    var rw = document.querySelector('.prog-ring-wrap');
+    if(rw){ rw.classList.add('celebrate'); setTimeout(function(){ rw.classList.remove('celebrate'); },600); }
+  }
   if(pct===100 && !_globalMilestones[100]){
     _globalMilestones[100]=true;
-    showToast('🎉 Ficha totalmente preenchida! Clique em Gerar PDF!', 't-ok', 4500);
+    showToast('💎 Ficha Diamante! Preenchimento completo!','t-ok',4500);
   }
+  if(pct<80) _globalMilestones[80]=false;
   if(pct<100) _globalMilestones[100]=false;
 
   // Section badges
@@ -1808,14 +1912,14 @@ function updateSectionBadges(){
     var badge = document.getElementById('badge'+s);
     if(!secEl||!badge) continue;
 
-    // Contagem de campos obrigatórios
-    var reqs = secEl.querySelectorAll('[data-req]');
-    var reqFilled=0;
-    reqs.forEach(function(el){ if(el.value&&el.value.trim()) reqFilled++; });
+    // Contagem de campos essenciais da seção
+    var essFlds = secEl.querySelectorAll('[data-ess]');
+    var essFilled=0;
+    essFlds.forEach(function(el){ if(el.value&&el.value.trim()) essFilled++; });
 
-    // Contagem de TODOS os campos da seção (exclui IDs fora de escopo)
+    // Contagem de TODOS os campos da seção (exclui IDs fora de escopo e ocultos)
     var allInSec = Array.from(secEl.querySelectorAll('input:not([type=radio]):not([type=checkbox]):not([type=hidden]),select'))
-      .filter(function(el){ return !PROG_EXCLUDE_IDS[el.id] && !el.readOnly; });
+      .filter(function(el){ return !PROG_EXCLUDE_IDS[el.id] && !el.readOnly && isElemVisible(el); });
     var allFilled=0;
     allInSec.forEach(function(el){ if(el.value&&el.value.trim()) allFilled++; });
     var allTotal = allInSec.length;
@@ -1827,8 +1931,7 @@ function updateSectionBadges(){
       continue;
     }
 
-    // Seção completa: todos os obrigatórios preenchidos E a maioria dos opcionais
-    var reqsDone = reqs.length===0 || reqFilled===reqs.length;
+    var essDone = essFlds.length===0 || essFilled===essFlds.length;
     var allDone = allFilled===allTotal;
 
     if(allDone){
@@ -1840,12 +1943,12 @@ function updateSectionBadges(){
       }
       secEl.classList.remove('partial');
       secEl.classList.add('done');
-    } else if(reqsDone && allFilled>0){
-      badge.textContent = '✓ Obrig. · '+allFilled+'/'+allTotal;
+    } else if(essDone && allFilled>0){
+      badge.textContent = '⭐ Ess. OK · '+allFilled+'/'+allTotal;
       badge.className = 'sec-badge badge-done';
       if(!_sectionMilestones[s]){
         _sectionMilestones[s]=true;
-        showToast('✅ Seção '+s+' — campos obrigatórios concluídos!', 't-ok', 2500);
+        showToast('⭐ Seção '+s+' — campos essenciais preenchidos!', 't-ok', 2500);
       }
       secEl.classList.remove('partial');
       secEl.classList.add('done');
@@ -1856,7 +1959,7 @@ function updateSectionBadges(){
       secEl.classList.remove('done');
       secEl.classList.add('partial');
     } else {
-      badge.textContent = reqs.length>0?(reqs.length+' obrigatório'+(reqs.length>1?'s':'')):'Não iniciado';
+      badge.textContent = essFlds.length>0?(essFlds.length+' essencial'+(essFlds.length>1?'is':'')):'Não iniciado';
       badge.className = 'sec-badge badge-empty';
       _sectionMilestones[s]=false;
       secEl.classList.remove('done','partial');
@@ -1872,19 +1975,24 @@ document.querySelectorAll('input,select,textarea').forEach(function(el){
 updateProgress();
 
 /*==========================================================
-  VALIDATION
+  VALIDATION — verifica campos essenciais (data-ess)
 ==========================================================*/
-function validate(){
-  var errors = [];
-  document.querySelectorAll('[data-req]').forEach(function(el){
+function getMissingEssentials(){
+  var missing = [];
+  document.querySelectorAll('[data-ess]').forEach(function(el){
     if(!el.value||!el.value.trim()){
       el.classList.add('error');
-      errors.push(el.dataset.label||el.id);
+      missing.push(el.dataset.label||el.id);
     } else {
       el.classList.remove('error');
     }
   });
-  return errors;
+  // Grupos essenciais (radio/checkbox)
+  var groupLabels = {sexo:'Sexo [Campo 13]',tipo_viol:'Tipo de Violência [Campo 56]',meio_agr:'Meio de Agressão [Campo 57]',auto_prov:'Lesão Autoprovocada [Campo 54]'};
+  ESS_GROUPS.forEach(function(name){
+    if(!groupHasCheck(name)) missing.push(groupLabels[name]||name);
+  });
+  return missing;
 }
 
 /*==========================================================
@@ -1907,16 +2015,21 @@ function fmtDate(val){
 function tv(id){ return (document.getElementById(id)||{}).value||''; }
 
 /*==========================================================
-  GERAR PDF
+  GERAR PDF — sempre habilitado; modal se faltar campo essencial
 ==========================================================*/
-async function gerarPDF(){
-  var errs = validate();
-  if(errs.length>0){
-    document.getElementById('err-list').innerHTML = errs.map(function(e){
-      return '<div class="err-item">⚠ '+e+'</div>';
-    }).join('');
-    document.getElementById('ov-err').classList.add('show');
-    return;
+async function gerarPDF(force){
+  if(!force){
+    var missing = getMissingEssentials();
+    if(missing.length>0){
+      document.getElementById('ov-quase-list').innerHTML = missing.map(function(e){
+        return '<div class="err-item">⭐ '+e+'</div>';
+      }).join('');
+      // Botão "baixar mesmo assim"
+      var dlBtn = document.getElementById('ov-quase-dl');
+      dlBtn.onclick = function(){ closeModal('ov-quase'); gerarPDF(true); };
+      document.getElementById('ov-quase').classList.add('show');
+      return;
+    }
   }
 
   var btn = document.getElementById('btn-gerar');
@@ -2321,22 +2434,49 @@ var FAKE_PATIENTS = [
   }
 ];
 
-// Monta menu de pacientes
+// Monta menu de pacientes (desktop e mobile)
 (function(){
+  var listHtml = FAKE_PATIENTS.map(function(p,i){
+    return '<div class="tb-mi" onclick="carregarPaciente('+i+');closePacMenuAll()">' +
+      '<span class="tb-mi-name">'+p.label+'</span>' +
+      '<span class="tb-mi-sub">'+p.sub+'</span></div>';
+  }).join('');
+
+  // Desktop dropdown
   var menu = document.getElementById('pac-menu');
-  if(!menu) return;
-  menu.innerHTML = '<div class="tb-menu-hdr">Selecione um perfil fictício</div>' +
-    FAKE_PATIENTS.map(function(p,i){
-      return '<div class="tb-mi" onclick="carregarPaciente('+i+');togglePacMenu()">' +
-        '<span class="tb-mi-name">'+p.label+'</span>' +
-        '<span class="tb-mi-sub">'+p.sub+'</span></div>';
-    }).join('');
+  if(menu) menu.innerHTML = '<div class="tb-menu-hdr">Selecione um caso didático</div>' + listHtml;
+
+  // Mobile bottom sheet
+  var mobList = document.getElementById('pac-mob-list');
+  if(mobList) mobList.innerHTML = listHtml;
 })();
+
+function isMobile(){ return window.innerWidth <= 768; }
 
 function togglePacMenu(e){
   if(e) e.stopPropagation();
-  document.getElementById('pac-menu').classList.toggle('open');
+  if(isMobile()){
+    openPacSheet();
+  } else {
+    document.getElementById('pac-menu').classList.toggle('open');
+  }
 }
+
+function openPacSheet(){
+  document.getElementById('pac-mob-sheet').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePacSheet(){
+  document.getElementById('pac-mob-sheet').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function closePacMenuAll(){
+  document.getElementById('pac-menu').classList.remove('open');
+  closePacSheet();
+}
+
 document.addEventListener('click', function(){ document.getElementById('pac-menu').classList.remove('open'); });
 
 // ------ helpers ------
@@ -2485,6 +2625,15 @@ function importarRascunho(input){
 }
 </script>
 
+<!-- BOTTOM SHEET MOBILE — menu de pacientes fictícios (fix iOS Safari) -->
+<div id="pac-mob-sheet">
+  <div id="pac-mob-backdrop" onclick="closePacSheet()"></div>
+  <div id="pac-mob-panel">
+    <div class="tb-menu-hdr">Selecione um caso didático</div>
+    <div id="pac-mob-list"></div>
+  </div>
+</div>
+
 <!-- BARRA INFERIOR — visível apenas em mobile (CSS oculta no desktop) -->
 <div id="mob-bottom">
   <a id="mob-back-btn" href="index.html">
@@ -2502,25 +2651,39 @@ function importarRascunho(input){
 </div>
 
 <script>
+/* ── TOOLTIP TOGGLE ────────────────────────────────────────── */
+function tipToggle(btn){
+  var wrap = btn.closest('.tip-wrap');
+  if(!wrap) return;
+  var isOpen = wrap.classList.contains('open');
+  // Fecha todos os outros
+  document.querySelectorAll('.tip-wrap.open').forEach(function(w){ w.classList.remove('open'); w.querySelector('.tip-btn').classList.remove('open'); });
+  if(!isOpen){
+    wrap.classList.add('open');
+    btn.classList.add('open');
+    // Fecha ao clicar fora
+    setTimeout(function(){
+      document.addEventListener('click', function _closeTip(ev){
+        if(!wrap.contains(ev.target)){ wrap.classList.remove('open'); btn.classList.remove('open'); }
+        document.removeEventListener('click', _closeTip);
+      });
+    }, 10);
+  }
+}
+
 /* ── MOBILE SYNC ──────────────────────────────────────────────
-   Sincroniza barra inferior com estado do botão e progresso
+   Sincroniza barra inferior com progresso (btn sempre habilitado)
 ──────────────────────────────────────────────────────────── */
 (function(){
   var btnGerar = document.getElementById('btn-gerar');
   var mobBtn   = document.getElementById('mob-pdf-btn');
-  var mobPct   = document.getElementById('mob-prog-pct');
   var srcPct   = document.getElementById('prog-pct');
   if(!mobBtn || !btnGerar || !srcPct) return;
 
-  // Sincroniza estado disabled
+  // Re-habilita mob-pdf-btn sempre (PDF é sempre acessível)
   new MutationObserver(function(){
-    mobBtn.disabled = btnGerar.disabled;
+    setTimeout(function(){ if(btnGerar.disabled){ mobBtn.disabled = false; } }, 5000);
   }).observe(btnGerar, {attributes:true, attributeFilter:['disabled']});
-
-  // Sincroniza porcentagem de progresso
-  new MutationObserver(function(){
-    if(mobPct) mobPct.textContent = srcPct.textContent || '0%';
-  }).observe(srcPct, {childList:true, characterData:true, subtree:true});
 
   /* ── INPUTMODE — teclados corretos no celular ──────────── */
   var numericIds = ['f_sus','f_cnes','f_ibge_notif','f_ibge_res','f_cep','f_num_res',
