@@ -454,22 +454,6 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
   <div><strong>Ferramenta NÃO oficial.</strong> Gera uma ficha impressa adaptada do SINAN para facilitar o preenchimento. As informações aqui inseridas <strong>não são enviadas a nenhum sistema</strong> — a digitação posterior no <strong>SINAN NET</strong> permanece obrigatória para registro oficial no Ministério da Saúde.</div>
 </div>
 
-<!-- INTRO -->
-<div class="intro">
-  <div style="width:100%">
-    <h2>🎯 Sobre este assistente</h2>
-    <p style="margin-bottom:10px">O objetivo deste assistente é <strong>tornar mais fácil e visualmente agradável o preenchimento das fichas SINAN</strong>. Os campos apresentados correspondem <strong>exatamente ao que aparece no SINAN NET</strong> no momento da digitação — obtidos diretamente dos arquivos de instalação do SINAN NET.</p>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">
-      <span style="background:#e8f5e9;color:#1e8449;font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px">✓ Campos idênticos ao SINAN NET</span>
-      <span style="background:#eff6ff;color:#1e40af;font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px">✓ Busca de município por nome</span>
-      <span style="background:#fef9e7;color:#c07000;font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px">✓ Sinônimos de ocupação (CBO)</span>
-      <span style="background:#f3e8ff;color:#7c3aed;font-size:13px;font-weight:700;padding:4px 12px;border-radius:20px">✓ Gera PDF para impressão</span>
-    </div>
-    <p style="font-size:13px;color:#6b7280">Campos com <strong style="color:#d97706">⭐</strong> são essenciais — mas você pode baixar o PDF a qualquer momento e terminar de preencher no arquivo. Todo texto é convertido para <strong>maiúsculas sem acentos</strong> (padrão SINAN). A ficha impressa <strong>não substitui a digitação no SINAN NET</strong>.<br>
-    <span style="font-size:12px;color:#9ca3af;margin-top:4px;display:block">Referência: <a href="https://www.youtube.com/watch?v=qt6r5SDq8Rw" target="_blank" rel="noopener">Como preencher o SINAN de Violência — YouTube ↗</a> · Portaria GM/MS nº 10.175/2026</span></p>
-  </div>
-</div>
-
 <!-- LEGENDA ⭐ -->
 <div class="legend-ess">
   <span class="leg-ico">⭐</span>
@@ -2190,6 +2174,15 @@ async function gerarPDF(force){
   </div>
 </div>
 
+<!-- BOTTOM SHEET MOBILE — menu de pacientes fictícios (fix iOS Safari) -->
+<div id="pac-mob-sheet">
+  <div id="pac-mob-backdrop" onclick="closePacSheet()"></div>
+  <div id="pac-mob-panel">
+    <div class="tb-menu-hdr">Selecione um caso didático</div>
+    <div id="pac-mob-list"></div>
+  </div>
+</div>
+
 <script>
 /*==========================================================
   TOOLS — Paciente Teste | Exportar | Importar | Nova Ficha
@@ -2624,15 +2617,6 @@ function importarRascunho(input){
   reader.readAsText(file);
 }
 </script>
-
-<!-- BOTTOM SHEET MOBILE — menu de pacientes fictícios (fix iOS Safari) -->
-<div id="pac-mob-sheet">
-  <div id="pac-mob-backdrop" onclick="closePacSheet()"></div>
-  <div id="pac-mob-panel">
-    <div class="tb-menu-hdr">Selecione um caso didático</div>
-    <div id="pac-mob-list"></div>
-  </div>
-</div>
 
 <!-- BARRA INFERIOR — visível apenas em mobile (CSS oculta no desktop) -->
 <div id="mob-bottom">
