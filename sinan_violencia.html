@@ -215,9 +215,17 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 .tip-wrap{position:relative;display:inline-flex;align-items:center;margin-left:4px;vertical-align:middle}
 .tip-btn{width:15px;height:15px;border-radius:50%;background:#e2e8f0;border:none;font-size:9px;font-weight:800;color:#64748b;cursor:pointer;padding:0;display:inline-flex;align-items:center;justify-content:center;line-height:1;flex-shrink:0;transition:background .15s;font-style:italic}
 .tip-btn:hover,.tip-btn.open{background:#2563eb;color:#fff}
-.tip-pop{display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1e293b;color:#e2e8f0;font-size:12px;font-weight:400;line-height:1.55;padding:9px 13px;border-radius:8px;width:250px;max-width:80vw;box-shadow:0 4px 18px rgba(0,0,0,.35);z-index:700;text-align:left;pointer-events:none;font-style:normal}
-.tip-pop::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#1e293b}
+.tip-pop{display:none;position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%);background:#1e293b;color:#cbd5e1;font-size:12px;font-weight:400;line-height:1.6;padding:12px 14px;border-radius:10px;width:290px;max-width:min(290px,90vw);box-shadow:0 6px 24px rgba(0,0,0,.4);z-index:9999;text-align:left;pointer-events:none;font-style:normal}
+.tip-pop::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:7px solid transparent;border-top-color:#1e293b}
+.tip-pop b{color:#93c5fd;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.4px}
+.tip-r{display:block}
+.tip-r+.tip-r{margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.1)}
 .tip-wrap.open .tip-pop{display:block}
+/* Garante que tooltip não saia da tela pela direita (mobile) */
+@media(max-width:400px){
+  .tip-pop{left:0;transform:none;max-width:calc(100vw - 24px)}
+  .tip-pop::after{left:20px;transform:none}
+}
 
 /* ANIMAÇÃO 80% */
 @keyframes celebrate80{0%{transform:scale(1)}25%{transform:scale(1.18)}60%{transform:scale(.93)}100%{transform:scale(1)}}
@@ -609,7 +617,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 
     <div class="row">
       <div class="fld">
-        <label>Raça/Cor <span class="req-star">⭐</span><span class="cn">[Campo 15]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">Raça/Cor (autodeclarada) é essencial para criar políticas públicas de proteção a grupos vulneráveis e para análise de desigualdades raciais na violência.</span></span></label>
+        <label>Raça/Cor <span class="req-star">⭐</span><span class="cn">[Campo 15]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Autodeclaração do paciente conforme as categorias do IBGE: Branca, Preta, Parda, Amarela ou Indígena. O profissional <u>não deve deduzir</u> — deve perguntar à própria pessoa.</span><span class="tip-r"><b>Por que informar:</b> Essencial para evidenciar o racismo estrutural e a vulnerabilidade desigual nos índices de violência.</span></span></span></label>
         <select id="f_raca" data-ess data-label="Raça/Cor">
           <option value="">— Selecione —</option>
           <option value="1">1 — Branca</option>
@@ -779,7 +787,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 
     <div class="row">
       <div class="fld">
-        <label>Orientação Sexual <span class="req-star">⭐</span><span class="cn">[Campo 36]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">Orientação sexual permite identificar violências por LGBTfobia e direcionar políticas específicas de proteção para esses grupos.</span></span></label>
+        <label>Orientação Sexual <span class="req-star">⭐</span><span class="cn">[Campo 36]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Por quem a pessoa sente atração afetiva ou sexual — Heterossexual, Homossexual (gay/lésbica), Bissexual etc. Independe de como ela se apresenta ou se veste.</span><span class="tip-r"><b>Por que informar:</b> Ajuda a identificar crimes de LGBTfobia e a direcionar o acolhimento e encaminhamento corretos.</span></span></span></label>
         <select id="f_or_sex" data-ess data-label="Orientação sexual">
           <option value="">— Selecione —</option>
           <option value="1">1 — Heterossexual</option>
@@ -790,7 +798,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
         </select>
       </div>
       <div class="fld">
-        <label>Identidade de Gênero <span class="req-star">⭐</span><span class="cn">[Campo 37]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">Identidade de gênero permite mapear violências transfóbicas e criar políticas de proteção para pessoas trans e travestis.</span></span></label>
+        <label>Identidade de Gênero <span class="req-star">⭐</span><span class="cn">[Campo 37]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Como a pessoa se reconhece e se apresenta ao mundo — Mulher Trans, Homem Trans, Travesti, Cisgênero etc. É independente do sexo biológico ao nascer.</span><span class="tip-r"><b>Por que informar:</b> Fundamental para mapear violências específicas contra a população trans e travesti e acionar redes de proteção adequadas.</span></span></span></label>
         <select id="f_id_gen" data-ess data-label="Identidade de gênero">
           <option value="">— Selecione —</option>
           <option value="1">1 — Travesti</option>
@@ -804,7 +812,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 
     <div class="row">
       <div class="fld">
-        <label>Possui Deficiência/Transtorno? <span class="cn">[Campo 38]</span></label>
+        <label>Possui Deficiência/Transtorno? <span class="cn">[Campo 38]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Impedimento de longo prazo de natureza física, mental, intelectual ou sensorial que dificulte a participação plena na sociedade em igualdade com os demais.</span><span class="tip-r"><b>Por que informar:</b> Garante o acionamento da rede de proteção social e de acessibilidade adequada — pessoas com deficiência são mais vulneráveis à violência e ao subregistro.</span></span></span></label>
         <div class="pills" id="grp_defic">
           <label class="pill" data-val="1"><input type="radio" name="defic" value="1"> Sim</label>
           <label class="pill" data-val="2"><input type="radio" name="defic" value="2"> Não</label>
