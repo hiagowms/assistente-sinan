@@ -1921,7 +1921,7 @@ var _globalMilestones = {25:false,50:false,80:false,100:false};
 var _celebrated80 = false;
 
 // IDs excluídos do progresso
-var PROG_EXCLUDE_IDS = {'f_num_notif':1,'f_compl_res':1,'f_pais_res':1,'f_acomp_nome':1,'f_acomp_vinc':1,'f_acomp_tel':1};
+var PROG_EXCLUDE_IDS = {'f_num_notif':1,'f_nome_social':1,'f_compl_res':1,'f_pais_res':1,'f_acomp_nome':1,'f_acomp_vinc':1,'f_acomp_tel':1};
 
 // Campos essenciais (⭐) — peso alto
 var ESS_IDS = {'f_data_notif':1,'f_data_ocorr':1,'f_tipo_un':1,'f_nome':1,'f_raca':1,'f_or_sex':1,'f_id_gen':1,'f_motiv':1,'f_data_enc':1,'f_mun_res':1};
@@ -1943,6 +1943,25 @@ function isElemVisible(el){
     node = node.parentElement;
   }
   return true;
+}
+
+// Calcula idade do paciente em anos (retorna null se não for possível)
+function getPatientAgeYears(){
+  var nascEl = document.getElementById('f_nasc');
+  if(nascEl && nascEl.value){
+    var nasc = new Date(nascEl.value + 'T00:00:00');
+    if(!isNaN(nasc)){
+      var today = new Date();
+      var age = today.getFullYear() - nasc.getFullYear();
+      var m = today.getMonth() - nasc.getMonth();
+      if(m < 0 || (m === 0 && today.getDate() < nasc.getDate())) age--;
+      return age;
+    }
+  }
+  var valEl = document.getElementById('f_idade_val');
+  var unEl  = document.getElementById('f_idade_un');
+  if(valEl && valEl.value && unEl && unEl.value === 'A') return parseInt(valEl.value, 10);
+  return null;
 }
 
 // Verifica se grupo (radio/checkbox) tem pelo menos um marcado
@@ -2010,10 +2029,13 @@ function updateProgress(){
 
   // --- Campos padrão (text/select, não essenciais, não excluídos) ---
   var stdEls = Array.from(document.querySelectorAll('input:not([type=radio]):not([type=checkbox]):not([type=hidden]),select'));
+  var _ageYrs = getPatientAgeYears();
+  var _skipOcup = _ageYrs !== null && _ageYrs < 14; // criança: sem campo de ocupação
   stdEls.forEach(function(el){
     if(PROG_EXCLUDE_IDS[el.id] || el.readOnly) return;
     if(ESS_IDS[el.id]) return; // já contou
     if(!isElemVisible(el)) return; // condicional oculto
+    if(el.id === 'f_ocupacao' && _skipOcup) return; // criança: ocupação não se aplica
     totalW += STD_W;
     if(el.value && el.value.trim()) filledW += STD_W;
   });
@@ -2053,7 +2075,7 @@ function updateProgress(){
   document.getElementById('prog-status').textContent = getStatusMsg(pct);
   document.getElementById('prog-count').textContent = getCountMsg(pct);
   var lvEl = document.getElementById('prog-level');
-  if(lvEl){ lvEl.textContent = level[0]; lvEl.style.background = level[2]+'30'; lvEl.style.color = pct>=80?'#fff':'rgba(255,255,255,.85)'; }
+  if(lvEl){ lvEl.textContent = level[1]; lvEl.style.background = level[2]+'30'; lvEl.style.color = pct>=80?'#fff':'rgba(255,255,255,.85)'; }
 
   // Progress bar strip
   var barFill = document.getElementById('prog-bar-fill');
@@ -2065,7 +2087,7 @@ function updateProgress(){
   var mobPct = document.getElementById('mob-prog-pct');
   if(mobPct) mobPct.textContent = pct+'%';
   var mobLabel = document.getElementById('mob-prog-label');
-  if(mobLabel) mobLabel.textContent = level[0];
+  if(mobLabel) mobLabel.textContent = level[1];
 
   // Milestone toasts
   [25,50].forEach(function(m){
@@ -2399,6 +2421,7 @@ var FAKE_PATIENTS = [
       f_mun_notif:"SAO PAULO",f_uf_notif:"SP",f_ibge_notif:"355030",
       f_nome:"JOAO PEDRO SOUZA SILVA",f_nasc:"2019-03-15",f_raca:"4",f_escol:"10",
       f_sus:"706012300000001",f_mae:"MARIA DA CONCEICAO SOUZA",
+      f_est_civil:"1",
       f_mun_res:"SAO PAULO",f_uf_res:"SP",f_ibge_res:"355030",
       f_bairro_res:"JARDIM BRASIL",f_logr_res:"RUA DAS FLORES",f_num_res:"45",
       f_cep:"02177-030",f_tel_res:"(11) 98765-1234",f_zona_res:"1",
@@ -2447,14 +2470,14 @@ var FAKE_PATIENTS = [
       f_mun_notif:"BELO HORIZONTE",f_uf_notif:"MG",f_ibge_notif:"310620",
       f_nome:"JOSE ANTONIO DA COSTA",f_nasc:"1952-11-08",f_raca:"1",f_escol:"3",
       f_sus:"706012300000003",f_mae:"CONCEICAO DA COSTA",
-      f_est_civil:"3",f_or_sex:"1",f_id_gen:"8",
+      f_est_civil:"3",f_ocupacao:"APOSENTADO/PENSIONISTA",f_or_sex:"1",f_id_gen:"8",
       f_mun_res:"BELO HORIZONTE",f_uf_res:"MG",f_ibge_res:"310620",
       f_bairro_res:"CENTRO",f_logr_res:"AVENIDA AFONSO PENA",f_num_res:"1500",
       f_compl_res:"APTO 203",f_cep:"30130-010",f_tel_res:"(31) 98765-5678",f_zona_res:"1",
       f_pref_res:"EM FRENTE AO TRIBUNAL DE JUSTICA DE MINAS GERAIS",
       f_mun_oc:"BELO HORIZONTE",f_uf_oc:"MG",f_bairro_oc:"CENTRO",
       f_logr_oc:"AVENIDA AFONSO PENA",f_num_oc:"1500",
-      f_zona_oc:"1",f_local_oc:"01",f_motiv:"06",f_ciclo:"5",
+      f_hora_oc:"14:00",f_zona_oc:"1",f_local_oc:"01",f_motiv:"06",f_ciclo:"5",
       f_cid10:"T74.3",
       f_acomp_nome:"ANTONIO DA COSTA JUNIOR",f_acomp_vinc:"FILHO",f_acomp_tel:"(31) 97654-3210",
       f_data_enc:"2025-04-03"
@@ -2471,7 +2494,7 @@ var FAKE_PATIENTS = [
       f_mun_notif:"SALVADOR",f_uf_notif:"BA",f_ibge_notif:"292740",
       f_nome:"BEATRIZ OLIVEIRA SANTOS",f_nasc:"2009-04-30",f_raca:"2",f_escol:"4",f_gest:"9",
       f_sus:"706012300000004",f_mae:"CLAUDIA SANTOS",
-      f_est_civil:"1",f_or_sex:"1",f_id_gen:"8",
+      f_est_civil:"1",f_ocupacao:"ESTUDANTE",f_or_sex:"1",f_id_gen:"8",
       f_mun_res:"SALVADOR",f_uf_res:"BA",f_ibge_res:"292740",
       f_bairro_res:"LIBERDADE",f_logr_res:"RUA JOAO DAS BOTAS",f_num_res:"82",
       f_compl_res:"CASA FUNDO",f_cep:"40200-025",f_tel_res:"(71) 99876-2345",f_zona_res:"1",
@@ -2541,14 +2564,14 @@ var FAKE_PATIENTS = [
       f_mun_notif:"PORTO ALEGRE",f_uf_notif:"RS",f_ibge_notif:"431490",
       f_nome:"MATHEUS RODRIGUES GOMES",f_nasc:"2015-08-10",f_raca:"1",f_escol:"10",
       f_sus:"706012300000007",f_mae:"TATIANA GOMES",
-      f_or_sex:"8",f_id_gen:"8",
+      f_est_civil:"1",f_or_sex:"8",f_id_gen:"8",
       f_mun_res:"PORTO ALEGRE",f_uf_res:"RS",f_ibge_res:"431490",
       f_bairro_res:"CRUZEIRO DO SUL",f_logr_res:"RUA IPIRANGA",f_num_res:"234",
       f_compl_res:"APTO 12",f_cep:"91150-040",f_tel_res:"(51) 99345-6789",f_zona_res:"1",
       f_pref_res:"PROXIMO A CRECHE MUNICIPAL TURMA DO BAIRRO",
       f_mun_oc:"PORTO ALEGRE",f_uf_oc:"RS",f_bairro_oc:"CRUZEIRO DO SUL",
       f_logr_oc:"RUA IPIRANGA",f_num_oc:"234",
-      f_zona_oc:"1",f_local_oc:"01",f_motiv:"06",f_ciclo:"4",
+      f_hora_oc:"20:00",f_zona_oc:"1",f_local_oc:"01",f_motiv:"06",f_ciclo:"4",
       f_cid10:"T74.1",
       f_acomp_nome:"TATIANA GOMES",f_acomp_vinc:"MAE",f_acomp_tel:"(51) 99345-6789",
       f_data_enc:"2025-03-15"
@@ -2588,14 +2611,14 @@ var FAKE_PATIENTS = [
       f_mun_notif:"MANAUS",f_uf_notif:"AM",f_ibge_notif:"130260",
       f_nome:"CONCEICAO APARECIDA PEREIRA",f_nasc:"1944-12-01",f_raca:"4",f_escol:"0",f_gest:"6",
       f_sus:"706012300000009",f_mae:"SEBASTIANA PEREIRA",
-      f_est_civil:"3",f_or_sex:"1",f_id_gen:"8",
+      f_est_civil:"3",f_ocupacao:"APOSENTADO/PENSIONISTA",f_or_sex:"1",f_id_gen:"8",
       f_mun_res:"MANAUS",f_uf_res:"AM",f_ibge_res:"130260",
       f_bairro_res:"COMPENSA",f_logr_res:"RUA FLORIANO PEIXOTO",f_num_res:"78",
       f_cep:"69036-010",f_tel_res:"(92) 98654-3210",f_zona_res:"1",
       f_pref_res:"PROXIMO AO MERCADINHO ESPERANCA",
       f_mun_oc:"MANAUS",f_uf_oc:"AM",f_bairro_oc:"COMPENSA",
       f_logr_oc:"RUA FLORIANO PEIXOTO",f_num_oc:"78",
-      f_zona_oc:"1",f_local_oc:"01",f_motiv:"06",f_ciclo:"5",
+      f_hora_oc:"09:00",f_zona_oc:"1",f_local_oc:"01",f_motiv:"06",f_ciclo:"5",
       f_cid10:"T74.0",
       f_acomp_nome:"IRACI PEREIRA DOS SANTOS",f_acomp_vinc:"VIZINHA",f_acomp_tel:"(92) 98765-4321",
       f_data_enc:"2025-02-14"
@@ -2745,8 +2768,7 @@ function carregarPaciente(idx){
   Object.keys(p.radios||{}).forEach(function(name){ _setRadio(name, p.radios[name]); });
   Object.keys(p.checks||{}).forEach(function(name){ _setChecks(name, p.checks[name]); });
   _applyVisibility();
-  updateProgress();
-  // Re-aplica nomes de município (podem ter sido apagados pelo handler de change da UF)
+  // Re-aplica nomes de município ANTES de updateProgress (handler de change da UF apaga o mun)
   ['notif','res','oc'].forEach(function(suf){
     var id = 'f_mun_' + suf;
     if(p.fields && p.fields[id]){
@@ -2756,6 +2778,7 @@ function carregarPaciente(idx){
   });
   // Fecha todos os dropdowns de autocomplete abertos durante o preenchimento
   document.querySelectorAll('.ac-drop').forEach(function(d){ d.innerHTML=''; d.classList.remove('show'); });
+  updateProgress(); // depois da re-aplicação, com todos os valores corretos
   // Define hint de CBO se o campo de ocupação foi preenchido
   var ocEl = document.getElementById('f_ocupacao');
   var ocHint = document.getElementById('f_ocupacao_hint');
