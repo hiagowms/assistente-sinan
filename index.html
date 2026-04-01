@@ -182,9 +182,116 @@ footer a{color:#1a5276;text-decoration:none}
   footer{padding:16px 18px}
   footer p{font-size:11px}
 }
+
+/*==============================================================
+  DARK MODE TOGGLE
+==============================================================*/
+.dm-toggle{background:none;border:1.5px solid rgba(255,255,255,.25);color:rgba(255,255,255,.85);width:34px;height:34px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,border-color .2s;padding:0;margin-left:auto}
+.dm-toggle:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.45)}
+.dm-toggle svg{width:18px;height:18px}
+.dm-toggle .ico-sun{display:none}
+.dm-toggle .ico-moon{display:block}
+
+/*==============================================================
+  DARK MODE — [data-theme="dark"]
+==============================================================*/
+[data-theme="dark"]{
+  --bg:       #0f1117;
+  --bg-card:  #1a1d27;
+  --bg-card2: #222633;
+  --bg-input: #1e2130;
+  --border:   #2d3348;
+  --text:     #e2e4eb;
+  --text2:    #9ea3b5;
+  --text3:    #6b7190;
+  --accent:   #3b82f6;
+  --accent-bg:rgba(59,130,246,.12);
+  --green:    #22c55e;
+  --warn-bg:  #2a2518;
+  --warn-border:#5c4a1e;
+  --warn-text:#d4a017;
+}
+[data-theme="dark"] .dm-toggle .ico-sun{display:block}
+[data-theme="dark"] .dm-toggle .ico-moon{display:none}
+
+[data-theme="dark"] body{background:var(--bg);color:var(--text)}
+
+/* Header — mantém gradiente */
+[data-theme="dark"] #hdr{box-shadow:0 4px 20px rgba(0,0,0,.5)}
+
+/* Disclaimer */
+[data-theme="dark"] .disclaimer{background:var(--warn-bg);border-bottom-color:var(--warn-border)}
+[data-theme="dark"] .disclaimer-inner{color:var(--warn-text)}
+[data-theme="dark"] .disclaimer strong{color:#eab308}
+[data-theme="dark"] .disclaimer-icon{color:#eab308}
+
+/* About/Legal boxes */
+[data-theme="dark"] .about-box{background:var(--bg-card);border-color:var(--border);box-shadow:0 1px 6px rgba(0,0,0,.2)}
+[data-theme="dark"] .about-box h2{color:var(--text)}
+[data-theme="dark"] .about-box h2::before{background:linear-gradient(180deg,#3b82f6,#22c55e)}
+[data-theme="dark"] .about-box p{color:var(--text2)}
+[data-theme="dark"] .chip-green{background:#0f2818;color:#4ade80;border-color:#1a4028}
+[data-theme="dark"] .chip-blue{background:#0f1a30;color:#60a5fa;border-color:#1a2e50}
+[data-theme="dark"] .chip-yellow{background:#2a2518;color:#eab308;border-color:#5c4a1e}
+[data-theme="dark"] .chip-purple{background:#1a152e;color:#a78bfa;border-color:#2e2550}
+[data-theme="dark"] .legal-box{background:var(--bg-card);border-color:var(--border);box-shadow:0 1px 6px rgba(0,0,0,.2)}
+[data-theme="dark"] .legal-icon{color:#60a5fa}
+[data-theme="dark"] .legal-box h3{color:var(--text)}
+[data-theme="dark"] .legal-box p{color:var(--text2)}
+[data-theme="dark"] .legal-box a{color:#60a5fa}
+
+/* Section title */
+[data-theme="dark"] .sec-title{color:var(--text3)}
+[data-theme="dark"] .sec-title::after{background:var(--border)}
+
+/* Cards */
+[data-theme="dark"] .card{background:var(--bg-card);border-color:var(--border);box-shadow:0 1px 4px rgba(0,0,0,.15)}
+[data-theme="dark"] .card.active:hover{box-shadow:0 6px 22px rgba(0,0,0,.3)}
+[data-theme="dark"] .card-title{color:var(--text)}
+[data-theme="dark"] .card-title.dim{color:var(--text3)}
+[data-theme="dark"] .status-active{background:#0f2818;color:#4ade80;border-color:#1a4028}
+[data-theme="dark"] .status-wip{background:#1a152e;color:#a78bfa;border-color:#2e2550}
+[data-theme="dark"] .status-noficha{background:#2a1a0f;color:#fb923c;border-color:#5c3a1e}
+[data-theme="dark"] details.def summary{color:var(--text3)}
+[data-theme="dark"] details.def summary:hover{color:#60a5fa}
+[data-theme="dark"] .def-text{background:var(--bg-card2);color:var(--text2);border-left-color:var(--border)}
+[data-theme="dark"] details.def{border-top-color:var(--border)}
+
+/* Card actions */
+[data-theme="dark"] .card-actions{border-top-color:var(--border)}
+[data-theme="dark"] .btn-download{background:var(--bg-card2);color:#60a5fa;border-color:var(--border)}
+[data-theme="dark"] .btn-download:hover{background:var(--accent-bg)}
+[data-theme="dark"] .btn-wip{background:#1a152e;color:#8b7ec8;border-color:#2e2550}
+[data-theme="dark"] .btn-noficha{background:#2a1a0f;color:#c08040;border-color:#5c3a1e}
+
+/* Footer */
+[data-theme="dark"] footer{background:var(--bg-card);border-top-color:var(--border)}
+[data-theme="dark"] footer p{color:var(--text3)}
+[data-theme="dark"] footer strong{color:var(--text2)}
+[data-theme="dark"] footer a{color:#60a5fa}
 </style>
 </head>
 <body>
+<script>
+// Dark Mode — aplica antes do paint para evitar flash
+(function(){
+  var stored = localStorage.getItem('sinan-theme');
+  var theme;
+  if(stored === 'dark' || stored === 'light'){
+    theme = stored;
+  } else {
+    theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  if(theme === 'dark') document.documentElement.setAttribute('data-theme','dark');
+})();
+function toggleDarkMode(){
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  var next = isDark ? 'light' : 'dark';
+  if(next === 'dark') document.documentElement.setAttribute('data-theme','dark');
+  else document.documentElement.removeAttribute('data-theme');
+  localStorage.setItem('sinan-theme', next);
+}
+</script>
 
 <header id="hdr">
   <div class="hdr-inner">
@@ -195,6 +302,10 @@ footer a{color:#1a5276;text-decoration:none}
       <p>Apoio ao preenchimento das fichas de notificação compulsória de interesse em Saúde do Trabalhador</p>
       <span class="pet-chip">PET Saúde Digital — Programa de Educação pelo Trabalho para a Saúde</span>
     </div>
+    <button class="dm-toggle" id="dm-toggle" onclick="toggleDarkMode()" title="Alternar modo escuro">
+      <svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+      <svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
   </div>
 </header>
 

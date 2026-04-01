@@ -197,16 +197,15 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 .ac-item b{color:#2563eb}
 .fld input[readonly]{background:#f3f4f6;color:#6b7280;cursor:default}
 
-/* ⭐ CAMPO ESSENCIAL (substitui asterisco vermelho) */
-.req-star{color:#d97706;font-size:13px;line-height:1;vertical-align:middle;margin-left:1px}
-.sublabel .req-star{font-size:13px;margin-left:2px}
+/* ⭐ CAMPO ESSENCIAL — discreto */
+.req-star{color:#d97706;font-size:10px;line-height:1;vertical-align:middle;margin-left:2px;opacity:.7;cursor:help;position:relative}
+.sublabel .req-star{font-size:10px;margin-left:3px}
+/* Tooltip "Campo essencial" ao hover/foco na estrela */
+.req-star::after{content:'Campo essencial';position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#1e293b;color:#cbd5e1;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;z-index:9999;box-shadow:0 3px 12px rgba(0,0,0,.3)}
+.req-star:hover::after,.req-star:focus::after{opacity:1}
 /* Ocultar estilos antigos de obrigatório */
 .fld label .req{display:none!important}
 .sublabel .req-mark{display:none!important}
-
-/* LEGENDA DOS CAMPOS ESSENCIAIS */
-.legend-ess{background:linear-gradient(135deg,#fffbeb,#fef3c7);border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:#92400e;line-height:1.6;display:flex;gap:10px;align-items:flex-start}
-.legend-ess .leg-ico{font-size:18px;flex-shrink:0;line-height:1.3}
 
 /* NÍVEL DE PROGRESSO */
 .prog-level{font-size:11px;font-weight:800;padding:3px 10px;border-radius:12px;background:rgba(255,255,255,.13);color:rgba(255,255,255,.85);white-space:nowrap;transition:all .5s;letter-spacing:.3px;margin-top:4px;display:inline-block}
@@ -402,9 +401,170 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
     background:#8fb8a0;box-shadow:none;cursor:not-allowed
   }
 }
+
+/*==============================================================
+  DARK MODE TOGGLE
+==============================================================*/
+.dm-toggle{background:none;border:1.5px solid rgba(255,255,255,.25);color:rgba(255,255,255,.85);width:34px;height:34px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,border-color .2s;padding:0}
+.dm-toggle:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.45)}
+.dm-toggle svg{width:18px;height:18px}
+.dm-toggle .ico-sun{display:none}
+.dm-toggle .ico-moon{display:block}
+
+/*==============================================================
+  DARK MODE — [data-theme="dark"]
+==============================================================*/
+[data-theme="dark"]{
+  --bg:       #0f1117;
+  --bg-card:  #1a1d27;
+  --bg-card2: #222633;
+  --bg-input: #1e2130;
+  --border:   #2d3348;
+  --text:     #e2e4eb;
+  --text2:    #9ea3b5;
+  --text3:    #6b7190;
+  --accent:   #3b82f6;
+  --accent-bg:rgba(59,130,246,.12);
+  --green:    #22c55e;
+  --red:      #ef4444;
+  --yellow:   #eab308;
+  --warn-bg:  #2a2518;
+  --warn-border:#5c4a1e;
+  --warn-text:#d4a017;
+  --danger-bg:#2d1a1a;
+  --danger-border:#6b2a2a;
+  --danger-text:#f87171;
+}
+[data-theme="dark"] .dm-toggle .ico-sun{display:block}
+[data-theme="dark"] .dm-toggle .ico-moon{display:none}
+
+[data-theme="dark"] body{background:var(--bg);color:var(--text)}
+
+/* Header — mantém gradiente mas ajusta opacidade */
+[data-theme="dark"] #hdr{box-shadow:0 4px 20px rgba(0,0,0,.5)}
+[data-theme="dark"] #prog-bar-strip{background:rgba(255,255,255,.06)}
+
+/* Tools bar */
+[data-theme="dark"] #tools-bar{background:var(--bg-card);border-bottom-color:var(--border)}
+[data-theme="dark"] .tools-label{color:var(--text3)}
+[data-theme="dark"] .tb-sep{background:var(--border)}
+[data-theme="dark"] .tb-btn{color:var(--text2)}
+[data-theme="dark"] .tb-btn:hover{background:var(--bg-card2);color:var(--accent);border-color:var(--border)}
+[data-theme="dark"] #btn-pac-menu{background:var(--accent-bg)!important;border-color:rgba(59,130,246,.3)!important;color:#93c5fd!important}
+[data-theme="dark"] .tb-danger{color:#f87171}
+[data-theme="dark"] .tb-danger:hover{background:var(--danger-bg);color:#fca5a5;border-color:var(--danger-border)}
+
+/* Sections */
+[data-theme="dark"] .sec{background:var(--bg-card);border-color:var(--border);box-shadow:0 2px 12px rgba(0,0,0,.2)}
+[data-theme="dark"] .sec-hdr{border-bottom-color:var(--border);border-left-color:var(--text3)}
+[data-theme="dark"] .sec.done .sec-hdr{border-left-color:var(--green);background:linear-gradient(90deg,rgba(34,197,94,.06) 0%,transparent 60%)}
+[data-theme="dark"] .sec.partial .sec-hdr{border-left-color:var(--yellow);background:linear-gradient(90deg,rgba(234,179,8,.06) 0%,transparent 60%)}
+[data-theme="dark"] .sec-info h3{color:var(--text)}
+[data-theme="dark"] .sec-info p{color:var(--text3)}
+[data-theme="dark"] .badge-empty{background:var(--bg-card2);color:var(--text3)}
+[data-theme="dark"] .badge-partial{background:#2a2518;color:#eab308}
+[data-theme="dark"] .badge-done{background:#162816;color:#4ade80}
+
+/* Form elements */
+[data-theme="dark"] .fld label{color:var(--text2)}
+[data-theme="dark"] .fld label .cn{color:var(--text3)}
+[data-theme="dark"] .fld input,[data-theme="dark"] .fld select,[data-theme="dark"] .fld textarea{background:var(--bg-input);border-color:var(--border);color:var(--text)}
+[data-theme="dark"] .fld input:focus,[data-theme="dark"] .fld select:focus,[data-theme="dark"] .fld textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,130,246,.15)}
+[data-theme="dark"] .fld input.filled{border-color:var(--green)}
+[data-theme="dark"] .fld input[readonly]{background:var(--bg-card2);color:var(--text3)}
+[data-theme="dark"] .fld select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236b7190'/%3E%3C/svg%3E")}
+[data-theme="dark"] .sublabel{color:var(--text2);border-bottom-color:var(--border)}
+
+/* Pills */
+[data-theme="dark"] .pill{background:var(--bg-card2);border-color:var(--border);color:var(--text2)}
+[data-theme="dark"] .pill:hover{border-color:var(--accent);background:var(--accent-bg)}
+[data-theme="dark"] .pill.checked{border-color:var(--accent);background:var(--accent-bg);color:#93c5fd}
+[data-theme="dark"] .pill.checked-danger{border-color:#dc2626;background:var(--danger-bg);color:#fca5a5}
+
+/* Info/warn/danger boxes */
+[data-theme="dark"] .info{background:var(--accent-bg);border-color:rgba(59,130,246,.25);color:#93c5fd}
+[data-theme="dark"] .warn{background:var(--warn-bg);border-color:var(--warn-border);color:var(--warn-text)}
+[data-theme="dark"] .banner-warn{background:var(--warn-bg);border-color:var(--warn-border);color:var(--warn-text)}
+[data-theme="dark"] .banner-warn strong{color:#eab308}
+[data-theme="dark"] .danger-alert{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger-text)}
+[data-theme="dark"] .intro{background:var(--bg-card);border-color:var(--border);color:var(--text2)}
+[data-theme="dark"] .intro h2{color:var(--text)}
+[data-theme="dark"] .intro a{color:#60a5fa}
+
+/* Autocomplete */
+[data-theme="dark"] .ac-drop{background:var(--bg-card);border-color:var(--accent)}
+[data-theme="dark"] .ac-item{color:var(--text);border-bottom-color:var(--border)}
+[data-theme="dark"] .ac-item:hover,[data-theme="dark"] .ac-item.focused{background:var(--accent-bg)}
+[data-theme="dark"] .ac-item.ac-synonym{background:#2a2518;border-left-color:#eab308}
+[data-theme="dark"] .ac-item b{color:#60a5fa}
+
+/* Tooltips */
+[data-theme="dark"] .tip-btn{background:var(--border);color:var(--text3)}
+[data-theme="dark"] .tip-btn:hover,[data-theme="dark"] .tip-btn.open{background:var(--accent);color:#fff}
+
+/* Modals */
+[data-theme="dark"] .modal{background:var(--bg-card);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+[data-theme="dark"] .modal h2{color:var(--text)}
+[data-theme="dark"] .modal p{color:var(--text2)}
+[data-theme="dark"] .err-item{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger-text)}
+[data-theme="dark"] .mbtn-s{background:var(--bg-card2);color:var(--text2)}
+[data-theme="dark"] .ov{background:rgba(0,0,0,.7)}
+
+/* Confirm modal */
+[data-theme="dark"] .cm-box{background:var(--bg-card)}
+[data-theme="dark"] .cm-box h3{color:var(--text)}
+[data-theme="dark"] .cm-box p{color:var(--text2)}
+[data-theme="dark"] .cm-icon{background:var(--danger-bg)}
+[data-theme="dark"] .cm-cancel{background:var(--bg-card2);color:var(--text2)}
+
+/* Toast */
+[data-theme="dark"] #toast{background:#2d3348;box-shadow:0 8px 28px rgba(0,0,0,.4)}
+
+/* Bottom sheet */
+[data-theme="dark"] #pac-mob-panel{background:var(--bg-card)}
+[data-theme="dark"] #pac-mob-panel .tb-menu-hdr{background:var(--bg-card2);color:var(--text3);border-bottom-color:var(--border)}
+[data-theme="dark"] #pac-mob-panel .tb-mi{color:var(--text);border-bottom-color:var(--border)}
+[data-theme="dark"] #pac-mob-panel .tb-mi:hover{background:var(--accent-bg);color:#93c5fd}
+[data-theme="dark"] #pac-mob-panel .tb-mi-sub{color:var(--text3)}
+
+/* Desktop dropdown menu */
+[data-theme="dark"] .tb-menu{background:var(--bg-card);border-color:var(--border);box-shadow:0 8px 28px rgba(0,0,0,.4)}
+[data-theme="dark"] .tb-menu-hdr{background:var(--bg-card2);color:var(--text3);border-bottom-color:var(--border)}
+[data-theme="dark"] .tb-mi{color:var(--text);border-bottom-color:var(--border)}
+[data-theme="dark"] .tb-mi:hover{background:var(--accent-bg);color:#93c5fd}
+[data-theme="dark"] .tb-mi-sub{color:var(--text3)}
+
+/* Mobile bottom bar */
+[data-theme="dark"] #mob-bottom{background:var(--bg-card);border-top-color:var(--border);box-shadow:0 -4px 20px rgba(0,0,0,.3)}
+[data-theme="dark"] #mob-back-btn{color:var(--text2);border-color:var(--border);background:var(--bg-card2)}
+[data-theme="dark"] #mob-prog-pct{color:var(--text)}
+[data-theme="dark"] #mob-prog-label{color:var(--text3)}
+
+/* Star tooltip in dark mode */
+[data-theme="dark"] .req-star::after{background:#334155;color:#e2e4eb}
 </style>
 </head>
 <body>
+<script>
+// Dark Mode — aplica antes do paint para evitar flash
+(function(){
+  var stored = localStorage.getItem('sinan-theme');
+  var theme;
+  if(stored === 'dark' || stored === 'light'){
+    theme = stored;
+  } else {
+    theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  if(theme === 'dark') document.documentElement.setAttribute('data-theme','dark');
+})();
+function toggleDarkMode(){
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  var next = isDark ? 'light' : 'dark';
+  if(next === 'dark') document.documentElement.setAttribute('data-theme','dark');
+  else document.documentElement.removeAttribute('data-theme');
+  localStorage.setItem('sinan-theme', next);
+}
+</script>
 
 <!-- ===== STICKY HEADER ===== -->
 <header id="hdr">
@@ -436,6 +596,10 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 
     <button class="hdr-btn" id="btn-gerar" onclick="gerarPDF()">📄 Gerar PDF</button>
     <a class="hdr-back" href="index.html">&#8592; Menu</a>
+    <button class="dm-toggle" id="dm-toggle" onclick="toggleDarkMode()" title="Alternar modo escuro">
+      <svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+      <svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
   </div>
 </header>
 <div id="prog-bar-strip"><div id="prog-bar-fill"></div></div>
@@ -480,11 +644,6 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
   <div><strong>Ferramenta NÃO oficial.</strong> Gera uma ficha impressa adaptada do SINAN para facilitar o preenchimento. As informações aqui inseridas <strong>não são enviadas a nenhum sistema</strong> — a digitação posterior no <strong>SINAN NET</strong> permanece obrigatória para registro oficial no Ministério da Saúde.</div>
 </div>
 
-<!-- LEGENDA ⭐ -->
-<div class="legend-ess">
-  <span class="leg-ico">⭐</span>
-  <div><strong>Campos essenciais para o SINAN</strong> — Campos marcados com ⭐ são os mais importantes para a qualidade do registro epidemiológico. Preencha-os aqui para poupar tempo, ou termine de preencher diretamente no PDF gerado. <strong>Você pode baixar o PDF a qualquer momento</strong> — mesmo com campos em branco.</div>
-</div>
 
 <!-- =========================================================
   SEÇÃO 1 — DADOS DA NOTIFICAÇÃO
@@ -778,11 +937,11 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 
     <div class="row">
       <div class="fld">
-        <label>Nome Social <span class="cn">[C.33]</span></label>
+        <label>Nome Social <span class="cn">[C.33]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Nome pelo qual a pessoa se identifica e prefere ser chamada socialmente, diferente do nome civil registrado em cartório. Deve ser respeitado independentemente de retificação documental.</span><span class="tip-r"><b>Por que informar:</b> Garante acolhimento respeitoso e evita constrangimento no atendimento. Também permite identificar barreiras de acesso à saúde enfrentadas pela população trans e travesti.</span></span></span></label>
         <input type="text" id="f_nome_social" data-caps placeholder="Se diferente do nome civil">
       </div>
       <div class="fld col-2">
-        <label>Ocupação (CBO) <span class="cn">[C.34]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">Informar a ocupação ajuda o SUS a mapear e prevenir violências no ambiente de trabalho, e orienta políticas de proteção ao trabalhador.</span></span></label>
+        <label>Ocupação (CBO) <span class="cn">[C.34]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> A atividade profissional exercida pela vítima, classificada segundo a CBO (Classificação Brasileira de Ocupações). Pode digitar o nome popular ou o código — o sistema busca automaticamente, inclusive sinônimos.</span><span class="tip-r"><b>Por que informar:</b> Permite ao SUS mapear violências no ambiente de trabalho, identificar categorias profissionais mais vulneráveis e direcionar políticas de proteção ao trabalhador.</span></span></span></label>
         <div class="ac-wrap">
           <input type="text" id="f_ocupacao" data-caps autocomplete="off" placeholder="Nome ou código CBO (ex: ENFERMEIRO, 223505)">
           <div class="ac-drop" id="f_ocupacao-drop"></div>
@@ -949,7 +1108,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
         </div>
       </div>
       <div class="fld">
-        <label>Lesão autoprovocada? <span class="req-star">⭐</span><span class="cn">[Campo 54]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">Lesão autoprovocada exige notificação em 24h e aciona protocolos específicos de saúde mental e suicidologia do SUS.</span></span></label>
+        <label>Lesão autoprovocada? <span class="req-star">⭐</span><span class="cn">[Campo 54]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Lesão ou dano que a pessoa causou a si mesma, intencionalmente — inclui tentativa de suicídio, automutilação e autoagressão.</span><span class="tip-r"><b>Por que informar:</b> Caso de notificação imediata (24h). Aciona protocolos de saúde mental, suicidologia e acompanhamento psicossocial do SUS. Dado essencial para políticas de prevenção ao suicídio.</span></span></span></label>
         <div class="pills" id="grp_auto_prov">
           <label class="pill" data-val="1"><input type="radio" name="auto_prov" value="1" onchange="onAutoProv()"> Sim</label>
           <label class="pill" data-val="2"><input type="radio" name="auto_prov" value="2" onchange="onAutoProv()"> Não</label>
@@ -982,7 +1141,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
     <!-- C55 — Motivação -->
     <div class="row row-wide">
       <div class="fld col-2">
-        <label>Motivação (perspectiva da vítima) <span class="req-star">⭐</span><span class="cn">[Campo 55]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">A motivação da violência direciona políticas de prevenção específicas — racismo, LGBTfobia, violência de gênero etc. Preencha conforme o relato da vítima.</span></span></label>
+        <label>Motivação (perspectiva da vítima) <span class="req-star">⭐</span><span class="cn">[Campo 55]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> A razão percebida pela própria vítima para a violência sofrida — sexismo, racismo, LGBTfobia, intolerância religiosa, xenofobia, entre outras. Deve refletir o relato do paciente, não a interpretação do profissional.</span><span class="tip-r"><b>Por que informar:</b> Direciona políticas de prevenção específicas e permite dimensionar violências motivadas por preconceito e discriminação nos indicadores nacionais.</span></span></span></label>
         <div class="info" style="margin-bottom:6px"><span class="ico">💡</span><div>Preencha conforme o <strong>relato da própria vítima</strong>.</div></div>
         <select id="f_motiv" data-ess data-label="Motivação da violência">
           <option value="">— Selecione —</option>
