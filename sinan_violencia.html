@@ -139,6 +139,10 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 .sublabel{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:#4b5563;padding:16px 0 10px;border-bottom:1px solid #e5e7eb;margin-bottom:14px;display:flex;align-items:center;gap:6px}
 .sublabel .req-mark{color:#c0392b;font-size:14px;font-weight:700}
 
+/* Botão copiar data */
+.btn-copy-date{padding:9px 14px;background:#eff6ff;border:1.5px solid #e5e7eb;border-radius:8px;font-size:12px;font-weight:700;color:#2563eb;cursor:pointer;white-space:nowrap;transition:background .15s,border-color .15s}
+.btn-copy-date:hover{background:#dbeafe;border-color:#93c5fd}
+
 /*==============================================================
   PILLS (radio / checkbox)
 ==============================================================*/
@@ -474,6 +478,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 [data-theme="dark"] .fld input[readonly]{background-color:var(--bg-card2);color:var(--text3)}
 [data-theme="dark"] .fld select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236b7190'/%3E%3C/svg%3E")}
 [data-theme="dark"] .sublabel{color:var(--text2);border-bottom-color:var(--border)}
+[data-theme="dark"] .btn-copy-date{background:var(--accent-bg);border-color:rgba(59,130,246,.3);color:#60a5fa}
+[data-theme="dark"] .btn-copy-date:hover{background:rgba(59,130,246,.2);border-color:rgba(59,130,246,.5)}
 
 /* Pills */
 [data-theme="dark"] .pill{background:var(--bg-card2);border-color:var(--border);color:var(--text2)}
@@ -1389,9 +1395,7 @@ function toggleDarkMode(){
       </div>
       <div class="fld" style="justify-content:flex-end">
         <label style="opacity:0;user-select:none">.</label>
-        <button onclick="copiarDataNotif()" style="padding:9px 14px;background:#eff6ff;border:1.5px solid #e5e7eb;border-radius:8px;font-size:12px;font-weight:700;color:#2563eb;cursor:pointer;white-space:nowrap">
-          = Copiar data da notificação
-        </button>
+        <button class="btn-copy-date" onclick="copiarDataNotif()">= Copiar data da notificação</button>
       </div>
     </div>
     <div class="info"><span class="ico">ℹ️</span><div>A <strong>data de encerramento (Campo 69)</strong> geralmente coincide com a <strong>data da notificação</strong>.</div></div>
@@ -1917,7 +1921,7 @@ var _globalMilestones = {25:false,50:false,80:false,100:false};
 var _celebrated80 = false;
 
 // IDs excluídos do progresso
-var PROG_EXCLUDE_IDS = {'f_num_notif':1,'f_acomp_nome':1,'f_acomp_vinc':1,'f_acomp_tel':1};
+var PROG_EXCLUDE_IDS = {'f_num_notif':1,'f_compl_res':1,'f_pais_res':1,'f_acomp_nome':1,'f_acomp_vinc':1,'f_acomp_tel':1};
 
 // Campos essenciais (⭐) — peso alto
 var ESS_IDS = {'f_data_notif':1,'f_data_ocorr':1,'f_tipo_un':1,'f_nome':1,'f_raca':1,'f_or_sex':1,'f_id_gen':1,'f_motiv':1,'f_data_enc':1,'f_mun_res':1};
