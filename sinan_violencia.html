@@ -1962,6 +1962,20 @@ function getStatusMsg(pct){
   return msg;
 }
 
+var COUNT_MSGS = [
+  [0,  'Comece pelos campos marcados com ⭐ — são os mais importantes'],
+  [1,  'Priorize os campos essenciais ⭐ para um registro de qualidade'],
+  [26, 'Cada detalhe fortalece a vigilância epidemiológica'],
+  [51, 'Você está construindo um registro de qualidade'],
+  [80, 'Parabéns pelo cuidado — o registro está quase completo!'],
+  [100,'Ficha exemplar — obrigado pelo compromisso com a saúde!']
+];
+function getCountMsg(pct){
+  var msg = COUNT_MSGS[0][1];
+  for(var i=0;i<COUNT_MSGS.length;i++){ if(pct>=COUNT_MSGS[i][0]) msg=COUNT_MSGS[i][1]; }
+  return msg;
+}
+
 // Nível de progresso
 var PROG_LEVELS = [
   [0,  'Ficha Inicial',  '#9ca3af'],
@@ -2037,7 +2051,7 @@ function updateProgress(){
   // Text + level name
   document.getElementById('prog-pct').textContent = pct+'%';
   document.getElementById('prog-status').textContent = getStatusMsg(pct);
-  document.getElementById('prog-count').textContent = essFilled+'/'+essTotal+' essenciais · '+allFilled+' campos';
+  document.getElementById('prog-count').textContent = getCountMsg(pct);
   var lvEl = document.getElementById('prog-level');
   if(lvEl){ lvEl.textContent = level[0]; lvEl.style.background = level[2]+'30'; lvEl.style.color = pct>=80?'#fff':'rgba(255,255,255,.85)'; }
 
@@ -2085,12 +2099,10 @@ function updateSectionBadges(){
     var badge = document.getElementById('badge'+s);
     if(!secEl||!badge) continue;
 
-    // Contagem de campos essenciais da seção
     var essFlds = secEl.querySelectorAll('[data-ess]');
     var essFilled=0;
     essFlds.forEach(function(el){ if(el.value&&el.value.trim()) essFilled++; });
 
-    // Contagem de TODOS os campos da seção (exclui IDs fora de escopo e ocultos)
     var allInSec = Array.from(secEl.querySelectorAll('input:not([type=radio]):not([type=checkbox]):not([type=hidden]),select'))
       .filter(function(el){ return !PROG_EXCLUDE_IDS[el.id] && !el.readOnly && isElemVisible(el); });
     var allFilled=0;
@@ -2117,7 +2129,7 @@ function updateSectionBadges(){
       secEl.classList.remove('partial');
       secEl.classList.add('done');
     } else if(essDone && allFilled>0){
-      badge.textContent = '⭐ Ess. OK · '+allFilled+'/'+allTotal;
+      badge.textContent = '⭐ Essenciais OK';
       badge.className = 'sec-badge badge-done';
       if(!_sectionMilestones[s]){
         _sectionMilestones[s]=true;
@@ -2126,13 +2138,13 @@ function updateSectionBadges(){
       secEl.classList.remove('partial');
       secEl.classList.add('done');
     } else if(allFilled>0){
-      badge.textContent = allFilled+'/'+allTotal+' campos';
+      badge.textContent = 'Em andamento';
       badge.className = 'sec-badge badge-partial';
       _sectionMilestones[s]=false;
       secEl.classList.remove('done');
       secEl.classList.add('partial');
     } else {
-      badge.textContent = essFlds.length>0?(essFlds.length+' essencial'+(essFlds.length>1?'is':'')):'Não iniciado';
+      badge.textContent = '—';
       badge.className = 'sec-badge badge-empty';
       _sectionMilestones[s]=false;
       secEl.classList.remove('done','partial');
