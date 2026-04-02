@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Assistente SINAN — PET Saúde Digital</title>
+<title>Assistente SINAN — PET-Saúde/I&SD</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f0f4f8;color:#1a2a3a;min-height:100vh;font-size:15px;line-height:1.5}
@@ -27,24 +27,50 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f0f4f
 /* MAIN */
 main{max-width:1100px;margin:0 auto;padding:28px 24px 60px}
 
-/* ABOUT BOX */
-.about-box{background:#fff;border-radius:12px;border:1px solid #dce8f0;padding:22px 26px;margin-bottom:20px;box-shadow:0 1px 6px rgba(0,0,0,.05)}
-.about-box h2{font-size:16px;font-weight:800;color:#0f2d4a;margin-bottom:10px;display:flex;align-items:center;gap:10px}
-.about-box h2::before{content:'';display:block;width:3px;height:18px;background:linear-gradient(180deg,#1a5276,#1a6b45);border-radius:2px;flex-shrink:0}
-.about-box p{font-size:13px;color:#4b5563;line-height:1.7;margin-bottom:10px}
-.about-chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px}
+/* CHIPS — usados no banner */
 .about-chip{font-size:12px;font-weight:700;padding:4px 12px;border-radius:4px;letter-spacing:.1px}
 .chip-green{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}
 .chip-blue{background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe}
 .chip-yellow{background:#fefce8;color:#854d0e;border:1px solid #fef08a}
 .chip-purple{background:#f5f3ff;color:#6d28d9;border:1px solid #ddd6fe}
 
-/* LEGAL BOX */
-.legal-box{background:#fff;border-radius:12px;border:1px solid #dce8f0;padding:16px 20px;margin-bottom:24px;display:flex;gap:14px;align-items:flex-start;box-shadow:0 1px 6px rgba(0,0,0,.05)}
-.legal-icon{flex-shrink:0;margin-top:2px;color:#1a5276}
-.legal-box h3{font-size:13px;font-weight:700;color:#0f2d4a;margin-bottom:4px}
-.legal-box p{font-size:12px;color:#5a7a9a;line-height:1.6}
-.legal-box a{color:#1a5276;text-decoration:none}
+/* ABOUT BANNER */
+.about-banner{display:flex;align-items:center;gap:16px;background:#fff;border-radius:12px;border:1px solid #dce8f0;border-left:4px solid #1a5276;padding:18px 22px;margin-bottom:20px;box-shadow:0 1px 6px rgba(0,0,0,.05);cursor:pointer;transition:box-shadow .2s,transform .15s;width:100%;text-align:left}
+.about-banner:hover{box-shadow:0 4px 18px rgba(26,82,118,.12);transform:translateY(-1px)}
+.about-banner-icon{flex-shrink:0;width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,#1a5276,#1a6b45);display:flex;align-items:center;justify-content:center;color:#fff}
+.about-banner-body{flex:1;min-width:0}
+.about-banner-title{font-size:14px;font-weight:800;color:#0f2d4a;margin-bottom:6px}
+.about-banner-chips{display:flex;flex-wrap:wrap;gap:6px}
+.about-banner-arrow{flex-shrink:0;color:#4a7a9b;transition:transform .2s}
+.about-banner:hover .about-banner-arrow{transform:translateX(4px)}
+
+/* DRAWER OVERLAY */
+.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1000;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.drawer-overlay.open{opacity:1;pointer-events:auto}
+
+/* DRAWER PANEL */
+.drawer-panel{position:fixed;top:0;right:0;height:100%;width:480px;max-width:100vw;background:#fff;z-index:1001;transform:translateX(100%);transition:transform .3s ease;display:flex;flex-direction:column;overflow:hidden;box-shadow:-4px 0 32px rgba(0,0,0,.12)}
+.drawer-panel.open{transform:translateX(0)}
+.drawer-hdr{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid #dce8f0;flex-shrink:0}
+.drawer-hdr-title{font-size:16px;font-weight:800;color:#0f2d4a;display:flex;align-items:center;gap:10px}
+.drawer-hdr-title::before{content:'';display:block;width:3px;height:18px;background:linear-gradient(180deg,#1a5276,#1a6b45);border-radius:2px;flex-shrink:0}
+.drawer-close{background:none;border:1px solid #e2e8f0;color:#6b7280;width:32px;height:32px;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s;flex-shrink:0}
+.drawer-close:hover{background:#f1f5f9;color:#0f2d4a}
+.drawer-body{flex:1;overflow-y:auto;padding:24px}
+.drawer-section{margin-bottom:28px}
+.drawer-section:last-child{margin-bottom:0}
+.drawer-section h3{font-size:14px;font-weight:800;color:#0f2d4a;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.drawer-section h3::before{content:'';display:block;width:3px;height:16px;background:linear-gradient(180deg,#1a5276,#1a6b45);border-radius:2px;flex-shrink:0}
+.drawer-section p{font-size:13px;color:#4b5563;line-height:1.75;margin-bottom:8px}
+.drawer-section p:last-child{margin-bottom:0}
+.drawer-section strong{color:#0f2d4a;font-weight:700}
+.drawer-section a{color:#1a5276;text-decoration:none}
+.drawer-section a:hover{text-decoration:underline}
+.drawer-sep{border:none;border-top:1px solid #eef3f8;margin:0 0 28px}
+.drawer-feature{margin-bottom:12px}
+.drawer-feature:last-child{margin-bottom:0}
+.drawer-feature-title{font-size:13px;font-weight:700;color:#1a5276;margin-bottom:3px}
+.drawer-feature-desc{font-size:12.5px;color:#4b5563;line-height:1.7}
 
 /* SECTION TITLE */
 .sec-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.6px;color:#4a7a9b;margin:0 0 16px;display:flex;align-items:center;gap:10px}
@@ -144,15 +170,16 @@ footer a{color:#1a5276;text-decoration:none}
   /* ── MAIN ───────────────────────────────────────────────── */
   main{padding:14px 14px 36px}
 
-  /* ── ABOUT / LEGAL BOXES ────────────────────────────────── */
-  .about-box{padding:14px 16px;margin-bottom:14px}
-  .about-box h2{font-size:14px;margin-bottom:8px}
-  .about-box p{font-size:12px}
-  .about-chips{gap:5px;margin-bottom:10px}
+  /* ── ABOUT BANNER ───────────────────────────────────────── */
+  .about-banner{padding:14px 16px;margin-bottom:14px;gap:12px}
+  .about-banner-icon{width:34px;height:34px;border-radius:6px}
+  .about-banner-title{font-size:13px}
   .about-chip{font-size:11px;padding:3px 9px}
-  .legal-box{padding:12px 14px;margin-bottom:18px;gap:10px}
-  .legal-box h3{font-size:12px}
-  .legal-box p{font-size:11px}
+
+  /* ── DRAWER ─────────────────────────────────────────────── */
+  .drawer-panel{width:100vw}
+  .drawer-hdr{padding:16px 18px}
+  .drawer-body{padding:18px}
 
   /* ── SECTION TITLE ──────────────────────────────────────── */
   .sec-title{font-size:10px;margin-bottom:12px;letter-spacing:1.3px}
@@ -225,20 +252,31 @@ footer a{color:#1a5276;text-decoration:none}
 [data-theme="dark"] .disclaimer strong{color:#eab308}
 [data-theme="dark"] .disclaimer-icon{color:#eab308}
 
-/* About/Legal boxes */
-[data-theme="dark"] .about-box{background:var(--bg-card);border-color:var(--border);box-shadow:0 1px 6px rgba(0,0,0,.2)}
-[data-theme="dark"] .about-box h2{color:var(--text)}
-[data-theme="dark"] .about-box h2::before{background:linear-gradient(180deg,#3b82f6,#22c55e)}
-[data-theme="dark"] .about-box p{color:var(--text2)}
+/* Chips */
 [data-theme="dark"] .chip-green{background:#0f2818;color:#4ade80;border-color:#1a4028}
 [data-theme="dark"] .chip-blue{background:#0f1a30;color:#60a5fa;border-color:#1a2e50}
 [data-theme="dark"] .chip-yellow{background:#2a2518;color:#eab308;border-color:#5c4a1e}
 [data-theme="dark"] .chip-purple{background:#1a152e;color:#a78bfa;border-color:#2e2550}
-[data-theme="dark"] .legal-box{background:var(--bg-card);border-color:var(--border);box-shadow:0 1px 6px rgba(0,0,0,.2)}
-[data-theme="dark"] .legal-icon{color:#60a5fa}
-[data-theme="dark"] .legal-box h3{color:var(--text)}
-[data-theme="dark"] .legal-box p{color:var(--text2)}
-[data-theme="dark"] .legal-box a{color:#60a5fa}
+
+/* About banner */
+[data-theme="dark"] .about-banner{background:var(--bg-card);border-color:var(--border);border-left-color:#3b82f6}
+[data-theme="dark"] .about-banner-title{color:var(--text)}
+[data-theme="dark"] .about-banner-arrow{color:var(--text3)}
+
+/* Drawer */
+[data-theme="dark"] .drawer-panel{background:var(--bg-card)}
+[data-theme="dark"] .drawer-hdr{border-bottom-color:var(--border)}
+[data-theme="dark"] .drawer-hdr-title{color:var(--text)}
+[data-theme="dark"] .drawer-close{border-color:var(--border);color:var(--text3)}
+[data-theme="dark"] .drawer-close:hover{background:var(--bg-card2);color:var(--text)}
+[data-theme="dark"] .drawer-section h3{color:var(--text)}
+[data-theme="dark"] .drawer-section p{color:var(--text2)}
+[data-theme="dark"] .drawer-section strong{color:var(--text)}
+[data-theme="dark"] .drawer-section a{color:#60a5fa}
+[data-theme="dark"] .drawer-feature-title{color:#60a5fa}
+[data-theme="dark"] .drawer-feature-desc{color:var(--text2)}
+[data-theme="dark"] .drawer-sep{border-top-color:var(--border)}
+[data-theme="dark"] .drawer-overlay{background:rgba(0,0,0,.65)}
 
 /* Section title */
 [data-theme="dark"] .sec-title{color:var(--text3)}
@@ -314,7 +352,7 @@ function toggleDarkMode(){
     <div class="hdr-text">
       <h1>Assistente SINAN</h1>
       <p>Apoio ao preenchimento das fichas de notificação compulsória de interesse em Saúde do Trabalhador</p>
-      <span class="pet-chip">PET Saúde Digital — Programa de Educação pelo Trabalho para a Saúde</span>
+      <span class="pet-chip">PET-Saúde/I&SD — Programa de Educação pelo Trabalho para a Saúde: Informação e Saúde Digital</span>
     </div>
     <button class="dm-toggle" id="dm-toggle" onclick="toggleDarkMode()" title="Alternar modo escuro">
       <svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
@@ -334,28 +372,22 @@ function toggleDarkMode(){
 
 <main>
 
-  <!-- ABOUT BOX -->
-  <div class="about-box">
-    <h2>Sobre este assistente</h2>
-    <p>O objetivo deste assistente é <strong>tornar mais fácil e visualmente agradável o processo de preenchimento das fichas SINAN</strong>. Os campos apresentados correspondem exatamente ao que aparece no SINAN NET no momento da digitação, obtidos dos arquivos de instalação do SINAN NET.</p>
-    <div class="about-chips">
-      <span class="about-chip chip-green">Campos idênticos ao SINAN NET</span>
-      <span class="about-chip chip-blue">Busca de município por nome</span>
-      <span class="about-chip chip-yellow">Busca por sinônimos de ocupação (CBO)</span>
-      <span class="about-chip chip-purple">Gera PDF para impressão</span>
+  <!-- ABOUT BANNER — opens drawer -->
+  <button class="about-banner" onclick="openDrawer()" aria-label="Sobre o Projeto e Base Legal — clique para saber mais">
+    <div class="about-banner-icon">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><line x1="10" y1="9" x2="10" y2="14"/><circle cx="10" cy="6.5" r=".5" fill="currentColor"/></svg>
     </div>
-    <p style="font-size:12px;color:#6b7280;margin-bottom:0">A ficha impressa <strong>não substitui a digitação no SINAN NET</strong> — ela serve como apoio visual e rascunho para posterior registro oficial.</p>
-  </div>
-
-  <!-- LEGAL BASIS -->
-  <div class="legal-box">
-    <svg class="legal-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="12" height="16" rx="1.5"/><line x1="7" y1="7" x2="13" y2="7"/><line x1="7" y1="10" x2="13" y2="10"/><line x1="7" y1="13" x2="10" y2="13"/></svg>
-    <div>
-      <h3>Base Legal — Notificação Compulsória</h3>
-      <p>A notificação compulsória é <strong>obrigatória para médicos, demais profissionais de saúde e responsáveis por serviços públicos e privados</strong>, diante da <strong>suspeita ou confirmação</strong> de doença ou agravo listado na relação nacional — mesmo que ainda não confirmado, todo caso suspeito deve ser notificado imediatamente.<br>
-      <strong>Portaria de Consolidação nº 4, de 28/09/2017</strong>, Seção II, Art. 3º e §1º · Atualizada pela <strong>Portaria GM/MS nº 10.175, de 23/01/2026</strong></p>
+    <div class="about-banner-body">
+      <div class="about-banner-title">Assistente SINAN — conheça a ferramenta, seus recursos e a base legal</div>
+      <div class="about-banner-chips">
+        <span class="about-chip chip-green">Dados extraídos do SINAN NET</span>
+        <span class="about-chip chip-blue">Busca de município por nome</span>
+        <span class="about-chip chip-yellow">Busca por sinônimos de ocupação CBO</span>
+        <span class="about-chip chip-purple">Gera PDF para impressão</span>
+      </div>
     </div>
-  </div>
+    <svg class="about-banner-arrow" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l5 5-5 5"/></svg>
+  </button>
 
   <div class="sec-title">Fichas de Notificação SINAN</div>
 
@@ -664,10 +696,103 @@ function toggleDarkMode(){
 
 <footer>
   <img src="assets/img/pet-logo-branca.png" alt="PET" style="height:32px;opacity:.4;margin-bottom:10px;display:block;margin-left:auto;margin-right:auto">
-  <p><strong>Assistente SINAN</strong> — PET Saúde Digital — Programa de Educação pelo Trabalho para a Saúde</p>
+  <p><strong>Assistente SINAN</strong> — PET-Saúde/I&SD — Programa de Educação pelo Trabalho para a Saúde: Informação e Saúde Digital</p>
   <p>Ferramenta educacional sem vínculo oficial com o Ministério da Saúde · Base legal: <a href="#" target="_blank">Portaria GM/MS nº 10.175/2026</a></p>
   <p style="margin-top:4px;font-size:11px">Desenvolvido em formato HTML/CSS/JS puro para uso offline em navegador</p>
 </footer>
+
+<!-- DRAWER OVERLAY -->
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+
+<!-- DRAWER PANEL -->
+<div class="drawer-panel" id="drawer-panel" role="dialog" aria-label="Sobre o Projeto e Base Legal" aria-modal="true">
+  <div class="drawer-hdr">
+    <div class="drawer-hdr-title">Sobre o Projeto e Base Legal</div>
+    <button class="drawer-close" onclick="closeDrawer()" aria-label="Fechar">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="4" x2="16" y2="16"/><line x1="16" y1="4" x2="4" y2="16"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body">
+
+    <div class="drawer-section">
+      <h3>O que é o Assistente SINAN</h3>
+      <p>O <strong>Assistente SINAN</strong> é uma ferramenta de apoio ao preenchimento das fichas de notificação compulsória do Sistema de Informação de Agravos de Notificação (SINAN), com foco nos agravos de interesse em Saúde do Trabalhador.</p>
+      <p>O projeto nasceu de uma necessidade real: o processo de notificação no SINAN ainda apresenta barreiras que contribuem para a <strong>subnotificação</strong> e para o <strong>preenchimento incompleto</strong> das fichas — problemas que comprometem diretamente a qualidade dos dados epidemiológicos e, por consequência, o planejamento de políticas públicas em saúde.</p>
+    </div>
+
+    <hr class="drawer-sep">
+
+    <div class="drawer-section">
+      <h3>O que a ferramenta oferece</h3>
+      <div class="drawer-feature">
+        <div class="drawer-feature-title">Dados de referência extraídos do SINAN NET</div>
+        <div class="drawer-feature-desc">As tabelas de municípios (códigos IBGE), ocupações (CBO — código e descrição), agravos e CNAEs utilizadas no assistente foram extraídas diretamente dos arquivos de instalação do SINAN NET, garantindo que esses dados de referência sejam idênticos aos do sistema oficial.</div>
+      </div>
+      <div class="drawer-feature">
+        <div class="drawer-feature-title">Busca inteligente de municípios</div>
+        <div class="drawer-feature-desc">Em vez de decorar ou consultar tabelas de códigos IBGE, o profissional digita o nome do município e o sistema localiza o código automaticamente.</div>
+      </div>
+      <div class="drawer-feature">
+        <div class="drawer-feature-title">Busca por ocupação (CBO) com sinônimos</div>
+        <div class="drawer-feature-desc">A consulta ao código CBO aceita termos populares e sinônimos (por exemplo, buscar "pedreiro" já retorna o código correto), eliminando a necessidade de consultar a tabela oficial separadamente.</div>
+      </div>
+      <div class="drawer-feature">
+        <div class="drawer-feature-title">Geração de PDF para impressão</div>
+        <div class="drawer-feature-desc">Ao concluir o preenchimento, a ferramenta gera um PDF formatado nos moldes da ficha oficial, pronto para impressão e para servir de apoio à digitação posterior no SINAN NET.</div>
+      </div>
+      <div class="drawer-feature">
+        <div class="drawer-feature-title">Interface guiada com barra de progresso</div>
+        <div class="drawer-feature-desc">O assistente conduz o preenchimento de forma sequencial, com indicação visual de progresso, ajudando o profissional a não pular campos obrigatórios e a concluir a ficha de forma completa.</div>
+      </div>
+    </div>
+
+    <hr class="drawer-sep">
+
+    <div class="drawer-section">
+      <h3>Qual problema isso resolve</h3>
+      <p>A subnotificação de agravos relacionados ao trabalho é um problema crônico na vigilância epidemiológica brasileira. Entre as causas mais frequentes estão a complexidade do processo de notificação, o tempo excessivo exigido para preenchimento, a dificuldade em localizar códigos (CBO, CID, IBGE) e a pouca familiaridade de parte dos profissionais com o sistema SINAN NET.</p>
+      <p>O Assistente SINAN atua diretamente nessas barreiras: ao simplificar a interface, automatizar buscas e guiar o preenchimento campo a campo, a ferramenta reduz o tempo necessário para gerar uma notificação de qualidade — o que, em última instância, favorece tanto a completude quanto a consistência dos dados registrados.</p>
+    </div>
+
+    <hr class="drawer-sep">
+
+    <div class="drawer-section">
+      <h3>Base legal da notificação compulsória</h3>
+      <p>A notificação compulsória é <strong>obrigatória para médicos, demais profissionais de saúde e responsáveis por serviços públicos e privados de saúde</strong>, diante da <strong>suspeita ou confirmação</strong> de doença ou agravo presente na lista nacional de notificação. Todo caso suspeito deve ser notificado — não é necessário aguardar confirmação diagnóstica.</p>
+      <p><strong>Fundamentação:</strong> Portaria de Consolidação nº 4, de 28 de setembro de 2017 (Seção II, Art. 3º e §1º), atualizada pela Portaria GM/MS nº 10.175, de 23 de janeiro de 2026.</p>
+    </div>
+
+    <hr class="drawer-sep">
+
+    <div class="drawer-section">
+      <h3>Privacidade, transparência e código aberto</h3>
+      <p>Esta ferramenta opera <strong>100% no lado do cliente (client-side)</strong>. Isso significa que nenhum dado inserido pelo profissional é transmitido, armazenado ou processado em servidores externos — todo o processamento acontece exclusivamente no navegador do próprio usuário. Nenhuma informação pessoal ou sensível sai do computador em que a ferramenta é utilizada, em total conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018).</p>
+      <p>O projeto é <strong>100% open source</strong>. Todo o código-fonte é público e pode ser livremente verificado, copiado, adaptado e redistribuído. O repositório está disponível em: <a href="https://github.com/hiagowms/assistente-sinan" target="_blank" rel="noopener">github.com/hiagowms/assistente-sinan</a>.</p>
+    </div>
+
+    <hr class="drawer-sep">
+
+    <div class="drawer-section">
+      <h3>Iniciativa</h3>
+      <p>Projeto desenvolvido no âmbito do <strong>PET-Saúde/I&SD — Programa de Educação pelo Trabalho para a Saúde: Informação e Saúde Digital</strong>, voltado à integração ensino-serviço-comunidade com uso de tecnologias digitais aplicadas ao SUS.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function openDrawer(){
+  document.getElementById('drawer-overlay').classList.add('open');
+  document.getElementById('drawer-panel').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeDrawer(){
+  document.getElementById('drawer-overlay').classList.remove('open');
+  document.getElementById('drawer-panel').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape') closeDrawer();});
+</script>
 
 </body>
 </html>
