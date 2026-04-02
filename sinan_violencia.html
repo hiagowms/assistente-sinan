@@ -125,7 +125,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 .col-3{grid-column:span 3}
 
 .fld{display:flex;flex-direction:column;gap:5px}
-.fld label{font-size:13px;font-weight:700;color:#374151;line-height:1.4;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.fld label{font-size:13px;font-weight:700;color:#374151;line-height:1.4;display:flex;align-items:center;gap:4px;flex-wrap:nowrap}
 .fld label .req{color:#c0392b;font-size:15px;line-height:1}
 .fld label .cn{font-size:11px;color:#9ca3af;font-weight:600}
 .fld input,.fld select,.fld textarea{padding:11px 14px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:15px;font-family:inherit;background:#f9fafb;color:#1f2937;outline:none;transition:border-color .15s,box-shadow .15s;width:100%}
@@ -1418,23 +1418,22 @@ function toggleDarkMode(){
   <div class="sec-body">
     <div style="height:10px"></div>
 
-    <div class="info" style="margin-bottom:12px"><span class="ico">📋</span><div><strong>Apenas para a ficha física impressa</strong> — Nome, vínculo e telefone do acompanhante <strong>não existem como campos no SINAN NET</strong>. Estes dados ficam registrados apenas na ficha impressa entregue à unidade.</div></div>
     <div class="row">
       <div class="fld col-2">
-        <label>Nome do Acompanhante</label>
+        <label>Nome do Acompanhante<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">Este campo não é digitado no SINAN NET. A informação fica registrada exclusivamente na ficha física entregue à unidade de saúde.</span></span></label>
         <input type="text" id="f_acomp_nome" data-caps placeholder="Se houver acompanhante">
       </div>
       <div class="fld">
-        <label>Vínculo / Grau de Parentesco</label>
+        <label>Vínculo / Parentesco<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">Este campo não é digitado no SINAN NET. A informação fica registrada exclusivamente na ficha física entregue à unidade de saúde.</span></span></label>
         <input type="text" id="f_acomp_vinc" data-caps placeholder="Ex: MAE, CONJUGE">
       </div>
       <div class="fld">
-        <label>Telefone do Acompanhante</label>
+        <label>Telefone do Acompanhante<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">Este campo não é digitado no SINAN NET. A informação fica registrada exclusivamente na ficha física entregue à unidade de saúde.</span></span></label>
         <input type="text" id="f_acomp_tel" placeholder="(00) 00000-0000">
       </div>
     </div>
 
-    <div class="sublabel">Observações Adicionais <span style="font-size:10px;font-weight:600;color:#27ae60;text-transform:none;margin-left:6px">✓ Campo presente no SINAN NET</span> <span style="font-size:10px;font-weight:400;color:#9ca3af;text-transform:none;margin-left:6px">— aceita acentos e letras minúsculas</span></div>
+    <div class="sublabel">Observações Adicionais <span style="font-size:10px;font-weight:400;color:#9ca3af;text-transform:none;margin-left:6px">— aceita acentos e letras minúsculas</span></div>
     <div class="fld">
       <textarea id="f_obs" placeholder="Observações relevantes para a notificação..." rows="4"></textarea>
     </div>
