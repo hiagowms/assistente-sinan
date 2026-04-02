@@ -2271,6 +2271,7 @@ async function gerarPDF(force){
     setTxt('3', fmtDate(tv('f_data_notif')));
     setTxt('4', tv('f_uf_notif'));
     setTxt('5', tv('f_mun_notif'));
+    setTxt('5_2', tv('f_ibge_notif')); // IBGE do município de notificação
     setTxt('6', tv('f_tipo_un'));
     setTxt('7', tv('f_nome_un'));
     setTxt('8', tv('f_cnes')); setTxt('CNES', tv('f_cnes')); // tenta ambos os nomes possíveis no PDF
@@ -2279,8 +2280,10 @@ async function gerarPDF(force){
     setTxt('10', tv('f_nome'));
     setTxt('11', fmtDate(tv('f_nasc')));
     setTxt('12', tv('f_idade_val'));
-    setTxt('13', getRadio('sexo')); // quadradinho: M/F/I
-    setTxt('14', tv('f_gest'));
+    setTxt('12_2', ({H:'1',D:'2',M:'3',A:'4'})[tv('f_idade_un')] || ''); // legenda unidade: 1=H 2=D 3=M 4=A
+    var _sexoPDF = getRadio('sexo');
+    setTxt('13', _sexoPDF); // quadradinho: M/F/I
+    setTxt('14', _sexoPDF === 'M' ? '6' : tv('f_gest')); // 6=Não se aplica quando masculino
     setTxt('15', tv('f_raca'));
     setTxt('16', tv('f_escol'));
     setTxt('17', tv('f_sus'));
