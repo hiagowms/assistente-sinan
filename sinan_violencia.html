@@ -125,7 +125,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 .col-3{grid-column:span 3}
 
 .fld{display:flex;flex-direction:column;gap:5px}
-.fld label{font-size:13px;font-weight:700;color:#374151;line-height:1.4;display:flex;align-items:baseline;gap:4px;flex-wrap:wrap}
+.fld label{font-size:13px;font-weight:700;color:#374151;line-height:1.4;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
 .fld label .req{color:#c0392b;font-size:15px;line-height:1}
 .fld label .cn{font-size:11px;color:#9ca3af;font-weight:600}
 .fld input,.fld select,.fld textarea{padding:11px 14px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:15px;font-family:inherit;background:#f9fafb;color:#1f2937;outline:none;transition:border-color .15s,box-shadow .15s;width:100%}
@@ -156,8 +156,6 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 /*==============================================================
   INFO / WARN / DANGER BOXES
 ==============================================================*/
-.info{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:12px 16px;font-size:14px;color:#1e40af;line-height:1.7;margin-bottom:14px;display:flex;gap:12px}
-.info .ico{flex-shrink:0;font-size:18px;line-height:1.4}
 .warn{background:#fef9e7;border:1px solid #f9e79f;border-radius:8px;padding:12px 16px;font-size:14px;color:#7d6608;line-height:1.7;margin-bottom:14px;display:flex;gap:12px}
 .danger-alert{background:#fdf2f2;border:1.5px solid #f5b7b1;border-radius:8px;padding:14px 16px;font-size:14px;color:#922b21;line-height:1.7;margin-bottom:14px;display:none;gap:12px}
 .danger-alert .ico{flex-shrink:0;font-size:18px;line-height:1.3}
@@ -216,8 +214,14 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 
 /* TOOLTIP DE PROPÓSITO (ícone i) */
 .tip-wrap{position:relative;display:inline-flex;align-items:center;margin-left:4px;vertical-align:middle}
-.tip-btn{width:15px;height:15px;border-radius:50%;background:#e2e8f0;border:none;font-size:9px;font-weight:800;color:#64748b;cursor:pointer;padding:0;display:inline-flex;align-items:center;justify-content:center;line-height:1;flex-shrink:0;transition:background .15s;font-style:italic}
-.tip-btn:hover,.tip-btn.open{background:#2563eb;color:#fff}
+.tip-btn{width:18px;height:18px;border-radius:50%;background:#0056b3;border:none;font-size:11px;font-weight:800;color:#fff;cursor:pointer;padding:0;display:inline-flex;align-items:center;justify-content:center;line-height:1;flex-shrink:0;transition:background .15s,box-shadow .15s;font-style:italic}
+.tip-btn:hover,.tip-btn.open{background:#003d82;box-shadow:0 0 0 3px rgba(0,86,179,.22)}
+
+/* SEÇÃO COM DICA (substitui .info com emoji) */
+.sec-tip{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.sec-tip .tip-wrap{margin-left:0}
+.sec-tip-label{font-size:12px;color:#64748b;font-weight:500;cursor:pointer;user-select:none}
+.sec-tip:hover .sec-tip-label{color:#0056b3}
 .tip-pop{
   display:none;
   position:fixed; /* JS sobrescreve coordenadas — fixed escapa de overflow:hidden */
@@ -341,8 +345,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
   .pills{gap:7px}
   .pill{padding:10px 14px;font-size:14px;min-height:44px;border-radius:8px}
 
-  /* ── CAIXAS INFO / ALERTA ───────────────────────────────── */
-  .info,.warn,.danger-alert{font-size:13px;padding:10px 12px}
+  /* ── CAIXAS ALERTA ─────────────────────────────────────── */
+  .warn,.danger-alert{font-size:13px;padding:10px 12px}
   .banner-warn{font-size:13px;padding:12px 14px}
   .intro{flex-direction:column;padding:14px 14px;font-size:13px}
   .intro h2{font-size:14px}
@@ -488,7 +492,6 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 [data-theme="dark"] .pill.checked-danger{border-color:#dc2626;background:var(--danger-bg);color:#fca5a5}
 
 /* Info/warn/danger boxes */
-[data-theme="dark"] .info{background:var(--accent-bg);border-color:rgba(59,130,246,.25);color:#93c5fd}
 [data-theme="dark"] .warn{background:var(--warn-bg);border-color:var(--warn-border);color:var(--warn-text)}
 [data-theme="dark"] .banner-warn{background:var(--warn-bg);border-color:var(--warn-border);color:var(--warn-text)}
 [data-theme="dark"] .banner-warn strong{color:#eab308}
@@ -505,8 +508,10 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 [data-theme="dark"] .ac-item b{color:#60a5fa}
 
 /* Tooltips */
-[data-theme="dark"] .tip-btn{background:var(--border);color:var(--text3)}
-[data-theme="dark"] .tip-btn:hover,[data-theme="dark"] .tip-btn.open{background:var(--accent);color:#fff}
+[data-theme="dark"] .tip-btn{background:#1e40af;color:#fff}
+[data-theme="dark"] .tip-btn:hover,[data-theme="dark"] .tip-btn.open{background:#1d4ed8;box-shadow:0 0 0 3px rgba(59,130,246,.28)}
+[data-theme="dark"] .sec-tip-label{color:var(--text3)}
+[data-theme="dark"] .sec-tip:hover .sec-tip-label{color:#60a5fa}
 
 /* Modals */
 [data-theme="dark"] .modal{background:var(--bg-card);box-shadow:0 20px 60px rgba(0,0,0,.5)}
@@ -665,7 +670,7 @@ function toggleDarkMode(){
   </div>
   <div class="sec-body">
 
-    <div class="info"><span class="ico">ℹ️</span><div>O <strong>Nº da Notificação</strong> é fornecido pela Vigilância Epidemiológica local — não é obrigatório aqui. O <strong>Campo 6</strong> (tipo de unidade) é obrigatório. Se a data da ocorrência for desconhecida, use uma <strong>data aproximada</strong>.</div></div>
+    <div class="sec-tip"><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop" data-wide="1">O <strong>Nº da Notificação</strong> é fornecido pela Vigilância Epidemiológica local — não é obrigatório aqui. O <strong>Campo 6</strong> (tipo de unidade) é obrigatório. Se a data da ocorrência for desconhecida, use uma <strong>data aproximada</strong>.</span></span><span class="sec-tip-label" onclick="secTipClick(this)">Orientações desta seção</span></div>
 
     <div class="row">
       <div class="fld">
@@ -744,7 +749,7 @@ function toggleDarkMode(){
   </div>
   <div class="sec-body">
 
-    <div class="info"><span class="ico">ℹ️</span><div><strong>Nome (Campo 10)</strong> é obrigatório — se desconhecido, escreva <strong>IGNORADO</strong>. Preencha <strong>data de nascimento OU idade</strong> (ao menos um). <strong>Raça/Cor (Campo 15)</strong> deve ser preenchida conforme <em>declaração da própria pessoa</em> — campo essencial.</div></div>
+    <div class="sec-tip"><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop" data-wide="1"><strong>Nome (Campo 10)</strong> é obrigatório — se desconhecido, escreva <strong>IGNORADO</strong>. Preencha <strong>data de nascimento OU idade</strong> (ao menos um). <strong>Raça/Cor (Campo 15)</strong> deve ser preenchida conforme <em>declaração da própria pessoa</em> — campo essencial.</span></span><span class="sec-tip-label" onclick="secTipClick(this)">Orientações desta seção</span></div>
 
     <div class="row row-full">
       <div class="fld">
@@ -939,7 +944,7 @@ function toggleDarkMode(){
   </div>
   <div class="sec-body">
 
-    <div class="info"><span class="ico">ℹ️</span><div>Os campos <strong>Orientação Sexual (36)</strong> e <strong>Identidade de Gênero (37)</strong> são obrigatórios para pacientes com <strong>10 anos ou mais</strong>.</div></div>
+    <div class="sec-tip"><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop" data-wide="1">Os campos <strong>Orientação Sexual (36)</strong> e <strong>Identidade de Gênero (37)</strong> são obrigatórios para pacientes com <strong>10 anos ou mais</strong>.</span></span><span class="sec-tip-label" onclick="secTipClick(this)">Orientações desta seção</span></div>
 
     <div class="row">
       <div class="fld">
@@ -1148,7 +1153,7 @@ function toggleDarkMode(){
     <div class="row row-wide">
       <div class="fld col-2">
         <label>Motivação (perspectiva da vítima) <span class="req-star">⭐</span><span class="cn">[Campo 55]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> A razão percebida pela própria vítima para a violência sofrida — sexismo, racismo, LGBTfobia, intolerância religiosa, xenofobia, entre outras. Deve refletir o relato do paciente, não a interpretação do profissional.</span><span class="tip-r"><b>Por que informar:</b> Direciona políticas de prevenção específicas e permite dimensionar violências motivadas por preconceito e discriminação nos indicadores nacionais.</span></span></span></label>
-        <div class="info" style="margin-bottom:6px"><span class="ico">💡</span><div>Preencha conforme o <strong>relato da própria vítima</strong>.</div></div>
+        <div class="sec-tip" style="margin-bottom:6px"><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">Preencha conforme o <strong>relato da própria vítima</strong>.</span></span><span class="sec-tip-label" onclick="secTipClick(this)">Dica de preenchimento</span></div>
         <select id="f_motiv" data-ess data-label="Motivação da violência">
           <option value="">— Selecione —</option>
           <option value="01">01 — Sexismo</option>
@@ -1327,7 +1332,7 @@ function toggleDarkMode(){
   </div>
   <div class="sec-body">
     <div style="height:10px"></div>
-    <div class="info"><span class="ico">ℹ️</span><div>Indique para onde a vítima foi encaminhada após o atendimento. É possível marcar mais de uma opção.</div></div>
+    <div class="sec-tip"><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop" data-wide="1">Indique para onde a vítima foi encaminhada após o atendimento. É possível marcar mais de uma opção.</span></span><span class="sec-tip-label" onclick="secTipClick(this)">Orientações desta seção</span></div>
     <div class="pills" id="grp_encam">
       <label class="pill" data-val="1" data-name="encam"><input type="checkbox" name="encam" value="1"> Rede de Saúde</label>
       <label class="pill" data-val="2" data-name="encam"><input type="checkbox" name="encam" value="2"> Rede de Assistência Social</label>
@@ -1398,7 +1403,7 @@ function toggleDarkMode(){
         <button class="btn-copy-date" onclick="copiarDataNotif()">= Copiar data da notificação</button>
       </div>
     </div>
-    <div class="info"><span class="ico">ℹ️</span><div>A <strong>data de encerramento (Campo 69)</strong> geralmente coincide com a <strong>data da notificação</strong>.</div></div>
+    <div class="sec-tip"><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop" data-wide="1">A <strong>data de encerramento (Campo 69)</strong> geralmente coincide com a <strong>data da notificação</strong>.</span></span><span class="sec-tip-label" onclick="secTipClick(this)">Orientação</span></div>
   </div>
 </div>
 
@@ -1417,7 +1422,7 @@ function toggleDarkMode(){
   <div class="sec-body">
     <div style="height:10px"></div>
 
-    <div class="info" style="margin-bottom:12px"><span class="ico">📋</span><div><strong>Apenas para a ficha física impressa</strong> — Nome, vínculo e telefone do acompanhante <strong>não existem como campos no SINAN NET</strong>. Estes dados ficam registrados apenas na ficha impressa entregue à unidade.</div></div>
+    <div class="sec-tip" style="margin-bottom:12px"><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop" data-wide="1"><strong>Apenas para a ficha física impressa</strong> — Nome, vínculo e telefone do acompanhante <strong>não existem como campos no SINAN NET</strong>. Estes dados ficam registrados apenas na ficha impressa entregue à unidade.</span></span><span class="sec-tip-label" onclick="secTipClick(this)">Sobre esta seção</span></div>
     <div class="row">
       <div class="fld col-2">
         <label>Nome do Acompanhante</label>
@@ -2872,6 +2877,10 @@ function _tipClose(){
   });
 }
 
+function secTipClick(el){
+  var st = el.closest('.sec-tip');
+  if(st) st.querySelector('.tip-btn').click();
+}
 function tipToggle(btn){
   var wrap = btn.closest('.tip-wrap');
   if(!wrap) return;
@@ -2888,7 +2897,7 @@ function tipToggle(btn){
   // Posiciona via fixed para não ser cortado por overflow:hidden
   var rect = btn.getBoundingClientRect();
   var GAP  = 10;
-  var MAX_W = Math.min(290, window.innerWidth - 24);
+  var MAX_W = Math.min(pop.dataset.wide ? 360 : 290, window.innerWidth - 24);
 
   pop.style.cssText = [
     'position:fixed',
