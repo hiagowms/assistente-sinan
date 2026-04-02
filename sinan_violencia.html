@@ -127,7 +127,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 .fld{display:flex;flex-direction:column;gap:5px}
 .fld label{font-size:13px;font-weight:700;color:#374151;line-height:1.4}
 .fld label .req{color:#c0392b;font-size:15px;line-height:1}
-.fld label .cn{font-size:11px;color:#9ca3af;font-weight:600}
+.fld label .cn{font-size:11px;color:#9ca3af;font-weight:600;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;vertical-align:middle}
+.fld label .cn .tip-wrap{margin-left:0;vertical-align:unset}
 .fld input,.fld select,.fld textarea{padding:11px 14px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:15px;font-family:inherit;background:#f9fafb;color:#1f2937;outline:none;transition:border-color .15s,box-shadow .15s;width:100%}
 .fld input:focus,.fld select:focus,.fld textarea:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
 .fld input.filled{border-color:#27ae60}
@@ -674,7 +675,7 @@ function toggleDarkMode(){
         <input type="text" id="f_num_notif" placeholder="Fornecido pela VE local">
       </div>
       <div class="fld">
-        <label>Data da Notificação <span class="req-star">⭐</span><span class="cn">[Campo 3]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">A data da notificação define o prazo para ações de proteção. Notificações tardias comprometem a vigilância epidemiológica local.</span></span></label>
+        <label>Data da Notificação <span class="req-star">⭐</span><span class="cn">[Campo 3]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">A data da notificação define o prazo para ações de proteção. Notificações tardias comprometem a vigilância epidemiológica local.</span></span></span></label>
         <input type="date" id="f_data_notif" data-ess data-label="Data da notificação">
       </div>
       <div class="fld">
@@ -749,7 +750,7 @@ function toggleDarkMode(){
 
     <div class="row row-full">
       <div class="fld">
-        <label>Nome Completo da Vítima <span class="req-star">⭐</span><span class="cn">[Campo 10]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">O nome da vítima é necessário para vincular notificações e evitar duplicidade no SINAN. Se desconhecido, escreva IGNORADO.</span></span></label>
+        <label>Nome Completo da Vítima <span class="req-star">⭐</span><span class="cn">[Campo 10]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">O nome da vítima é necessário para vincular notificações e evitar duplicidade no SINAN. Se desconhecido, escreva IGNORADO.</span></span></span></label>
         <input type="text" id="f_nome" placeholder="Nome completo — ou IGNORADO se desconhecido" data-caps data-ess data-label="Nome do paciente">
       </div>
     </div>
@@ -774,7 +775,7 @@ function toggleDarkMode(){
         </select>
       </div>
       <div class="fld">
-        <label>Sexo <span class="req-star">⭐</span><span class="cn">[Campo 13]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">O sexo é essencial para análise epidemiológica de violências de gênero e para cálculo de indicadores nacionais.</span></span></label>
+        <label>Sexo <span class="req-star">⭐</span><span class="cn">[Campo 13]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">O sexo é essencial para análise epidemiológica de violências de gênero e para cálculo de indicadores nacionais.</span></span></span></label>
         <div class="pills" id="grp_sexo">
           <label class="pill" data-val="M"><input type="radio" name="sexo" value="M" onchange="onSexoChange()"> Masculino</label>
           <label class="pill" data-val="F"><input type="radio" name="sexo" value="F" onchange="onSexoChange()"> Feminino</label>
@@ -801,7 +802,7 @@ function toggleDarkMode(){
 
     <div class="row">
       <div class="fld">
-        <label>Raça/Cor <span class="req-star">⭐</span><span class="cn">[Campo 15]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Autodeclaração do paciente conforme as categorias do IBGE: Branca, Preta, Parda, Amarela ou Indígena. O profissional <u>não deve deduzir</u> — deve perguntar à própria pessoa.</span><span class="tip-r"><b>Por que informar:</b> Essencial para evidenciar o racismo estrutural e a vulnerabilidade desigual nos índices de violência.</span></span></span></label>
+        <label>Raça/Cor <span class="req-star">⭐</span><span class="cn">[Campo 15]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Autodeclaração do paciente conforme as categorias do IBGE: Branca, Preta, Parda, Amarela ou Indígena. O profissional <u>não deve deduzir</u> — deve perguntar à própria pessoa.</span><span class="tip-r"><b>Por que informar:</b> Essencial para evidenciar o racismo estrutural e a vulnerabilidade desigual nos índices de violência.</span></span></span></span></label>
         <select id="f_raca" data-ess data-label="Raça/Cor">
           <option value="">— Selecione —</option>
           <option value="1">1 — Branca</option>
@@ -860,7 +861,7 @@ function toggleDarkMode(){
   <div class="sec-body">
     <div class="row">
       <div class="fld col-2">
-        <label>Município <span class="req-star">⭐</span><span class="cn">[Campo 20]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">Município de residência permite que a vigilância local acompanhe e intervenha no caso, e é essencial para georeferenciamento dos dados.</span></span></label>
+        <label>Município <span class="req-star">⭐</span><span class="cn">[Campo 20]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">Município de residência permite que a vigilância local acompanhe e intervenha no caso, e é essencial para georeferenciamento dos dados.</span></span></span></label>
         <div class="ac-wrap">
           <input type="text" id="f_mun_res" data-ess data-label="Município de residência" placeholder="Digite para buscar — UF preenchida automaticamente" data-caps autocomplete="off">
           <div class="ac-drop" id="f_mun_res-drop"></div>
@@ -944,11 +945,11 @@ function toggleDarkMode(){
 
     <div class="row">
       <div class="fld">
-        <label>Nome Social <span class="cn">[C.33]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Nome pelo qual a pessoa se identifica e prefere ser chamada socialmente, diferente do nome civil registrado em cartório. Deve ser respeitado independentemente de retificação documental.</span><span class="tip-r"><b>Por que informar:</b> Garante acolhimento respeitoso e evita constrangimento no atendimento. Também permite identificar barreiras de acesso à saúde enfrentadas pela população trans e travesti.</span></span></span></label>
+        <label>Nome Social <span class="cn">[C.33]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Nome pelo qual a pessoa se identifica e prefere ser chamada socialmente, diferente do nome civil registrado em cartório. Deve ser respeitado independentemente de retificação documental.</span><span class="tip-r"><b>Por que informar:</b> Garante acolhimento respeitoso e evita constrangimento no atendimento. Também permite identificar barreiras de acesso à saúde enfrentadas pela população trans e travesti.</span></span></span></span></label>
         <input type="text" id="f_nome_social" data-caps placeholder="Se diferente do nome civil">
       </div>
       <div class="fld col-2">
-        <label>Ocupação (CBO) <span class="cn">[C.34]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> A atividade profissional exercida pela vítima, classificada segundo a CBO (Classificação Brasileira de Ocupações). Pode digitar o nome popular ou o código — o sistema busca automaticamente, inclusive sinônimos.</span><span class="tip-r"><b>Por que informar:</b> Permite ao SUS mapear violências no ambiente de trabalho, identificar categorias profissionais mais vulneráveis e direcionar políticas de proteção ao trabalhador.</span></span></span></label>
+        <label>Ocupação (CBO) <span class="cn">[C.34]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> A atividade profissional exercida pela vítima, classificada segundo a CBO (Classificação Brasileira de Ocupações). Pode digitar o nome popular ou o código — o sistema busca automaticamente, inclusive sinônimos.</span><span class="tip-r"><b>Por que informar:</b> Permite ao SUS mapear violências no ambiente de trabalho, identificar categorias profissionais mais vulneráveis e direcionar políticas de proteção ao trabalhador.</span></span></span></span></label>
         <div class="ac-wrap">
           <input type="text" id="f_ocupacao" data-caps autocomplete="off" placeholder="Nome ou código CBO (ex: ENFERMEIRO, 223505)">
           <div class="ac-drop" id="f_ocupacao-drop"></div>
@@ -971,7 +972,7 @@ function toggleDarkMode(){
 
     <div class="row">
       <div class="fld">
-        <label>Orientação Sexual <span class="req-star">⭐</span><span class="cn">[Campo 36]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Por quem a pessoa sente atração afetiva ou sexual — Heterossexual, Homossexual (gay/lésbica), Bissexual etc. Independe de como ela se apresenta ou se veste.</span><span class="tip-r"><b>Por que informar:</b> Ajuda a identificar crimes de LGBTfobia e a direcionar o acolhimento e encaminhamento corretos.</span></span></span></label>
+        <label>Orientação Sexual <span class="req-star">⭐</span><span class="cn">[Campo 36]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Por quem a pessoa sente atração afetiva ou sexual — Heterossexual, Homossexual (gay/lésbica), Bissexual etc. Independe de como ela se apresenta ou se veste.</span><span class="tip-r"><b>Por que informar:</b> Ajuda a identificar crimes de LGBTfobia e a direcionar o acolhimento e encaminhamento corretos.</span></span></span></span></label>
         <select id="f_or_sex" data-ess data-label="Orientação sexual">
           <option value="">— Selecione —</option>
           <option value="1">1 — Heterossexual</option>
@@ -982,7 +983,7 @@ function toggleDarkMode(){
         </select>
       </div>
       <div class="fld">
-        <label>Identidade de Gênero <span class="req-star">⭐</span><span class="cn">[Campo 37]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Como a pessoa se reconhece e se apresenta ao mundo — Mulher Trans, Homem Trans, Travesti, Cisgênero etc. É independente do sexo biológico ao nascer.</span><span class="tip-r"><b>Por que informar:</b> Fundamental para mapear violências específicas contra a população trans e travesti e acionar redes de proteção adequadas.</span></span></span></label>
+        <label>Identidade de Gênero <span class="req-star">⭐</span><span class="cn">[Campo 37]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Como a pessoa se reconhece e se apresenta ao mundo — Mulher Trans, Homem Trans, Travesti, Cisgênero etc. É independente do sexo biológico ao nascer.</span><span class="tip-r"><b>Por que informar:</b> Fundamental para mapear violências específicas contra a população trans e travesti e acionar redes de proteção adequadas.</span></span></span></span></label>
         <select id="f_id_gen" data-ess data-label="Identidade de gênero">
           <option value="">— Selecione —</option>
           <option value="1">1 — Travesti</option>
@@ -996,7 +997,7 @@ function toggleDarkMode(){
 
     <div class="row">
       <div class="fld">
-        <label>Possui Deficiência/Transtorno? <span class="cn">[Campo 38]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Impedimento de longo prazo de natureza física, mental, intelectual ou sensorial que dificulte a participação plena na sociedade em igualdade com os demais.</span><span class="tip-r"><b>Por que informar:</b> Garante o acionamento da rede de proteção social e de acessibilidade adequada — pessoas com deficiência são mais vulneráveis à violência e ao subregistro.</span></span></span></label>
+        <label>Possui Deficiência/Transtorno? <span class="cn">[Campo 38]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Impedimento de longo prazo de natureza física, mental, intelectual ou sensorial que dificulte a participação plena na sociedade em igualdade com os demais.</span><span class="tip-r"><b>Por que informar:</b> Garante o acionamento da rede de proteção social e de acessibilidade adequada — pessoas com deficiência são mais vulneráveis à violência e ao subregistro.</span></span></span></span></label>
         <div class="pills" id="grp_defic">
           <label class="pill" data-val="1"><input type="radio" name="defic" value="1"> Sim</label>
           <label class="pill" data-val="2"><input type="radio" name="defic" value="2"> Não</label>
@@ -1115,7 +1116,7 @@ function toggleDarkMode(){
         </div>
       </div>
       <div class="fld">
-        <label>Lesão autoprovocada? <span class="req-star">⭐</span><span class="cn">[Campo 54]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Lesão ou dano que a pessoa causou a si mesma, intencionalmente — inclui tentativa de suicídio, automutilação e autoagressão.</span><span class="tip-r"><b>Por que informar:</b> Caso de notificação imediata (24h). Aciona protocolos de saúde mental, suicidologia e acompanhamento psicossocial do SUS. Dado essencial para políticas de prevenção ao suicídio.</span></span></span></label>
+        <label>Lesão autoprovocada? <span class="req-star">⭐</span><span class="cn">[Campo 54]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Lesão ou dano que a pessoa causou a si mesma, intencionalmente — inclui tentativa de suicídio, automutilação e autoagressão.</span><span class="tip-r"><b>Por que informar:</b> Caso de notificação imediata (24h). Aciona protocolos de saúde mental, suicidologia e acompanhamento psicossocial do SUS. Dado essencial para políticas de prevenção ao suicídio.</span></span></span></span></label>
         <div class="pills" id="grp_auto_prov">
           <label class="pill" data-val="1"><input type="radio" name="auto_prov" value="1" onchange="onAutoProv()"> Sim</label>
           <label class="pill" data-val="2"><input type="radio" name="auto_prov" value="2" onchange="onAutoProv()"> Não</label>
@@ -1148,7 +1149,7 @@ function toggleDarkMode(){
     <!-- C55 — Motivação -->
     <div class="row row-wide">
       <div class="fld col-2">
-        <label>Motivação (perspectiva da vítima) <span class="req-star">⭐</span><span class="cn">[Campo 55]</span><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> A razão percebida pela própria vítima para a violência sofrida — sexismo, racismo, LGBTfobia, intolerância religiosa, xenofobia, entre outras. Deve refletir o relato do paciente, não a interpretação do profissional.</span><span class="tip-r"><b>Por que informar:</b> Direciona políticas de prevenção específicas e permite dimensionar violências motivadas por preconceito e discriminação nos indicadores nacionais.</span></span></span></label>
+        <label>Motivação (perspectiva da vítima) <span class="req-star">⭐</span><span class="cn">[Campo 55]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> A razão percebida pela própria vítima para a violência sofrida — sexismo, racismo, LGBTfobia, intolerância religiosa, xenofobia, entre outras. Deve refletir o relato do paciente, não a interpretação do profissional.</span><span class="tip-r"><b>Por que informar:</b> Direciona políticas de prevenção específicas e permite dimensionar violências motivadas por preconceito e discriminação nos indicadores nacionais.</span></span></span></span></label>
         <div class="info" style="margin-bottom:6px"><span class="ico">💡</span><div>Preencha conforme o <strong>relato da própria vítima</strong>.</div></div>
         <select id="f_motiv" data-ess data-label="Motivação da violência">
           <option value="">— Selecione —</option>
