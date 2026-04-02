@@ -125,7 +125,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 .col-3{grid-column:span 3}
 
 .fld{display:flex;flex-direction:column;gap:5px}
-.fld label{font-size:13px;font-weight:700;color:#374151;line-height:1.4}
+.fld label{font-size:13px;font-weight:700;color:#374151;line-height:1.4;white-space:nowrap}
 .fld label .req{color:#c0392b;font-size:15px;line-height:1}
 .fld label .cn{font-size:11px;color:#9ca3af;font-weight:600;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;vertical-align:middle}
 .fld label .cn .tip-wrap{margin-left:0;vertical-align:unset}
@@ -229,6 +229,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
   box-shadow:0 6px 28px rgba(0,0,0,.45);
   z-index:9999;text-align:left;
   pointer-events:none;font-style:normal;
+  white-space:normal;
   --tip-arrow-left:50%
 }
 /* Seta apontando para baixo (tooltip acima do botão — padrão) */
