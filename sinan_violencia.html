@@ -1054,6 +1054,7 @@ function toggleDarkMode(){
         <label>UF <span class="cn">[C.40]</span> <span style="font-size:9px;font-weight:500;color:#27ae60;text-transform:none">← auto</span></label>
         <select id="f_uf_oc"></select>
       </div>
+      <input type="hidden" id="f_ibge_oc">
       <div class="fld">
         <label>Bairro <span class="cn">[C.43]</span></label>
         <input type="text" id="f_bairro_oc" data-caps>
@@ -1646,7 +1647,7 @@ function acSetup(inputId, dropId, datafn, matchfn, labelFn, selectFn){
 [
   {suf:'notif', ibge:'f_ibge_notif'},
   {suf:'res',   ibge:'f_ibge_res'},
-  {suf:'oc',    ibge:null}
+  {suf:'oc',    ibge:'f_ibge_oc'}
 ].forEach(function(cfg){
   var ufId  = 'f_uf_'  + cfg.suf;
   var munId = 'f_mun_' + cfg.suf;
@@ -2292,7 +2293,7 @@ async function gerarPDF(force){
     // Seção 3
     setTxt('19', tv('f_uf_res'));
     setTxt('20', tv('f_mun_res'));
-    setTxt('21', tv('f_ibge_res')); // IBGE do município de residência
+    setTxt('20_2', tv('f_ibge_res')); // IBGE do município de residência
     setTxt('22', tv('f_bairro_res'));
     setTxt('23', tv('f_logr_res'));
     setTxt('24', tv('f_num_res'));
@@ -2319,6 +2320,7 @@ async function gerarPDF(force){
     // Seção 5
     setTxt('40', tv('f_uf_oc'));
     setTxt('41', tv('f_mun_oc'));
+    setTxt('41_2', tv('f_ibge_oc')); // IBGE do município de ocorrência
     setTxt('43', tv('f_bairro_oc'));
     setTxt('44', tv('f_logr_oc'));
     setTxt('45', tv('f_num_oc'));
