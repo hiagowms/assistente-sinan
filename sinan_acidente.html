@@ -476,11 +476,10 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 .rf-textarea{width:100%;min-height:90px;resize:vertical;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:12px;font-family:monospace;background:var(--bg-card);color:var(--text);box-sizing:border-box;line-height:1.4}
 .rf-textarea:focus{outline:none;border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
 .rf-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
-.rf-sug-list{display:flex;flex-direction:column;gap:8px;margin-top:12px}
-.rf-sug-opt{border:1.5px solid var(--border);border-radius:8px;padding:10px 14px;cursor:pointer;transition:all .15s;display:flex;flex-direction:column;gap:3px}
-.rf-sug-opt:hover{border-color:#2563eb;background:rgba(37,99,235,.05)}
-.rf-sug-code{font-size:12px;font-weight:700;color:#2563eb}
-.rf-sug-nome{font-size:12px;color:var(--text)}
+.rf-cnae-warn{background:#fffbeb;border:1px solid #fbbf24;border-radius:8px;padding:9px 12px;margin-bottom:8px;font-size:12px;color:#92400e;line-height:1.5}
+[data-theme="dark"] .rf-cnae-warn{background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.35);color:#fcd34d}
+.rf-cnae-warn strong{font-weight:700}
+.rf-cnae-warn em{font-style:italic;opacity:.85}
 </style>
 </head>
 <body>
@@ -969,6 +968,7 @@ function toggleDarkMode(){
     <div class="row">
       <div class="fld">
         <label>CNAE <span class="cn">[Campo 40]</span></label>
+        <div class="rf-cnae-warn" id="rf-cnae-warn" style="display:none">&#9888;&#65039; CNAE <strong id="rf-cnae-warn-code"></strong><span id="rf-cnae-warn-ramo"></span> não consta na lista do SINAN NET. Pesquise o código mais adequado no campo abaixo:</div>
         <div class="ac-wrap">
           <input type="text" id="f_emp_cnae" placeholder="Digite código ou atividade econômica..." autocomplete="off">
           <div class="ac-drop" id="f_emp_cnae-drop"></div>
@@ -1382,18 +1382,6 @@ function toggleDarkMode(){
   </div>
 </div>
 
-<div class="ov" id="ov-rf-cnae">
-  <div class="modal" style="max-width:500px">
-    <div class="modal-ico">&#128269;</div>
-    <h2>CNAE não encontrado na lista</h2>
-    <p>O código <strong id="rf-cnae-code"></strong> (<span id="rf-cnae-ramo" style="font-style:italic"></span>) não consta na lista SINAN. Selecione o mais adequado ou feche para preencher manualmente:</p>
-    <div class="rf-sug-list" id="rf-sug-list"></div>
-    <div class="modal-actions">
-      <button class="mbtn mbtn-s" onclick="closeModal('ov-rf-cnae')">Preencher manualmente</button>
-    </div>
-  </div>
-</div>
-
 <!-- BOTTOM SHEET MOBILE -->
 <div id="pac-mob-sheet">
   <div id="pac-mob-backdrop" onclick="closePacSheet()"></div>
@@ -1645,6 +1633,17 @@ function cnaeSetup(inputId, hintId){
 cnaeSetup('f_emp_cnae',      'f_emp_cnae_hint');
 cnaeSetup('f_emp_terc_cnae', 'f_emp_terc_cnae_hint');
 
+// Esconde aviso RF ao digitar manualmente no campo CNAE
+(function(){
+  var el = document.getElementById('f_emp_cnae');
+  if(el) el.addEventListener('input', function(){
+    if(this.value.trim()){
+      var w = document.getElementById('rf-cnae-warn');
+      if(w) w.style.display = 'none';
+    }
+  });
+})();
+
 /*==========================================================
   RECEITA FEDERAL — EXTRAÇÃO DE CNPJ
 ==========================================================*/
@@ -1691,22 +1690,6 @@ function extractCompanyInfo(text){
   return r;
 }
 
-function cnaeSemantic(query, topN){
-  if(!window.SINAN_CNAES || !query) return [];
-  var words = query.toUpperCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-    .replace(/[^A-Z0-9\s]/g,' ')
-    .split(/\s+/).filter(function(w){ return w.length > 3; });
-  if(!words.length) return [];
-  var scored = window.SINAN_CNAES.map(function(c){
-    var nome = c.nome.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-    var sc = 0; words.forEach(function(w){ if(nome.indexOf(w) >= 0) sc++; });
-    return {c:c, sc:sc};
-  }).filter(function(x){ return x.sc > 0; });
-  scored.sort(function(a,b){ return b.sc - a.sc; });
-  return scored.slice(0, topN||3).map(function(x){ return x.c; });
-}
-
 function rfFillCnae(found){
   var inp  = document.getElementById('f_emp_cnae');
   var hint = document.getElementById('f_emp_cnae_hint');
@@ -1740,30 +1723,19 @@ function rfExtrair(){
   }
 
   if(!cnaeOk){
-    var sug = cnaeSemantic(info.ramoAtividade || info.cnaeCode, 3);
-    document.getElementById('rf-cnae-code').textContent = info.cnaeCode || '(não identificado)';
-    document.getElementById('rf-cnae-ramo').textContent = info.ramoAtividade || '';
-    var html = sug.map(function(c){
-      return '<div class="rf-sug-opt" onclick="rfSelectCnae(\''+c.codigo.replace(/\\/g,'\\\\').replace(/'/g,"\\'")+'\')">'
-           + '<span class="rf-sug-code">'+c.codigo+'</span>'
-           + '<span class="rf-sug-nome">'+c.nome+'</span></div>';
-    }).join('');
-    document.getElementById('rf-sug-list').innerHTML = html
-      || '<p style="color:var(--text2);font-size:13px;margin:0">Nenhuma sugestão encontrada. Preencha o campo CNAE manualmente.</p>';
-    document.getElementById('ov-rf-cnae').classList.add('show');
+    var warn = document.getElementById('rf-cnae-warn');
+    if(warn){
+      document.getElementById('rf-cnae-warn-code').textContent = info.cnaeCode || '(não identificado)';
+      var rEl = document.getElementById('rf-cnae-warn-ramo');
+      rEl.textContent = info.ramoAtividade ? ' — ' + info.ramoAtividade : '';
+      warn.style.display = 'block';
+    }
+    showToast('Demais campos preenchidos. Escolha o CNAE manualmente.','warn', 4000);
   } else {
+    var warn2 = document.getElementById('rf-cnae-warn');
+    if(warn2) warn2.style.display = 'none';
     showToast('Dados da empresa preenchidos com sucesso.','ok');
-    document.getElementById('rf-panel').style.display = 'none';
-    document.getElementById('rf-toggle-btn').classList.remove('active');
   }
-  updateProgress();
-}
-
-function rfSelectCnae(codigo){
-  var found = (window.SINAN_CNAES||[]).find(function(c){ return c.codigo === codigo; });
-  if(found) rfFillCnae(found);
-  closeModal('ov-rf-cnae');
-  showToast('Dados da empresa preenchidos.','ok');
   document.getElementById('rf-panel').style.display = 'none';
   document.getElementById('rf-toggle-btn').classList.remove('active');
   updateProgress();
