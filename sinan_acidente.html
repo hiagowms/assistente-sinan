@@ -466,6 +466,21 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 [data-theme="dark"] .transfer-ficha-opt.selected{border-color:#3b82f6;background:var(--accent-bg)}
 [data-theme="dark"] .transfer-ficha-name{color:var(--text)}
 [data-theme="dark"] .transfer-ficha-sub{color:var(--text3)}
+
+/* RECEITA FEDERAL PANEL */
+.rf-toggle-btn{background:transparent;border:1.5px dashed var(--border);color:var(--text2);padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;white-space:nowrap;margin-bottom:12px}
+.rf-toggle-btn:hover,.rf-toggle-btn.active{border-color:#2563eb;color:#2563eb;background:rgba(37,99,235,.06);border-style:solid}
+.rf-panel{background:var(--bg-hover);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:16px;display:none}
+.rf-instr{font-size:12px;color:var(--text2);margin:0 0 10px;line-height:1.5}
+.rf-instr kbd{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:11px;font-family:monospace}
+.rf-textarea{width:100%;min-height:90px;resize:vertical;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:12px;font-family:monospace;background:var(--bg-card);color:var(--text);box-sizing:border-box;line-height:1.4}
+.rf-textarea:focus{outline:none;border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.rf-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.rf-sug-list{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.rf-sug-opt{border:1.5px solid var(--border);border-radius:8px;padding:10px 14px;cursor:pointer;transition:all .15s;display:flex;flex-direction:column;gap:3px}
+.rf-sug-opt:hover{border-color:#2563eb;background:rgba(37,99,235,.05)}
+.rf-sug-code{font-size:12px;font-weight:700;color:#2563eb}
+.rf-sug-nome{font-size:12px;color:var(--text)}
 </style>
 </head>
 <body>
@@ -929,6 +944,17 @@ function toggleDarkMode(){
   </div>
   <div class="sec-body">
 
+    <!-- IMPORTAR VIA RECEITA FEDERAL -->
+    <button type="button" class="rf-toggle-btn" id="rf-toggle-btn" onclick="rfTogglePanel()">&#128203; Importar via Receita Federal</button>
+    <div class="rf-panel" id="rf-panel">
+      <p class="rf-instr">Acesse <strong>consulta.cnpj.receita.fazenda.gov.br</strong>, abra a ficha do CNPJ, selecione tudo (<kbd>Ctrl+A</kbd>) e cole abaixo:</p>
+      <textarea id="rf-textarea" class="rf-textarea" rows="5" placeholder="Cole aqui o texto completo da página da Receita Federal..."></textarea>
+      <div class="rf-actions">
+        <button type="button" class="mbtn mbtn-p" onclick="rfExtrair()">Extrair e preencher</button>
+        <button type="button" class="mbtn mbtn-s" onclick="document.getElementById('rf-textarea').value=''">Limpar</button>
+      </div>
+    </div>
+
     <div class="row">
       <div class="fld">
         <label>Registro / CNPJ / CPF <span class="cn">[Campo 38]</span></label>
@@ -1356,6 +1382,18 @@ function toggleDarkMode(){
   </div>
 </div>
 
+<div class="ov" id="ov-rf-cnae">
+  <div class="modal" style="max-width:500px">
+    <div class="modal-ico">&#128269;</div>
+    <h2>CNAE não encontrado na lista</h2>
+    <p>O código <strong id="rf-cnae-code"></strong> (<span id="rf-cnae-ramo" style="font-style:italic"></span>) não consta na lista SINAN. Selecione o mais adequado ou feche para preencher manualmente:</p>
+    <div class="rf-sug-list" id="rf-sug-list"></div>
+    <div class="modal-actions">
+      <button class="mbtn mbtn-s" onclick="closeModal('ov-rf-cnae')">Preencher manualmente</button>
+    </div>
+  </div>
+</div>
+
 <!-- BOTTOM SHEET MOBILE -->
 <div id="pac-mob-sheet">
   <div id="pac-mob-backdrop" onclick="closePacSheet()"></div>
@@ -1606,6 +1644,130 @@ function cnaeSetup(inputId, hintId){
 
 cnaeSetup('f_emp_cnae',      'f_emp_cnae_hint');
 cnaeSetup('f_emp_terc_cnae', 'f_emp_terc_cnae_hint');
+
+/*==========================================================
+  RECEITA FEDERAL — EXTRAÇÃO DE CNPJ
+==========================================================*/
+function rfTogglePanel(){
+  var panel = document.getElementById('rf-panel');
+  var btn   = document.getElementById('rf-toggle-btn');
+  var open  = panel.style.display === 'block';
+  panel.style.display = open ? 'none' : 'block';
+  btn.classList.toggle('active', !open);
+}
+
+function extractCompanyInfo(text){
+  var r = {};
+  var cnpjM = text.match(/\d{2}[\.\s]?\d{3}[\.\s]?\d{3}[\/\s]?\d{4}[-\s]?\d{2}/);
+  r.cnpj = cnpjM ? cnpjM[0].replace(/\s/g,'') : '';
+
+  var rsM = text.match(/Raz[aã]o\s+Social[:\s]+([^\n\r]+)/i);
+  r.razaoSocial = rsM ? rsM[1].trim() : '';
+
+  var fnM = text.match(/Nome\s+de?\s+Fantasia[:\s]+([^\n\r]+)/i);
+  r.nomeFantasia = fnM ? fnM[1].trim().replace(/^\.\s*/,'') : '';
+
+  var cnaeM = text.match(/CNAE\s*(?:Principal\s*)?[-–:]?\s*([\d\.\/\-]+)\s*[-–]\s*([^\n\r]+)/i);
+  r.cnaeCode      = cnaeM ? cnaeM[1].trim() : '';
+  r.ramoAtividade = cnaeM ? cnaeM[2].trim() : '';
+
+  var endM = text.match(/Logradouro\s*[\/][^:]*:\s*([^\n\r]+)/i)
+          || text.match(/Logradouro[:\s]+([^\n\r]+)/i);
+  r.logradouro = endM ? endM[1].trim() : '';
+
+  var numM = text.match(/N[uú]mero[:\s]+([^\s\n\r\/,]+)/i);
+  r.numero = numM ? numM[1].trim() : '';
+
+  var bairroM = text.match(/Bairro\s*[\/]\s*[Dd]istrito[:\s]+([^\n\r]+)/i)
+             || text.match(/Bairro[:\s]+([^\n\r]+)/i);
+  r.bairro = bairroM ? bairroM[1].trim() : '';
+
+  var munM = text.match(/Munic[ií]pio[:\s]+([^\n\r]+)/i);
+  r.municipio = munM ? munM[1].trim() : '';
+
+  var ufM = text.match(/\bUF[:\s]+([A-Za-z]{2})\b/i);
+  r.uf = ufM ? ufM[1].toUpperCase() : '';
+
+  return r;
+}
+
+function cnaeSemantic(query, topN){
+  if(!window.SINAN_CNAES || !query) return [];
+  var words = query.toUpperCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^A-Z0-9\s]/g,' ')
+    .split(/\s+/).filter(function(w){ return w.length > 3; });
+  if(!words.length) return [];
+  var scored = window.SINAN_CNAES.map(function(c){
+    var nome = c.nome.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    var sc = 0; words.forEach(function(w){ if(nome.indexOf(w) >= 0) sc++; });
+    return {c:c, sc:sc};
+  }).filter(function(x){ return x.sc > 0; });
+  scored.sort(function(a,b){ return b.sc - a.sc; });
+  return scored.slice(0, topN||3).map(function(x){ return x.c; });
+}
+
+function rfFillCnae(found){
+  var inp  = document.getElementById('f_emp_cnae');
+  var hint = document.getElementById('f_emp_cnae_hint');
+  if(inp)  { inp.value = found.codigo; }
+  if(hint) { hint.textContent = found.nome; hint.style.display = 'block'; }
+}
+
+function rfExtrair(){
+  var text = document.getElementById('rf-textarea').value;
+  if(!text.trim()){ showToast('Cole o texto da Receita Federal antes de extrair.','warn'); return; }
+  var info = extractCompanyInfo(text);
+
+  if(info.cnpj)        _setField('f_emp_reg',    info.cnpj);
+  if(info.razaoSocial) _setField('f_emp_nome',   info.razaoSocial);
+  if(info.logradouro)  _setField('f_emp_end',    info.logradouro);
+  if(info.numero)      _setField('f_emp_num',    info.numero);
+  if(info.bairro)      _setField('f_emp_bairro', info.bairro);
+  if(info.municipio)   _setField('f_emp_mun',    info.municipio);
+  if(info.uf)          _setField('f_emp_uf',     info.uf);
+
+  var cnaeOk = false;
+  if((info.cnaeCode || info.ramoAtividade) && window.SINAN_CNAES){
+    var normExt = normCnae(info.cnaeCode);
+    var found = normExt
+      ? window.SINAN_CNAES.find(function(c){
+          var nc = normCnae(c.codigo);
+          return nc === normExt || normExt.indexOf(nc) === 0 || nc.indexOf(normExt) === 0;
+        })
+      : null;
+    if(found){ rfFillCnae(found); cnaeOk = true; }
+  }
+
+  if(!cnaeOk){
+    var sug = cnaeSemantic(info.ramoAtividade || info.cnaeCode, 3);
+    document.getElementById('rf-cnae-code').textContent = info.cnaeCode || '(não identificado)';
+    document.getElementById('rf-cnae-ramo').textContent = info.ramoAtividade || '';
+    var html = sug.map(function(c){
+      return '<div class="rf-sug-opt" onclick="rfSelectCnae(\''+c.codigo.replace(/\\/g,'\\\\').replace(/'/g,"\\'")+'\')">'
+           + '<span class="rf-sug-code">'+c.codigo+'</span>'
+           + '<span class="rf-sug-nome">'+c.nome+'</span></div>';
+    }).join('');
+    document.getElementById('rf-sug-list').innerHTML = html
+      || '<p style="color:var(--text2);font-size:13px;margin:0">Nenhuma sugestão encontrada. Preencha o campo CNAE manualmente.</p>';
+    document.getElementById('ov-rf-cnae').classList.add('show');
+  } else {
+    showToast('Dados da empresa preenchidos com sucesso.','ok');
+    document.getElementById('rf-panel').style.display = 'none';
+    document.getElementById('rf-toggle-btn').classList.remove('active');
+  }
+  updateProgress();
+}
+
+function rfSelectCnae(codigo){
+  var found = (window.SINAN_CNAES||[]).find(function(c){ return c.codigo === codigo; });
+  if(found) rfFillCnae(found);
+  closeModal('ov-rf-cnae');
+  showToast('Dados da empresa preenchidos.','ok');
+  document.getElementById('rf-panel').style.display = 'none';
+  document.getElementById('rf-toggle-btn').classList.remove('active');
+  updateProgress();
+}
 
 /*==========================================================
   AUTOCOMPLETE CBO (ocupação)
