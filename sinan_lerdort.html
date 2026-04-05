@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SINAN — Violência | Assistente PET Saúde Digital</title>
+<title>SINAN — LER/DORT | Assistente PET Saúde Digital</title>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XBCCJ6GTG6"></script>
 <script>
@@ -106,7 +106,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 ==============================================================*/
 .sec{background:#ffffff;border-radius:14px;border:1px solid #e5e7eb;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:20px;overflow:hidden}
 
-/* Section header — NOT clickable (no accordion) */
+/* Section header */
 .sec-hdr{display:flex;align-items:center;gap:14px;padding:16px 22px 14px;border-bottom:2px solid #f3f4f6;border-left:5px solid #d1d5db;transition:border-color .4s}
 .sec.done .sec-hdr{border-left-color:#27ae60;background:linear-gradient(90deg,rgba(39,174,96,.04) 0%,transparent 60%)}
 .sec.partial .sec-hdr{border-left-color:#f39c12;background:linear-gradient(90deg,rgba(243,156,18,.04) 0%,transparent 60%)}
@@ -230,7 +230,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 
 .tip-pop{
   display:none;
-  position:fixed; /* JS sobrescreve coordenadas — fixed escapa de overflow:hidden */
+  position:fixed;
   background:#1e293b;color:#cbd5e1;
   font-size:12px;font-weight:400;line-height:1.6;
   padding:12px 14px;border-radius:10px;
@@ -240,7 +240,6 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
   white-space:normal;
   --tip-arrow-left:50%
 }
-/* Seta apontando para baixo (tooltip acima do botão — padrão) */
 .tip-pop::after{
   content:'';position:absolute;
   top:100%;
@@ -249,7 +248,6 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
   border:7px solid transparent;
   border-top-color:#1e293b
 }
-/* Seta apontando para cima (tooltip abaixo do botão) */
 .tip-pop[data-arrow-below="0"]::after{
   top:auto;bottom:100%;
   border-top-color:transparent;
@@ -282,7 +280,6 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 
 /*==============================================================
   MOBILE RESPONSIVE — @media max-width:768px
-  Todas as regras abaixo NÃO afetam o layout desktop
 ==============================================================*/
 @media(max-width:768px){
 
@@ -338,7 +335,6 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
   .col-2,.col-3{grid-column:span 1!important}
 
   /* ── CAMPOS ─────────────────────────────────────────────── */
-  /* font-size 16px evita o zoom automático do iOS */
   .fld input,.fld select,.fld textarea{
     font-size:16px!important;
     padding:11px 13px;
@@ -455,7 +451,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 
 [data-theme="dark"] body{background:var(--bg);color:var(--text)}
 
-/* Header — mantém gradiente mas ajusta opacidade */
+/* Header */
 [data-theme="dark"] #hdr{box-shadow:0 4px 20px rgba(0,0,0,.5)}
 [data-theme="dark"] #prog-bar-strip{background:rgba(255,255,255,.06)}
 
@@ -610,7 +606,7 @@ function toggleDarkMode(){
     <img class="hdr-logo" src="assets/img/pet-saude-logo-png.png" alt="PET Saúde Digital">
     <div class="hdr-vline"></div>
     <div class="hdr-title">
-      <h1>SINAN — Violência Doméstica, Sexual e/ou Outras Violências</h1>
+      <h1>SINAN — LER/DORT</h1>
       <p>Assistente de preenchimento · PET Saúde Digital</p>
     </div>
 
@@ -686,7 +682,6 @@ function toggleDarkMode(){
   <div><strong>Ferramenta NÃO oficial.</strong> Gera uma ficha impressa adaptada do SINAN para facilitar o preenchimento. As informações aqui inseridas <strong>não são enviadas a nenhum sistema</strong> — a digitação posterior no <strong>SINAN NET</strong> permanece obrigatória para registro oficial no Ministério da Saúde.</div>
 </div>
 
-
 <!-- =========================================================
   SEÇÃO 1 — DADOS DA NOTIFICAÇÃO
 ========================================================= -->
@@ -701,26 +696,26 @@ function toggleDarkMode(){
   </div>
   <div class="sec-body">
 
-    <div class="info"><span class="ico">ℹ️</span><div>O <strong>Nº da Notificação</strong> é fornecido pela Vigilância Epidemiológica local — não é obrigatório aqui. O <strong>Campo 6</strong> (tipo de unidade) é obrigatório. Se a data da ocorrência for desconhecida, use uma <strong>data aproximada</strong>.</div></div>
+    <div class="info"><span class="ico">ℹ️</span><div>A <strong>Data do Diagnóstico (Campo 8)</strong> corresponde à data em que o profissional de saúde estabeleceu o diagnóstico da LER/DORT.</div></div>
 
     <div class="row">
       <div class="fld">
-        <label>Nº da Notificação <span class="cn">[Campo 1]</span></label>
+        <label>Nº da Notificação <span class="cn">[C.1]</span></label>
         <input type="text" id="f_num_notif" placeholder="Fornecido pela VE local">
       </div>
       <div class="fld">
-        <label>Data da Notificação <span class="req-star">⭐</span><span class="cn">[Campo 3]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">A data da notificação define o prazo para ações de proteção. Notificações tardias comprometem a vigilância epidemiológica local.</span></span></span></label>
+        <label>Data da Notificação <span class="req-star">⭐</span><span class="cn">[C.2]</span></label>
         <input type="date" id="f_data_notif" data-ess data-label="Data da notificação">
       </div>
       <div class="fld">
-        <label>Data da Ocorrência <span class="req-star">⭐</span><span class="cn">[Campo 9]</span></label>
-        <input type="date" id="f_data_ocorr" data-ess data-label="Data da ocorrência">
+        <label>Data do Diagnóstico <span class="req-star">⭐</span><span class="cn">[C.8]</span></label>
+        <input type="date" id="f_data_diag" data-ess data-label="Data do diagnóstico">
       </div>
     </div>
 
     <div class="row">
       <div class="fld col-2">
-        <label>Município de Notificação <span class="cn">[Campo 5]</span></label>
+        <label>Município de Notificação <span class="cn">[C.5]</span></label>
         <div class="ac-wrap">
           <input type="text" id="f_mun_notif" placeholder="Digite para buscar — UF preenchida automaticamente" data-caps autocomplete="off">
           <div class="ac-drop" id="f_mun_notif-drop"></div>
@@ -732,34 +727,18 @@ function toggleDarkMode(){
       </div>
       <div class="fld" style="max-width:120px">
         <label>Código IBGE</label>
-        <input type="text" id="f_ibge_notif" maxlength="6" placeholder="000000" readonly>
+        <input type="text" id="f_ibge_notif" maxlength="7" placeholder="0000000" readonly>
       </div>
     </div>
 
     <div class="row row-wide">
       <div class="fld col-2">
-        <label>Tipo de Unidade Notificadora <span class="req-star">⭐</span><span class="cn">[Campo 6]</span></label>
-        <select id="f_tipo_un" data-ess data-label="Tipo de unidade notificadora">
-          <option value="">— Selecione —</option>
-          <option value="1">1 — Unidade de Saúde</option>
-          <option value="2">2 — Unidade de Assistência Social</option>
-          <option value="3">3 — Estabelecimento de Ensino</option>
-          <option value="4">4 — Conselho Tutelar</option>
-          <option value="5">5 — Unidade de Saúde Indígena</option>
-          <option value="6">6 — Centro Especializado de Atendimento à Mulher</option>
-          <option value="7">7 — Outros</option>
-        </select>
-      </div>
-      <div class="fld">
-        <label>CNES <span class="cn">[Campo 8]</span></label>
-        <input type="text" id="f_cnes" maxlength="7" placeholder="0000000">
-      </div>
-    </div>
-
-    <div class="row row-full">
-      <div class="fld">
-        <label>Nome da Unidade Notificadora <span class="cn">[Campo 7]</span></label>
+        <label>Nome da Unidade Notificadora <span class="cn">[C.7]</span></label>
         <input type="text" id="f_nome_un" placeholder="Nome completo da unidade" data-caps>
+      </div>
+      <div class="fld">
+        <label>CNES <span class="cn">[C.8]</span></label>
+        <input type="text" id="f_cnes" maxlength="7" placeholder="0000000">
       </div>
     </div>
 
@@ -774,17 +753,17 @@ function toggleDarkMode(){
     <div class="sec-num">2</div>
     <div class="sec-info">
       <h3>Identificação do Paciente</h3>
-      <p>Campos 10–18 — dados pessoais da vítima</p>
+      <p>Dados pessoais do trabalhador</p>
     </div>
     <span class="sec-badge badge-empty" id="badge2">—</span>
   </div>
   <div class="sec-body">
 
-    <div class="info"><span class="ico">ℹ️</span><div><strong>Nome (Campo 10)</strong> é obrigatório — se desconhecido, escreva <strong>IGNORADO</strong>. Preencha <strong>data de nascimento OU idade</strong> (ao menos um). <strong>Raça/Cor (Campo 15)</strong> deve ser preenchida conforme <em>declaração da própria pessoa</em> — campo essencial.</div></div>
+    <div class="info"><span class="ico">ℹ️</span><div><strong>Nome</strong> é obrigatório — se desconhecido, escreva <strong>IGNORADO</strong>. Preencha <strong>data de nascimento OU idade</strong> (ao menos um). <strong>Raça/Cor</strong> deve ser preenchida conforme <em>declaração da própria pessoa</em>.</div></div>
 
     <div class="row row-full">
       <div class="fld">
-        <label>Nome Completo da Vítima <span class="req-star">⭐</span><span class="cn">[Campo 10]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">O nome da vítima é necessário para vincular notificações e evitar duplicidade no SINAN. Se desconhecido, escreva IGNORADO.</span></span></span></label>
+        <label>Nome Completo do Paciente <span class="req-star">⭐</span><span class="cn">[Campo 10]</span></label>
         <input type="text" id="f_nome" placeholder="Nome completo — ou IGNORADO se desconhecido" data-caps data-ess data-label="Nome do paciente">
       </div>
     </div>
@@ -809,7 +788,7 @@ function toggleDarkMode(){
         </select>
       </div>
       <div class="fld">
-        <label>Sexo <span class="req-star">⭐</span><span class="cn">[Campo 13]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">O sexo é essencial para análise epidemiológica de violências de gênero e para cálculo de indicadores nacionais.</span></span></span></label>
+        <label>Sexo <span class="req-star">⭐</span><span class="cn">[Campo 13]</span></label>
         <div class="pills" id="grp_sexo">
           <label class="pill" data-val="M"><input type="radio" name="sexo" value="M" onchange="onSexoChange()"> Masculino</label>
           <label class="pill" data-val="F"><input type="radio" name="sexo" value="F" onchange="onSexoChange()"> Feminino</label>
@@ -836,7 +815,7 @@ function toggleDarkMode(){
 
     <div class="row">
       <div class="fld">
-        <label>Raça/Cor <span class="req-star">⭐</span><span class="cn">[Campo 15]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Autodeclaração do paciente conforme as categorias do IBGE: Branca, Preta, Parda, Amarela ou Indígena. O profissional <u>não deve deduzir</u> — deve perguntar à própria pessoa.</span><span class="tip-r"><b>Por que informar:</b> Essencial para evidenciar o racismo estrutural e a vulnerabilidade desigual nos índices de violência.</span></span></span></span></label>
+        <label>Raça/Cor <span class="req-star">⭐</span><span class="cn">[Campo 15]</span></label>
         <select id="f_raca" data-ess data-label="Raça/Cor">
           <option value="">— Selecione —</option>
           <option value="1">1 — Branca</option>
@@ -888,14 +867,14 @@ function toggleDarkMode(){
     <div class="sec-num">3</div>
     <div class="sec-info">
       <h3>Dados de Residência</h3>
-      <p>Campos 19–32 — endereço da vítima</p>
+      <p>Endereço e contato do paciente</p>
     </div>
     <span class="sec-badge badge-empty" id="badge3">—</span>
   </div>
   <div class="sec-body">
     <div class="row">
       <div class="fld col-2">
-        <label>Município <span class="req-star">⭐</span><span class="cn">[Campo 20]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">Município de residência permite que a vigilância local acompanhe e intervenha no caso, e é essencial para georeferenciamento dos dados.</span></span></span></label>
+        <label>Município <span class="req-star">⭐</span><span class="cn">[Campo 20]</span></label>
         <div class="ac-wrap">
           <input type="text" id="f_mun_res" data-ess data-label="Município de residência" placeholder="Digite para buscar — UF preenchida automaticamente" data-caps autocomplete="off">
           <div class="ac-drop" id="f_mun_res-drop"></div>
@@ -907,7 +886,7 @@ function toggleDarkMode(){
       </div>
       <div class="fld" style="max-width:120px">
         <label>Código IBGE</label>
-        <input type="text" id="f_ibge_res" maxlength="6" placeholder="000000" readonly>
+        <input type="text" id="f_ibge_res" maxlength="7" placeholder="0000000" readonly>
       </div>
     </div>
     <div class="row">
@@ -916,35 +895,49 @@ function toggleDarkMode(){
         <input type="text" id="f_bairro_res" data-caps>
       </div>
       <div class="fld col-2">
-        <label>Logradouro <span class="cn">[Campo 23]</span></label>
+        <label>Logradouro <span class="cn">[C.23]</span></label>
         <input type="text" id="f_logr_res" data-caps>
       </div>
+      <div class="fld" style="max-width:80px">
+        <label>Cód. Logr. <span class="cn">[C.24]</span></label>
+        <input type="text" id="f_logr_cod_res">
+      </div>
+    </div>
+    <div class="row">
       <div class="fld" style="max-width:100px">
-        <label>Número <span class="cn">[C.24]</span></label>
+        <label>Número <span class="cn">[C.25]</span></label>
         <input type="text" id="f_num_res">
+      </div>
+      <div class="fld col-2">
+        <label>Complemento <span class="cn">[C.26]</span></label>
+        <input type="text" id="f_compl_res" data-caps>
+      </div>
+      <div class="fld">
+        <label>Geo Campo 1 <span class="cn">[C.27]</span></label>
+        <input type="text" id="f_geo1_res">
+      </div>
+      <div class="fld">
+        <label>Geo Campo 2 <span class="cn">[C.28]</span></label>
+        <input type="text" id="f_geo2_res">
       </div>
     </div>
     <div class="row">
       <div class="fld col-2">
-        <label>Complemento <span class="cn">[C.25]</span></label>
-        <input type="text" id="f_compl_res" data-caps>
+        <label>Ponto de Referência <span class="cn">[C.29]</span></label>
+        <input type="text" id="f_pref_res" data-caps>
       </div>
       <div class="fld">
-        <label>CEP <span class="cn">[C.29]</span></label>
+        <label>CEP <span class="cn">[C.30]</span></label>
         <input type="text" id="f_cep" maxlength="9" placeholder="00000-000">
       </div>
       <div class="fld">
-        <label>Telefone (DDD) <span class="cn">[C.30]</span></label>
+        <label>Telefone (DDD) <span class="cn">[C.31]</span></label>
         <input type="text" id="f_tel_res" placeholder="(00) 00000-0000">
       </div>
     </div>
     <div class="row">
-      <div class="fld col-2">
-        <label>Ponto de Referência <span class="cn">[C.28]</span></label>
-        <input type="text" id="f_pref_res" data-caps>
-      </div>
       <div class="fld">
-        <label>Zona <span class="cn">[C.31]</span></label>
+        <label>Zona <span class="cn">[C.32]</span></label>
         <select id="f_zona_res">
           <option value="">—</option>
           <option value="1">1 — Urbana</option>
@@ -953,8 +946,8 @@ function toggleDarkMode(){
           <option value="9">9 — Ignorado</option>
         </select>
       </div>
-      <div class="fld">
-        <label>País (se fora do Brasil) <span class="cn">[C.32]</span></label>
+      <div class="fld col-2">
+        <label>País (se fora do Brasil) <span class="cn">[C.33]</span></label>
         <input type="text" id="f_pais_res" data-caps>
       </div>
     </div>
@@ -962,43 +955,39 @@ function toggleDarkMode(){
 </div>
 
 <!-- =========================================================
-  SEÇÃO 4 — DADOS COMPLEMENTARES
+  SEÇÃO 4 — OCUPAÇÃO E MERCADO DE TRABALHO
 ========================================================= -->
 <div class="sec" id="sec4">
   <div class="sec-hdr">
     <div class="sec-num">4</div>
     <div class="sec-info">
-      <h3>Dados Complementares do Paciente</h3>
-      <p>Campos 33–39 — orientação sexual, gênero, deficiências</p>
+      <h3>Ocupação e Mercado de Trabalho</h3>
+      <p>Dados profissionais do trabalhador</p>
     </div>
     <span class="sec-badge badge-empty" id="badge4">—</span>
   </div>
   <div class="sec-body">
 
-    <div class="info"><span class="ico">ℹ️</span><div>Os campos <strong>Orientação Sexual (36)</strong> e <strong>Identidade de Gênero (37)</strong> são obrigatórios para pacientes com <strong>10 anos ou mais</strong>.</div></div>
-
-    <div class="row">
-      <div class="fld">
-        <label>Nome Social <span class="cn">[C.33]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Nome pelo qual a pessoa se identifica e prefere ser chamada socialmente, diferente do nome civil registrado em cartório. Deve ser respeitado independentemente de retificação documental.</span><span class="tip-r"><b>Por que informar:</b> Garante acolhimento respeitoso e evita constrangimento no atendimento. Também permite identificar barreiras de acesso à saúde enfrentadas pela população trans e travesti.</span></span></span></span></label>
-        <input type="text" id="f_nome_social" data-caps placeholder="Se diferente do nome civil">
-      </div>
+    <div class="row row-wide">
       <div class="fld col-2">
-        <label>Ocupação (CBO) <span class="cn">[C.34]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> A atividade profissional exercida pela vítima, classificada segundo a CBO (Classificação Brasileira de Ocupações). Pode digitar o nome popular ou o código — o sistema busca automaticamente, inclusive sinônimos.</span><span class="tip-r"><b>Por que informar:</b> Permite ao SUS mapear violências no ambiente de trabalho, identificar categorias profissionais mais vulneráveis e direcionar políticas de proteção ao trabalhador.</span></span></span></span></label>
+        <label>Ocupação (CBO) <span class="req-star">⭐</span><span class="cn">[C.33]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">A Classificação Brasileira de Ocupações (CBO) permite identificar o vínculo entre a doença e a atividade laboral. Pode digitar o nome ou código — o sistema busca automaticamente.</span></span></span></label>
         <div class="ac-wrap">
-          <input type="text" id="f_ocupacao" data-caps autocomplete="off" placeholder="Nome ou código CBO (ex: ENFERMEIRO, 223505)">
+          <input type="text" id="f_ocupacao" data-caps data-ess data-label="Ocupação CBO" autocomplete="off" placeholder="Nome ou código CBO (ex: DIGITADOR, 411005)">
           <div class="ac-drop" id="f_ocupacao-drop"></div>
         </div>
         <span id="f_ocupacao_hint" style="font-size:12px;color:#2563eb;margin-top:4px;display:none;line-height:1.4;font-weight:600"></span>
       </div>
       <div class="fld">
-        <label>Situação Conjugal <span class="cn">[C.35]</span></label>
-        <select id="f_est_civil">
+        <label>Situação no Mercado de Trabalho <span class="cn">[C.34]</span></label>
+        <select id="f_sit_mercado">
           <option value="">— Selecione —</option>
-          <option value="1">1 — Solteiro(a)</option>
-          <option value="2">2 — Casado(a) / União estável</option>
-          <option value="3">3 — Viúvo(a)</option>
-          <option value="4">4 — Separado(a)</option>
-          <option value="8">8 — Não se aplica</option>
+          <option value="1">1 — Empregado registrado</option>
+          <option value="2">2 — Empregado não registrado</option>
+          <option value="3">3 — Autônomo/conta própria</option>
+          <option value="4">4 — Desempregado</option>
+          <option value="5">5 — Aposentado/Pensionista</option>
+          <option value="6">6 — Trabalhador doméstico</option>
+          <option value="7">7 — Servidor público</option>
           <option value="9">9 — Ignorado</option>
         </select>
       </div>
@@ -1006,55 +995,27 @@ function toggleDarkMode(){
 
     <div class="row">
       <div class="fld">
-        <label>Orientação Sexual <span class="req-star">⭐</span><span class="cn">[Campo 36]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Por quem a pessoa sente atração afetiva ou sexual — Heterossexual, Homossexual (gay/lésbica), Bissexual etc. Independe de como ela se apresenta ou se veste.</span><span class="tip-r"><b>Por que informar:</b> Ajuda a identificar crimes de LGBTfobia e a direcionar o acolhimento e encaminhamento corretos.</span></span></span></span></label>
-        <select id="f_or_sex" data-ess data-label="Orientação sexual">
-          <option value="">— Selecione —</option>
-          <option value="1">1 — Heterossexual</option>
-          <option value="2">2 — Homossexual (gay / lésbica)</option>
-          <option value="3">3 — Bissexual</option>
-          <option value="8">8 — Não se aplica</option>
-          <option value="9">9 — Ignorado</option>
-        </select>
-      </div>
-      <div class="fld">
-        <label>Identidade de Gênero <span class="req-star">⭐</span><span class="cn">[Campo 37]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Como a pessoa se reconhece e se apresenta ao mundo — Mulher Trans, Homem Trans, Travesti, Cisgênero etc. É independente do sexo biológico ao nascer.</span><span class="tip-r"><b>Por que informar:</b> Fundamental para mapear violências específicas contra a população trans e travesti e acionar redes de proteção adequadas.</span></span></span></span></label>
-        <select id="f_id_gen" data-ess data-label="Identidade de gênero">
-          <option value="">— Selecione —</option>
-          <option value="1">1 — Travesti</option>
-          <option value="2">2 — Mulher transexual</option>
-          <option value="3">3 — Homem transexual</option>
-          <option value="8">8 — Não se aplica</option>
-          <option value="9">9 — Ignorado</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="fld">
-        <label>Possui Deficiência/Transtorno? <span class="cn">[Campo 38]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Impedimento de longo prazo de natureza física, mental, intelectual ou sensorial que dificulte a participação plena na sociedade em igualdade com os demais.</span><span class="tip-r"><b>Por que informar:</b> Garante o acionamento da rede de proteção social e de acessibilidade adequada — pessoas com deficiência são mais vulneráveis à violência e ao subregistro.</span></span></span></span></label>
-        <div class="pills" id="grp_defic">
-          <label class="pill" data-val="1"><input type="radio" name="defic" value="1"> Sim</label>
-          <label class="pill" data-val="2"><input type="radio" name="defic" value="2"> Não</label>
-          <label class="pill" data-val="9"><input type="radio" name="defic" value="9"> Ignorado</label>
+        <label>Tempo de Exposição <span class="cn">[C.35]</span></label>
+        <div style="display:flex;gap:8px">
+          <input type="number" id="f_tempo_exp_val" min="0" placeholder="Ex: 12" style="flex:1">
+          <select id="f_tempo_exp_tipo" style="width:90px">
+            <option value="">—</option>
+            <option value="A">A — Anos</option>
+            <option value="M">M — Meses</option>
+            <option value="D">D — Dias</option>
+          </select>
         </div>
       </div>
-    </div>
-
-    <div id="row_defic_tipos" style="display:none">
-      <div class="sublabel">Campo 39 — Tipo(s) de Deficiência</div>
-      <div class="pills" id="grp_tdefic">
-        <label class="pill" data-val="1" data-name="tdefic"><input type="checkbox" name="tdefic" value="1"> Física</label>
-        <label class="pill" data-val="2" data-name="tdefic"><input type="checkbox" name="tdefic" value="2"> Visual</label>
-        <label class="pill" data-val="3" data-name="tdefic"><input type="checkbox" name="tdefic" value="3"> Intelectual / cognitiva</label>
-        <label class="pill" data-val="4" data-name="tdefic"><input type="checkbox" name="tdefic" value="4"> Auditiva</label>
-        <label class="pill" data-val="5" data-name="tdefic"><input type="checkbox" name="tdefic" value="5"> Transtorno mental</label>
-        <label class="pill" data-val="6" data-name="tdefic"><input type="checkbox" name="tdefic" value="6"> Transtorno de comportamento</label>
-        <label class="pill" data-val="7" data-name="tdefic"><input type="checkbox" name="tdefic" value="7"> Outras</label>
-      </div>
-      <div id="box_tdefic_outras" style="display:none;margin-top:8px">
-        <div class="fld">
-          <label style="font-size:11px">Especificar "Outras" <span class="cn">[C.39]</span></label>
-          <input type="text" id="f_tdefic_outras" data-caps placeholder="Descreva as outras deficiências/transtornos">
+      <div class="fld">
+        <label>Tempo no Trabalho/Ocupação <span class="cn">[C.36]</span></label>
+        <div style="display:flex;gap:8px">
+          <input type="number" id="f_tempo_trab_val" min="0" placeholder="Ex: 12" style="flex:1">
+          <select id="f_tempo_trab_tipo" style="width:90px">
+            <option value="">—</option>
+            <option value="A">A — Anos</option>
+            <option value="M">M — Meses</option>
+            <option value="D">D — Dias</option>
+          </select>
         </div>
       </div>
     </div>
@@ -1063,285 +1024,213 @@ function toggleDarkMode(){
 </div>
 
 <!-- =========================================================
-  SEÇÃO 5 — LOCAL E DADOS DA OCORRÊNCIA
+  SEÇÃO 5 — DADOS DA EMPRESA
 ========================================================= -->
 <div class="sec" id="sec5">
   <div class="sec-hdr">
     <div class="sec-num">5</div>
     <div class="sec-info">
-      <h3>Local e Dados da Ocorrência</h3>
-      <p>Campos 40–54 — endereço e contexto da violência</p>
+      <h3>Dados da Empresa</h3>
+      <p>Local de trabalho onde ocorreu a exposição</p>
     </div>
     <span class="sec-badge badge-empty" id="badge5">—</span>
   </div>
   <div class="sec-body">
-    <div class="row">
+
+    <div class="row row-wide">
+      <div class="fld">
+        <label>Registro/CNPJ/CPF <span class="cn">[C.37]</span></label>
+        <input type="text" id="f_emp_reg" placeholder="CNPJ ou CPF">
+      </div>
       <div class="fld col-2">
-        <label>Município da Ocorrência <span class="cn">[C.41]</span></label>
+        <label>Nome da Empresa <span class="req-star">⭐</span><span class="cn">[C.38]</span></label>
+        <input type="text" id="f_emp_nome" data-caps data-ess data-label="Nome da empresa" placeholder="Razão social ou nome fantasia">
+      </div>
+      <div class="fld">
+        <label>CNAE <span class="cn">[C.39]</span></label>
         <div class="ac-wrap">
-          <input type="text" id="f_mun_oc" placeholder="Digite para buscar — UF preenchida automaticamente" data-caps autocomplete="off">
-          <div class="ac-drop" id="f_mun_oc-drop"></div>
+          <input type="text" id="f_emp_cnae" placeholder="Digite código ou atividade..." autocomplete="off">
+          <div class="ac-drop" id="f_emp_cnae-drop"></div>
         </div>
-      </div>
-      <div class="fld" style="max-width:100px">
-        <label>UF <span class="cn">[C.40]</span> <span style="font-size:9px;font-weight:500;color:#27ae60;text-transform:none">← auto</span></label>
-        <select id="f_uf_oc"></select>
-      </div>
-      <input type="hidden" id="f_ibge_oc">
-      <div class="fld">
-        <label>Bairro <span class="cn">[C.43]</span></label>
-        <input type="text" id="f_bairro_oc" data-caps>
+        <span id="f_emp_cnae_hint" style="font-size:12px;color:#2563eb;margin-top:4px;display:none;line-height:1.4;font-weight:600"></span>
       </div>
     </div>
+
     <div class="row">
-      <div class="fld col-2">
-        <label>Logradouro <span class="cn">[C.44]</span></label>
-        <input type="text" id="f_logr_oc" data-caps>
-      </div>
       <div class="fld" style="max-width:100px">
-        <label>Número <span class="cn">[C.45]</span></label>
-        <input type="text" id="f_num_oc">
+        <label>UF <span class="cn">[C.40]</span></label>
+        <input type="text" id="f_emp_uf" maxlength="2" data-caps placeholder="SP">
       </div>
       <div class="fld">
-        <label>Hora <span class="cn">[C.51]</span></label>
-        <input type="time" id="f_hora_oc">
+        <label>Município <span class="cn">[C.41]</span></label>
+        <input type="text" id="f_emp_mun" data-caps placeholder="Nome do município">
+      </div>
+      <div class="fld" style="max-width:120px">
+        <label>IBGE <span class="cn">[C.42]</span></label>
+        <input type="text" id="f_emp_ibge" maxlength="7" placeholder="0000000" readonly>
+      </div>
+      <div class="fld">
+        <label>Distrito <span class="cn">[C.43]</span></label>
+        <input type="text" id="f_emp_dist" data-caps>
       </div>
     </div>
+
     <div class="row">
       <div class="fld">
-        <label>Zona <span class="cn">[C.50]</span></label>
-        <select id="f_zona_oc">
-          <option value="">—</option>
-          <option value="1">1 — Urbana</option>
-          <option value="2">2 — Rural</option>
-          <option value="3">3 — Periurbana</option>
-          <option value="9">9 — Ignorado</option>
-        </select>
+        <label>Bairro <span class="cn">[C.44]</span></label>
+        <input type="text" id="f_emp_bairro" data-caps>
       </div>
       <div class="fld col-2">
-        <label>Local de Ocorrência <span class="cn">[Campo 52]</span></label>
-        <select id="f_local_oc">
-          <option value="">— Selecione —</option>
-          <option value="01">01 — Residência</option>
-          <option value="02">02 — Habitação coletiva</option>
-          <option value="03">03 — Escola</option>
-          <option value="04">04 — Local de prática esportiva</option>
-          <option value="05">05 — Bar ou similar</option>
-          <option value="06">06 — Via pública</option>
-          <option value="07">07 — Comércio / serviços</option>
-          <option value="08">08 — Indústrias / construção</option>
-          <option value="09">09 — Outro</option>
-          <option value="99">99 — Ignorado</option>
-        </select>
+        <label>Endereço <span class="cn">[C.45]</span></label>
+        <input type="text" id="f_emp_end" data-caps>
+      </div>
+      <div class="fld" style="max-width:100px">
+        <label>Número <span class="cn">[C.46]</span></label>
+        <input type="text" id="f_emp_num">
       </div>
     </div>
-    <div id="box_local_outro" style="display:none;margin-bottom:14px">
+
+    <div class="row">
+      <div class="fld col-2">
+        <label>Ponto de Referência <span class="cn">[C.47]</span></label>
+        <input type="text" id="f_emp_pref" data-caps>
+      </div>
       <div class="fld">
-        <label>Especificar "Outro" local <span class="cn">[C.52]</span></label>
-        <input type="text" id="f_local_outro" data-caps placeholder="Descreva o local de ocorrência">
+        <label>Telefone <span class="cn">[C.48]</span></label>
+        <input type="text" id="f_emp_tel" placeholder="(00) 00000-0000">
       </div>
     </div>
+
     <div class="row">
       <div class="fld">
-        <label>Ocorreu outras vezes? <span class="cn">[C.53]</span></label>
-        <div class="pills" id="grp_outr_vez">
-          <label class="pill" data-val="1"><input type="radio" name="outr_vez" value="1"> Sim</label>
-          <label class="pill" data-val="2"><input type="radio" name="outr_vez" value="2"> Não</label>
-          <label class="pill" data-val="9"><input type="radio" name="outr_vez" value="9"> Ignorado</label>
-        </div>
-      </div>
-      <div class="fld">
-        <label>Lesão autoprovocada? <span class="req-star">⭐</span><span class="cn">[Campo 54]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Lesão ou dano que a pessoa causou a si mesma, intencionalmente — inclui tentativa de suicídio, automutilação e autoagressão.</span><span class="tip-r"><b>Por que informar:</b> Caso de notificação imediata (24h). Aciona protocolos de saúde mental, suicidologia e acompanhamento psicossocial do SUS. Dado essencial para políticas de prevenção ao suicídio.</span></span></span></span></label>
-        <div class="pills" id="grp_auto_prov">
-          <label class="pill" data-val="1"><input type="radio" name="auto_prov" value="1" onchange="onAutoProv()"> Sim</label>
-          <label class="pill" data-val="2"><input type="radio" name="auto_prov" value="2" onchange="onAutoProv()"> Não</label>
-          <label class="pill" data-val="9"><input type="radio" name="auto_prov" value="9" onchange="onAutoProv()"> Ignorado</label>
+        <label>Empresa Terceirizada? <span class="cn">[C.49]</span></label>
+        <div class="pills" id="grp_emp_terc">
+          <label class="pill" data-val="1"><input type="radio" name="emp_terc" value="1" onchange="onEmpTerc()"> Sim</label>
+          <label class="pill" data-val="2"><input type="radio" name="emp_terc" value="2" onchange="onEmpTerc()"> Não</label>
+          <label class="pill" data-val="9"><input type="radio" name="emp_terc" value="9" onchange="onEmpTerc()"> Ignorado</label>
         </div>
       </div>
     </div>
 
-    <div class="danger-alert" id="box_auto_prov">
-      <span class="ico">🚨</span>
-      <div><strong>NOTIFICAÇÃO IMEDIATA!</strong> Lesão autoprovocada deve ser comunicada à Vigilância Epidemiológica <strong>em até 24 horas</strong>.</div>
+    <div id="box_emp_terc" style="display:none">
+      <div class="row">
+        <div class="fld">
+          <label>CNAE da Terceirizada <span class="cn">[C.50]</span></label>
+          <div class="ac-wrap">
+            <input type="text" id="f_emp_terc_cnae" placeholder="Digite código ou atividade..." autocomplete="off">
+            <div class="ac-drop" id="f_emp_terc_cnae-drop"></div>
+          </div>
+          <span id="f_emp_terc_cnae_hint" style="font-size:12px;color:#2563eb;margin-top:4px;display:none;line-height:1.4;font-weight:600"></span>
+        </div>
+        <div class="fld">
+          <label>CNPJ Empresa Principal <span class="cn">[C.51]</span></label>
+          <input type="text" id="f_emp_princ_cnpj" placeholder="00.000.000/0000-00">
+        </div>
+        <div class="fld col-2">
+          <label>Razão Social Empresa Principal <span class="cn">[C.52]</span></label>
+          <input type="text" id="f_emp_princ_rs" data-caps placeholder="Razão social">
+        </div>
+      </div>
     </div>
+
   </div>
 </div>
 
 <!-- =========================================================
-  SEÇÃO 6 — CARACTERIZAÇÃO DA VIOLÊNCIA
+  SEÇÃO 6 — AGRAVOS CONCOMITANTES
 ========================================================= -->
 <div class="sec" id="sec6">
   <div class="sec-hdr">
     <div class="sec-num">6</div>
     <div class="sec-info">
-      <h3>Caracterização da Violência</h3>
-      <p>Campos 55–64 — tipo, meios, agressor e circunstâncias</p>
+      <h3>Agravos Concomitantes</h3>
+      <p>Outras condições de saúde que podem influenciar o diagnóstico</p>
     </div>
     <span class="sec-badge badge-empty" id="badge6">—</span>
   </div>
   <div class="sec-body">
 
-    <!-- C55 — Motivação -->
+    <div class="info"><span class="ico">ℹ️</span><div>Indique se o trabalhador possui outros agravos de saúde concomitantes que possam influenciar o diagnóstico ou o curso da doença.</div></div>
+
+    <div class="pills" id="grp_agrav" style="margin-bottom:14px">
+      <label class="pill" data-val="1" data-name="agrav"><input type="checkbox" name="agrav" value="1"> Hipertensão</label>
+      <label class="pill" data-val="2" data-name="agrav"><input type="checkbox" name="agrav" value="2"> Diabetes</label>
+      <label class="pill" data-val="3" data-name="agrav"><input type="checkbox" name="agrav" value="3"> Hanseníase</label>
+      <label class="pill" data-val="4" data-name="agrav"><input type="checkbox" name="agrav" value="4"> Transtorno Mental</label>
+      <label class="pill" data-val="5" data-name="agrav"><input type="checkbox" name="agrav" value="5"> Tuberculose</label>
+      <label class="pill" data-val="6" data-name="agrav"><input type="checkbox" name="agrav" value="6"> Asma</label>
+      <label class="pill" data-val="7" data-name="agrav"><input type="checkbox" name="agrav" value="7" onchange="onAgravOutras()"> Outras</label>
+    </div>
+
+    <div id="box_agrav_outras" style="display:none;margin-bottom:14px">
+      <div class="fld">
+        <label>Especificar "Outras" <span class="cn">[C.53]</span></label>
+        <input type="text" id="f_agrav_outras_det" data-caps placeholder="Descreva outros agravos concomitantes">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- =========================================================
+  SEÇÃO 7 — SINTOMAS E DIAGNÓSTICO
+========================================================= -->
+<div class="sec" id="sec7">
+  <div class="sec-hdr">
+    <div class="sec-num">7</div>
+    <div class="sec-info">
+      <h3>Sintomas e Diagnóstico</h3>
+      <p>Sintomas predominantes, CID-10, limitação e regime de tratamento</p>
+    </div>
+    <span class="sec-badge badge-empty" id="badge7">—</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="sublabel">Sintomas Predominantes <span style="font-size:10px;font-weight:400;color:#9ca3af;text-transform:none;margin-left:6px">Marque todos que se aplicam</span></div>
+
+    <div class="pills" id="grp_sint" style="margin-bottom:14px">
+      <label class="pill" data-val="1" data-name="sint"><input type="checkbox" name="sint" value="1"> Dor</label>
+      <label class="pill" data-val="2" data-name="sint"><input type="checkbox" name="sint" value="2"> Diminuição de força</label>
+      <label class="pill" data-val="3" data-name="sint"><input type="checkbox" name="sint" value="3"> Diminuição do movimento</label>
+      <label class="pill" data-val="4" data-name="sint"><input type="checkbox" name="sint" value="4"> Alteração de sensibilidade</label>
+      <label class="pill" data-val="5" data-name="sint"><input type="checkbox" name="sint" value="5"> Limitação de movimentos</label>
+      <label class="pill" data-val="6" data-name="sint"><input type="checkbox" name="sint" value="6"> Sinais flogísticos</label>
+      <label class="pill" data-val="7" data-name="sint"><input type="checkbox" name="sint" value="7" onchange="onSintOutro()"> Outro</label>
+    </div>
+
+    <div id="box_sint_outro" style="display:none;margin-bottom:14px">
+      <div class="fld">
+        <label>Especificar "Outro" sintoma</label>
+        <input type="text" id="f_sint_outro_det" data-caps placeholder="Descreva o outro sintoma">
+      </div>
+    </div>
+
     <div class="row row-wide">
       <div class="fld col-2">
-        <label>Motivação (perspectiva da vítima) <span class="req-star">⭐</span><span class="cn">[Campo 55]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> A razão percebida pela própria vítima para a violência sofrida — sexismo, racismo, LGBTfobia, intolerância religiosa, xenofobia, entre outras. Deve refletir o relato do paciente, não a interpretação do profissional.</span><span class="tip-r"><b>Por que informar:</b> Direciona políticas de prevenção específicas e permite dimensionar violências motivadas por preconceito e discriminação nos indicadores nacionais.</span></span></span></span></label>
-        <div class="info" style="margin-bottom:6px"><span class="ico">💡</span><div>Preencha conforme o <strong>relato da própria vítima</strong>.</div></div>
-        <select id="f_motiv" data-ess data-label="Motivação da violência">
+        <label>CID-10 Específico <span class="cn">[C.49]</span></label>
+        <div class="ac-wrap">
+          <input type="text" id="f_diag_cid" data-caps autocomplete="off" placeholder="Ex: M75.1 — CID-10 do diagnóstico">
+          <div class="ac-drop" id="f_diag_cid-drop"></div>
+        </div>
+        <span id="f_diag_cid_hint" style="font-size:12px;color:#2563eb;margin-top:4px;display:none;line-height:1.4;font-weight:600"></span>
+      </div>
+      <div class="fld">
+        <label>Limitação/Incapacidade <span class="cn">[C.50]</span></label>
+        <select id="f_limit_incap">
           <option value="">— Selecione —</option>
-          <option value="01">01 — Sexismo</option>
-          <option value="02">02 — Homofobia / Lesbofobia / Bifobia / Transfobia</option>
-          <option value="03">03 — Racismo</option>
-          <option value="04">04 — Intolerância religiosa</option>
-          <option value="05">05 — Xenofobia</option>
-          <option value="06">06 — Conflito geracional</option>
-          <option value="07">07 — Situação de rua</option>
-          <option value="08">08 — Deficiência</option>
-          <option value="09">09 — Outros</option>
-          <option value="88">88 — Não se aplica</option>
-          <option value="99">99 — Ignorado</option>
+          <option value="1">1 — Sim</option>
+          <option value="2">2 — Não</option>
+          <option value="9">9 — Ignorado</option>
         </select>
       </div>
-    </div>
-
-    <!-- C56 — Tipo de Violência -->
-    <div class="sublabel">Campo 56 — Tipo de Violência <span class="req-star">⭐</span><span class="tip-wrap" style="margin-left:6px"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">Classificar o tipo de violência garante o encaminhamento correto da vítima e alimenta indicadores epidemiológicos nacionais.</span></span></div>
-    <div class="pills" id="grp_tipo_viol" style="margin-bottom:14px">
-      <label class="pill" data-val="1" data-name="tipo_viol"><input type="checkbox" name="tipo_viol" value="1" onchange="onTipoViol()"> Física</label>
-      <label class="pill" data-val="2" data-name="tipo_viol"><input type="checkbox" name="tipo_viol" value="2" onchange="onTipoViol()"> Psicológica / Moral</label>
-      <label class="pill" data-val="3" data-name="tipo_viol"><input type="checkbox" name="tipo_viol" value="3" onchange="onTipoViol()"> Tortura</label>
-      <label class="pill" data-val="4" data-name="tipo_viol"><input type="checkbox" name="tipo_viol" value="4" onchange="onTipoViol()"> Sexual</label>
-      <label class="pill" data-val="5" data-name="tipo_viol"><input type="checkbox" name="tipo_viol" value="5" onchange="onTipoViol()"> Tráfico de pessoas</label>
-      <label class="pill" data-val="6" data-name="tipo_viol"><input type="checkbox" name="tipo_viol" value="6" onchange="onTipoViol()"> Financeira / Econômica</label>
-      <label class="pill" data-val="7" data-name="tipo_viol"><input type="checkbox" name="tipo_viol" value="7" onchange="onTipoViol()"> Negligência / Abandono</label>
-      <label class="pill" data-val="8" data-name="tipo_viol"><input type="checkbox" name="tipo_viol" value="8" onchange="onTipoViol()"> Trabalho infantil</label>
-      <label class="pill" data-val="9" data-name="tipo_viol"><input type="checkbox" name="tipo_viol" value="9" onchange="onTipoViol()"> Intervenção legal</label>
-      <label class="pill" data-val="10" data-name="tipo_viol"><input type="checkbox" name="tipo_viol" value="10" onchange="onTipoViol()"> Outros</label>
-    </div>
-    <div id="box_tipo_viol_outros" style="display:none;margin-bottom:14px">
       <div class="fld">
-        <label>Especificar "Outros" tipos <span class="cn">[C.56]</span></label>
-        <input type="text" id="f_tipo_viol_outros" data-caps placeholder="Descreva outros tipos de violência">
-      </div>
-    </div>
-
-    <!-- C57 — Meio de Agressão -->
-    <div class="sublabel">Campo 57 — Meio de Agressão <span class="req-star">⭐</span><span class="tip-wrap" style="margin-left:6px"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">O meio de agressão fornece dados para vigilância — armas de fogo informam políticas de desarmamento; força corporal indica padrões domésticos.</span></span><span style="font-size:10px;font-weight:400;color:#9ca3af;margin-left:6px;text-transform:none">Se "Outro", especifique nas observações</span></div>
-    <div class="pills" id="grp_meio_agr" style="margin-bottom:14px">
-      <label class="pill" data-val="1" data-name="meio_agr"><input type="checkbox" name="meio_agr" value="1"> Força corporal / espancamento</label>
-      <label class="pill" data-val="2" data-name="meio_agr"><input type="checkbox" name="meio_agr" value="2"> Enforcamento</label>
-      <label class="pill" data-val="3" data-name="meio_agr"><input type="checkbox" name="meio_agr" value="3"> Objeto contundente</label>
-      <label class="pill" data-val="4" data-name="meio_agr"><input type="checkbox" name="meio_agr" value="4"> Objeto pérfuro-cortante</label>
-      <label class="pill" data-val="5" data-name="meio_agr"><input type="checkbox" name="meio_agr" value="5"> Substância / Envenenamento</label>
-      <label class="pill" data-val="6" data-name="meio_agr"><input type="checkbox" name="meio_agr" value="6"> Arma de fogo</label>
-      <label class="pill" data-val="7" data-name="meio_agr"><input type="checkbox" name="meio_agr" value="7"> Objeto quente / corrosivo</label>
-      <label class="pill" data-val="8" data-name="meio_agr"><input type="checkbox" name="meio_agr" value="8"> Ameaça</label>
-      <label class="pill" data-val="9" data-name="meio_agr"><input type="checkbox" name="meio_agr" value="9"> Outro</label>
-    </div>
-    <div id="box_meio_agr_outro" style="display:none;margin-bottom:14px">
-      <div class="fld">
-        <label>Especificar "Outro" meio <span class="cn">[C.57]</span></label>
-        <input type="text" id="f_meio_agr_outro" data-caps placeholder="Descreva o outro meio de agressão">
-      </div>
-    </div>
-
-    <!-- C58 — Violência Sexual (condicional) -->
-    <div id="sec_viol_sex" style="display:none">
-      <div class="sublabel" style="color:#922b21">Campo 58 — Violência Sexual — Tipo</div>
-      <div class="pills" id="grp_viol_sex" style="margin-bottom:14px">
-        <label class="pill" data-val="1" data-name="viol_sex"><input type="checkbox" name="viol_sex" value="1"> Assédio sexual</label>
-        <label class="pill" data-val="2" data-name="viol_sex"><input type="checkbox" name="viol_sex" value="2"> Estupro</label>
-        <label class="pill" data-val="3" data-name="viol_sex"><input type="checkbox" name="viol_sex" value="3"> Pornografia infantil</label>
-        <label class="pill" data-val="4" data-name="viol_sex"><input type="checkbox" name="viol_sex" value="4"> Exploração sexual</label>
-        <label class="pill" data-val="5" data-name="viol_sex"><input type="checkbox" name="viol_sex" value="5"> Outros</label>
-      </div>
-      <div id="box_viol_sex_outros" style="display:none;margin-bottom:14px">
-        <div class="fld">
-          <label>Especificar "Outros" tipos sexuais <span class="cn">[C.58]</span></label>
-          <input type="text" id="f_viol_sex_outros" data-caps placeholder="Descreva outros tipos de violência sexual">
-        </div>
-      </div>
-      <div class="sublabel">Campo 59 — Procedimentos Realizados</div>
-      <div class="pills" id="grp_proc" style="margin-bottom:14px">
-        <label class="pill" data-val="1" data-name="proc"><input type="checkbox" name="proc" value="1"> Profilaxia DST</label>
-        <label class="pill" data-val="2" data-name="proc"><input type="checkbox" name="proc" value="2"> Profilaxia HIV</label>
-        <label class="pill" data-val="3" data-name="proc"><input type="checkbox" name="proc" value="3"> Profilaxia Hepatite B</label>
-        <label class="pill" data-val="4" data-name="proc"><input type="checkbox" name="proc" value="4"> Coleta de sangue</label>
-        <label class="pill" data-val="5" data-name="proc"><input type="checkbox" name="proc" value="5"> Coleta de secreção vaginal</label>
-        <label class="pill" data-val="6" data-name="proc"><input type="checkbox" name="proc" value="6"> Coleta de sêmen</label>
-        <label class="pill" data-val="7" data-name="proc"><input type="checkbox" name="proc" value="7"> Contracepção de emergência</label>
-        <label class="pill" data-val="8" data-name="proc"><input type="checkbox" name="proc" value="8"> Aborto previsto em lei</label>
-      </div>
-    </div>
-
-    <!-- C60 — Nº de Envolvidos -->
-    <div class="row">
-      <div class="fld">
-        <label>Nº de Envolvidos <span class="cn">[Campo 60]</span></label>
-        <div class="pills" id="grp_nenv">
-          <label class="pill" data-val="1"><input type="radio" name="nenv" value="1"> Um</label>
-          <label class="pill" data-val="2"><input type="radio" name="nenv" value="2"> Dois ou mais</label>
-          <label class="pill" data-val="9"><input type="radio" name="nenv" value="9"> Ignorado</label>
-        </div>
-      </div>
-    </div>
-
-    <!-- C61 — Vínculo -->
-    <div class="sublabel">Campo 61 — Vínculo/Parentesco do Provável Autor com a Vítima</div>
-    <div class="pills" id="grp_vinc" style="margin-bottom:14px">
-      <label class="pill" data-val="1" data-name="vinc"><input type="checkbox" name="vinc" value="1"> Pai</label>
-      <label class="pill" data-val="2" data-name="vinc"><input type="checkbox" name="vinc" value="2"> Mãe</label>
-      <label class="pill" data-val="3" data-name="vinc"><input type="checkbox" name="vinc" value="3"> Padrasto</label>
-      <label class="pill" data-val="4" data-name="vinc"><input type="checkbox" name="vinc" value="4"> Madrasta</label>
-      <label class="pill" data-val="5" data-name="vinc"><input type="checkbox" name="vinc" value="5"> Cônjuge</label>
-      <label class="pill" data-val="6" data-name="vinc"><input type="checkbox" name="vinc" value="6"> Ex-cônjuge</label>
-      <label class="pill" data-val="7" data-name="vinc"><input type="checkbox" name="vinc" value="7"> Namorado(a)</label>
-      <label class="pill" data-val="8" data-name="vinc"><input type="checkbox" name="vinc" value="8"> Ex-namorado(a)</label>
-      <label class="pill" data-val="9" data-name="vinc"><input type="checkbox" name="vinc" value="9"> Filho(a)</label>
-      <label class="pill" data-val="10" data-name="vinc"><input type="checkbox" name="vinc" value="10"> Irmão(ã)</label>
-      <label class="pill" data-val="11" data-name="vinc"><input type="checkbox" name="vinc" value="11"> Amigos / Conhecidos</label>
-      <label class="pill" data-val="12" data-name="vinc"><input type="checkbox" name="vinc" value="12"> Desconhecido(a)</label>
-      <label class="pill" data-val="13" data-name="vinc"><input type="checkbox" name="vinc" value="13"> Cuidador(a)</label>
-      <label class="pill" data-val="14" data-name="vinc"><input type="checkbox" name="vinc" value="14"> Patrão / Chefe</label>
-      <label class="pill" data-val="15" data-name="vinc"><input type="checkbox" name="vinc" value="15"> Relação institucional</label>
-      <label class="pill" data-val="16" data-name="vinc"><input type="checkbox" name="vinc" value="16"> Policial / Agente da lei</label>
-      <label class="pill" data-val="17" data-name="vinc"><input type="checkbox" name="vinc" value="17"> Própria pessoa</label>
-      <label class="pill" data-val="18" data-name="vinc"><input type="checkbox" name="vinc" value="18"> Outros</label>
-    </div>
-    <div id="box_vinc_outro" style="display:none;margin-bottom:14px">
-      <div class="fld">
-        <label>Especificar "Outros" vínculo <span class="cn">[C.61]</span></label>
-        <input type="text" id="f_vinc_outro" data-caps placeholder="Descreva o outro vínculo/parentesco">
-      </div>
-    </div>
-
-    <!-- C62 + C63 — Dados do autor -->
-    <div class="row">
-      <div class="fld">
-        <label>Sexo do Provável Autor <span class="cn">[Campo 62]</span></label>
-        <div class="pills" id="grp_sex_autor">
-          <label class="pill" data-val="1"><input type="radio" name="sex_autor" value="1"> Masculino</label>
-          <label class="pill" data-val="2"><input type="radio" name="sex_autor" value="2"> Feminino</label>
-          <label class="pill" data-val="3"><input type="radio" name="sex_autor" value="3"> Ambos</label>
-          <label class="pill" data-val="9"><input type="radio" name="sex_autor" value="9"> Ignorado</label>
-        </div>
-      </div>
-      <div class="fld">
-        <label>Suspeita de Uso de Álcool pelo Autor <span class="cn">[Campo 63]</span></label>
-        <div class="pills" id="grp_alcool">
-          <label class="pill" data-val="1"><input type="radio" name="alcool" value="1"> Sim</label>
-          <label class="pill" data-val="2"><input type="radio" name="alcool" value="2"> Não</label>
-          <label class="pill" data-val="9"><input type="radio" name="alcool" value="9"> Ignorado</label>
-        </div>
-      </div>
-      <div class="fld">
-        <label>Ciclo de Vida do Provável Autor <span class="cn">[Campo 64]</span></label>
-        <select id="f_ciclo">
+        <label>Regime de Tratamento <span class="cn">[C.51]</span></label>
+        <select id="f_regime">
           <option value="">— Selecione —</option>
-          <option value="1">1 — Criança (0–9 anos)</option>
-          <option value="2">2 — Adolescente (10–19 anos)</option>
-          <option value="3">3 — Jovem (20–24 anos)</option>
-          <option value="4">4 — Adulto (25–59 anos)</option>
-          <option value="5">5 — Idoso (≥60 anos)</option>
+          <option value="1">1 — Ambulatorial</option>
+          <option value="2">2 — Internação</option>
+          <option value="3">3 — Day hospital</option>
+          <option value="4">4 — CAPS</option>
           <option value="9">9 — Ignorado</option>
         </select>
       </div>
@@ -1351,172 +1240,264 @@ function toggleDarkMode(){
 </div>
 
 <!-- =========================================================
-  SEÇÃO 7 — ENCAMINHAMENTO
-========================================================= -->
-<div class="sec" id="sec7">
-  <div class="sec-hdr">
-    <div class="sec-num">7</div>
-    <div class="sec-info">
-      <h3>Encaminhamento</h3>
-      <p>Campo 65 — para onde a vítima foi encaminhada</p>
-    </div>
-    <span class="sec-badge badge-empty" id="badge7">—</span>
-  </div>
-  <div class="sec-body">
-    <div style="height:10px"></div>
-    <div class="info"><span class="ico">ℹ️</span><div>Indique para onde a vítima foi encaminhada após o atendimento. É possível marcar mais de uma opção.</div></div>
-    <div class="pills" id="grp_encam">
-      <label class="pill" data-val="1" data-name="encam"><input type="checkbox" name="encam" value="1"> Rede de Saúde</label>
-      <label class="pill" data-val="2" data-name="encam"><input type="checkbox" name="encam" value="2"> Rede de Assistência Social</label>
-      <label class="pill" data-val="3" data-name="encam"><input type="checkbox" name="encam" value="3"> Rede de Educação</label>
-      <label class="pill" data-val="4" data-name="encam"><input type="checkbox" name="encam" value="4"> Rede de Atendimento à Mulher</label>
-      <label class="pill" data-val="5" data-name="encam"><input type="checkbox" name="encam" value="5"> Conselho Tutelar</label>
-      <label class="pill" data-val="6" data-name="encam"><input type="checkbox" name="encam" value="6"> Conselho do Idoso</label>
-      <label class="pill" data-val="7" data-name="encam"><input type="checkbox" name="encam" value="7"> Del. Atendimento à Mulher</label>
-      <label class="pill" data-val="8" data-name="encam"><input type="checkbox" name="encam" value="8"> Del. Atendimento ao Idoso</label>
-      <label class="pill" data-val="9" data-name="encam"><input type="checkbox" name="encam" value="9"> Outras Delegacias</label>
-      <label class="pill" data-val="10" data-name="encam"><input type="checkbox" name="encam" value="10"> Ctr. Ref. Direitos Humanos</label>
-      <label class="pill" data-val="11" data-name="encam"><input type="checkbox" name="encam" value="11"> Justiça Infância / Juventude</label>
-      <label class="pill" data-val="12" data-name="encam"><input type="checkbox" name="encam" value="12"> Ministério Público</label>
-      <label class="pill" data-val="13" data-name="encam"><input type="checkbox" name="encam" value="13"> Defensoria Pública</label>
-      <label class="pill" data-val="14" data-name="encam"><input type="checkbox" name="encam" value="14"> Del. Prot. Criança / Adolescente</label>
-    </div>
-  </div>
-</div>
-
-<!-- =========================================================
-  SEÇÃO 8 — DADOS FINAIS (66–69)
+  SEÇÃO 8 — FATORES DE EXPOSIÇÃO
 ========================================================= -->
 <div class="sec" id="sec8">
   <div class="sec-hdr">
     <div class="sec-num">8</div>
     <div class="sec-info">
-      <h3>Dados Finais</h3>
-      <p>Campos 66–69 — violência no trabalho, CAT, CID-10 e encerramento</p>
+      <h3>Fatores de Exposição</h3>
+      <p>Principais fatores de risco ocupacional a que o trabalhador foi exposto</p>
     </div>
     <span class="sec-badge badge-empty" id="badge8">—</span>
   </div>
   <div class="sec-body">
-    <div style="height:10px"></div>
+
+    <div class="info"><span class="ico">ℹ️</span><div>Indique os principais fatores de risco ocupacional a que o trabalhador foi exposto.</div></div>
+
+    <div class="pills" id="grp_expos" style="margin-bottom:14px">
+      <label class="pill" data-val="1" data-name="expos"><input type="checkbox" name="expos" value="1"> Movimentos repetitivos</label>
+      <label class="pill" data-val="2" data-name="expos"><input type="checkbox" name="expos" value="2"> Ambiente estressante</label>
+      <label class="pill" data-val="3" data-name="expos"><input type="checkbox" name="expos" value="3"> Tempo insuficiente de pausas</label>
+      <label class="pill" data-val="4" data-name="expos"><input type="checkbox" name="expos" value="4"> Jornada superior a 6h</label>
+      <label class="pill" data-val="5" data-name="expos"><input type="checkbox" name="expos" value="5"> Prêmios e produção (incentivo financeiro por produtividade)</label>
+    </div>
+
+  </div>
+</div>
+
+<!-- =========================================================
+  SEÇÃO 9 — AFASTAMENTO E CONDUTA
+========================================================= -->
+<div class="sec" id="sec9">
+  <div class="sec-hdr">
+    <div class="sec-num">9</div>
+    <div class="sec-info">
+      <h3>Afastamento e Conduta</h3>
+      <p>Afastamento laboral e condutas adotadas</p>
+    </div>
+    <span class="sec-badge badge-empty" id="badge9">—</span>
+  </div>
+  <div class="sec-body">
+
     <div class="row">
       <div class="fld">
-        <label>Violência relac. ao trabalho? <span class="cn">[Campo 66]</span></label>
-        <div class="pills" id="grp_viol_trab">
-          <label class="pill" data-val="1"><input type="radio" name="viol_trab" value="1"> Sim</label>
-          <label class="pill" data-val="2"><input type="radio" name="viol_trab" value="2"> Não</label>
-          <label class="pill" data-val="9"><input type="radio" name="viol_trab" value="9"> Ignorado</label>
+        <label>Houve afastamento do trabalho? <span class="cn">[C.52]</span></label>
+        <div class="pills" id="grp_afast">
+          <label class="pill" data-val="1"><input type="radio" name="afast" value="1" onchange="onAfast()"> Sim</label>
+          <label class="pill" data-val="2"><input type="radio" name="afast" value="2" onchange="onAfast()"> Não</label>
+          <label class="pill" data-val="9"><input type="radio" name="afast" value="9" onchange="onAfast()"> Ignorado</label>
         </div>
       </div>
       <div class="fld">
-        <label>CAT emitida? <span class="cn">[Campo 67]</span></label>
+        <label>Outros trabalhadores com a mesma doença? <span class="cn">[C.54]</span></label>
+        <div class="pills" id="grp_outros_trab">
+          <label class="pill" data-val="1"><input type="radio" name="outros_trab" value="1"> Sim</label>
+          <label class="pill" data-val="2"><input type="radio" name="outros_trab" value="2"> Não</label>
+          <label class="pill" data-val="9"><input type="radio" name="outros_trab" value="9"> Ignorado</label>
+        </div>
+      </div>
+    </div>
+
+    <div id="box_tempo_afast" style="display:none" class="row">
+      <div class="fld">
+        <label>Tempo de Afastamento</label>
+        <div style="display:flex;gap:8px">
+          <input type="number" id="f_tempo_afast_val" min="0" placeholder="Quantidade" style="flex:1">
+          <select id="f_tempo_afast_tipo" style="width:90px">
+            <option value="">—</option>
+            <option value="A">A — Anos</option>
+            <option value="M">M — Meses</option>
+            <option value="D">D — Dias</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row row-wide">
+      <div class="fld col-2">
+        <label>Resultado do Afastamento <span class="cn">[C.53]</span></label>
+        <select id="f_afast_res">
+          <option value="">— Selecione —</option>
+          <option value="1">1 — Retorno ao mesmo posto</option>
+          <option value="2">2 — Readaptação</option>
+          <option value="3">3 — Aposentadoria</option>
+          <option value="4">4 — Óbito</option>
+          <option value="9">9 — Ignorado</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="sublabel">Conduta Adotada</div>
+    <div class="pills" id="grp_conduta" style="margin-bottom:14px">
+      <label class="pill" data-val="1" data-name="conduta"><input type="checkbox" name="conduta" value="1"> Afastamento do fator de risco</label>
+      <label class="pill" data-val="2" data-name="conduta"><input type="checkbox" name="conduta" value="2"> Mudança de organização do trabalho</label>
+      <label class="pill" data-val="3" data-name="conduta"><input type="checkbox" name="conduta" value="3"> Proteção coletiva</label>
+      <label class="pill" data-val="4" data-name="conduta"><input type="checkbox" name="conduta" value="4"> Proteção individual</label>
+      <label class="pill" data-val="5" data-name="conduta"><input type="checkbox" name="conduta" value="5"> Afastamento do local de trabalho</label>
+      <label class="pill" data-val="6" data-name="conduta"><input type="checkbox" name="conduta" value="6" onchange="onCondutaOutros()"> Outros</label>
+      <label class="pill" data-val="7" data-name="conduta"><input type="checkbox" name="conduta" value="7"> Nenhuma</label>
+    </div>
+
+    <div id="box_conduta_outros" style="display:none;margin-bottom:14px">
+      <div class="fld">
+        <label>Especificar "Outros"</label>
+        <input type="text" id="f_conduta_outros_det" data-caps placeholder="Descreva outras condutas adotadas">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- =========================================================
+  SEÇÃO 10 — ENCERRAMENTO
+========================================================= -->
+<div class="sec" id="sec10">
+  <div class="sec-hdr">
+    <div class="sec-num">10</div>
+    <div class="sec-info">
+      <h3>Encerramento</h3>
+      <p>Evolução do caso, CAT e observações complementares</p>
+    </div>
+    <span class="sec-badge badge-empty" id="badge10">—</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="row row-wide">
+      <div class="fld col-2">
+        <label>Evolução do Caso <span class="cn">[C.56]</span></label>
+        <select id="f_evolucao" onchange="onEvolucao()">
+          <option value="">— Selecione —</option>
+          <option value="1">1 — Cura</option>
+          <option value="2">2 — Incapacidade temporária</option>
+          <option value="3">3 — Incapacidade parcial permanente</option>
+          <option value="4">4 — Incapacidade total permanente</option>
+          <option value="5">5 — Óbito por doença</option>
+          <option value="6">6 — Óbito por outras causas</option>
+          <option value="9">9 — Ignorado</option>
+        </select>
+      </div>
+      <div class="fld">
+        <label>CAT Emitida? <span class="cn">[C.57]</span></label>
         <div class="pills" id="grp_cat">
           <label class="pill" data-val="1"><input type="radio" name="cat" value="1"> Sim</label>
           <label class="pill" data-val="2"><input type="radio" name="cat" value="2"> Não</label>
           <label class="pill" data-val="9"><input type="radio" name="cat" value="9"> Ignorado</label>
         </div>
       </div>
-      <div class="fld col-2">
-        <label>CID-10 da Circunstância <span class="cn">[Campo 68]</span></label>
-        <div class="ac-wrap">
-          <input type="text" id="f_cid10" placeholder="Digite o código (ex: W19) ou nome da condição" data-caps autocomplete="off">
-          <div class="ac-drop" id="f_cid10-drop"></div>
-        </div>
-        <span id="f_cid10_hint" style="font-size:11px;color:#2563eb;margin-top:3px;display:none;line-height:1.4;font-weight:500"></span>
-      </div>
     </div>
 
-    <div class="row">
+    <div id="box_obito" style="display:none" class="row">
       <div class="fld">
-        <label>Data de Encerramento <span class="req-star">⭐</span><span class="cn">[Campo 69]</span></label>
-        <input type="date" id="f_data_enc" data-ess data-label="Data de encerramento">
-      </div>
-      <div class="fld" style="justify-content:flex-end">
-        <label style="opacity:0;user-select:none">.</label>
-        <button class="btn-copy-date" onclick="copiarDataNotif()">= Copiar data da notificação</button>
+        <label>Data do Óbito <span class="cn">[C.58]</span></label>
+        <input type="date" id="f_obito">
       </div>
     </div>
-    <div class="info"><span class="ico">ℹ️</span><div>A <strong>data de encerramento (Campo 69)</strong> geralmente coincide com a <strong>data da notificação</strong>.</div></div>
-  </div>
-</div>
 
-<!-- =========================================================
-  SEÇÃO 9 — INFORMAÇÕES COMPLEMENTARES E OBSERVAÇÕES
-========================================================= -->
-<div class="sec" id="sec9">
-  <div class="sec-hdr">
-    <div class="sec-num">9</div>
-    <div class="sec-info">
-      <h3>Informações Complementares e Observações</h3>
-      <p>Dados do acompanhante e observações adicionais</p>
-    </div>
-    <span class="sec-badge badge-empty" id="badge9">—</span>
-  </div>
-  <div class="sec-body">
-    <div style="height:10px"></div>
-
-    <div class="row">
-      <div class="fld col-2">
-        <label>Nome do Acompanhante<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">Este campo não é digitado no SINAN NET. A informação fica registrada exclusivamente na ficha física entregue à unidade de saúde.</span></span></label>
-        <input type="text" id="f_acomp_nome" data-caps placeholder="Se houver acompanhante">
-      </div>
+    <div class="row row-full">
       <div class="fld">
-        <label>Vínculo / Parentesco<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">Este campo não é digitado no SINAN NET. A informação fica registrada exclusivamente na ficha física entregue à unidade de saúde.</span></span></label>
-        <input type="text" id="f_acomp_vinc" data-caps placeholder="Ex: MAE, CONJUGE">
+        <label>Observações Complementares</label>
+        <textarea id="f_obs" placeholder="Informações adicionais relevantes para o caso" rows="4"></textarea>
       </div>
-      <div class="fld">
-        <label>Telefone do Acompanhante<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">Este campo não é digitado no SINAN NET. A informação fica registrada exclusivamente na ficha física entregue à unidade de saúde.</span></span></label>
-        <input type="text" id="f_acomp_tel" placeholder="(00) 00000-0000">
-      </div>
-    </div>
-
-    <div class="sublabel">Observações Adicionais <span style="font-size:10px;font-weight:400;color:#9ca3af;text-transform:none;margin-left:6px">— aceita acentos e letras minúsculas</span></div>
-    <div class="fld">
-      <textarea id="f_obs" placeholder="Observações relevantes para a notificação..." rows="4"></textarea>
     </div>
 
   </div>
 </div>
 
-</div><!-- /wrapper -->
+</div><!-- /.wrapper -->
 
 <!-- TOAST -->
 <div id="toast"></div>
 
-<!-- MODAL "QUASE LÁ" — campos essenciais faltando -->
+<!-- MODAIS DE VALIDAÇÃO -->
 <div class="ov" id="ov-quase">
   <div class="modal">
-    <div class="modal-ico">⭐</div>
-    <h2>Sua ficha está quase pronta!</h2>
-    <p>Alguns campos essenciais (⭐) ainda estão em branco. Você pode <strong>voltar e preenchê-los agora</strong> para um registro mais completo, ou <strong>baixar o PDF assim mesmo</strong> e terminar de preencher depois diretamente no arquivo ou no SINAN NET.</p>
-    <div class="err-list" id="ov-quase-list" style="margin-top:12px"></div>
-    <div class="modal-actions" style="flex-direction:column;gap:8px">
-      <button class="mbtn mbtn-p" onclick="closeModal('ov-quase')" style="width:100%">← Voltar e preencher agora</button>
-      <button class="mbtn mbtn-s" id="ov-quase-dl" style="width:100%">Baixar PDF e preencher depois</button>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL AUTOPROVOCADA -->
-<div class="ov" id="ov-auto">
-  <div class="modal">
-    <div class="modal-ico">🚨</div>
-    <h2>Notificação Imediata Obrigatória</h2>
-    <p>Lesão autoprovocada exige notificação à Vigilância Epidemiológica <strong>em até 24 horas</strong>.</p>
+    <div class="modal-ico">⚠️</div>
+    <h2>Campos essenciais incompletos</h2>
+    <p>Os seguintes campos ⭐ não foram preenchidos. Recomendamos completá-los antes de gerar o PDF.</p>
+    <div class="err-list" id="ov-quase-list"></div>
     <div class="modal-actions">
-      <button class="mbtn mbtn-p" onclick="closeModal('ov-auto')">Entendi</button>
+      <button class="mbtn mbtn-s" onclick="closeModal('ov-quase')">Voltar e preencher</button>
+      <button class="mbtn mbtn-p" id="ov-quase-dl">Gerar mesmo assim</button>
     </div>
   </div>
 </div>
 
-<!-- SINAN NET — tabelas de referência (offline, geradas de scraping_sinan/) -->
+<!-- CONFIRM MODAL -->
+<div id="confirm-modal">
+  <div class="cm-box">
+    <div class="cm-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,4 1,10 7,10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg></div>
+    <h3>Apagar tudo e começar do zero?</h3>
+    <p>Todos os dados inseridos serão perdidos. Se quiser preservá-los, use <strong>Exportar Rascunho</strong> antes de continuar.</p>
+    <div class="cm-actions">
+      <button class="cm-cancel" onclick="fecharModalNova()">Cancelar</button>
+      <button class="cm-ok" onclick="novaFichaConfirmado()">Apagar tudo</button>
+    </div>
+  </div>
+</div>
+
+<!-- TRANSFER MODAL -->
+<div class="ov" id="ov-transfer">
+  <div class="modal" style="max-width:500px">
+    <div class="modal-ico">🔁</div>
+    <h2>Usar dados em outra ficha</h2>
+    <p>Os dados do paciente, notificação e residência já preenchidos serão transferidos automaticamente para a nova ficha. Selecione o destino:</p>
+    <div id="transfer-fichas" style="margin-top:16px;display:flex;flex-direction:column;gap:8px"></div>
+    <div class="modal-actions">
+      <button class="mbtn mbtn-s" onclick="closeModal('ov-transfer')">Cancelar</button>
+      <button class="mbtn mbtn-p" id="btn-transfer-ok" onclick="confirmarTransferencia()" style="opacity:.45;pointer-events:none">Continuar →</button>
+    </div>
+  </div>
+</div>
+
+<!-- TRANSFER SEM PDF — aviso -->
+<div class="ov" id="ov-transfer-warn">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-ico">⚠️</div>
+    <h2>PDF ainda não gerado</h2>
+    <p>Você ainda não gerou o PDF desta ficha. Se prosseguir, os dados desta ficha <strong>não serão salvos em PDF</strong> — apenas transferidos para a próxima.</p>
+    <div class="modal-actions">
+      <button class="mbtn mbtn-s" onclick="closeModal('ov-transfer-warn')">Voltar e gerar PDF</button>
+      <button class="mbtn mbtn-p" onclick="closeModal('ov-transfer-warn');abrirTransferencia()">Transferir mesmo assim</button>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM SHEET MOBILE — menu de pacientes fictícios -->
+<div id="pac-mob-sheet">
+  <div id="pac-mob-backdrop" onclick="closePacSheet()"></div>
+  <div id="pac-mob-panel">
+    <div class="tb-menu-hdr">Selecione um caso didático</div>
+    <div id="pac-mob-list"></div>
+  </div>
+</div>
+
+<!-- BARRA INFERIOR — visível apenas em mobile -->
+<div id="mob-bottom">
+  <a id="mob-back-btn" href="index.html">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15,18 9,12 15,6"/></svg>
+    Menu
+  </a>
+  <div id="mob-prog-wrap">
+    <span id="mob-prog-pct">0%</span>
+    <span id="mob-prog-label">preenchido</span>
+  </div>
+  <button id="mob-pdf-btn" onclick="gerarPDF()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+    Gerar PDF
+  </button>
+</div>
+
+<!-- DATA SCRIPTS -->
 <script src="data/tb_regiao.js"></script>
 <script src="data/tb_uf.js"></script>
 <script src="data/tb_municipios.js"></script>
 <script src="data/tb_agravo.js"></script>
 <script src="data/tb_ocupacao.js"></script>
 <script src="data/cbo_sinonimos_map.js"></script>
-<!-- tb_cnae.js carregado apenas nas fichas DRT (Saude do Trabalhador) -->
+<script src="data/tb_cnae.js"></script>
 <script src="lib/pdf-lib.min.js"></script>
+
 <script>
 /*==========================================================
   CAPS LOCK + SEM ACENTO (todos inputs com data-caps)
@@ -1536,7 +1517,7 @@ document.querySelectorAll('.pill').forEach(function(lbl){
   lbl.addEventListener('click', function(e){
     var inp = this.querySelector('input');
     if(!inp) return;
-    e.preventDefault(); // impede que o browser também ative o input nativamente (causaria duplo-toggle)
+    e.preventDefault();
     if(inp.type === 'radio'){
       if(inp.checked){
         inp.checked = false;
@@ -1564,58 +1545,40 @@ function onSexoChange(){
   document.getElementById('row_gest').style.display = (s&&s.value==='F')?'grid':'none';
 }
 
-document.querySelectorAll('[name="defic"]').forEach(function(r){
-  r.addEventListener('change', function(){
-    var sel = document.querySelector('[name="defic"]:checked');
-    document.getElementById('row_defic_tipos').style.display = (sel && sel.value==='1') ? 'block' : 'none';
-  });
-});
-
-function onTipoViol(){
-  var checked = Array.from(document.querySelectorAll('[name="tipo_viol"]:checked'));
-  document.getElementById('sec_viol_sex').style.display = checked.some(function(c){return c.value==='4';}) ? 'block' : 'none';
-  document.getElementById('box_tipo_viol_outros').style.display = checked.some(function(c){return c.value==='10';}) ? 'block' : 'none';
+function onEmpTerc(){
+  var v = document.querySelector('[name="emp_terc"]:checked');
+  document.getElementById('box_emp_terc').style.display = (v&&v.value==='1') ? 'block' : 'none';
 }
 
-document.querySelectorAll('[name="meio_agr"]').forEach(function(chk){
-  chk.addEventListener('change', function(){
-    var has = Array.from(document.querySelectorAll('[name="meio_agr"]:checked')).some(function(c){return c.value==='9';});
-    document.getElementById('box_meio_agr_outro').style.display = has ? 'block' : 'none';
-  });
-});
-
-document.querySelectorAll('[name="vinc"]').forEach(function(chk){
-  chk.addEventListener('change', function(){
-    var has = Array.from(document.querySelectorAll('[name="vinc"]:checked')).some(function(c){return c.value==='18';});
-    document.getElementById('box_vinc_outro').style.display = has ? 'block' : 'none';
-  });
-});
-
-document.querySelectorAll('[name="viol_sex"]').forEach(function(chk){
-  chk.addEventListener('change', function(){
-    var has = Array.from(document.querySelectorAll('[name="viol_sex"]:checked')).some(function(c){return c.value==='5';});
-    document.getElementById('box_viol_sex_outros').style.display = has ? 'block' : 'none';
-  });
-});
-
-document.getElementById('f_local_oc').addEventListener('change', function(){
-  document.getElementById('box_local_outro').style.display = this.value === '09' ? 'block' : 'none';
-});
-
-function onAutoProv(){
-  var v = document.querySelector('[name="auto_prov"]:checked');
-  var box = document.getElementById('box_auto_prov');
-  if(v&&v.value==='1'){
-    box.style.display='flex';
-    document.getElementById('ov-auto').classList.add('show');
-  } else {
-    box.style.display='none';
-  }
+function onAfast(){
+  var v = document.querySelector('[name="afast"]:checked');
+  document.getElementById('box_tempo_afast').style.display = (v&&v.value==='1') ? 'grid' : 'none';
 }
+
+function onEvolucao(){
+  var v = document.getElementById('f_evolucao').value;
+  document.getElementById('box_obito').style.display = (v==='5'||v==='6') ? 'grid' : 'none';
+}
+
+function onAgravOutras(){
+  var has = Array.from(document.querySelectorAll('[name="agrav"]:checked')).some(function(c){return c.value==='7';});
+  document.getElementById('box_agrav_outras').style.display = has ? 'block' : 'none';
+}
+
+function onSintOutro(){
+  var has = Array.from(document.querySelectorAll('[name="sint"]:checked')).some(function(c){return c.value==='7';});
+  document.getElementById('box_sint_outro').style.display = has ? 'block' : 'none';
+}
+
+function onCondutaOutros(){
+  var has = Array.from(document.querySelectorAll('[name="conduta"]:checked')).some(function(c){return c.value==='6';});
+  document.getElementById('box_conduta_outros').style.display = has ? 'block' : 'none';
+}
+
+document.getElementById('f_evolucao').addEventListener('change', onEvolucao);
 
 /*==========================================================
-  SINAN DATA — UF / MUNICIPIO / CID10
-  Dados carregados de data/tb_uf.js, tb_municipios.js, tb_agravo.js
+  SINAN DATA — UF / MUNICIPIO / CID10 / CBO
 ==========================================================*/
 
 // Popula todos os <select> de UF com SINAN_UFS
@@ -1624,7 +1587,7 @@ function onAutoProv(){
   (window.SINAN_UFS || []).forEach(function(u){
     opts += '<option value="' + u.sigla + '">' + u.sigla + '</option>';
   });
-  ['f_uf_notif','f_uf_res','f_uf_oc'].forEach(function(id){
+  ['f_uf_notif','f_uf_res'].forEach(function(id){
     var el = document.getElementById(id);
     if(el) el.innerHTML = opts;
   });
@@ -1676,35 +1639,31 @@ function acSetup(inputId, dropId, datafn, matchfn, labelFn, selectFn){
   });
 }
 
-// Autocomplete de Município (3 instâncias: notif, res, oc)
+// Autocomplete de Município (2 instâncias: notif, res)
 [
   {suf:'notif', ibge:'f_ibge_notif'},
-  {suf:'res',   ibge:'f_ibge_res'},
-  {suf:'oc',    ibge:'f_ibge_oc'}
+  {suf:'res',   ibge:'f_ibge_res'}
 ].forEach(function(cfg){
   var ufId  = 'f_uf_'  + cfg.suf;
   var munId = 'f_mun_' + cfg.suf;
   acSetup(
     munId, munId + '-drop',
-    function(){ return window.SINAN_MUNICIPIOS || []; }, // todos os municípios
-    function(m, q){ // match: início ou palavra interna
+    function(){ return window.SINAN_MUNICIPIOS || []; },
+    function(m, q){
       var n = m.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
       return n.indexOf(q) === 0 || n.indexOf(' '+q) !== -1;
     },
     function(m){ return '<b>' + m.nome + '</b> <span style="color:#9ca3af;font-size:11px">' + m.uf + ' &mdash; ' + m.ibge + '</span>'; },
     function(inp, m){
       inp.value = m.nome;
-      // Auto-preenche UF a partir do município selecionado
       var ufEl = document.getElementById(ufId);
       if(ufEl) ufEl.value = m.uf;
-      // Auto-preenche IBGE
       if(cfg.ibge){
         var ibgeEl = document.getElementById(cfg.ibge);
         if(ibgeEl) ibgeEl.value = m.ibge;
       }
     }
   );
-  // Ao trocar UF manualmente, limpa município e IBGE
   var ufEl = document.getElementById(ufId);
   if(ufEl) ufEl.addEventListener('change', function(){
     var munEl = document.getElementById(munId);
@@ -1716,11 +1675,44 @@ function acSetup(inputId, dropId, datafn, matchfn, labelFn, selectFn){
   });
 });
 
-// Autocomplete de CID-10
-// Normaliza código removendo ponto para comparação (M751 == M75.1)
+/*==========================================================
+  AUTOCOMPLETE CNAE (empresa principal + terceirizada)
+  Normaliza código removendo pontos e hifens (01.11-2 → 01112)
+==========================================================*/
+function normCnae(s){ return (s||'').replace(/[.\-]/g,''); }
+
+function cnaeSetup(inputId, hintId){
+  acSetup(
+    inputId, inputId+'-drop',
+    function(){ return window.SINAN_CNAES || []; },
+    function(c, q){
+      var qn = normCnae(q);
+      var nome = c.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+      return normCnae(c.codigo).indexOf(qn) === 0 || nome.indexOf(q) !== -1;
+    },
+    function(c){ return '<b>'+c.codigo+'</b> &mdash; '+c.nome; },
+    function(inp, c){
+      inp.value = c.codigo;
+      var hint = document.getElementById(hintId);
+      if(hint){ hint.textContent = c.nome; hint.style.display = 'block'; }
+    }
+  );
+  var el = document.getElementById(inputId);
+  if(el) el.addEventListener('input', function(){
+    if(!this.value.trim()){
+      var h = document.getElementById(hintId);
+      if(h){ h.style.display='none'; h.textContent=''; }
+    }
+  });
+}
+
+cnaeSetup('f_emp_cnae',      'f_emp_cnae_hint');
+cnaeSetup('f_emp_terc_cnae', 'f_emp_terc_cnae_hint');
+
+// Autocomplete de CID-10 (campo f_diag_cid)
 function normCid(s){ return s.replace('.',''); }
 acSetup(
-  'f_cid10', 'f_cid10-drop',
+  'f_diag_cid', 'f_diag_cid-drop',
   function(){ return window.SINAN_AGRAVOS || []; },
   function(a, q){
     var qn = normCid(q);
@@ -1730,20 +1722,15 @@ acSetup(
   function(a){ return '<b>' + a.cid + '</b> &mdash; ' + a.nome; },
   function(inp, a){
     inp.value = a.cid;
-    var hint = document.getElementById('f_cid10_hint');
+    var hint = document.getElementById('f_diag_cid_hint');
     if(hint){ hint.textContent = a.nome; hint.style.display = 'block'; }
   }
 );
-// Esconde hint ao limpar o campo manualmente
-document.getElementById('f_cid10').addEventListener('input', function(){
-  if(!this.value.trim()){ var h=document.getElementById('f_cid10_hint'); if(h){h.style.display='none';h.textContent='';} }
+document.getElementById('f_diag_cid').addEventListener('input', function(){
+  if(!this.value.trim()){ var h=document.getElementById('f_diag_cid_hint'); if(h){h.style.display='none';h.textContent='';} }
 });
 
-// Autocomplete de Ocupação / CBO (Campo 34)
-// SINAN_CBOS disponível em data/tb_ocupacao.js
-// cboSinonimosMap disponível em data/cbo_sinonimos_map.js
-
-// Monta mapa reverso: SINONIMO_NORMALIZADO -> { cboCode, synonymText }
+// Autocomplete de Ocupação / CBO
 var _cboRevSyn = null;
 function buildCboRevSyn(){
   if(_cboRevSyn) return _cboRevSyn;
@@ -1759,19 +1746,16 @@ function buildCboRevSyn(){
   return _cboRevSyn;
 }
 
-// Busca sinônimos para uma query
 function searchCboSynonyms(q){
   var revMap = buildCboRevSyn();
   var cbos = window.SINAN_CBOS || [];
   var results = [];
   var seen = {};
-  // Busca por prefixo ou substring nos sinônimos
   Object.keys(revMap).forEach(function(key){
     if(key.indexOf(q) === 0 || key.indexOf(' '+q) !== -1 || key.indexOf(q) !== -1){
       revMap[key].forEach(function(entry){
         if(seen[entry.cboCode]) return;
         seen[entry.cboCode] = true;
-        // Encontrar o nome SINAN correspondente
         var cboItem = cbos.find ? cbos.find(function(c){ return c.cbo === entry.cboCode; }) : null;
         if(!cboItem){ for(var i=0;i<cbos.length;i++){ if(cbos[i].cbo===entry.cboCode){cboItem=cbos[i];break;} } }
         if(cboItem){
@@ -1792,12 +1776,12 @@ acSetup(
   },
   function(c){
     if(c.isSynonym){
-      return '<span class="ac-synonym-badge" style="font-size:11px;background:#f39c12;color:#fff;padding:1px 6px;border-radius:4px;margin-right:4px">sinônimo</span><b>' + c.cbo + '</b> &mdash; ' + c.nome + ' <span style="color:#9ca3af;font-size:12px">(você digitou: ' + c.synonymText + ')</span>';
+      return '<span style="font-size:11px;background:#f39c12;color:#fff;padding:1px 6px;border-radius:4px;margin-right:4px">sinônimo</span><b>' + c.cbo + '</b> &mdash; ' + c.nome + ' <span style="color:#9ca3af;font-size:12px">(você digitou: ' + c.synonymText + ')</span>';
     }
     return '<b>' + c.cbo + '</b> &mdash; ' + c.nome;
   },
   function(inp, c){
-    inp.value = c.nome; // descrição da ocupação (padrão SINAN NET) — NUNCA o sinônimo
+    inp.value = c.nome;
     var hint = document.getElementById('f_ocupacao_hint');
     if(hint){
       var txt = 'CBO: ' + c.cbo;
@@ -1808,31 +1792,24 @@ acSetup(
   }
 );
 
-// Sobrescreve o comportamento do input de ocupação para buscar também sinônimos
+// Sinônimos CBO
 (function(){
   var inp = document.getElementById('f_ocupacao');
   var drop = document.getElementById('f_ocupacao-drop');
   if(!inp||!drop) return;
-  var _origInput = null;
-  // Captura o input event APÓS o acSetup para adicionar busca de sinônimos
   inp.addEventListener('input', function(){
     var q = inp.value.trim().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
     if(q.length < 2) return;
-    // Aguarda um microtask para o acSetup processar primeiro
     setTimeout(function(){
       var cbos = window.SINAN_CBOS || [];
-      // Verifica quantos resultados diretos existem
       var directCount = cbos.filter(function(c){
         var nome = c.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
         return c.cbo.indexOf(q) === 0 || nome.indexOf(q) !== -1;
       }).length;
-      // Busca sinônimos
       var synonymResults = searchCboSynonyms(q).slice(0, 5);
       if(synonymResults.length === 0) return;
-      // Adiciona sinônimos ao dropdown se houver espaço ou se não houver resultados diretos
       var existingItems = drop.querySelectorAll('.ac-item');
       if(existingItems.length === 0 && synonymResults.length > 0){
-        // Sem resultados diretos — mostra sinônimos com cabeçalho
         var header = '<div style="padding:6px 14px;font-size:11px;font-weight:800;color:#9ca3af;text-transform:uppercase;letter-spacing:.5px;background:#f9fafb;border-bottom:1px solid #f3f4f6">Sinônimos encontrados</div>';
         drop.innerHTML = header + synonymResults.map(function(c, i){
           return '<div class="ac-item ac-synonym" data-i="syn-'+i+'">' +
@@ -1854,7 +1831,6 @@ acSetup(
           });
         });
       } else if(directCount < 8 && synonymResults.length > 0){
-        // Há resultados diretos mas poucos — acrescenta sinônimos ao final
         var sepDiv = document.createElement('div');
         sepDiv.style.cssText = 'padding:4px 14px;font-size:11px;font-weight:800;color:#9ca3af;text-transform:uppercase;letter-spacing:.5px;background:#f9fafb;border-top:1px solid #f3f4f6;border-bottom:1px solid #f3f4f6';
         sepDiv.textContent = 'Sinônimos';
@@ -1881,7 +1857,6 @@ acSetup(
 
 /*==========================================================
   AUTO-IDADE (calcula a partir da data de nascimento)
-  O usuário pode sobrescrever manualmente após o cálculo.
 ==========================================================*/
 document.getElementById('f_nasc').addEventListener('change', function(){
   var nasc = new Date(this.value + 'T00:00:00');
@@ -1889,7 +1864,7 @@ document.getElementById('f_nasc').addEventListener('change', function(){
   var hoje = new Date();
   hoje.setHours(0,0,0,0);
   var diffMs = hoje - nasc;
-  if(diffMs < 0) return; // data futura
+  if(diffMs < 0) return;
   var diffDias = Math.floor(diffMs / 86400000);
   var idadeEl = document.getElementById('f_idade_val');
   var unEl    = document.getElementById('f_idade_un');
@@ -1906,26 +1881,6 @@ document.getElementById('f_nasc').addEventListener('change', function(){
   }
   updateProgress();
 });
-
-/*==========================================================
-  CAMPO 39 — "OUTRAS" deficiências: exibe campo de detalhe
-==========================================================*/
-document.querySelectorAll('[name="tdefic"]').forEach(function(chk){
-  chk.addEventListener('change', function(){
-    if(this.value === '7'){
-      var box = document.getElementById('box_tdefic_outras');
-      if(box) box.style.display = this.checked ? 'block' : 'none';
-    }
-  });
-});
-
-/*==========================================================
-  COPY DATE HELPER
-==========================================================*/
-function copiarDataNotif(){
-  var d = document.getElementById('f_data_notif').value;
-  if(d){ document.getElementById('f_data_enc').value=d; updateProgress(); }
-}
 
 /*==========================================================
   MODALS
@@ -1952,26 +1907,24 @@ function showToast(msg, type, dur){
 ==========================================================*/
 var CIRCUMFERENCE = 2 * Math.PI * 29; // r=29
 var _prevPct = -1;
-var _sectionMilestones = {}; // track completed sections
+var _sectionMilestones = {};
 var _globalMilestones = {25:false,50:false,80:false,100:false};
-var _celebrated80 = false;
 
 // IDs excluídos do progresso
-var PROG_EXCLUDE_IDS = {'f_num_notif':1,'f_nome_social':1,'f_compl_res':1,'f_pais_res':1,'f_acomp_nome':1,'f_acomp_vinc':1,'f_acomp_tel':1};
+var PROG_EXCLUDE_IDS = {'f_num_notif':1,'f_compl_res':1,'f_pais_res':1,'f_logr_cod_res':1,'f_geo1_res':1,'f_geo2_res':1,'f_pref_res':1,'f_emp_reg':1,'f_emp_dist':1,'f_emp_pref':1,'f_emp_ibge':1};
 
-// Campos essenciais (⭐) — peso alto
-var ESS_IDS = {'f_data_notif':1,'f_data_ocorr':1,'f_tipo_un':1,'f_nome':1,'f_raca':1,'f_or_sex':1,'f_id_gen':1,'f_motiv':1,'f_data_enc':1,'f_mun_res':1};
-var ESS_W = 8; // peso de cada campo essencial
-var STD_W = 1; // peso de campo padrão
+// Campos essenciais (⭐)
+var ESS_IDS = {'f_data_notif':1,'f_data_diag':1,'f_nome':1,'f_raca':1,'f_mun_res':1,'f_ocupacao':1,'f_emp_nome':1};
+var ESS_W = 8;
+var STD_W = 1;
 
-// Grupos essenciais (radio/checkbox) — checar se algum está marcado
-var ESS_GROUPS = ['sexo','tipo_viol','meio_agr','auto_prov'];
-// Grupos padrão (não essenciais, não condicionais)
-var STD_GROUPS = ['outr_vez','nenv','sex_autor','alcool','defic','viol_trab','cat','vinc','encam'];
-// Grupos condicionais (só contam quando container visível)
-var COND_GROUPS = {viol_sex:'sec_viol_sex',proc:'sec_viol_sex',tdefic:'row_defic_tipos'};
+// Grupos essenciais
+var ESS_GROUPS = ['sexo'];
+// Grupos padrão
+var STD_GROUPS = ['cat','afast','outros_trab'];
+// Grupos condicionais
+var COND_GROUPS = {};
 
-// Verifica se elemento está visível (nenhum ancestral com display:none até .wrapper)
 function isElemVisible(el){
   var node = el;
   while(node && node.className !== 'wrapper'){
@@ -1981,7 +1934,6 @@ function isElemVisible(el){
   return true;
 }
 
-// Calcula idade do paciente em anos (retorna null se não for possível)
 function getPatientAgeYears(){
   var nascEl = document.getElementById('f_nasc');
   if(nascEl && nascEl.value){
@@ -2000,7 +1952,6 @@ function getPatientAgeYears(){
   return null;
 }
 
-// Verifica se grupo (radio/checkbox) tem pelo menos um marcado
 function groupHasCheck(name){
   return !!document.querySelector('[name="'+name+'"]:checked');
 }
@@ -2031,7 +1982,6 @@ function getCountMsg(pct){
   return msg;
 }
 
-// Nível de progresso
 var PROG_LEVELS = [
   [0,  'Ficha Inicial',  '#9ca3af'],
   [26, 'Ficha Básica',   '#60a5fa'],
@@ -2049,7 +1999,6 @@ function updateProgress(){
   var totalW = 0, filledW = 0;
   var essTotal = 0, essFilled = 0;
 
-  // --- Campos essenciais (texto/select) ---
   Object.keys(ESS_IDS).forEach(function(id){
     var el = document.getElementById(id);
     if(!el) return;
@@ -2057,26 +2006,20 @@ function updateProgress(){
     if(el.value && el.value.trim()){ filledW += ESS_W; essFilled++; }
   });
 
-  // --- Grupos essenciais ---
   ESS_GROUPS.forEach(function(name){
     totalW += ESS_W; essTotal++;
     if(groupHasCheck(name)){ filledW += ESS_W; essFilled++; }
   });
 
-  // --- Campos padrão (text/select, não essenciais, não excluídos) ---
   var stdEls = Array.from(document.querySelectorAll('input:not([type=radio]):not([type=checkbox]):not([type=hidden]),select'));
-  var _ageYrs = getPatientAgeYears();
-  var _skipOcup = _ageYrs !== null && _ageYrs < 14; // criança: sem campo de ocupação
   stdEls.forEach(function(el){
     if(PROG_EXCLUDE_IDS[el.id] || el.readOnly) return;
-    if(ESS_IDS[el.id]) return; // já contou
-    if(!isElemVisible(el)) return; // condicional oculto
-    if(el.id === 'f_ocupacao' && _skipOcup) return; // criança: ocupação não se aplica
+    if(ESS_IDS[el.id]) return;
+    if(!isElemVisible(el)) return;
     totalW += STD_W;
     if(el.value && el.value.trim()) filledW += STD_W;
   });
 
-  // --- Grupos padrão ---
   STD_GROUPS.forEach(function(name){
     var grpEl = document.querySelector('[name="'+name+'"]');
     if(!grpEl || !isElemVisible(grpEl)) return;
@@ -2084,7 +2027,6 @@ function updateProgress(){
     if(groupHasCheck(name)) filledW += STD_W;
   });
 
-  // --- Grupos condicionais ---
   Object.keys(COND_GROUPS).forEach(function(name){
     var cont = document.getElementById(COND_GROUPS[name]);
     if(!cont || cont.style.display === 'none') return;
@@ -2093,39 +2035,30 @@ function updateProgress(){
   });
 
   var pct = totalW > 0 ? Math.round(filledW/totalW*100) : 0;
-  // contagem exibida: campos de texto/select preenchidos para display
-  var allTextEls = stdEls.filter(function(el){ return !PROG_EXCLUDE_IDS[el.id] && !el.readOnly && isElemVisible(el); });
-  var allFilled = allTextEls.filter(function(el){ return el.value && el.value.trim(); }).length;
 
-  // Nível
   var level = getLevel(pct);
 
-  // Ring
   var offset = CIRCUMFERENCE - (pct/100)*CIRCUMFERENCE;
   var ring = document.getElementById('prog-ring');
   ring.style.strokeDashoffset = offset;
   ring.style.stroke = level[2];
 
-  // Text + level name
   document.getElementById('prog-pct').textContent = pct+'%';
   document.getElementById('prog-status').textContent = getStatusMsg(pct);
   document.getElementById('prog-count').textContent = getCountMsg(pct);
   var lvEl = document.getElementById('prog-level');
   if(lvEl){ lvEl.textContent = level[1]; lvEl.style.background = level[2]+'30'; lvEl.style.color = pct>=80?'#fff':'rgba(255,255,255,.85)'; }
 
-  // Progress bar strip
   var barFill = document.getElementById('prog-bar-fill');
   if(barFill){ barFill.style.width = pct+'%'; barFill.style.background = level[2]; }
   var barStrip = document.getElementById('prog-bar-strip');
   if(barStrip){ barStrip.style.background = pct>0?'rgba(0,0,0,.1)':'rgba(255,255,255,.08)'; }
 
-  // Mobile bottom bar
   var mobPct = document.getElementById('mob-prog-pct');
   if(mobPct) mobPct.textContent = pct+'%';
   var mobLabel = document.getElementById('mob-prog-label');
   if(mobLabel) mobLabel.textContent = level[1];
 
-  // Milestone toasts
   [25,50].forEach(function(m){
     if(pct>=m && !_globalMilestones[m]){
       _globalMilestones[m]=true;
@@ -2145,14 +2078,12 @@ function updateProgress(){
   if(pct<80) _globalMilestones[80]=false;
   if(pct<100) _globalMilestones[100]=false;
 
-  // Section badges
   updateSectionBadges();
-
   _prevPct = pct;
 }
 
 function updateSectionBadges(){
-  for(var s=1;s<=9;s++){
+  for(var s=1;s<=10;s++){
     var secEl = document.getElementById('sec'+s);
     var badge = document.getElementById('badge'+s);
     if(!secEl||!badge) continue;
@@ -2230,8 +2161,7 @@ function getMissingEssentials(){
       el.classList.remove('error');
     }
   });
-  // Grupos essenciais (radio/checkbox)
-  var groupLabels = {sexo:'Sexo [Campo 13]',tipo_viol:'Tipo de Violência [Campo 56]',meio_agr:'Meio de Agressão [Campo 57]',auto_prov:'Lesão Autoprovocada [Campo 54]'};
+  var groupLabels = {sexo:'Sexo [Campo 13]'};
   ESS_GROUPS.forEach(function(name){
     if(!groupHasCheck(name)) missing.push(groupLabels[name]||name);
   });
@@ -2258,7 +2188,7 @@ function fmtDate(val){
 function tv(id){ return (document.getElementById(id)||{}).value||''; }
 
 /*==========================================================
-  GERAR PDF — sempre habilitado; modal se faltar campo essencial
+  GERAR PDF
 ==========================================================*/
 async function gerarPDF(force){
   if(!force){
@@ -2267,7 +2197,6 @@ async function gerarPDF(force){
       document.getElementById('ov-quase-list').innerHTML = missing.map(function(e){
         return '<div class="err-item">⭐ '+e+'</div>';
       }).join('');
-      // Botão "baixar mesmo assim"
       var dlBtn = document.getElementById('ov-quase-dl');
       dlBtn.onclick = function(){ closeModal('ov-quase'); gerarPDF(true); };
       document.getElementById('ov-quase').classList.add('show');
@@ -2280,8 +2209,8 @@ async function gerarPDF(force){
   btn.textContent='⏳ Gerando...';
 
   try{
-    var resp = await fetch('fichas/violencia_editavel.pdf');
-    if(!resp.ok) throw new Error('Arquivo violencia_editavel.pdf não encontrado em fichas/');
+    var resp = await fetch('fichas/DRT_LERDORT_editavel.pdf');
+    if(!resp.ok) throw new Error('Arquivo DRT_LERDORT_editavel.pdf não encontrado em fichas/');
     var pdfBytes = await resp.arrayBuffer();
     var pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
     var form = pdfDoc.getForm();
@@ -2289,138 +2218,114 @@ async function gerarPDF(force){
     function setTxt(name,val){
       try{ form.getTextField(name).setText(val||''); }catch(e){}
     }
-    function setRadio(name,val){
-      try{ form.getRadioGroup(name).select(val); }catch(e){
-        try{ form.getDropdown(name).select(val); }catch(e2){}
-      }
-    }
-    function setChkGroup(prefix,vals){
-      (vals||[]).forEach(function(v){
-        try{ form.getCheckBox(prefix+'_'+v).check(); }catch(e){}
-        try{ form.getCheckBox(prefix+v).check(); }catch(e){}
-      });
-    }
 
-    // Seção 1
-    setTxt('notificacao_numero',              tv('f_num_notif'));
-    setTxt('data_notificacao',                fmtDate(tv('f_data_notif')));
-    setTxt('uf_notificacao',                  tv('f_uf_notif'));
-    setTxt('municipio_notificacao_nome',      tv('f_mun_notif'));
+    // Seção 1 — Dados da Notificação
+    setTxt('notificacao_numero',               tv('f_num_notif'));
+    setTxt('data_notificacao',                 fmtDate(tv('f_data_notif')));
+    setTxt('data_diagnostico',                 fmtDate(tv('f_data_diag')));
+    setTxt('municipio_notificacao_nome',       tv('f_mun_notif'));
+    setTxt('uf_notificacao',                   tv('f_uf_notif'));
     setTxt('municipio_notificacao_codigo_ibge', tv('f_ibge_notif'));
-    setTxt('unidade_notificadora_codigo',     tv('f_tipo_un'));
-    setTxt('unidade_notificadora_nome',       tv('f_nome_un'));
-    setTxt('unidade_notificadora_cnes',       tv('f_cnes'));
-    setTxt('data_ocorrencia',                 fmtDate(tv('f_data_ocorr')));
-    // Seção 2
-    setTxt('paciente_nome',           tv('f_nome'));
+    setTxt('unidade_notificadora_nome',        tv('f_nome_un'));
+    setTxt('unidade_notificadora_cnes',        tv('f_cnes'));
+
+    // Seção 2 — Identificação do Paciente
+    setTxt('paciente_nome',            tv('f_nome'));
     setTxt('paciente_data_nascimento', fmtDate(tv('f_nasc')));
-    setTxt('paciente_idade_valor',    tv('f_idade_val'));
-    setTxt('paciente_idade_tipo',     ({H:'1',D:'2',M:'3',A:'4'})[tv('f_idade_un')] || ''); // 1=H 2=D 3=M 4=A
+    setTxt('paciente_idade_valor',     tv('f_idade_val'));
+    setTxt('paciente_idade_tipo',      ({H:'1',D:'2',M:'3',A:'4'})[tv('f_idade_un')]||'');
     var _sexoPDF = getRadio('sexo');
-    setTxt('paciente_sexo',           _sexoPDF); // M/F/I
-    setTxt('paciente_gestante',       _sexoPDF === 'M' ? '6' : tv('f_gest')); // 6=Não se aplica quando masculino
-    setTxt('paciente_raca_cor',       tv('f_raca'));
-    setTxt('paciente_escolaridade',   tv('f_escol'));
-    setTxt('paciente_cartao_sus',     tv('f_sus'));
-    setTxt('paciente_mae_nome',       tv('f_mae'));
-    // Seção 3
-    setTxt('residencia_uf',                   tv('f_uf_res'));
-    setTxt('residencia_municipio_nome',       tv('f_mun_res'));
+    setTxt('paciente_sexo',            _sexoPDF);
+    setTxt('paciente_gestante',        _sexoPDF==='M'?'6':tv('f_gest'));
+    setTxt('paciente_raca_cor',        tv('f_raca'));
+    setTxt('paciente_escolaridade',    tv('f_escol'));
+    setTxt('paciente_cartao_sus',      tv('f_sus'));
+    setTxt('paciente_mae_nome',        tv('f_mae'));
+
+    // Seção 3 — Dados de Residência
+    setTxt('residencia_uf',                    tv('f_uf_res'));
+    setTxt('residencia_municipio_nome',        tv('f_mun_res'));
     setTxt('residencia_municipio_codigo_ibge', tv('f_ibge_res'));
-    setTxt('residencia_distrito',             tv('f_bairro_res'));
-    setTxt('residencia_logradouro',           tv('f_logr_res'));
-    setTxt('residencia_numero',               tv('f_num_res'));
-    setTxt('residencia_complemento',          tv('f_compl_res'));
-    setTxt('residencia_ponto_de_referencia',  tv('f_pref_res'));
-    setTxt('residencia_cep',                  tv('f_cep'));
-    setTxt('residencia_telefone',             tv('f_tel_res'));
-    setTxt('residencia_zona',                 tv('f_zona_res'));
-    setTxt('residencia_pais',                 tv('f_pais_res'));
-    // Seção 4
-    setTxt('pessoa_nome_social',        tv('f_nome_social'));
-    setTxt('pessoa_ocupacao',           tv('f_ocupacao'));
-    setTxt('pessoa_situacao_conjugal',  tv('f_est_civil'));
-    setTxt('pessoa_orientacao_sexual',  tv('f_or_sex'));
-    setTxt('pessoa_identidade_genero',  tv('f_id_gen'));
-    setTxt('pessoa_possui_deficiencia', getRadio('defic')); // 1=Sim 2=Não 9=Ignorado
-    // C.39 — Tipo de Deficiência (1=Sim 2=Não por tipo)
-    var _tdef = getChecks('tdefic').map(String);
-    ['deficiencia_fisica','deficiencia_visual','deficiencia_intelectual','deficiencia_auditiva',
-     'deficiencia_transtorno_mental','deficiencia_transtorno_comportamento','deficiencia_outras']
-    .forEach(function(fn,i){ setTxt(fn, _tdef.indexOf(String(i+1))!==-1?'1':'2'); });
-    setTxt('deficiencia_outras_detalhe', tv('f_tdefic_outras'));
-    // Seção 5
-    setTxt('ocorrencia_uf',                   tv('f_uf_oc'));
-    setTxt('ocorrencia_municipio_nome',        tv('f_mun_oc'));
-    setTxt('ocorrencia_municipio_codigo_ibge', tv('f_ibge_oc'));
-    setTxt('ocorrencia_bairro',               tv('f_bairro_oc'));
-    setTxt('ocorrencia_logradouro',           tv('f_logr_oc'));
-    setTxt('ocorrencia_numero',               tv('f_num_oc'));
-    setTxt('ocorrencia_zona',                 tv('f_zona_oc'));
-    setTxt('ocorrencia_hora',                 tv('f_hora_oc'));
-    setTxt('ocorrencia_local_tipo',           tv('f_local_oc'));
-    setTxt('ocorrencia_repetida',             getRadio('outr_vez'));
-    setTxt('ocorrencia_lesao_autoprovocada',  getRadio('auto_prov'));
-    // Seção 6
-    setTxt('motivacao_codigo', tv('f_motiv'));
-    // C.56 — Tipo de Violência (10 opções, 1=sim 2=não)
-    var _tv56 = getChecks('tipo_viol').map(String);
-    ['violencia_fisica','violencia_psicologica_moral','violencia_tortura','violencia_sexual',
-     'violencia_trafico_seres_humanos','violencia_financeira_economica','violencia_negligencia_abandono',
-     'violencia_trabalho_infantil','violencia_intervencao_legal','violencia_outras']
-    .forEach(function(fn,i){ setTxt(fn, _tv56.indexOf(String(i+1))!==-1?'1':'2'); });
-    setTxt('violencia_outras_detalhe', tv('f_tipo_viol_outros'));
-    // C.57 — Meio de Agressão (9 opções)
-    var _tv57 = getChecks('meio_agr').map(String);
-    ['agressao_forca_corporal','agressao_enforcamento','agressao_objeto_contundente',
-     'agressao_objeto_perfurocortante','agressao_envenenamento','agressao_arma_de_fogo',
-     'agressao_substancia_quente','agressao_ameaca','agressao_outro']
-    .forEach(function(fn,i){ setTxt(fn, _tv57.indexOf(String(i+1))!==-1?'1':'2'); });
-    setTxt('agressao_outro_detalhe', tv('f_meio_agr_outro'));
-    // C.58 — Violência Sexual (5 opções)
-    var _tv58 = getChecks('viol_sex').map(String);
-    ['sexual_assedio','sexual_estupro','sexual_pornografia_infantil','sexual_exploracao','sexual_outros']
-    .forEach(function(fn,i){ setTxt(fn, _tv58.indexOf(String(i+1))!==-1?'1':'2'); });
-    setTxt('sexual_outros_detalhe', tv('f_viol_sex_outros'));
-    // C.59 — Procedimentos (8 opções)
-    var _tv59 = getChecks('proc').map(String);
-    ['procedimento_profilaxia_dst','procedimento_profilaxia_hiv','procedimento_profilaxia_hepatite_b',
-     'procedimento_coleta_sangue','procedimento_coleta_secrecao_vaginal','procedimento_coleta_semen',
-     'procedimento_contracepcao_emergencia','procedimento_aborto_previsto_lei']
-    .forEach(function(fn,i){ setTxt(fn, _tv59.indexOf(String(i+1))!==-1?'1':'2'); });
-    // C.60 — Número de envolvidos
-    setTxt('autor_numero_envolvidos', getRadio('nenv'));
-    // C.61 — Vínculo do autor (18 opções)
-    var _tv61 = getChecks('vinc').map(String);
-    ['autor_vinculo_pai','autor_vinculo_mae','autor_vinculo_padrasto','autor_vinculo_madrasta',
-     'autor_vinculo_conjuge','autor_vinculo_ex_conjuge','autor_vinculo_namorado','autor_vinculo_ex_namorado',
-     'autor_vinculo_filho','autor_vinculo_irmao','autor_vinculo_amigo_conhecido','autor_vinculo_desconhecido',
-     'autor_vinculo_cuidador','autor_vinculo_patrao_chefe','autor_vinculo_relacao_institucional',
-     'autor_vinculo_policial','autor_vinculo_propria_pessoa','autor_vinculo_outros']
-    .forEach(function(fn,i){ setTxt(fn, _tv61.indexOf(String(i+1))!==-1?'1':'2'); });
-    setTxt('autor_vinculo_outros_detalhe', tv('f_vinc_outro'));
-    setTxt('autor_sexo',               getRadio('sex_autor'));
-    setTxt('autor_suspeita_uso_alcool', getRadio('alcool'));
-    setTxt('autor_ciclo_vida',         tv('f_ciclo'));
-    // C.65 — Encaminhamento (13 opções da interface)
-    var _tv65 = getChecks('encam').map(String);
-    ['encaminhamento_rede_saude','encaminhamento_rede_assistencia_social','encaminhamento_rede_educacao',
-     'encaminhamento_rede_atendimento_mulher','encaminhamento_conselho_tutelar','encaminhamento_conselho_idoso',
-     'encaminhamento_delegacia_mulher','encaminhamento_delegacia_idoso','encaminhamento_outras_delegacias',
-     'encaminhamento_centro_direitos_humanos','encaminhamento_justica_infancia_juventude',
-     'encaminhamento_ministerio_publico','encaminhamento_defensoria_publica']
-    .forEach(function(fn,i){ setTxt(fn, _tv65.indexOf(String(i+1))!==-1?'1':'2'); });
-    setTxt('encaminhamento_delegacia_crianca_adolescente', '2'); // sem opção na interface
-    setTxt('trabalho_violencia_relacionada', getRadio('viol_trab'));
-    setTxt('trabalho_cat_emitida',           getRadio('cat'));
-    // C.68 — CID: envia apenas o código (sem descrição)
-    setTxt('circunstancia_lesao_cid10', tv('f_cid10').split(' ')[0].substring(0,7));
-    // Seção 7 + extras
-    setTxt('data_encerramento',      fmtDate(tv('f_data_enc')));
-    setTxt('observacoes_adicionais', document.getElementById('f_obs').value||'');
-    setTxt('acompanhante_nome',      tv('f_acomp_nome'));
-    setTxt('acompanhante_vinculo',   tv('f_acomp_vinc'));
-    setTxt('acompanhante_telefone',  tv('f_acomp_tel'));
+    setTxt('residencia_bairro',                tv('f_bairro_res'));
+    setTxt('residencia_logradouro',            tv('f_logr_res'));
+    setTxt('residencia_logradouro_codigo',     tv('f_logr_cod_res'));
+    setTxt('residencia_numero',                tv('f_num_res'));
+    setTxt('residencia_complemento',           tv('f_compl_res'));
+    setTxt('residencia_geo_campo1',            tv('f_geo1_res'));
+    setTxt('residencia_geo_campo2',            tv('f_geo2_res'));
+    setTxt('residencia_ponto_referencia',      tv('f_pref_res'));
+    setTxt('residencia_cep',                   tv('f_cep'));
+    setTxt('residencia_telefone',              tv('f_tel_res'));
+    setTxt('residencia_zona',                  tv('f_zona_res'));
+    setTxt('residencia_pais',                  tv('f_pais_res'));
+
+    // Seção 4 — Ocupação
+    setTxt('ocupacao_descricao',        tv('f_ocupacao'));
+    setTxt('situacao_mercado_trabalho', tv('f_sit_mercado'));
+    setTxt('tempo_exposicao_valor',     tv('f_tempo_exp_val'));
+    setTxt('tempo_exposicao_tipo',      tv('f_tempo_exp_tipo'));
+    setTxt('tempo_trabalho_valor',      tv('f_tempo_trab_val'));
+    setTxt('tempo_trabalho_tipo',       tv('f_tempo_trab_tipo'));
+
+    // Seção 5 — Empresa
+    setTxt('empresa_registro_cnpj',    tv('f_emp_reg'));
+    setTxt('empresa_nome',             tv('f_emp_nome'));
+    setTxt('empresa_cnae',             tv('f_emp_cnae'));
+    setTxt('empresa_uf',               tv('f_emp_uf'));
+    setTxt('empresa_municipio',        tv('f_emp_mun'));
+    setTxt('empresa_ibge',             tv('f_emp_ibge'));
+    setTxt('empresa_distrito',         tv('f_emp_dist'));
+    setTxt('empresa_bairro',           tv('f_emp_bairro'));
+    setTxt('empresa_endereco',         tv('f_emp_end'));
+    setTxt('empresa_numero',           tv('f_emp_num'));
+    setTxt('empresa_ponto_referencia', tv('f_emp_pref'));
+    setTxt('empresa_telefone',         tv('f_emp_tel'));
+    setTxt('empresa_terceirizada',     getRadio('emp_terc'));
+    setTxt('empresa_terc_cnae',        tv('f_emp_terc_cnae'));
+    setTxt('empresa_princ_cnpj',       tv('f_emp_princ_cnpj'));
+    setTxt('empresa_princ_razao_social', tv('f_emp_princ_rs'));
+
+    // Seção 6 — Agravos Concomitantes (1=sim, 2=não por agravo)
+    var _agrav = getChecks('agrav').map(String);
+    ['agravo_hipertensao','agravo_diabetes','agravo_hanseniase','agravo_transtorno_mental',
+     'agravo_tuberculose','agravo_asma','agravo_outras']
+    .forEach(function(fn,i){ setTxt(fn, _agrav.indexOf(String(i+1))!==-1?'1':'2'); });
+    setTxt('agravo_outras_detalhe', tv('f_agrav_outras_det'));
+
+    // Seção 7 — Sintomas e Diagnóstico
+    var _sint = getChecks('sint').map(String);
+    ['sintoma_dor','sintoma_diminuicao_forca','sintoma_diminuicao_movimento',
+     'sintoma_alteracao_sensibilidade','sintoma_limitacao_movimentos',
+     'sintoma_sinais_flogisticos','sintoma_outro']
+    .forEach(function(fn,i){ setTxt(fn, _sint.indexOf(String(i+1))!==-1?'1':'2'); });
+    setTxt('sintoma_outro_detalhe',       tv('f_sint_outro_det'));
+    setTxt('diagnostico_especifico_cid10', tv('f_diag_cid'));
+    setTxt('limitacao_incapacidade',      tv('f_limit_incap'));
+    setTxt('regime_tratamento',           tv('f_regime'));
+
+    // Seção 8 — Fatores de Exposição
+    var _expos = getChecks('expos').map(String);
+    ['exposicao_movimentos_repetitivos','exposicao_ambiente_estressante',
+     'exposicao_tempo_pausas','exposicao_jornada_6h','exposicao_premios_producao']
+    .forEach(function(fn,i){ setTxt(fn, _expos.indexOf(String(i+1))!==-1?'1':'2'); });
+
+    // Seção 9 — Afastamento e Conduta
+    setTxt('afastamento_tratamento',       getRadio('afast'));
+    setTxt('tempo_afastamento_valor',      tv('f_tempo_afast_val'));
+    setTxt('tempo_afastamento_tipo',       tv('f_tempo_afast_tipo'));
+    setTxt('outros_trabalhadores_doenca',  getRadio('outros_trab'));
+    setTxt('afastamento_resultado',        tv('f_afast_res'));
+    var _cond = getChecks('conduta').map(String);
+    ['conduta_afastamento_risco','conduta_mudanca_organizacao','conduta_protecao_coletiva',
+     'conduta_protecao_individual','conduta_afastamento_local','conduta_outros','conduta_nenhum']
+    .forEach(function(fn,i){ setTxt(fn, _cond.indexOf(String(i+1))!==-1?'1':'2'); });
+    setTxt('conduta_outros_detalhe', tv('f_conduta_outros_det'));
+
+    // Seção 10 — Encerramento
+    setTxt('evolucao_caso',                tv('f_evolucao'));
+    setTxt('cat_emitida',                  getRadio('cat'));
+    setTxt('obito_data',                   fmtDate(tv('f_obito')));
+    setTxt('observacoes_complementares',   tv('f_obs'));
 
     var outBytes = await pdfDoc.save();
     var blob = new Blob([outBytes],{type:'application/pdf'});
@@ -2429,13 +2334,12 @@ async function gerarPDF(force){
     a.href=url;
     var ds = fmtDate(tv('f_data_notif')).replace(/\//g,'-')||'sem-data';
     var nm = tv('f_nome').split(' ')[0]||'PACIENTE';
-    a.download = 'SINAN_Violencia_'+nm+'_'+ds+'.pdf';
+    a.download = 'SINAN_LERDORT_'+nm+'_'+ds+'.pdf';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
     showToast('✓ PDF gerado e baixado com sucesso!','t-ok',4000);
-    // Habilita o botão de transferência após PDF gerado com sucesso
     var btnTr = document.getElementById('btn-transfer');
     if(btnTr) btnTr.classList.remove('btn-disabled');
 
@@ -2447,299 +2351,55 @@ async function gerarPDF(force){
   btn.disabled=false;
   btn.innerHTML='📄 Gerar PDF';
 }
-</script>
 
-<!-- CONFIRM MODAL -->
-<div id="confirm-modal">
-  <div class="cm-box">
-    <div class="cm-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,4 1,10 7,10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg></div>
-    <h3>Apagar tudo e começar do zero?</h3>
-    <p>Todos os dados inseridos serão perdidos. Se quiser preservá-los, use <strong>Exportar Rascunho</strong> antes de continuar.</p>
-    <div class="cm-actions">
-      <button class="cm-cancel" onclick="fecharModalNova()">Cancelar</button>
-      <button class="cm-ok" onclick="novaFichaConfirmado()">Apagar tudo</button>
-    </div>
-  </div>
-</div>
-
-<!-- TRANSFER MODAL -->
-<div class="ov" id="ov-transfer">
-  <div class="modal" style="max-width:500px">
-    <div class="modal-ico">🔁</div>
-    <h2>Usar dados em outra ficha</h2>
-    <p>Os dados do paciente, notificação e residência já preenchidos serão transferidos automaticamente para a nova ficha. Selecione o destino:</p>
-    <div id="transfer-fichas" style="margin-top:16px;display:flex;flex-direction:column;gap:8px"></div>
-    <div class="modal-actions">
-      <button class="mbtn mbtn-s" onclick="closeModal('ov-transfer')">Cancelar</button>
-      <button class="mbtn mbtn-p" id="btn-transfer-ok" onclick="confirmarTransferencia()" style="opacity:.45;pointer-events:none">Continuar →</button>
-    </div>
-  </div>
-</div>
-
-<!-- TRANSFER SEM PDF — aviso -->
-<div class="ov" id="ov-transfer-warn">
-  <div class="modal" style="max-width:400px">
-    <div class="modal-ico">⚠️</div>
-    <h2>PDF ainda não gerado</h2>
-    <p>Você ainda não gerou o PDF desta ficha. Se prosseguir, os dados desta ficha <strong>não serão salvos em PDF</strong> — apenas transferidos para a próxima.</p>
-    <div class="modal-actions">
-      <button class="mbtn mbtn-s" onclick="closeModal('ov-transfer-warn')">Voltar e gerar PDF</button>
-      <button class="mbtn mbtn-p" onclick="closeModal('ov-transfer-warn');abrirTransferencia()">Transferir mesmo assim</button>
-    </div>
-  </div>
-</div>
-
-<!-- BOTTOM SHEET MOBILE — menu de pacientes fictícios (fix iOS Safari) -->
-<div id="pac-mob-sheet">
-  <div id="pac-mob-backdrop" onclick="closePacSheet()"></div>
-  <div id="pac-mob-panel">
-    <div class="tb-menu-hdr">Selecione um caso didático</div>
-    <div id="pac-mob-list"></div>
-  </div>
-</div>
-
-<script>
 /*==========================================================
-  TOOLS — Paciente Teste | Exportar | Importar | Nova Ficha
+  TOOLS — Pacientes Didáticos | Exportar | Importar | Nova Ficha
 ==========================================================*/
 
 var FAKE_PATIENTS = [
   {
-    label:"João Pedro, 6 anos",
-    sub:"Física + Negligência · padrasto · São Paulo/SP",
-    fields:{
-      f_data_notif:"2025-06-10",f_data_ocorr:"2025-06-09",
-      f_tipo_un:"1",f_nome_un:"UPA NORTE",f_cnes:"2078015",
-      f_mun_notif:"SAO PAULO",f_uf_notif:"SP",f_ibge_notif:"355030",
-      f_nome:"JOAO PEDRO SOUZA SILVA",f_nasc:"2019-03-15",f_raca:"4",f_escol:"10",
-      f_sus:"706012300000001",f_mae:"MARIA DA CONCEICAO SOUZA",
-      f_est_civil:"1",
-      f_mun_res:"SAO PAULO",f_uf_res:"SP",f_ibge_res:"355030",
-      f_bairro_res:"JARDIM BRASIL",f_logr_res:"RUA DAS FLORES",f_num_res:"45",
-      f_cep:"02177-030",f_tel_res:"(11) 98765-1234",f_zona_res:"1",
-      f_pref_res:"PROXIMO A ESCOLA ESTADUAL JARDIM BRASIL",
-      f_or_sex:"8",f_id_gen:"8",
-      f_mun_oc:"SAO PAULO",f_uf_oc:"SP",f_bairro_oc:"JARDIM BRASIL",
-      f_logr_oc:"RUA DAS FLORES",f_num_oc:"45",
-      f_hora_oc:"19:30",f_zona_oc:"1",f_local_oc:"01",f_motiv:"06",f_ciclo:"4",
-      f_cid10:"T74.1",
-      f_acomp_nome:"MARIA DA CONCEICAO SOUZA",f_acomp_vinc:"MAE",f_acomp_tel:"(11) 98765-1234",
-      f_data_enc:"2025-06-10"
+    label: "Marcia Oliveira, 38 anos",
+    sub: "Tendinite · digitadora · São Paulo/SP",
+    fields: {
+      f_data_notif:"2025-08-05", f_data_diag:"2025-08-01",
+      f_nome_un:"CEREST PAULISTANO", f_cnes:"6789012",
+      f_mun_notif:"SAO PAULO", f_uf_notif:"SP", f_ibge_notif:"355030",
+      f_nome:"MARCIA DE OLIVEIRA SANTOS", f_nasc:"1987-03-20", f_raca:"4", f_escol:"6",
+      f_sus:"706012300000021", f_mae:"JOANA DE OLIVEIRA",
+      f_mun_res:"SAO PAULO", f_uf_res:"SP", f_ibge_res:"355030",
+      f_bairro_res:"TATUAPE", f_logr_res:"RUA TUIUTI", f_num_res:"450",
+      f_cep:"03307-000", f_tel_res:"(11) 97654-3210", f_zona_res:"1",
+      f_ocupacao:"DIGITADOR",
+      f_sit_mercado:"1", f_tempo_exp_val:"12", f_tempo_exp_tipo:"A",
+      f_tempo_trab_val:"12", f_tempo_trab_tipo:"A",
+      f_emp_nome:"EMPRESA DE PROCESSAMENTO DE DADOS SA", f_emp_cnae:"6311900",
+      f_emp_uf:"SP", f_emp_mun:"SAO PAULO",
+      f_diag_cid:"M75.1", f_limit_incap:"1", f_regime:"1"
     },
-    radios:{sexo:"M",defic:"2",outr_vez:"1",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"1",viol_trab:"2",cat:"2"},
-    checks:{tipo_viol:["1","7"],meio_agr:["1"],vinc:["3"],encam:["1","5","14"]}
+    radios: {sexo:"F", afast:"1", outros_trab:"1", cat:"2"},
+    checks: {sint:["1","4","5"], expos:["1","3","4","5"], conduta:["1","2"]}
   },
   {
-    label:"Ana Claudia, 32 anos",
-    sub:"Física + Psicológica · cônjuge · Rio de Janeiro/RJ",
-    fields:{
-      f_data_notif:"2025-08-14",f_data_ocorr:"2025-08-13",
-      f_tipo_un:"1",f_nome_un:"UPA CENTRAL",f_cnes:"2089011",
-      f_mun_notif:"RIO DE JANEIRO",f_uf_notif:"RJ",f_ibge_notif:"330455",
-      f_nome:"ANA CLAUDIA FERREIRA MENDES",f_nasc:"1992-07-22",f_raca:"1",f_escol:"6",f_gest:"5",
-      f_sus:"706012300000002",f_mae:"LUCIA APARECIDA FERREIRA",
-      f_est_civil:"2",f_ocupacao:"EMPREGADO DOMESTICO NOS SERVICOS GERAIS",
-      f_or_sex:"1",f_id_gen:"8",
-      f_mun_res:"RIO DE JANEIRO",f_uf_res:"RJ",f_ibge_res:"330455",
-      f_bairro_res:"SANTA CRUZ",f_logr_res:"RUA SENADOR CAMARA",f_num_res:"312",
-      f_compl_res:"APTO 4 BL B",f_cep:"23565-170",f_tel_res:"(21) 98765-4321",f_zona_res:"1",
-      f_pref_res:"PROXIMO A PADARIA SAO JORGE",
-      f_mun_oc:"RIO DE JANEIRO",f_uf_oc:"RJ",f_bairro_oc:"SANTA CRUZ",
-      f_logr_oc:"RUA SENADOR CAMARA",f_num_oc:"312",
-      f_hora_oc:"22:15",f_zona_oc:"1",f_local_oc:"01",f_motiv:"01",f_ciclo:"4",
-      f_cid10:"Y07.0",
-      f_data_enc:"2025-08-14"
+    label: "Paulo Ferreira, 47 anos",
+    sub: "Síndrome do túnel do carpo · operário · Curitiba/PR",
+    fields: {
+      f_data_notif:"2025-06-20", f_data_diag:"2025-06-15",
+      f_nome_un:"CEREST REGIONAL CURITIBA", f_cnes:"4100450",
+      f_mun_notif:"CURITIBA", f_uf_notif:"PR", f_ibge_notif:"410690",
+      f_nome:"PAULO HENRIQUE FERREIRA GOMES", f_nasc:"1978-07-30", f_raca:"1", f_escol:"3",
+      f_sus:"706012300000022", f_mae:"TEREZINHA FERREIRA",
+      f_mun_res:"CURITIBA", f_uf_res:"PR", f_ibge_res:"410690",
+      f_bairro_res:"PORTAO", f_logr_res:"AVENIDA IGUACU", f_num_res:"1200",
+      f_cep:"80230-020", f_tel_res:"(41) 98765-4321", f_zona_res:"1",
+      f_ocupacao:"MONTADOR DE MAQUINAS E EQUIPAMENTOS INDUSTRIAIS",
+      f_sit_mercado:"1", f_tempo_exp_val:"15", f_tempo_exp_tipo:"A",
+      f_tempo_trab_val:"15", f_tempo_trab_tipo:"A",
+      f_emp_nome:"INDUSTRIA METALURGICA DO PARANA LTDA", f_emp_cnae:"2812200",
+      f_emp_uf:"PR", f_emp_mun:"CURITIBA",
+      f_diag_cid:"G56.0", f_limit_incap:"1", f_regime:"1"
     },
-    radios:{sexo:"F",defic:"2",outr_vez:"1",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"1",viol_trab:"2",cat:"2"},
-    checks:{tipo_viol:["1","2"],meio_agr:["1","3"],vinc:["5"],encam:["1","7"]}
-  },
-  {
-    label:"José Antonio, 72 anos",
-    sub:"Financeira + Psicológica · filho · Belo Horizonte/MG",
-    fields:{
-      f_data_notif:"2025-04-03",f_data_ocorr:"2025-04-01",
-      f_tipo_un:"2",f_nome_un:"CRAS LESTE",f_cnes:"3502345",
-      f_mun_notif:"BELO HORIZONTE",f_uf_notif:"MG",f_ibge_notif:"310620",
-      f_nome:"JOSE ANTONIO DA COSTA",f_nasc:"1952-11-08",f_raca:"1",f_escol:"3",
-      f_sus:"706012300000003",f_mae:"CONCEICAO DA COSTA",
-      f_est_civil:"3",f_ocupacao:"APOSENTADO/PENSIONISTA",f_or_sex:"1",f_id_gen:"8",
-      f_mun_res:"BELO HORIZONTE",f_uf_res:"MG",f_ibge_res:"310620",
-      f_bairro_res:"CENTRO",f_logr_res:"AVENIDA AFONSO PENA",f_num_res:"1500",
-      f_compl_res:"APTO 203",f_cep:"30130-010",f_tel_res:"(31) 98765-5678",f_zona_res:"1",
-      f_pref_res:"EM FRENTE AO TRIBUNAL DE JUSTICA DE MINAS GERAIS",
-      f_mun_oc:"BELO HORIZONTE",f_uf_oc:"MG",f_bairro_oc:"CENTRO",
-      f_logr_oc:"AVENIDA AFONSO PENA",f_num_oc:"1500",
-      f_hora_oc:"14:00",f_zona_oc:"1",f_local_oc:"01",f_motiv:"06",f_ciclo:"5",
-      f_cid10:"T74.3",
-      f_acomp_nome:"ANTONIO DA COSTA JUNIOR",f_acomp_vinc:"FILHO",f_acomp_tel:"(31) 97654-3210",
-      f_data_enc:"2025-04-03"
-    },
-    radios:{sexo:"M",defic:"2",outr_vez:"1",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"2",viol_trab:"2",cat:"2"},
-    checks:{tipo_viol:["6","2"],meio_agr:["8"],vinc:["9"],encam:["6","8","2"]}
-  },
-  {
-    label:"Beatriz Oliveira, 15 anos",
-    sub:"Sexual (estupro) · desconhecido · Salvador/BA",
-    fields:{
-      f_data_notif:"2025-07-22",f_data_ocorr:"2025-07-21",
-      f_tipo_un:"1",f_nome_un:"HOSPITAL REGIONAL",f_cnes:"2256789",
-      f_mun_notif:"SALVADOR",f_uf_notif:"BA",f_ibge_notif:"292740",
-      f_nome:"BEATRIZ OLIVEIRA SANTOS",f_nasc:"2009-04-30",f_raca:"2",f_escol:"4",f_gest:"9",
-      f_sus:"706012300000004",f_mae:"CLAUDIA SANTOS",
-      f_est_civil:"1",f_ocupacao:"ESTUDANTE",f_or_sex:"1",f_id_gen:"8",
-      f_mun_res:"SALVADOR",f_uf_res:"BA",f_ibge_res:"292740",
-      f_bairro_res:"LIBERDADE",f_logr_res:"RUA JOAO DAS BOTAS",f_num_res:"82",
-      f_compl_res:"CASA FUNDO",f_cep:"40200-025",f_tel_res:"(71) 99876-2345",f_zona_res:"1",
-      f_pref_res:"EM FRENTE AO SUPERMERCADO BARATAO",
-      f_mun_oc:"SALVADOR",f_uf_oc:"BA",f_bairro_oc:"LIBERDADE",
-      f_logr_oc:"RUA JOAO DAS BOTAS",f_num_oc:"82",
-      f_hora_oc:"23:45",f_zona_oc:"1",f_local_oc:"06",f_motiv:"01",f_ciclo:"2",
-      f_cid10:"T74.2",
-      f_acomp_nome:"CLAUDIA SANTOS",f_acomp_vinc:"MAE",f_acomp_tel:"(71) 99876-2345",
-      f_data_enc:"2025-07-22"
-    },
-    radios:{sexo:"F",defic:"2",outr_vez:"2",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"9",viol_trab:"2",cat:"2"},
-    checks:{tipo_viol:["4"],meio_agr:["1"],viol_sex:["2"],proc:["1","2","3","4","7"],vinc:["12"],encam:["1","7","12"]}
-  },
-  {
-    label:"Carlos Eduardo, 27 anos",
-    sub:"Física, arma de fogo · desconhecido · Fortaleza/CE",
-    fields:{
-      f_data_notif:"2025-09-05",f_data_ocorr:"2025-09-04",
-      f_tipo_un:"1",f_nome_un:"HOSPITAL DE BASE",f_cnes:"2304401",
-      f_mun_notif:"FORTALEZA",f_uf_notif:"CE",f_ibge_notif:"230440",
-      f_nome:"CARLOS EDUARDO LIMA BARBOSA",f_nasc:"1997-09-12",f_raca:"4",f_escol:"5",
-      f_sus:"706012300000005",f_mae:"RAIMUNDA LIMA",
-      f_est_civil:"1",f_ocupacao:"PEDREIRO",f_or_sex:"1",f_id_gen:"8",
-      f_mun_res:"FORTALEZA",f_uf_res:"CE",f_ibge_res:"230440",
-      f_bairro_res:"CONJUNTO CEARA",f_logr_res:"RUA AUGUSTO CALS",f_num_res:"88",
-      f_cep:"60536-070",f_tel_res:"(85) 99234-6789",f_zona_res:"1",
-      f_pref_res:"ESQUINA COM RUA PAULO SARASATE",
-      f_mun_oc:"FORTALEZA",f_uf_oc:"CE",f_bairro_oc:"CONJUNTO CEARA",
-      f_logr_oc:"AVENIDA JOAO PESSOA",f_num_oc:"S/N",
-      f_hora_oc:"21:00",f_zona_oc:"1",f_local_oc:"06",f_motiv:"09",f_ciclo:"3",
-      f_cid10:"X93.4",
-      f_data_enc:"2025-09-05"
-    },
-    radios:{sexo:"M",defic:"2",outr_vez:"2",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"9",viol_trab:"2",cat:"2"},
-    checks:{tipo_viol:["1"],meio_agr:["6"],vinc:["12"],encam:["1","9"]}
-  },
-  {
-    label:"Fernanda Cristina, 46 anos",
-    sub:"Psicológica + Física · ex-cônjuge · Recife/PE",
-    fields:{
-      f_data_notif:"2025-05-20",f_data_ocorr:"2025-05-19",
-      f_tipo_un:"6",f_nome_un:"CRAM MUNICIPAL",f_cnes:"2612345",
-      f_mun_notif:"RECIFE",f_uf_notif:"PE",f_ibge_notif:"261160",
-      f_nome:"FERNANDA CRISTINA ALVES PEREIRA",f_nasc:"1979-02-28",f_raca:"4",f_escol:"8",f_gest:"5",
-      f_sus:"706012300000006",f_mae:"SONIA ALVES",
-      f_est_civil:"4",f_ocupacao:"RECEPCIONISTA, EM GERAL",f_or_sex:"1",f_id_gen:"8",
-      f_mun_res:"RECIFE",f_uf_res:"PE",f_ibge_res:"261160",
-      f_bairro_res:"BOA VIAGEM",f_logr_res:"AVENIDA BOA VIAGEM",f_num_res:"700",
-      f_compl_res:"APTO 204",f_cep:"51111-010",f_tel_res:"(81) 99234-5678",f_zona_res:"1",
-      f_pref_res:"EM FRENTE AO HOTEL INTERNACIONAL",
-      f_mun_oc:"RECIFE",f_uf_oc:"PE",f_bairro_oc:"BOA VIAGEM",
-      f_logr_oc:"AVENIDA BOA VIAGEM",f_num_oc:"700",
-      f_hora_oc:"08:30",f_zona_oc:"1",f_local_oc:"01",f_motiv:"01",f_ciclo:"4",
-      f_cid10:"T74.8",
-      f_data_enc:"2025-05-20"
-    },
-    radios:{sexo:"F",defic:"2",outr_vez:"1",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"2",viol_trab:"2",cat:"2"},
-    checks:{tipo_viol:["2","1"],meio_agr:["8","1"],vinc:["6"],encam:["1","7","4"]}
-  },
-  {
-    label:"Matheus Rodrigues, 9 anos",
-    sub:"Física + Tortura · pai · Porto Alegre/RS",
-    fields:{
-      f_data_notif:"2025-03-15",f_data_ocorr:"2025-03-14",
-      f_tipo_un:"1",f_nome_un:"UBS CRIANCAS SAUDAVEIS",f_cnes:"4314901",
-      f_mun_notif:"PORTO ALEGRE",f_uf_notif:"RS",f_ibge_notif:"431490",
-      f_nome:"MATHEUS RODRIGUES GOMES",f_nasc:"2015-08-10",f_raca:"1",f_escol:"10",
-      f_sus:"706012300000007",f_mae:"TATIANA GOMES",
-      f_est_civil:"1",f_or_sex:"8",f_id_gen:"8",
-      f_mun_res:"PORTO ALEGRE",f_uf_res:"RS",f_ibge_res:"431490",
-      f_bairro_res:"CRUZEIRO DO SUL",f_logr_res:"RUA IPIRANGA",f_num_res:"234",
-      f_compl_res:"APTO 12",f_cep:"91150-040",f_tel_res:"(51) 99345-6789",f_zona_res:"1",
-      f_pref_res:"PROXIMO A CRECHE MUNICIPAL TURMA DO BAIRRO",
-      f_mun_oc:"PORTO ALEGRE",f_uf_oc:"RS",f_bairro_oc:"CRUZEIRO DO SUL",
-      f_logr_oc:"RUA IPIRANGA",f_num_oc:"234",
-      f_hora_oc:"20:00",f_zona_oc:"1",f_local_oc:"01",f_motiv:"06",f_ciclo:"4",
-      f_cid10:"T74.1",
-      f_acomp_nome:"TATIANA GOMES",f_acomp_vinc:"MAE",f_acomp_tel:"(51) 99345-6789",
-      f_data_enc:"2025-03-15"
-    },
-    radios:{sexo:"M",defic:"2",outr_vez:"1",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"1",viol_trab:"2",cat:"2"},
-    checks:{tipo_viol:["1","3"],meio_agr:["1","3"],vinc:["1"],encam:["1","5","14"]}
-  },
-  {
-    label:"Camila Rodrigues, 23 anos (trans)",
-    sub:"Física + Psicológica · transfobia · Curitiba/PR",
-    fields:{
-      f_data_notif:"2025-10-08",f_data_ocorr:"2025-10-07",
-      f_tipo_un:"1",f_nome_un:"UPA SUL",f_cnes:"4106901",
-      f_mun_notif:"CURITIBA",f_uf_notif:"PR",f_ibge_notif:"410690",
-      f_nome:"CAMILA RODRIGUES",f_nome_social:"CAMILA",f_nasc:"2001-06-15",f_raca:"2",f_escol:"5",f_gest:"6",
-      f_sus:"706012300000008",f_mae:"APARECIDA RODRIGUES",
-      f_est_civil:"1",f_ocupacao:"FAXINEIRO",f_or_sex:"1",f_id_gen:"2",
-      f_mun_res:"CURITIBA",f_uf_res:"PR",f_ibge_res:"410690",
-      f_bairro_res:"CENTRO",f_logr_res:"RUA XV DE NOVEMBRO",f_num_res:"120",
-      f_compl_res:"QUARTO 5",f_cep:"80010-010",f_tel_res:"(41) 99876-5432",f_zona_res:"1",
-      f_pref_res:"PROXIMO AO LARGO DA ORDEM",
-      f_mun_oc:"CURITIBA",f_uf_oc:"PR",f_bairro_oc:"CENTRO",
-      f_logr_oc:"RUA XV DE NOVEMBRO",f_num_oc:"488",
-      f_hora_oc:"01:20",f_zona_oc:"1",f_local_oc:"06",f_motiv:"02",f_ciclo:"3",
-      f_cid10:"Y04.4",
-      f_data_enc:"2025-10-08"
-    },
-    radios:{sexo:"F",defic:"2",outr_vez:"2",auto_prov:"2",nenv:"2",sex_autor:"1",alcool:"1",viol_trab:"2",cat:"2"},
-    checks:{tipo_viol:["1","2"],meio_agr:["1","3"],vinc:["12"],encam:["1","9","10"]}
-  },
-  {
-    label:"Conceição Pereira, 80 anos",
-    sub:"Negligência + Física · cuidador · Manaus/AM",
-    fields:{
-      f_data_notif:"2025-02-14",f_data_ocorr:"2025-02-13",
-      f_tipo_un:"1",f_nome_un:"HOSPITAL MUNICIPAL",f_cnes:"1302601",
-      f_mun_notif:"MANAUS",f_uf_notif:"AM",f_ibge_notif:"130260",
-      f_nome:"CONCEICAO APARECIDA PEREIRA",f_nasc:"1944-12-01",f_raca:"4",f_escol:"0",f_gest:"6",
-      f_sus:"706012300000009",f_mae:"SEBASTIANA PEREIRA",
-      f_est_civil:"3",f_ocupacao:"APOSENTADO/PENSIONISTA",f_or_sex:"1",f_id_gen:"8",
-      f_mun_res:"MANAUS",f_uf_res:"AM",f_ibge_res:"130260",
-      f_bairro_res:"COMPENSA",f_logr_res:"RUA FLORIANO PEIXOTO",f_num_res:"78",
-      f_cep:"69036-010",f_tel_res:"(92) 98654-3210",f_zona_res:"1",
-      f_pref_res:"PROXIMO AO MERCADINHO ESPERANCA",
-      f_mun_oc:"MANAUS",f_uf_oc:"AM",f_bairro_oc:"COMPENSA",
-      f_logr_oc:"RUA FLORIANO PEIXOTO",f_num_oc:"78",
-      f_hora_oc:"09:00",f_zona_oc:"1",f_local_oc:"01",f_motiv:"06",f_ciclo:"5",
-      f_cid10:"T74.0",
-      f_acomp_nome:"IRACI PEREIRA DOS SANTOS",f_acomp_vinc:"VIZINHA",f_acomp_tel:"(92) 98765-4321",
-      f_data_enc:"2025-02-14"
-    },
-    radios:{sexo:"F",defic:"1",outr_vez:"1",auto_prov:"2",nenv:"1",sex_autor:"1",alcool:"2",viol_trab:"2",cat:"2"},
-    checks:{tipo_viol:["7","1"],meio_agr:["1"],tdefic:["1"],vinc:["13"],encam:["1","6","8","2"]}
-  },
-  {
-    label:"Larissa Silva, 17 anos",
-    sub:"Exploração sexual + Tráfico · Belém/PA",
-    fields:{
-      f_data_notif:"2025-11-03",f_data_ocorr:"2025-10-30",
-      f_tipo_un:"1",f_nome_un:"HOSPITAL GERAL",f_cnes:"1501401",
-      f_mun_notif:"BELEM",f_uf_notif:"PA",f_ibge_notif:"150140",
-      f_nome:"LARISSA SILVA NASCIMENTO",f_nasc:"2007-03-20",f_raca:"4",f_escol:"3",f_gest:"9",
-      f_sus:"706012300000010",f_mae:"ROSA NASCIMENTO",
-      f_est_civil:"1",f_ocupacao:"VENDEDOR DE COMERCIO VAREJISTA",f_or_sex:"1",f_id_gen:"8",
-      f_mun_res:"BELEM",f_uf_res:"PA",f_ibge_res:"150140",
-      f_bairro_res:"GUAMA",f_logr_res:"AVENIDA PERIMETRAL",f_num_res:"534",
-      f_cep:"66075-110",f_tel_res:"(91) 99345-7890",f_zona_res:"1",
-      f_pref_res:"ESQUINA COM TRAVESSA MAURITI",
-      f_mun_oc:"BELEM",f_uf_oc:"PA",f_bairro_oc:"COMERCIO",
-      f_logr_oc:"RUA JOAO ALFREDO",f_num_oc:"S/N",
-      f_hora_oc:"23:00",f_zona_oc:"1",f_local_oc:"07",f_motiv:"01",f_ciclo:"2",
-      f_cid10:"T74.2",
-      f_data_enc:"2025-11-03"
-    },
-    radios:{sexo:"F",defic:"2",outr_vez:"1",auto_prov:"2",nenv:"2",sex_autor:"1",alcool:"9",viol_trab:"2",cat:"2"},
-    checks:{tipo_viol:["4","5"],meio_agr:["8","9"],viol_sex:["4"],proc:["1","2","7"],vinc:["14","18"],encam:["1","11","12","13"]}
+    radios: {sexo:"M", afast:"1", outros_trab:"1", cat:"1"},
+    checks: {sint:["1","2","5"], expos:["1","4"], agrav:["2"], conduta:["1","3","4"]}
   }
 ];
 
@@ -2751,11 +2411,9 @@ var FAKE_PATIENTS = [
       '<span class="tb-mi-sub">'+p.sub+'</span></div>';
   }).join('');
 
-  // Desktop dropdown
   var menu = document.getElementById('pac-menu');
   if(menu) menu.innerHTML = '<div class="tb-menu-hdr">Selecione um caso didático</div>' + listHtml;
 
-  // Mobile bottom sheet
   var mobList = document.getElementById('pac-mob-list');
   if(mobList) mobList.innerHTML = listHtml;
 })();
@@ -2817,19 +2475,12 @@ function _setChecks(name, vals){
 
 function _applyVisibility(){
   onSexoChange();
-  onTipoViol();
-  onAutoProv();
-  var deficEl = document.querySelector('[name="defic"]:checked');
-  document.getElementById('row_defic_tipos').style.display = (deficEl && deficEl.value==='1') ? 'block' : 'none';
-  var meioOutro = Array.from(document.querySelectorAll('[name="meio_agr"]:checked')).some(function(c){return c.value==='9';});
-  document.getElementById('box_meio_agr_outro').style.display = meioOutro ? 'block' : 'none';
-  var vincOutro = Array.from(document.querySelectorAll('[name="vinc"]:checked')).some(function(c){return c.value==='18';});
-  document.getElementById('box_vinc_outro').style.display = vincOutro ? 'block' : 'none';
-  var vsOutro = Array.from(document.querySelectorAll('[name="viol_sex"]:checked')).some(function(c){return c.value==='5';});
-  var vsBox = document.getElementById('box_viol_sex_outros'); if(vsBox) vsBox.style.display = vsOutro ? 'block' : 'none';
-  document.getElementById('box_local_outro').style.display = (document.getElementById('f_local_oc').value==='09') ? 'block' : 'none';
-  var tdOutro = Array.from(document.querySelectorAll('[name="tdefic"]:checked')).some(function(c){return c.value==='7';});
-  var tdBox = document.getElementById('box_tdefic_outras'); if(tdBox) tdBox.style.display = tdOutro ? 'block' : 'none';
+  onEmpTerc();
+  onAfast();
+  onEvolucao();
+  onAgravOutras();
+  onSintOutro();
+  onCondutaOutros();
 }
 
 // ------ Nova Ficha ------
@@ -2838,12 +2489,11 @@ function _clearForm(){
   document.querySelectorAll('.pill input:checked').forEach(function(inp){ inp.closest('.pill').click(); });
   document.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]):not(#f-import):not([readonly]), select, textarea')
     .forEach(function(el){ el.value=''; });
-  var ov = document.getElementById('ov-auto'); if(ov) ov.classList.remove('show');
-  ['row_gest','row_defic_tipos','sec_viol_sex','box_local_outro','box_auto_prov',
-   'box_tipo_viol_outros','box_meio_agr_outro','box_viol_sex_outros','box_tdefic_outras','box_vinc_outro']
+  ['row_gest','box_emp_terc','box_tempo_afast','box_obito',
+   'box_agrav_outras','box_sint_outro','box_conduta_outros']
   .forEach(function(id){ var el=document.getElementById(id); if(el) el.style.display='none'; });
   var h=document.getElementById('f_ocupacao_hint'); if(h){h.textContent='';h.style.display='none';}
-  var h2=document.getElementById('f_cid10_hint'); if(h2){h2.textContent='';h2.style.display='none';}
+  var h2=document.getElementById('f_diag_cid_hint'); if(h2){h2.textContent='';h2.style.display='none';}
   updateProgress();
 }
 
@@ -2860,27 +2510,23 @@ function carregarPaciente(idx){
   Object.keys(p.radios||{}).forEach(function(name){ _setRadio(name, p.radios[name]); });
   Object.keys(p.checks||{}).forEach(function(name){ _setChecks(name, p.checks[name]); });
   _applyVisibility();
-  // Re-aplica nomes de município ANTES de updateProgress (handler de change da UF apaga o mun)
-  ['notif','res','oc'].forEach(function(suf){
+  ['notif','res'].forEach(function(suf){
     var id = 'f_mun_' + suf;
     if(p.fields && p.fields[id]){
       var el = document.getElementById(id);
       if(el) el.value = p.fields[id];
     }
   });
-  // Fecha todos os dropdowns de autocomplete abertos durante o preenchimento
   document.querySelectorAll('.ac-drop').forEach(function(d){ d.innerHTML=''; d.classList.remove('show'); });
-  updateProgress(); // depois da re-aplicação, com todos os valores corretos
-  // Define hint de CBO se o campo de ocupação foi preenchido
+  updateProgress();
   var ocEl = document.getElementById('f_ocupacao');
   var ocHint = document.getElementById('f_ocupacao_hint');
   if(ocEl && ocHint && ocEl.value && window.SINAN_CBOS){
     var ocMatch = (window.SINAN_CBOS||[]).filter(function(c){ return c.nome === ocEl.value; })[0];
     if(ocMatch){ ocHint.textContent='CBO: '+ocMatch.cbo; ocHint.style.display='block'; }
   }
-  // Define hint de CID-10 se o campo foi preenchido
-  var cidEl = document.getElementById('f_cid10');
-  var cidHint = document.getElementById('f_cid10_hint');
+  var cidEl = document.getElementById('f_diag_cid');
+  var cidHint = document.getElementById('f_diag_cid_hint');
   if(cidEl && cidHint && cidEl.value && window.SINAN_AGRAVOS){
     var cidMatch = (window.SINAN_AGRAVOS||[]).filter(function(a){ return a.cid === cidEl.value; })[0];
     if(cidMatch){ cidHint.textContent=cidMatch.nome; cidHint.style.display='block'; }
@@ -2903,7 +2549,7 @@ function exportarRascunho(){
   var blob = new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'rascunho-sinan-violencia-'+new Date().toISOString().slice(0,10)+'.json';
+  a.download = 'rascunho-sinan-lerdort-'+new Date().toISOString().slice(0,10)+'.json';
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
   URL.revokeObjectURL(a.href);
   showToast('💾 Rascunho exportado com sucesso!','t-ok',3000);
@@ -2932,29 +2578,10 @@ function importarRascunho(input){
   };
   reader.readAsText(file);
 }
-</script>
 
-<!-- BARRA INFERIOR — visível apenas em mobile (CSS oculta no desktop) -->
-<div id="mob-bottom">
-  <a id="mob-back-btn" href="index.html">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15,18 9,12 15,6"/></svg>
-    Menu
-  </a>
-  <div id="mob-prog-wrap">
-    <span id="mob-prog-pct">0%</span>
-    <span id="mob-prog-label">preenchido</span>
-  </div>
-  <button id="mob-pdf-btn" onclick="gerarPDF()">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
-    Gerar PDF
-  </button>
-</div>
-
-<script>
 /* ── TOOLTIP TOGGLE ─────────────────────────────────────────
    Usa position:fixed calculado para escapar de overflow:hidden
-   nos cards .sec — evita corte em qualquer container
-────────────────────────────────────────────────────────── */
+──────────────────────────────────────────────────────────── */
 function _tipClose(){
   document.querySelectorAll('.tip-wrap.open').forEach(function(w){
     w.classList.remove('open');
@@ -2970,14 +2597,13 @@ function tipToggle(btn){
   var pop  = wrap.querySelector('.tip-pop');
   var isOpen = wrap.classList.contains('open');
 
-  _tipClose(); // fecha qualquer aberto
+  _tipClose();
 
-  if(isOpen) return; // era o mesmo — já fechou
+  if(isOpen) return;
 
   wrap.classList.add('open');
   btn.classList.add('open');
 
-  // Posiciona via fixed para não ser cortado por overflow:hidden
   var rect = btn.getBoundingClientRect();
   var GAP  = 10;
   var MAX_W = Math.min(pop.dataset.wide ? 360 : 290, window.innerWidth - 24);
@@ -2986,7 +2612,7 @@ function tipToggle(btn){
     'position:fixed',
     'width:' + MAX_W + 'px',
     'max-width:' + MAX_W + 'px',
-    'display:block',           // mostra para medir altura
+    'display:block',
     'visibility:hidden',
     'bottom:auto',
     'left:0',
@@ -2997,23 +2623,20 @@ function tipToggle(btn){
   var popH = pop.offsetHeight;
   var popW = pop.offsetWidth || MAX_W;
 
-  // Posição horizontal: centraliza no botão, clamped à viewport
   var left = rect.left + rect.width / 2 - popW / 2;
   left = Math.max(12, Math.min(left, window.innerWidth - popW - 12));
 
-  // Preferência: acima do botão; se não couber, abaixo
   var topAbove = rect.top - popH - GAP;
   var topBelow = rect.bottom + GAP;
   var top, arrowBelow;
   if(topAbove >= 8){
     top = topAbove;
-    arrowBelow = true;   // seta aponta para baixo (tooltip está acima)
+    arrowBelow = true;
   } else {
     top = topBelow;
-    arrowBelow = false;  // seta aponta para cima
+    arrowBelow = false;
   }
 
-  // Aplica estilos finais
   pop.style.cssText = [
     'position:fixed',
     'width:' + MAX_W + 'px',
@@ -3024,14 +2647,11 @@ function tipToggle(btn){
     'transform:none',
     'visibility:visible',
     'display:block',
-    // Ajusta pseudo-elemento da seta via variável CSS
     '--tip-arrow-left:' + Math.round(rect.left + rect.width/2 - left) + 'px'
   ].join(';');
 
-  // Seta dinâmica: posiciona horizontalmente sobre o botão
   pop.dataset.arrowBelow = arrowBelow ? '1' : '0';
 
-  // Fecha ao clicar ou tocar fora
   setTimeout(function(){
     function _close(ev){
       if(!wrap.contains(ev.target)){ _tipClose(); }
@@ -3047,9 +2667,9 @@ function tipToggle(btn){
    sessionStorage: salva todos os dados e redireciona
 ──────────────────────────────────────────────────────────── */
 var _transferTarget = null;
-var TRANSFER_FICHAS_VIO = [
-  {id:'acidente', label:'Acidente de Trabalho',    sub:'Acidentes típicos, de trajeto ou fatais',         url:'sinan_acidente.html', color:'#c2410c'},
-  {id:'lerdort',  label:'LER/DORT',                sub:'Lesão por esforço repetitivo / DORT',             url:'sinan_lerdort.html',  color:'#0f766e'}
+var TRANSFER_FICHAS_LD = [
+  {id:'violencia', label:'Violência',          sub:'Violência doméstica, sexual e/ou interpessoal', url:'sinan_violencia.html', color:'#1e40af'},
+  {id:'acidente',  label:'Acidente de Trabalho', sub:'Acidentes típicos, de trajeto ou fatais',        url:'sinan_acidente.html',  color:'#c2410c'}
 ];
 
 function clickTransfer(){
@@ -3066,7 +2686,7 @@ function abrirTransferencia(){
   var okBtn = document.getElementById('btn-transfer-ok');
   okBtn.style.opacity = '.45'; okBtn.style.pointerEvents = 'none';
   var cont = document.getElementById('transfer-fichas');
-  cont.innerHTML = TRANSFER_FICHAS_VIO.map(function(f){
+  cont.innerHTML = TRANSFER_FICHAS_LD.map(function(f){
     return '<div class="transfer-ficha-opt" data-id="'+f.id+'" onclick="selectTransfer(this,\''+f.id+'\')">'+
       '<span class="transfer-ficha-dot" style="background:'+f.color+'"></span>'+
       '<span><strong class="transfer-ficha-name">'+f.label+'</strong><span class="transfer-ficha-sub">'+f.sub+'</span></span>'+
@@ -3085,9 +2705,9 @@ function selectTransfer(el, id){
 
 function confirmarTransferencia(){
   if(!_transferTarget) return;
-  var ficha = TRANSFER_FICHAS_VIO.filter(function(f){ return f.id===_transferTarget; })[0];
+  var ficha = TRANSFER_FICHAS_LD.filter(function(f){ return f.id===_transferTarget; })[0];
   if(!ficha) return;
-  var payload = {source:'violencia', ts:new Date().toISOString(), fields:{}, radios:{}, checks:{}};
+  var payload = {source:'lerdort', ts:new Date().toISOString(), fields:{}, radios:{}, checks:{}};
   document.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]):not(#f-import), select, textarea')
     .forEach(function(el){ if(el.id && el.value!=='') payload.fields[el.id]=el.value; });
   document.querySelectorAll('input[type="radio"]:checked').forEach(function(inp){ payload.radios[inp.name]=inp.value; });
@@ -3100,23 +2720,20 @@ function confirmarTransferencia(){
 }
 
 /* ── MOBILE SYNC ──────────────────────────────────────────────
-   Sincroniza barra inferior com progresso (btn sempre habilitado)
+   Sincroniza barra inferior com progresso
 ──────────────────────────────────────────────────────────── */
 (function(){
   var btnGerar = document.getElementById('btn-gerar');
   var mobBtn   = document.getElementById('mob-pdf-btn');
-  var srcPct   = document.getElementById('prog-pct');
-  if(!mobBtn || !btnGerar || !srcPct) return;
+  if(!mobBtn || !btnGerar) return;
 
-  // Re-habilita mob-pdf-btn sempre (PDF é sempre acessível)
   new MutationObserver(function(){
     setTimeout(function(){ if(btnGerar.disabled){ mobBtn.disabled = false; } }, 5000);
   }).observe(btnGerar, {attributes:true, attributeFilter:['disabled']});
 
-  /* ── INPUTMODE — teclados corretos no celular ──────────── */
   var numericIds = ['f_sus','f_cnes','f_ibge_notif','f_ibge_res','f_cep','f_num_res',
-                    'f_num_oc','f_hora_oc'];
-  var telIds     = ['f_tel_res','f_acomp_tel'];
+                    'f_tempo_exp_val','f_tempo_trab_val','f_tempo_afast_val'];
+  var telIds     = ['f_tel_res','f_emp_tel'];
   numericIds.forEach(function(id){
     var el = document.getElementById(id);
     if(el) el.setAttribute('inputmode','numeric');
@@ -3125,6 +2742,28 @@ function confirmarTransferencia(){
     var el = document.getElementById(id);
     if(el) el.setAttribute('inputmode','tel');
   });
+})();
+
+/* ── sessionStorage Transfer Import ──────────────────────── */
+(function(){
+  var raw = sessionStorage.getItem('sinan_transfer');
+  if(!raw) return;
+  try {
+    var data = JSON.parse(raw);
+    sessionStorage.removeItem('sinan_transfer');
+    setTimeout(function(){
+      Object.keys(data.fields||{}).forEach(function(id){ _setField(id, data.fields[id]); });
+      Object.keys(data.radios||{}).forEach(function(name){ _setRadio(name, data.radios[name]); });
+      ['notif','res'].forEach(function(suf){
+        var id='f_mun_'+suf;
+        if(data.fields&&data.fields[id]){var el=document.getElementById(id);if(el)el.value=data.fields[id];}
+      });
+      document.querySelectorAll('.ac-drop').forEach(function(d){d.innerHTML='';d.classList.remove('show');});
+      _applyVisibility();
+      updateProgress();
+      showToast('✓ Dados da ficha anterior transferidos!','t-ok',4000);
+    }, 200);
+  } catch(e){ sessionStorage.removeItem('sinan_transfer'); }
 })();
 </script>
 </body>

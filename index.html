@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Assistente SINAN — PET-Saúde/I&SD</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XBCCJ6GTG6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XBCCJ6GTG6');
+</script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f0f4f8;color:#1a2a3a;min-height:100vh;font-size:15px;line-height:1.5}
@@ -384,6 +392,7 @@ function toggleDarkMode(){
         <span class="about-chip chip-blue">Busca de município por nome</span>
         <span class="about-chip chip-yellow">Busca por sinônimos de ocupação CBO</span>
         <span class="about-chip chip-purple">Gera PDF para impressão</span>
+        <span class="about-chip chip-green">Transferência de dados entre fichas</span>
       </div>
     </div>
     <svg class="about-banner-arrow" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l5 5-5 5"/></svg>
@@ -420,6 +429,72 @@ function toggleDarkMode(){
           Ficha editável
         </a>
         <a class="btn-download" href="fichas/violencia.pdf" download>
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+          Ficha em branco
+        </a>
+      </div>
+    </div>
+
+    <!-- ACIDENTE DE TRABALHO -->
+    <div class="card active cat-accident">
+      <div class="card-main">
+        <div class="card-head">
+          <div class="card-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h12v2H4zM5 11V9a5 5 0 0110 0v2"/><rect x="3" y="13" width="14" height="3" rx="1"/><line x1="8" y1="9" x2="8" y2="11"/><line x1="12" y1="9" x2="12" y2="11"/></svg>
+          </div>
+          <div class="card-info">
+            <div class="card-title">Acidente de Trabalho</div>
+            <span class="card-status status-active"><span class="status-dot"></span>Assistente disponível</span>
+          </div>
+        </div>
+        <details class="def">
+          <summary>Definição de caso</summary>
+          <div class="def-text">Todo caso de acidente de trabalho por causas não naturais (Capítulo XX da CID-10: V01–Y98), ocorrido no ambiente de trabalho ou durante o exercício do trabalho, que provoca lesão corporal ou perturbação funcional, podendo causar a perda ou redução — temporária ou permanente — da capacidade para o trabalho, ou morte.</div>
+        </details>
+      </div>
+      <div class="card-actions">
+        <a class="btn-assistente" href="sinan_acidente.html">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
+          Usar assistente
+        </a>
+        <a class="btn-download" href="fichas/DRT_Acidente_Trabalho_editavel.pdf" download>
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+          Ficha editável
+        </a>
+        <a class="btn-download" href="fichas/DRT_Acidente_Trabalho.pdf" download>
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+          Ficha em branco
+        </a>
+      </div>
+    </div>
+
+    <!-- LER/DORT -->
+    <div class="card active cat-lerdort">
+      <div class="card-main">
+        <div class="card-head">
+          <div class="card-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17V9M13 17V9M7 9a3 3 0 006 0"/><path d="M5 17h10"/><ellipse cx="10" cy="7" rx="4" ry="2"/></svg>
+          </div>
+          <div class="card-info">
+            <div class="card-title">LER/DORT</div>
+            <span class="card-status status-active"><span class="status-dot"></span>Assistente disponível</span>
+          </div>
+        </div>
+        <details class="def">
+          <summary>Definição de caso</summary>
+          <div class="def-text">Todas as doenças, lesões e síndromes que afetam o <strong>sistema músculo-esquelético</strong>, causadas, mantidas ou agravadas pelo trabalho (CID-10: G50–59, G90–99, M00–99). Caracteriza-se por sintomas como dor crônica, parestesia e fadiga muscular, manifestando-se principalmente no pescoço, coluna vertebral, cintura escapular e membros.</div>
+        </details>
+      </div>
+      <div class="card-actions">
+        <a class="btn-assistente" href="sinan_lerdort.html">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
+          Usar assistente
+        </a>
+        <a class="btn-download" href="fichas/DRT_LERDORT_editavel.pdf" download>
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+          Ficha editável
+        </a>
+        <a class="btn-download" href="fichas/DRT_LERDORT.pdf" download>
           <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
           Ficha em branco
         </a>
@@ -473,62 +548,6 @@ function toggleDarkMode(){
         <a class="btn-download" href="fichas/DRT_Acidente_Trabalho_Biologico.pdf" download>
           <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
           Ficha em branco
-        </a>
-        <span class="btn-wip">Assistente em construção</span>
-      </div>
-    </div>
-
-    <!-- ACIDENTE TRABALHO GRAVE -->
-    <div class="card cat-accident">
-      <div class="card-main">
-        <div class="card-head">
-          <div class="card-icon-wrap">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h12v2H4zM5 11V9a5 5 0 0110 0v2"/><rect x="3" y="13" width="14" height="3" rx="1"/><line x1="8" y1="9" x2="8" y2="11"/><line x1="12" y1="9" x2="12" y2="11"/></svg>
-          </div>
-          <div class="card-info">
-            <div class="card-title dim">Acidente de Trabalho Grave</div>
-            <span class="card-status status-wip"><span class="status-dot"></span>Em construção</span>
-          </div>
-        </div>
-        <details class="def">
-          <summary>Definição de caso</summary>
-          <div class="def-text">Todo caso de acidente de trabalho por causas não naturais (Capítulo XX da CID-10: V01–Y98), ocorrido no ambiente de trabalho ou durante o exercício do trabalho, que provoca lesão corporal ou perturbação funcional, podendo causar a perda ou redução — temporária ou permanente — da capacidade para o trabalho, ou morte.</div>
-        </details>
-      </div>
-      <div class="card-actions">
-        <a class="btn-download" href="fichas/DRT_Acidente_Trabalho.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha em branco
-        </a>
-        <span class="btn-wip">Assistente em construção</span>
-      </div>
-    </div>
-
-    <!-- LER/DORT -->
-    <div class="card cat-lerdort">
-      <div class="card-main">
-        <div class="card-head">
-          <div class="card-icon-wrap">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17V9M13 17V9M7 9a3 3 0 006 0"/><path d="M5 17h10"/><ellipse cx="10" cy="7" rx="4" ry="2"/></svg>
-          </div>
-          <div class="card-info">
-            <div class="card-title dim">LER/DORT</div>
-            <span class="card-status status-wip"><span class="status-dot"></span>Em construção</span>
-          </div>
-        </div>
-        <details class="def">
-          <summary>Definição de caso</summary>
-          <div class="def-text">Todas as doenças, lesões e síndromes que afetam o <strong>sistema músculo-esquelético</strong>, causadas, mantidas ou agravadas pelo trabalho (CID-10: G50–59, G90–99, M00–99). Caracteriza-se por sintomas como dor crônica, parestesia e fadiga muscular, manifestando-se principalmente no pescoço, coluna vertebral, cintura escapular e membros.</div>
-        </details>
-      </div>
-      <div class="card-actions">
-        <a class="btn-download" href="fichas/DRT_LERDORT.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha em branco
-        </a>
-        <a class="btn-download" href="fichas/DRT_LERDORT_editavel.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha editável
         </a>
         <span class="btn-wip">Assistente em construção</span>
       </div>
@@ -743,6 +762,10 @@ function toggleDarkMode(){
       <div class="drawer-feature">
         <div class="drawer-feature-title">Interface guiada com barra de progresso</div>
         <div class="drawer-feature-desc">O assistente conduz o preenchimento de forma sequencial, com indicação visual de progresso, ajudando o profissional a não pular campos obrigatórios e a concluir a ficha de forma completa.</div>
+      </div>
+      <div class="drawer-feature">
+        <div class="drawer-feature-title">Transferência de dados entre fichas</div>
+        <div class="drawer-feature-desc">Ao concluir uma ficha, o profissional pode transferir automaticamente os dados comuns (paciente, endereço, notificação) para outra ficha com um clique — evitando redigitação quando o mesmo caso requer mais de uma notificação.</div>
       </div>
     </div>
 
