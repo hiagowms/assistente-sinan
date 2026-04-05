@@ -1675,7 +1675,16 @@ function extractCompanyInfo(text){
   var fnM = text.match(/Nome\s+de?\s+Fantasia[:\s]+([^\n\r]+)/i);
   r.nomeFantasia = fnM ? fnM[1].trim().replace(/^\.\s*/,'') : '';
 
-  var cnaeM = text.match(/CNAE\s*(?:Principal\s*)?[-–:]?\s*([\d\.\/\-]+)\s*[-–]\s*([^\n\r]+)/i);
+  // Extrai CNAE — 3 estratégias em cascata:
+  // 1. Label "CNAE" explícito na mesma linha (ex: "CNAE Principal: 64.22-1-00 - ...")
+  var cnaeM = text.match(/CNAE[^\n:]*:?\s*([\d]{2}\.[\d]{2}-[\d](?:-[\d]{2})?)\s*[-–]\s*([^\n\r]+)/i);
+  // 2. Label "ATIVIDADE ECONÔMICA" na linha anterior, código na próxima
+  if(!cnaeM){
+    var actBlock = text.match(/ATIVIDADE\s+ECON[ÔO]MICA[^\n]*\n([\s\S]{1,300})/i);
+    if(actBlock) cnaeM = actBlock[1].match(/([\d]{2}\.[\d]{2}-[\d](?:-[\d]{2})?)\s*[-–]\s*([^\n\r]+)/);
+  }
+  // 3. Fallback: padrão de subclasse XX.XX-X-XX em qualquer lugar do texto
+  if(!cnaeM) cnaeM = text.match(/([\d]{2}\.[\d]{2}-[\d]-[\d]{2})\s*[-–]\s*([^\n\r]+)/);
   r.cnaeCode      = cnaeM ? cnaeM[1].trim() : '';
   r.ramoAtividade = cnaeM ? cnaeM[2].trim() : '';
 
@@ -1714,7 +1723,7 @@ function rfFillCnae(sinanEntry, rfCode){
   }
   if(hint){
     var hintText = rfCode && rfCode !== sinanEntry.codigo
-      ? 'Classe SINAN: ' + sinanEntry.codigo + ' \u2014 ' + sinanEntry.nome
+      ? rfCode + ' (RF) \u2192 SINAN: ' + sinanEntry.codigo + ' \u2014 ' + sinanEntry.nome
       : sinanEntry.nome;
     hint.textContent = hintText;
     hint.style.display = 'block';
