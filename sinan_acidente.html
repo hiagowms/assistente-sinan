@@ -989,11 +989,14 @@ function toggleDarkMode(){
       </div>
       <div class="fld">
         <label>Município <span class="cn">[Campo 42]</span></label>
-        <input type="text" id="f_emp_mun" placeholder="Nome do município" data-caps>
+        <div class="ac-wrap">
+          <input type="text" id="f_emp_mun" placeholder="Nome do município" data-caps autocomplete="off">
+          <div class="ac-drop" id="f_emp_mun-drop"></div>
+        </div>
       </div>
       <div class="fld">
         <label>Código IBGE <span class="cn">[C.42]</span></label>
-        <input type="text" id="f_emp_ibge" maxlength="6" placeholder="000000">
+        <input type="text" id="f_emp_ibge" maxlength="6" placeholder="000000" readonly>
       </div>
     </div>
 
@@ -1547,10 +1550,11 @@ function acSetup(inputId, dropId, datafn, matchfn, labelFn, selectFn){
   {suf:'notif', ibge:'f_ibge_notif'},
   {suf:'res',   ibge:'f_ibge_res'},
   {suf:'ac',    ibge:'f_ibge_ac'},
-  {suf:'atend', ibge:'f_ibge_atend'}
+  {suf:'atend', ibge:'f_ibge_atend'},
+  {suf:'emp',   ibge:'f_emp_ibge',  ufId:'f_emp_uf',  munId:'f_emp_mun'}
 ].forEach(function(cfg){
-  var ufId  = 'f_uf_'  + cfg.suf;
-  var munId = 'f_mun_' + cfg.suf;
+  var ufId  = cfg.ufId  || ('f_uf_'  + cfg.suf);
+  var munId = cfg.munId || ('f_mun_' + cfg.suf);
   acSetup(
     munId, munId + '-drop',
     function(){ return window.SINAN_MUNICIPIOS || []; },
@@ -1669,8 +1673,10 @@ function extractCompanyInfo(text){
   var cnpjM = text.match(/\d{2}[\.\s]?\d{3}[\.\s]?\d{3}[\/\s]?\d{4}[-\s]?\d{2}/);
   r.cnpj = cnpjM ? cnpjM[0].replace(/\s/g,'') : '';
 
-  var rsM = text.match(/Raz[aã]o\s+Social[:\s]+([^\n\r]+)/i);
-  r.razaoSocial = rsM ? rsM[1].trim() : '';
+  // Razão Social: mesma linha OU próxima linha (RF pode separar rótulo e valor com quebra)
+  var rsM = text.match(/Raz[aã]o\s+Social[^:\n\r]*:?\s*([^\n\r]{2,})/i)
+          || text.match(/Raz[aã]o\s+Social[^\n\r]*[\n\r]+\s*([^\n\r]{2,})/i);
+  r.razaoSocial = rsM ? rsM[1].trim().replace(/\s+/g,' ') : '';
 
   var fnM = text.match(/Nome\s+de?\s+Fantasia[:\s]+([^\n\r]+)/i);
   r.nomeFantasia = fnM ? fnM[1].trim().replace(/^\.\s*/,'') : '';
@@ -1772,8 +1778,22 @@ function rfExtrair(){
   if(info.logradouro)  _setField('f_emp_end',    info.logradouro);
   if(info.numero)      _setField('f_emp_num',    info.numero);
   if(info.bairro)      _setField('f_emp_bairro', info.bairro);
-  if(info.municipio)   _setField('f_emp_mun',    info.municipio);
-  if(info.uf)          _setField('f_emp_uf',     info.uf);
+  // Município: preenche IBGE e UF automaticamente via base SINAN_MUNICIPIOS
+  if(info.municipio){
+    var munNorm = info.municipio.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    var munFound = (window.SINAN_MUNICIPIOS||[]).find(function(m){
+      return m.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'') === munNorm;
+    });
+    if(munFound){
+      _setField('f_emp_mun',  munFound.nome);
+      var ibgeEl = document.getElementById('f_emp_ibge');
+      if(ibgeEl){ ibgeEl.value = munFound.ibge; ibgeEl.dispatchEvent(new Event('change',{bubbles:true})); }
+      if(!info.uf) _setField('f_emp_uf', munFound.uf);
+    } else {
+      _setField('f_emp_mun', info.municipio);
+    }
+  }
+  if(info.uf) _setField('f_emp_uf', info.uf);
 
   var cnaeOk = false;
   if(info.cnaeCode || info.ramoAtividade){
