@@ -480,6 +480,12 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 [data-theme="dark"] .rf-cnae-warn{background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.35);color:#fcd34d}
 .rf-cnae-warn strong{font-weight:700}
 .rf-cnae-warn em{font-style:italic;opacity:.85}
+.rf-cnae-sugs{display:flex;flex-direction:column;gap:5px;margin-top:8px}
+.rf-cnae-sug-item{background:var(--bg-card);border:1.5px solid var(--border);border-radius:7px;padding:7px 11px;cursor:pointer;display:flex;align-items:baseline;gap:10px;transition:border-color .15s}
+.rf-cnae-sug-item:hover{border-color:#2563eb}
+.rf-cnae-sug-code{font-size:12px;font-weight:700;color:#2563eb;white-space:nowrap;flex-shrink:0}
+.rf-cnae-sug-name{font-size:11px;color:var(--text);line-height:1.3}
+.rf-instr a{color:#2563eb;text-decoration:underline}
 </style>
 </head>
 <body>
@@ -946,7 +952,7 @@ function toggleDarkMode(){
     <!-- IMPORTAR VIA RECEITA FEDERAL -->
     <button type="button" class="rf-toggle-btn" id="rf-toggle-btn" onclick="rfTogglePanel()">&#128203; Importar via Receita Federal</button>
     <div class="rf-panel" id="rf-panel">
-      <p class="rf-instr">Acesse <strong>consulta.cnpj.receita.fazenda.gov.br</strong>, abra a ficha do CNPJ, selecione tudo (<kbd>Ctrl+A</kbd>) e cole abaixo:</p>
+      <p class="rf-instr">Acesse o site da <a href="https://solucoes.receita.fazenda.gov.br/servicos/cnpjreva/Cnpjreva_Solicitacao.asp" target="_blank" rel="noopener">Receita Federal</a>, abra a ficha do CNPJ, selecione tudo (<kbd>Ctrl+A</kbd>) e cole abaixo:</p>
       <textarea id="rf-textarea" class="rf-textarea" rows="5" placeholder="Cole aqui o texto completo da página da Receita Federal..."></textarea>
       <div class="rf-actions">
         <button type="button" class="mbtn mbtn-p" onclick="rfExtrair()">Extrair e preencher</button>
@@ -968,7 +974,9 @@ function toggleDarkMode(){
     <div class="row">
       <div class="fld">
         <label>CNAE <span class="cn">[Campo 40]</span></label>
-        <div class="rf-cnae-warn" id="rf-cnae-warn" style="display:none">&#9888;&#65039; CNAE <strong id="rf-cnae-warn-code"></strong><span id="rf-cnae-warn-ramo"></span> não consta na lista do SINAN NET. Pesquise o código mais adequado no campo abaixo:</div>
+        <div class="rf-cnae-warn" id="rf-cnae-warn" style="display:none">&#9888;&#65039; CNAE <strong id="rf-cnae-warn-code"></strong><span id="rf-cnae-warn-ramo"></span> não consta na lista do SINAN NET. Selecione a classe mais próxima ou pesquise manualmente no campo abaixo:
+          <div class="rf-cnae-sugs" id="rf-cnae-sugs"></div>
+        </div>
         <div class="ac-wrap">
           <input type="text" id="f_emp_cnae" placeholder="Digite código ou atividade econômica..." autocomplete="off">
           <div class="ac-drop" id="f_emp_cnae-drop"></div>
@@ -1633,10 +1641,11 @@ function cnaeSetup(inputId, hintId){
 cnaeSetup('f_emp_cnae',      'f_emp_cnae_hint');
 cnaeSetup('f_emp_terc_cnae', 'f_emp_terc_cnae_hint');
 
-// Esconde aviso RF ao digitar manualmente no campo CNAE
+// Ao digitar manualmente no campo CNAE: esconde aviso RF e descarta mapeamento automático
 (function(){
   var el = document.getElementById('f_emp_cnae');
   if(el) el.addEventListener('input', function(){
+    if(this.dataset) delete this.dataset.sinanCnae;
     if(this.value.trim()){
       var w = document.getElementById('rf-cnae-warn');
       if(w) w.style.display = 'none';
@@ -1690,11 +1699,58 @@ function extractCompanyInfo(text){
   return r;
 }
 
-function rfFillCnae(found){
+// Normaliza CNAE: remove pontos, hífens e barras
+function normCnaeRF(s){ return (s||'').replace(/[.\-\/\s]/g,''); }
+
+// Exibe código RF no input (fiel à subclasse) e mapeia classe SINAN no hint
+function rfFillCnae(sinanEntry, rfCode){
   var inp  = document.getElementById('f_emp_cnae');
   var hint = document.getElementById('f_emp_cnae_hint');
-  if(inp)  { inp.value = found.codigo; }
-  if(hint) { hint.textContent = found.nome; hint.style.display = 'block'; }
+  var displayCode = rfCode || sinanEntry.codigo;
+  if(inp){
+    inp.value = displayCode;
+    // Guarda a classe SINAN para uso no PDF
+    inp.dataset.sinanCnae = sinanEntry.codigo;
+  }
+  if(hint){
+    var hintText = rfCode && rfCode !== sinanEntry.codigo
+      ? 'Classe SINAN: ' + sinanEntry.codigo + ' \u2014 ' + sinanEntry.nome
+      : sinanEntry.nome;
+    hint.textContent = hintText;
+    hint.style.display = 'block';
+  }
+}
+
+// Busca a classe SINAN correspondente a um código de subclasse RF
+function rfMatchCnae(rfCode){
+  if(!rfCode || !window.SINAN_CNAES) return null;
+  var normExt = normCnaeRF(rfCode);
+  // 1. Match exato
+  var found = window.SINAN_CNAES.find(function(c){ return normCnae(c.codigo) === normExt; });
+  if(found) return found;
+  // 2. Subclasse RF começa com a classe SINAN (ex: "2930102" começa com "29301")
+  found = window.SINAN_CNAES.find(function(c){
+    var nc = normCnae(c.codigo);
+    return nc.length < normExt.length && normExt.indexOf(nc) === 0;
+  });
+  return found || null;
+}
+
+// Sugestões semânticas por sobreposição de palavras (fallback)
+function cnaeSemantic(query, topN){
+  if(!window.SINAN_CNAES || !query) return [];
+  var words = query.toUpperCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^A-Z0-9\s]/g,' ')
+    .split(/\s+/).filter(function(w){ return w.length > 3; });
+  if(!words.length) return [];
+  var scored = window.SINAN_CNAES.map(function(c){
+    var nome = c.nome.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    var sc = 0; words.forEach(function(w){ if(nome.indexOf(w) >= 0) sc++; });
+    return {c:c, sc:sc};
+  }).filter(function(x){ return x.sc > 0; });
+  scored.sort(function(a,b){ return b.sc - a.sc; });
+  return scored.slice(0, topN||3).map(function(x){ return x.c; });
 }
 
 function rfExtrair(){
@@ -1711,34 +1767,52 @@ function rfExtrair(){
   if(info.uf)          _setField('f_emp_uf',     info.uf);
 
   var cnaeOk = false;
-  if((info.cnaeCode || info.ramoAtividade) && window.SINAN_CNAES){
-    var normExt = normCnae(info.cnaeCode);
-    var found = normExt
-      ? window.SINAN_CNAES.find(function(c){
-          var nc = normCnae(c.codigo);
-          return nc === normExt || normExt.indexOf(nc) === 0 || nc.indexOf(normExt) === 0;
-        })
-      : null;
-    if(found){ rfFillCnae(found); cnaeOk = true; }
+  if(info.cnaeCode || info.ramoAtividade){
+    var matched = rfMatchCnae(info.cnaeCode);
+    if(matched){ rfFillCnae(matched, info.cnaeCode); cnaeOk = true; }
   }
 
+  var warn = document.getElementById('rf-cnae-warn');
   if(!cnaeOk){
-    var warn = document.getElementById('rf-cnae-warn');
     if(warn){
       document.getElementById('rf-cnae-warn-code').textContent = info.cnaeCode || '(não identificado)';
-      var rEl = document.getElementById('rf-cnae-warn-ramo');
-      rEl.textContent = info.ramoAtividade ? ' — ' + info.ramoAtividade : '';
+      document.getElementById('rf-cnae-warn-ramo').textContent = info.ramoAtividade ? ' \u2014 ' + info.ramoAtividade : '';
+      // Sugestões semânticas
+      var sug = cnaeSemantic(info.ramoAtividade || info.cnaeCode, 3);
+      var rfCodeEsc = (info.cnaeCode || '').replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+      var html = sug.map(function(c){
+        return '<div class="rf-cnae-sug-item" onclick="rfSelectCnaeSug(\''+c.codigo.replace(/'/g,"\\'")+'\',\''+rfCodeEsc+'\')">'
+             + '<span class="rf-cnae-sug-code">'+c.codigo+'</span>'
+             + '<span class="rf-cnae-sug-name">'+c.nome+'</span></div>';
+      }).join('');
+      document.getElementById('rf-cnae-sugs').innerHTML = html;
       warn.style.display = 'block';
     }
-    showToast('Demais campos preenchidos. Escolha o CNAE manualmente.','warn', 4000);
+    showToast('Demais campos preenchidos. Escolha o CNAE manualmente.','warn',4000);
   } else {
-    var warn2 = document.getElementById('rf-cnae-warn');
-    if(warn2) warn2.style.display = 'none';
+    if(warn) warn.style.display = 'none';
     showToast('Dados da empresa preenchidos com sucesso.','ok');
   }
   document.getElementById('rf-panel').style.display = 'none';
   document.getElementById('rf-toggle-btn').classList.remove('active');
   updateProgress();
+}
+
+function rfSelectCnaeSug(codigo, rfCode){
+  var found = (window.SINAN_CNAES||[]).find(function(c){ return c.codigo === codigo; });
+  if(found) rfFillCnae(found, rfCode || found.codigo);
+  var warn = document.getElementById('rf-cnae-warn');
+  if(warn) warn.style.display = 'none';
+  showToast('CNAE selecionado.','ok');
+  updateProgress();
+}
+
+// Retorna o código de classe SINAN para o PDF (sem o sufixo de subclasse)
+function sinanCnaeVal(){
+  var el = document.getElementById('f_emp_cnae');
+  if(!el) return '';
+  if(el.dataset && el.dataset.sinanCnae) return el.dataset.sinanCnae;
+  return el.value.replace(/-\d{2}$/, '').trim();
 }
 
 /*==========================================================
@@ -2238,7 +2312,7 @@ async function gerarPDF(force){
     // Seção 5 — Empresa
     setTxt('empresa_registro_cnpj_cpf',        tv('f_emp_reg'));
     setTxt('empresa_nome',                     tv('f_emp_nome'));
-    setTxt('empresa_cnae',                     tv('f_emp_cnae'));
+    setTxt('empresa_cnae',                     sinanCnaeVal());
     setTxt('empresa_uf',                       tv('f_emp_uf'));
     setTxt('empresa_municipio',                tv('f_emp_mun'));
     setTxt('empresa_cnae_codigo_ibge',         tv('f_emp_ibge'));
