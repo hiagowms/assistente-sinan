@@ -739,16 +739,16 @@ function toggleDarkMode(){
     <div class="row row-wide">
       <div class="fld col-2">
         <label>Tipo de Unidade Notificadora <span class="req-star">⭐</span><span class="cn">[Campo 6]</span></label>
-        <select id="f_tipo_un" data-ess data-label="Tipo de unidade notificadora">
-          <option value="">— Selecione —</option>
-          <option value="1">1 — Unidade de Saúde</option>
-          <option value="2">2 — Unidade de Assistência Social</option>
-          <option value="3">3 — Estabelecimento de Ensino</option>
-          <option value="4">4 — Conselho Tutelar</option>
-          <option value="5">5 — Unidade de Saúde Indígena</option>
-          <option value="6">6 — Centro Especializado de Atendimento à Mulher</option>
-          <option value="7">7 — Outros</option>
-        </select>
+        <div class="pills" id="grp_tipo_un" data-hidden="f_tipo_un">
+          <label class="pill" data-val="1"><input type="radio" name="tipo_un" value="1"> Unidade de Saúde</label>
+          <label class="pill" data-val="2"><input type="radio" name="tipo_un" value="2"> Assistência Social</label>
+          <label class="pill" data-val="3"><input type="radio" name="tipo_un" value="3"> Estabelecimento de Ensino</label>
+          <label class="pill" data-val="4"><input type="radio" name="tipo_un" value="4"> Conselho Tutelar</label>
+          <label class="pill" data-val="5"><input type="radio" name="tipo_un" value="5"> Saúde Indígena</label>
+          <label class="pill" data-val="6"><input type="radio" name="tipo_un" value="6"> Centro Esp. Mulher</label>
+          <label class="pill" data-val="7"><input type="radio" name="tipo_un" value="7"> Outros</label>
+        </div>
+        <input type="hidden" id="f_tipo_un" data-ess data-label="Tipo de unidade notificadora">
       </div>
       <div class="fld">
         <label>CNES <span class="cn">[Campo 8]</span></label>
@@ -800,13 +800,13 @@ function toggleDarkMode(){
       </div>
       <div class="fld" style="max-width:130px">
         <label>Unidade</label>
-        <select id="f_idade_un">
-          <option value="">—</option>
-          <option value="H">H — Hora</option>
-          <option value="D">D — Dia</option>
-          <option value="M">M — Mês</option>
-          <option value="A">A — Ano</option>
-        </select>
+        <div class="pills" id="grp_idade_un" data-hidden="f_idade_un">
+          <label class="pill" data-val="H"><input type="radio" name="idade_un" value="H"> H — Hora</label>
+          <label class="pill" data-val="D"><input type="radio" name="idade_un" value="D"> D — Dia</label>
+          <label class="pill" data-val="M"><input type="radio" name="idade_un" value="M"> M — Mês</label>
+          <label class="pill" data-val="A"><input type="radio" name="idade_un" value="A"> A — Ano</label>
+        </div>
+        <input type="hidden" id="f_idade_un">
       </div>
       <div class="fld">
         <label>Sexo <span class="req-star">⭐</span><span class="cn">[Campo 13]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">O sexo é essencial para análise epidemiológica de violências de gênero e para cálculo de indicadores nacionais.</span></span></span></label>
@@ -821,31 +821,31 @@ function toggleDarkMode(){
     <div id="row_gest" style="display:none" class="row">
       <div class="fld col-2">
         <label>Gestante <span class="cn">[Campo 14]</span></label>
-        <select id="f_gest">
-          <option value="">— Selecione —</option>
-          <option value="1">1 — 1º Trimestre</option>
-          <option value="2">2 — 2º Trimestre</option>
-          <option value="3">3 — 3º Trimestre</option>
-          <option value="4">4 — Idade gestacional ignorada</option>
-          <option value="5">5 — Não</option>
-          <option value="6">6 — Não se aplica</option>
-          <option value="9">9 — Ignorado</option>
-        </select>
+        <div class="pills" id="grp_gest" data-hidden="f_gest">
+          <label class="pill" data-val="1"><input type="radio" name="gest" value="1"> 1 — 1º Trimestre</label>
+          <label class="pill" data-val="2"><input type="radio" name="gest" value="2"> 2 — 2º Trimestre</label>
+          <label class="pill" data-val="3"><input type="radio" name="gest" value="3"> 3 — 3º Trimestre</label>
+          <label class="pill" data-val="4"><input type="radio" name="gest" value="4"> 4 — Idade gestacional ignorada</label>
+          <label class="pill" data-val="5"><input type="radio" name="gest" value="5"> 5 — Não</label>
+          <label class="pill" data-val="6"><input type="radio" name="gest" value="6"> 6 — Não se aplica</label>
+          <label class="pill" data-val="9"><input type="radio" name="gest" value="9"> 9 — Ignorado</label>
+        </div>
+        <input type="hidden" id="f_gest">
       </div>
     </div>
 
     <div class="row">
       <div class="fld">
         <label>Raça/Cor <span class="req-star">⭐</span><span class="cn">[Campo 15]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Autodeclaração do paciente conforme as categorias do IBGE: Branca, Preta, Parda, Amarela ou Indígena. O profissional <u>não deve deduzir</u> — deve perguntar à própria pessoa.</span><span class="tip-r"><b>Por que informar:</b> Essencial para evidenciar o racismo estrutural e a vulnerabilidade desigual nos índices de violência.</span></span></span></span></label>
-        <select id="f_raca" data-ess data-label="Raça/Cor">
-          <option value="">— Selecione —</option>
-          <option value="1">1 — Branca</option>
-          <option value="2">2 — Preta</option>
-          <option value="3">3 — Amarela</option>
-          <option value="4">4 — Parda</option>
-          <option value="5">5 — Indígena</option>
-          <option value="9">9 — Ignorado</option>
-        </select>
+        <div class="pills" id="grp_raca" data-hidden="f_raca">
+          <label class="pill" data-val="1"><input type="radio" name="raca" value="1"> Branca</label>
+          <label class="pill" data-val="2"><input type="radio" name="raca" value="2"> Preta</label>
+          <label class="pill" data-val="3"><input type="radio" name="raca" value="3"> Amarela</label>
+          <label class="pill" data-val="4"><input type="radio" name="raca" value="4"> Parda</label>
+          <label class="pill" data-val="5"><input type="radio" name="raca" value="5"> Indígena</label>
+          <label class="pill" data-val="9"><input type="radio" name="raca" value="9"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_raca" data-ess data-label="Raça/Cor">
       </div>
       <div class="fld">
         <label>Escolaridade <span class="cn">[Campo 16]</span></label>
@@ -945,13 +945,13 @@ function toggleDarkMode(){
       </div>
       <div class="fld">
         <label>Zona <span class="cn">[C.31]</span></label>
-        <select id="f_zona_res">
-          <option value="">—</option>
-          <option value="1">1 — Urbana</option>
-          <option value="2">2 — Rural</option>
-          <option value="3">3 — Periurbana</option>
-          <option value="9">9 — Ignorado</option>
-        </select>
+        <div class="pills" id="grp_zona_res" data-hidden="f_zona_res">
+          <label class="pill" data-val="1"><input type="radio" name="zona_res" value="1"> 1 — Urbana</label>
+          <label class="pill" data-val="2"><input type="radio" name="zona_res" value="2"> 2 — Rural</label>
+          <label class="pill" data-val="3"><input type="radio" name="zona_res" value="3"> 3 — Periurbana</label>
+          <label class="pill" data-val="9"><input type="radio" name="zona_res" value="9"> 9 — Ignorado</label>
+        </div>
+        <input type="hidden" id="f_zona_res">
       </div>
       <div class="fld">
         <label>País (se fora do Brasil) <span class="cn">[C.32]</span></label>
@@ -992,40 +992,40 @@ function toggleDarkMode(){
       </div>
       <div class="fld">
         <label>Situação Conjugal <span class="cn">[C.35]</span></label>
-        <select id="f_est_civil">
-          <option value="">— Selecione —</option>
-          <option value="1">1 — Solteiro(a)</option>
-          <option value="2">2 — Casado(a) / União estável</option>
-          <option value="3">3 — Viúvo(a)</option>
-          <option value="4">4 — Separado(a)</option>
-          <option value="8">8 — Não se aplica</option>
-          <option value="9">9 — Ignorado</option>
-        </select>
+        <div class="pills" id="grp_est_civil" data-hidden="f_est_civil">
+          <label class="pill" data-val="1"><input type="radio" name="est_civil" value="1"> Solteiro(a)</label>
+          <label class="pill" data-val="2"><input type="radio" name="est_civil" value="2"> Casado(a) / União</label>
+          <label class="pill" data-val="3"><input type="radio" name="est_civil" value="3"> Viúvo(a)</label>
+          <label class="pill" data-val="4"><input type="radio" name="est_civil" value="4"> Separado(a)</label>
+          <label class="pill" data-val="8"><input type="radio" name="est_civil" value="8"> Não se aplica</label>
+          <label class="pill" data-val="9"><input type="radio" name="est_civil" value="9"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_est_civil">
       </div>
     </div>
 
     <div class="row">
       <div class="fld">
         <label>Orientação Sexual <span class="req-star">⭐</span><span class="cn">[Campo 36]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Por quem a pessoa sente atração afetiva ou sexual — Heterossexual, Homossexual (gay/lésbica), Bissexual etc. Independe de como ela se apresenta ou se veste.</span><span class="tip-r"><b>Por que informar:</b> Ajuda a identificar crimes de LGBTfobia e a direcionar o acolhimento e encaminhamento corretos.</span></span></span></span></label>
-        <select id="f_or_sex" data-ess data-label="Orientação sexual">
-          <option value="">— Selecione —</option>
-          <option value="1">1 — Heterossexual</option>
-          <option value="2">2 — Homossexual (gay / lésbica)</option>
-          <option value="3">3 — Bissexual</option>
-          <option value="8">8 — Não se aplica</option>
-          <option value="9">9 — Ignorado</option>
-        </select>
+        <div class="pills" id="grp_or_sex" data-hidden="f_or_sex">
+          <label class="pill" data-val="1"><input type="radio" name="or_sex" value="1"> Heterossexual</label>
+          <label class="pill" data-val="2"><input type="radio" name="or_sex" value="2"> Homossexual (gay / lésbica)</label>
+          <label class="pill" data-val="3"><input type="radio" name="or_sex" value="3"> Bissexual</label>
+          <label class="pill" data-val="8"><input type="radio" name="or_sex" value="8"> Não se aplica</label>
+          <label class="pill" data-val="9"><input type="radio" name="or_sex" value="9"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_or_sex" data-ess data-label="Orientação sexual">
       </div>
       <div class="fld">
         <label>Identidade de Gênero <span class="req-star">⭐</span><span class="cn">[Campo 37]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Como a pessoa se reconhece e se apresenta ao mundo — Mulher Trans, Homem Trans, Travesti, Cisgênero etc. É independente do sexo biológico ao nascer.</span><span class="tip-r"><b>Por que informar:</b> Fundamental para mapear violências específicas contra a população trans e travesti e acionar redes de proteção adequadas.</span></span></span></span></label>
-        <select id="f_id_gen" data-ess data-label="Identidade de gênero">
-          <option value="">— Selecione —</option>
-          <option value="1">1 — Travesti</option>
-          <option value="2">2 — Mulher transexual</option>
-          <option value="3">3 — Homem transexual</option>
-          <option value="8">8 — Não se aplica</option>
-          <option value="9">9 — Ignorado</option>
-        </select>
+        <div class="pills" id="grp_id_gen" data-hidden="f_id_gen">
+          <label class="pill" data-val="1"><input type="radio" name="id_gen" value="1"> Travesti</label>
+          <label class="pill" data-val="2"><input type="radio" name="id_gen" value="2"> Mulher transexual</label>
+          <label class="pill" data-val="3"><input type="radio" name="id_gen" value="3"> Homem transexual</label>
+          <label class="pill" data-val="8"><input type="radio" name="id_gen" value="8"> Não se aplica</label>
+          <label class="pill" data-val="9"><input type="radio" name="id_gen" value="9"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_id_gen" data-ess data-label="Identidade de gênero">
       </div>
     </div>
 
@@ -1110,13 +1110,13 @@ function toggleDarkMode(){
     <div class="row">
       <div class="fld">
         <label>Zona <span class="cn">[C.50]</span></label>
-        <select id="f_zona_oc">
-          <option value="">—</option>
-          <option value="1">1 — Urbana</option>
-          <option value="2">2 — Rural</option>
-          <option value="3">3 — Periurbana</option>
-          <option value="9">9 — Ignorado</option>
-        </select>
+        <div class="pills" id="grp_zona_oc" data-hidden="f_zona_oc">
+          <label class="pill" data-val="1"><input type="radio" name="zona_oc" value="1"> 1 — Urbana</label>
+          <label class="pill" data-val="2"><input type="radio" name="zona_oc" value="2"> 2 — Rural</label>
+          <label class="pill" data-val="3"><input type="radio" name="zona_oc" value="3"> 3 — Periurbana</label>
+          <label class="pill" data-val="9"><input type="radio" name="zona_oc" value="9"> 9 — Ignorado</label>
+        </div>
+        <input type="hidden" id="f_zona_oc">
       </div>
       <div class="fld col-2">
         <label>Local de Ocorrência <span class="cn">[Campo 52]</span></label>
@@ -1335,15 +1335,15 @@ function toggleDarkMode(){
       </div>
       <div class="fld">
         <label>Ciclo de Vida do Provável Autor <span class="cn">[Campo 64]</span></label>
-        <select id="f_ciclo">
-          <option value="">— Selecione —</option>
-          <option value="1">1 — Criança (0–9 anos)</option>
-          <option value="2">2 — Adolescente (10–19 anos)</option>
-          <option value="3">3 — Jovem (20–24 anos)</option>
-          <option value="4">4 — Adulto (25–59 anos)</option>
-          <option value="5">5 — Idoso (≥60 anos)</option>
-          <option value="9">9 — Ignorado</option>
-        </select>
+        <div class="pills" id="grp_ciclo" data-hidden="f_ciclo">
+          <label class="pill" data-val="1"><input type="radio" name="ciclo" value="1"> Criança (0–9)</label>
+          <label class="pill" data-val="2"><input type="radio" name="ciclo" value="2"> Adolescente (10–19)</label>
+          <label class="pill" data-val="3"><input type="radio" name="ciclo" value="3"> Jovem (20–24)</label>
+          <label class="pill" data-val="4"><input type="radio" name="ciclo" value="4"> Adulto (25–59)</label>
+          <label class="pill" data-val="5"><input type="radio" name="ciclo" value="5"> Idoso (≥60)</label>
+          <label class="pill" data-val="9"><input type="radio" name="ciclo" value="9"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_ciclo">
       </div>
     </div>
 
@@ -1555,6 +1555,38 @@ document.querySelectorAll('.pill').forEach(function(lbl){
     inp.dispatchEvent(new Event('change',{bubbles:true}));
   });
 });
+
+/*==========================================================
+  SYNC PILL GROUPS COM HIDDEN INPUTS
+==========================================================*/
+(function(){
+  document.querySelectorAll('.pills[data-hidden]').forEach(function(grp){
+    var hidId = grp.dataset.hidden;
+    var hidEl = document.getElementById(hidId);
+    if(!hidEl) return;
+    /* pill → hidden: ao clicar no pill, atualiza hidden e dispara change */
+    grp.querySelectorAll('.pill').forEach(function(p){
+      p.addEventListener('click', function(){
+        var radio = p.querySelector('input[type="radio"]');
+        if(!radio) return;
+        setTimeout(function(){
+          hidEl.value = radio.checked ? radio.value : '';
+          hidEl.dispatchEvent(new Event('change', {bubbles:true}));
+        }, 0);
+      });
+    });
+    /* hidden → pill: quando _setField() seta o hidden, sincroniza visualmente */
+    hidEl.addEventListener('change', function(){
+      var val = hidEl.value;
+      grp.querySelectorAll('.pill').forEach(function(p){
+        var radio = p.querySelector('input[type="radio"]');
+        var match = !!val && radio && radio.value === val;
+        p.classList.toggle('checked', match);
+        if(radio) radio.checked = match;
+      });
+    });
+  });
+})();
 
 /*==========================================================
   CONDITIONALS
@@ -1904,6 +1936,7 @@ document.getElementById('f_nasc').addEventListener('change', function(){
     idadeEl.value = Math.floor(diffDias / 365.25);
     unEl.value = 'A';
   }
+  unEl.dispatchEvent(new Event('change', {bubbles:true}));
   updateProgress();
 });
 

@@ -689,13 +689,13 @@ function toggleDarkMode(){
       </div>
       <div class="fld" style="max-width:130px">
         <label>Unidade</label>
-        <select id="f_idade_un">
-          <option value="">—</option>
-          <option value="H">H — Hora</option>
-          <option value="D">D — Dia</option>
-          <option value="M">M — Mês</option>
-          <option value="A">A — Ano</option>
-        </select>
+        <div class="pills" id="grp_idade_un" data-hidden="f_idade_un">
+          <label class="pill" data-val="H"><input type="radio" name="idade_un" value="H"> H — Hora</label>
+          <label class="pill" data-val="D"><input type="radio" name="idade_un" value="D"> D — Dia</label>
+          <label class="pill" data-val="M"><input type="radio" name="idade_un" value="M"> M — Mês</label>
+          <label class="pill" data-val="A"><input type="radio" name="idade_un" value="A"> A — Ano</label>
+        </div>
+        <input type="hidden" id="f_idade_un">
       </div>
       <div class="fld">
         <label>Sexo <span class="req-star">⭐</span><span class="cn">[Campo 13]</span></label>
@@ -710,31 +710,31 @@ function toggleDarkMode(){
     <div id="row_gest" style="display:none" class="row">
       <div class="fld col-2">
         <label>Gestante <span class="cn">[Campo 14]</span></label>
-        <select id="f_gest">
-          <option value="">— Selecione —</option>
-          <option value="1">1 — 1º Trimestre</option>
-          <option value="2">2 — 2º Trimestre</option>
-          <option value="3">3 — 3º Trimestre</option>
-          <option value="4">4 — Idade gestacional ignorada</option>
-          <option value="5">5 — Não</option>
-          <option value="6">6 — Não se aplica</option>
-          <option value="9">9 — Ignorado</option>
-        </select>
+        <div class="pills" id="grp_gest" data-hidden="f_gest">
+          <label class="pill" data-val="1"><input type="radio" name="gest" value="1"> 1 — 1º Trimestre</label>
+          <label class="pill" data-val="2"><input type="radio" name="gest" value="2"> 2 — 2º Trimestre</label>
+          <label class="pill" data-val="3"><input type="radio" name="gest" value="3"> 3 — 3º Trimestre</label>
+          <label class="pill" data-val="4"><input type="radio" name="gest" value="4"> 4 — Idade gestacional ignorada</label>
+          <label class="pill" data-val="5"><input type="radio" name="gest" value="5"> 5 — Não</label>
+          <label class="pill" data-val="6"><input type="radio" name="gest" value="6"> 6 — Não se aplica</label>
+          <label class="pill" data-val="9"><input type="radio" name="gest" value="9"> 9 — Ignorado</label>
+        </div>
+        <input type="hidden" id="f_gest">
       </div>
     </div>
 
     <div class="row">
       <div class="fld">
         <label>Raça/Cor <span class="req-star">⭐</span><span class="cn">[Campo 15]</span></label>
-        <select id="f_raca" data-ess data-label="Raça/Cor">
-          <option value="">— Selecione —</option>
-          <option value="1">1 — Branca</option>
-          <option value="2">2 — Preta</option>
-          <option value="3">3 — Amarela</option>
-          <option value="4">4 — Parda</option>
-          <option value="5">5 — Indígena</option>
-          <option value="9">9 — Ignorado</option>
-        </select>
+        <div class="pills" id="grp_raca" data-hidden="f_raca">
+          <label class="pill" data-val="1"><input type="radio" name="raca" value="1"> Branca</label>
+          <label class="pill" data-val="2"><input type="radio" name="raca" value="2"> Preta</label>
+          <label class="pill" data-val="3"><input type="radio" name="raca" value="3"> Amarela</label>
+          <label class="pill" data-val="4"><input type="radio" name="raca" value="4"> Parda</label>
+          <label class="pill" data-val="5"><input type="radio" name="raca" value="5"> Indígena</label>
+          <label class="pill" data-val="9"><input type="radio" name="raca" value="9"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_raca" data-ess data-label="Raça/Cor">
       </div>
       <div class="fld">
         <label>Escolaridade <span class="cn">[Campo 16]</span></label>
@@ -838,13 +838,13 @@ function toggleDarkMode(){
       </div>
       <div class="fld">
         <label>Zona <span class="cn">[C.31]</span></label>
-        <select id="f_zona_res">
-          <option value="">—</option>
-          <option value="1">1 — Urbana</option>
-          <option value="2">2 — Rural</option>
-          <option value="3">3 — Periurbana</option>
-          <option value="9">9 — Ignorado</option>
-        </select>
+        <div class="pills" id="grp_zona_res" data-hidden="f_zona_res">
+          <label class="pill" data-val="1"><input type="radio" name="zona_res" value="1"> 1 — Urbana</label>
+          <label class="pill" data-val="2"><input type="radio" name="zona_res" value="2"> 2 — Rural</label>
+          <label class="pill" data-val="3"><input type="radio" name="zona_res" value="3"> 3 — Periurbana</label>
+          <label class="pill" data-val="9"><input type="radio" name="zona_res" value="9"> 9 — Ignorado</label>
+        </div>
+        <input type="hidden" id="f_zona_res">
       </div>
       <div class="fld">
         <label>País (se fora do Brasil) <span class="cn">[C.32]</span></label>
@@ -889,17 +889,17 @@ function toggleDarkMode(){
       </div>
       <div class="fld">
         <label>Situação no Mercado de Trabalho <span class="cn">[Campo 35]</span></label>
-        <select id="f_sit_mercado">
-          <option value="">— Selecione —</option>
-          <option value="1">1 — Empregado registrado</option>
-          <option value="2">2 — Empregado não registrado</option>
-          <option value="3">3 — Autônomo/conta própria</option>
-          <option value="4">4 — Desempregado</option>
-          <option value="5">5 — Aposentado/Pensionista</option>
-          <option value="6">6 — Trabalhador doméstico</option>
-          <option value="7">7 — Servidor público</option>
-          <option value="9">9 — Ignorado</option>
-        </select>
+        <div class="pills" id="grp_sit_mercado" data-hidden="f_sit_mercado">
+          <label class="pill" data-val="1"><input type="radio" name="sit_mercado" value="1"> 1 — Empregado registrado</label>
+          <label class="pill" data-val="2"><input type="radio" name="sit_mercado" value="2"> 2 — Empregado não registrado</label>
+          <label class="pill" data-val="3"><input type="radio" name="sit_mercado" value="3"> 3 — Autônomo/conta própria</label>
+          <label class="pill" data-val="4"><input type="radio" name="sit_mercado" value="4"> 4 — Desempregado</label>
+          <label class="pill" data-val="5"><input type="radio" name="sit_mercado" value="5"> 5 — Aposentado/Pensionista</label>
+          <label class="pill" data-val="6"><input type="radio" name="sit_mercado" value="6"> 6 — Trabalhador doméstico</label>
+          <label class="pill" data-val="7"><input type="radio" name="sit_mercado" value="7"> 7 — Servidor público</label>
+          <label class="pill" data-val="9"><input type="radio" name="sit_mercado" value="9"> 9 — Ignorado</label>
+        </div>
+        <input type="hidden" id="f_sit_mercado">
       </div>
     </div>
 
@@ -910,25 +910,25 @@ function toggleDarkMode(){
       </div>
       <div class="fld" style="max-width:160px">
         <label>Unidade</label>
-        <select id="f_tempo_trab_tipo">
-          <option value="">—</option>
-          <option value="A">A — Anos</option>
-          <option value="M">M — Meses</option>
-          <option value="D">D — Dias</option>
-        </select>
+        <div class="pills" id="grp_tempo_trab_tipo" data-hidden="f_tempo_trab_tipo">
+          <label class="pill" data-val="A"><input type="radio" name="tempo_trab_tipo" value="A"> A — Anos</label>
+          <label class="pill" data-val="M"><input type="radio" name="tempo_trab_tipo" value="M"> M — Meses</label>
+          <label class="pill" data-val="D"><input type="radio" name="tempo_trab_tipo" value="D"> D — Dias</label>
+        </div>
+        <input type="hidden" id="f_tempo_trab_tipo">
       </div>
       <div class="fld">
         <label>Local do Acidente <span class="cn">[Campo 37]</span></label>
-        <select id="f_local_ac">
-          <option value="">— Selecione —</option>
-          <option value="01">01 — Empresa/oficina</option>
-          <option value="02">02 — Residência</option>
-          <option value="03">03 — Via pública</option>
-          <option value="04">04 — Escola/ensino</option>
-          <option value="05">05 — Área rural</option>
-          <option value="06">06 — Área de lazer</option>
-          <option value="09">09 — Outros</option>
-        </select>
+        <div class="pills" id="grp_local_ac" data-hidden="f_local_ac">
+          <label class="pill" data-val="01"><input type="radio" name="local_ac" value="01"> 01 — Empresa/oficina</label>
+          <label class="pill" data-val="02"><input type="radio" name="local_ac" value="02"> 02 — Residência</label>
+          <label class="pill" data-val="03"><input type="radio" name="local_ac" value="03"> 03 — Via pública</label>
+          <label class="pill" data-val="04"><input type="radio" name="local_ac" value="04"> 04 — Escola/ensino</label>
+          <label class="pill" data-val="05"><input type="radio" name="local_ac" value="05"> 05 — Área rural</label>
+          <label class="pill" data-val="06"><input type="radio" name="local_ac" value="06"> 06 — Área de lazer</label>
+          <label class="pill" data-val="09"><input type="radio" name="local_ac" value="09"> 09 — Outros</label>
+        </div>
+        <input type="hidden" id="f_local_ac">
       </div>
     </div>
 
@@ -1128,13 +1128,13 @@ function toggleDarkMode(){
       </div>
       <div class="fld">
         <label>Tipo de Acidente <span class="cn">[Campo 57]</span></label>
-        <select id="f_tipo_ac">
-          <option value="">— Selecione —</option>
-          <option value="1">1 — Típico</option>
-          <option value="2">2 — De trajeto</option>
-          <option value="3">3 — Doença</option>
-          <option value="9">9 — Ignorado</option>
-        </select>
+        <div class="pills" id="grp_tipo_ac" data-hidden="f_tipo_ac">
+          <label class="pill" data-val="1"><input type="radio" name="tipo_ac" value="1"> 1 — Típico</label>
+          <label class="pill" data-val="2"><input type="radio" name="tipo_ac" value="2"> 2 — De trajeto</label>
+          <label class="pill" data-val="3"><input type="radio" name="tipo_ac" value="3"> 3 — Doença</label>
+          <label class="pill" data-val="9"><input type="radio" name="tipo_ac" value="9"> 9 — Ignorado</label>
+        </div>
+        <input type="hidden" id="f_tipo_ac">
       </div>
     </div>
 
@@ -1258,14 +1258,14 @@ function toggleDarkMode(){
       </div>
       <div class="fld">
         <label>Regime de Tratamento <span class="cn">[Campo 65]</span></label>
-        <select id="f_regime">
-          <option value="">— Selecione —</option>
-          <option value="1">1 — Ambulatorial</option>
-          <option value="2">2 — Internação</option>
-          <option value="3">3 — Day hospital</option>
-          <option value="4">4 — CAPS</option>
-          <option value="9">9 — Ignorado</option>
-        </select>
+        <div class="pills" id="grp_regime" data-hidden="f_regime">
+          <label class="pill" data-val="1"><input type="radio" name="regime" value="1"> 1 — Ambulatorial</label>
+          <label class="pill" data-val="2"><input type="radio" name="regime" value="2"> 2 — Internação</label>
+          <label class="pill" data-val="3"><input type="radio" name="regime" value="3"> 3 — Day hospital</label>
+          <label class="pill" data-val="4"><input type="radio" name="regime" value="4"> 4 — CAPS</label>
+          <label class="pill" data-val="9"><input type="radio" name="regime" value="9"> 9 — Ignorado</label>
+        </div>
+        <input type="hidden" id="f_regime">
       </div>
     </div>
 
@@ -1289,16 +1289,16 @@ function toggleDarkMode(){
     <div class="row row-wide">
       <div class="fld col-2">
         <label>Evolução do Caso <span class="cn">[Campo 66]</span></label>
-        <select id="f_evolucao" onchange="onEvolucao()">
-          <option value="">— Selecione —</option>
-          <option value="1">1 — Cura</option>
-          <option value="2">2 — Incapacidade temporária</option>
-          <option value="3">3 — Incapacidade parcial permanente</option>
-          <option value="4">4 — Incapacidade total permanente</option>
-          <option value="5">5 — Óbito por acidente de trabalho</option>
-          <option value="6">6 — Óbito por outras causas</option>
-          <option value="9">9 — Ignorado</option>
-        </select>
+        <div class="pills" id="grp_evolucao" data-hidden="f_evolucao">
+          <label class="pill" data-val="1"><input type="radio" name="evolucao" value="1"> 1 — Cura</label>
+          <label class="pill" data-val="2"><input type="radio" name="evolucao" value="2"> 2 — Incapacidade temporária</label>
+          <label class="pill" data-val="3"><input type="radio" name="evolucao" value="3"> 3 — Incapacidade parcial permanente</label>
+          <label class="pill" data-val="4"><input type="radio" name="evolucao" value="4"> 4 — Incapacidade total permanente</label>
+          <label class="pill" data-val="5"><input type="radio" name="evolucao" value="5"> 5 — Óbito por acidente de trabalho</label>
+          <label class="pill" data-val="6"><input type="radio" name="evolucao" value="6"> 6 — Óbito por outras causas</label>
+          <label class="pill" data-val="9"><input type="radio" name="evolucao" value="9"> 9 — Ignorado</label>
+        </div>
+        <input type="hidden" id="f_evolucao">
       </div>
       <div class="fld">
         <label>CAT Emitida? <span class="cn">[Campo 67]</span></label>
@@ -1450,6 +1450,40 @@ document.querySelectorAll('.pill').forEach(function(lbl){
     inp.dispatchEvent(new Event('change',{bubbles:true}));
   });
 });
+
+/*==========================================================
+  SYNC PILL GROUPS COM HIDDEN INPUTS
+==========================================================*/
+(function(){
+  document.querySelectorAll('.pills[data-hidden]').forEach(function(grp){
+    var hidId = grp.dataset.hidden;
+    var hidEl = document.getElementById(hidId);
+    if(!hidEl) return;
+    /* pill → hidden: ao clicar no pill, atualiza hidden e dispara change */
+    grp.querySelectorAll('.pill').forEach(function(p){
+      p.addEventListener('click', function(){
+        var radio = p.querySelector('input[type="radio"]');
+        if(!radio) return;
+        setTimeout(function(){
+          hidEl.value = radio.checked ? radio.value : '';
+          hidEl.dispatchEvent(new Event('change', {bubbles:true}));
+        }, 0);
+      });
+    });
+    /* hidden → pill: quando _setField() seta o hidden, sincroniza visualmente */
+    hidEl.addEventListener('change', function(){
+      var val = hidEl.value;
+      grp.querySelectorAll('.pill').forEach(function(p){
+        var radio = p.querySelector('input[type="radio"]');
+        var match = !!val && radio && radio.value === val;
+        p.classList.toggle('checked', match);
+        if(radio) radio.checked = match;
+      });
+      /* Disparar callbacks especiais para certos campos */
+      if(hidId === 'f_evolucao' && typeof onEvolucao === 'function') onEvolucao();
+    });
+  });
+})();
 
 /*==========================================================
   CONDITIONALS
@@ -1992,6 +2026,7 @@ document.getElementById('f_nasc').addEventListener('change', function(){
   } else {
     idadeEl.value = Math.floor(diffDias / 365.25); unEl.value = 'A';
   }
+  unEl.dispatchEvent(new Event('change', {bubbles:true}));
   updateProgress();
 });
 
