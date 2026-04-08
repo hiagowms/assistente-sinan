@@ -976,10 +976,6 @@ function toggleDarkMode(){
         <label>Logradouro</label>
         <input type="text" id="f_logr_res" data-caps>
       </div>
-      <div class="fld" style="max-width:80px">
-        <label>Cód. Logr.</label>
-        <input type="text" id="f_logr_cod_res">
-      </div>
     </div>
     <div class="row">
       <div class="fld" style="max-width:100px">
@@ -989,14 +985,6 @@ function toggleDarkMode(){
       <div class="fld col-2">
         <label>Complemento</label>
         <input type="text" id="f_compl_res" data-caps>
-      </div>
-      <div class="fld">
-        <label>Geo Campo 1</label>
-        <input type="text" id="f_geo1_res">
-      </div>
-      <div class="fld">
-        <label>Geo Campo 2</label>
-        <input type="text" id="f_geo2_res">
       </div>
     </div>
     <div class="row">
@@ -1025,7 +1013,7 @@ function toggleDarkMode(){
         <input type="hidden" id="f_zona_res">
       </div>
       <div class="fld col-2">
-        <label>País (se fora do Brasil)</label>
+        <label>País (se residente fora do Brasil)</label>
         <input type="text" id="f_pais_res" data-caps>
       </div>
     </div>
@@ -1889,46 +1877,57 @@ function rfTogglePanel(){
 
 function extractCompanyInfo(text){
   var r = {};
+
+  // CNPJ
   var cnpjM = text.match(/\d{2}[\.\s]?\d{3}[\.\s]?\d{3}[\/\s]?\d{4}[-\s]?\d{2}/);
   r.cnpj = cnpjM ? cnpjM[0].replace(/\s/g,'') : '';
 
-  // Razão Social: mesma linha OU próxima linha (RF pode separar rótulo e valor com quebra)
-  var rsM = text.match(/Raz[aã]o\s+Social[^:\n\r]*:?\s*([^\n\r]{2,})/i)
-          || text.match(/Raz[aã]o\s+Social[^\n\r]*[\n\r]+\s*([^\n\r]{2,})/i);
-  r.razaoSocial = rsM ? rsM[1].trim().replace(/\s+/g,' ') : '';
-
-  var fnM = text.match(/Nome\s+de?\s+Fantasia[:\s]+([^\n\r]+)/i);
-  r.nomeFantasia = fnM ? fnM[1].trim().replace(/^\.\s*/,'') : '';
-
-  // Extrai CNAE — 3 estratégias em cascata:
-  // 1. Label "CNAE" explícito na mesma linha (ex: "CNAE Principal: 64.22-1-00 - ...")
-  var cnaeM = text.match(/CNAE[^\n:]*:?\s*([\d]{2}\.[\d]{2}-[\d](?:-[\d]{2})?)\s*[-–]\s*([^\n\r]+)/i);
-  // 2. Label "ATIVIDADE ECONÔMICA" na linha anterior, código na próxima
-  if(!cnaeM){
-    var actBlock = text.match(/ATIVIDADE\s+ECON[ÔO]MICA[^\n]*\n([\s\S]{1,300})/i);
-    if(actBlock) cnaeM = actBlock[1].match(/([\d]{2}\.[\d]{2}-[\d](?:-[\d]{2})?)\s*[-–]\s*([^\n\r]+)/);
+  // Helper: valor após rótulo — suporta "ROTULO: valor" (mesma linha)
+  // e "ROTULO\nvalor" (próxima linha), como no layout da Receita Federal
+  function getVal(labelRe){
+    var re1 = new RegExp(labelRe+'[^:\\n\\r]*:[\\t ]*([^\\n\\r]+)','i');
+    var re2 = new RegExp(labelRe+'[^\\n\\r]*[\\n\\r]+[\\t ]*([^\\n\\r]+)','i');
+    var m = text.match(re1) || text.match(re2);
+    return m ? m[1].trim() : '';
   }
-  // 3. Fallback: padrão de subclasse XX.XX-X-XX em qualquer lugar do texto
-  if(!cnaeM) cnaeM = text.match(/([\d]{2}\.[\d]{2}-[\d]-[\d]{2})\s*[-–]\s*([^\n\r]+)/);
+
+  // NOME EMPRESARIAL (RF) ou Razão Social (outros formatos)
+  r.razaoSocial = getVal('NOME EMPRESARIAL')
+               || getVal('Raz[a\u00e3]o\\s+Social');
+
+  // CNAE — 3 estratégias em cascata
+  var cnaeM = text.match(/CNAE[^\n:]*:?\s*([\d]{2}\.[\d]{2}-[\d](?:-[\d]{2})?)\s*[-\u2013]\s*([^\n\r]+)/i);
+  if(!cnaeM){
+    var actBlock = text.match(/ATIVIDADE\s+ECON[\u00d4O]MICA[^\n]*\n([\s\S]{1,300})/i);
+    if(actBlock) cnaeM = actBlock[1].match(/([\d]{2}\.[\d]{2}-[\d](?:-[\d]{2})?)\s*[-\u2013]\s*([^\n\r]+)/);
+  }
+  if(!cnaeM) cnaeM = text.match(/([\d]{2}\.[\d]{2}-[\d]-[\d]{2})\s*[-\u2013]\s*([^\n\r]+)/);
   r.cnaeCode      = cnaeM ? cnaeM[1].trim() : '';
   r.ramoAtividade = cnaeM ? cnaeM[2].trim() : '';
 
-  var endM = text.match(/Logradouro\s*[\/][^:]*:\s*([^\n\r]+)/i)
-          || text.match(/Logradouro[:\s]+([^\n\r]+)/i);
-  r.logradouro = endM ? endM[1].trim() : '';
+  // ENDEREÇO = LOGRADOURO + COMPLEMENTO
+  var logr  = getVal('LOGRADOURO');
+  var compl = getVal('COMPLEMENTO');
+  r.logradouro = compl ? logr + ' ' + compl : logr;
 
-  var numM = text.match(/N[uú]mero[:\s]+([^\s\n\r\/,]+)/i);
-  r.numero = numM ? numM[1].trim() : '';
+  // NÚMERO
+  r.numero = getVal('N[\u00daU]MERO');
 
-  var bairroM = text.match(/Bairro\s*[\/]\s*[Dd]istrito[:\s]+([^\n\r]+)/i)
-             || text.match(/Bairro[:\s]+([^\n\r]+)/i);
-  r.bairro = bairroM ? bairroM[1].trim() : '';
+  // BAIRRO/DISTRITO
+  r.bairro = getVal('BAIRRO[\\s\\/]DISTRITO') || getVal('Bairro');
 
-  var munM = text.match(/Munic[ií]pio[:\s]+([^\n\r]+)/i);
-  r.municipio = munM ? munM[1].trim() : '';
+  // MUNICÍPIO
+  r.municipio = getVal('MUNIC.PIO');
 
-  var ufM = text.match(/\bUF[:\s]+([A-Za-z]{2})\b/i);
-  r.uf = ufM ? ufM[1].toUpperCase() : '';
+  // UF — deve ter exatamente 2 letras
+  var ufRaw = getVal('\\bUF\\b');
+  r.uf = (ufRaw && /^[A-Za-z]{2}/.test(ufRaw)) ? ufRaw.substring(0,2).toUpperCase() : '';
+  if(!r.uf){ var ufM = text.match(/\bUF[:\s]+([A-Za-z]{2})\b/i); r.uf = ufM ? ufM[1].toUpperCase() : ''; }
+
+  // TELEFONE — primeiro número válido no formato (XX) XXXX-XXXX ou variações
+  var telBlock = getVal('TELEFONE');
+  var telM = telBlock.match(/\(?\d{2}\)?\s*\d{4,5}[-\s]?\d{4}/);
+  r.telefone = telM ? telM[0].replace(/\s+/g,' ').trim() : '';
 
   return r;
 }
@@ -1993,7 +1992,8 @@ function rfExtrair(){
   if(info.razaoSocial) _setField('f_emp_nome',   info.razaoSocial);
   if(info.logradouro)  _setField('f_emp_end',    info.logradouro);
   if(info.numero)      _setField('f_emp_num',    info.numero);
-  if(info.bairro)      _setField('f_emp_bairro', info.bairro);
+  if(info.bairro){     _setField('f_emp_bairro', info.bairro);
+                       _setField('f_emp_dist',   info.bairro); }
   // Município: preenche IBGE e UF automaticamente via base SINAN_MUNICIPIOS
   if(info.municipio){
     var munNorm = info.municipio.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
@@ -2009,7 +2009,8 @@ function rfExtrair(){
       _setField('f_emp_mun', info.municipio);
     }
   }
-  if(info.uf) _setField('f_emp_uf', info.uf);
+  if(info.uf)       _setField('f_emp_uf',  info.uf);
+  if(info.telefone) _setField('f_emp_tel', info.telefone);
 
   var cnaeOk = false;
   if(info.cnaeCode || info.ramoAtividade){
@@ -2599,11 +2600,8 @@ async function gerarPDF(force){
     setTxt('residencia_municipio_codigo_ibge', tv('f_ibge_res'));
     setTxt('residencia_bairro',                tv('f_bairro_res'));
     setTxt('residencia_logradouro',            tv('f_logr_res'));
-    setTxt('residencia_logradouro_codigo',     tv('f_logr_cod_res'));
     setTxt('residencia_numero',                tv('f_num_res'));
     setTxt('residencia_complemento',           tv('f_compl_res'));
-    setTxt('residencia_geo_campo_1',           tv('f_geo1_res'));
-    setTxt('residencia_geo_campo_2',           tv('f_geo2_res'));
     setTxt('residencia_ponto_de_referencia',   tv('f_pref_res'));
     setTxt('residencia_cep',                   tv('f_cep'));
     setTxt('residencia_telefone',              tv('f_tel_res'));

@@ -903,10 +903,6 @@ function toggleDarkMode(){
       </div>
     </div>
     <div class="row">
-      <div class="fld">
-        <label>Código Logradouro</label>
-        <input type="text" id="f_logr_cod_res" placeholder="Código">
-      </div>
       <div class="fld col-2">
         <label>Complemento</label>
         <input type="text" id="f_compl_res" data-caps>
@@ -936,18 +932,8 @@ function toggleDarkMode(){
         <input type="hidden" id="f_zona_res">
       </div>
       <div class="fld">
-        <label>País (se fora do Brasil)</label>
+        <label>País (se residente fora do Brasil)</label>
         <input type="text" id="f_pais_res" data-caps>
-      </div>
-    </div>
-    <div class="row">
-      <div class="fld">
-        <label>Geo Campo 1 <span class="cn">[C.27a]</span></label>
-        <input type="text" id="f_geo1_res">
-      </div>
-      <div class="fld">
-        <label>Geo Campo 2 <span class="cn">[C.27b]</span></label>
-        <input type="text" id="f_geo2_res">
       </div>
     </div>
   </div>
@@ -1908,51 +1894,7 @@ function rfTogglePanel(){
   btn.classList.toggle('active', !open);
 }
 
-function extractCompanyInfo(text){
-  var r = {};
-  var cnpjM = text.match(/\d{2}[\.\s]?\d{3}[\.\s]?\d{3}[\/\s]?\d{4}[-\s]?\d{2}/);
-  r.cnpj = cnpjM ? cnpjM[0].replace(/\s/g,'') : '';
 
-  // Razão Social: mesma linha OU próxima linha (RF pode separar rótulo e valor com quebra)
-  var rsM = text.match(/Raz[aã]o\s+Social[^:\n\r]*:?\s*([^\n\r]{2,})/i)
-          || text.match(/Raz[aã]o\s+Social[^\n\r]*[\n\r]+\s*([^\n\r]{2,})/i);
-  r.razaoSocial = rsM ? rsM[1].trim().replace(/\s+/g,' ') : '';
-
-  var fnM = text.match(/Nome\s+de?\s+Fantasia[:\s]+([^\n\r]+)/i);
-  r.nomeFantasia = fnM ? fnM[1].trim().replace(/^\.\s*/,'') : '';
-
-  // Extrai CNAE — 3 estratégias em cascata:
-  // 1. Label "CNAE" explícito na mesma linha (ex: "CNAE Principal: 64.22-1-00 - ...")
-  var cnaeM = text.match(/CNAE[^\n:]*:?\s*([\d]{2}\.[\d]{2}-[\d](?:-[\d]{2})?)\s*[-–]\s*([^\n\r]+)/i);
-  // 2. Label "ATIVIDADE ECONÔMICA" na linha anterior, código na próxima
-  if(!cnaeM){
-    var actBlock = text.match(/ATIVIDADE\s+ECON[ÔO]MICA[^\n]*\n([\s\S]{1,300})/i);
-    if(actBlock) cnaeM = actBlock[1].match(/([\d]{2}\.[\d]{2}-[\d](?:-[\d]{2})?)\s*[-–]\s*([^\n\r]+)/);
-  }
-  // 3. Fallback: padrão de subclasse XX.XX-X-XX em qualquer lugar do texto
-  if(!cnaeM) cnaeM = text.match(/([\d]{2}\.[\d]{2}-[\d]-[\d]{2})\s*[-–]\s*([^\n\r]+)/);
-  r.cnaeCode      = cnaeM ? cnaeM[1].trim() : '';
-  r.ramoAtividade = cnaeM ? cnaeM[2].trim() : '';
-
-  var endM = text.match(/Logradouro\s*[\/][^:]*:\s*([^\n\r]+)/i)
-          || text.match(/Logradouro[:\s]+([^\n\r]+)/i);
-  r.logradouro = endM ? endM[1].trim() : '';
-
-  var numM = text.match(/N[uú]mero[:\s]+([^\s\n\r\/,]+)/i);
-  r.numero = numM ? numM[1].trim() : '';
-
-  var bairroM = text.match(/Bairro\s*[\/]\s*[Dd]istrito[:\s]+([^\n\r]+)/i)
-             || text.match(/Bairro[:\s]+([^\n\r]+)/i);
-  r.bairro = bairroM ? bairroM[1].trim() : '';
-
-  var munM = text.match(/Munic[ií]pio[:\s]+([^\n\r]+)/i);
-  r.municipio = munM ? munM[1].trim() : '';
-
-  var ufM = text.match(/\bUF[:\s]+([A-Za-z]{2})\b/i);
-  r.uf = ufM ? ufM[1].toUpperCase() : '';
-
-  return r;
-}
 
 // Normaliza CNAE: remove pontos, hífens e barras
 function normCnaeRF(s){ return (s||'').replace(/[.\-\/\s]/g,''); }
@@ -2017,7 +1959,8 @@ function rfExtrair(){
   if(info.razaoSocial) _setField('f_emp_nome',   info.razaoSocial);
   if(info.logradouro)  _setField('f_emp_end',    info.logradouro);
   if(info.numero)      _setField('f_emp_num',    info.numero);
-  if(info.bairro)      _setField('f_emp_bairro', info.bairro);
+  if(info.bairro){     _setField('f_emp_bairro', info.bairro);
+                       _setField('f_emp_dist',   info.bairro); }
   // Município: preenche IBGE e UF automaticamente via base SINAN_MUNICIPIOS
   if(info.municipio){
     var munNorm = info.municipio.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
@@ -2033,7 +1976,8 @@ function rfExtrair(){
       _setField('f_emp_mun', info.municipio);
     }
   }
-  if(info.uf) _setField('f_emp_uf', info.uf);
+  if(info.uf)       _setField('f_emp_uf',  info.uf);
+  if(info.telefone) _setField('f_emp_tel', info.telefone);
 
   var cnaeOk = false;
   if(info.cnaeCode || info.ramoAtividade){
@@ -2561,11 +2505,8 @@ async function gerarPDF(force){
     setTxt('residencia_distrito',              tv('f_bairro_res'));
     setTxt('residencia_bairro',                tv('f_bairro_res'));
     setTxt('residencia_logradouro',            tv('f_logr_res'));
-    setTxt('residencia_logradouro_codigo',     tv('f_logr_cod_res'));
     setTxt('residencia_numero',                tv('f_num_res'));
     setTxt('residencia_complemento',           tv('f_compl_res'));
-    setTxt('residencia_geo_campo_1',           tv('f_geo1_res'));
-    setTxt('residencia_geo_campo_2',           tv('f_geo2_res'));
     setTxt('residencia_ponto_de_referencia',   tv('f_pref_res'));
     setTxt('residencia_cep',                   tv('f_cep'));
     setTxt('residencia_telefone',              tv('f_tel_res'));
@@ -2574,7 +2515,7 @@ async function gerarPDF(force){
 
     // Seção 4 — Ocupação
     setTxt('pessoa_ocupacao',                  tv('f_ocupacao'));
-    setTxt('situacao_mercado_trabalho',        tv('f_sit_mercado'));
+    setTxt('situacao_mercado_trabalho',        (function(v){return v&&v.length===1?'0'+v:v;})(tv('f_sit_mercado')));
     setTxt('tempo_trabalho_ocupacao_valor',    tv('f_tempo_trab_val'));
     setTxt('tempo_trabalho_ocupacao_tipo',     tv('f_tempo_trab_tipo'));
     setTxt('local_acidente',                   tv('f_local_ac'));
