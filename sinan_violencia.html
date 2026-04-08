@@ -619,6 +619,10 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 [data-theme="dark"] .lock-grp.locked input:not([type="hidden"]):not([type="date"]),
 [data-theme="dark"] .lock-grp.locked select{background:rgba(22,101,52,.22)!important;color:#4ade80!important;border-color:#16a34a!important}
 @media(max-width:768px){.lock-grp{padding:11px 0 11px 10px}.lock-rail{width:42px}.lock-btn-rail{width:32px;height:32px}}
+.lock-tipo-warn{display:flex;align-items:flex-start;gap:8px;font-size:11.5px;line-height:1.55;padding:7px 11px;margin-bottom:10px;border-radius:6px;border:1px solid #fca5a5;background:#fff1f2;color:#991b1b}
+.lock-tipo-warn strong{color:#7f1d1d}
+[data-theme="dark"] .lock-tipo-warn{background:rgba(153,27,27,.18);border-color:#7f1d1d;color:#fca5a5}
+[data-theme="dark"] .lock-tipo-warn strong{color:#fca5a5}
 </style>
 </head>
 <body>
@@ -762,6 +766,10 @@ function toggleDarkMode(){
         <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-top:1px"><rect x="5" y="9" width="10" height="9" rx="1.5"/><path d="M8 9V7a2 2 0 014 0v2"/></svg>
         <span class="lock-hint-txt">Estes campos representam a unidade notificadora deste computador. Trave o cadeado para salvar e não precisar preencher novamente nas próximas fichas.</span>
       </div>
+      <div id="lock-tipo-un-warn" class="lock-tipo-warn" style="display:none">
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-top:1px"><path d="M10 2L2 17h16L10 2z"/><line x1="10" y1="9" x2="10" y2="13"/><circle cx="10" cy="15.5" r=".5" fill="currentColor"/></svg>
+        <span>Esta ficha possui o campo <strong>Tipo de Unidade Notificadora</strong> que não estava presente quando o cadeado foi travado em outra ficha. Preencha esse campo e trave o cadeado novamente para ativar o preenchimento automático completo.</span>
+      </div>
       <div class="lock-inner">
         <div class="lock-fields">
     <div class="row">
@@ -773,7 +781,7 @@ function toggleDarkMode(){
         </div>
       </div>
       <div class="fld" style="max-width:100px">
-        <label>UF <span class="cn">[C.4]</span> <span style="font-size:9px;font-weight:500;color:#27ae60;text-transform:none">← auto</span></label>
+        <label>UF</label>
         <select id="f_uf_notif"></select>
       </div>
       <div class="fld" style="max-width:120px">
@@ -853,7 +861,7 @@ function toggleDarkMode(){
         <input type="date" id="f_nasc">
       </div>
       <div class="fld" style="max-width:120px">
-        <label>Idade <span class="cn">[C.12]</span></label>
+        <label>Idade</label>
         <input type="number" id="f_idade_val" min="0" max="999" placeholder="Ex: 35">
       </div>
       <div class="fld" style="max-width:130px">
@@ -960,7 +968,7 @@ function toggleDarkMode(){
         </div>
       </div>
       <div class="fld" style="max-width:100px">
-        <label>UF <span class="cn">[C.19]</span> <span style="font-size:9px;font-weight:500;color:#27ae60;text-transform:none">← auto</span></label>
+        <label>UF</label>
         <select id="f_uf_res"></select>
       </div>
       <div class="fld" style="max-width:120px">
@@ -970,7 +978,7 @@ function toggleDarkMode(){
     </div>
     <div class="row">
       <div class="fld">
-        <label>Bairro <span class="cn">[C.22]</span></label>
+        <label>Bairro</label>
         <input type="text" id="f_bairro_res" data-caps>
       </div>
       <div class="fld col-2">
@@ -978,31 +986,31 @@ function toggleDarkMode(){
         <input type="text" id="f_logr_res" data-caps>
       </div>
       <div class="fld" style="max-width:100px">
-        <label>Número <span class="cn">[C.24]</span></label>
+        <label>Número</label>
         <input type="text" id="f_num_res">
       </div>
     </div>
     <div class="row">
       <div class="fld col-2">
-        <label>Complemento <span class="cn">[C.25]</span></label>
+        <label>Complemento</label>
         <input type="text" id="f_compl_res" data-caps>
       </div>
       <div class="fld">
-        <label>CEP <span class="cn">[C.29]</span></label>
+        <label>CEP</label>
         <input type="text" id="f_cep" maxlength="9" placeholder="00000-000">
       </div>
       <div class="fld">
-        <label>Telefone (DDD) <span class="cn">[C.30]</span></label>
+        <label>Telefone (DDD)</label>
         <input type="text" id="f_tel_res" placeholder="(00) 00000-0000">
       </div>
     </div>
     <div class="row">
       <div class="fld col-2">
-        <label>Ponto de Referência <span class="cn">[C.28]</span></label>
+        <label>Ponto de Referência</label>
         <input type="text" id="f_pref_res" data-caps>
       </div>
       <div class="fld">
-        <label>Zona <span class="cn">[C.31]</span></label>
+        <label>Zona</label>
         <div class="pills" id="grp_zona_res" data-hidden="f_zona_res">
           <label class="pill" data-val="1"><input type="radio" name="zona_res" value="1"> 1 — Urbana</label>
           <label class="pill" data-val="2"><input type="radio" name="zona_res" value="2"> 2 — Rural</label>
@@ -1012,7 +1020,7 @@ function toggleDarkMode(){
         <input type="hidden" id="f_zona_res">
       </div>
       <div class="fld">
-        <label>País (se fora do Brasil) <span class="cn">[C.32]</span></label>
+        <label>País (se fora do Brasil)</label>
         <input type="text" id="f_pais_res" data-caps>
       </div>
     </div>
@@ -1037,11 +1045,11 @@ function toggleDarkMode(){
 
     <div class="row">
       <div class="fld">
-        <label>Nome Social <span class="cn">[C.33]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Nome pelo qual a pessoa se identifica e prefere ser chamada socialmente, diferente do nome civil registrado em cartório. Deve ser respeitado independentemente de retificação documental.</span><span class="tip-r"><b>Por que informar:</b> Garante acolhimento respeitoso e evita constrangimento no atendimento. Também permite identificar barreiras de acesso à saúde enfrentadas pela população trans e travesti.</span></span></span></span></label>
+        <label>Nome Social <span class="cn"><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> Nome pelo qual a pessoa se identifica e prefere ser chamada socialmente, diferente do nome civil registrado em cartório. Deve ser respeitado independentemente de retificação documental.</span><span class="tip-r"><b>Por que informar:</b> Garante acolhimento respeitoso e evita constrangimento no atendimento. Também permite identificar barreiras de acesso à saúde enfrentadas pela população trans e travesti.</span></span></span></span></label>
         <input type="text" id="f_nome_social" data-caps placeholder="Se diferente do nome civil">
       </div>
       <div class="fld col-2">
-        <label>Ocupação (CBO) <span class="cn">[C.34]<span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> A atividade profissional exercida pela vítima, classificada segundo a CBO (Classificação Brasileira de Ocupações). Pode digitar o nome popular ou o código — o sistema busca automaticamente, inclusive sinônimos.</span><span class="tip-r"><b>Por que informar:</b> Permite ao SUS mapear violências no ambiente de trabalho, identificar categorias profissionais mais vulneráveis e direcionar políticas de proteção ao trabalhador.</span></span></span></span></label>
+        <label>Ocupação (CBO) <span class="cn"><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> A atividade profissional exercida pela vítima, classificada segundo a CBO (Classificação Brasileira de Ocupações). Pode digitar o nome popular ou o código — o sistema busca automaticamente, inclusive sinônimos.</span><span class="tip-r"><b>Por que informar:</b> Permite ao SUS mapear violências no ambiente de trabalho, identificar categorias profissionais mais vulneráveis e direcionar políticas de proteção ao trabalhador.</span></span></span></span></label>
         <div class="ac-wrap">
           <input type="text" id="f_ocupacao" data-caps autocomplete="off" placeholder="Nome ou código CBO (ex: ENFERMEIRO, 223505)">
           <div class="ac-drop" id="f_ocupacao-drop"></div>
@@ -1049,7 +1057,7 @@ function toggleDarkMode(){
         <span id="f_ocupacao_hint" style="font-size:12px;color:#2563eb;margin-top:4px;display:none;line-height:1.4;font-weight:600"></span>
       </div>
       <div class="fld">
-        <label>Situação Conjugal <span class="cn">[C.35]</span></label>
+        <label>Situação Conjugal</label>
         <div class="pills" id="grp_est_civil" data-hidden="f_est_civil">
           <label class="pill" data-val="1"><input type="radio" name="est_civil" value="1"> Solteiro(a)</label>
           <label class="pill" data-val="2"><input type="radio" name="est_civil" value="2"> Casado(a) / União</label>
@@ -1111,7 +1119,7 @@ function toggleDarkMode(){
       </div>
       <div id="box_tdefic_outras" style="display:none;margin-top:8px">
         <div class="fld">
-          <label style="font-size:11px">Especificar "Outras" <span class="cn">[C.39]</span></label>
+          <label style="font-size:11px">Especificar "Outras"</label>
           <input type="text" id="f_tdefic_outras" data-caps placeholder="Descreva as outras deficiências/transtornos">
         </div>
       </div>
@@ -1135,39 +1143,39 @@ function toggleDarkMode(){
   <div class="sec-body">
     <div class="row">
       <div class="fld col-2">
-        <label>Município da Ocorrência <span class="cn">[C.41]</span></label>
+        <label>Município da Ocorrência</label>
         <div class="ac-wrap">
           <input type="text" id="f_mun_oc" placeholder="Digite para buscar — UF preenchida automaticamente" data-caps autocomplete="off">
           <div class="ac-drop" id="f_mun_oc-drop"></div>
         </div>
       </div>
       <div class="fld" style="max-width:100px">
-        <label>UF <span class="cn">[C.40]</span> <span style="font-size:9px;font-weight:500;color:#27ae60;text-transform:none">← auto</span></label>
+        <label>UF</label>
         <select id="f_uf_oc"></select>
       </div>
       <input type="hidden" id="f_ibge_oc">
       <div class="fld">
-        <label>Bairro <span class="cn">[C.43]</span></label>
+        <label>Bairro</label>
         <input type="text" id="f_bairro_oc" data-caps>
       </div>
     </div>
     <div class="row">
       <div class="fld col-2">
-        <label>Logradouro <span class="cn">[C.44]</span></label>
+        <label>Logradouro</label>
         <input type="text" id="f_logr_oc" data-caps>
       </div>
       <div class="fld" style="max-width:100px">
-        <label>Número <span class="cn">[C.45]</span></label>
+        <label>Número</label>
         <input type="text" id="f_num_oc">
       </div>
       <div class="fld">
-        <label>Hora <span class="cn">[C.51]</span></label>
+        <label>Hora</label>
         <input type="time" id="f_hora_oc">
       </div>
     </div>
     <div class="row">
       <div class="fld">
-        <label>Zona <span class="cn">[C.50]</span></label>
+        <label>Zona</label>
         <div class="pills" id="grp_zona_oc" data-hidden="f_zona_oc">
           <label class="pill" data-val="1"><input type="radio" name="zona_oc" value="1"> 1 — Urbana</label>
           <label class="pill" data-val="2"><input type="radio" name="zona_oc" value="2"> 2 — Rural</label>
@@ -1195,13 +1203,13 @@ function toggleDarkMode(){
     </div>
     <div id="box_local_outro" style="display:none;margin-bottom:14px">
       <div class="fld">
-        <label>Especificar "Outro" local <span class="cn">[C.52]</span></label>
+        <label>Especificar "Outro" local</label>
         <input type="text" id="f_local_outro" data-caps placeholder="Descreva o local de ocorrência">
       </div>
     </div>
     <div class="row">
       <div class="fld">
-        <label>Ocorreu outras vezes? <span class="cn">[C.53]</span></label>
+        <label>Ocorreu outras vezes?</label>
         <div class="pills" id="grp_outr_vez">
           <label class="pill" data-val="1"><input type="radio" name="outr_vez" value="1"> Sim</label>
           <label class="pill" data-val="2"><input type="radio" name="outr_vez" value="2"> Não</label>
@@ -1277,7 +1285,7 @@ function toggleDarkMode(){
     </div>
     <div id="box_tipo_viol_outros" style="display:none;margin-bottom:14px">
       <div class="fld">
-        <label>Especificar "Outros" tipos <span class="cn">[C.56]</span></label>
+        <label>Especificar "Outros" tipos</label>
         <input type="text" id="f_tipo_viol_outros" data-caps placeholder="Descreva outros tipos de violência">
       </div>
     </div>
@@ -1297,7 +1305,7 @@ function toggleDarkMode(){
     </div>
     <div id="box_meio_agr_outro" style="display:none;margin-bottom:14px">
       <div class="fld">
-        <label>Especificar "Outro" meio <span class="cn">[C.57]</span></label>
+        <label>Especificar "Outro" meio</label>
         <input type="text" id="f_meio_agr_outro" data-caps placeholder="Descreva o outro meio de agressão">
       </div>
     </div>
@@ -1314,7 +1322,7 @@ function toggleDarkMode(){
       </div>
       <div id="box_viol_sex_outros" style="display:none;margin-bottom:14px">
         <div class="fld">
-          <label>Especificar "Outros" tipos sexuais <span class="cn">[C.58]</span></label>
+          <label>Especificar "Outros" tipos sexuais</label>
           <input type="text" id="f_viol_sex_outros" data-caps placeholder="Descreva outros tipos de violência sexual">
         </div>
       </div>
@@ -1367,7 +1375,7 @@ function toggleDarkMode(){
     </div>
     <div id="box_vinc_outro" style="display:none;margin-bottom:14px">
       <div class="fld">
-        <label>Especificar "Outros" vínculo <span class="cn">[C.61]</span></label>
+        <label>Especificar "Outros" vínculo</label>
         <input type="text" id="f_vinc_outro" data-caps placeholder="Descreva o outro vínculo/parentesco">
       </div>
     </div>
@@ -3236,13 +3244,16 @@ function _unitSetUI(locked){
 
 function toggleUnitLock(){
   var g=document.getElementById('lock-grp-notif'); if(!g) return;
+  var warn=document.getElementById('lock-tipo-un-warn');
   if(g.classList.contains('locked')){
     _unitSetUI(false); localStorage.removeItem(UNIT_KEY);
+    if(warn) warn.style.display='none';
   } else {
     var d={};
     UNIT_IDS.forEach(function(id){var el=document.getElementById(id);if(el)d[id]=el.value;});
     localStorage.setItem(UNIT_KEY,JSON.stringify(d));
     _unitSetUI(true);
+    if(warn) warn.style.display='none';
     showToast('\uD83D\uDD12 Unidade notificadora salva neste computador','t-ok',3500);
   }
 }
@@ -3256,7 +3267,16 @@ function toggleUnitLock(){
       el.value=d[id];
       el.dispatchEvent(new Event('change',{bubbles:true}));
     });
-    setTimeout(function(){_unitSetUI(true);},80);
+    // Se o tipo de unidade nao foi salvo (dados vieram de outra ficha),
+    // deixa desbloqueado e exibe aviso para o usuario preencher o campo extra.
+    var tipoEl=document.getElementById('f_tipo_un');
+    var tipoSalvo=d['f_tipo_un']&&d['f_tipo_un']!=='';
+    if(!tipoSalvo){
+      var warn=document.getElementById('lock-tipo-un-warn');
+      if(warn) warn.style.display='flex';
+    } else {
+      setTimeout(function(){_unitSetUI(true);},80);
+    }
   }catch(e){localStorage.removeItem(UNIT_KEY);}
 })();
 
