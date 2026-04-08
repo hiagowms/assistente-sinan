@@ -18,13 +18,22 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f0f4f
 
 /* HEADER */
 #hdr{background:linear-gradient(135deg,#0d2c4a 0%,#1a5276 55%,#1a6b45 100%);padding:28px 40px;position:relative;overflow:hidden}
+#hdr::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 120% at 110% 50%,rgba(255,255,255,.035) 0%,transparent 65%);pointer-events:none}
 #hdr::after{content:'';position:absolute;top:-60%;right:-5%;width:600px;height:600px;background:radial-gradient(circle,rgba(255,255,255,.04) 0%,transparent 65%);pointer-events:none}
-.hdr-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:24px}
-.hdr-logo{height:54px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))}
+.hdr-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:20px}
+/* Logos group */
+.hdr-logos{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.hdr-logo{height:52px;object-fit:contain;filter:drop-shadow(0 2px 10px rgba(0,0,0,.35))}
+.hdr-logo-sep{display:flex;flex-direction:column;align-items:center;gap:3px;flex-shrink:0}
+.hdr-logo-sep-line{width:1px;height:18px;background:rgba(255,255,255,.22)}
+.hdr-logo-sep-dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.3)}
 .hdr-vline{width:1px;height:46px;background:rgba(255,255,255,.22);flex-shrink:0}
 .hdr-text h1{color:#fff;font-size:24px;font-weight:800;letter-spacing:-.3px}
 .hdr-text p{color:rgba(255,255,255,.7);font-size:13px;margin-top:4px;line-height:1.5}
-.pet-chip{display:inline-flex;align-items:center;gap:6px;margin-top:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.8);font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;letter-spacing:.3px}
+/* Chips row */
+.hdr-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.pet-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.8);font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;letter-spacing:.3px}
+.cerest-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(26,107,69,.25);border:1px solid rgba(74,222,128,.25);color:rgba(255,255,255,.8);font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;letter-spacing:.3px}
 
 /* DISCLAIMER */
 .disclaimer{background:#fffbeb;border-bottom:1px solid #fcd34d}
@@ -156,6 +165,12 @@ footer{background:#fff;border-top:1px solid #dce8f0;padding:22px 40px;text-align
 footer p{font-size:12px;color:#8aabb8;line-height:1.8}
 footer strong{color:#4a7a9b}
 footer a{color:#1a5276;text-decoration:none}
+.footer-logos{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:12px}
+/* White logos: invert in light mode (dark bg in header is fine, but footer is white) */
+.footer-logo{height:28px;display:block;filter:invert(1) opacity(.25)}
+.footer-logo-sep{width:1px;height:22px;background:rgba(74,122,155,.18)}
+[data-theme="dark"] .footer-logo{filter:invert(0) opacity(.3)}
+[data-theme="dark"] .footer-logo-sep{background:rgba(255,255,255,.12)}
 
 /*==============================================================
   MOBILE RESPONSIVE — @media max-width:768px
@@ -165,12 +180,15 @@ footer a{color:#1a5276;text-decoration:none}
 
   /* ── HEADER ────────────────────────────────────────────── */
   #hdr{padding:16px 18px}
-  .hdr-inner{gap:12px}
-  .hdr-logo{height:36px}
+  .hdr-inner{gap:10px}
+  .hdr-logos{gap:10px}
+  .hdr-logo{height:34px}
+  .hdr-logo-sep{display:none}
   .hdr-vline{display:none}
   .hdr-text h1{font-size:17px;letter-spacing:-.2px}
   .hdr-text p{font-size:12px;margin-top:3px}
-  .pet-chip{font-size:10px;padding:3px 10px;margin-top:6px}
+  .hdr-chips{gap:5px;margin-top:6px}
+  .pet-chip,.cerest-chip{font-size:10px;padding:3px 10px}
 
   /* ── DISCLAIMER ─────────────────────────────────────────── */
   .disclaimer-inner{padding:11px 18px;font-size:12px;gap:9px}
@@ -355,12 +373,23 @@ function toggleDarkMode(){
 
 <header id="hdr">
   <div class="hdr-inner">
-    <img class="hdr-logo" src="assets/img/pet-saude-logo-png.png" alt="PET Saúde Digital">
+    <div class="hdr-logos">
+      <img class="hdr-logo" src="assets/img/pet-logo-branca.png" alt="PET-Saúde I&SD">
+      <div class="hdr-logo-sep">
+        <div class="hdr-logo-sep-line"></div>
+        <div class="hdr-logo-sep-dot"></div>
+        <div class="hdr-logo-sep-line"></div>
+      </div>
+      <img class="hdr-logo" src="assets/img/cerest-logo-branca.png" alt="CEREST Botucatu">
+    </div>
     <div class="hdr-vline"></div>
     <div class="hdr-text">
       <h1>Assistente SINAN</h1>
       <p>Apoio ao preenchimento das fichas de notificação compulsória de interesse em Saúde do Trabalhador</p>
-      <span class="pet-chip">PET-Saúde/I&SD — Programa de Educação pelo Trabalho para a Saúde: Informação e Saúde Digital</span>
+      <div class="hdr-chips">
+        <span class="pet-chip">PET-Saúde/I&SD — Informação e Saúde Digital</span>
+        <span class="cerest-chip">CEREST Botucatu</span>
+      </div>
     </div>
     <button class="dm-toggle" id="dm-toggle" onclick="toggleDarkMode()" title="Alternar modo escuro">
       <svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
@@ -735,8 +764,12 @@ function toggleDarkMode(){
 </main>
 
 <footer>
-  <img src="assets/img/pet-logo-branca.png" alt="PET" style="height:32px;opacity:.4;margin-bottom:10px;display:block;margin-left:auto;margin-right:auto">
-  <p><strong>Assistente SINAN</strong> — PET-Saúde/I&SD — Programa de Educação pelo Trabalho para a Saúde: Informação e Saúde Digital</p>
+  <div class="footer-logos">
+    <img src="assets/img/pet-logo-branca.png" alt="PET-Saúde I&SD" class="footer-logo">
+    <div class="footer-logo-sep"></div>
+    <img src="assets/img/cerest-logo-branca.png" alt="CEREST Botucatu" class="footer-logo">
+  </div>
+  <p><strong>Assistente SINAN</strong> — Desenvolvido no âmbito do <strong>PET-Saúde/I&SD</strong> em parceria com o <strong>CEREST Botucatu</strong></p>
   <p>Ferramenta educacional sem vínculo oficial com o Ministério da Saúde · Base legal: <a href="#" target="_blank">Portaria GM/MS nº 10.175/2026</a></p>
   <p style="margin-top:4px;font-size:11px">Desenvolvido em formato HTML/CSS/JS puro para uso offline em navegador</p>
 </footer>
@@ -818,7 +851,7 @@ function toggleDarkMode(){
 
     <div class="drawer-section">
       <h3>Iniciativa</h3>
-      <p>Projeto desenvolvido no âmbito do <strong>PET-Saúde/I&SD — Programa de Educação pelo Trabalho para a Saúde: Informação e Saúde Digital</strong>, voltado à integração ensino-serviço-comunidade com uso de tecnologias digitais aplicadas ao SUS.</p>
+      <p>Projeto desenvolvido no âmbito do <strong>PET-Saúde/I&SD — Programa de Educação pelo Trabalho para a Saúde: Informação e Saúde Digital</strong> em parceria com o <strong>CEREST Botucatu — Centro de Referência em Saúde do Trabalhador</strong></p>
     </div>
 
   </div>

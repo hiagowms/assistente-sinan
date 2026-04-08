@@ -783,14 +783,14 @@ function toggleDarkMode(){
 
     <div class="row row-full">
       <div class="fld">
-        <label>Nome Completo do Paciente <span class="req-star">⭐</span><span class="cn">[Campo 10]</span></label>
+        <label>Nome Completo do Paciente <span class="req-star">⭐</span></label>
         <input type="text" id="f_nome" placeholder="Nome completo — ou IGNORADO se desconhecido" data-caps data-ess data-label="Nome do paciente">
       </div>
     </div>
 
     <div class="row">
       <div class="fld">
-        <label>Data de Nascimento <span class="cn">[Campo 11]</span></label>
+        <label>Data de Nascimento</label>
         <input type="date" id="f_nasc">
       </div>
       <div class="fld" style="max-width:120px">
@@ -808,7 +808,7 @@ function toggleDarkMode(){
         <input type="hidden" id="f_idade_un">
       </div>
       <div class="fld">
-        <label>Sexo <span class="req-star">⭐</span><span class="cn">[Campo 13]</span></label>
+        <label>Sexo <span class="req-star">⭐</span></label>
         <div class="pills" id="grp_sexo">
           <label class="pill" data-val="M"><input type="radio" name="sexo" value="M" onchange="onSexoChange()"> Masculino</label>
           <label class="pill" data-val="F"><input type="radio" name="sexo" value="F" onchange="onSexoChange()"> Feminino</label>
@@ -819,7 +819,7 @@ function toggleDarkMode(){
 
     <div id="row_gest" style="display:none" class="row">
       <div class="fld col-2">
-        <label>Gestante <span class="cn">[Campo 14]</span></label>
+        <label>Gestante</label>
         <div class="pills" id="grp_gest" data-hidden="f_gest">
           <label class="pill" data-val="1"><input type="radio" name="gest" value="1"> 1º Trim</label>
           <label class="pill" data-val="2"><input type="radio" name="gest" value="2"> 2º Trim</label>
@@ -835,7 +835,7 @@ function toggleDarkMode(){
 
     <div class="row">
       <div class="fld">
-        <label>Raça/Cor <span class="req-star">⭐</span><span class="cn">[Campo 15]</span></label>
+        <label>Raça/Cor <span class="req-star">⭐</span></label>
         <div class="pills" id="grp_raca" data-hidden="f_raca">
           <label class="pill" data-val="1"><input type="radio" name="raca" value="1"> Branca</label>
           <label class="pill" data-val="2"><input type="radio" name="raca" value="2"> Preta</label>
@@ -847,7 +847,7 @@ function toggleDarkMode(){
         <input type="hidden" id="f_raca" data-ess data-label="Raça/Cor">
       </div>
       <div class="fld">
-        <label>Escolaridade <span class="cn">[Campo 16]</span></label>
+        <label>Escolaridade</label>
         <select id="f_escol">
           <option value="">— Selecione —</option>
           <option value="0">0 — Analfabeto</option>
@@ -864,14 +864,14 @@ function toggleDarkMode(){
         </select>
       </div>
       <div class="fld">
-        <label>Nº Cartão SUS (CNS) <span class="cn">[Campo 17]</span></label>
+        <label>Nº Cartão SUS (CNS)</label>
         <input type="text" id="f_sus" maxlength="15" placeholder="000000000000000">
       </div>
     </div>
 
     <div class="row row-full">
       <div class="fld">
-        <label>Nome da Mãe <span class="cn">[Campo 18]</span> <span style="font-weight:400;color:#9ca3af">(sem abreviações)</span></label>
+        <label>Nome da Mãe <span style="font-weight:400;color:#9ca3af">(sem abreviações)</span></label>
         <input type="text" id="f_mae" placeholder="Nome completo da mãe — se desconhecido, IGNORADO" data-caps>
       </div>
     </div>
@@ -894,7 +894,7 @@ function toggleDarkMode(){
   <div class="sec-body">
     <div class="row">
       <div class="fld col-2">
-        <label>Município <span class="req-star">⭐</span><span class="cn">[Campo 20]</span></label>
+        <label>Município <span class="req-star">⭐</span></label>
         <div class="ac-wrap">
           <input type="text" id="f_mun_res" data-ess data-label="Município de residência" placeholder="Digite para buscar — UF preenchida automaticamente" data-caps autocomplete="off">
           <div class="ac-drop" id="f_mun_res-drop"></div>
@@ -2331,7 +2331,7 @@ function getMissingEssentials(){
       el.classList.remove('error');
     }
   });
-  var groupLabels = {sexo:'Sexo [Campo 13]'};
+  var groupLabels = {sexo:'Sexo'};
   ESS_GROUPS.forEach(function(name){
     if(!groupHasCheck(name)) missing.push(groupLabels[name]||name);
   });
