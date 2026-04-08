@@ -1,0 +1,3154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SINAN — Acidente de Trabalho | Assistente PET Saúde Digital</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XBCCJ6GTG6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XBCCJ6GTG6');
+</script>
+<style>
+/*==============================================================
+  RESET
+==============================================================*/
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f6;color:#1f2937;min-height:100vh;font-size:15px;line-height:1.5}
+
+/*==============================================================
+  STICKY HEADER + PROGRESS GAMIFICATION
+==============================================================*/
+#hdr{position:sticky;top:0;z-index:300;background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 55%,#1e40af 100%);box-shadow:0 4px 20px rgba(0,0,0,.28)}
+.hdr-row{display:flex;align-items:center;gap:12px;padding:10px 28px;max-width:1180px;margin:0 auto}
+.hdr-logo{height:38px;object-fit:contain}
+.hdr-vline{width:1px;height:32px;background:rgba(255,255,255,.2);flex-shrink:0}
+.hdr-title{flex:1;min-width:0;overflow:hidden}
+.hdr-title h1{color:#fff;font-size:16px;font-weight:700;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hdr-title p{color:rgba(255,255,255,.65);font-size:13px;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* PROGRESS DISPLAY */
+.hdr-progress{display:flex;align-items:center;gap:16px;flex-shrink:0}
+.prog-ring-wrap{position:relative;width:72px;height:72px;flex-shrink:0}
+.prog-ring-wrap svg{transform:rotate(-90deg)}
+.prog-ring-bg{fill:none;stroke:rgba(255,255,255,.15);stroke-width:5}
+.prog-ring-fill{fill:none;stroke:#2ecc71;stroke-width:5;stroke-linecap:round;stroke-dasharray:182;stroke-dashoffset:182;transition:stroke-dashoffset .5s ease,stroke .5s ease}
+.prog-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.prog-pct{font-size:16px;font-weight:900;color:#fff;line-height:1}
+.prog-meta{text-align:right}
+.prog-meta .prog-status{font-size:13px;font-weight:700;color:rgba(255,255,255,.95);line-height:1.3}
+.prog-meta .prog-count{font-size:12px;color:rgba(255,255,255,.65);margin-top:3px}
+/* GLOBAL PROGRESS BAR STRIP */
+#prog-bar-strip{height:6px;background:rgba(255,255,255,.1);overflow:hidden;transition:background .3s}
+#prog-bar-fill{height:100%;width:0%;background:#2ecc71;transition:width .5s ease,background .5s ease;border-radius:0 4px 4px 0}
+
+/* GERAR PDF BUTTON */
+.hdr-btn{background:linear-gradient(135deg,#27ae60,#2ecc71);color:#fff;border:none;padding:12px 26px;border-radius:30px;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.hdr-btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.hdr-btn:disabled{background:#5a8870;box-shadow:none;cursor:not-allowed;transform:none}
+.hdr-back{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.85);font-size:13px;font-weight:600;text-decoration:none;padding:8px 16px;border-radius:30px;border:1.5px solid rgba(255,255,255,.3);background:rgba(255,255,255,.07);transition:all .2s;white-space:nowrap;flex-shrink:0}
+.hdr-back:hover{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.55);transform:translateX(-2px)}
+
+/* TOOLS BAR */
+#tools-bar{background:#f1f5f9;border-bottom:1px solid #dde3ec}
+.tools-inner{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 28px;max-width:1180px;margin:0 auto;flex-wrap:wrap}
+.tools-label{font-size:10.5px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.7px;margin-right:4px;flex-shrink:0}
+.tb-group{display:flex;align-items:center;gap:2px}
+.tb-sep{width:1px;height:16px;background:#cbd5e1;margin:0 6px;flex-shrink:0}
+.tb-btn{background:transparent;color:#475569;border:1px solid transparent;padding:5px 11px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .15s;line-height:1.4;display:flex;align-items:center;gap:6px}
+.tb-btn svg{flex-shrink:0;opacity:.7;transition:opacity .15s}
+.tb-btn:hover{background:#fff;color:#1e3a8a;border-color:#cbd5e1;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.tb-btn:hover svg{opacity:1}
+.tb-danger{color:#b91c1c}
+.tb-danger svg{color:#dc2626}
+.tb-danger:hover{background:#fff5f5;color:#991b1b;border-color:#fecaca;box-shadow:0 1px 3px rgba(220,38,38,.1)}
+.tb-dd{position:relative}
+.tb-menu{position:absolute;top:calc(100% + 6px);left:0;background:#fff;border:1.5px solid #e5e7eb;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.18);z-index:600;min-width:280px;overflow:hidden;display:none}
+.tb-menu.open{display:block}
+.tb-menu-hdr{padding:8px 16px 4px;font-size:10px;font-weight:800;color:#9ca3af;text-transform:uppercase;letter-spacing:.6px;background:#f9fafb;border-bottom:1px solid #f3f4f6}
+.tb-mi{padding:10px 16px;font-size:13px;color:#1f2937;cursor:pointer;border-bottom:1px solid #f3f4f6;line-height:1.4;transition:background .1s}
+.tb-mi:last-child{border-bottom:none}
+.tb-mi:hover{background:#eff6ff;color:#1e40af}
+.tb-mi-name{font-weight:700;display:block}
+.tb-mi-sub{font-size:11px;color:#6b7280;margin-top:1px}
+/* CONFIRM MODAL */
+#confirm-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9000;align-items:center;justify-content:center}
+#confirm-modal.show{display:flex}
+.cm-box{background:#fff;border-radius:16px;padding:32px;max-width:360px;width:92%;box-shadow:0 24px 64px rgba(0,0,0,.3);text-align:center}
+.cm-icon{width:48px;height:48px;background:#fee2e2;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;color:#dc2626}
+.cm-box h3{font-size:17px;font-weight:800;color:#1f2937;margin-bottom:8px}
+.cm-box p{font-size:13px;color:#6b7280;line-height:1.6;margin-bottom:22px}
+.cm-actions{display:flex;gap:10px;justify-content:center}
+.cm-cancel{background:#f3f4f6;color:#374151;border:none;padding:10px 22px;border-radius:30px;font-size:14px;font-weight:600;cursor:pointer;transition:background .15s}
+.cm-cancel:hover{background:#e5e7eb}
+.cm-ok{background:linear-gradient(135deg,#dc2626,#ef4444);color:#fff;border:none;padding:10px 22px;border-radius:30px;font-size:14px;font-weight:600;cursor:pointer;transition:opacity .15s}
+.cm-ok:hover{opacity:.88}
+
+/*==============================================================
+  LAYOUT
+==============================================================*/
+.wrapper{max-width:1180px;margin:0 auto;padding:20px 20px 60px}
+
+/* DISCLAIMER */
+.banner-warn{background:#fff3cd;border:1px solid #ffd047;border-radius:10px;padding:14px 20px;margin-bottom:20px;display:flex;gap:14px;align-items:flex-start;font-size:14px;color:#7d5a00;line-height:1.7}
+.banner-warn strong{color:#5c4200}
+
+/* INTRO */
+.intro{background:#ffffff;border-radius:14px;border:1px solid #e5e7eb;padding:20px 24px;margin-bottom:24px;display:flex;gap:18px;align-items:flex-start;font-size:14px;color:#4b5563;line-height:1.7;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.intro h2{font-size:16px;font-weight:800;color:#1f2937;margin-bottom:8px}
+.intro a{color:#2563eb}
+
+/*==============================================================
+  SECTION CARDS
+==============================================================*/
+.sec{background:#ffffff;border-radius:14px;border:1px solid #e5e7eb;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:20px;overflow:hidden}
+.sec-hdr{display:flex;align-items:center;gap:14px;padding:16px 22px 14px;border-bottom:2px solid #f3f4f6;border-left:5px solid #d1d5db;transition:border-color .4s}
+.sec.done .sec-hdr{border-left-color:#27ae60;background:linear-gradient(90deg,rgba(39,174,96,.04) 0%,transparent 60%)}
+.sec.partial .sec-hdr{border-left-color:#f39c12;background:linear-gradient(90deg,rgba(243,156,18,.04) 0%,transparent 60%)}
+.sec-num{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;background:#6b7280;transition:background .4s}
+.sec.done .sec-num{background:#27ae60}
+.sec.partial .sec-num{background:#f39c12}
+.sec-info{flex:1}
+.sec-info h3{font-size:16px;font-weight:700;color:#1f2937}
+.sec-info p{font-size:13px;color:#9ca3af;margin-top:3px}
+.sec-badge{font-size:13px;font-weight:700;padding:5px 12px;border-radius:20px;letter-spacing:.3px;white-space:nowrap;transition:all .4s}
+.badge-empty{background:#f3f4f6;color:#6b7280}
+.badge-partial{background:#fef9e7;color:#c07000}
+.badge-done{background:#e8f5e9;color:#1e8449}
+
+.sec-body{padding:20px 22px 22px}
+
+/*==============================================================
+  FORM ELEMENTS
+==============================================================*/
+.row{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-bottom:14px}
+.row.row-wide{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.row.row-full{grid-template-columns:1fr}
+.col-2{grid-column:span 2}
+.col-3{grid-column:span 3}
+
+.fld{display:flex;flex-direction:column;gap:5px}
+.fld label{font-size:13px;font-weight:700;color:#374151;line-height:1.4;white-space:nowrap}
+.fld label .req{color:#c0392b;font-size:15px;line-height:1}
+.fld label .cn{font-size:11px;color:#9ca3af;font-weight:600;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;vertical-align:middle}
+.fld label .cn .tip-wrap{margin-left:0;vertical-align:unset}
+.fld input,.fld select,.fld textarea{padding:11px 14px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:15px;font-family:inherit;background:#f9fafb;color:#1f2937;outline:none;transition:border-color .15s,box-shadow .15s;width:100%}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.fld input.filled{border-color:#27ae60}
+.fld input.error,.fld select.error{border-color:#e74c3c!important;box-shadow:0 0 0 3px rgba(231,76,60,.1)!important}
+.fld select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239ca3af'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;cursor:pointer}
+.fld textarea{resize:vertical;min-height:80px}
+
+/* Sublabel dentro de seção */
+.sublabel{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:#4b5563;padding:16px 0 10px;border-bottom:1px solid #e5e7eb;margin-bottom:14px;display:flex;align-items:center;gap:6px}
+.sublabel .req-mark{color:#c0392b;font-size:14px;font-weight:700}
+
+/* Botão copiar data */
+.btn-copy-date{padding:9px 14px;background:#eff6ff;border:1.5px solid #e5e7eb;border-radius:8px;font-size:12px;font-weight:700;color:#2563eb;cursor:pointer;white-space:nowrap;transition:background .15s,border-color .15s}
+.btn-copy-date:hover{background:#dbeafe;border-color:#93c5fd}
+
+/*==============================================================
+  PILLS (radio / checkbox)
+==============================================================*/
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:2px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:8px;border:1.5px solid #e5e7eb;cursor:pointer;font-size:14px;font-weight:600;color:#374151;background:#ffffff;transition:all .15s;user-select:none}
+.pill:hover{border-color:#2563eb;background:#eff6ff}
+.pill input{position:absolute;opacity:0;pointer-events:none;width:0;height:0}
+.pill.checked{border-color:#2563eb;background:#eff6ff;color:#1e40af}
+.pill.checked-danger{border-color:#e74c3c;background:#fdf2f2;color:#c0392b}
+
+/*==============================================================
+  INFO / WARN / DANGER BOXES
+==============================================================*/
+.info{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:12px 16px;font-size:14px;color:#1e40af;line-height:1.7;margin-bottom:14px;display:flex;gap:12px}
+.info .ico{flex-shrink:0;font-size:18px;line-height:1.4}
+.warn{background:#fef9e7;border:1px solid #f9e79f;border-radius:8px;padding:12px 16px;font-size:14px;color:#7d6608;line-height:1.7;margin-bottom:14px;display:flex;gap:12px}
+.danger-alert{background:#fdf2f2;border:1.5px solid #f5b7b1;border-radius:8px;padding:14px 16px;font-size:14px;color:#922b21;line-height:1.7;margin-bottom:14px;display:none;gap:12px}
+.danger-alert .ico{flex-shrink:0;font-size:18px;line-height:1.3}
+
+/*==============================================================
+  TOAST
+==============================================================*/
+#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(10px);padding:12px 24px;border-radius:30px;font-size:13px;font-weight:700;opacity:0;transition:all .35s;z-index:800;pointer-events:none;white-space:nowrap;box-shadow:0 8px 28px rgba(0,0,0,.25);background:#1f2937;color:#fff}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#toast.t-ok{background:#1e8449}
+#toast.t-warn{background:#c07000}
+#toast.t-err{background:#c0392b}
+#toast.t-mile{background:linear-gradient(135deg,#2563eb,#1e8449)}
+
+/*==============================================================
+  VALIDATION MODAL
+==============================================================*/
+.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:900;align-items:center;justify-content:center}
+.ov.show{display:flex}
+.modal{background:#ffffff;border-radius:18px;padding:28px 32px;max-width:460px;width:94%;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal-ico{font-size:40px;text-align:center;margin-bottom:10px}
+.modal h2{font-size:17px;font-weight:800;color:#1f2937;margin-bottom:8px;text-align:center}
+.modal p{font-size:13px;color:#6b7280;line-height:1.6;text-align:center}
+.err-list{margin-top:14px;display:flex;flex-direction:column;gap:5px;max-height:280px;overflow-y:auto}
+.err-item{background:#fef3f2;border:1px solid #f5b7b1;border-radius:6px;padding:7px 12px;font-size:12px;color:#922b21}
+.modal-actions{display:flex;justify-content:center;gap:10px;margin-top:22px}
+.mbtn{padding:10px 28px;border-radius:30px;font-size:13px;font-weight:700;cursor:pointer;border:none}
+.mbtn-p{background:linear-gradient(135deg,#2563eb,#1e8449);color:#fff}
+.mbtn-s{background:#f3f4f6;color:#6b7280}
+
+/*==============================================================
+  AUTOCOMPLETE (municipio / CID10)
+==============================================================*/
+.ac-wrap{position:relative}
+.ac-drop{position:absolute;top:100%;left:0;right:0;z-index:500;background:#ffffff;border:1.5px solid #2563eb;border-top:none;border-radius:0 0 8px 8px;box-shadow:0 6px 20px rgba(0,0,0,.15);max-height:220px;overflow-y:auto;display:none}
+.ac-drop.show{display:block}
+.ac-item{padding:10px 14px;font-size:14px;cursor:pointer;border-bottom:1px solid #f3f4f6;line-height:1.5;overflow:hidden;text-overflow:ellipsis}
+.ac-item.ac-synonym{background:#fef9e7;border-left:3px solid #f39c12}
+.ac-item:last-child{border-bottom:none}
+.ac-item:hover,.ac-item.focused{background:#eff6ff}
+.ac-item b{color:#2563eb}
+.fld input[readonly]{background:#f3f4f6;color:#6b7280;cursor:default}
+
+/* ⭐ CAMPO ESSENCIAL — discreto */
+.req-star{color:#d97706;font-size:10px;line-height:1;vertical-align:middle;margin-left:2px;opacity:.7;cursor:help;position:relative}
+.sublabel .req-star{font-size:10px;margin-left:3px}
+.req-star::after{content:'Campo essencial';position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#1e293b;color:#cbd5e1;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;z-index:9999;box-shadow:0 3px 12px rgba(0,0,0,.3)}
+.req-star:hover::after,.req-star:focus::after{opacity:1}
+.fld label .req{display:none!important}
+.sublabel .req-mark{display:none!important}
+
+/* NÍVEL DE PROGRESSO */
+.prog-level{font-size:11px;font-weight:800;padding:3px 10px;border-radius:12px;background:rgba(255,255,255,.13);color:rgba(255,255,255,.85);white-space:nowrap;transition:all .5s;letter-spacing:.3px;margin-top:4px;display:inline-block}
+
+/*==============================================================
+  PARTES ATINGIDAS — seletor visual
+==============================================================*/
+.parte-grupo{margin-bottom:12px;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;background:#fff}
+.parte-grupo-titulo{font-size:12px;font-weight:800;color:#1e40af;background:#eff6ff;padding:7px 12px;border-bottom:1px solid #e5e7eb;letter-spacing:.3px;text-transform:uppercase}
+.parte-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:4px;padding:8px 10px}
+.parte-pill{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:6px;border:1.5px solid transparent;cursor:pointer;font-size:13px;font-weight:500;color:#374151;background:#f9fafb;transition:all .15s;user-select:none}
+.parte-pill:hover{border-color:#2563eb;background:#eff6ff}
+.parte-pill input{position:absolute;opacity:0;pointer-events:none;width:0;height:0}
+.parte-pill.checked{border-color:#2563eb;background:#dbeafe;color:#1e40af;font-weight:600}
+.parte-pill.disabled{opacity:.4;pointer-events:none;cursor:not-allowed}
+.parte-pill.disabled:hover{border-color:transparent;background:#f9fafb}
+.parte-display{background:#f3f4f6;color:#6b7280}
+
+/* TOOLTIP DE PROPÓSITO (ícone i) */
+.tip-wrap{position:relative;display:inline-flex;align-items:center;margin-left:4px;vertical-align:middle}
+.tip-btn{width:18px;height:18px;border-radius:50%;background:#0056b3;border:none;font-size:11px;font-weight:800;color:#fff;cursor:pointer;padding:0;display:inline-flex;align-items:center;justify-content:center;line-height:1;flex-shrink:0;transition:background .15s,box-shadow .15s;font-style:italic}
+.tip-btn:hover,.tip-btn.open{background:#003d82;box-shadow:0 0 0 3px rgba(0,86,179,.22)}
+
+.tip-pop{
+  display:none;
+  position:fixed;
+  background:#1e293b;color:#cbd5e1;
+  font-size:12px;font-weight:400;line-height:1.6;
+  padding:12px 14px;border-radius:10px;
+  box-shadow:0 6px 28px rgba(0,0,0,.45);
+  z-index:9999;text-align:left;
+  pointer-events:none;font-style:normal;
+  white-space:normal;
+  --tip-arrow-left:50%
+}
+.tip-pop::after{
+  content:'';position:absolute;
+  top:100%;
+  left:var(--tip-arrow-left);
+  transform:translateX(-50%);
+  border:7px solid transparent;
+  border-top-color:#1e293b
+}
+.tip-pop[data-arrow-below="0"]::after{
+  top:auto;bottom:100%;
+  border-top-color:transparent;
+  border-bottom-color:#1e293b
+}
+.tip-pop b{color:#93c5fd;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.4px}
+.tip-r{display:block}
+.tip-r+.tip-r{margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.1)}
+
+/* ANIMAÇÃO 80% */
+@keyframes celebrate80{0%{transform:scale(1)}25%{transform:scale(1.18)}60%{transform:scale(.93)}100%{transform:scale(1)}}
+.prog-ring-wrap.celebrate{animation:celebrate80 .55s ease}
+
+/*==============================================================
+  MOBILE BOTTOM BAR
+==============================================================*/
+#mob-bottom{display:none}
+
+/* BOTTOM SHEET MOBILE */
+#pac-mob-sheet{display:none;position:fixed;inset:0;z-index:2000}
+#pac-mob-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.45)}
+#pac-mob-panel{position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:18px 18px 0 0;max-height:65vh;overflow-y:auto;box-shadow:0 -6px 32px rgba(0,0,0,.22);-webkit-overflow-scrolling:touch}
+#pac-mob-panel .tb-menu-hdr{padding:14px 18px 6px;font-size:11px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:.7px;background:#f9fafb;border-bottom:1px solid #f3f4f6;position:sticky;top:0;z-index:1}
+#pac-mob-panel .tb-mi{padding:13px 18px;font-size:14px;color:#1f2937;cursor:pointer;border-bottom:1px solid #f3f4f6;line-height:1.4;transition:background .1s}
+#pac-mob-panel .tb-mi:last-child{border-bottom:none}
+#pac-mob-panel .tb-mi:hover{background:#eff6ff;color:#1e40af}
+#pac-mob-panel .tb-mi-name{font-weight:700;display:block}
+#pac-mob-panel .tb-mi-sub{font-size:12px;color:#6b7280;margin-top:2px}
+#pac-mob-sheet.show{display:block}
+
+/*==============================================================
+  MOBILE RESPONSIVE
+==============================================================*/
+@media(max-width:768px){
+  .hdr-row{padding:8px 14px;gap:8px;flex-wrap:nowrap}
+  .hdr-logo{height:26px}
+  .hdr-vline{display:none}
+  .hdr-title h1{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px}
+  .hdr-title p{display:none}
+  .hdr-progress{gap:8px}
+  .prog-ring-wrap{width:42px;height:42px}
+  .prog-ring-wrap svg{width:42px;height:42px}
+  .prog-pct{font-size:11px;font-weight:800}
+  .prog-meta{display:none}
+  .hdr-btn{display:none}
+  .hdr-back{display:none}
+  .tools-inner{padding:5px 10px;gap:3px;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .tools-inner::-webkit-scrollbar{display:none}
+  .tools-label{display:none}
+  .tb-sep{display:none}
+  .tb-group{gap:3px}
+  .tb-btn{padding:7px 10px;font-size:12px;min-height:36px;white-space:nowrap}
+  .tb-menu{display:none!important}
+  .wrapper{padding:12px 12px 76px}
+  .sec{border-radius:10px;margin-bottom:10px}
+  .sec-hdr{padding:12px 14px;gap:10px}
+  .sec-body{padding:14px 12px 16px}
+  .sec-num{width:28px;height:28px;font-size:12px}
+  .sec-info h3{font-size:14px}
+  .sec-info p{font-size:11px}
+  .sec-badge{font-size:11px;padding:3px 8px}
+  .row{grid-template-columns:1fr!important;gap:10px;margin-bottom:10px}
+  .row.row-wide{grid-template-columns:1fr!important}
+  .col-2,.col-3{grid-column:span 1!important}
+  .fld input,.fld select,.fld textarea{font-size:16px!important;padding:11px 13px;min-height:46px}
+  .fld label{font-size:12px}
+  .fld label .cn{font-size:10px}
+  .sublabel{font-size:11px;padding:10px 0 7px;letter-spacing:.4px}
+  .pills{gap:7px}
+  .pill{padding:10px 14px;font-size:14px;min-height:44px;border-radius:8px}
+
+  /* Partes Atingidas — mobile */
+  .parte-grid{grid-template-columns:1fr!important;gap:3px!important;padding:6px 8px!important}
+  .parte-pill{padding:10px 12px;font-size:13px;min-height:44px}
+  .parte-grupo-titulo{font-size:11px;padding:6px 10px}
+  .parte-selecionada-row .fld input{min-height:40px!important;font-size:14px!important}
+
+  .info,.warn,.danger-alert{font-size:13px;padding:10px 12px}
+  .banner-warn{font-size:13px;padding:12px 14px}
+  .intro{flex-direction:column;padding:14px 14px;font-size:13px}
+  .intro h2{font-size:14px}
+  .modal{padding:20px 18px;border-radius:14px}
+  .cm-box{padding:22px 18px}
+  .cm-actions{flex-direction:column;gap:8px}
+  .cm-cancel,.cm-ok{width:100%;padding:13px}
+  .ac-drop{max-height:180px}
+  .ac-item{padding:12px 14px;font-size:14px;min-height:44px;display:flex;align-items:center}
+  #toast{font-size:12px;padding:10px 16px;max-width:88vw;white-space:normal;text-align:center;bottom:70px}
+  #mob-bottom{display:flex!important;position:fixed;bottom:0;left:0;right:0;z-index:400;height:58px;background:#fff;border-top:1px solid #e2e8f0;box-shadow:0 -4px 20px rgba(0,0,0,.1);align-items:center;justify-content:space-between;padding:0 12px;gap:8px}
+  #mob-back-btn{display:flex;align-items:center;gap:5px;color:#475569;font-size:12px;font-weight:600;text-decoration:none;padding:8px 11px;border-radius:7px;border:1px solid #e2e8f0;background:#f8fafc;white-space:nowrap;flex-shrink:0}
+  #mob-prog-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
+  #mob-prog-pct{font-size:15px;font-weight:800;color:#1f2937;line-height:1}
+  #mob-prog-label{font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+  #mob-pdf-btn{display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,#27ae60,#2ecc71);color:#fff;border:none;padding:10px 15px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;box-shadow:0 2px 8px rgba(39,174,96,.35)}
+  #mob-pdf-btn:disabled{background:#8fb8a0;box-shadow:none;cursor:not-allowed}
+}
+
+/*==============================================================
+  DARK MODE TOGGLE
+==============================================================*/
+.dm-toggle{background:none;border:1.5px solid rgba(255,255,255,.25);color:rgba(255,255,255,.85);width:34px;height:34px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,border-color .2s;padding:0}
+.dm-toggle:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.45)}
+.dm-toggle svg{width:18px;height:18px}
+.dm-toggle .ico-sun{display:none}
+.dm-toggle .ico-moon{display:block}
+
+/*==============================================================
+  DARK MODE — [data-theme="dark"]
+==============================================================*/
+[data-theme="dark"]{
+  --bg:       #0f1117;
+  --bg-card:  #1a1d27;
+  --bg-card2: #222633;
+  --bg-input: #1e2130;
+  --border:   #2d3348;
+  --text:     #e2e4eb;
+  --text2:    #9ea3b5;
+  --text3:    #6b7190;
+  --accent:   #3b82f6;
+  --accent-bg:rgba(59,130,246,.12);
+  --green:    #22c55e;
+  --red:      #ef4444;
+  --yellow:   #eab308;
+  --warn-bg:  #2a2518;
+  --warn-border:#5c4a1e;
+  --warn-text:#d4a017;
+  --danger-bg:#2d1a1a;
+  --danger-border:#6b2a2a;
+  --danger-text:#f87171;
+}
+[data-theme="dark"] .dm-toggle .ico-sun{display:block}
+[data-theme="dark"] .dm-toggle .ico-moon{display:none}
+[data-theme="dark"] body{background:var(--bg);color:var(--text)}
+[data-theme="dark"] #hdr{box-shadow:0 4px 20px rgba(0,0,0,.5)}
+[data-theme="dark"] #prog-bar-strip{background:rgba(255,255,255,.06)}
+[data-theme="dark"] #tools-bar{background:var(--bg-card);border-bottom-color:var(--border)}
+[data-theme="dark"] .tools-label{color:var(--text3)}
+[data-theme="dark"] .tb-sep{background:var(--border)}
+[data-theme="dark"] .tb-btn{color:var(--text2)}
+[data-theme="dark"] .tb-btn:hover{background:var(--bg-card2);color:var(--accent);border-color:var(--border)}
+[data-theme="dark"] #btn-pac-menu{background:var(--accent-bg)!important;border-color:rgba(59,130,246,.3)!important;color:#93c5fd!important}
+[data-theme="dark"] .tb-danger{color:#f87171}
+[data-theme="dark"] .tb-danger:hover{background:var(--danger-bg);color:#fca5a5;border-color:var(--danger-border)}
+[data-theme="dark"] .sec{background:var(--bg-card);border-color:var(--border);box-shadow:0 2px 12px rgba(0,0,0,.2)}
+[data-theme="dark"] .sec-hdr{border-bottom-color:var(--border);border-left-color:var(--text3)}
+[data-theme="dark"] .sec.done .sec-hdr{border-left-color:var(--green);background:linear-gradient(90deg,rgba(34,197,94,.06) 0%,transparent 60%)}
+[data-theme="dark"] .sec.partial .sec-hdr{border-left-color:var(--yellow);background:linear-gradient(90deg,rgba(234,179,8,.06) 0%,transparent 60%)}
+[data-theme="dark"] .sec-info h3{color:var(--text)}
+[data-theme="dark"] .sec-info p{color:var(--text3)}
+[data-theme="dark"] .badge-empty{background:var(--bg-card2);color:var(--text3)}
+[data-theme="dark"] .badge-partial{background:#2a2518;color:#eab308}
+[data-theme="dark"] .badge-done{background:#162816;color:#4ade80}
+[data-theme="dark"] .fld label{color:var(--text2)}
+[data-theme="dark"] .fld label .cn{color:var(--text3)}
+[data-theme="dark"] .fld input,[data-theme="dark"] .fld select,[data-theme="dark"] .fld textarea{background-color:var(--bg-input);border-color:var(--border);color:var(--text)}
+[data-theme="dark"] .fld input:focus,[data-theme="dark"] .fld select:focus,[data-theme="dark"] .fld textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,130,246,.15)}
+[data-theme="dark"] .fld input.filled{border-color:var(--green)}
+[data-theme="dark"] .fld input[readonly]{background-color:var(--bg-card2);color:var(--text3)}
+[data-theme="dark"] .fld select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236b7190'/%3E%3C/svg%3E")}
+[data-theme="dark"] .sublabel{color:var(--text2);border-bottom-color:var(--border)}
+[data-theme="dark"] .btn-copy-date{background:var(--accent-bg);border-color:rgba(59,130,246,.3);color:#60a5fa}
+[data-theme="dark"] .btn-copy-date:hover{background:rgba(59,130,246,.2);border-color:rgba(59,130,246,.5)}
+[data-theme="dark"] .pill{background:var(--bg-card2);border-color:var(--border);color:var(--text2)}
+[data-theme="dark"] .pill:hover{border-color:var(--accent);background:var(--accent-bg)}
+[data-theme="dark"] .pill.checked{border-color:var(--accent);background:var(--accent-bg);color:#93c5fd}
+[data-theme="dark"] .pill.checked-danger{border-color:#dc2626;background:var(--danger-bg);color:#fca5a5}
+[data-theme="dark"] .info{background:var(--accent-bg);border-color:rgba(59,130,246,.25);color:#93c5fd}
+[data-theme="dark"] .warn{background:var(--warn-bg);border-color:var(--warn-border);color:var(--warn-text)}
+[data-theme="dark"] .banner-warn{background:var(--warn-bg);border-color:var(--warn-border);color:var(--warn-text)}
+[data-theme="dark"] .banner-warn strong{color:#eab308}
+[data-theme="dark"] .danger-alert{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger-text)}
+[data-theme="dark"] .intro{background:var(--bg-card);border-color:var(--border);color:var(--text2)}
+[data-theme="dark"] .intro h2{color:var(--text)}
+[data-theme="dark"] .intro a{color:#60a5fa}
+[data-theme="dark"] .ac-drop{background:var(--bg-card);border-color:var(--accent)}
+[data-theme="dark"] .ac-item{color:var(--text);border-bottom-color:var(--border)}
+[data-theme="dark"] .ac-item:hover,[data-theme="dark"] .ac-item.focused{background:var(--accent-bg)}
+[data-theme="dark"] .ac-item.ac-synonym{background:#2a2518;border-left-color:#eab308}
+[data-theme="dark"] .ac-item b{color:#60a5fa}
+[data-theme="dark"] .tip-btn{background:#1e40af;color:#fff}
+[data-theme="dark"] .tip-btn:hover,[data-theme="dark"] .tip-btn.open{background:#1d4ed8;box-shadow:0 0 0 3px rgba(59,130,246,.28)}
+[data-theme="dark"] .modal{background:var(--bg-card);box-shadow:0 20px 60px rgba(0,0,0,.5)}
+[data-theme="dark"] .modal h2{color:var(--text)}
+[data-theme="dark"] .modal p{color:var(--text2)}
+
+/* Dark mode — Partes Atingidas */
+[data-theme="dark"] .parte-grupo{background:var(--bg-card);border-color:var(--border)}
+[data-theme="dark"] .parte-grupo-titulo{background:var(--bg-card2);color:#60a5fa;border-bottom-color:var(--border)}
+[data-theme="dark"] .parte-pill{background:var(--bg-card2);color:var(--text2);border-color:var(--border)}
+[data-theme="dark"] .parte-pill:hover{border-color:#3b82f6;background:rgba(59,130,246,.1)}
+[data-theme="dark"] .parte-pill.checked{border-color:#3b82f6;background:rgba(59,130,246,.15);color:#60a5fa}
+[data-theme="dark"] .parte-pill.disabled{opacity:.3}
+[data-theme="dark"] .parte-pill.disabled:hover{border-color:var(--border);background:var(--bg-card2)}
+[data-theme="dark"] .parte-display{background:var(--bg-card2);color:var(--text3)}
+[data-theme="dark"] .err-item{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger-text)}
+[data-theme="dark"] .mbtn-s{background:var(--bg-card2);color:var(--text2)}
+[data-theme="dark"] .ov{background:rgba(0,0,0,.7)}
+[data-theme="dark"] .cm-box{background:var(--bg-card)}
+[data-theme="dark"] .cm-box h3{color:var(--text)}
+[data-theme="dark"] .cm-box p{color:var(--text2)}
+[data-theme="dark"] .cm-icon{background:var(--danger-bg)}
+[data-theme="dark"] .cm-cancel{background:var(--bg-card2);color:var(--text2)}
+[data-theme="dark"] #toast{background:#2d3348;box-shadow:0 8px 28px rgba(0,0,0,.4)}
+[data-theme="dark"] #pac-mob-panel{background:var(--bg-card)}
+[data-theme="dark"] #pac-mob-panel .tb-menu-hdr{background:var(--bg-card2);color:var(--text3);border-bottom-color:var(--border)}
+[data-theme="dark"] #pac-mob-panel .tb-mi{color:var(--text);border-bottom-color:var(--border)}
+[data-theme="dark"] #pac-mob-panel .tb-mi:hover{background:var(--accent-bg);color:#93c5fd}
+[data-theme="dark"] #pac-mob-panel .tb-mi-sub{color:var(--text3)}
+[data-theme="dark"] .tb-menu{background:var(--bg-card);border-color:var(--border);box-shadow:0 8px 28px rgba(0,0,0,.4)}
+[data-theme="dark"] .tb-menu-hdr{background:var(--bg-card2);color:var(--text3);border-bottom-color:var(--border)}
+[data-theme="dark"] .tb-mi{color:var(--text);border-bottom-color:var(--border)}
+[data-theme="dark"] .tb-mi:hover{background:var(--accent-bg);color:#93c5fd}
+[data-theme="dark"] .tb-mi-sub{color:var(--text3)}
+[data-theme="dark"] #mob-bottom{background:var(--bg-card);border-top-color:var(--border);box-shadow:0 -4px 20px rgba(0,0,0,.3)}
+[data-theme="dark"] #mob-back-btn{color:var(--text2);border-color:var(--border);background:var(--bg-card2)}
+[data-theme="dark"] #mob-prog-pct{color:var(--text)}
+[data-theme="dark"] #mob-prog-label{color:var(--text3)}
+[data-theme="dark"] .req-star::after{background:#334155;color:#e2e4eb}
+
+/* TRANSFER BUTTON */
+.hdr-btn-transfer{background:rgba(255,255,255,.1);color:rgba(255,255,255,.9);border:1.5px solid rgba(255,255,255,.28);padding:8px 14px;border-radius:30px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s;display:flex;align-items:center;gap:6px;flex-shrink:0}
+.hdr-btn-transfer:not(.btn-disabled):hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);transform:translateY(-1px)}
+.hdr-btn-transfer.btn-disabled{opacity:.38;cursor:not-allowed}
+@media(max-width:768px){.hdr-btn-transfer{display:none}}
+/* Oculta metadados do anel em telas médias para liberar espaço ao título */
+@media(max-width:1200px){.prog-meta{display:none}}
+
+/* TRANSFER FICHA OPTIONS */
+.transfer-ficha-opt{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:10px;border:2px solid #e5e7eb;cursor:pointer;transition:all .15s;user-select:none}
+.transfer-ficha-opt:hover{border-color:#93c5fd;background:#f0f9ff}
+.transfer-ficha-opt.selected{border-color:#2563eb;background:#eff6ff}
+.transfer-ficha-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.transfer-ficha-name{font-size:14px;font-weight:700;color:#1f2937;display:block}
+.transfer-ficha-sub{font-size:12px;color:#6b7280}
+[data-theme="dark"] .transfer-ficha-opt{border-color:var(--border);background:transparent}
+[data-theme="dark"] .transfer-ficha-opt:hover{border-color:#3b82f6;background:var(--accent-bg)}
+[data-theme="dark"] .transfer-ficha-opt.selected{border-color:#3b82f6;background:var(--accent-bg)}
+[data-theme="dark"] .transfer-ficha-name{color:var(--text)}
+[data-theme="dark"] .transfer-ficha-sub{color:var(--text3)}
+
+/* RECEITA FEDERAL PANEL */
+.rf-toggle-btn{background:transparent;border:1.5px dashed var(--border);color:var(--text2);padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;white-space:nowrap;margin-bottom:12px}
+.rf-toggle-btn:hover,.rf-toggle-btn.active{border-color:#2563eb;color:#2563eb;background:rgba(37,99,235,.06);border-style:solid}
+.rf-panel{background:var(--bg-hover);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:16px;display:none}
+.rf-instr{font-size:12px;color:var(--text2);margin:0 0 10px;line-height:1.5}
+.rf-instr kbd{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:11px;font-family:monospace}
+.rf-textarea{width:100%;min-height:90px;resize:vertical;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:12px;font-family:monospace;background:var(--bg-card);color:var(--text);box-sizing:border-box;line-height:1.4}
+.rf-textarea:focus{outline:none;border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.rf-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.rf-cnae-warn{background:#fffbeb;border:1px solid #fbbf24;border-radius:8px;padding:9px 12px;margin-bottom:8px;font-size:12px;color:#92400e;line-height:1.5}
+[data-theme="dark"] .rf-cnae-warn{background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.35);color:#fcd34d}
+.rf-cnae-warn strong{font-weight:700}
+.rf-cnae-warn em{font-style:italic;opacity:.85}
+.rf-cnae-sugs{display:flex;flex-direction:column;gap:5px;margin-top:8px}
+.rf-cnae-sug-item{background:var(--bg-card);border:1.5px solid var(--border);border-radius:7px;padding:7px 11px;cursor:pointer;display:flex;align-items:baseline;gap:10px;transition:border-color .15s}
+.rf-cnae-sug-item:hover{border-color:#2563eb}
+.rf-cnae-sug-code{font-size:12px;font-weight:700;color:#2563eb;white-space:nowrap;flex-shrink:0}
+.rf-cnae-sug-name{font-size:11px;color:var(--text);line-height:1.3}
+.rf-instr a{color:#2563eb;text-decoration:underline}
+
+/* === UNIDADE NOTIFICADORA - CADEADO PERSISTENTE ========================= */
+.lock-grp{border:1.5px solid #f59e0b;border-radius:10px;padding:14px 0 14px 14px;margin:0 0 14px;background:#fffbeb;transition:border-color .3s,background .3s}
+.lock-grp.locked{border-color:#22c55e;background:#f0fdf4}
+.lock-inner{display:flex;align-items:stretch;gap:0}
+.lock-fields{flex:1;min-width:0}
+.lock-rail{display:flex;flex-direction:column;align-items:center;width:50px;flex-shrink:0;padding:3px 0}
+.lock-seg{width:2px;flex:1;border-radius:1px;min-height:16px;transition:all .3s}
+.lock-grp:not(.locked) .lock-seg{background:rgba(245,158,11,.3)}
+.lock-grp.locked .lock-seg{background:rgba(34,197,94,.45)}
+.lock-btn-rail{width:36px;height:36px;border-radius:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;transition:all .2s;margin:5px 0}
+.lock-grp:not(.locked) .lock-btn-rail{border:1.5px dashed #d97706;background:transparent;color:#d97706}
+.lock-grp:not(.locked) .lock-btn-rail:hover{background:#fef3c7;border-style:solid;box-shadow:0 2px 8px rgba(217,119,6,.2)}
+.lock-grp.locked .lock-btn-rail{border:2px solid #16a34a;background:#dcfce7;color:#15803d;box-shadow:0 1px 4px rgba(22,163,74,.18)}
+.lock-grp.locked .lock-btn-rail:hover{background:#bbf7d0}
+.lock-ico-open{display:block}
+.lock-ico-closed{display:none}
+.lock-grp.locked .lock-ico-open{display:none}
+.lock-grp.locked .lock-ico-closed{display:block}
+.lock-hint{display:flex;align-items:flex-start;gap:8px;font-size:11.5px;line-height:1.55;padding:7px 11px;margin-bottom:10px;border-radius:6px;border:1px solid;transition:all .3s}
+.lock-grp:not(.locked) .lock-hint{background:#fef9c3;border-color:#fde68a;color:#92400e}
+.lock-grp.locked .lock-hint{background:#f0fdf4;border-color:#bbf7d0;color:#166534}
+.lock-grp.locked input:not([type="hidden"]):not([type="date"]),
+.lock-grp.locked select{background:#f0fdf4!important;color:#166534!important;border-color:#bbf7d0!important;pointer-events:none;cursor:default}
+.lock-grp.locked .pill{pointer-events:none}
+.lock-grp.locked .pill input{pointer-events:none}
+[data-theme="dark"] .lock-grp{border-color:#b45309;background:rgba(120,53,15,.15)}
+[data-theme="dark"] .lock-grp.locked{border-color:#16a34a;background:rgba(22,101,52,.15)}
+[data-theme="dark"] .lock-grp:not(.locked) .lock-seg{background:rgba(217,119,6,.28)}
+[data-theme="dark"] .lock-grp.locked .lock-seg{background:rgba(22,163,74,.32)}
+[data-theme="dark"] .lock-grp:not(.locked) .lock-btn-rail{border-color:#d97706;color:#d97706}
+[data-theme="dark"] .lock-grp:not(.locked) .lock-btn-rail:hover{background:rgba(217,119,6,.12)}
+[data-theme="dark"] .lock-grp.locked .lock-btn-rail{border-color:#16a34a;background:rgba(22,163,74,.18);color:#4ade80}
+[data-theme="dark"] .lock-grp.locked .lock-btn-rail:hover{background:rgba(22,163,74,.28)}
+[data-theme="dark"] .lock-grp:not(.locked) .lock-hint{background:rgba(120,53,15,.22);border-color:#92400e;color:#fbbf24}
+[data-theme="dark"] .lock-grp.locked .lock-hint{background:rgba(22,101,52,.2);border-color:#16a34a;color:#4ade80}
+[data-theme="dark"] .lock-grp.locked input:not([type="hidden"]):not([type="date"]),
+[data-theme="dark"] .lock-grp.locked select{background:rgba(22,101,52,.22)!important;color:#4ade80!important;border-color:#16a34a!important}
+@media(max-width:768px){.lock-grp{padding:11px 0 11px 10px}.lock-rail{width:42px}.lock-btn-rail{width:32px;height:32px}}
+</style>
+</head>
+<body>
+<script>
+// Dark Mode — aplica antes do paint para evitar flash
+(function(){
+  var stored = localStorage.getItem('sinan-theme');
+  var theme;
+  if(stored === 'dark' || stored === 'light'){
+    theme = stored;
+  } else {
+    theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  if(theme === 'dark') document.documentElement.setAttribute('data-theme','dark');
+})();
+function toggleDarkMode(){
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  var next = isDark ? 'light' : 'dark';
+  if(next === 'dark') document.documentElement.setAttribute('data-theme','dark');
+  else document.documentElement.removeAttribute('data-theme');
+  localStorage.setItem('sinan-theme', next);
+}
+</script>
+
+<!-- ===== STICKY HEADER ===== -->
+<header id="hdr">
+  <div class="hdr-row">
+    <img class="hdr-logo" src="assets/img/pet-saude-logo-png.png" alt="PET Saúde Digital">
+    <div class="hdr-vline"></div>
+    <div class="hdr-title">
+      <h1>SINAN — Acidente de Trabalho</h1>
+      <p>Assistente de preenchimento · PET Saúde Digital</p>
+    </div>
+
+    <!-- PROGRESS RING -->
+    <div class="hdr-progress">
+      <div class="prog-ring-wrap">
+        <svg width="72" height="72" viewBox="0 0 72 72">
+          <circle class="prog-ring-bg" cx="36" cy="36" r="29"/>
+          <circle class="prog-ring-fill" id="prog-ring" cx="36" cy="36" r="29"/>
+        </svg>
+        <div class="prog-center">
+          <span class="prog-pct" id="prog-pct">0%</span>
+        </div>
+      </div>
+      <div class="prog-meta">
+        <div class="prog-status" id="prog-status">Pronto para iniciar</div>
+        <div class="prog-count" id="prog-count">0 / 0 campos preenchidos</div>
+        <span class="prog-level" id="prog-level">Ficha Inicial</span>
+      </div>
+    </div>
+
+    <button class="hdr-btn" id="btn-gerar" onclick="gerarPDF()">📄 Gerar PDF</button>
+    <button class="hdr-btn-transfer btn-disabled" id="btn-transfer" onclick="clickTransfer()" title="Transferir dados preenchidos para outra ficha">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      Usar em outra ficha
+    </button>
+    <a class="hdr-back" href="index.html">&#8592; Menu</a>
+    <button class="dm-toggle" id="dm-toggle" onclick="toggleDarkMode()" title="Alternar modo escuro">
+      <svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+      <svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+</header>
+<div id="prog-bar-strip"><div id="prog-bar-fill"></div></div>
+
+<div id="tools-bar">
+  <div class="tools-inner">
+    <div class="tb-group">
+      <span class="tools-label">Ferramentas</span>
+      <div class="tb-dd" id="dd-pac">
+        <button class="tb-btn" id="btn-pac-menu" onclick="togglePacMenu(event)" style="background:#eff6ff;border-color:#bfdbfe;color:#1e40af;font-weight:700">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5.5 20c0-3.5 2.9-6 6.5-6s6.5 2.5 6.5 6"/></svg>
+          Carregar Caso Didático
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:.55"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="tb-menu" id="pac-menu"></div>
+      </div>
+      <span class="tb-sep"></span>
+      <button class="tb-btn" onclick="document.getElementById('f-import').click()" title="Importar rascunho salvo (.json)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17,8 12,3 7,8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        📂 Importar
+      </button>
+      <input type="file" id="f-import" accept=".json" style="display:none" onchange="importarRascunho(this)">
+      <button class="tb-btn" onclick="exportarRascunho()" title="Salvar rascunho como arquivo .json">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        💾 Exportar
+      </button>
+    </div>
+    <div class="tb-group">
+      <button class="tb-btn tb-danger" onclick="abrirModalNova()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,4 1,10 7,10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg>
+        Nova Ficha
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper">
+
+<!-- DISCLAIMER -->
+<div class="banner-warn">
+  <span style="font-size:18px;flex-shrink:0">⚠️</span>
+  <div><strong>Ferramenta NÃO oficial.</strong> Gera uma ficha impressa adaptada do SINAN para facilitar o preenchimento. As informações aqui inseridas <strong>não são enviadas a nenhum sistema</strong> — a digitação posterior no <strong>SINAN NET</strong> permanece obrigatória para registro oficial no Ministério da Saúde.</div>
+</div>
+
+<!-- =========================================================
+  SEÇÃO 1 — DADOS DA NOTIFICAÇÃO
+========================================================= -->
+<div class="sec" id="sec1">
+  <div class="sec-hdr">
+    <div class="sec-num">1</div>
+    <div class="sec-info">
+      <h3>Dados da Notificação</h3>
+      <p>Unidade notificadora, datas, UF e município</p>
+    </div>
+    <span class="sec-badge badge-empty" id="badge1">—</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="info"><span class="ico">ℹ️</span><div>O <strong>Nº da Notificação</strong> é fornecido pela Vigilância Epidemiológica local — não é obrigatório aqui. Preencha a <strong>data do acidente</strong> mesmo que seja aproximada.</div></div>
+
+    <div class="row">
+      <div class="fld">
+        <label>Nº da Notificação</label>
+        <input type="text" id="f_num_notif" placeholder="Fornecido pela VE local">
+      </div>
+      <div class="fld">
+        <label>Data da Notificação <span class="req-star">⭐</span></label>
+        <input type="date" id="f_data_notif" data-ess data-label="Data da notificação">
+      </div>
+      <div class="fld">
+        <label>Data do Acidente <span class="req-star">⭐</span></label>
+        <input type="date" id="f_data_acidente" data-ess data-label="Data do acidente">
+      </div>
+    </div>
+
+    <div class="lock-grp" id="lock-grp-notif">
+      <div class="lock-hint">
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-top:1px"><rect x="5" y="9" width="10" height="9" rx="1.5"/><path d="M8 9V7a2 2 0 014 0v2"/></svg>
+        <span class="lock-hint-txt">Estes campos representam a unidade notificadora deste computador. Trave o cadeado para salvar e não precisar preencher novamente nas próximas fichas.</span>
+      </div>
+      <div class="lock-inner">
+        <div class="lock-fields">
+    <div class="row">
+      <div class="fld col-2">
+        <label>Município de Notificação</label>
+        <div class="ac-wrap">
+          <input type="text" id="f_mun_notif" placeholder="Digite para buscar — UF preenchida automaticamente" data-caps autocomplete="off">
+          <div class="ac-drop" id="f_mun_notif-drop"></div>
+        </div>
+      </div>
+      <div class="fld" style="max-width:100px">
+        <label>UF <span class="cn">[C.4]</span> <span style="font-size:9px;font-weight:500;color:#27ae60;text-transform:none">← auto</span></label>
+        <select id="f_uf_notif"></select>
+      </div>
+      <div class="fld" style="max-width:120px">
+        <label>Código IBGE</label>
+        <input type="text" id="f_ibge_notif" maxlength="6" placeholder="000000" readonly>
+      </div>
+    </div>
+
+    <div class="row row-wide">
+      <div class="fld col-2">
+        <label>Nome da Unidade Notificadora</label>
+        <input type="text" id="f_nome_un" placeholder="Nome completo da unidade" data-caps>
+      </div>
+      <div class="fld">
+        <label>CNES</label>
+        <input type="text" id="f_cnes" maxlength="7" placeholder="0000000">
+      </div>
+    </div>
+        </div>
+        <div class="lock-rail">
+          <div class="lock-seg"></div>
+          <button type="button" class="lock-btn-rail" onclick="toggleUnitLock()" title="Travar dados da unidade notificadora neste computador">
+            <svg class="lock-ico-open" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="9" width="12" height="9" rx="1.5"/><path d="M8 9V6a4 4 0 018 0"/></svg>
+            <svg class="lock-ico-closed" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="9" width="12" height="9" rx="1.5"/><path d="M7 9V6a3 3 0 016 0v3"/></svg>
+          </button>
+          <div class="lock-seg"></div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<!-- =========================================================
+  SEÇÃO 2 — IDENTIFICAÇÃO DO PACIENTE
+========================================================= -->
+<div class="sec" id="sec2">
+  <div class="sec-hdr">
+    <div class="sec-num">2</div>
+    <div class="sec-info">
+      <h3>Identificação do Paciente</h3>
+      <p>Dados pessoais do trabalhador acidentado</p>
+    </div>
+    <span class="sec-badge badge-empty" id="badge2">—</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="info"><span class="ico">ℹ️</span><div><strong>Nome</strong> é obrigatório — se desconhecido, escreva <strong>IGNORADO</strong>. Preencha <strong>data de nascimento OU idade</strong>. <strong>Raça/Cor</strong> deve ser preenchida conforme <em>declaração da própria pessoa</em>.</div></div>
+
+    <div class="row row-full">
+      <div class="fld">
+        <label>Nome Completo do Trabalhador <span class="req-star">⭐</span></label>
+        <input type="text" id="f_nome" placeholder="Nome completo — ou IGNORADO se desconhecido" data-caps data-ess data-label="Nome do paciente">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="fld">
+        <label>Data de Nascimento</label>
+        <input type="date" id="f_nasc">
+      </div>
+      <div class="fld" style="max-width:120px">
+        <label>Idade <span class="cn">[C.12]</span></label>
+        <input type="number" id="f_idade_val" min="0" max="999" placeholder="Ex: 35">
+      </div>
+      <div class="fld" style="max-width:130px">
+        <label>Unidade</label>
+        <div class="pills" id="grp_idade_un" data-hidden="f_idade_un">
+          <label class="pill" data-val="H"><input type="radio" name="idade_un" value="H"> H — Hora</label>
+          <label class="pill" data-val="D"><input type="radio" name="idade_un" value="D"> D — Dia</label>
+          <label class="pill" data-val="M"><input type="radio" name="idade_un" value="M"> M — Mês</label>
+          <label class="pill" data-val="A"><input type="radio" name="idade_un" value="A"> A — Ano</label>
+        </div>
+        <input type="hidden" id="f_idade_un">
+      </div>
+      <div class="fld">
+        <label>Sexo <span class="req-star">⭐</span></label>
+        <div class="pills" id="grp_sexo">
+          <label class="pill" data-val="M"><input type="radio" name="sexo" value="M" onchange="onSexoChange()"> Masculino</label>
+          <label class="pill" data-val="F"><input type="radio" name="sexo" value="F" onchange="onSexoChange()"> Feminino</label>
+          <label class="pill" data-val="I"><input type="radio" name="sexo" value="I" onchange="onSexoChange()"> Ignorado</label>
+        </div>
+      </div>
+    </div>
+
+    <div id="row_gest" style="display:none" class="row">
+      <div class="fld col-2">
+        <label>Gestante</label>
+        <div class="pills" id="grp_gest" data-hidden="f_gest">
+          <label class="pill" data-val="1"><input type="radio" name="gest" value="1"> 1 — 1º Trimestre</label>
+          <label class="pill" data-val="2"><input type="radio" name="gest" value="2"> 2 — 2º Trimestre</label>
+          <label class="pill" data-val="3"><input type="radio" name="gest" value="3"> 3 — 3º Trimestre</label>
+          <label class="pill" data-val="4"><input type="radio" name="gest" value="4"> 4 — Idade gestacional ignorada</label>
+          <label class="pill" data-val="5"><input type="radio" name="gest" value="5"> 5 — Não</label>
+          <label class="pill" data-val="6"><input type="radio" name="gest" value="6"> 6 — Não se aplica</label>
+          <label class="pill" data-val="9"><input type="radio" name="gest" value="9"> 9 — Ignorado</label>
+        </div>
+        <input type="hidden" id="f_gest">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="fld">
+        <label>Raça/Cor <span class="req-star">⭐</span></label>
+        <div class="pills" id="grp_raca" data-hidden="f_raca">
+          <label class="pill" data-val="1"><input type="radio" name="raca" value="1"> Branca</label>
+          <label class="pill" data-val="2"><input type="radio" name="raca" value="2"> Preta</label>
+          <label class="pill" data-val="3"><input type="radio" name="raca" value="3"> Amarela</label>
+          <label class="pill" data-val="4"><input type="radio" name="raca" value="4"> Parda</label>
+          <label class="pill" data-val="5"><input type="radio" name="raca" value="5"> Indígena</label>
+          <label class="pill" data-val="9"><input type="radio" name="raca" value="9"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_raca" data-ess data-label="Raça/Cor">
+      </div>
+      <div class="fld">
+        <label>Escolaridade</label>
+        <select id="f_escol">
+          <option value="">— Selecione —</option>
+          <option value="0">0 — Analfabeto</option>
+          <option value="1">1 — 1ª–4ª EF incompleto</option>
+          <option value="2">2 — 4ª EF completo</option>
+          <option value="3">3 — 5ª–8ª EF incompleto</option>
+          <option value="4">4 — EF completo</option>
+          <option value="5">5 — EM incompleto</option>
+          <option value="6">6 — EM completo</option>
+          <option value="7">7 — Superior incompleto</option>
+          <option value="8">8 — Superior completo</option>
+          <option value="9">9 — Ignorado</option>
+          <option value="10">10 — Não se aplica</option>
+        </select>
+      </div>
+      <div class="fld">
+        <label>Nº Cartão SUS (CNS)</label>
+        <input type="text" id="f_sus" maxlength="15" placeholder="000000000000000">
+      </div>
+    </div>
+
+    <div class="row row-full">
+      <div class="fld">
+        <label>Nome da Mãe <span style="font-weight:400;color:#9ca3af">(sem abreviações)</span></label>
+        <input type="text" id="f_mae" placeholder="Nome completo da mãe — se desconhecido, IGNORADO" data-caps>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- =========================================================
+  SEÇÃO 3 — DADOS DE RESIDÊNCIA
+========================================================= -->
+<div class="sec" id="sec3">
+  <div class="sec-hdr">
+    <div class="sec-num">3</div>
+    <div class="sec-info">
+      <h3>Dados de Residência</h3>
+      <p>Endereço do trabalhador</p>
+    </div>
+    <span class="sec-badge badge-empty" id="badge3">—</span>
+  </div>
+  <div class="sec-body">
+    <div class="row">
+      <div class="fld col-2">
+        <label>Município <span class="req-star">⭐</span></label>
+        <div class="ac-wrap">
+          <input type="text" id="f_mun_res" data-ess data-label="Município de residência" placeholder="Digite para buscar — UF preenchida automaticamente" data-caps autocomplete="off">
+          <div class="ac-drop" id="f_mun_res-drop"></div>
+        </div>
+      </div>
+      <div class="fld" style="max-width:100px">
+        <label>UF <span class="cn">[C.19]</span> <span style="font-size:9px;font-weight:500;color:#27ae60;text-transform:none">← auto</span></label>
+        <select id="f_uf_res"></select>
+      </div>
+      <div class="fld" style="max-width:120px">
+        <label>Código IBGE</label>
+        <input type="text" id="f_ibge_res" maxlength="6" placeholder="000000" readonly>
+      </div>
+    </div>
+    <div class="row">
+      <div class="fld">
+        <label>Bairro <span class="cn">[C.22]</span></label>
+        <input type="text" id="f_bairro_res" data-caps>
+      </div>
+      <div class="fld col-2">
+        <label>Logradouro</label>
+        <input type="text" id="f_logr_res" data-caps>
+      </div>
+      <div class="fld" style="max-width:100px">
+        <label>Número <span class="cn">[C.24]</span></label>
+        <input type="text" id="f_num_res">
+      </div>
+    </div>
+    <div class="row">
+      <div class="fld">
+        <label>Código Logradouro <span class="cn">[C.26]</span></label>
+        <input type="text" id="f_logr_cod_res" placeholder="Código">
+      </div>
+      <div class="fld col-2">
+        <label>Complemento <span class="cn">[C.25]</span></label>
+        <input type="text" id="f_compl_res" data-caps>
+      </div>
+      <div class="fld">
+        <label>Ponto de Referência <span class="cn">[C.28]</span></label>
+        <input type="text" id="f_pref_res" data-caps>
+      </div>
+    </div>
+    <div class="row">
+      <div class="fld">
+        <label>CEP <span class="cn">[C.29]</span></label>
+        <input type="text" id="f_cep" maxlength="9" placeholder="00000-000">
+      </div>
+      <div class="fld">
+        <label>Telefone (DDD) <span class="cn">[C.30]</span></label>
+        <input type="text" id="f_tel_res" placeholder="(00) 00000-0000">
+      </div>
+      <div class="fld">
+        <label>Zona <span class="cn">[C.31]</span></label>
+        <div class="pills" id="grp_zona_res" data-hidden="f_zona_res">
+          <label class="pill" data-val="1"><input type="radio" name="zona_res" value="1"> 1 — Urbana</label>
+          <label class="pill" data-val="2"><input type="radio" name="zona_res" value="2"> 2 — Rural</label>
+          <label class="pill" data-val="3"><input type="radio" name="zona_res" value="3"> 3 — Periurbana</label>
+          <label class="pill" data-val="9"><input type="radio" name="zona_res" value="9"> 9 — Ignorado</label>
+        </div>
+        <input type="hidden" id="f_zona_res">
+      </div>
+      <div class="fld">
+        <label>País (se fora do Brasil) <span class="cn">[C.32]</span></label>
+        <input type="text" id="f_pais_res" data-caps>
+      </div>
+    </div>
+    <div class="row">
+      <div class="fld">
+        <label>Geo Campo 1 <span class="cn">[C.27a]</span></label>
+        <input type="text" id="f_geo1_res">
+      </div>
+      <div class="fld">
+        <label>Geo Campo 2 <span class="cn">[C.27b]</span></label>
+        <input type="text" id="f_geo2_res">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+  SEÇÃO 4 — OCUPAÇÃO E MERCADO DE TRABALHO
+========================================================= -->
+<div class="sec" id="sec4">
+  <div class="sec-hdr">
+    <div class="sec-num">4</div>
+    <div class="sec-info">
+      <h3>Ocupação e Mercado de Trabalho</h3>
+      <p>CBO, situação no trabalho e local do acidente</p>
+    </div>
+    <span class="sec-badge badge-empty" id="badge4">—</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="row row-wide">
+      <div class="fld col-2">
+        <label>Ocupação (CBO) <span class="req-star">⭐</span><span class="cn"><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> A atividade profissional exercida pelo trabalhador, classificada pela CBO (Classificação Brasileira de Ocupações). Digite o nome ou código — o sistema busca automaticamente.</span><span class="tip-r"><b>Por que informar:</b> Permite mapear os riscos ocupacionais por categoria profissional e subsidiar políticas de saúde do trabalhador.</span></span></span></span></label>
+        <div class="ac-wrap">
+          <input type="text" id="f_ocupacao" data-caps autocomplete="off" placeholder="Nome ou código CBO (ex: ENFERMEIRO, 223505)" data-ess data-label="Ocupação (CBO)">
+          <div class="ac-drop" id="f_ocupacao-drop"></div>
+        </div>
+        <span id="f_ocupacao_hint" style="font-size:12px;color:#2563eb;margin-top:4px;display:none;line-height:1.4;font-weight:600"></span>
+      </div>
+      <div class="fld">
+        <label>Situação no Mercado de Trabalho</label>
+        <div class="pills" id="grp_sit_mercado" data-hidden="f_sit_mercado">
+          <label class="pill" data-val="1"><input type="radio" name="sit_mercado" value="1"> 1 — Empregado registrado</label>
+          <label class="pill" data-val="2"><input type="radio" name="sit_mercado" value="2"> 2 — Empregado não registrado</label>
+          <label class="pill" data-val="3"><input type="radio" name="sit_mercado" value="3"> 3 — Autônomo/conta própria</label>
+          <label class="pill" data-val="4"><input type="radio" name="sit_mercado" value="4"> 4 — Desempregado</label>
+          <label class="pill" data-val="5"><input type="radio" name="sit_mercado" value="5"> 5 — Aposentado/Pensionista</label>
+          <label class="pill" data-val="6"><input type="radio" name="sit_mercado" value="6"> 6 — Trabalhador doméstico</label>
+          <label class="pill" data-val="7"><input type="radio" name="sit_mercado" value="7"> 7 — Servidor público</label>
+          <label class="pill" data-val="9"><input type="radio" name="sit_mercado" value="9"> 9 — Ignorado</label>
+        </div>
+        <input type="hidden" id="f_sit_mercado">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="fld">
+        <label>Tempo no Trabalho</label>
+        <input type="number" id="f_tempo_trab_val" min="0" placeholder="Ex: 5">
+      </div>
+      <div class="fld" style="max-width:160px">
+        <label>Unidade</label>
+        <div class="pills" id="grp_tempo_trab_tipo" data-hidden="f_tempo_trab_tipo">
+          <label class="pill" data-val="A"><input type="radio" name="tempo_trab_tipo" value="A"> A — Anos</label>
+          <label class="pill" data-val="M"><input type="radio" name="tempo_trab_tipo" value="M"> M — Meses</label>
+          <label class="pill" data-val="D"><input type="radio" name="tempo_trab_tipo" value="D"> D — Dias</label>
+        </div>
+        <input type="hidden" id="f_tempo_trab_tipo">
+      </div>
+      <div class="fld">
+        <label>Local do Acidente</label>
+        <div class="pills" id="grp_local_ac" data-hidden="f_local_ac">
+          <label class="pill" data-val="01"><input type="radio" name="local_ac" value="01"> 01 — Empresa/oficina</label>
+          <label class="pill" data-val="02"><input type="radio" name="local_ac" value="02"> 02 — Residência</label>
+          <label class="pill" data-val="03"><input type="radio" name="local_ac" value="03"> 03 — Via pública</label>
+          <label class="pill" data-val="04"><input type="radio" name="local_ac" value="04"> 04 — Escola/ensino</label>
+          <label class="pill" data-val="05"><input type="radio" name="local_ac" value="05"> 05 — Área rural</label>
+          <label class="pill" data-val="06"><input type="radio" name="local_ac" value="06"> 06 — Área de lazer</label>
+          <label class="pill" data-val="09"><input type="radio" name="local_ac" value="09"> 09 — Outros</label>
+        </div>
+        <input type="hidden" id="f_local_ac">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- =========================================================
+  SEÇÃO 5 — DADOS DA EMPRESA
+========================================================= -->
+<div class="sec" id="sec5">
+  <div class="sec-hdr">
+    <div class="sec-num">5</div>
+    <div class="sec-info">
+      <h3>Dados da Empresa</h3>
+      <p>Identificação, endereço e terceirização</p>
+    </div>
+    <span class="sec-badge badge-empty" id="badge5">—</span>
+  </div>
+  <div class="sec-body">
+
+    <!-- IMPORTAR VIA RECEITA FEDERAL -->
+    <button type="button" class="rf-toggle-btn" id="rf-toggle-btn" onclick="rfTogglePanel()">&#128203; Importar via Receita Federal</button>
+    <div class="rf-panel" id="rf-panel">
+      <p class="rf-instr">Acesse o site da <a href="https://solucoes.receita.fazenda.gov.br/servicos/cnpjreva/Cnpjreva_Solicitacao.asp" target="_blank" rel="noopener">Receita Federal</a>, abra a ficha do CNPJ, selecione tudo (<kbd>Ctrl+A</kbd>) e cole abaixo:</p>
+      <textarea id="rf-textarea" class="rf-textarea" rows="5" placeholder="Cole aqui o texto completo da página da Receita Federal..."></textarea>
+      <div class="rf-actions">
+        <button type="button" class="mbtn mbtn-p" onclick="rfExtrair()">Extrair e preencher</button>
+        <button type="button" class="mbtn mbtn-s" onclick="document.getElementById('rf-textarea').value=''">Limpar</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="fld">
+        <label>Registro / CNPJ / CPF</label>
+        <input type="text" id="f_emp_reg" placeholder="00.000.000/0000-00">
+      </div>
+      <div class="fld col-2">
+        <label>Nome da Empresa <span class="req-star">⭐</span></label>
+        <input type="text" id="f_emp_nome" placeholder="Razão social ou nome fantasia" data-caps data-ess data-label="Nome da empresa">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="fld">
+        <label>CNAE</label>
+        <div class="rf-cnae-warn" id="rf-cnae-warn" style="display:none">&#9888;&#65039; CNAE <strong id="rf-cnae-warn-code"></strong><span id="rf-cnae-warn-ramo"></span> não consta na lista do SINAN NET. Selecione a classe mais próxima ou pesquise manualmente no campo abaixo:
+          <div class="rf-cnae-sugs" id="rf-cnae-sugs"></div>
+        </div>
+        <div class="ac-wrap">
+          <input type="text" id="f_emp_cnae" placeholder="Digite código ou atividade econômica..." autocomplete="off">
+          <div class="ac-drop" id="f_emp_cnae-drop"></div>
+        </div>
+        <span id="f_emp_cnae_hint" style="font-size:12px;color:#2563eb;margin-top:4px;display:none;line-height:1.4;font-weight:600"></span>
+      </div>
+      <div class="fld">
+        <label>UF</label>
+        <select id="f_emp_uf"></select>
+      </div>
+      <div class="fld">
+        <label>Município</label>
+        <div class="ac-wrap">
+          <input type="text" id="f_emp_mun" placeholder="Nome do município" data-caps autocomplete="off">
+          <div class="ac-drop" id="f_emp_mun-drop"></div>
+        </div>
+      </div>
+      <div class="fld">
+        <label>Código IBGE <span class="cn">[C.42]</span></label>
+        <input type="text" id="f_emp_ibge" maxlength="6" placeholder="000000" readonly>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="fld">
+        <label>Distrito <span class="cn">[C.43]</span></label>
+        <input type="text" id="f_emp_dist" data-caps>
+      </div>
+      <div class="fld">
+        <label>Bairro <span class="cn">[C.44]</span></label>
+        <input type="text" id="f_emp_bairro" data-caps>
+      </div>
+      <div class="fld col-2">
+        <label>Endereço / Logradouro <span class="cn">[C.45]</span></label>
+        <input type="text" id="f_emp_end" data-caps>
+      </div>
+      <div class="fld" style="max-width:100px">
+        <label>Número <span class="cn">[C.46]</span></label>
+        <input type="text" id="f_emp_num">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="fld col-2">
+        <label>Ponto de Referência <span class="cn">[C.47]</span></label>
+        <input type="text" id="f_emp_pref" data-caps>
+      </div>
+      <div class="fld">
+        <label>Telefone <span class="cn">[C.48]</span></label>
+        <input type="text" id="f_emp_tel" placeholder="(00) 00000-0000">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="fld">
+        <label>Empresa Terceirizada?</label>
+        <div class="pills" id="grp_emp_terc">
+          <label class="pill" data-val="1"><input type="radio" name="emp_terc" value="1" onchange="onEmpTerc()"> Sim</label>
+          <label class="pill" data-val="2"><input type="radio" name="emp_terc" value="2" onchange="onEmpTerc()"> Não</label>
+          <label class="pill" data-val="9"><input type="radio" name="emp_terc" value="9" onchange="onEmpTerc()"> Ignorado</label>
+        </div>
+      </div>
+    </div>
+
+    <div id="box_emp_terc_detalhe" style="display:none">
+      <div class="sublabel">Dados da Empresa Terceirizada / Principal</div>
+      <div class="row">
+        <div class="fld">
+          <label>CNAE da Terceirizada <span class="cn">[C.50]</span></label>
+          <div class="ac-wrap">
+            <input type="text" id="f_emp_terc_cnae" placeholder="Digite código ou atividade..." autocomplete="off">
+            <div class="ac-drop" id="f_emp_terc_cnae-drop"></div>
+          </div>
+          <span id="f_emp_terc_cnae_hint" style="font-size:12px;color:#2563eb;margin-top:4px;display:none;line-height:1.4;font-weight:600"></span>
+        </div>
+        <div class="fld">
+          <label>CNPJ Empresa Principal <span class="cn">[C.51]</span></label>
+          <input type="text" id="f_emp_princ_cnpj" placeholder="00.000.000/0000-00">
+        </div>
+        <div class="fld col-2">
+          <label>Razão Social Empresa Principal <span class="cn">[C.52]</span></label>
+          <input type="text" id="f_emp_princ_rs" data-caps placeholder="Razão social da empresa principal">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- =========================================================
+  SEÇÃO 6 — DADOS DO ACIDENTE
+========================================================= -->
+<div class="sec" id="sec6">
+  <div class="sec-hdr">
+    <div class="sec-num">6</div>
+    <div class="sec-info">
+      <h3>Dados do Acidente</h3>
+      <p>Hora, local, causa CID-10 e tipo de acidente</p>
+    </div>
+    <span class="sec-badge badge-empty" id="badge6">—</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="row">
+      <div class="fld">
+        <label>Hora do Acidente (HH)</label>
+        <input type="text" id="f_hora_h" maxlength="2" placeholder="HH" inputmode="numeric">
+      </div>
+      <div class="fld">
+        <label>Minuto (MM)</label>
+        <input type="text" id="f_hora_m" maxlength="2" placeholder="MM" inputmode="numeric">
+      </div>
+      <div class="fld">
+        <label>Horas após jornada (HH)</label>
+        <input type="text" id="f_jorn_h" maxlength="2" placeholder="HH" inputmode="numeric">
+      </div>
+      <div class="fld">
+        <label>Minuto (MM)</label>
+        <input type="text" id="f_jorn_m" maxlength="2" placeholder="MM" inputmode="numeric">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="fld col-2">
+        <label>Município do Acidente</label>
+        <div class="ac-wrap">
+          <input type="text" id="f_mun_ac" placeholder="Digite para buscar — UF preenchida automaticamente" data-caps autocomplete="off">
+          <div class="ac-drop" id="f_mun_ac-drop"></div>
+        </div>
+      </div>
+      <div class="fld" style="max-width:100px">
+        <label>UF <span class="cn">[C.54]</span> <span style="font-size:9px;font-weight:500;color:#27ae60;text-transform:none">← auto</span></label>
+        <select id="f_uf_ac"></select>
+      </div>
+      <div class="fld" style="max-width:120px">
+        <label>Código IBGE</label>
+        <input type="text" id="f_ibge_ac" maxlength="6" placeholder="000000" readonly>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="fld col-2">
+        <label>CID-10 da Causa</label>
+        <div class="ac-wrap">
+          <input type="text" id="f_causa_cid" placeholder="Ex: W29 — use apenas o código" autocomplete="off">
+          <div class="ac-drop" id="f_causa_cid-drop"></div>
+        </div>
+        <span id="f_causa_cid_hint" style="font-size:12px;color:#2563eb;margin-top:4px;display:none;line-height:1.4;font-weight:600"></span>
+      </div>
+      <div class="fld">
+        <label>Tipo de Acidente</label>
+        <div class="pills" id="grp_tipo_ac" data-hidden="f_tipo_ac">
+          <label class="pill" data-val="1"><input type="radio" name="tipo_ac" value="1"> 1 — Típico</label>
+          <label class="pill" data-val="2"><input type="radio" name="tipo_ac" value="2"> 2 — De trajeto</label>
+          <label class="pill" data-val="3"><input type="radio" name="tipo_ac" value="3"> 3 — Doença</label>
+          <label class="pill" data-val="9"><input type="radio" name="tipo_ac" value="9"> 9 — Ignorado</label>
+        </div>
+        <input type="hidden" id="f_tipo_ac">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="fld">
+        <label>Outros trabalhadores atingidos?</label>
+        <div class="pills" id="grp_outros_quant">
+          <label class="pill" data-val="1"><input type="radio" name="outros_quant" value="1" onchange="onOutrosQuant()"> Sim</label>
+          <label class="pill" data-val="2"><input type="radio" name="outros_quant" value="2" onchange="onOutrosQuant()"> Não</label>
+          <label class="pill" data-val="9"><input type="radio" name="outros_quant" value="9" onchange="onOutrosQuant()"> Ignorado</label>
+        </div>
+      </div>
+      <div class="fld" id="box_outros_num" style="display:none">
+        <label>Quantos? <span class="cn">[C.58a]</span></label>
+        <input type="text" id="f_outros_num" placeholder="Nº de trabalhadores" inputmode="numeric">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- =========================================================
+  SEÇÃO 7 — ATENDIMENTO MÉDICO
+========================================================= -->
+<div class="sec" id="sec7">
+  <div class="sec-hdr">
+    <div class="sec-num">7</div>
+    <div class="sec-info">
+      <h3>Atendimento Médico</h3>
+      <p>Ocorrência, data e local do atendimento</p>
+    </div>
+    <span class="sec-badge badge-empty" id="badge7">—</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="row">
+      <div class="fld">
+        <label>Ocorreu atendimento médico?</label>
+        <div class="pills" id="grp_atend">
+          <label class="pill" data-val="1"><input type="radio" name="atend" value="1" onchange="onAtend()"> Sim</label>
+          <label class="pill" data-val="2"><input type="radio" name="atend" value="2" onchange="onAtend()"> Não</label>
+          <label class="pill" data-val="9"><input type="radio" name="atend" value="9" onchange="onAtend()"> Ignorado</label>
+        </div>
+      </div>
+    </div>
+
+    <div id="box_atend_detalhe" style="display:none">
+      <div class="row">
+        <div class="fld">
+          <label>Data do Atendimento</label>
+          <input type="date" id="f_data_atend">
+        </div>
+        <div class="fld col-2">
+          <label>Município do Atendimento</label>
+          <div class="ac-wrap">
+            <input type="text" id="f_mun_atend" placeholder="Digite para buscar" data-caps autocomplete="off">
+            <div class="ac-drop" id="f_mun_atend-drop"></div>
+          </div>
+        </div>
+        <div class="fld" style="max-width:100px">
+          <label>UF <span style="font-size:9px;font-weight:500;color:#27ae60;text-transform:none">← auto</span></label>
+          <select id="f_uf_atend"></select>
+        </div>
+        <div class="fld" style="max-width:120px">
+          <label>Código IBGE</label>
+          <input type="text" id="f_ibge_atend" maxlength="6" placeholder="000000" readonly>
+        </div>
+      </div>
+      <div class="row">
+        <div class="fld col-2">
+          <label>Nome da Unidade de Saúde</label>
+          <input type="text" id="f_un_atend" data-caps placeholder="Nome da unidade de saúde">
+        </div>
+        <div class="fld">
+          <label>Código da Unidade <span class="cn">[C.62]</span></label>
+          <input type="text" id="f_cod_atend" placeholder="CNES">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- =========================================================
+  SEÇÃO 8 — LESÕES E DIAGNÓSTICO
+========================================================= -->
+<div class="sec" id="sec8">
+  <div class="sec-hdr">
+    <div class="sec-num">8</div>
+    <div class="sec-info">
+      <h3>Lesões e Diagnóstico</h3>
+      <p>Parte do corpo, CID-10 e regime de tratamento</p>
+    </div>
+    <span class="sec-badge badge-empty" id="badge8">—</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="info"><span class="ico">ℹ️</span><div>Selecione <strong>até 3 partes do corpo</strong> atingidas pelo acidente. O sistema converterá automaticamente nos códigos de 2 dígitos da ficha SINAN.</div></div>
+
+    <div class="sublabel" style="margin-bottom:10px">Partes Atingidas <span style="font-size:10px;font-weight:400;color:#9ca3af;text-transform:none;margin-left:6px">Máximo 3 seleções</span></div>
+
+    <div id="parte-corpo-selecao" style="margin-bottom:14px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <span style="font-size:13px;font-weight:700;color:#374151">Selecionadas:</span>
+        <span id="parte-count" style="font-size:13px;font-weight:700;color:#2563eb">0/3</span>
+      </div>
+      <div class="row" id="parte-selecionada-row" style="margin-bottom:8px">
+        <div class="fld"><label>Parte 1</label><input type="text" id="f_corpo1_display" readonly placeholder="—" class="parte-display"></div>
+        <div class="fld"><label>Parte 2</label><input type="text" id="f_corpo2_display" readonly placeholder="—" class="parte-display"></div>
+        <div class="fld"><label>Parte 3</label><input type="text" id="f_corpo3_display" readonly placeholder="—" class="parte-display"></div>
+      </div>
+      <input type="hidden" id="f_corpo1"><input type="hidden" id="f_corpo2"><input type="hidden" id="f_corpo3">
+
+      <!-- Opções oficiais da ficha SINAN (Campo 63) -->
+      <div class="parte-grid">
+        <label class="parte-pill" data-code="01"><input type="checkbox" name="parte_corpo" value="01"> Olho</label>
+        <label class="parte-pill" data-code="02"><input type="checkbox" name="parte_corpo" value="02"> Cabeça</label>
+        <label class="parte-pill" data-code="03"><input type="checkbox" name="parte_corpo" value="03"> Pescoço</label>
+        <label class="parte-pill" data-code="04"><input type="checkbox" name="parte_corpo" value="04"> Tórax</label>
+        <label class="parte-pill" data-code="05"><input type="checkbox" name="parte_corpo" value="05"> Abdome</label>
+        <label class="parte-pill" data-code="06"><input type="checkbox" name="parte_corpo" value="06"> Mão</label>
+        <label class="parte-pill" data-code="07"><input type="checkbox" name="parte_corpo" value="07"> Membro superior</label>
+        <label class="parte-pill" data-code="08"><input type="checkbox" name="parte_corpo" value="08"> Membro inferior</label>
+        <label class="parte-pill" data-code="09"><input type="checkbox" name="parte_corpo" value="09"> Pé</label>
+        <label class="parte-pill" data-code="10"><input type="checkbox" name="parte_corpo" value="10"> Todo o corpo</label>
+        <label class="parte-pill" data-code="11"><input type="checkbox" name="parte_corpo" value="11"> Outro</label>
+        <label class="parte-pill" data-code="99"><input type="checkbox" name="parte_corpo" value="99"> Ignorado</label>
+      </div>
+
+    </div>
+
+    <div class="row row-wide" style="margin-top:16px">
+      <div class="fld col-2">
+        <label>CID-10 da Lesão</label>
+        <div class="ac-wrap">
+          <input type="text" id="f_diag_cid" placeholder="Ex: S67.0 — use apenas o código" autocomplete="off">
+          <div class="ac-drop" id="f_diag_cid-drop"></div>
+        </div>
+        <span id="f_diag_cid_hint" style="font-size:12px;color:#2563eb;margin-top:4px;display:none;line-height:1.4;font-weight:600"></span>
+      </div>
+      <div class="fld">
+        <label>Regime de Tratamento</label>
+        <div class="pills" id="grp_regime" data-hidden="f_regime">
+          <label class="pill" data-val="1"><input type="radio" name="regime" value="1"> 1 — Ambulatorial</label>
+          <label class="pill" data-val="2"><input type="radio" name="regime" value="2"> 2 — Internação</label>
+          <label class="pill" data-val="3"><input type="radio" name="regime" value="3"> 3 — Day hospital</label>
+          <label class="pill" data-val="4"><input type="radio" name="regime" value="4"> 4 — CAPS</label>
+          <label class="pill" data-val="9"><input type="radio" name="regime" value="9"> 9 — Ignorado</label>
+        </div>
+        <input type="hidden" id="f_regime">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- =========================================================
+  SEÇÃO 9 — ENCERRAMENTO
+========================================================= -->
+<div class="sec" id="sec9">
+  <div class="sec-hdr">
+    <div class="sec-num">9</div>
+    <div class="sec-info">
+      <h3>Encerramento</h3>
+      <p>Evolução, CAT, óbito e observações</p>
+    </div>
+    <span class="sec-badge badge-empty" id="badge9">—</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="row row-wide">
+      <div class="fld col-2">
+        <label>Evolução do Caso</label>
+        <div class="pills" id="grp_evolucao" data-hidden="f_evolucao">
+          <label class="pill" data-val="1"><input type="radio" name="evolucao" value="1"> 1 — Cura</label>
+          <label class="pill" data-val="2"><input type="radio" name="evolucao" value="2"> 2 — Incapacidade temporária</label>
+          <label class="pill" data-val="3"><input type="radio" name="evolucao" value="3"> 3 — Incapacidade parcial permanente</label>
+          <label class="pill" data-val="4"><input type="radio" name="evolucao" value="4"> 4 — Incapacidade total permanente</label>
+          <label class="pill" data-val="5"><input type="radio" name="evolucao" value="5"> 5 — Óbito por acidente de trabalho</label>
+          <label class="pill" data-val="6"><input type="radio" name="evolucao" value="6"> 6 — Óbito por outras causas</label>
+          <label class="pill" data-val="9"><input type="radio" name="evolucao" value="9"> 9 — Ignorado</label>
+        </div>
+        <input type="hidden" id="f_evolucao">
+      </div>
+      <div class="fld">
+        <label>CAT Emitida?</label>
+        <div class="pills" id="grp_cat">
+          <label class="pill" data-val="1"><input type="radio" name="cat" value="1"> Sim</label>
+          <label class="pill" data-val="2"><input type="radio" name="cat" value="2"> Não</label>
+          <label class="pill" data-val="9"><input type="radio" name="cat" value="9"> Ignorado</label>
+        </div>
+      </div>
+    </div>
+
+    <div id="box_obito" style="display:none" class="row">
+      <div class="fld">
+        <label>Data do Óbito</label>
+        <input type="date" id="f_obito">
+      </div>
+    </div>
+
+    <div class="row row-full" style="margin-top:4px">
+      <div class="fld">
+        <label>Descrição do Acidente</label>
+        <textarea id="f_desc" style="min-height:100px" placeholder="Descreva como o acidente ocorreu, as circunstâncias, mecanismo de lesão, etc."></textarea>
+      </div>
+    </div>
+
+    <div class="row row-full">
+      <div class="fld">
+        <label>Observações Complementares</label>
+        <textarea id="f_obs" placeholder="Informações adicionais relevantes para o caso"></textarea>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /.wrapper -->
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- VALIDATION MODAL (quase completo) -->
+<div class="ov" id="ov-quase">
+  <div class="modal">
+    <div class="modal-ico">⭐</div>
+    <h2>Campos essenciais pendentes</h2>
+    <p>Os itens abaixo são fundamentais para um registro de qualidade. Você pode prosseguir mesmo assim.</p>
+    <div class="err-list" id="ov-quase-list"></div>
+    <div class="modal-actions">
+      <button class="mbtn mbtn-s" onclick="closeModal('ov-quase')">Voltar e preencher</button>
+      <button class="mbtn mbtn-p" id="ov-quase-dl">Baixar mesmo assim</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM MODAL -->
+<div id="confirm-modal">
+  <div class="cm-box">
+    <div class="cm-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,4 1,10 7,10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg></div>
+    <h3>Apagar tudo e começar do zero?</h3>
+    <p>Todos os dados inseridos serão perdidos. Se quiser preservá-los, use <strong>Exportar Rascunho</strong> antes de continuar.</p>
+    <div class="cm-actions">
+      <button class="cm-cancel" onclick="fecharModalNova()">Cancelar</button>
+      <button class="cm-ok" onclick="novaFichaConfirmado()">Apagar tudo</button>
+    </div>
+  </div>
+</div>
+
+<!-- TRANSFER MODAL -->
+<div class="ov" id="ov-transfer">
+  <div class="modal" style="max-width:500px">
+    <div class="modal-ico">🔁</div>
+    <h2>Usar dados em outra ficha</h2>
+    <p>Os dados do paciente, notificação e residência já preenchidos serão transferidos automaticamente para a nova ficha. Selecione o destino:</p>
+    <div id="transfer-fichas" style="margin-top:16px;display:flex;flex-direction:column;gap:8px"></div>
+    <div class="modal-actions">
+      <button class="mbtn mbtn-s" onclick="closeModal('ov-transfer')">Cancelar</button>
+      <button class="mbtn mbtn-p" id="btn-transfer-ok" onclick="confirmarTransferencia()" style="opacity:.45;pointer-events:none">Continuar →</button>
+    </div>
+  </div>
+</div>
+
+<!-- TRANSFER SEM PDF — aviso -->
+<div class="ov" id="ov-transfer-warn">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-ico">⚠️</div>
+    <h2>PDF ainda não gerado</h2>
+    <p>Você ainda não gerou o PDF desta ficha. Se prosseguir, os dados desta ficha <strong>não serão salvos em PDF</strong> — apenas transferidos para a próxima.</p>
+    <div class="modal-actions">
+      <button class="mbtn mbtn-s" onclick="closeModal('ov-transfer-warn')">Voltar e gerar PDF</button>
+      <button class="mbtn mbtn-p" onclick="closeModal('ov-transfer-warn');abrirTransferencia()">Transferir mesmo assim</button>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM SHEET MOBILE -->
+<div id="pac-mob-sheet">
+  <div id="pac-mob-backdrop" onclick="closePacSheet()"></div>
+  <div id="pac-mob-panel">
+    <div class="tb-menu-hdr">Selecione um caso didático</div>
+    <div id="pac-mob-list"></div>
+  </div>
+</div>
+
+<!-- SINAN NET — tabelas de referência -->
+<script src="data/tb_regiao.js"></script>
+<script src="data/tb_uf.js"></script>
+<script src="data/tb_municipios.js"></script>
+<script src="data/tb_agravo.js"></script>
+<script src="data/tb_ocupacao.js"></script>
+<script src="data/cbo_sinonimos_map.js"></script>
+<script src="data/tb_cnae.js"></script>
+<script src="lib/pdf-lib.min.js"></script>
+
+<script>
+/*==========================================================
+  CAPS LOCK + SEM ACENTO
+==========================================================*/
+document.querySelectorAll('input[data-caps]').forEach(function(inp){
+  inp.addEventListener('input', function(){
+    var pos = this.selectionStart;
+    this.value = this.value.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    try{ this.setSelectionRange(pos,pos); }catch(e){}
+  });
+});
+
+/*==========================================================
+  PARTES ATINGIDAS — seletor visual (máx. 3)
+==========================================================*/
+(function(){
+  var MAX_PARTES = 3;
+  var pills = document.querySelectorAll('.parte-pill');
+  var countEl = document.getElementById('parte-count');
+
+  // Mapa de código → nome legível
+  var CODE_NAMES = {};
+  pills.forEach(function(p){
+    var code = p.dataset.code || p.querySelector('input').value;
+    CODE_NAMES[code] = p.textContent.trim();
+  });
+
+  function updatePartes(){
+    var selected = [];
+    pills.forEach(function(p){
+      var inp = p.querySelector('input');
+      if(inp && inp.checked) selected.push(inp.value);
+    });
+
+    // Atualiza contador
+    if(countEl) countEl.textContent = selected.length + '/' + MAX_PARTES;
+
+    // Desabilita pills não selecionados quando atingir max
+    pills.forEach(function(p){
+      var inp = p.querySelector('input');
+      if(!inp) return;
+      if(selected.length >= MAX_PARTES && !inp.checked){
+        p.classList.add('disabled');
+      } else {
+        p.classList.remove('disabled');
+      }
+    });
+
+    // Preenche campos display e hidden
+    for(var i = 0; i < MAX_PARTES; i++){
+      var displayEl = document.getElementById('f_corpo' + (i+1) + '_display');
+      var hiddenEl = document.getElementById('f_corpo' + (i+1));
+      if(selected[i]){
+        if(displayEl) displayEl.value = selected[i] + ' — ' + CODE_NAMES[selected[i]];
+        if(hiddenEl) hiddenEl.value = selected[i];
+      } else {
+        if(displayEl) displayEl.value = '';
+        if(displayEl) displayEl.placeholder = '—';
+        if(hiddenEl) hiddenEl.value = '';
+      }
+    }
+  }
+
+  // Intercepta cliques nas parte-pills
+  pills.forEach(function(lbl){
+    lbl.addEventListener('click', function(e){
+      e.preventDefault();
+      var inp = this.querySelector('input');
+      if(!inp || this.classList.contains('disabled')) return;
+
+      if(inp.checked){
+        // Desmarcar
+        inp.checked = false;
+        this.classList.remove('checked');
+      } else {
+        // Verificar limite
+        var currentCount = document.querySelectorAll('.parte-pill.checked').length;
+        if(currentCount >= MAX_PARTES) return;
+        inp.checked = true;
+        this.classList.add('checked');
+      }
+      inp.dispatchEvent(new Event('change',{bubbles:true}));
+      updatePartes();
+    });
+  });
+
+  // Sync: hidden → display (para carregar pacientes fictícios)
+  ['f_corpo1','f_corpo2','f_corpo3'].forEach(function(hidId, idx){
+    var hidEl = document.getElementById(hidId);
+    if(!hidEl) return;
+    hidEl.addEventListener('change', function(){
+      var val = hidEl.value;
+      var displayEl = document.getElementById('f_corpo' + (idx+1) + '_display');
+      if(val){
+        if(displayEl) displayEl.value = val + ' — ' + (CODE_NAMES[val] || '');
+        // Marca o pill correspondente
+        pills.forEach(function(p){
+          if(p.dataset.code === val || p.querySelector('input').value === val){
+            p.querySelector('input').checked = true;
+            p.classList.add('checked');
+          }
+        });
+      }
+      updatePartes();
+    });
+  });
+
+  updatePartes();
+})();
+
+/*==========================================================
+  PILL TOGGLE
+==========================================================*/
+document.querySelectorAll('.pill').forEach(function(lbl){
+  lbl.addEventListener('click', function(e){
+    var inp = this.querySelector('input');
+    if(!inp) return;
+    e.preventDefault();
+    if(inp.type === 'radio'){
+      if(inp.checked){
+        inp.checked = false;
+        this.classList.remove('checked','checked-danger');
+      } else {
+        document.querySelectorAll('[name="'+inp.name+'"]').forEach(function(r){
+          r.closest('.pill').classList.remove('checked','checked-danger');
+        });
+        inp.checked = true;
+        this.classList.add('checked');
+      }
+    } else {
+      inp.checked = !inp.checked;
+      this.classList.toggle('checked', inp.checked);
+    }
+    inp.dispatchEvent(new Event('change',{bubbles:true}));
+  });
+});
+
+/*==========================================================
+  SYNC PILL GROUPS COM HIDDEN INPUTS
+==========================================================*/
+(function(){
+  document.querySelectorAll('.pills[data-hidden]').forEach(function(grp){
+    var hidId = grp.dataset.hidden;
+    var hidEl = document.getElementById(hidId);
+    if(!hidEl) return;
+    /* pill → hidden: ao clicar no pill, atualiza hidden e dispara change */
+    grp.querySelectorAll('.pill').forEach(function(p){
+      p.addEventListener('click', function(){
+        var radio = p.querySelector('input[type="radio"]');
+        if(!radio) return;
+        setTimeout(function(){
+          hidEl.value = radio.checked ? radio.value : '';
+          hidEl.dispatchEvent(new Event('change', {bubbles:true}));
+        }, 0);
+      });
+    });
+    /* hidden → pill: quando _setField() seta o hidden, sincroniza visualmente */
+    hidEl.addEventListener('change', function(){
+      var val = hidEl.value;
+      grp.querySelectorAll('.pill').forEach(function(p){
+        var radio = p.querySelector('input[type="radio"]');
+        var match = !!val && radio && radio.value === val;
+        p.classList.toggle('checked', match);
+        if(radio) radio.checked = match;
+      });
+      /* Disparar callbacks especiais para certos campos */
+      if(hidId === 'f_evolucao' && typeof onEvolucao === 'function') onEvolucao();
+    });
+  });
+})();
+
+/*==========================================================
+  CONDITIONALS
+==========================================================*/
+function onSexoChange(){
+  var s = document.querySelector('[name="sexo"]:checked');
+  document.getElementById('row_gest').style.display = (s && s.value === 'F') ? 'grid' : 'none';
+}
+
+function onEmpTerc(){
+  var v = document.querySelector('[name="emp_terc"]:checked');
+  document.getElementById('box_emp_terc_detalhe').style.display = (v && v.value === '1') ? 'block' : 'none';
+}
+
+function onOutrosQuant(){
+  var v = document.querySelector('[name="outros_quant"]:checked');
+  document.getElementById('box_outros_num').style.display = (v && v.value === '1') ? 'flex' : 'none';
+}
+
+function onAtend(){
+  var v = document.querySelector('[name="atend"]:checked');
+  document.getElementById('box_atend_detalhe').style.display = (v && v.value === '1') ? 'block' : 'none';
+}
+
+function onEvolucao(){
+  var v = document.getElementById('f_evolucao').value;
+  document.getElementById('box_obito').style.display = (v === '5' || v === '6') ? 'grid' : 'none';
+}
+
+/*==========================================================
+  SINAN DATA — UF / MUNICIPIO
+==========================================================*/
+
+// Popula todos os <select> de UF
+(function(){
+  var opts = '<option value="">— UF —</option>';
+  (window.SINAN_UFS || []).forEach(function(u){
+    opts += '<option value="' + u.sigla + '">' + u.sigla + '</option>';
+  });
+  ['f_uf_notif','f_uf_res','f_uf_ac','f_uf_atend','f_emp_uf'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.innerHTML = opts;
+  });
+})();
+
+/*==========================================================
+  MOTOR GENÉRICO DE AUTOCOMPLETE
+==========================================================*/
+function acSetup(inputId, dropId, datafn, matchfn, labelFn, selectFn){
+  var inp  = document.getElementById(inputId);
+  var drop = document.getElementById(dropId);
+  if(!inp || !drop) return;
+
+  var _items = [], _active = -1;
+
+  function render(items){
+    _items = items; _active = -1;
+    if(!items.length){ drop.innerHTML = ''; drop.classList.remove('show'); return; }
+    drop.innerHTML = items.map(function(it, i){
+      return '<div class="ac-item" data-i="' + i + '">' + labelFn(it) + '</div>';
+    }).join('');
+    drop.classList.add('show');
+    drop.querySelectorAll('.ac-item').forEach(function(el, i){
+      el.addEventListener('mousedown', function(e){
+        e.preventDefault();
+        selectFn(inp, _items[i]);
+        drop.classList.remove('show');
+        updateProgress();
+      });
+    });
+  }
+
+  inp.addEventListener('input', function(){
+    var q = inp.value.trim().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    if(q.length < 1){ drop.classList.remove('show'); return; }
+    render(datafn().filter(function(d){ return matchfn(d, q); }).slice(0, 20));
+  });
+
+  inp.addEventListener('keydown', function(e){
+    var els = drop.querySelectorAll('.ac-item');
+    if(e.key === 'ArrowDown'){ e.preventDefault(); _active = Math.min(_active+1, els.length-1); }
+    else if(e.key === 'ArrowUp'){ e.preventDefault(); _active = Math.max(_active-1, 0); }
+    else if(e.key === 'Enter' && _active >= 0){ e.preventDefault(); selectFn(inp, _items[_active]); drop.classList.remove('show'); updateProgress(); return; }
+    else if(e.key === 'Escape'){ drop.classList.remove('show'); return; }
+    else { return; }
+    els.forEach(function(el, i){ el.classList.toggle('focused', i === _active); });
+  });
+
+  inp.addEventListener('blur', function(){
+    setTimeout(function(){ drop.classList.remove('show'); }, 160);
+  });
+}
+
+/*==========================================================
+  AUTOCOMPLETE DE MUNICÍPIO (notif, res, ac, atend)
+==========================================================*/
+[
+  {suf:'notif', ibge:'f_ibge_notif'},
+  {suf:'res',   ibge:'f_ibge_res'},
+  {suf:'ac',    ibge:'f_ibge_ac'},
+  {suf:'atend', ibge:'f_ibge_atend'},
+  {suf:'emp',   ibge:'f_emp_ibge',  ufId:'f_emp_uf',  munId:'f_emp_mun'}
+].forEach(function(cfg){
+  var ufId  = cfg.ufId  || ('f_uf_'  + cfg.suf);
+  var munId = cfg.munId || ('f_mun_' + cfg.suf);
+  acSetup(
+    munId, munId + '-drop',
+    function(){ return window.SINAN_MUNICIPIOS || []; },
+    function(m, q){
+      var n = m.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+      return n.indexOf(q) === 0 || n.indexOf(' '+q) !== -1;
+    },
+    function(m){ return '<b>' + m.nome + '</b> <span style="color:#9ca3af;font-size:11px">' + m.uf + ' &mdash; ' + m.ibge + '</span>'; },
+    function(inp, m){
+      inp.value = m.nome;
+      var ufEl = document.getElementById(ufId);
+      if(ufEl) ufEl.value = m.uf;
+      if(cfg.ibge){
+        var ibgeEl = document.getElementById(cfg.ibge);
+        if(ibgeEl) ibgeEl.value = m.ibge;
+      }
+    }
+  );
+  var ufEl = document.getElementById(ufId);
+  if(ufEl) ufEl.addEventListener('change', function(){
+    var munEl = document.getElementById(munId);
+    if(munEl) munEl.value = '';
+    if(cfg.ibge){ var ibgeEl = document.getElementById(cfg.ibge); if(ibgeEl) ibgeEl.value = ''; }
+    var dr = document.getElementById(munId+'-drop');
+    if(dr) dr.classList.remove('show');
+    updateProgress();
+  });
+});
+
+/*==========================================================
+  AUTOCOMPLETE CID-10 (causa e diagnóstico)
+==========================================================*/
+function normCid(s){ return s.replace('.',''); }
+
+['f_causa_cid','f_diag_cid'].forEach(function(fieldId){
+  var hintId = fieldId + '_hint';
+  acSetup(
+    fieldId, fieldId + '-drop',
+    function(){ return window.SINAN_AGRAVOS || []; },
+    function(a, q){
+      var qn = normCid(q);
+      var nome = a.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+      return normCid(a.cid).indexOf(qn) === 0 || nome.indexOf(q) !== -1;
+    },
+    function(a){ return '<b>' + a.cid + '</b> &mdash; ' + a.nome; },
+    function(inp, a){
+      inp.value = a.cid;
+      var hint = document.getElementById(hintId);
+      if(hint){ hint.textContent = a.nome; hint.style.display = 'block'; }
+    }
+  );
+  document.getElementById(fieldId).addEventListener('input', function(){
+    if(!this.value.trim()){ var h=document.getElementById(hintId); if(h){h.style.display='none';h.textContent='';} }
+  });
+});
+
+/*==========================================================
+  AUTOCOMPLETE CNAE (empresa principal + terceirizada)
+  Normaliza código removendo pontos e hifens (01.11-2 → 01112)
+==========================================================*/
+function normCnae(s){ return (s||'').replace(/[.\-]/g,''); }
+
+function cnaeSetup(inputId, hintId){
+  acSetup(
+    inputId, inputId+'-drop',
+    function(){ return window.SINAN_CNAES || []; },
+    function(c, q){
+      var qn = normCnae(q);
+      var nome = c.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+      return normCnae(c.codigo).indexOf(qn) === 0 || nome.indexOf(q) !== -1;
+    },
+    function(c){ return '<b>'+c.codigo+'</b> &mdash; '+c.nome; },
+    function(inp, c){
+      inp.value = c.codigo;
+      var hint = document.getElementById(hintId);
+      if(hint){ hint.textContent = c.nome; hint.style.display = 'block'; }
+    }
+  );
+  var el = document.getElementById(inputId);
+  if(el) el.addEventListener('input', function(){
+    if(!this.value.trim()){
+      var h = document.getElementById(hintId);
+      if(h){ h.style.display='none'; h.textContent=''; }
+    }
+  });
+}
+
+cnaeSetup('f_emp_cnae',      'f_emp_cnae_hint');
+cnaeSetup('f_emp_terc_cnae', 'f_emp_terc_cnae_hint');
+
+// Ao digitar manualmente no campo CNAE: esconde aviso RF e descarta mapeamento automático
+(function(){
+  var el = document.getElementById('f_emp_cnae');
+  if(el) el.addEventListener('input', function(){
+    if(this.dataset) delete this.dataset.sinanCnae;
+    if(this.value.trim()){
+      var w = document.getElementById('rf-cnae-warn');
+      if(w) w.style.display = 'none';
+    }
+  });
+})();
+
+/*==========================================================
+  RECEITA FEDERAL — EXTRAÇÃO DE CNPJ
+==========================================================*/
+function rfTogglePanel(){
+  var panel = document.getElementById('rf-panel');
+  var btn   = document.getElementById('rf-toggle-btn');
+  var open  = panel.style.display === 'block';
+  panel.style.display = open ? 'none' : 'block';
+  btn.classList.toggle('active', !open);
+}
+
+function extractCompanyInfo(text){
+  var r = {};
+  var cnpjM = text.match(/\d{2}[\.\s]?\d{3}[\.\s]?\d{3}[\/\s]?\d{4}[-\s]?\d{2}/);
+  r.cnpj = cnpjM ? cnpjM[0].replace(/\s/g,'') : '';
+
+  // Razão Social: mesma linha OU próxima linha (RF pode separar rótulo e valor com quebra)
+  var rsM = text.match(/Raz[aã]o\s+Social[^:\n\r]*:?\s*([^\n\r]{2,})/i)
+          || text.match(/Raz[aã]o\s+Social[^\n\r]*[\n\r]+\s*([^\n\r]{2,})/i);
+  r.razaoSocial = rsM ? rsM[1].trim().replace(/\s+/g,' ') : '';
+
+  var fnM = text.match(/Nome\s+de?\s+Fantasia[:\s]+([^\n\r]+)/i);
+  r.nomeFantasia = fnM ? fnM[1].trim().replace(/^\.\s*/,'') : '';
+
+  // Extrai CNAE — 3 estratégias em cascata:
+  // 1. Label "CNAE" explícito na mesma linha (ex: "CNAE Principal: 64.22-1-00 - ...")
+  var cnaeM = text.match(/CNAE[^\n:]*:?\s*([\d]{2}\.[\d]{2}-[\d](?:-[\d]{2})?)\s*[-–]\s*([^\n\r]+)/i);
+  // 2. Label "ATIVIDADE ECONÔMICA" na linha anterior, código na próxima
+  if(!cnaeM){
+    var actBlock = text.match(/ATIVIDADE\s+ECON[ÔO]MICA[^\n]*\n([\s\S]{1,300})/i);
+    if(actBlock) cnaeM = actBlock[1].match(/([\d]{2}\.[\d]{2}-[\d](?:-[\d]{2})?)\s*[-–]\s*([^\n\r]+)/);
+  }
+  // 3. Fallback: padrão de subclasse XX.XX-X-XX em qualquer lugar do texto
+  if(!cnaeM) cnaeM = text.match(/([\d]{2}\.[\d]{2}-[\d]-[\d]{2})\s*[-–]\s*([^\n\r]+)/);
+  r.cnaeCode      = cnaeM ? cnaeM[1].trim() : '';
+  r.ramoAtividade = cnaeM ? cnaeM[2].trim() : '';
+
+  var endM = text.match(/Logradouro\s*[\/][^:]*:\s*([^\n\r]+)/i)
+          || text.match(/Logradouro[:\s]+([^\n\r]+)/i);
+  r.logradouro = endM ? endM[1].trim() : '';
+
+  var numM = text.match(/N[uú]mero[:\s]+([^\s\n\r\/,]+)/i);
+  r.numero = numM ? numM[1].trim() : '';
+
+  var bairroM = text.match(/Bairro\s*[\/]\s*[Dd]istrito[:\s]+([^\n\r]+)/i)
+             || text.match(/Bairro[:\s]+([^\n\r]+)/i);
+  r.bairro = bairroM ? bairroM[1].trim() : '';
+
+  var munM = text.match(/Munic[ií]pio[:\s]+([^\n\r]+)/i);
+  r.municipio = munM ? munM[1].trim() : '';
+
+  var ufM = text.match(/\bUF[:\s]+([A-Za-z]{2})\b/i);
+  r.uf = ufM ? ufM[1].toUpperCase() : '';
+
+  return r;
+}
+
+// Normaliza CNAE: remove pontos, hífens e barras
+function normCnaeRF(s){ return (s||'').replace(/[.\-\/\s]/g,''); }
+
+// Exibe código RF no input (fiel à subclasse) e mapeia classe SINAN no hint
+function rfFillCnae(sinanEntry, rfCode){
+  var inp  = document.getElementById('f_emp_cnae');
+  var hint = document.getElementById('f_emp_cnae_hint');
+  var displayCode = rfCode || sinanEntry.codigo;
+  if(inp){
+    inp.value = displayCode;
+    // Guarda a classe SINAN para uso no PDF
+    inp.dataset.sinanCnae = sinanEntry.codigo;
+  }
+  if(hint){
+    var hintText = rfCode && rfCode !== sinanEntry.codigo
+      ? rfCode + ' (RF) \u2192 SINAN: ' + sinanEntry.codigo + ' \u2014 ' + sinanEntry.nome
+      : sinanEntry.nome;
+    hint.textContent = hintText;
+    hint.style.display = 'block';
+  }
+}
+
+// Busca a classe SINAN correspondente a um código de subclasse RF
+function rfMatchCnae(rfCode){
+  if(!rfCode || !window.SINAN_CNAES) return null;
+  var normExt = normCnaeRF(rfCode);
+  // 1. Match exato
+  var found = window.SINAN_CNAES.find(function(c){ return normCnae(c.codigo) === normExt; });
+  if(found) return found;
+  // 2. Subclasse RF começa com a classe SINAN (ex: "2930102" começa com "29301")
+  found = window.SINAN_CNAES.find(function(c){
+    var nc = normCnae(c.codigo);
+    return nc.length < normExt.length && normExt.indexOf(nc) === 0;
+  });
+  return found || null;
+}
+
+// Sugestões semânticas por sobreposição de palavras (fallback)
+function cnaeSemantic(query, topN){
+  if(!window.SINAN_CNAES || !query) return [];
+  var words = query.toUpperCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^A-Z0-9\s]/g,' ')
+    .split(/\s+/).filter(function(w){ return w.length > 3; });
+  if(!words.length) return [];
+  var scored = window.SINAN_CNAES.map(function(c){
+    var nome = c.nome.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    var sc = 0; words.forEach(function(w){ if(nome.indexOf(w) >= 0) sc++; });
+    return {c:c, sc:sc};
+  }).filter(function(x){ return x.sc > 0; });
+  scored.sort(function(a,b){ return b.sc - a.sc; });
+  return scored.slice(0, topN||3).map(function(x){ return x.c; });
+}
+
+function rfExtrair(){
+  var text = document.getElementById('rf-textarea').value;
+  if(!text.trim()){ showToast('Cole o texto da Receita Federal antes de extrair.','warn'); return; }
+  var info = extractCompanyInfo(text);
+
+  if(info.cnpj)        _setField('f_emp_reg',    info.cnpj);
+  if(info.razaoSocial) _setField('f_emp_nome',   info.razaoSocial);
+  if(info.logradouro)  _setField('f_emp_end',    info.logradouro);
+  if(info.numero)      _setField('f_emp_num',    info.numero);
+  if(info.bairro)      _setField('f_emp_bairro', info.bairro);
+  // Município: preenche IBGE e UF automaticamente via base SINAN_MUNICIPIOS
+  if(info.municipio){
+    var munNorm = info.municipio.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    var munFound = (window.SINAN_MUNICIPIOS||[]).find(function(m){
+      return m.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'') === munNorm;
+    });
+    if(munFound){
+      _setField('f_emp_mun',  munFound.nome);
+      var ibgeEl = document.getElementById('f_emp_ibge');
+      if(ibgeEl){ ibgeEl.value = munFound.ibge; ibgeEl.dispatchEvent(new Event('change',{bubbles:true})); }
+      if(!info.uf) _setField('f_emp_uf', munFound.uf);
+    } else {
+      _setField('f_emp_mun', info.municipio);
+    }
+  }
+  if(info.uf) _setField('f_emp_uf', info.uf);
+
+  var cnaeOk = false;
+  if(info.cnaeCode || info.ramoAtividade){
+    var matched = rfMatchCnae(info.cnaeCode);
+    if(matched){ rfFillCnae(matched, info.cnaeCode); cnaeOk = true; }
+  }
+
+  var warn = document.getElementById('rf-cnae-warn');
+  if(!cnaeOk){
+    if(warn){
+      document.getElementById('rf-cnae-warn-code').textContent = info.cnaeCode || '(não identificado)';
+      document.getElementById('rf-cnae-warn-ramo').textContent = info.ramoAtividade ? ' \u2014 ' + info.ramoAtividade : '';
+      // Sugestões semânticas
+      var sug = cnaeSemantic(info.ramoAtividade || info.cnaeCode, 3);
+      var rfCodeEsc = (info.cnaeCode || '').replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+      var html = sug.map(function(c){
+        return '<div class="rf-cnae-sug-item" onclick="rfSelectCnaeSug(\''+c.codigo.replace(/'/g,"\\'")+'\',\''+rfCodeEsc+'\')">'
+             + '<span class="rf-cnae-sug-code">'+c.codigo+'</span>'
+             + '<span class="rf-cnae-sug-name">'+c.nome+'</span></div>';
+      }).join('');
+      document.getElementById('rf-cnae-sugs').innerHTML = html;
+      warn.style.display = 'block';
+    }
+    showToast('Demais campos preenchidos. Escolha o CNAE manualmente.','warn',4000);
+  } else {
+    if(warn) warn.style.display = 'none';
+    showToast('Dados da empresa preenchidos com sucesso.','ok');
+  }
+  document.getElementById('rf-panel').style.display = 'none';
+  document.getElementById('rf-toggle-btn').classList.remove('active');
+  updateProgress();
+}
+
+function rfSelectCnaeSug(codigo, rfCode){
+  var found = (window.SINAN_CNAES||[]).find(function(c){ return c.codigo === codigo; });
+  if(found) rfFillCnae(found, rfCode || found.codigo);
+  var warn = document.getElementById('rf-cnae-warn');
+  if(warn) warn.style.display = 'none';
+  showToast('CNAE selecionado.','ok');
+  updateProgress();
+}
+
+// Retorna o código de classe SINAN para o PDF (sem o sufixo de subclasse)
+function sinanCnaeVal(){
+  var el = document.getElementById('f_emp_cnae');
+  if(!el) return '';
+  if(el.dataset && el.dataset.sinanCnae) return el.dataset.sinanCnae;
+  return el.value.replace(/-\d{2}$/, '').trim();
+}
+
+/*==========================================================
+  AUTOCOMPLETE CBO (ocupação)
+==========================================================*/
+var _cboRevSyn = null;
+function buildCboRevSyn(){
+  if(_cboRevSyn) return _cboRevSyn;
+  _cboRevSyn = {};
+  var map = window.cboSinonimosMap || {};
+  Object.keys(map).forEach(function(code){
+    (map[code]||[]).forEach(function(syn){
+      var key = syn.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim();
+      if(!_cboRevSyn[key]) _cboRevSyn[key] = [];
+      _cboRevSyn[key].push({cboCode: code, synonymText: syn});
+    });
+  });
+  return _cboRevSyn;
+}
+
+function searchCboSynonyms(q){
+  var revMap = buildCboRevSyn();
+  var cbos = window.SINAN_CBOS || [];
+  var results = [];
+  var seen = {};
+  Object.keys(revMap).forEach(function(key){
+    if(key.indexOf(q) === 0 || key.indexOf(' '+q) !== -1 || key.indexOf(q) !== -1){
+      revMap[key].forEach(function(entry){
+        if(seen[entry.cboCode]) return;
+        seen[entry.cboCode] = true;
+        var cboItem = null;
+        for(var i=0;i<cbos.length;i++){ if(cbos[i].cbo===entry.cboCode){cboItem=cbos[i];break;} }
+        if(cboItem){
+          results.push({ cbo: cboItem.cbo, nome: cboItem.nome, synonymText: entry.synonymText, isSynonym: true });
+        }
+      });
+    }
+  });
+  return results;
+}
+
+acSetup(
+  'f_ocupacao', 'f_ocupacao-drop',
+  function(){ return window.SINAN_CBOS || []; },
+  function(c, q){
+    var nome = c.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    return c.cbo.indexOf(q) === 0 || nome.indexOf(q) !== -1;
+  },
+  function(c){
+    if(c.isSynonym){
+      return '<span style="font-size:11px;background:#f39c12;color:#fff;padding:1px 6px;border-radius:4px;margin-right:4px">sinônimo</span><b>' + c.cbo + '</b> &mdash; ' + c.nome + ' <span style="color:#9ca3af;font-size:12px">(você digitou: ' + c.synonymText + ')</span>';
+    }
+    return '<b>' + c.cbo + '</b> &mdash; ' + c.nome;
+  },
+  function(inp, c){
+    inp.value = c.nome;
+    var hint = document.getElementById('f_ocupacao_hint');
+    if(hint){
+      var txt = 'CBO: ' + c.cbo;
+      if(c.isSynonym) txt += ' · Inserido: nome oficial SINAN NET';
+      hint.textContent = txt;
+      hint.style.display = 'block';
+    }
+  }
+);
+
+// Sinônimos CBO
+(function(){
+  var inp = document.getElementById('f_ocupacao');
+  var drop = document.getElementById('f_ocupacao-drop');
+  if(!inp||!drop) return;
+  inp.addEventListener('input', function(){
+    var q = inp.value.trim().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    if(q.length < 2) return;
+    setTimeout(function(){
+      var cbos = window.SINAN_CBOS || [];
+      var directCount = cbos.filter(function(c){
+        var nome = c.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+        return c.cbo.indexOf(q) === 0 || nome.indexOf(q) !== -1;
+      }).length;
+      var synonymResults = searchCboSynonyms(q).slice(0, 5);
+      if(synonymResults.length === 0) return;
+      var existingItems = drop.querySelectorAll('.ac-item');
+      if(existingItems.length === 0 && synonymResults.length > 0){
+        var header = '<div style="padding:6px 14px;font-size:11px;font-weight:800;color:#9ca3af;text-transform:uppercase;letter-spacing:.5px;background:#f9fafb;border-bottom:1px solid #f3f4f6">Sinônimos encontrados</div>';
+        drop.innerHTML = header + synonymResults.map(function(c, i){
+          return '<div class="ac-item ac-synonym" data-i="syn-'+i+'">' +
+            '<span style="font-size:11px;background:#f39c12;color:#fff;padding:1px 6px;border-radius:4px;margin-right:4px">sinônimo</span>' +
+            '<b>' + c.cbo + '</b> &mdash; ' + c.nome +
+            ' <span style="color:#9ca3af;font-size:12px">(você digitou: ' + c.synonymText + ')</span>' +
+            '</div>';
+        }).join('');
+        drop.classList.add('show');
+        drop.querySelectorAll('.ac-item').forEach(function(el, i){
+          el.addEventListener('mousedown', function(e){
+            e.preventDefault();
+            var c = synonymResults[i];
+            inp.value = c.nome;
+            var hint = document.getElementById('f_ocupacao_hint');
+            if(hint){ hint.textContent = 'CBO: ' + c.cbo + ' · Nome oficial SINAN NET'; hint.style.display = 'block'; }
+            drop.classList.remove('show');
+            updateProgress();
+          });
+        });
+      } else if(directCount < 8 && synonymResults.length > 0){
+        var sepDiv = document.createElement('div');
+        sepDiv.style.cssText = 'padding:4px 14px;font-size:11px;font-weight:800;color:#9ca3af;text-transform:uppercase;letter-spacing:.5px;background:#f9fafb;border-top:1px solid #f3f4f6;border-bottom:1px solid #f3f4f6';
+        sepDiv.textContent = 'Sinônimos';
+        drop.appendChild(sepDiv);
+        synonymResults.forEach(function(c){
+          var el = document.createElement('div');
+          el.className = 'ac-item ac-synonym';
+          el.innerHTML = '<span style="font-size:11px;background:#f39c12;color:#fff;padding:1px 6px;border-radius:4px;margin-right:4px">sinônimo</span><b>' + c.cbo + '</b> &mdash; ' + c.nome + ' <span style="color:#9ca3af;font-size:12px">(você digitou: ' + c.synonymText + ')</span>';
+          el.addEventListener('mousedown', function(e){
+            e.preventDefault();
+            inp.value = c.nome;
+            var hint = document.getElementById('f_ocupacao_hint');
+            if(hint){ hint.textContent = 'CBO: ' + c.cbo + ' · Nome oficial SINAN NET'; hint.style.display = 'block'; }
+            drop.classList.remove('show');
+            updateProgress();
+          });
+          drop.appendChild(el);
+        });
+        drop.classList.add('show');
+      }
+    }, 0);
+  });
+})();
+
+/*==========================================================
+  AUTO-IDADE (calcula a partir da data de nascimento)
+==========================================================*/
+document.getElementById('f_nasc').addEventListener('change', function(){
+  var nasc = new Date(this.value + 'T00:00:00');
+  if(isNaN(nasc)) return;
+  var hoje = new Date();
+  hoje.setHours(0,0,0,0);
+  var diffMs = hoje - nasc;
+  if(diffMs < 0) return;
+  var diffDias = Math.floor(diffMs / 86400000);
+  var idadeEl = document.getElementById('f_idade_val');
+  var unEl    = document.getElementById('f_idade_un');
+  if(!idadeEl || !unEl) return;
+  if(diffDias < 29){
+    idadeEl.value = diffDias; unEl.value = 'D';
+  } else if(diffDias < 365){
+    idadeEl.value = Math.floor(diffDias / 30.44); unEl.value = 'M';
+  } else {
+    idadeEl.value = Math.floor(diffDias / 365.25); unEl.value = 'A';
+  }
+  unEl.dispatchEvent(new Event('change', {bubbles:true}));
+  updateProgress();
+});
+
+/*==========================================================
+  MODALS
+==========================================================*/
+function closeModal(id){ document.getElementById(id).classList.remove('show'); }
+document.querySelectorAll('.ov').forEach(function(ov){
+  ov.addEventListener('click', function(e){ if(e.target===this) this.classList.remove('show'); });
+});
+
+/*==========================================================
+  TOAST
+==========================================================*/
+var _toastTimer = null;
+function showToast(msg, type, dur){
+  var t = document.getElementById('toast');
+  clearTimeout(_toastTimer);
+  t.textContent = msg;
+  t.className = 'show '+(type||'');
+  _toastTimer = setTimeout(function(){ t.className=''; }, dur||3000);
+}
+
+/*==========================================================
+  PROGRESS + GAMIFICATION
+==========================================================*/
+var CIRCUMFERENCE = 2 * Math.PI * 29;
+var _prevPct = -1;
+var _sectionMilestones = {};
+var _globalMilestones = {25:false,50:false,80:false,100:false};
+
+var PROG_EXCLUDE_IDS = {'f_num_notif':1,'f_compl_res':1,'f_pais_res':1,'f_geo1_res':1,'f_geo2_res':1,'f_logr_cod_res':1};
+
+var ESS_IDS = {'f_data_notif':1,'f_data_acidente':1,'f_nome':1,'f_raca':1,'f_mun_res':1,'f_ocupacao':1,'f_emp_nome':1};
+var ESS_W = 8;
+var STD_W = 1;
+
+var ESS_GROUPS = ['sexo'];
+var STD_GROUPS = ['cat','outros_quant'];
+var COND_GROUPS = {atend_det:'box_atend_detalhe'};
+
+function isElemVisible(el){
+  var node = el;
+  while(node && node.className !== 'wrapper'){
+    if(node.style && node.style.display === 'none') return false;
+    node = node.parentElement;
+  }
+  return true;
+}
+
+function groupHasCheck(name){
+  return !!document.querySelector('[name="'+name+'"]:checked');
+}
+
+var STATUS_MSGS = [
+  [0,'Pronto para iniciar ✏️'],[1,'Ótimo, começando!'],[10,'Continue assim! 💪'],
+  [25,'25% — bom ritmo!'],[40,'Quase na metade!'],[50,'50% — na metade! 🔥'],
+  [65,'Mais da metade! Quase lá!'],[79,'Faltam poucos campos essenciais!'],[90,'Finalizando...'],
+  [99,'Último campo!'],[100,'🎉 Ficha completa!']
+];
+function getStatusMsg(pct){
+  var msg = STATUS_MSGS[0][1];
+  for(var i=0;i<STATUS_MSGS.length;i++){ if(pct>=STATUS_MSGS[i][0]) msg=STATUS_MSGS[i][1]; }
+  return msg;
+}
+
+var COUNT_MSGS = [
+  [0,  'Comece pelos campos marcados com ⭐ — são os mais importantes'],
+  [1,  'Priorize os campos essenciais ⭐ para um registro de qualidade'],
+  [26, 'Cada detalhe fortalece a vigilância em saúde do trabalhador'],
+  [51, 'Você está construindo um registro de qualidade'],
+  [80, 'Parabéns pelo cuidado — o registro está quase completo!'],
+  [100,'Ficha exemplar — obrigado pelo compromisso com a saúde!']
+];
+function getCountMsg(pct){
+  var msg = COUNT_MSGS[0][1];
+  for(var i=0;i<COUNT_MSGS.length;i++){ if(pct>=COUNT_MSGS[i][0]) msg=COUNT_MSGS[i][1]; }
+  return msg;
+}
+
+var PROG_LEVELS = [
+  [0,  'Ficha Inicial',  '#9ca3af'],
+  [26, 'Ficha Básica',   '#60a5fa'],
+  [51, 'Ficha Útil',     '#2563eb'],
+  [80, 'Padrão Ouro ✅', '#22c55e'],
+  [100,'Diamante 💎',    '#d97706']
+];
+function getLevel(pct){
+  var lv = PROG_LEVELS[0];
+  for(var i=0;i<PROG_LEVELS.length;i++){ if(pct>=PROG_LEVELS[i][0]) lv=PROG_LEVELS[i]; }
+  return lv;
+}
+
+function updateProgress(){
+  var totalW = 0, filledW = 0;
+
+  Object.keys(ESS_IDS).forEach(function(id){
+    var el = document.getElementById(id);
+    if(!el) return;
+    totalW += ESS_W;
+    if(el.value && el.value.trim()) filledW += ESS_W;
+  });
+
+  ESS_GROUPS.forEach(function(name){
+    totalW += ESS_W;
+    if(groupHasCheck(name)) filledW += ESS_W;
+  });
+
+  var stdEls = Array.from(document.querySelectorAll('input:not([type=radio]):not([type=checkbox]):not([type=hidden]),select'));
+  stdEls.forEach(function(el){
+    if(PROG_EXCLUDE_IDS[el.id] || el.readOnly) return;
+    if(ESS_IDS[el.id]) return;
+    if(!isElemVisible(el)) return;
+    totalW += STD_W;
+    if(el.value && el.value.trim()) filledW += STD_W;
+  });
+
+  STD_GROUPS.forEach(function(name){
+    var grpEl = document.querySelector('[name="'+name+'"]');
+    if(!grpEl || !isElemVisible(grpEl)) return;
+    totalW += STD_W;
+    if(groupHasCheck(name)) filledW += STD_W;
+  });
+
+  Object.keys(COND_GROUPS).forEach(function(name){
+    var cont = document.getElementById(COND_GROUPS[name]);
+    if(!cont || cont.style.display === 'none') return;
+    totalW += STD_W;
+    if(groupHasCheck(name)) filledW += STD_W;
+  });
+
+  var pct = totalW > 0 ? Math.round(filledW/totalW*100) : 0;
+  var level = getLevel(pct);
+
+  var offset = CIRCUMFERENCE - (pct/100)*CIRCUMFERENCE;
+  var ring = document.getElementById('prog-ring');
+  ring.style.strokeDashoffset = offset;
+  ring.style.stroke = level[2];
+
+  document.getElementById('prog-pct').textContent = pct+'%';
+  document.getElementById('prog-status').textContent = getStatusMsg(pct);
+  document.getElementById('prog-count').textContent = getCountMsg(pct);
+  var lvEl = document.getElementById('prog-level');
+  if(lvEl){ lvEl.textContent = level[1]; lvEl.style.background = level[2]+'30'; lvEl.style.color = pct>=80?'#fff':'rgba(255,255,255,.85)'; }
+
+  var barFill = document.getElementById('prog-bar-fill');
+  if(barFill){ barFill.style.width = pct+'%'; barFill.style.background = level[2]; }
+  var barStrip = document.getElementById('prog-bar-strip');
+  if(barStrip){ barStrip.style.background = pct>0?'rgba(0,0,0,.1)':'rgba(255,255,255,.08)'; }
+
+  var mobPct = document.getElementById('mob-prog-pct');
+  if(mobPct) mobPct.textContent = pct+'%';
+  var mobLabel = document.getElementById('mob-prog-label');
+  if(mobLabel) mobLabel.textContent = level[1];
+
+  [25,50].forEach(function(m){
+    if(pct>=m && !_globalMilestones[m]){
+      _globalMilestones[m]=true;
+      showToast(m===25?'🎯 25% da ficha preenchida — ótimo começo!':'🔥 Metade concluída! Continue assim!','t-mile',3800);
+    }
+  });
+  if(pct>=80 && !_globalMilestones[80]){
+    _globalMilestones[80]=true;
+    showToast('🏆 Padrão Ouro! Todos os campos essenciais preenchidos!','t-ok',4500);
+    var rw = document.querySelector('.prog-ring-wrap');
+    if(rw){ rw.classList.add('celebrate'); setTimeout(function(){ rw.classList.remove('celebrate'); },600); }
+  }
+  if(pct===100 && !_globalMilestones[100]){
+    _globalMilestones[100]=true;
+    showToast('💎 Ficha Diamante! Preenchimento completo!','t-ok',4500);
+  }
+  if(pct<80) _globalMilestones[80]=false;
+  if(pct<100) _globalMilestones[100]=false;
+
+  updateSectionBadges();
+  _prevPct = pct;
+}
+
+function updateSectionBadges(){
+  for(var s=1;s<=9;s++){
+    var secEl = document.getElementById('sec'+s);
+    var badge = document.getElementById('badge'+s);
+    if(!secEl||!badge) continue;
+
+    var essFlds = secEl.querySelectorAll('[data-ess]');
+    var essFilled=0;
+    essFlds.forEach(function(el){ if(el.value&&el.value.trim()) essFilled++; });
+
+    var allInSec = Array.from(secEl.querySelectorAll('input:not([type=radio]):not([type=checkbox]):not([type=hidden]),select'))
+      .filter(function(el){ return !PROG_EXCLUDE_IDS[el.id] && !el.readOnly && isElemVisible(el); });
+    var allFilled=0;
+    allInSec.forEach(function(el){ if(el.value&&el.value.trim()) allFilled++; });
+    var allTotal = allInSec.length;
+
+    if(allTotal===0){
+      badge.textContent = '—'; badge.className = 'sec-badge badge-empty';
+      secEl.classList.remove('done','partial'); continue;
+    }
+
+    var essDone = essFlds.length===0 || essFilled===essFlds.length;
+    var allDone = allFilled===allTotal;
+
+    if(allDone){
+      badge.textContent = '✓ Completo'; badge.className = 'sec-badge badge-done';
+      if(!_sectionMilestones[s]){ _sectionMilestones[s]=true; showToast('✅ Seção '+s+' totalmente preenchida!','t-ok',2500); }
+      secEl.classList.remove('partial'); secEl.classList.add('done');
+    } else if(essDone && allFilled>0){
+      badge.textContent = '⭐ Essenciais OK'; badge.className = 'sec-badge badge-done';
+      if(!_sectionMilestones[s]){ _sectionMilestones[s]=true; showToast('⭐ Seção '+s+' — campos essenciais preenchidos!','t-ok',2500); }
+      secEl.classList.remove('partial'); secEl.classList.add('done');
+    } else if(allFilled>0){
+      badge.textContent = 'Em andamento'; badge.className = 'sec-badge badge-partial';
+      _sectionMilestones[s]=false; secEl.classList.remove('done'); secEl.classList.add('partial');
+    } else {
+      badge.textContent = '—'; badge.className = 'sec-badge badge-empty';
+      _sectionMilestones[s]=false; secEl.classList.remove('done','partial');
+    }
+  }
+}
+
+document.querySelectorAll('input,select,textarea').forEach(function(el){
+  el.addEventListener('input', updateProgress);
+  el.addEventListener('change', updateProgress);
+});
+updateProgress();
+
+/*==========================================================
+  VALIDATION — campos essenciais
+==========================================================*/
+function getMissingEssentials(){
+  var missing = [];
+  document.querySelectorAll('[data-ess]').forEach(function(el){
+    if(!el.value||!el.value.trim()){
+      el.classList.add('error');
+      missing.push(el.dataset.label||el.id);
+    } else {
+      el.classList.remove('error');
+    }
+  });
+  var groupLabels = {sexo:'Sexo '};
+  ESS_GROUPS.forEach(function(name){
+    if(!groupHasCheck(name)) missing.push(groupLabels[name]||name);
+  });
+  return missing;
+}
+
+/*==========================================================
+  HELPERS
+==========================================================*/
+function getRadio(name){
+  var el=document.querySelector('[name="'+name+'"]:checked');
+  return el?el.value:'';
+}
+function getChecks(name){
+  var v=[];
+  document.querySelectorAll('[name="'+name+'"]:checked').forEach(function(c){v.push(c.value);});
+  return v;
+}
+function fmtDate(val){
+  if(!val) return '';
+  var p=val.split('-');
+  return p.length===3?p[2]+'/'+p[1]+'/'+p[0]:val;
+}
+function tv(id){ return (document.getElementById(id)||{}).value||''; }
+
+/*==========================================================
+  GERAR PDF
+==========================================================*/
+async function gerarPDF(force){
+  if(!force){
+    var missing = getMissingEssentials();
+    if(missing.length>0){
+      document.getElementById('ov-quase-list').innerHTML = missing.map(function(e){
+        return '<div class="err-item">⭐ '+e+'</div>';
+      }).join('');
+      var dlBtn = document.getElementById('ov-quase-dl');
+      dlBtn.onclick = function(){ closeModal('ov-quase'); gerarPDF(true); };
+      document.getElementById('ov-quase').classList.add('show');
+      return;
+    }
+  }
+
+  var btn = document.getElementById('btn-gerar');
+  btn.disabled=true;
+  btn.textContent='⏳ Gerando...';
+
+  try{
+    var resp = await fetch('fichas/DRT_Acidente_Trabalho_editavel.pdf');
+    if(!resp.ok) throw new Error('Arquivo DRT_Acidente_Trabalho_editavel.pdf não encontrado em fichas/');
+    var pdfBytes = await resp.arrayBuffer();
+    var pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
+    var form = pdfDoc.getForm();
+
+    function setTxt(name,val){
+      try{ form.getTextField(name).setText(val||''); }catch(e){}
+    }
+
+    var _sexoPDF = getRadio('sexo');
+
+    // Seção 1 — Notificação
+    setTxt('notificacao_numero',              tv('f_num_notif'));
+    setTxt('data_notificacao',               fmtDate(tv('f_data_notif')));
+    setTxt('uf_notificacao',                 tv('f_uf_notif'));
+    setTxt('municipio_notificacao_nome',     tv('f_mun_notif'));
+    setTxt('municipio_notificacao_codigo_ibge', tv('f_ibge_notif'));
+    setTxt('unidade_notificadora_nome',      tv('f_nome_un'));
+    setTxt('unidade_notificadora_cnes',      tv('f_cnes'));
+    setTxt('data_acidente',                  fmtDate(tv('f_data_acidente')));
+
+    // Seção 2 — Paciente
+    setTxt('paciente_nome',            tv('f_nome'));
+    setTxt('paciente_data_nascimento', fmtDate(tv('f_nasc')));
+    setTxt('paciente_idade_valor',     tv('f_idade_val'));
+    setTxt('paciente_idade_tipo',      ({H:'1',D:'2',M:'3',A:'4'})[tv('f_idade_un')]||'');
+    setTxt('paciente_sexo',            _sexoPDF);
+    setTxt('paciente_gestante',        _sexoPDF==='M'?'6':tv('f_gest'));
+    setTxt('paciente_raca_cor',        tv('f_raca'));
+    setTxt('paciente_escolaridade',    tv('f_escol'));
+    setTxt('paciente_cartao_sus',      tv('f_sus'));
+    setTxt('paciente_mae_nome',        tv('f_mae'));
+
+    // Seção 3 — Residência
+    setTxt('residencia_uf',                    tv('f_uf_res'));
+    setTxt('residencia_municipio_nome',        tv('f_mun_res'));
+    setTxt('residencia_municipio_codigo_ibge', tv('f_ibge_res'));
+    setTxt('residencia_distrito',              tv('f_bairro_res'));
+    setTxt('residencia_bairro',                tv('f_bairro_res'));
+    setTxt('residencia_logradouro',            tv('f_logr_res'));
+    setTxt('residencia_logradouro_codigo',     tv('f_logr_cod_res'));
+    setTxt('residencia_numero',                tv('f_num_res'));
+    setTxt('residencia_complemento',           tv('f_compl_res'));
+    setTxt('residencia_geo_campo_1',           tv('f_geo1_res'));
+    setTxt('residencia_geo_campo_2',           tv('f_geo2_res'));
+    setTxt('residencia_ponto_de_referencia',   tv('f_pref_res'));
+    setTxt('residencia_cep',                   tv('f_cep'));
+    setTxt('residencia_telefone',              tv('f_tel_res'));
+    setTxt('residencia_zona',                  tv('f_zona_res'));
+    setTxt('residencia_pais',                  tv('f_pais_res'));
+
+    // Seção 4 — Ocupação
+    setTxt('pessoa_ocupacao',                  tv('f_ocupacao'));
+    setTxt('situacao_mercado_trabalho',        tv('f_sit_mercado'));
+    setTxt('tempo_trabalho_ocupacao_valor',    tv('f_tempo_trab_val'));
+    setTxt('tempo_trabalho_ocupacao_tipo',     tv('f_tempo_trab_tipo'));
+    setTxt('local_acidente',                   tv('f_local_ac'));
+
+    // Seção 5 — Empresa
+    setTxt('empresa_registro_cnpj_cpf',        tv('f_emp_reg'));
+    setTxt('empresa_nome',                     tv('f_emp_nome'));
+    setTxt('empresa_cnae',                     sinanCnaeVal());
+    setTxt('empresa_uf',                       tv('f_emp_uf'));
+    setTxt('empresa_municipio',                tv('f_emp_mun'));
+    setTxt('empresa_cnae_codigo_ibge',         tv('f_emp_ibge'));
+    setTxt('empresa_distrito',                 tv('f_emp_dist'));
+    setTxt('empresa_bairro',                   tv('f_emp_bairro'));
+    setTxt('empresa_endereco',                 tv('f_emp_end'));
+    setTxt('empresa_numero',                   tv('f_emp_num'));
+    setTxt('empresa_ponto_referencia',         tv('f_emp_pref'));
+    setTxt('empresa_telefone',                 tv('f_emp_tel'));
+    setTxt('empresa_terceirizada',             getRadio('emp_terc'));
+    setTxt('empresa_terceirizada_cnae',        tv('f_emp_terc_cnae'));
+    setTxt('empresa_principal_cnpj',           tv('f_emp_princ_cnpj'));
+    setTxt('empresa_principal_razao_social',   tv('f_emp_princ_rs'));
+
+    // Seção 6 — Acidente
+    setTxt('hora_acidente_hora',               tv('f_hora_h'));
+    setTxt('hora_acidente_minuto',             tv('f_hora_m'));
+    setTxt('horas_apos_jornada_hora',          tv('f_jorn_h'));
+    setTxt('horas_apos_jornada_minuto',        tv('f_jorn_m'));
+    setTxt('acidente_uf',                      tv('f_uf_ac'));
+    setTxt('acidente_municipio_nome',          tv('f_mun_ac'));
+    setTxt('acidente_municipio_codigo_ibge',   tv('f_ibge_ac'));
+    setTxt('acidente_causa_cid10',             tv('f_causa_cid').split(' ')[0]);
+    setTxt('tipo_acidente',                    tv('f_tipo_ac'));
+    setTxt('outros_trabalhadores_atingidos',   getRadio('outros_quant'));
+    setTxt('outros_trabalhadores_quantos',     tv('f_outros_num'));
+
+    // Seção 7 — Atendimento
+    setTxt('atendimento_medico_ocorreu',          getRadio('atend'));
+    setTxt('data_atendimento',                    fmtDate(tv('f_data_atend')));
+    setTxt('atendimento_uf',                      tv('f_uf_atend'));
+    setTxt('atendimento_municipio_nome',          tv('f_mun_atend'));
+    setTxt('atendimento_municipio_codigo_ibge',   tv('f_ibge_atend'));
+    setTxt('atendimento_unidade_saude_nome',      tv('f_un_atend'));
+    setTxt('atendimento_unidade_saude_codigo',    tv('f_cod_atend'));
+
+    // Seção 8 — Lesões
+    setTxt('corpo_atingido_1',         tv('f_corpo1'));
+    setTxt('corpo_atingido_2',         tv('f_corpo2'));
+    setTxt('corpo_atingido_3',         tv('f_corpo3'));
+    setTxt('diagnostico_lesao_cid10',  tv('f_diag_cid').split(' ')[0]);
+    setTxt('regime_tratamento',        tv('f_regime'));
+
+    // Seção 9 — Encerramento
+    setTxt('evolucao_caso',             tv('f_evolucao'));
+    setTxt('cat_emitida',               getRadio('cat'));
+    setTxt('obito_data',                fmtDate(tv('f_obito')));
+    setTxt('descricao_acidente',        document.getElementById('f_desc').value||'');
+    setTxt('observacoes_complementares', document.getElementById('f_obs').value||'');
+
+    var outBytes = await pdfDoc.save();
+    var blob = new Blob([outBytes],{type:'application/pdf'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href=url;
+    var ds = fmtDate(tv('f_data_notif')).replace(/\//g,'-')||'sem-data';
+    var nm = tv('f_nome').split(' ')[0]||'PACIENTE';
+    a.download = 'SINAN_Acidente_'+nm+'_'+ds+'.pdf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('✓ PDF gerado e baixado com sucesso!','t-ok',4000);
+    var btnTr = document.getElementById('btn-transfer');
+    if(btnTr) btnTr.classList.remove('btn-disabled');
+
+  } catch(e){
+    console.error(e);
+    showToast('Erro ao gerar PDF: '+e.message,'t-err',5000);
+  }
+
+  btn.disabled=false;
+  btn.innerHTML='📄 Gerar PDF';
+}
+</script>
+
+<!-- BARRA INFERIOR — visível apenas em mobile -->
+<div id="mob-bottom">
+  <a id="mob-back-btn" href="index.html">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15,18 9,12 15,6"/></svg>
+    Menu
+  </a>
+  <div id="mob-prog-wrap">
+    <span id="mob-prog-pct">0%</span>
+    <span id="mob-prog-label">preenchido</span>
+  </div>
+  <button id="mob-pdf-btn" onclick="gerarPDF()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+    Gerar PDF
+  </button>
+</div>
+
+<script>
+/* ── TOOLTIP TOGGLE ─────────────────────────────────────────
+   Usa position:fixed calculado para escapar de overflow:hidden
+──────────────────────────────────────────────────────────── */
+function _tipClose(){
+  document.querySelectorAll('.tip-wrap.open').forEach(function(w){
+    w.classList.remove('open');
+    w.querySelector('.tip-btn').classList.remove('open');
+    var pop = w.querySelector('.tip-pop');
+    if(pop){ pop.removeAttribute('style'); }
+  });
+}
+
+function tipToggle(btn){
+  var wrap = btn.closest('.tip-wrap');
+  if(!wrap) return;
+  var pop  = wrap.querySelector('.tip-pop');
+  var isOpen = wrap.classList.contains('open');
+
+  _tipClose();
+
+  if(isOpen) return;
+
+  wrap.classList.add('open');
+  btn.classList.add('open');
+
+  var rect = btn.getBoundingClientRect();
+  var GAP  = 10;
+  var MAX_W = Math.min(pop.dataset.wide ? 360 : 290, window.innerWidth - 24);
+
+  pop.style.cssText = [
+    'position:fixed',
+    'width:' + MAX_W + 'px',
+    'max-width:' + MAX_W + 'px',
+    'display:block',
+    'visibility:hidden',
+    'bottom:auto',
+    'left:0',
+    'top:0',
+    'transform:none'
+  ].join(';');
+
+  var popH = pop.offsetHeight;
+  var popW = pop.offsetWidth || MAX_W;
+
+  var left = rect.left + rect.width / 2 - popW / 2;
+  left = Math.max(12, Math.min(left, window.innerWidth - popW - 12));
+
+  var topAbove = rect.top - popH - GAP;
+  var topBelow = rect.bottom + GAP;
+  var top, arrowBelow;
+  if(topAbove >= 8){
+    top = topAbove; arrowBelow = true;
+  } else {
+    top = topBelow; arrowBelow = false;
+  }
+
+  pop.style.cssText = [
+    'position:fixed',
+    'width:' + MAX_W + 'px',
+    'max-width:' + MAX_W + 'px',
+    'top:' + Math.round(top) + 'px',
+    'left:' + Math.round(left) + 'px',
+    'bottom:auto',
+    'transform:none',
+    'visibility:visible',
+    'display:block',
+    '--tip-arrow-left:' + Math.round(rect.left + rect.width/2 - left) + 'px'
+  ].join(';');
+
+  pop.dataset.arrowBelow = arrowBelow ? '1' : '0';
+
+  setTimeout(function(){
+    function _close(ev){
+      if(!wrap.contains(ev.target)){ _tipClose(); }
+      document.removeEventListener('click', _close);
+      document.removeEventListener('touchstart', _close);
+    }
+    document.addEventListener('click', _close);
+    document.addEventListener('touchstart', _close);
+  }, 10);
+}
+
+/* ── TRANSFERÊNCIA PARA OUTRA FICHA ──────────────────────────
+   sessionStorage: salva todos os dados e redireciona
+──────────────────────────────────────────────────────────── */
+var _transferTarget = null;
+var TRANSFER_FICHAS_AC = [
+  {id:'violencia',   label:'Viol\u00eancia',            sub:'Viol\u00eancia dom\u00e9stica, sexual e/ou interpessoal',    url:'sinan_violencia.html',   color:'#1e40af'},
+  {id:'lerdort',     label:'LER/DORT',             sub:'Les\u00e3o por esfor\u00e7o repetitivo / DORT',              url:'sinan_lerdort.html',     color:'#0f766e'},
+  {id:'transtornos', label:'Transtornos Mentais',  sub:'Transtornos mentais relacionados ao trabalho',     url:'sinan_transtornos.html', color:'#4338ca'},
+  {id:'pair',        label:'PAIR',                 sub:'Perda auditiva induzida por ru\u00eddo',                url:'sinan_pair.html',        color:'#0369a1'},
+  {id:'dermatoses',  label:'Dermatoses',           sub:'Dermatoses ocupacionais',                          url:'sinan_dermatoses.html',  color:'#be185d'}
+];
+
+function clickTransfer(){
+  var btn = document.getElementById('btn-transfer');
+  if(btn && btn.classList.contains('btn-disabled')){
+    document.getElementById('ov-transfer-warn').classList.add('show');
+  } else {
+    abrirTransferencia();
+  }
+}
+
+function abrirTransferencia(){
+  _transferTarget = null;
+  var okBtn = document.getElementById('btn-transfer-ok');
+  okBtn.style.opacity = '.45'; okBtn.style.pointerEvents = 'none';
+  var cont = document.getElementById('transfer-fichas');
+  cont.innerHTML = TRANSFER_FICHAS_AC.map(function(f){
+    return '<div class="transfer-ficha-opt" data-id="'+f.id+'" onclick="selectTransfer(this,\''+f.id+'\')">'+
+      '<span class="transfer-ficha-dot" style="background:'+f.color+'"></span>'+
+      '<span><strong class="transfer-ficha-name">'+f.label+'</strong><span class="transfer-ficha-sub">'+f.sub+'</span></span>'+
+      '</div>';
+  }).join('');
+  document.getElementById('ov-transfer').classList.add('show');
+}
+
+function selectTransfer(el, id){
+  document.querySelectorAll('#transfer-fichas .transfer-ficha-opt').forEach(function(o){ o.classList.remove('selected'); });
+  el.classList.add('selected');
+  _transferTarget = id;
+  var okBtn = document.getElementById('btn-transfer-ok');
+  okBtn.style.opacity = '1'; okBtn.style.pointerEvents = '';
+}
+
+function confirmarTransferencia(){
+  if(!_transferTarget) return;
+  var ficha = TRANSFER_FICHAS_AC.filter(function(f){ return f.id===_transferTarget; })[0];
+  if(!ficha) return;
+  var payload = {source:'acidente', ts:new Date().toISOString(), fields:{}, radios:{}, checks:{}};
+  document.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]):not(#f-import), select, textarea')
+    .forEach(function(el){ if(el.id && el.value!=='') payload.fields[el.id]=el.value; });
+  document.querySelectorAll('input[type="radio"]:checked').forEach(function(inp){ payload.radios[inp.name]=inp.value; });
+  document.querySelectorAll('input[type="checkbox"]:checked').forEach(function(inp){
+    if(!payload.checks[inp.name]) payload.checks[inp.name]=[];
+    payload.checks[inp.name].push(inp.value);
+  });
+  sessionStorage.setItem('sinan_transfer', JSON.stringify(payload));
+  window.location.href = ficha.url;
+}
+
+/* ── SESSION STORAGE — importar dados transferidos de outra ficha ── */
+(function(){
+  var raw = sessionStorage.getItem('sinan_transfer');
+  if(!raw) return;
+  try{
+    var payload = JSON.parse(raw);
+    sessionStorage.removeItem('sinan_transfer');
+    if(!payload || !payload.source) return;
+    // Mapeamento de campos comuns entre fichas
+    var fieldMap = {
+      f_nome:1, f_nasc:1, f_raca:1, f_escol:1, f_sus:1, f_mae:1,
+      f_mun_res:1, f_uf_res:1, f_ibge_res:1,
+      f_bairro_res:1, f_logr_res:1, f_num_res:1, f_compl_res:1,
+      f_pref_res:1, f_cep:1, f_tel_res:1, f_zona_res:1, f_pais_res:1,
+      f_mun_notif:1, f_uf_notif:1, f_ibge_notif:1,
+      f_nome_un:1, f_cnes:1
+    };
+    var radioMap = {sexo:1};
+    Object.keys(payload.fields||{}).forEach(function(id){
+      if(fieldMap[id]){ _setField(id, payload.fields[id]); }
+    });
+    Object.keys(payload.radios||{}).forEach(function(name){
+      if(radioMap[name]){ _setRadio(name, payload.radios[name]); }
+    });
+    _applyVisibility();
+    // Re-aplica municípios após aplicar UF
+    ['notif','res'].forEach(function(suf){
+      var id = 'f_mun_' + suf;
+      if(payload.fields && payload.fields[id]){
+        var el = document.getElementById(id);
+        if(el) el.value = payload.fields[id];
+      }
+    });
+    document.querySelectorAll('.ac-drop').forEach(function(d){ d.innerHTML=''; d.classList.remove('show'); });
+    updateProgress();
+    showToast('📋 Dados transferidos da outra ficha aplicados!','t-ok',4000);
+  } catch(e){ sessionStorage.removeItem('sinan_transfer'); }
+})();
+
+/* ── TOOLS ──────────────────────────────────────────────────── */
+
+var FAKE_PATIENTS = [
+  {
+    label: "Roberto Santos, 42 anos",
+    sub: "Acidente típico · mão e dedos · metalúrgico · São Paulo/SP",
+    fields: {
+      f_data_notif:"2025-07-10", f_data_acidente:"2025-07-09",
+      f_nome_un:"UPA NORTE", f_cnes:"2078015",
+      f_mun_notif:"SAO PAULO", f_uf_notif:"SP", f_ibge_notif:"355030",
+      f_nome:"ROBERTO SANTOS PEREIRA", f_nasc:"1983-04-12", f_raca:"4", f_escol:"4",
+      f_sus:"706012300000011", f_mae:"MARIA SANTOS",
+      f_mun_res:"SAO PAULO", f_uf_res:"SP", f_ibge_res:"355030",
+      f_bairro_res:"VILA MADALENA", f_logr_res:"RUA GIRASSOL", f_num_res:"270",
+      f_cep:"05433-900", f_tel_res:"(11) 98765-1111", f_zona_res:"1",
+      f_ocupacao:"OPERADOR DE MAQUINAS DE CORTE E DOBRAMENTO DE METAIS",
+      f_sit_mercado:"1", f_tempo_trab_val:"8", f_tempo_trab_tipo:"A",
+      f_local_ac:"01",
+      f_emp_nome:"METALURGICA PAULISTA LTDA", f_emp_cnae:"2422501",
+      f_emp_uf:"SP", f_emp_mun:"SAO PAULO", f_emp_bairro:"IPIRANGA",
+      f_emp_end:"AVENIDA DO ESTADO", f_emp_num:"3001",
+      f_hora_h:"14", f_hora_m:"30",
+      f_uf_ac:"SP", f_mun_ac:"SAO PAULO", f_ibge_ac:"355030",
+      f_causa_cid:"W29", f_tipo_ac:"1",
+      f_diag_cid:"S67.0", f_regime:"1",
+      f_corpo1:"36", f_corpo2:"37"
+    },
+    radios: {sexo:"M", outros_quant:"2", atend:"1", cat:"1"}
+  },
+  {
+    label: "Adriana Lima, 35 anos",
+    sub: "Acidente de trajeto · coluna e costelas · enfermeira · BH/MG",
+    fields: {
+      f_data_notif:"2025-09-03", f_data_acidente:"2025-09-02",
+      f_nome_un:"HOSPITAL DAS CLINICAS", f_cnes:"3100450",
+      f_mun_notif:"BELO HORIZONTE", f_uf_notif:"MG", f_ibge_notif:"310620",
+      f_nome:"ADRIANA LIMA CARVALHO", f_nasc:"1990-02-18", f_raca:"1", f_escol:"7", f_gest:"5",
+      f_sus:"706012300000012", f_mae:"CLEIDE LIMA",
+      f_mun_res:"BELO HORIZONTE", f_uf_res:"MG", f_ibge_res:"310620",
+      f_bairro_res:"SANTO AGOSTINHO", f_logr_res:"AVENIDA AFONSO PENA", f_num_res:"1800",
+      f_cep:"30130-011", f_tel_res:"(31) 99876-5432", f_zona_res:"1",
+      f_ocupacao:"ENFERMEIRO DE TERAPIA INTENSIVA",
+      f_sit_mercado:"7", f_tempo_trab_val:"5", f_tempo_trab_tipo:"A",
+      f_local_ac:"03",
+      f_emp_nome:"HOSPITAL DAS CLINICAS UFMG", f_emp_cnae:"8610101",
+      f_emp_uf:"MG", f_emp_mun:"BELO HORIZONTE",
+      f_hora_h:"07", f_hora_m:"15",
+      f_uf_ac:"MG", f_mun_ac:"BELO HORIZONTE", f_ibge_ac:"310620",
+      f_causa_cid:"V89", f_tipo_ac:"2",
+      f_diag_cid:"S22.0", f_regime:"2",
+      f_corpo1:"21", f_corpo2:"23", f_corpo3:"24"
+    },
+    radios: {sexo:"F", outros_quant:"2", atend:"1", cat:"1"}
+  }
+];
+
+// Monta menu de pacientes (desktop e mobile)
+(function(){
+  var listHtml = FAKE_PATIENTS.map(function(p,i){
+    return '<div class="tb-mi" onclick="carregarPaciente('+i+');closePacMenuAll()">' +
+      '<span class="tb-mi-name">'+p.label+'</span>' +
+      '<span class="tb-mi-sub">'+p.sub+'</span></div>';
+  }).join('');
+
+  var menu = document.getElementById('pac-menu');
+  if(menu) menu.innerHTML = '<div class="tb-menu-hdr">Selecione um caso didático</div>' + listHtml;
+
+  var mobList = document.getElementById('pac-mob-list');
+  if(mobList) mobList.innerHTML = listHtml;
+})();
+
+function isMobile(){ return window.innerWidth <= 768; }
+
+function togglePacMenu(e){
+  if(e) e.stopPropagation();
+  if(isMobile()){
+    openPacSheet();
+  } else {
+    document.getElementById('pac-menu').classList.toggle('open');
+  }
+}
+
+function openPacSheet(){
+  document.getElementById('pac-mob-sheet').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePacSheet(){
+  document.getElementById('pac-mob-sheet').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function closePacMenuAll(){
+  document.getElementById('pac-menu').classList.remove('open');
+  closePacSheet();
+}
+
+document.addEventListener('click', function(){ document.getElementById('pac-menu').classList.remove('open'); });
+
+// ------ helpers ------
+
+function _setField(id, val){
+  var el = document.getElementById(id);
+  if(!el || val === undefined || val === null || val === '') return;
+  el.value = val;
+  el.dispatchEvent(new Event('input',{bubbles:true}));
+  el.dispatchEvent(new Event('change',{bubbles:true}));
+}
+
+function _setRadio(name, val){
+  var inp = document.querySelector('input[name="'+name+'"][value="'+val+'"]');
+  if(!inp) return;
+  inp.closest('.pill').click();
+  inp.dispatchEvent(new Event('change',{bubbles:true}));
+}
+
+function _setChecks(name, vals){
+  document.querySelectorAll('input[name="'+name+'"]:checked').forEach(function(inp){
+    inp.closest('.pill').click();
+  });
+  (vals||[]).forEach(function(v){
+    var inp = document.querySelector('input[name="'+name+'"][value="'+v+'"]');
+    if(inp && !inp.checked){ inp.closest('.pill').click(); inp.dispatchEvent(new Event('change',{bubbles:true})); }
+  });
+}
+
+function _applyVisibility(){
+  onSexoChange();
+  onEmpTerc();
+  onOutrosQuant();
+  onAtend();
+  onEvolucao();
+}
+
+// ------ Nova Ficha ------
+
+function _clearForm(){
+  document.querySelectorAll('.pill input:checked').forEach(function(inp){ inp.closest('.pill').click(); });
+  document.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]):not(#f-import):not([readonly]), select, textarea')
+    .forEach(function(el){ el.value=''; });
+  // Limpar seleção de partes do corpo
+  document.querySelectorAll('.parte-pill.checked').forEach(function(p){
+    var inp = p.querySelector('input');
+    if(inp){ inp.checked = false; }
+    p.classList.remove('checked','disabled');
+  });
+  ['f_corpo1_display','f_corpo2_display','f_corpo3_display'].forEach(function(id){
+    var el=document.getElementById(id); if(el){ el.value=''; el.placeholder='—'; }
+  });
+  ['row_gest','box_emp_terc_detalhe','box_outros_num','box_atend_detalhe','box_obito']
+    .forEach(function(id){ var el=document.getElementById(id); if(el) el.style.display='none'; });
+  var hints = ['f_ocupacao_hint','f_emp_cnae_hint','f_causa_cid_hint','f_diag_cid_hint'];
+  hints.forEach(function(id){ var h=document.getElementById(id); if(h){h.textContent='';h.style.display='none';} });
+  updateProgress();
+}
+
+function abrirModalNova(){ document.getElementById('confirm-modal').classList.add('show'); }
+function fecharModalNova(){ document.getElementById('confirm-modal').classList.remove('show'); }
+function novaFichaConfirmado(){ fecharModalNova(); _clearForm(); }
+
+// ------ Carregar paciente fictício ------
+
+function carregarPaciente(idx){
+  var p = FAKE_PATIENTS[idx]; if(!p) return;
+  _clearForm();
+  Object.keys(p.fields||{}).forEach(function(id){ _setField(id, p.fields[id]); });
+  Object.keys(p.radios||{}).forEach(function(name){ _setRadio(name, p.radios[name]); });
+  Object.keys(p.checks||{}).forEach(function(name){ _setChecks(name, p.checks[name]); });
+  _applyVisibility();
+  // Re-aplica municípios após UF (handler de change da UF pode ter apagado)
+  ['notif','res','ac'].forEach(function(suf){
+    var id = 'f_mun_' + suf;
+    if(p.fields && p.fields[id]){
+      var el = document.getElementById(id);
+      if(el) el.value = p.fields[id];
+    }
+  });
+  document.querySelectorAll('.ac-drop').forEach(function(d){ d.innerHTML=''; d.classList.remove('show'); });
+  updateProgress();
+  // Define hint de CBO
+  var ocEl = document.getElementById('f_ocupacao');
+  var ocHint = document.getElementById('f_ocupacao_hint');
+  if(ocEl && ocHint && ocEl.value && window.SINAN_CBOS){
+    var ocMatch = null;
+    for(var i=0;i<(window.SINAN_CBOS||[]).length;i++){ if(window.SINAN_CBOS[i].nome===ocEl.value){ocMatch=window.SINAN_CBOS[i];break;} }
+    if(ocMatch){ ocHint.textContent='CBO: '+ocMatch.cbo; ocHint.style.display='block'; }
+  }
+  window.scrollTo({top:0, behavior:'smooth'});
+  showToast('Paciente fictício carregado: '+p.label,'t-ok',3500);
+}
+
+// ------ Exportar Rascunho ------
+
+function exportarRascunho(){
+  var data = {v:1, ts:new Date().toISOString(), fields:{}, radios:{}, checks:{}};
+  document.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]):not(#f-import), select, textarea')
+    .forEach(function(el){ if(el.id && el.value!=='') data.fields[el.id]=el.value; });
+  document.querySelectorAll('input[type="radio"]:checked').forEach(function(inp){ data.radios[inp.name]=inp.value; });
+  document.querySelectorAll('input[type="checkbox"]:checked').forEach(function(inp){
+    if(!data.checks[inp.name]) data.checks[inp.name]=[];
+    data.checks[inp.name].push(inp.value);
+  });
+  var blob = new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'rascunho-sinan-acidente-'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
+  showToast('💾 Rascunho exportado com sucesso!','t-ok',3000);
+}
+
+// ------ Importar Rascunho ------
+
+function importarRascunho(input){
+  var file = input.files[0]; if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e){
+    try{
+      var data = JSON.parse(e.target.result);
+      if(!data.fields && !data.radios && !data.checks) throw new Error('formato inválido');
+      _clearForm();
+      Object.keys(data.fields||{}).forEach(function(id){ _setField(id, data.fields[id]); });
+      Object.keys(data.radios||{}).forEach(function(name){ _setRadio(name, data.radios[name]); });
+      Object.keys(data.checks||{}).forEach(function(name){ _setChecks(name, data.checks[name]); });
+      _applyVisibility();
+      updateProgress();
+      showToast('📂 Rascunho importado com sucesso!','t-ok',3000);
+    }catch(err){
+      showToast('Arquivo inválido ou corrompido','t-err',4000);
+    }
+    input.value='';
+  };
+  reader.readAsText(file);
+}
+
+/* ── MOBILE SYNC ────────────────────────────────────────────── */
+(function(){
+  var btnGerar = document.getElementById('btn-gerar');
+  var mobBtn   = document.getElementById('mob-pdf-btn');
+  if(!mobBtn || !btnGerar) return;
+  new MutationObserver(function(){
+    setTimeout(function(){ if(btnGerar.disabled){ mobBtn.disabled = false; } }, 5000);
+  }).observe(btnGerar, {attributes:true, attributeFilter:['disabled']});
+
+  var numericIds = ['f_sus','f_cnes','f_ibge_notif','f_ibge_res','f_ibge_ac','f_ibge_atend',
+                    'f_cep','f_num_res','f_hora_h','f_hora_m','f_jorn_h','f_jorn_m',
+                    'f_emp_num','f_emp_ibge','f_outros_num'];
+  var telIds = ['f_tel_res','f_emp_tel'];
+  numericIds.forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.setAttribute('inputmode','numeric');
+  });
+  telIds.forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.setAttribute('inputmode','tel');
+  });
+})();
+
+/* === UNIDADE NOTIFICADORA - CADEADO PERSISTENTE ========================= */
+var UNIT_KEY = 'sinan_unidade';
+var UNIT_IDS = ['f_mun_notif','f_uf_notif','f_ibge_notif','f_nome_un','f_cnes'];
+
+function _unitSetUI(locked){
+  var g=document.getElementById('lock-grp-notif'); if(!g) return;
+  if(locked){g.classList.add('locked');}else{g.classList.remove('locked');}
+  var ht=g.querySelector('.lock-hint-txt');
+  if(ht) ht.textContent=locked
+    ?'\u2713 Unidade notificadora salva \u2014 n\u00e3o ser\u00e1 necess\u00e1rio preencher novamente neste computador. Clique no cadeado para editar.'
+    :'Estes campos representam a unidade notificadora deste computador. Trave o cadeado para salvar e n\u00e3o precisar preencher novamente nas pr\u00f3ximas fichas.';
+}
+
+function toggleUnitLock(){
+  var g=document.getElementById('lock-grp-notif'); if(!g) return;
+  if(g.classList.contains('locked')){
+    _unitSetUI(false); localStorage.removeItem(UNIT_KEY);
+  } else {
+    var d={};
+    UNIT_IDS.forEach(function(id){var el=document.getElementById(id);if(el)d[id]=el.value;});
+    localStorage.setItem(UNIT_KEY,JSON.stringify(d));
+    _unitSetUI(true);
+    showToast('\uD83D\uDD12 Unidade notificadora salva neste computador','t-ok',3500);
+  }
+}
+
+(function initUnitLock(){
+  var raw=localStorage.getItem(UNIT_KEY); if(!raw) return;
+  try{
+    var d=JSON.parse(raw);
+    UNIT_IDS.forEach(function(id){var el=document.getElementById(id);if(el&&d[id]!==undefined)el.value=d[id];});
+    setTimeout(function(){_unitSetUI(true);},80);
+  }catch(e){localStorage.removeItem(UNIT_KEY);}
+})();
+
+</script>
+</body>
+</html>
