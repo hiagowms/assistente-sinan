@@ -3265,7 +3265,9 @@ function toggleUnitLock(){
     UNIT_IDS.forEach(function(id){
       var el=document.getElementById(id); if(!el||d[id]===undefined) return;
       el.value=d[id];
-      el.dispatchEvent(new Event('change',{bubbles:true}));
+      // f_tipo_un é um hidden conectado a pill group — precisa do change para sincronizar visual
+      // Os demais campos (incluindo f_mun_notif) NÃO devem disparar change para não acionar o autocomplete
+      if(id==='f_tipo_un') el.dispatchEvent(new Event('change',{bubbles:true}));
     });
     // Se o tipo de unidade nao foi salvo (dados vieram de outra ficha),
     // deixa desbloqueado e exibe aviso para o usuario preencher o campo extra.
