@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SINAN — Acidente de Trabalho | Assistente PET Saúde Digital</title>
+<title>SINAN — Câncer Relacionado ao Trabalho | Assistente PET Saúde Digital</title>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XBCCJ6GTG6"></script>
 <script>
@@ -105,6 +105,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
   SECTION CARDS
 ==============================================================*/
 .sec{background:#ffffff;border-radius:14px;border:1px solid #e5e7eb;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:20px;overflow:hidden}
+
+/* Section header */
 .sec-hdr{display:flex;align-items:center;gap:14px;padding:16px 22px 14px;border-bottom:2px solid #f3f4f6;border-left:5px solid #d1d5db;transition:border-color .4s}
 .sec.done .sec-hdr{border-left-color:#27ae60;background:linear-gradient(90deg,rgba(39,174,96,.04) 0%,transparent 60%)}
 .sec.partial .sec-hdr{border-left-color:#f39c12;background:linear-gradient(90deg,rgba(243,156,18,.04) 0%,transparent 60%)}
@@ -211,27 +213,15 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 /* ⭐ CAMPO ESSENCIAL — discreto */
 .req-star{color:#d97706;font-size:10px;line-height:1;vertical-align:middle;margin-left:2px;opacity:.7;cursor:help;position:relative}
 .sublabel .req-star{font-size:10px;margin-left:3px}
+/* Tooltip "Campo essencial" ao hover/foco na estrela */
 .req-star::after{content:'Campo essencial';position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#1e293b;color:#cbd5e1;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;z-index:9999;box-shadow:0 3px 12px rgba(0,0,0,.3)}
 .req-star:hover::after,.req-star:focus::after{opacity:1}
+/* Ocultar estilos antigos de obrigatório */
 .fld label .req{display:none!important}
 .sublabel .req-mark{display:none!important}
 
 /* NÍVEL DE PROGRESSO */
 .prog-level{font-size:11px;font-weight:800;padding:3px 10px;border-radius:12px;background:rgba(255,255,255,.13);color:rgba(255,255,255,.85);white-space:nowrap;transition:all .5s;letter-spacing:.3px;margin-top:4px;display:inline-block}
-
-/*==============================================================
-  PARTES ATINGIDAS — seletor visual
-==============================================================*/
-.parte-grupo{margin-bottom:12px;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;background:#fff}
-.parte-grupo-titulo{font-size:12px;font-weight:800;color:#1e40af;background:#eff6ff;padding:7px 12px;border-bottom:1px solid #e5e7eb;letter-spacing:.3px;text-transform:uppercase}
-.parte-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:4px;padding:8px 10px}
-.parte-pill{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:6px;border:1.5px solid transparent;cursor:pointer;font-size:13px;font-weight:500;color:#374151;background:#f9fafb;transition:all .15s;user-select:none}
-.parte-pill:hover{border-color:#2563eb;background:#eff6ff}
-.parte-pill input{position:absolute;opacity:0;pointer-events:none;width:0;height:0}
-.parte-pill.checked{border-color:#2563eb;background:#dbeafe;color:#1e40af;font-weight:600}
-.parte-pill.disabled{opacity:.4;pointer-events:none;cursor:not-allowed}
-.parte-pill.disabled:hover{border-color:transparent;background:#f9fafb}
-.parte-display{background:#f3f4f6;color:#6b7280}
 
 /* TOOLTIP DE PROPÓSITO (ícone i) */
 .tip-wrap{position:relative;display:inline-flex;align-items:center;margin-left:4px;vertical-align:middle}
@@ -272,11 +262,11 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 .prog-ring-wrap.celebrate{animation:celebrate80 .55s ease}
 
 /*==============================================================
-  MOBILE BOTTOM BAR
+  MOBILE BOTTOM BAR — oculta no desktop, visível no mobile
 ==============================================================*/
 #mob-bottom{display:none}
 
-/* BOTTOM SHEET MOBILE */
+/* BOTTOM SHEET MOBILE — menu de pacientes (fix iOS Safari) */
 #pac-mob-sheet{display:none;position:fixed;inset:0;z-index:2000}
 #pac-mob-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.45)}
 #pac-mob-panel{position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:18px 18px 0 0;max-height:65vh;overflow-y:auto;box-shadow:0 -6px 32px rgba(0,0,0,.22);-webkit-overflow-scrolling:touch}
@@ -289,29 +279,48 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 #pac-mob-sheet.show{display:block}
 
 /*==============================================================
-  MOBILE RESPONSIVE
+  MOBILE RESPONSIVE — @media max-width:768px
 ==============================================================*/
 @media(max-width:768px){
+
+  /* ── HEADER ────────────────────────────────────────────── */
   .hdr-row{padding:8px 14px;gap:8px;flex-wrap:nowrap}
   .hdr-logo{height:26px}
   .hdr-vline{display:none}
   .hdr-title h1{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px}
   .hdr-title p{display:none}
+
+  /* Progress ring — reduzido */
   .hdr-progress{gap:8px}
   .prog-ring-wrap{width:42px;height:42px}
   .prog-ring-wrap svg{width:42px;height:42px}
   .prog-pct{font-size:11px;font-weight:800}
   .prog-meta{display:none}
+
+  /* Botão PDF e botão Voltar — escondidos no header (movidos para barra inferior) */
   .hdr-btn{display:none}
   .hdr-back{display:none}
-  .tools-inner{padding:5px 10px;gap:3px;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+
+  /* ── TOOLS BAR ─────────────────────────────────────────── */
+  .tools-inner{
+    padding:5px 10px;gap:3px;
+    flex-wrap:nowrap;overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none
+  }
   .tools-inner::-webkit-scrollbar{display:none}
   .tools-label{display:none}
   .tb-sep{display:none}
   .tb-group{gap:3px}
   .tb-btn{padding:7px 10px;font-size:12px;min-height:36px;white-space:nowrap}
-  .tb-menu{display:none!important}
+
+  /* Dropdown paciente: desabilitado no mobile — usa bottom sheet (#pac-mob-sheet) */
+  .tb-menu{ display:none!important }
+
+  /* ── LAYOUT ─────────────────────────────────────────────── */
   .wrapper{padding:12px 12px 76px}
+
+  /* ── SEÇÕES ─────────────────────────────────────────────── */
   .sec{border-radius:10px;margin-bottom:10px}
   .sec-hdr{padding:12px 14px;gap:10px}
   .sec-body{padding:14px 12px 16px}
@@ -319,40 +328,89 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
   .sec-info h3{font-size:14px}
   .sec-info p{font-size:11px}
   .sec-badge{font-size:11px;padding:3px 8px}
+
+  /* ── GRADE DE FORMULÁRIO — coluna única ─────────────────── */
   .row{grid-template-columns:1fr!important;gap:10px;margin-bottom:10px}
   .row.row-wide{grid-template-columns:1fr!important}
   .col-2,.col-3{grid-column:span 1!important}
-  .fld input,.fld select,.fld textarea{font-size:16px!important;padding:11px 13px;min-height:46px}
+
+  /* ── CAMPOS ─────────────────────────────────────────────── */
+  .fld input,.fld select,.fld textarea{
+    font-size:16px!important;
+    padding:11px 13px;
+    min-height:46px
+  }
   .fld label{font-size:12px}
   .fld label .cn{font-size:10px}
   .sublabel{font-size:11px;padding:10px 0 7px;letter-spacing:.4px}
+
+  /* ── PILLS ──────────────────────────────────────────────── */
   .pills{gap:7px}
   .pill{padding:10px 14px;font-size:14px;min-height:44px;border-radius:8px}
 
-  /* Partes Atingidas — mobile */
-  .parte-grid{grid-template-columns:1fr!important;gap:3px!important;padding:6px 8px!important}
-  .parte-pill{padding:10px 12px;font-size:13px;min-height:44px}
-  .parte-grupo-titulo{font-size:11px;padding:6px 10px}
-  .parte-selecionada-row .fld input{min-height:40px!important;font-size:14px!important}
-
+  /* ── CAIXAS INFO / ALERTA ───────────────────────────────── */
   .info,.warn,.danger-alert{font-size:13px;padding:10px 12px}
   .banner-warn{font-size:13px;padding:12px 14px}
   .intro{flex-direction:column;padding:14px 14px;font-size:13px}
   .intro h2{font-size:14px}
+
+  /* ── MODAIS ─────────────────────────────────────────────── */
   .modal{padding:20px 18px;border-radius:14px}
   .cm-box{padding:22px 18px}
   .cm-actions{flex-direction:column;gap:8px}
   .cm-cancel,.cm-ok{width:100%;padding:13px}
+
+  /* ── AUTOCOMPLETE ───────────────────────────────────────── */
   .ac-drop{max-height:180px}
   .ac-item{padding:12px 14px;font-size:14px;min-height:44px;display:flex;align-items:center}
-  #toast{font-size:12px;padding:10px 16px;max-width:88vw;white-space:normal;text-align:center;bottom:70px}
-  #mob-bottom{display:flex!important;position:fixed;bottom:0;left:0;right:0;z-index:400;height:58px;background:#fff;border-top:1px solid #e2e8f0;box-shadow:0 -4px 20px rgba(0,0,0,.1);align-items:center;justify-content:space-between;padding:0 12px;gap:8px}
-  #mob-back-btn{display:flex;align-items:center;gap:5px;color:#475569;font-size:12px;font-weight:600;text-decoration:none;padding:8px 11px;border-radius:7px;border:1px solid #e2e8f0;background:#f8fafc;white-space:nowrap;flex-shrink:0}
-  #mob-prog-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
-  #mob-prog-pct{font-size:15px;font-weight:800;color:#1f2937;line-height:1}
-  #mob-prog-label{font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
-  #mob-pdf-btn{display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,#27ae60,#2ecc71);color:#fff;border:none;padding:10px 15px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;box-shadow:0 2px 8px rgba(39,174,96,.35)}
-  #mob-pdf-btn:disabled{background:#8fb8a0;box-shadow:none;cursor:not-allowed}
+
+  /* ── TOAST ──────────────────────────────────────────────── */
+  #toast{
+    font-size:12px;padding:10px 16px;
+    max-width:88vw;white-space:normal;
+    text-align:center;bottom:70px
+  }
+
+  /* ── BARRA INFERIOR MOBILE ──────────────────────────────── */
+  #mob-bottom{
+    display:flex!important;
+    position:fixed;bottom:0;left:0;right:0;
+    z-index:400;height:58px;
+    background:#fff;
+    border-top:1px solid #e2e8f0;
+    box-shadow:0 -4px 20px rgba(0,0,0,.1);
+    align-items:center;justify-content:space-between;
+    padding:0 12px;gap:8px
+  }
+  #mob-back-btn{
+    display:flex;align-items:center;gap:5px;
+    color:#475569;font-size:12px;font-weight:600;
+    text-decoration:none;padding:8px 11px;
+    border-radius:7px;border:1px solid #e2e8f0;
+    background:#f8fafc;white-space:nowrap;flex-shrink:0
+  }
+  #mob-prog-wrap{
+    flex:1;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:1px
+  }
+  #mob-prog-pct{
+    font-size:15px;font-weight:800;color:#1f2937;line-height:1
+  }
+  #mob-prog-label{
+    font-size:10px;color:#94a3b8;font-weight:600;
+    text-transform:uppercase;letter-spacing:.5px
+  }
+  #mob-pdf-btn{
+    display:flex;align-items:center;gap:6px;
+    background:linear-gradient(135deg,#27ae60,#2ecc71);
+    color:#fff;border:none;padding:10px 15px;
+    border-radius:8px;font-size:13px;font-weight:700;
+    cursor:pointer;white-space:nowrap;flex-shrink:0;
+    box-shadow:0 2px 8px rgba(39,174,96,.35)
+  }
+  #mob-pdf-btn:disabled{
+    background:#8fb8a0;box-shadow:none;cursor:not-allowed
+  }
 }
 
 /*==============================================================
@@ -390,9 +448,14 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 }
 [data-theme="dark"] .dm-toggle .ico-sun{display:block}
 [data-theme="dark"] .dm-toggle .ico-moon{display:none}
+
 [data-theme="dark"] body{background:var(--bg);color:var(--text)}
+
+/* Header */
 [data-theme="dark"] #hdr{box-shadow:0 4px 20px rgba(0,0,0,.5)}
 [data-theme="dark"] #prog-bar-strip{background:rgba(255,255,255,.06)}
+
+/* Tools bar */
 [data-theme="dark"] #tools-bar{background:var(--bg-card);border-bottom-color:var(--border)}
 [data-theme="dark"] .tools-label{color:var(--text3)}
 [data-theme="dark"] .tb-sep{background:var(--border)}
@@ -401,6 +464,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 [data-theme="dark"] #btn-pac-menu{background:var(--accent-bg)!important;border-color:rgba(59,130,246,.3)!important;color:#93c5fd!important}
 [data-theme="dark"] .tb-danger{color:#f87171}
 [data-theme="dark"] .tb-danger:hover{background:var(--danger-bg);color:#fca5a5;border-color:var(--danger-border)}
+
+/* Sections */
 [data-theme="dark"] .sec{background:var(--bg-card);border-color:var(--border);box-shadow:0 2px 12px rgba(0,0,0,.2)}
 [data-theme="dark"] .sec-hdr{border-bottom-color:var(--border);border-left-color:var(--text3)}
 [data-theme="dark"] .sec.done .sec-hdr{border-left-color:var(--green);background:linear-gradient(90deg,rgba(34,197,94,.06) 0%,transparent 60%)}
@@ -410,6 +475,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 [data-theme="dark"] .badge-empty{background:var(--bg-card2);color:var(--text3)}
 [data-theme="dark"] .badge-partial{background:#2a2518;color:#eab308}
 [data-theme="dark"] .badge-done{background:#162816;color:#4ade80}
+
+/* Form elements */
 [data-theme="dark"] .fld label{color:var(--text2)}
 [data-theme="dark"] .fld label .cn{color:var(--text3)}
 [data-theme="dark"] .fld input,[data-theme="dark"] .fld select,[data-theme="dark"] .fld textarea{background-color:var(--bg-input);border-color:var(--border);color:var(--text)}
@@ -420,10 +487,14 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 [data-theme="dark"] .sublabel{color:var(--text2);border-bottom-color:var(--border)}
 [data-theme="dark"] .btn-copy-date{background:var(--accent-bg);border-color:rgba(59,130,246,.3);color:#60a5fa}
 [data-theme="dark"] .btn-copy-date:hover{background:rgba(59,130,246,.2);border-color:rgba(59,130,246,.5)}
+
+/* Pills */
 [data-theme="dark"] .pill{background:var(--bg-card2);border-color:var(--border);color:var(--text2)}
 [data-theme="dark"] .pill:hover{border-color:var(--accent);background:var(--accent-bg)}
 [data-theme="dark"] .pill.checked{border-color:var(--accent);background:var(--accent-bg);color:#93c5fd}
 [data-theme="dark"] .pill.checked-danger{border-color:#dc2626;background:var(--danger-bg);color:#fca5a5}
+
+/* Info/warn/danger boxes */
 [data-theme="dark"] .info{background:var(--accent-bg);border-color:rgba(59,130,246,.25);color:#93c5fd}
 [data-theme="dark"] .warn{background:var(--warn-bg);border-color:var(--warn-border);color:var(--warn-text)}
 [data-theme="dark"] .banner-warn{background:var(--warn-bg);border-color:var(--warn-border);color:var(--warn-text)}
@@ -432,49 +503,57 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 [data-theme="dark"] .intro{background:var(--bg-card);border-color:var(--border);color:var(--text2)}
 [data-theme="dark"] .intro h2{color:var(--text)}
 [data-theme="dark"] .intro a{color:#60a5fa}
+
+/* Autocomplete */
 [data-theme="dark"] .ac-drop{background:var(--bg-card);border-color:var(--accent)}
 [data-theme="dark"] .ac-item{color:var(--text);border-bottom-color:var(--border)}
 [data-theme="dark"] .ac-item:hover,[data-theme="dark"] .ac-item.focused{background:var(--accent-bg)}
 [data-theme="dark"] .ac-item.ac-synonym{background:#2a2518;border-left-color:#eab308}
 [data-theme="dark"] .ac-item b{color:#60a5fa}
+
+/* Tooltips */
 [data-theme="dark"] .tip-btn{background:#1e40af;color:#fff}
 [data-theme="dark"] .tip-btn:hover,[data-theme="dark"] .tip-btn.open{background:#1d4ed8;box-shadow:0 0 0 3px rgba(59,130,246,.28)}
+
+/* Modals */
 [data-theme="dark"] .modal{background:var(--bg-card);box-shadow:0 20px 60px rgba(0,0,0,.5)}
 [data-theme="dark"] .modal h2{color:var(--text)}
 [data-theme="dark"] .modal p{color:var(--text2)}
-
-/* Dark mode — Partes Atingidas */
-[data-theme="dark"] .parte-grupo{background:var(--bg-card);border-color:var(--border)}
-[data-theme="dark"] .parte-grupo-titulo{background:var(--bg-card2);color:#60a5fa;border-bottom-color:var(--border)}
-[data-theme="dark"] .parte-pill{background:var(--bg-card2);color:var(--text2);border-color:var(--border)}
-[data-theme="dark"] .parte-pill:hover{border-color:#3b82f6;background:rgba(59,130,246,.1)}
-[data-theme="dark"] .parte-pill.checked{border-color:#3b82f6;background:rgba(59,130,246,.15);color:#60a5fa}
-[data-theme="dark"] .parte-pill.disabled{opacity:.3}
-[data-theme="dark"] .parte-pill.disabled:hover{border-color:var(--border);background:var(--bg-card2)}
-[data-theme="dark"] .parte-display{background:var(--bg-card2);color:var(--text3)}
 [data-theme="dark"] .err-item{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger-text)}
 [data-theme="dark"] .mbtn-s{background:var(--bg-card2);color:var(--text2)}
 [data-theme="dark"] .ov{background:rgba(0,0,0,.7)}
+
+/* Confirm modal */
 [data-theme="dark"] .cm-box{background:var(--bg-card)}
 [data-theme="dark"] .cm-box h3{color:var(--text)}
 [data-theme="dark"] .cm-box p{color:var(--text2)}
 [data-theme="dark"] .cm-icon{background:var(--danger-bg)}
 [data-theme="dark"] .cm-cancel{background:var(--bg-card2);color:var(--text2)}
+
+/* Toast */
 [data-theme="dark"] #toast{background:#2d3348;box-shadow:0 8px 28px rgba(0,0,0,.4)}
+
+/* Bottom sheet */
 [data-theme="dark"] #pac-mob-panel{background:var(--bg-card)}
 [data-theme="dark"] #pac-mob-panel .tb-menu-hdr{background:var(--bg-card2);color:var(--text3);border-bottom-color:var(--border)}
 [data-theme="dark"] #pac-mob-panel .tb-mi{color:var(--text);border-bottom-color:var(--border)}
 [data-theme="dark"] #pac-mob-panel .tb-mi:hover{background:var(--accent-bg);color:#93c5fd}
 [data-theme="dark"] #pac-mob-panel .tb-mi-sub{color:var(--text3)}
+
+/* Desktop dropdown menu */
 [data-theme="dark"] .tb-menu{background:var(--bg-card);border-color:var(--border);box-shadow:0 8px 28px rgba(0,0,0,.4)}
 [data-theme="dark"] .tb-menu-hdr{background:var(--bg-card2);color:var(--text3);border-bottom-color:var(--border)}
 [data-theme="dark"] .tb-mi{color:var(--text);border-bottom-color:var(--border)}
 [data-theme="dark"] .tb-mi:hover{background:var(--accent-bg);color:#93c5fd}
 [data-theme="dark"] .tb-mi-sub{color:var(--text3)}
+
+/* Mobile bottom bar */
 [data-theme="dark"] #mob-bottom{background:var(--bg-card);border-top-color:var(--border);box-shadow:0 -4px 20px rgba(0,0,0,.3)}
 [data-theme="dark"] #mob-back-btn{color:var(--text2);border-color:var(--border);background:var(--bg-card2)}
 [data-theme="dark"] #mob-prog-pct{color:var(--text)}
 [data-theme="dark"] #mob-prog-label{color:var(--text3)}
+
+/* Star tooltip in dark mode */
 [data-theme="dark"] .req-star::after{background:#334155;color:#e2e4eb}
 
 /* TRANSFER BUTTON */
@@ -586,7 +665,7 @@ function toggleDarkMode(){
     <img class="hdr-logo" src="assets/img/pet-saude-logo-png.png" alt="PET Saúde Digital">
     <div class="hdr-vline"></div>
     <div class="hdr-title">
-      <h1>SINAN — Acidente de Trabalho</h1>
+      <h1>SINAN — Câncer Relacionado ao Trabalho</h1>
       <p>Assistente de preenchimento · PET Saúde Digital</p>
     </div>
 
@@ -659,7 +738,7 @@ function toggleDarkMode(){
   </div>
   <div class="sec-body">
 
-    <div class="info"><span class="ico">ℹ️</span><div>O <strong>Nº da Notificação</strong> é fornecido pela Vigilância Epidemiológica local — não é obrigatório aqui. Preencha a <strong>data do acidente</strong> mesmo que seja aproximada.</div></div>
+    <div class="info"><span class="ico">ℹ️</span><div>A <strong>Data do Diagnóstico (Campo 8)</strong> corresponde à data em que o profissional de saúde estabeleceu o diagnóstico do Transtorno Mental Relacionado ao Trabalho.</div></div>
 
     <div class="row">
       <div class="fld">
@@ -671,8 +750,8 @@ function toggleDarkMode(){
         <input type="date" id="f_data_notif" data-ess data-label="Data da notificação">
       </div>
       <div class="fld">
-        <label>Data do Acidente <span class="req-star">⭐</span></label>
-        <input type="date" id="f_data_acidente" data-ess data-label="Data do acidente">
+        <label>Data do Diagnóstico <span class="req-star">⭐</span></label>
+        <input type="date" id="f_data_diag" data-ess data-label="Data do diagnóstico">
       </div>
     </div>
 
@@ -697,7 +776,7 @@ function toggleDarkMode(){
       </div>
       <div class="fld" style="max-width:120px">
         <label>Código IBGE</label>
-        <input type="text" id="f_ibge_notif" maxlength="6" placeholder="000000" readonly>
+        <input type="text" id="f_ibge_notif" maxlength="7" placeholder="0000000" readonly>
       </div>
     </div>
 
@@ -735,17 +814,17 @@ function toggleDarkMode(){
     <div class="sec-num">2</div>
     <div class="sec-info">
       <h3>Identificação do Paciente</h3>
-      <p>Dados pessoais do trabalhador acidentado</p>
+      <p>Dados pessoais do trabalhador</p>
     </div>
     <span class="sec-badge badge-empty" id="badge2">—</span>
   </div>
   <div class="sec-body">
 
-    <div class="info"><span class="ico">ℹ️</span><div><strong>Nome</strong> é obrigatório — se desconhecido, escreva <strong>IGNORADO</strong>. Preencha <strong>data de nascimento OU idade</strong>. <strong>Raça/Cor</strong> deve ser preenchida conforme <em>declaração da própria pessoa</em>.</div></div>
+    <div class="info"><span class="ico">ℹ️</span><div><strong>Nome</strong> é obrigatório — se desconhecido, escreva <strong>IGNORADO</strong>. Preencha <strong>data de nascimento OU idade</strong> (ao menos um). <strong>Raça/Cor</strong> deve ser preenchida conforme <em>declaração da própria pessoa</em>.</div></div>
 
     <div class="row row-full">
       <div class="fld">
-        <label>Nome Completo do Trabalhador <span class="req-star">⭐</span></label>
+        <label>Nome Completo do Paciente <span class="req-star">⭐</span></label>
         <input type="text" id="f_nome" placeholder="Nome completo — ou IGNORADO se desconhecido" data-caps data-ess data-label="Nome do paciente">
       </div>
     </div>
@@ -762,10 +841,10 @@ function toggleDarkMode(){
       <div class="fld" style="max-width:130px">
         <label>Unidade</label>
         <div class="pills" id="grp_idade_un" data-hidden="f_idade_un">
-          <label class="pill" data-val="H"><input type="radio" name="idade_un" value="H"> H — Hora</label>
-          <label class="pill" data-val="D"><input type="radio" name="idade_un" value="D"> D — Dia</label>
-          <label class="pill" data-val="M"><input type="radio" name="idade_un" value="M"> M — Mês</label>
-          <label class="pill" data-val="A"><input type="radio" name="idade_un" value="A"> A — Ano</label>
+          <label class="pill" data-val="H"><input type="radio" name="idade_un" value="H"> H</label>
+          <label class="pill" data-val="D"><input type="radio" name="idade_un" value="D"> D</label>
+          <label class="pill" data-val="M"><input type="radio" name="idade_un" value="M"> M</label>
+          <label class="pill" data-val="A"><input type="radio" name="idade_un" value="A"> A</label>
         </div>
         <input type="hidden" id="f_idade_un">
       </div>
@@ -783,13 +862,13 @@ function toggleDarkMode(){
       <div class="fld col-2">
         <label>Gestante</label>
         <div class="pills" id="grp_gest" data-hidden="f_gest">
-          <label class="pill" data-val="1"><input type="radio" name="gest" value="1"> 1 — 1º Trimestre</label>
-          <label class="pill" data-val="2"><input type="radio" name="gest" value="2"> 2 — 2º Trimestre</label>
-          <label class="pill" data-val="3"><input type="radio" name="gest" value="3"> 3 — 3º Trimestre</label>
-          <label class="pill" data-val="4"><input type="radio" name="gest" value="4"> 4 — Idade gestacional ignorada</label>
-          <label class="pill" data-val="5"><input type="radio" name="gest" value="5"> 5 — Não</label>
-          <label class="pill" data-val="6"><input type="radio" name="gest" value="6"> 6 — Não se aplica</label>
-          <label class="pill" data-val="9"><input type="radio" name="gest" value="9"> 9 — Ignorado</label>
+          <label class="pill" data-val="1"><input type="radio" name="gest" value="1"> 1º Trim</label>
+          <label class="pill" data-val="2"><input type="radio" name="gest" value="2"> 2º Trim</label>
+          <label class="pill" data-val="3"><input type="radio" name="gest" value="3"> 3º Trim</label>
+          <label class="pill" data-val="4"><input type="radio" name="gest" value="4"> Ign. gest.</label>
+          <label class="pill" data-val="5"><input type="radio" name="gest" value="5"> Não</label>
+          <label class="pill" data-val="6"><input type="radio" name="gest" value="6"> N/A</label>
+          <label class="pill" data-val="9"><input type="radio" name="gest" value="9"> Ign.</label>
         </div>
         <input type="hidden" id="f_gest">
       </div>
@@ -804,7 +883,7 @@ function toggleDarkMode(){
           <label class="pill" data-val="3"><input type="radio" name="raca" value="3"> Amarela</label>
           <label class="pill" data-val="4"><input type="radio" name="raca" value="4"> Parda</label>
           <label class="pill" data-val="5"><input type="radio" name="raca" value="5"> Indígena</label>
-          <label class="pill" data-val="9"><input type="radio" name="raca" value="9"> Ignorado</label>
+          <label class="pill" data-val="9"><input type="radio" name="raca" value="9"> Ign.</label>
         </div>
         <input type="hidden" id="f_raca" data-ess data-label="Raça/Cor">
       </div>
@@ -849,7 +928,7 @@ function toggleDarkMode(){
     <div class="sec-num">3</div>
     <div class="sec-info">
       <h3>Dados de Residência</h3>
-      <p>Endereço do trabalhador</p>
+      <p>Endereço e contato do paciente</p>
     </div>
     <span class="sec-badge badge-empty" id="badge3">—</span>
   </div>
@@ -868,7 +947,7 @@ function toggleDarkMode(){
       </div>
       <div class="fld" style="max-width:120px">
         <label>Código IBGE</label>
-        <input type="text" id="f_ibge_res" maxlength="6" placeholder="000000" readonly>
+        <input type="text" id="f_ibge_res" maxlength="7" placeholder="0000000" readonly>
       </div>
     </div>
     <div class="row">
@@ -880,22 +959,22 @@ function toggleDarkMode(){
         <label>Logradouro</label>
         <input type="text" id="f_logr_res" data-caps>
       </div>
+    </div>
+    <div class="row">
       <div class="fld" style="max-width:100px">
         <label>Número</label>
         <input type="text" id="f_num_res">
       </div>
-    </div>
-    <div class="row">
       <div class="fld col-2">
         <label>Complemento</label>
         <input type="text" id="f_compl_res" data-caps>
       </div>
-      <div class="fld">
+    </div>
+    <div class="row">
+      <div class="fld col-2">
         <label>Ponto de Referência</label>
         <input type="text" id="f_pref_res" data-caps>
       </div>
-    </div>
-    <div class="row">
       <div class="fld">
         <label>CEP</label>
         <input type="text" id="f_cep" maxlength="9" placeholder="00000-000">
@@ -904,17 +983,19 @@ function toggleDarkMode(){
         <label>Telefone (DDD)</label>
         <input type="text" id="f_tel_res" placeholder="(00) 00000-0000">
       </div>
+    </div>
+    <div class="row">
       <div class="fld">
         <label>Zona</label>
         <div class="pills" id="grp_zona_res" data-hidden="f_zona_res">
-          <label class="pill" data-val="1"><input type="radio" name="zona_res" value="1"> 1 — Urbana</label>
-          <label class="pill" data-val="2"><input type="radio" name="zona_res" value="2"> 2 — Rural</label>
-          <label class="pill" data-val="3"><input type="radio" name="zona_res" value="3"> 3 — Periurbana</label>
-          <label class="pill" data-val="9"><input type="radio" name="zona_res" value="9"> 9 — Ignorado</label>
+          <label class="pill" data-val="1"><input type="radio" name="zona_res" value="1"> Urbana</label>
+          <label class="pill" data-val="2"><input type="radio" name="zona_res" value="2"> Rural</label>
+          <label class="pill" data-val="3"><input type="radio" name="zona_res" value="3"> Periurbana</label>
+          <label class="pill" data-val="9"><input type="radio" name="zona_res" value="9"> Ign.</label>
         </div>
         <input type="hidden" id="f_zona_res">
       </div>
-      <div class="fld">
+      <div class="fld col-2">
         <label>País (se residente fora do Brasil)</label>
         <input type="text" id="f_pais_res" data-caps>
       </div>
@@ -930,7 +1011,7 @@ function toggleDarkMode(){
     <div class="sec-num">4</div>
     <div class="sec-info">
       <h3>Ocupação e Mercado de Trabalho</h3>
-      <p>CBO, situação no trabalho e local do acidente</p>
+      <p>Dados profissionais do trabalhador</p>
     </div>
     <span class="sec-badge badge-empty" id="badge4">—</span>
   </div>
@@ -938,9 +1019,9 @@ function toggleDarkMode(){
 
     <div class="row row-wide">
       <div class="fld col-2">
-        <label>Ocupação (CBO) <span class="req-star">⭐</span><span class="cn"><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop"><span class="tip-r"><b>O que é:</b> A atividade profissional exercida pelo trabalhador, classificada pela CBO (Classificação Brasileira de Ocupações). Digite o nome ou código — o sistema busca automaticamente.</span><span class="tip-r"><b>Por que informar:</b> Permite mapear os riscos ocupacionais por categoria profissional e subsidiar políticas de saúde do trabalhador.</span></span></span></span></label>
+        <label>Ocupação (CBO) <span class="req-star">⭐</span><span class="cn"><span class="tip-wrap"><button type="button" class="tip-btn" onclick="tipToggle(this)">i</button><span class="tip-pop">A Classificação Brasileira de Ocupações (CBO) permite identificar o vínculo entre a doença e a atividade laboral. Pode digitar o nome ou código — o sistema busca automaticamente.</span></span></span></label>
         <div class="ac-wrap">
-          <input type="text" id="f_ocupacao" data-caps autocomplete="off" placeholder="Nome ou código CBO (ex: ENFERMEIRO, 223505)" data-ess data-label="Ocupação (CBO)">
+          <input type="text" id="f_ocupacao" data-caps data-ess data-label="Ocupação CBO" autocomplete="off" placeholder="Nome ou código CBO (ex: DIGITADOR, 411005)">
           <div class="ac-drop" id="f_ocupacao-drop"></div>
         </div>
         <span id="f_ocupacao_hint" style="font-size:12px;color:#2563eb;margin-top:4px;display:none;line-height:1.4;font-weight:600"></span>
@@ -948,14 +1029,14 @@ function toggleDarkMode(){
       <div class="fld">
         <label>Situação no Mercado de Trabalho</label>
         <div class="pills" id="grp_sit_mercado" data-hidden="f_sit_mercado">
-          <label class="pill" data-val="1"><input type="radio" name="sit_mercado" value="1"> 1 — Empregado registrado</label>
-          <label class="pill" data-val="2"><input type="radio" name="sit_mercado" value="2"> 2 — Empregado não registrado</label>
-          <label class="pill" data-val="3"><input type="radio" name="sit_mercado" value="3"> 3 — Autônomo/conta própria</label>
-          <label class="pill" data-val="4"><input type="radio" name="sit_mercado" value="4"> 4 — Desempregado</label>
-          <label class="pill" data-val="5"><input type="radio" name="sit_mercado" value="5"> 5 — Aposentado/Pensionista</label>
-          <label class="pill" data-val="6"><input type="radio" name="sit_mercado" value="6"> 6 — Trabalhador doméstico</label>
-          <label class="pill" data-val="7"><input type="radio" name="sit_mercado" value="7"> 7 — Servidor público</label>
-          <label class="pill" data-val="9"><input type="radio" name="sit_mercado" value="9"> 9 — Ignorado</label>
+          <label class="pill" data-val="1"><input type="radio" name="sit_mercado" value="1"> Empregado reg.</label>
+          <label class="pill" data-val="2"><input type="radio" name="sit_mercado" value="2"> Empregado n.reg.</label>
+          <label class="pill" data-val="3"><input type="radio" name="sit_mercado" value="3"> Autônomo</label>
+          <label class="pill" data-val="4"><input type="radio" name="sit_mercado" value="4"> Desempregado</label>
+          <label class="pill" data-val="5"><input type="radio" name="sit_mercado" value="5"> Aposentado</label>
+          <label class="pill" data-val="6"><input type="radio" name="sit_mercado" value="6"> Doméstico</label>
+          <label class="pill" data-val="7"><input type="radio" name="sit_mercado" value="7"> Servidor públ.</label>
+          <label class="pill" data-val="9"><input type="radio" name="sit_mercado" value="9"> Ign.</label>
         </div>
         <input type="hidden" id="f_sit_mercado">
       </div>
@@ -963,30 +1044,28 @@ function toggleDarkMode(){
 
     <div class="row">
       <div class="fld">
-        <label>Tempo no Trabalho</label>
-        <input type="number" id="f_tempo_trab_val" min="0" placeholder="Ex: 5">
-      </div>
-      <div class="fld" style="max-width:160px">
-        <label>Unidade</label>
-        <div class="pills" id="grp_tempo_trab_tipo" data-hidden="f_tempo_trab_tipo">
-          <label class="pill" data-val="A"><input type="radio" name="tempo_trab_tipo" value="A"> A — Anos</label>
-          <label class="pill" data-val="M"><input type="radio" name="tempo_trab_tipo" value="M"> M — Meses</label>
-          <label class="pill" data-val="D"><input type="radio" name="tempo_trab_tipo" value="D"> D — Dias</label>
+        <label>Tempo de Exposição</label>
+        <div style="display:flex;gap:8px;align-items:flex-start">
+          <input type="number" id="f_tempo_exp_val" min="0" placeholder="Ex: 12" style="flex:1">
+          <div class="pills" id="grp_tempo_exp_tipo" data-hidden="f_tempo_exp_tipo" style="margin-top:2px">
+            <label class="pill" data-val="A"><input type="radio" name="tempo_exp_tipo" value="A"> A</label>
+            <label class="pill" data-val="M"><input type="radio" name="tempo_exp_tipo" value="M"> M</label>
+            <label class="pill" data-val="D"><input type="radio" name="tempo_exp_tipo" value="D"> D</label>
+          </div>
+          <input type="hidden" id="f_tempo_exp_tipo">
         </div>
-        <input type="hidden" id="f_tempo_trab_tipo">
       </div>
       <div class="fld">
-        <label>Local do Acidente</label>
-        <div class="pills" id="grp_local_ac" data-hidden="f_local_ac">
-          <label class="pill" data-val="01"><input type="radio" name="local_ac" value="01"> 01 — Empresa/oficina</label>
-          <label class="pill" data-val="02"><input type="radio" name="local_ac" value="02"> 02 — Residência</label>
-          <label class="pill" data-val="03"><input type="radio" name="local_ac" value="03"> 03 — Via pública</label>
-          <label class="pill" data-val="04"><input type="radio" name="local_ac" value="04"> 04 — Escola/ensino</label>
-          <label class="pill" data-val="05"><input type="radio" name="local_ac" value="05"> 05 — Área rural</label>
-          <label class="pill" data-val="06"><input type="radio" name="local_ac" value="06"> 06 — Área de lazer</label>
-          <label class="pill" data-val="09"><input type="radio" name="local_ac" value="09"> 09 — Outros</label>
+        <label>Tempo no Trabalho/Ocupação</label>
+        <div style="display:flex;gap:8px;align-items:flex-start">
+          <input type="number" id="f_tempo_trab_val" min="0" placeholder="Ex: 12" style="flex:1">
+          <div class="pills" id="grp_tempo_trab_tipo" data-hidden="f_tempo_trab_tipo" style="margin-top:2px">
+            <label class="pill" data-val="A"><input type="radio" name="tempo_trab_tipo" value="A"> A</label>
+            <label class="pill" data-val="M"><input type="radio" name="tempo_trab_tipo" value="M"> M</label>
+            <label class="pill" data-val="D"><input type="radio" name="tempo_trab_tipo" value="D"> D</label>
+          </div>
+          <input type="hidden" id="f_tempo_trab_tipo">
         </div>
-        <input type="hidden" id="f_local_ac">
       </div>
     </div>
 
@@ -1001,7 +1080,7 @@ function toggleDarkMode(){
     <div class="sec-num">5</div>
     <div class="sec-info">
       <h3>Dados da Empresa</h3>
-      <p>Identificação, endereço e terceirização</p>
+      <p>Local de trabalho onde ocorreu a exposição</p>
     </div>
     <span class="sec-badge badge-empty" id="badge5">—</span>
   </div>
@@ -1018,57 +1097,57 @@ function toggleDarkMode(){
       </div>
     </div>
 
-    <div class="row">
+    <div class="row row-wide">
       <div class="fld">
-        <label>Registro / CNPJ / CPF</label>
-        <input type="text" id="f_emp_reg" placeholder="00.000.000/0000-00">
+        <label>Registro/CNPJ/CPF</label>
+        <input type="text" id="f_emp_reg" placeholder="CNPJ ou CPF">
       </div>
       <div class="fld col-2">
         <label>Nome da Empresa <span class="req-star">⭐</span></label>
-        <input type="text" id="f_emp_nome" placeholder="Razão social ou nome fantasia" data-caps data-ess data-label="Nome da empresa">
+        <input type="text" id="f_emp_nome" data-caps data-ess data-label="Nome da empresa" placeholder="Razão social ou nome fantasia">
       </div>
-    </div>
-
-    <div class="row">
       <div class="fld">
         <label>CNAE</label>
         <div class="rf-cnae-warn" id="rf-cnae-warn" style="display:none">&#9888;&#65039; CNAE <strong id="rf-cnae-warn-code"></strong><span id="rf-cnae-warn-ramo"></span> não consta na lista do SINAN NET. Selecione a classe mais próxima ou pesquise manualmente no campo abaixo:
           <div class="rf-cnae-sugs" id="rf-cnae-sugs"></div>
         </div>
         <div class="ac-wrap">
-          <input type="text" id="f_emp_cnae" placeholder="Digite código ou atividade econômica..." autocomplete="off">
+          <input type="text" id="f_emp_cnae" placeholder="Digite código ou atividade..." autocomplete="off">
           <div class="ac-drop" id="f_emp_cnae-drop"></div>
         </div>
         <span id="f_emp_cnae_hint" style="font-size:12px;color:#2563eb;margin-top:4px;display:none;line-height:1.4;font-weight:600"></span>
       </div>
-      <div class="fld">
+    </div>
+
+    <div class="row">
+      <div class="fld" style="max-width:100px">
         <label>UF</label>
-        <select id="f_emp_uf"></select>
+        <input type="text" id="f_emp_uf" maxlength="2" data-caps placeholder="SP">
       </div>
       <div class="fld">
         <label>Município</label>
         <div class="ac-wrap">
-          <input type="text" id="f_emp_mun" placeholder="Nome do município" data-caps autocomplete="off">
+          <input type="text" id="f_emp_mun" data-caps placeholder="Nome do município" autocomplete="off">
           <div class="ac-drop" id="f_emp_mun-drop"></div>
         </div>
       </div>
+      <div class="fld" style="max-width:120px">
+        <label>IBGE</label>
+        <input type="text" id="f_emp_ibge" maxlength="7" placeholder="0000000" readonly>
+      </div>
       <div class="fld">
-        <label>Código IBGE</label>
-        <input type="text" id="f_emp_ibge" maxlength="6" placeholder="000000" readonly>
+        <label>Distrito</label>
+        <input type="text" id="f_emp_dist" data-caps>
       </div>
     </div>
 
     <div class="row">
       <div class="fld">
-        <label>Distrito</label>
-        <input type="text" id="f_emp_dist" data-caps>
-      </div>
-      <div class="fld">
         <label>Bairro</label>
         <input type="text" id="f_emp_bairro" data-caps>
       </div>
       <div class="fld col-2">
-        <label>Endereço / Logradouro</label>
+        <label>Endereço</label>
         <input type="text" id="f_emp_end" data-caps>
       </div>
       <div class="fld" style="max-width:100px">
@@ -1099,253 +1178,147 @@ function toggleDarkMode(){
       </div>
     </div>
 
-    <div id="box_emp_terc_detalhe" style="display:none">
-      <div class="sublabel">Dados da Empresa Terceirizada / Principal</div>
-      <div class="row">
-        <div class="fld">
-          <label>CNAE da Terceirizada</label>
-          <div class="ac-wrap">
-            <input type="text" id="f_emp_terc_cnae" placeholder="Digite código ou atividade..." autocomplete="off">
-            <div class="ac-drop" id="f_emp_terc_cnae-drop"></div>
-          </div>
-          <span id="f_emp_terc_cnae_hint" style="font-size:12px;color:#2563eb;margin-top:4px;display:none;line-height:1.4;font-weight:600"></span>
-        </div>
-        <div class="fld">
-          <label>CNPJ Empresa Principal</label>
-          <input type="text" id="f_emp_princ_cnpj" placeholder="00.000.000/0000-00">
-        </div>
-        <div class="fld col-2">
-          <label>Razão Social Empresa Principal</label>
-          <input type="text" id="f_emp_princ_rs" data-caps placeholder="Razão social da empresa principal">
-        </div>
-      </div>
+    <div id="box_emp_terc" style="display:none">
     </div>
 
   </div>
 </div>
 
 <!-- =========================================================
-  SEÇÃO 6 — DADOS DO ACIDENTE
+  SEÇÃO 6 — DIAGNÓSTICO DO CÂNCER
 ========================================================= -->
 <div class="sec" id="sec6">
   <div class="sec-hdr">
     <div class="sec-num">6</div>
     <div class="sec-info">
-      <h3>Dados do Acidente</h3>
-      <p>Hora, local, causa CID-10 e tipo de acidente</p>
+      <h3>Diagnóstico do Câncer</h3>
+      <p>CID-10, topografia, tipo, base diagnóstica, estadiamento</p>
     </div>
     <span class="sec-badge badge-empty" id="badge6">—</span>
   </div>
   <div class="sec-body">
-
-    <div class="row">
-      <div class="fld">
-        <label>Hora do Acidente (HH)</label>
-        <input type="text" id="f_hora_h" maxlength="2" placeholder="HH" inputmode="numeric">
-      </div>
-      <div class="fld">
-        <label>Minuto (MM)</label>
-        <input type="text" id="f_hora_m" maxlength="2" placeholder="MM" inputmode="numeric">
-      </div>
-      <div class="fld">
-        <label>Horas após jornada (HH)</label>
-        <input type="text" id="f_jorn_h" maxlength="2" placeholder="HH" inputmode="numeric">
-      </div>
-      <div class="fld">
-        <label>Minuto (MM)</label>
-        <input type="text" id="f_jorn_m" maxlength="2" placeholder="MM" inputmode="numeric">
-      </div>
-    </div>
-
-    <div class="row">
+    <div class="sublabel">Diagnóstico <span class="req-mark">obrigatório</span><span class="req-star" tabindex="0">⭐</span></div>
+    <div class="row row-wide">
       <div class="fld col-2">
-        <label>Município do Acidente</label>
+        <label>Diagnóstico CID-10 <span class="req">★</span></label>
         <div class="ac-wrap">
-          <input type="text" id="f_mun_ac" placeholder="Digite para buscar — UF preenchida automaticamente" data-caps autocomplete="off">
-          <div class="ac-drop" id="f_mun_ac-drop"></div>
+          <input type="text" id="f_diag_cid" placeholder="Digite para buscar — ex: C34, C50, C61..." data-caps data-ess data-label="Diagnóstico CID-10" autocomplete="off">
+          <div class="ac-drop" id="f_diag_cid-drop"></div>
         </div>
-      </div>
-      <div class="fld" style="max-width:100px">
-        <label>UF</label>
-        <select id="f_uf_ac"></select>
-      </div>
-      <div class="fld" style="max-width:120px">
-        <label>Código IBGE</label>
-        <input type="text" id="f_ibge_ac" maxlength="6" placeholder="000000" readonly>
+        <span class="info" id="f_diag_cid_hint" style="font-size:11px;color:#6b7280;display:none;margin-top:4px"></span>
       </div>
     </div>
-
-    <div class="row">
-      <div class="fld col-2">
-        <label>CID-10 da Causa</label>
-        <div class="ac-wrap">
-          <input type="text" id="f_causa_cid" placeholder="Ex: W29 — use apenas o código" autocomplete="off">
-          <div class="ac-drop" id="f_causa_cid-drop"></div>
-        </div>
-        <span id="f_causa_cid_hint" style="font-size:12px;color:#2563eb;margin-top:4px;display:none;line-height:1.4;font-weight:600"></span>
-      </div>
-      <div class="fld">
-        <label>Tipo de Acidente</label>
-        <div class="pills" id="grp_tipo_ac" data-hidden="f_tipo_ac">
-          <label class="pill" data-val="1"><input type="radio" name="tipo_ac" value="1"> 1 — Típico</label>
-          <label class="pill" data-val="2"><input type="radio" name="tipo_ac" value="2"> 2 — De trajeto</label>
-          <label class="pill" data-val="3"><input type="radio" name="tipo_ac" value="3"> 3 — Doença</label>
-          <label class="pill" data-val="9"><input type="radio" name="tipo_ac" value="9"> 9 — Ignorado</label>
-        </div>
-        <input type="hidden" id="f_tipo_ac">
-      </div>
-    </div>
-
     <div class="row">
       <div class="fld">
-        <label>Outros trabalhadores atingidos?</label>
-        <div class="pills" id="grp_outros_quant">
-          <label class="pill" data-val="1"><input type="radio" name="outros_quant" value="1" onchange="onOutrosQuant()"> Sim</label>
-          <label class="pill" data-val="2"><input type="radio" name="outros_quant" value="2" onchange="onOutrosQuant()"> Não</label>
-          <label class="pill" data-val="9"><input type="radio" name="outros_quant" value="9" onchange="onOutrosQuant()"> Ignorado</label>
-        </div>
+        <label>Topografia (Localização do Tumor)</label>
+        <input type="text" id="f_topografia" placeholder="Ex: Pulmão, Mama, Próstada..." data-caps>
       </div>
-      <div class="fld" id="box_outros_num" style="display:none">
-        <label>Quantos? <span class="cn">[C.58a]</span></label>
-        <input type="text" id="f_outros_num" placeholder="Nº de trabalhadores" inputmode="numeric">
+      <div class="fld">
+        <label>Tipo de Tumor</label>
+        <select id="f_tipo_tumor">
+          <option value="">Selecione...</option>
+          <option value="1">Primário</option>
+          <option value="2">Secundário (Metástase)</option>
+          <option value="3">In situ</option>
+        </select>
       </div>
     </div>
-
+    <div class="sublabel">Base Diagnóstica</div>
+    <div class="pills" id="box_base_diag">
+      <label class="pill"><input type="checkbox" name="base_diag" value="1" onchange="onBaseDiagChange()"> Clínica</label>
+      <label class="pill"><input type="checkbox" name="base_diag" value="2" onchange="onBaseDiagChange()"> Biópsia</label>
+      <label class="pill"><input type="checkbox" name="base_diag" value="3" onchange="onBaseDiagChange()"> Anatomopatológico</label>
+      <label class="pill"><input type="checkbox" name="base_diag" value="4" onchange="onBaseDiagChange()"> Citologia</label>
+      <label class="pill"><input type="checkbox" name="base_diag" value="5" onchange="onBaseDiagChange()"> Citogenética</label>
+      <label class="pill"><input type="checkbox" name="base_diag" value="6" onchange="onBaseDiagChange()"> Imuno-histoquímica</label>
+    </div>
+    <div class="row">
+      <div class="fld">
+        <label>Estadiamento</label>
+        <select id="f_estadiamento">
+          <option value="">Selecione...</option>
+          <option value="I">Estádio I</option>
+          <option value="II">Estádio II</option>
+          <option value="III">Estádio III</option>
+          <option value="IV">Estádio IV</option>
+          <option value="X">Estádio X (Não determinado)</option>
+        </select>
+      </div>
+    </div>
   </div>
 </div>
 
 <!-- =========================================================
-  SEÇÃO 7 — ATENDIMENTO MÉDICO
+  SEÇÃO 7 — AGENTES CARCINOGÊNICOS
 ========================================================= -->
 <div class="sec" id="sec7">
   <div class="sec-hdr">
     <div class="sec-num">7</div>
     <div class="sec-info">
-      <h3>Atendimento Médico</h3>
-      <p>Ocorrência, data e local do atendimento</p>
+      <h3>Agentes Carcinogênicos</h3>
+      <p>Substâncias e agentes de exposição ocupacional</p>
     </div>
     <span class="sec-badge badge-empty" id="badge7">—</span>
   </div>
   <div class="sec-body">
-
-    <div class="row">
-      <div class="fld">
-        <label>Ocorreu atendimento médico?</label>
-        <div class="pills" id="grp_atend">
-          <label class="pill" data-val="1"><input type="radio" name="atend" value="1" onchange="onAtend()"> Sim</label>
-          <label class="pill" data-val="2"><input type="radio" name="atend" value="2" onchange="onAtend()"> Não</label>
-          <label class="pill" data-val="9"><input type="radio" name="atend" value="9" onchange="onAtend()"> Ignorado</label>
-        </div>
+    <div class="row row-wide">
+      <div class="fld col-2">
+        <label>Agentes Carcinogênicos Exposição</label>
+        <textarea id="f_agentes" placeholder="Liste os agentes: amianto, benzeno, radiação ionizante, sílica, cromo, arsênio, níquel, cádmio, berílio, alcatrão, outros..." data-caps rows="3"></textarea>
       </div>
     </div>
-
-    <div id="box_atend_detalhe" style="display:none">
-      <div class="row">
-        <div class="fld">
-          <label>Data do Atendimento</label>
-          <input type="date" id="f_data_atend">
-        </div>
-        <div class="fld col-2">
-          <label>Município do Atendimento</label>
-          <div class="ac-wrap">
-            <input type="text" id="f_mun_atend" placeholder="Digite para buscar" data-caps autocomplete="off">
-            <div class="ac-drop" id="f_mun_atend-drop"></div>
-          </div>
-        </div>
-        <div class="fld" style="max-width:100px">
-          <label>UF</label>
-          <select id="f_uf_atend"></select>
-        </div>
-        <div class="fld" style="max-width:120px">
-          <label>Código IBGE</label>
-          <input type="text" id="f_ibge_atend" maxlength="6" placeholder="000000" readonly>
-        </div>
-      </div>
-      <div class="row">
-        <div class="fld col-2">
-          <label>Nome da Unidade de Saúde</label>
-          <input type="text" id="f_un_atend" data-caps placeholder="Nome da unidade de saúde">
-        </div>
-        <div class="fld">
-          <label>Código da Unidade</label>
-          <input type="text" id="f_cod_atend" placeholder="CNES">
-        </div>
+    <div class="row row-wide">
+      <div class="fld col-2">
+        <label>Local de Exposição ao Agente</label>
+        <input type="text" id="f_local_exposicao" placeholder="Onde ocorreu a exposição ao agente cancerígeno..." data-caps>
       </div>
     </div>
-
   </div>
 </div>
 
 <!-- =========================================================
-  SEÇÃO 8 — LESÕES E DIAGNÓSTICO
+  SEÇÃO 8 — HÁBITOS E ESTILO DE VIDA
 ========================================================= -->
 <div class="sec" id="sec8">
   <div class="sec-hdr">
     <div class="sec-num">8</div>
     <div class="sec-info">
-      <h3>Lesões e Diagnóstico</h3>
-      <p>Parte do corpo, CID-10 e regime de tratamento</p>
+      <h3>Hábitos e Estilo de Vida</h3>
+      <p>Tabagismo, etilismo e fatores associados</p>
     </div>
     <span class="sec-badge badge-empty" id="badge8">—</span>
   </div>
   <div class="sec-body">
-
-    <div class="info"><span class="ico">ℹ️</span><div>Selecione <strong>até 3 partes do corpo</strong> atingidas pelo acidente. O sistema converterá automaticamente nos códigos de 2 dígitos da ficha SINAN.</div></div>
-
-    <div class="sublabel" style="margin-bottom:10px">Partes Atingidas <span style="font-size:10px;font-weight:400;color:#9ca3af;text-transform:none;margin-left:6px">Máximo 3 seleções</span></div>
-
-    <div id="parte-corpo-selecao" style="margin-bottom:14px">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
-        <span style="font-size:13px;font-weight:700;color:#374151">Selecionadas:</span>
-        <span id="parte-count" style="font-size:13px;font-weight:700;color:#2563eb">0/3</span>
-      </div>
-      <div class="row" id="parte-selecionada-row" style="margin-bottom:8px">
-        <div class="fld"><label>Parte 1</label><input type="text" id="f_corpo1_display" readonly placeholder="—" class="parte-display"></div>
-        <div class="fld"><label>Parte 2</label><input type="text" id="f_corpo2_display" readonly placeholder="—" class="parte-display"></div>
-        <div class="fld"><label>Parte 3</label><input type="text" id="f_corpo3_display" readonly placeholder="—" class="parte-display"></div>
-      </div>
-      <input type="hidden" id="f_corpo1"><input type="hidden" id="f_corpo2"><input type="hidden" id="f_corpo3">
-
-      <!-- Opções oficiais da ficha SINAN (Campo 63) -->
-      <div class="parte-grid">
-        <label class="parte-pill" data-code="01"><input type="checkbox" name="parte_corpo" value="01"> Olho</label>
-        <label class="parte-pill" data-code="02"><input type="checkbox" name="parte_corpo" value="02"> Cabeça</label>
-        <label class="parte-pill" data-code="03"><input type="checkbox" name="parte_corpo" value="03"> Pescoço</label>
-        <label class="parte-pill" data-code="04"><input type="checkbox" name="parte_corpo" value="04"> Tórax</label>
-        <label class="parte-pill" data-code="05"><input type="checkbox" name="parte_corpo" value="05"> Abdome</label>
-        <label class="parte-pill" data-code="06"><input type="checkbox" name="parte_corpo" value="06"> Mão</label>
-        <label class="parte-pill" data-code="07"><input type="checkbox" name="parte_corpo" value="07"> Membro superior</label>
-        <label class="parte-pill" data-code="08"><input type="checkbox" name="parte_corpo" value="08"> Membro inferior</label>
-        <label class="parte-pill" data-code="09"><input type="checkbox" name="parte_corpo" value="09"> Pé</label>
-        <label class="parte-pill" data-code="10"><input type="checkbox" name="parte_corpo" value="10"> Todo o corpo</label>
-        <label class="parte-pill" data-code="11"><input type="checkbox" name="parte_corpo" value="11"> Outro</label>
-        <label class="parte-pill" data-code="99"><input type="checkbox" name="parte_corpo" value="99"> Ignorado</label>
-      </div>
-
+    <div class="sublabel">Tabagismo</div>
+    <div class="pills">
+      <label class="pill" onclick="onTabagismoChange()"><input type="radio" name="habito_fumar" value="1"> Sim</label>
+      <label class="pill" onclick="onTabagismoChange()"><input type="radio" name="habito_fumar" value="2"> Não</label>
+      <label class="pill" onclick="onTabagismoChange()"><input type="radio" name="habito_fumar" value="3"> Ex-fumante</label>
     </div>
-
-    <div class="row row-wide" style="margin-top:16px">
+    <div id="box_tabaco_tempos" style="display:none">
+      <div class="row">
+        <div class="fld">
+          <label>Tempo de Tabagismo (anos)</label>
+          <input type="text" id="f_tempo_tabaco_val" placeholder="0" maxlength="3" style="max-width:100px">
+        </div>
+        <div class="fld">
+          <label>Cigarros/dia (maços)</label>
+          <input type="text" id="f_cigarros_dia" placeholder="0" maxlength="4">
+        </div>
+      </div>
+    </div>
+    <div class="sublabel">Etilismo</div>
+    <div class="pills">
+      <label class="pill"><input type="radio" name="habito_alcool" value="1"> Sim</label>
+      <label class="pill"><input type="radio" name="habito_alcool" value="2"> Não</label>
+      <label class="pill"><input type="radio" name="habito_alcool" value="3"> Social</label>
+    </div>
+    <div class="row row-wide" style="margin-top:10px">
       <div class="fld col-2">
-        <label>CID-10 da Lesão</label>
-        <div class="ac-wrap">
-          <input type="text" id="f_diag_cid" placeholder="Ex: S67.0 — use apenas o código" autocomplete="off">
-          <div class="ac-drop" id="f_diag_cid-drop"></div>
-        </div>
-        <span id="f_diag_cid_hint" style="font-size:12px;color:#2563eb;margin-top:4px;display:none;line-height:1.4;font-weight:600"></span>
-      </div>
-      <div class="fld">
-        <label>Regime de Tratamento</label>
-        <div class="pills" id="grp_regime" data-hidden="f_regime">
-          <label class="pill" data-val="1"><input type="radio" name="regime" value="1"> 1 — Ambulatorial</label>
-          <label class="pill" data-val="2"><input type="radio" name="regime" value="2"> 2 — Internação</label>
-          <label class="pill" data-val="3"><input type="radio" name="regime" value="3"> 3 — Day hospital</label>
-          <label class="pill" data-val="4"><input type="radio" name="regime" value="4"> 4 — CAPS</label>
-          <label class="pill" data-val="9"><input type="radio" name="regime" value="9"> 9 — Ignorado</label>
-        </div>
-        <input type="hidden" id="f_regime">
+        <label>Observações sobre Hábitos</label>
+        <textarea id="f_obs_hab" placeholder="Outros hábitos e fatores de risco relevantes..." rows="2"></textarea>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -1362,52 +1335,46 @@ function toggleDarkMode(){
     <span class="sec-badge badge-empty" id="badge9">—</span>
   </div>
   <div class="sec-body">
-
-    <div class="row row-wide">
-      <div class="fld col-2">
+    <div class="row">
+      <div class="fld">
         <label>Evolução do Caso</label>
-        <div class="pills" id="grp_evolucao" data-hidden="f_evolucao">
-          <label class="pill" data-val="1"><input type="radio" name="evolucao" value="1"> 1 — Cura</label>
-          <label class="pill" data-val="2"><input type="radio" name="evolucao" value="2"> 2 — Incapacidade temporária</label>
-          <label class="pill" data-val="3"><input type="radio" name="evolucao" value="3"> 3 — Incapacidade parcial permanente</label>
-          <label class="pill" data-val="4"><input type="radio" name="evolucao" value="4"> 4 — Incapacidade total permanente</label>
-          <label class="pill" data-val="5"><input type="radio" name="evolucao" value="5"> 5 — Óbito por acidente de trabalho</label>
-          <label class="pill" data-val="6"><input type="radio" name="evolucao" value="6"> 6 — Óbito por outras causas</label>
-          <label class="pill" data-val="9"><input type="radio" name="evolucao" value="9"> 9 — Ignorado</label>
+        <select id="f_evolucao">
+          <option value="">Selecione...</option>
+          <option value="1">Cura</option>
+          <option value="2">Óbito por câncer</option>
+          <option value="3">Óbito por outra causa</option>
+          <option value="4">Sequelas</option>
+          <option value="5">Perda de seguimento</option>
+          <option value="9">Ignorado</option>
+        </select>
+      </div>
+    </div>
+    <div class="sublabel">CAT — Comunicação de Acidente de Trabalho</div>
+    <div class="pills">
+      <label class="pill"><input type="radio" name="f_cat" value="1"> Sim</label>
+      <label class="pill"><input type="radio" name="f_cat" value="2"> Não</label>
+      <label class="pill"><input type="radio" name="f_cat" value="9"> Ignorado</label>
+    </div>
+    <div class="sublabel">Óbito</div>
+    <div class="pills">
+      <label class="pill" onclick="onObitoChange()"><input type="radio" name="f_obito" value="1"> Sim</label>
+      <label class="pill" onclick="onObitoChange()"><input type="radio" name="f_obito" value="2"> Não</label>
+      <label class="pill" onclick="onObitoChange()"><input type="radio" name="f_obito" value="9"> Ignorado</label>
+    </div>
+    <div id="box_obito_data" style="display:none">
+      <div class="row">
+        <div class="fld">
+          <label>Data do Óbito</label>
+          <input type="date" id="f_obito_data">
         </div>
-        <input type="hidden" id="f_evolucao">
-      </div>
-      <div class="fld">
-        <label>CAT Emitida?</label>
-        <div class="pills" id="grp_cat">
-          <label class="pill" data-val="1"><input type="radio" name="cat" value="1"> Sim</label>
-          <label class="pill" data-val="2"><input type="radio" name="cat" value="2"> Não</label>
-          <label class="pill" data-val="9"><input type="radio" name="cat" value="9"> Ignorado</label>
-        </div>
       </div>
     </div>
-
-    <div id="box_obito" style="display:none" class="row">
-      <div class="fld">
-        <label>Data do Óbito</label>
-        <input type="date" id="f_obito">
+    <div class="row row-wide" style="margin-top:10px">
+      <div class="fld col-2">
+        <label>Observações</label>
+        <textarea id="f_obs" placeholder="Informações adicionais..." rows="3"></textarea>
       </div>
     </div>
-
-    <div class="row row-full" style="margin-top:4px">
-      <div class="fld">
-        <label>Descrição do Acidente</label>
-        <textarea id="f_desc" style="min-height:100px" placeholder="Descreva como o acidente ocorreu, as circunstâncias, mecanismo de lesão, etc."></textarea>
-      </div>
-    </div>
-
-    <div class="row row-full">
-      <div class="fld">
-        <label>Observações Complementares</label>
-        <textarea id="f_obs" placeholder="Informações adicionais relevantes para o caso"></textarea>
-      </div>
-    </div>
-
   </div>
 </div>
 
@@ -1416,16 +1383,16 @@ function toggleDarkMode(){
 <!-- TOAST -->
 <div id="toast"></div>
 
-<!-- VALIDATION MODAL (quase completo) -->
+<!-- MODAIS DE VALIDAÇÃO -->
 <div class="ov" id="ov-quase">
   <div class="modal">
-    <div class="modal-ico">⭐</div>
-    <h2>Campos essenciais pendentes</h2>
-    <p>Os itens abaixo são fundamentais para um registro de qualidade. Você pode prosseguir mesmo assim.</p>
+    <div class="modal-ico">⚠️</div>
+    <h2>Campos essenciais incompletos</h2>
+    <p>Os seguintes campos ⭐ não foram preenchidos. Recomendamos completá-los antes de gerar o PDF.</p>
     <div class="err-list" id="ov-quase-list"></div>
     <div class="modal-actions">
       <button class="mbtn mbtn-s" onclick="closeModal('ov-quase')">Voltar e preencher</button>
-      <button class="mbtn mbtn-p" id="ov-quase-dl">Baixar mesmo assim</button>
+      <button class="mbtn mbtn-p" id="ov-quase-dl">Gerar mesmo assim</button>
     </div>
   </div>
 </div>
@@ -1470,7 +1437,7 @@ function toggleDarkMode(){
   </div>
 </div>
 
-<!-- BOTTOM SHEET MOBILE -->
+<!-- BOTTOM SHEET MOBILE — menu de pacientes fictícios -->
 <div id="pac-mob-sheet">
   <div id="pac-mob-backdrop" onclick="closePacSheet()"></div>
   <div id="pac-mob-panel">
@@ -1479,7 +1446,19 @@ function toggleDarkMode(){
   </div>
 </div>
 
-<!-- SINAN NET — tabelas de referência -->
+<!-- BARRA INFERIOR — visível apenas em mobile -->
+<div id="mob-bottom">
+  <a id="mob-back-btn" href="index.html">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15,18 9,12 15,6"/></svg>
+    Menu
+  </a>
+  <button id="mob-pdf-btn" onclick="gerarPDF()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+    Gerar PDF
+  </button>
+</div>
+
+<!-- DATA SCRIPTS -->
 <script src="data/tb_regiao.js"></script>
 <script src="data/tb_uf.js"></script>
 <script src="data/tb_municipios.js"></script>
@@ -1491,7 +1470,7 @@ function toggleDarkMode(){
 
 <script>
 /*==========================================================
-  CAPS LOCK + SEM ACENTO
+  CAPS LOCK + SEM ACENTO (todos inputs com data-caps)
 ==========================================================*/
 document.querySelectorAll('input[data-caps]').forEach(function(inp){
   inp.addEventListener('input', function(){
@@ -1500,104 +1479,6 @@ document.querySelectorAll('input[data-caps]').forEach(function(inp){
     try{ this.setSelectionRange(pos,pos); }catch(e){}
   });
 });
-
-/*==========================================================
-  PARTES ATINGIDAS — seletor visual (máx. 3)
-==========================================================*/
-(function(){
-  var MAX_PARTES = 3;
-  var pills = document.querySelectorAll('.parte-pill');
-  var countEl = document.getElementById('parte-count');
-
-  // Mapa de código → nome legível
-  var CODE_NAMES = {};
-  pills.forEach(function(p){
-    var code = p.dataset.code || p.querySelector('input').value;
-    CODE_NAMES[code] = p.textContent.trim();
-  });
-
-  function updatePartes(){
-    var selected = [];
-    pills.forEach(function(p){
-      var inp = p.querySelector('input');
-      if(inp && inp.checked) selected.push(inp.value);
-    });
-
-    // Atualiza contador
-    if(countEl) countEl.textContent = selected.length + '/' + MAX_PARTES;
-
-    // Desabilita pills não selecionados quando atingir max
-    pills.forEach(function(p){
-      var inp = p.querySelector('input');
-      if(!inp) return;
-      if(selected.length >= MAX_PARTES && !inp.checked){
-        p.classList.add('disabled');
-      } else {
-        p.classList.remove('disabled');
-      }
-    });
-
-    // Preenche campos display e hidden
-    for(var i = 0; i < MAX_PARTES; i++){
-      var displayEl = document.getElementById('f_corpo' + (i+1) + '_display');
-      var hiddenEl = document.getElementById('f_corpo' + (i+1));
-      if(selected[i]){
-        if(displayEl) displayEl.value = selected[i] + ' — ' + CODE_NAMES[selected[i]];
-        if(hiddenEl) hiddenEl.value = selected[i];
-      } else {
-        if(displayEl) displayEl.value = '';
-        if(displayEl) displayEl.placeholder = '—';
-        if(hiddenEl) hiddenEl.value = '';
-      }
-    }
-  }
-
-  // Intercepta cliques nas parte-pills
-  pills.forEach(function(lbl){
-    lbl.addEventListener('click', function(e){
-      e.preventDefault();
-      var inp = this.querySelector('input');
-      if(!inp || this.classList.contains('disabled')) return;
-
-      if(inp.checked){
-        // Desmarcar
-        inp.checked = false;
-        this.classList.remove('checked');
-      } else {
-        // Verificar limite
-        var currentCount = document.querySelectorAll('.parte-pill.checked').length;
-        if(currentCount >= MAX_PARTES) return;
-        inp.checked = true;
-        this.classList.add('checked');
-      }
-      inp.dispatchEvent(new Event('change',{bubbles:true}));
-      updatePartes();
-    });
-  });
-
-  // Sync: hidden → display (para carregar pacientes fictícios)
-  ['f_corpo1','f_corpo2','f_corpo3'].forEach(function(hidId, idx){
-    var hidEl = document.getElementById(hidId);
-    if(!hidEl) return;
-    hidEl.addEventListener('change', function(){
-      var val = hidEl.value;
-      var displayEl = document.getElementById('f_corpo' + (idx+1) + '_display');
-      if(val){
-        if(displayEl) displayEl.value = val + ' — ' + (CODE_NAMES[val] || '');
-        // Marca o pill correspondente
-        pills.forEach(function(p){
-          if(p.dataset.code === val || p.querySelector('input').value === val){
-            p.querySelector('input').checked = true;
-            p.classList.add('checked');
-          }
-        });
-      }
-      updatePartes();
-    });
-  });
-
-  updatePartes();
-})();
 
 /*==========================================================
   PILL TOGGLE
@@ -1634,7 +1515,7 @@ document.querySelectorAll('.pill').forEach(function(lbl){
     var hidId = grp.dataset.hidden;
     var hidEl = document.getElementById(hidId);
     if(!hidEl) return;
-    /* pill → hidden: ao clicar no pill, atualiza hidden e dispara change */
+    // pill → hidden: ao clicar no pill, atualiza hidden e dispara change
     grp.querySelectorAll('.pill').forEach(function(p){
       p.addEventListener('click', function(){
         var radio = p.querySelector('input[type="radio"]');
@@ -1645,7 +1526,7 @@ document.querySelectorAll('.pill').forEach(function(lbl){
         }, 0);
       });
     });
-    /* hidden → pill: quando _setField() seta o hidden, sincroniza visualmente */
+    // hidden → pill: quando _setField() seta o hidden, sincroniza visualmente
     hidEl.addEventListener('change', function(){
       var val = hidEl.value;
       grp.querySelectorAll('.pill').forEach(function(p){
@@ -1654,8 +1535,6 @@ document.querySelectorAll('.pill').forEach(function(lbl){
         p.classList.toggle('checked', match);
         if(radio) radio.checked = match;
       });
-      /* Disparar callbacks especiais para certos campos */
-      if(hidId === 'f_evolucao' && typeof onEvolucao === 'function') onEvolucao();
     });
   });
 })();
@@ -1665,48 +1544,45 @@ document.querySelectorAll('.pill').forEach(function(lbl){
 ==========================================================*/
 function onSexoChange(){
   var s = document.querySelector('[name="sexo"]:checked');
-  document.getElementById('row_gest').style.display = (s && s.value === 'F') ? 'grid' : 'none';
+  document.getElementById('row_gest').style.display = (s&&s.value==='F')?'grid':'none';
 }
 
 function onEmpTerc(){
   var v = document.querySelector('[name="emp_terc"]:checked');
-  document.getElementById('box_emp_terc_detalhe').style.display = (v && v.value === '1') ? 'block' : 'none';
+  document.getElementById('box_emp_terc').style.display = (v&&v.value==='1') ? 'block' : 'none';
 }
 
-function onOutrosQuant(){
-  var v = document.querySelector('[name="outros_quant"]:checked');
-  document.getElementById('box_outros_num').style.display = (v && v.value === '1') ? 'flex' : 'none';
+function onTabagismoChange(){
+  var v = document.querySelector('[name="habito_fumar"]:checked');
+  document.getElementById('box_tabaco_tempos').style.display = (v && v.value === '1') ? 'block' : 'none';
 }
 
-function onAtend(){
-  var v = document.querySelector('[name="atend"]:checked');
-  document.getElementById('box_atend_detalhe').style.display = (v && v.value === '1') ? 'block' : 'none';
+function onObitoChange(){
+  var v = document.querySelector('[name="f_obito"]:checked');
+  document.getElementById('box_obito_data').style.display = (v && v.value === '1') ? 'block' : 'none';
 }
 
-function onEvolucao(){
-  var v = document.getElementById('f_evolucao').value;
-  document.getElementById('box_obito').style.display = (v === '5' || v === '6') ? 'grid' : 'none';
+function onBaseDiagChange(){
+  updateProgress();
 }
 
 /*==========================================================
-  SINAN DATA — UF / MUNICIPIO
+  SINAN DATA — UF / MUNICIPIO / CID10 / CBO
 ==========================================================*/
 
-// Popula todos os <select> de UF
+// Popula todos os <select> de UF com SINAN_UFS
 (function(){
   var opts = '<option value="">— UF —</option>';
   (window.SINAN_UFS || []).forEach(function(u){
     opts += '<option value="' + u.sigla + '">' + u.sigla + '</option>';
   });
-  ['f_uf_notif','f_uf_res','f_uf_ac','f_uf_atend','f_emp_uf'].forEach(function(id){
+  ['f_uf_notif','f_uf_res'].forEach(function(id){
     var el = document.getElementById(id);
     if(el) el.innerHTML = opts;
   });
 })();
 
-/*==========================================================
-  MOTOR GENÉRICO DE AUTOCOMPLETE
-==========================================================*/
+// Motor genérico de autocomplete
 function acSetup(inputId, dropId, datafn, matchfn, labelFn, selectFn){
   var inp  = document.getElementById(inputId);
   var drop = document.getElementById(dropId);
@@ -1752,15 +1628,11 @@ function acSetup(inputId, dropId, datafn, matchfn, labelFn, selectFn){
   });
 }
 
-/*==========================================================
-  AUTOCOMPLETE DE MUNICÍPIO (notif, res, ac, atend)
-==========================================================*/
+// Autocomplete de Município (notif, res, emp)
 [
   {suf:'notif', ibge:'f_ibge_notif'},
   {suf:'res',   ibge:'f_ibge_res'},
-  {suf:'ac',    ibge:'f_ibge_ac'},
-  {suf:'atend', ibge:'f_ibge_atend'},
-  {suf:'emp',   ibge:'f_emp_ibge',  ufId:'f_emp_uf',  munId:'f_emp_mun'}
+  {suf:'emp',   ibge:'f_emp_ibge', ufId:'f_emp_uf', munId:'f_emp_mun'}
 ].forEach(function(cfg){
   var ufId  = cfg.ufId  || ('f_uf_'  + cfg.suf);
   var munId = cfg.munId || ('f_mun_' + cfg.suf);
@@ -1794,34 +1666,7 @@ function acSetup(inputId, dropId, datafn, matchfn, labelFn, selectFn){
 });
 
 /*==========================================================
-  AUTOCOMPLETE CID-10 (causa e diagnóstico)
-==========================================================*/
-function normCid(s){ return s.replace('.',''); }
-
-['f_causa_cid','f_diag_cid'].forEach(function(fieldId){
-  var hintId = fieldId + '_hint';
-  acSetup(
-    fieldId, fieldId + '-drop',
-    function(){ return window.SINAN_AGRAVOS || []; },
-    function(a, q){
-      var qn = normCid(q);
-      var nome = a.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-      return normCid(a.cid).indexOf(qn) === 0 || nome.indexOf(q) !== -1;
-    },
-    function(a){ return '<b>' + a.cid + '</b> &mdash; ' + a.nome; },
-    function(inp, a){
-      inp.value = a.cid;
-      var hint = document.getElementById(hintId);
-      if(hint){ hint.textContent = a.nome; hint.style.display = 'block'; }
-    }
-  );
-  document.getElementById(fieldId).addEventListener('input', function(){
-    if(!this.value.trim()){ var h=document.getElementById(hintId); if(h){h.style.display='none';h.textContent='';} }
-  });
-});
-
-/*==========================================================
-  AUTOCOMPLETE CNAE (empresa principal + terceirizada)
+  AUTOCOMPLETE CNAE (empresa principal)
   Normaliza código removendo pontos e hifens (01.11-2 → 01112)
 ==========================================================*/
 function normCnae(s){ return (s||'').replace(/[.\-]/g,''); }
@@ -1851,8 +1696,7 @@ function cnaeSetup(inputId, hintId){
   });
 }
 
-cnaeSetup('f_emp_cnae',      'f_emp_cnae_hint');
-cnaeSetup('f_emp_terc_cnae', 'f_emp_terc_cnae_hint');
+cnaeSetup('f_emp_cnae', 'f_emp_cnae_hint');
 
 // Ao digitar manualmente no campo CNAE: esconde aviso RF e descarta mapeamento automático
 (function(){
@@ -1869,6 +1713,14 @@ cnaeSetup('f_emp_terc_cnae', 'f_emp_terc_cnae_hint');
 /*==========================================================
   RECEITA FEDERAL — EXTRAÇÃO DE CNPJ
 ==========================================================*/
+function rfTogglePanel(){
+  var panel = document.getElementById('rf-panel');
+  var btn   = document.getElementById('rf-toggle-btn');
+  var open  = panel.style.display === 'block';
+  panel.style.display = open ? 'none' : 'block';
+  btn.classList.toggle('active', !open);
+}
+
 function extractCompanyInfo(text){
   var r = {};
 
@@ -1877,7 +1729,7 @@ function extractCompanyInfo(text){
   r.cnpj = cnpjM ? cnpjM[0].replace(/\s/g,'') : '';
 
   // Helper: valor após rótulo — suporta "ROTULO: valor" (mesma linha)
-  // e "ROTULO\nvalor" (próxima linha), pulando linhas em branco com espaços
+  // e "ROTULO\nvalor" (próxima linha), como no layout da Receita Federal
   function getVal(labelRe){
     var re1 = new RegExp(labelRe+'[^:\\n\\r]*:[\\t ]*([^\\n\\r]+)','i');
     // Pula linhas em branco (com ou sem espaços) entre o rótulo e o valor
@@ -1928,27 +1780,14 @@ function extractCompanyInfo(text){
   return r;
 }
 
-function rfTogglePanel(){
-  var panel = document.getElementById('rf-panel');
-  var btn   = document.getElementById('rf-toggle-btn');
-  var open  = panel.style.display === 'block';
-  panel.style.display = open ? 'none' : 'block';
-  btn.classList.toggle('active', !open);
-}
-
-
-
-// Normaliza CNAE: remove pontos, hífens e barras
 function normCnaeRF(s){ return (s||'').replace(/[.\-\/\s]/g,''); }
 
-// Exibe código RF no input (fiel à subclasse) e mapeia classe SINAN no hint
 function rfFillCnae(sinanEntry, rfCode){
   var inp  = document.getElementById('f_emp_cnae');
   var hint = document.getElementById('f_emp_cnae_hint');
   var displayCode = rfCode || sinanEntry.codigo;
   if(inp){
     inp.value = displayCode;
-    // Guarda a classe SINAN para uso no PDF
     inp.dataset.sinanCnae = sinanEntry.codigo;
   }
   if(hint){
@@ -1960,14 +1799,11 @@ function rfFillCnae(sinanEntry, rfCode){
   }
 }
 
-// Busca a classe SINAN correspondente a um código de subclasse RF
 function rfMatchCnae(rfCode){
   if(!rfCode || !window.SINAN_CNAES) return null;
   var normExt = normCnaeRF(rfCode);
-  // 1. Match exato
   var found = window.SINAN_CNAES.find(function(c){ return normCnae(c.codigo) === normExt; });
   if(found) return found;
-  // 2. Subclasse RF começa com a classe SINAN (ex: "2930102" começa com "29301")
   found = window.SINAN_CNAES.find(function(c){
     var nc = normCnae(c.codigo);
     return nc.length < normExt.length && normExt.indexOf(nc) === 0;
@@ -1975,7 +1811,6 @@ function rfMatchCnae(rfCode){
   return found || null;
 }
 
-// Sugestões semânticas por sobreposição de palavras (fallback)
 function cnaeSemantic(query, topN){
   if(!window.SINAN_CNAES || !query) return [];
   var words = query.toUpperCase()
@@ -2033,7 +1868,6 @@ function rfExtrair(){
     if(warn){
       document.getElementById('rf-cnae-warn-code').textContent = info.cnaeCode || '(não identificado)';
       document.getElementById('rf-cnae-warn-ramo').textContent = info.ramoAtividade ? ' \u2014 ' + info.ramoAtividade : '';
-      // Sugestões semânticas
       var sug = cnaeSemantic(info.ramoAtividade || info.cnaeCode, 3);
       var rfCodeEsc = (info.cnaeCode || '').replace(/\\/g,'\\\\').replace(/'/g,"\\'");
       var html = sug.map(function(c){
@@ -2063,7 +1897,6 @@ function rfSelectCnaeSug(codigo, rfCode){
   updateProgress();
 }
 
-// Retorna o código de classe SINAN para o PDF (sem o sufixo de subclasse)
 function sinanCnaeVal(){
   var el = document.getElementById('f_emp_cnae');
   if(!el) return '';
@@ -2071,9 +1904,30 @@ function sinanCnaeVal(){
   return el.value.replace(/-\d{2}$/, '').trim();
 }
 
-/*==========================================================
-  AUTOCOMPLETE CBO (ocupação)
-==========================================================*/
+// Autocomplete de CID-10 cancer (C00-D48)
+function normCid(s){ return s.replace('.',''); }
+acSetup(
+  'f_diag_cid', 'f_diag_cid-drop',
+  function(){ return window.SINAN_AGRAVOS || []; },
+  function(a, q){
+    var qn = normCid(q);
+    var nome = a.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    var cidNorm = normCid(a.cid);
+    var cancerMatch = /^C[0-9][0-9]/.test(cidNorm) || /^D[0-3][0-9]/.test(cidNorm) || ['D44','D45','D46','D47','D48'].indexOf(cidNorm) !== -1;
+    return cancerMatch && (cidNorm.indexOf(qn) === 0 || nome.indexOf(q) !== -1);
+  },
+  function(a){ return '<b>' + a.cid + '</b> &mdash; ' + a.nome; },
+  function(inp, a){
+    inp.value = a.cid;
+    var hint = document.getElementById('f_diag_cid_hint');
+    if(hint){ hint.textContent = a.nome; hint.style.display = 'block'; }
+  }
+);
+document.getElementById('f_diag_cid').addEventListener('input', function(){
+  if(!this.value.trim()){ var h=document.getElementById('f_diag_cid_hint'); if(h){h.style.display='none';h.textContent='';} }
+});
+
+// Autocomplete de Ocupação / CBO
 var _cboRevSyn = null;
 function buildCboRevSyn(){
   if(_cboRevSyn) return _cboRevSyn;
@@ -2099,8 +1953,8 @@ function searchCboSynonyms(q){
       revMap[key].forEach(function(entry){
         if(seen[entry.cboCode]) return;
         seen[entry.cboCode] = true;
-        var cboItem = null;
-        for(var i=0;i<cbos.length;i++){ if(cbos[i].cbo===entry.cboCode){cboItem=cbos[i];break;} }
+        var cboItem = cbos.find ? cbos.find(function(c){ return c.cbo === entry.cboCode; }) : null;
+        if(!cboItem){ for(var i=0;i<cbos.length;i++){ if(cbos[i].cbo===entry.cboCode){cboItem=cbos[i];break;} } }
         if(cboItem){
           results.push({ cbo: cboItem.cbo, nome: cboItem.nome, synonymText: entry.synonymText, isSynonym: true });
         }
@@ -2213,13 +2067,18 @@ document.getElementById('f_nasc').addEventListener('change', function(){
   var unEl    = document.getElementById('f_idade_un');
   if(!idadeEl || !unEl) return;
   if(diffDias < 29){
-    idadeEl.value = diffDias; unEl.value = 'D';
+    idadeEl.value = diffDias;
+    unEl.value = 'D';
+    unEl.dispatchEvent(new Event('change', {bubbles:true}));
   } else if(diffDias < 365){
-    idadeEl.value = Math.floor(diffDias / 30.44); unEl.value = 'M';
+    idadeEl.value = Math.floor(diffDias / 30.44);
+    unEl.value = 'M';
+    unEl.dispatchEvent(new Event('change', {bubbles:true}));
   } else {
-    idadeEl.value = Math.floor(diffDias / 365.25); unEl.value = 'A';
+    idadeEl.value = Math.floor(diffDias / 365.25);
+    unEl.value = 'A';
+    unEl.dispatchEvent(new Event('change', {bubbles:true}));
   }
-  unEl.dispatchEvent(new Event('change', {bubbles:true}));
   updateProgress();
 });
 
@@ -2246,20 +2105,23 @@ function showToast(msg, type, dur){
 /*==========================================================
   PROGRESS + GAMIFICATION
 ==========================================================*/
-var CIRCUMFERENCE = 2 * Math.PI * 29;
+var CIRCUMFERENCE = 2 * Math.PI * 29; // r=29
 var _prevPct = -1;
 var _sectionMilestones = {};
 var _globalMilestones = {25:false,50:false,80:false,100:false};
 
-var PROG_EXCLUDE_IDS = {'f_num_notif':1,'f_compl_res':1,'f_pais_res':1,'f_geo1_res':1,'f_geo2_res':1,'f_logr_cod_res':1};
+// IDs excluídos do progresso
+var PROG_EXCLUDE_IDS = {'f_num_notif':1,'f_compl_res':1,'f_pais_res':1,'f_logr_cod_res':1,'f_geo1_res':1,'f_geo2_res':1,'f_pref_res':1,'f_emp_reg':1,'f_emp_dist':1,'f_emp_pref':1,'f_emp_ibge':1};
 
-var ESS_IDS = {'f_data_notif':1,'f_data_acidente':1,'f_nome':1,'f_raca':1,'f_mun_res':1,'f_ocupacao':1,'f_emp_nome':1};
+// Campos essenciais (⭐)
+var ESS_IDS = {'f_data_notif':1,'f_data_diag':1,'f_nome':1,'f_raca':1,'f_mun_res':1,'f_ocupacao':1,'f_emp_nome':1,'f_diag_cid':1};
 var ESS_W = 8;
 var STD_W = 1;
 
+// Grupos essenciais
 var ESS_GROUPS = ['sexo'];
-var STD_GROUPS = ['cat','outros_quant'];
-var COND_GROUPS = {atend_det:'box_atend_detalhe'};
+// Grupos padrão
+var STD_GROUPS = ['f_cat'];
 
 function isElemVisible(el){
   var node = el;
@@ -2268,6 +2130,24 @@ function isElemVisible(el){
     node = node.parentElement;
   }
   return true;
+}
+
+function getPatientAgeYears(){
+  var nascEl = document.getElementById('f_nasc');
+  if(nascEl && nascEl.value){
+    var nasc = new Date(nascEl.value + 'T00:00:00');
+    if(!isNaN(nasc)){
+      var today = new Date();
+      var age = today.getFullYear() - nasc.getFullYear();
+      var m = today.getMonth() - nasc.getMonth();
+      if(m < 0 || (m === 0 && today.getDate() < nasc.getDate())) age--;
+      return age;
+    }
+  }
+  var valEl = document.getElementById('f_idade_val');
+  var unEl  = document.getElementById('f_idade_un');
+  if(valEl && valEl.value && unEl && unEl.value === 'A') return parseInt(valEl.value, 10);
+  return null;
 }
 
 function groupHasCheck(name){
@@ -2289,7 +2169,7 @@ function getStatusMsg(pct){
 var COUNT_MSGS = [
   [0,  'Comece pelos campos marcados com ⭐ — são os mais importantes'],
   [1,  'Priorize os campos essenciais ⭐ para um registro de qualidade'],
-  [26, 'Cada detalhe fortalece a vigilância em saúde do trabalhador'],
+  [26, 'Cada detalhe fortalece a vigilância epidemiológica'],
   [51, 'Você está construindo um registro de qualidade'],
   [80, 'Parabéns pelo cuidado — o registro está quase completo!'],
   [100,'Ficha exemplar — obrigado pelo compromisso com a saúde!']
@@ -2315,17 +2195,18 @@ function getLevel(pct){
 
 function updateProgress(){
   var totalW = 0, filledW = 0;
+  var essTotal = 0, essFilled = 0;
 
   Object.keys(ESS_IDS).forEach(function(id){
     var el = document.getElementById(id);
     if(!el) return;
-    totalW += ESS_W;
-    if(el.value && el.value.trim()) filledW += ESS_W;
+    totalW += ESS_W; essTotal++;
+    if(el.value && el.value.trim()){ filledW += ESS_W; essFilled++; }
   });
 
   ESS_GROUPS.forEach(function(name){
-    totalW += ESS_W;
-    if(groupHasCheck(name)) filledW += ESS_W;
+    totalW += ESS_W; essTotal++;
+    if(groupHasCheck(name)){ filledW += ESS_W; essFilled++; }
   });
 
   var stdEls = Array.from(document.querySelectorAll('input:not([type=radio]):not([type=checkbox]):not([type=hidden]),select'));
@@ -2344,14 +2225,8 @@ function updateProgress(){
     if(groupHasCheck(name)) filledW += STD_W;
   });
 
-  Object.keys(COND_GROUPS).forEach(function(name){
-    var cont = document.getElementById(COND_GROUPS[name]);
-    if(!cont || cont.style.display === 'none') return;
-    totalW += STD_W;
-    if(groupHasCheck(name)) filledW += STD_W;
-  });
-
   var pct = totalW > 0 ? Math.round(filledW/totalW*100) : 0;
+
   var level = getLevel(pct);
 
   var barFill = document.getElementById('prog-bar-fill');
@@ -2397,31 +2272,49 @@ function updateSectionBadges(){
     var allTotal = allInSec.length;
 
     if(allTotal===0){
-      badge.textContent = '—'; badge.className = 'sec-badge badge-empty';
-      secEl.classList.remove('done','partial'); continue;
+      badge.textContent = '—';
+      badge.className = 'sec-badge badge-empty';
+      secEl.classList.remove('done','partial');
+      continue;
     }
 
     var essDone = essFlds.length===0 || essFilled===essFlds.length;
     var allDone = allFilled===allTotal;
 
     if(allDone){
-      badge.textContent = '✓ Completo'; badge.className = 'sec-badge badge-done';
-      if(!_sectionMilestones[s]){ _sectionMilestones[s]=true; showToast('✅ Seção '+s+' totalmente preenchida!','t-ok',2500); }
-      secEl.classList.remove('partial'); secEl.classList.add('done');
+      badge.textContent = '✓ Completo';
+      badge.className = 'sec-badge badge-done';
+      if(!_sectionMilestones[s]){
+        _sectionMilestones[s]=true;
+        showToast('✅ Seção '+s+' totalmente preenchida!', 't-ok', 2500);
+      }
+      secEl.classList.remove('partial');
+      secEl.classList.add('done');
     } else if(essDone && allFilled>0){
-      badge.textContent = '⭐ Essenciais OK'; badge.className = 'sec-badge badge-done';
-      if(!_sectionMilestones[s]){ _sectionMilestones[s]=true; showToast('⭐ Seção '+s+' — campos essenciais preenchidos!','t-ok',2500); }
-      secEl.classList.remove('partial'); secEl.classList.add('done');
+      badge.textContent = '⭐ Essenciais OK';
+      badge.className = 'sec-badge badge-done';
+      if(!_sectionMilestones[s]){
+        _sectionMilestones[s]=true;
+        showToast('⭐ Seção '+s+' — campos essenciais preenchidos!', 't-ok', 2500);
+      }
+      secEl.classList.remove('partial');
+      secEl.classList.add('done');
     } else if(allFilled>0){
-      badge.textContent = 'Em andamento'; badge.className = 'sec-badge badge-partial';
-      _sectionMilestones[s]=false; secEl.classList.remove('done'); secEl.classList.add('partial');
+      badge.textContent = 'Em andamento';
+      badge.className = 'sec-badge badge-partial';
+      _sectionMilestones[s]=false;
+      secEl.classList.remove('done');
+      secEl.classList.add('partial');
     } else {
-      badge.textContent = '—'; badge.className = 'sec-badge badge-empty';
-      _sectionMilestones[s]=false; secEl.classList.remove('done','partial');
+      badge.textContent = '—';
+      badge.className = 'sec-badge badge-empty';
+      _sectionMilestones[s]=false;
+      secEl.classList.remove('done','partial');
     }
   }
 }
 
+// Attach to all interactable elements
 document.querySelectorAll('input,select,textarea').forEach(function(el){
   el.addEventListener('input', updateProgress);
   el.addEventListener('change', updateProgress);
@@ -2429,7 +2322,7 @@ document.querySelectorAll('input,select,textarea').forEach(function(el){
 updateProgress();
 
 /*==========================================================
-  VALIDATION — campos essenciais
+  VALIDATION — verifica campos essenciais (data-ess)
 ==========================================================*/
 function getMissingEssentials(){
   var missing = [];
@@ -2441,7 +2334,7 @@ function getMissingEssentials(){
       el.classList.remove('error');
     }
   });
-  var groupLabels = {sexo:'Sexo '};
+  var groupLabels = {sexo:'Sexo'};
   ESS_GROUPS.forEach(function(name){
     if(!groupHasCheck(name)) missing.push(groupLabels[name]||name);
   });
@@ -2489,115 +2382,87 @@ async function gerarPDF(force){
   btn.textContent='⏳ Gerando...';
 
   try{
-    var resp = await fetch('fichas/DRT_Acidente_Trabalho_editavel.pdf');
-    if(!resp.ok) throw new Error('Arquivo DRT_Acidente_Trabalho_editavel.pdf não encontrado em fichas/');
-    var pdfBytes = await resp.arrayBuffer();
-    var pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
+    var pdfUrl = 'fichas/DRT_CANCER_editavel.pdf';
+    var pdfBytes = await fetch(pdfUrl).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.arrayBuffer();});
+    var pdfDoc = await PDFLib.PDFDocument.load(pdfBytes, {ignoreEncryption:true});
     var form = pdfDoc.getForm();
 
-    function setTxt(name,val){
-      try{ form.getTextField(name).setText(val||''); }catch(e){}
+    function setTxt(acroName, val){
+      try{var f=form.getTextField(acroName);if(f)f.setText(val||'');}catch(e){}
     }
 
-    var _sexoPDF = getRadio('sexo');
+    // Secao 1
+    setTxt('numero_notificacao', tv('f_num_notif'));
+    setTxt('data_notificacao', fmtDate(tv('f_data_notif')));
+    setTxt('data_diagnostico', fmtDate(tv('f_data_diag')));
+    setTxt('municipio_notificacao', tv('f_mun_notif'));
+    setTxt('uf_notificacao', tv('f_uf_notif'));
+    setTxt('nome_unidade_notificadora', tv('f_nome_un'));
+    setTxt('cnes', tv('f_cnes'));
 
-    // Seção 1 — Notificação
-    setTxt('notificacao_numero',              tv('f_num_notif'));
-    setTxt('data_notificacao',               fmtDate(tv('f_data_notif')));
-    setTxt('uf_notificacao',                 tv('f_uf_notif'));
-    setTxt('municipio_notificacao_nome',     tv('f_mun_notif'));
-    setTxt('municipio_notificacao_codigo_ibge', tv('f_ibge_notif'));
-    setTxt('unidade_notificadora_nome',      tv('f_nome_un'));
-    setTxt('unidade_notificadora_cnes',      tv('f_cnes'));
-    setTxt('data_acidente',                  fmtDate(tv('f_data_acidente')));
+    // Secao 2
+    setTxt('nome_paciente', tv('f_nome'));
+    setTxt('data_nascimento', fmtDate(tv('f_nasc')));
+    setTxt('idade', tv('f_idade_val') + ' ' + tv('f_idade_un'));
+    setTxt('sexo', getRadio('sexo'));
+    setTxt('gestacao', tv('f_gest'));
+    setTxt('raca', tv('f_raca'));
+    setTxt('escolaridade', tv('f_escol'));
+    setTxt('cartao_sus', tv('f_sus'));
+    setTxt('nome_mae', tv('f_mae'));
 
-    // Seção 2 — Paciente
-    setTxt('paciente_nome',            tv('f_nome'));
-    setTxt('paciente_data_nascimento', fmtDate(tv('f_nasc')));
-    setTxt('paciente_idade_valor',     tv('f_idade_val'));
-    setTxt('paciente_idade_tipo',      ({H:'1',D:'2',M:'3',A:'4'})[tv('f_idade_un')]||'');
-    setTxt('paciente_sexo',            _sexoPDF);
-    setTxt('paciente_gestante',        _sexoPDF==='M'?'6':tv('f_gest'));
-    setTxt('paciente_raca_cor',        tv('f_raca'));
-    setTxt('paciente_escolaridade',    tv('f_escol'));
-    setTxt('paciente_cartao_sus',      tv('f_sus'));
-    setTxt('paciente_mae_nome',        tv('f_mae'));
+    // Secao 3
+    setTxt('municipio_residencia', tv('f_mun_res'));
+    setTxt('uf_residencia', tv('f_uf_res'));
+    setTxt('logradouro', tv('f_logr_res'));
+    setTxt('numero', tv('f_num_res'));
+    setTxt('complemento', tv('f_compl_res'));
+    setTxt('bairro', tv('f_bairro_res'));
+    setTxt('cep', tv('f_cep'));
+    setTxt('telefone', tv('f_tel_res'));
+    setTxt('zona', tv('f_zona_res'));
 
-    // Seção 3 — Residência
-    setTxt('residencia_uf',                    tv('f_uf_res'));
-    setTxt('residencia_municipio_nome',        tv('f_mun_res'));
-    setTxt('residencia_municipio_codigo_ibge', tv('f_ibge_res'));
-    setTxt('residencia_distrito',              tv('f_bairro_res'));
-    setTxt('residencia_bairro',                tv('f_bairro_res'));
-    setTxt('residencia_logradouro',            tv('f_logr_res'));
-    setTxt('residencia_numero',                tv('f_num_res'));
-    setTxt('residencia_complemento',           tv('f_compl_res'));
-    setTxt('residencia_ponto_de_referencia',   tv('f_pref_res'));
-    setTxt('residencia_cep',                   tv('f_cep'));
-    setTxt('residencia_telefone',              tv('f_tel_res'));
-    setTxt('residencia_zona',                  tv('f_zona_res'));
-    setTxt('residencia_pais',                  tv('f_pais_res'));
+    // Secao 4
+    setTxt('ocupacao', tv('f_ocupacao'));
+    setTxt('situacao_mercado', tv('f_sit_mercado'));
+    setTxt('tempo_trabalho', tv('f_tempo_trab_val') + ' ' + tv('f_tempo_trab_tipo'));
+    setTxt('tempo_exposicao', tv('f_tempo_exp_val') + ' ' + tv('f_tempo_exp_tipo'));
 
-    // Seção 4 — Ocupação
-    setTxt('pessoa_ocupacao',                  tv('f_ocupacao'));
-    setTxt('situacao_mercado_trabalho',        (function(v){return v&&v.length===1?'0'+v:v;})(tv('f_sit_mercado')));
-    setTxt('tempo_trabalho_ocupacao_valor',    tv('f_tempo_trab_val'));
-    setTxt('tempo_trabalho_ocupacao_tipo',     tv('f_tempo_trab_tipo'));
-    setTxt('local_acidente',                   tv('f_local_ac'));
+    // Secao 5 — Empresa
+    setTxt('cnpj_empresa', tv('f_emp_reg'));
+    setTxt('razao_social', tv('f_emp_nome'));
+    setTxt('cnae', sinanCnaeVal());
+    setTxt('endereco_empresa', tv('f_emp_end'));
+    setTxt('num_empresa', tv('f_emp_num'));
+    setTxt('bairro_empresa', tv('f_emp_bairro'));
+    setTxt('municipio_empresa', tv('f_emp_mun'));
+    setTxt('uf_empresa', tv('f_emp_uf'));
+    setTxt('empresa_terceirizada', getRadio('emp_terc'));
 
-    // Seção 5 — Empresa
-    setTxt('empresa_registro_cnpj_cpf',        tv('f_emp_reg'));
-    setTxt('empresa_nome',                     tv('f_emp_nome'));
-    setTxt('empresa_cnae',                     sinanCnaeVal());
-    setTxt('empresa_uf',                       tv('f_emp_uf'));
-    setTxt('empresa_municipio',                tv('f_emp_mun'));
-    setTxt('empresa_cnae_codigo_ibge',         tv('f_emp_ibge'));
-    setTxt('empresa_distrito',                 tv('f_emp_dist'));
-    setTxt('empresa_bairro',                   tv('f_emp_bairro'));
-    setTxt('empresa_endereco',                 tv('f_emp_end'));
-    setTxt('empresa_numero',                   tv('f_emp_num'));
-    setTxt('empresa_ponto_referencia',         tv('f_emp_pref'));
-    setTxt('empresa_telefone',                 tv('f_emp_tel'));
-    setTxt('empresa_terceirizada',             getRadio('emp_terc'));
-    setTxt('empresa_terceirizada_cnae',        tv('f_emp_terc_cnae'));
-    setTxt('empresa_principal_cnpj',           tv('f_emp_princ_cnpj'));
-    setTxt('empresa_principal_razao_social',   tv('f_emp_princ_rs'));
+    // Secao 6 — Diagnostico Cancer
+    setTxt('diagnostico_cancer_cid10', tv('f_diag_cid'));
+    setTxt('topografia_cancer', tv('f_topografia'));
+    setTxt('tipo_tumor', tv('f_tipo_tumor'));
+    var bases = []; document.querySelectorAll('input[name="base_diag"]:checked').forEach(function(c){bases.push(c.value);});
+    setTxt('base_diagnostica', bases.join(', '));
+    setTxt('estadiamento', tv('f_estadiamento'));
 
-    // Seção 6 — Acidente
-    setTxt('hora_acidente_hora',               tv('f_hora_h'));
-    setTxt('hora_acidente_minuto',             tv('f_hora_m'));
-    setTxt('horas_apos_jornada_hora',          tv('f_jorn_h'));
-    setTxt('horas_apos_jornada_minuto',        tv('f_jorn_m'));
-    setTxt('acidente_uf',                      tv('f_uf_ac'));
-    setTxt('acidente_municipio_nome',          tv('f_mun_ac'));
-    setTxt('acidente_municipio_codigo_ibge',   tv('f_ibge_ac'));
-    setTxt('acidente_causa_cid10',             tv('f_causa_cid').split(' ')[0]);
-    setTxt('tipo_acidente',                    tv('f_tipo_ac'));
-    setTxt('outros_trabalhadores_atingidos',   getRadio('outros_quant'));
-    setTxt('outros_trabalhadores_quantos',     tv('f_outros_num'));
+    // Secao 7 — Agentes
+    setTxt('agente_cancerigeno', tv('f_agentes'));
+    setTxt('local_exposicao_agente', tv('f_local_exposicao'));
 
-    // Seção 7 — Atendimento
-    setTxt('atendimento_medico_ocorreu',          getRadio('atend'));
-    setTxt('data_atendimento',                    fmtDate(tv('f_data_atend')));
-    setTxt('atendimento_uf',                      tv('f_uf_atend'));
-    setTxt('atendimento_municipio_nome',          tv('f_mun_atend'));
-    setTxt('atendimento_municipio_codigo_ibge',   tv('f_ibge_atend'));
-    setTxt('atendimento_unidade_saude_nome',      tv('f_un_atend'));
-    setTxt('atendimento_unidade_saude_codigo',    tv('f_cod_atend'));
+    // Secao 8 — Habitos
+    setTxt('habito_fumar', getRadio('habito_fumar'));
+    setTxt('tempo_exposicao_tabaco_anos', tv('f_tempo_tabaco_val'));
+    setTxt('cigarros_dia', tv('f_cigarros_dia'));
+    setTxt('habito_alcool', getRadio('habito_alcool'));
+    setTxt('observacoes_habitos', tv('f_obs_hab'));
 
-    // Seção 8 — Lesões
-    setTxt('corpo_atingido_1',         tv('f_corpo1'));
-    setTxt('corpo_atingido_2',         tv('f_corpo2'));
-    setTxt('corpo_atingido_3',         tv('f_corpo3'));
-    setTxt('diagnostico_lesao_cid10',  tv('f_diag_cid').split(' ')[0]);
-    setTxt('regime_tratamento',        tv('f_regime'));
-
-    // Seção 9 — Encerramento
-    setTxt('evolucao_caso',             tv('f_evolucao'));
-    setTxt('cat_emitida',               getRadio('cat'));
-    setTxt('obito_data',                fmtDate(tv('f_obito')));
-    setTxt('descricao_acidente',        document.getElementById('f_desc').value||'');
-    setTxt('observacoes_complementares', document.getElementById('f_obs').value||'');
+    // Secao 9 — Encerramento
+    setTxt('evolucao_caso', tv('f_evolucao'));
+    setTxt('cat_emitida', getRadio('f_cat'));
+    setTxt('obito_data', fmtDate(tv('f_obito_data')));
+    setTxt('observacoes', tv('f_obs'));
 
     var outBytes = await pdfDoc.save();
     var blob = new Blob([outBytes],{type:'application/pdf'});
@@ -2606,10 +2471,8 @@ async function gerarPDF(force){
     a.href=url;
     var ds = fmtDate(tv('f_data_notif')).replace(/\//g,'-')||'sem-data';
     var nm = tv('f_nome').split(' ')[0]||'PACIENTE';
-    a.download = 'SINAN_Acidente_'+nm+'_'+ds+'.pdf';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    a.download = 'SINAN_Cancer_'+nm+'_'+ds+'.pdf';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
     URL.revokeObjectURL(url);
     showToast('✓ PDF gerado e baixado com sucesso!','t-ok',4000);
     var btnTr = document.getElementById('btn-transfer');
@@ -2623,256 +2486,63 @@ async function gerarPDF(force){
   btn.disabled=false;
   btn.innerHTML='📄 Gerar PDF';
 }
-</script>
 
-<!-- BARRA INFERIOR — visível apenas em mobile -->
-<div id="mob-bottom">
-  <a id="mob-back-btn" href="index.html">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15,18 9,12 15,6"/></svg>
-    Menu
-  </a>
-  <button id="mob-pdf-btn" onclick="gerarPDF()">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
-    Gerar PDF
-  </button>
-</div>
-
-<script>
-/* ── TOOLTIP TOGGLE ─────────────────────────────────────────
-   Usa position:fixed calculado para escapar de overflow:hidden
-──────────────────────────────────────────────────────────── */
-function _tipClose(){
-  document.querySelectorAll('.tip-wrap.open').forEach(function(w){
-    w.classList.remove('open');
-    w.querySelector('.tip-btn').classList.remove('open');
-    var pop = w.querySelector('.tip-pop');
-    if(pop){ pop.removeAttribute('style'); }
-  });
-}
-
-function tipToggle(btn){
-  var wrap = btn.closest('.tip-wrap');
-  if(!wrap) return;
-  var pop  = wrap.querySelector('.tip-pop');
-  var isOpen = wrap.classList.contains('open');
-
-  _tipClose();
-
-  if(isOpen) return;
-
-  wrap.classList.add('open');
-  btn.classList.add('open');
-
-  var rect = btn.getBoundingClientRect();
-  var GAP  = 10;
-  var MAX_W = Math.min(pop.dataset.wide ? 360 : 290, window.innerWidth - 24);
-
-  pop.style.cssText = [
-    'position:fixed',
-    'width:' + MAX_W + 'px',
-    'max-width:' + MAX_W + 'px',
-    'display:block',
-    'visibility:hidden',
-    'bottom:auto',
-    'left:0',
-    'top:0',
-    'transform:none'
-  ].join(';');
-
-  var popH = pop.offsetHeight;
-  var popW = pop.offsetWidth || MAX_W;
-
-  var left = rect.left + rect.width / 2 - popW / 2;
-  left = Math.max(12, Math.min(left, window.innerWidth - popW - 12));
-
-  var topAbove = rect.top - popH - GAP;
-  var topBelow = rect.bottom + GAP;
-  var top, arrowBelow;
-  if(topAbove >= 8){
-    top = topAbove; arrowBelow = true;
-  } else {
-    top = topBelow; arrowBelow = false;
-  }
-
-  pop.style.cssText = [
-    'position:fixed',
-    'width:' + MAX_W + 'px',
-    'max-width:' + MAX_W + 'px',
-    'top:' + Math.round(top) + 'px',
-    'left:' + Math.round(left) + 'px',
-    'bottom:auto',
-    'transform:none',
-    'visibility:visible',
-    'display:block',
-    '--tip-arrow-left:' + Math.round(rect.left + rect.width/2 - left) + 'px'
-  ].join(';');
-
-  pop.dataset.arrowBelow = arrowBelow ? '1' : '0';
-
-  setTimeout(function(){
-    function _close(ev){
-      if(!wrap.contains(ev.target)){ _tipClose(); }
-      document.removeEventListener('click', _close);
-      document.removeEventListener('touchstart', _close);
-    }
-    document.addEventListener('click', _close);
-    document.addEventListener('touchstart', _close);
-  }, 10);
-}
-
-/* ── TRANSFERÊNCIA PARA OUTRA FICHA ──────────────────────────
-   sessionStorage: salva todos os dados e redireciona
-──────────────────────────────────────────────────────────── */
-var _transferTarget = null;
-var TRANSFER_FICHAS_AC = [
-  {id:'violencia',   label:'Viol\u00eancia',            sub:'Viol\u00eancia dom\u00e9stica, sexual e/ou interpessoal',    url:'sinan_violencia.html',   color:'#1e40af'},
-  {id:'lerdort',     label:'LER/DORT',             sub:'Les\u00e3o por esfor\u00e7o repetitivo / DORT',              url:'sinan_lerdort.html',     color:'#0f766e'},
-  {id:'transtornos', label:'Transtornos Mentais',  sub:'Transtornos mentais relacionados ao trabalho',     url:'sinan_transtornos.html', color:'#4338ca'},
-  {id:'pair',        label:'PAIR',                 sub:'Perda auditiva induzida por ru\u00eddo',                url:'sinan_pair.html',        color:'#0369a1'},
-  {id:'dermatoses',  label:'Dermatoses',           sub:'Dermatoses ocupacionais',                          url:'sinan_dermatoses.html',  color:'#be185d'},
-  {id:'cancer',      label:'C\u00e2ncer',              sub:'C\u00e2ncer relacionado ao trabalho',                        url:'sinan_cancer.html',            color:'#dc2626'},
-  {id:'acidente_bio',label:'Acidente Biol\u00f3gico',  sub:'Exposi\u00e7\u00e3o a material biol\u00f3gico potencialmente contaminado', url:'sinan_acidente_biologico.html', color:'#7c3aed'}
-];
-
-function clickTransfer(){
-  var btn = document.getElementById('btn-transfer');
-  if(btn && btn.classList.contains('btn-disabled')){
-    document.getElementById('ov-transfer-warn').classList.add('show');
-  } else {
-    abrirTransferencia();
-  }
-}
-
-function abrirTransferencia(){
-  _transferTarget = null;
-  var okBtn = document.getElementById('btn-transfer-ok');
-  okBtn.style.opacity = '.45'; okBtn.style.pointerEvents = 'none';
-  var cont = document.getElementById('transfer-fichas');
-  cont.innerHTML = TRANSFER_FICHAS_AC.map(function(f){
-    return '<div class="transfer-ficha-opt" data-id="'+f.id+'" onclick="selectTransfer(this,\''+f.id+'\')">'+
-      '<span class="transfer-ficha-dot" style="background:'+f.color+'"></span>'+
-      '<span><strong class="transfer-ficha-name">'+f.label+'</strong><span class="transfer-ficha-sub">'+f.sub+'</span></span>'+
-      '</div>';
-  }).join('');
-  document.getElementById('ov-transfer').classList.add('show');
-}
-
-function selectTransfer(el, id){
-  document.querySelectorAll('#transfer-fichas .transfer-ficha-opt').forEach(function(o){ o.classList.remove('selected'); });
-  el.classList.add('selected');
-  _transferTarget = id;
-  var okBtn = document.getElementById('btn-transfer-ok');
-  okBtn.style.opacity = '1'; okBtn.style.pointerEvents = '';
-}
-
-function confirmarTransferencia(){
-  if(!_transferTarget) return;
-  var ficha = TRANSFER_FICHAS_AC.filter(function(f){ return f.id===_transferTarget; })[0];
-  if(!ficha) return;
-  var payload = {source:'acidente', ts:new Date().toISOString(), fields:{}, radios:{}, checks:{}};
-  document.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]):not(#f-import), select, textarea')
-    .forEach(function(el){ if(el.id && el.value!=='') payload.fields[el.id]=el.value; });
-  document.querySelectorAll('input[type="radio"]:checked').forEach(function(inp){ payload.radios[inp.name]=inp.value; });
-  document.querySelectorAll('input[type="checkbox"]:checked').forEach(function(inp){
-    if(!payload.checks[inp.name]) payload.checks[inp.name]=[];
-    payload.checks[inp.name].push(inp.value);
-  });
-  sessionStorage.setItem('sinan_transfer', JSON.stringify(payload));
-  window.location.href = ficha.url;
-}
-
-/* ── SESSION STORAGE — importar dados transferidos de outra ficha ── */
-(function(){
-  var raw = sessionStorage.getItem('sinan_transfer');
-  if(!raw) return;
-  try{
-    var payload = JSON.parse(raw);
-    sessionStorage.removeItem('sinan_transfer');
-    if(!payload || !payload.source) return;
-    // Mapeamento de campos comuns entre fichas
-    var fieldMap = {
-      f_nome:1, f_nasc:1, f_raca:1, f_escol:1, f_sus:1, f_mae:1,
-      f_mun_res:1, f_uf_res:1, f_ibge_res:1,
-      f_bairro_res:1, f_logr_res:1, f_num_res:1, f_compl_res:1,
-      f_pref_res:1, f_cep:1, f_tel_res:1, f_zona_res:1, f_pais_res:1,
-      f_mun_notif:1, f_uf_notif:1, f_ibge_notif:1,
-      f_nome_un:1, f_cnes:1
-    };
-    var radioMap = {sexo:1};
-    Object.keys(payload.fields||{}).forEach(function(id){
-      if(fieldMap[id]){ _setField(id, payload.fields[id]); }
-    });
-    Object.keys(payload.radios||{}).forEach(function(name){
-      if(radioMap[name]){ _setRadio(name, payload.radios[name]); }
-    });
-    _applyVisibility();
-    // Re-aplica municípios após aplicar UF
-    ['notif','res'].forEach(function(suf){
-      var id = 'f_mun_' + suf;
-      if(payload.fields && payload.fields[id]){
-        var el = document.getElementById(id);
-        if(el) el.value = payload.fields[id];
-      }
-    });
-    document.querySelectorAll('.ac-drop').forEach(function(d){ d.innerHTML=''; d.classList.remove('show'); });
-    updateProgress();
-    showToast('📋 Dados transferidos da outra ficha aplicados!','t-ok',4000);
-  } catch(e){ sessionStorage.removeItem('sinan_transfer'); }
-})();
-
-/* ── TOOLS ──────────────────────────────────────────────────── */
+/*==========================================================
+  TOOLS — Pacientes Didáticos | Exportar | Importar | Nova Ficha
+==========================================================*/
 
 var FAKE_PATIENTS = [
   {
-    label: "Roberto Santos, 42 anos",
-    sub: "Acidente típico · mão e dedos · metalúrgico · São Paulo/SP",
+    label: "José Ferreira, 55 anos",
+    sub: "Trabalhador de mineração — Silicose + câncer de pulmão · MG",
     fields: {
-      f_data_notif:"2025-07-10", f_data_acidente:"2025-07-09",
-      f_nome_un:"UPA NORTE", f_cnes:"2078015",
-      f_mun_notif:"SAO PAULO", f_uf_notif:"SP", f_ibge_notif:"355030",
-      f_nome:"ROBERTO SANTOS PEREIRA", f_nasc:"1983-04-12", f_raca:"4", f_escol:"4",
-      f_sus:"706012300000011", f_mae:"MARIA SANTOS",
-      f_mun_res:"SAO PAULO", f_uf_res:"SP", f_ibge_res:"355030",
-      f_bairro_res:"VILA MADALENA", f_logr_res:"RUA GIRASSOL", f_num_res:"270",
-      f_cep:"05433-900", f_tel_res:"(11) 98765-1111", f_zona_res:"1",
-      f_ocupacao:"OPERADOR DE MAQUINAS DE CORTE E DOBRAMENTO DE METAIS",
-      f_sit_mercado:"1", f_tempo_trab_val:"8", f_tempo_trab_tipo:"A",
-      f_local_ac:"01",
-      f_emp_nome:"METALURGICA PAULISTA LTDA", f_emp_cnae:"2422501",
-      f_emp_uf:"SP", f_emp_mun:"SAO PAULO", f_emp_bairro:"IPIRANGA",
-      f_emp_end:"AVENIDA DO ESTADO", f_emp_num:"3001",
-      f_hora_h:"14", f_hora_m:"30",
-      f_uf_ac:"SP", f_mun_ac:"SAO PAULO", f_ibge_ac:"355030",
-      f_causa_cid:"W29", f_tipo_ac:"1",
-      f_diag_cid:"S67.0", f_regime:"1",
-      f_corpo1:"36", f_corpo2:"37"
+      f_data_notif:"2025-05-10", f_data_diag:"2025-04-28",
+      f_nome_un:"CENTRO DE REFERÊNCIA EM SAÚDE DO TRABALHADOR", f_cnes:"3456789",
+      f_mun_notif:"BELO HORIZONTE", f_uf_notif:"MG", f_ibge_notif:"310620",
+      f_nome:"JOSÉ FERREIRA SANTOS", f_nasc:"1970-08-15", f_raca:"3", f_escol:"3",
+      f_sus:"706012300000030", f_mae:"ANA FERREIRA",
+      f_mun_res:"BELO HORIZONTE", f_uf_res:"MG", f_ibge_res:"310620",
+      f_bairro_res:"VENDA NOVA", f_logr_res:"RUA DAS FLORES", f_num_res:"100",
+      f_cep:"31615-000", f_tel_res:"(31) 98888-7777", f_zona_res:"1",
+      f_ocupacao:"OPERADOR DE MAQUINAS PERFURATRIZ DE MINAS",
+      f_sit_mercado:"1", f_tempo_trab_val:"30", f_tempo_trab_tipo:"A",
+      f_tempo_exp_val:"25", f_tempo_exp_tipo:"A",
+      f_emp_nome:"MINERAÇÃO VALE DO AÇO LTDA", f_emp_cnae:"0710301",
+      f_emp_uf:"MG", f_emp_mun:"ITABIRA", f_emp_bairro:"DISTRITO INDUSTRIAL",
+      f_emp_end:"RODOVIA BR-381", f_emp_num:"KM 50",
+      f_diag_cid:"C34", f_topografia:"PULMÃO", f_tipo_tumor:"1", f_estadiamento:"III",
+      f_agentes:"SÍLICA CRISTALINA, POEIRA MINERAL", f_local_exposicao:"GALERIAS SUBTERRÂNEAS DE MINERAÇÃO",
+      habito_fumar:"1", f_tempo_tabaco_val:"35", f_cigarros_dia:"20", habito_alcool:"2",
+      f_evolucao:"2", f_cat:"1"
     },
-    radios: {sexo:"M", outros_quant:"2", atend:"1", cat:"1"}
+    radios: {sexo:"M", habito_fumar:"1", habito_alcool:"2", f_obito:"2", f_cat:"1", f_evolucao:"2", f_tipo_tumor:"1", f_estadiamento:"III"},
+    checks: {base_diag:["2","3","4"]}
   },
   {
-    label: "Adriana Lima, 35 anos",
-    sub: "Acidente de trajeto · coluna e costelas · enfermeira · BH/MG",
+    label: "Ana Souza, 42 anos",
+    sub: "Técnica de laboratório — Benzeno + leucemia · SP",
     fields: {
-      f_data_notif:"2025-09-03", f_data_acidente:"2025-09-02",
-      f_nome_un:"HOSPITAL DAS CLINICAS", f_cnes:"3100450",
-      f_mun_notif:"BELO HORIZONTE", f_uf_notif:"MG", f_ibge_notif:"310620",
-      f_nome:"ADRIANA LIMA CARVALHO", f_nasc:"1990-02-18", f_raca:"1", f_escol:"7", f_gest:"5",
-      f_sus:"706012300000012", f_mae:"CLEIDE LIMA",
-      f_mun_res:"BELO HORIZONTE", f_uf_res:"MG", f_ibge_res:"310620",
-      f_bairro_res:"SANTO AGOSTINHO", f_logr_res:"AVENIDA AFONSO PENA", f_num_res:"1800",
-      f_cep:"30130-011", f_tel_res:"(31) 99876-5432", f_zona_res:"1",
-      f_ocupacao:"ENFERMEIRO DE TERAPIA INTENSIVA",
-      f_sit_mercado:"7", f_tempo_trab_val:"5", f_tempo_trab_tipo:"A",
-      f_local_ac:"03",
-      f_emp_nome:"HOSPITAL DAS CLINICAS UFMG", f_emp_cnae:"8610101",
-      f_emp_uf:"MG", f_emp_mun:"BELO HORIZONTE",
-      f_hora_h:"07", f_hora_m:"15",
-      f_uf_ac:"MG", f_mun_ac:"BELO HORIZONTE", f_ibge_ac:"310620",
-      f_causa_cid:"V89", f_tipo_ac:"2",
-      f_diag_cid:"S22.0", f_regime:"2",
-      f_corpo1:"21", f_corpo2:"23", f_corpo3:"24"
+      f_data_notif:"2025-07-22", f_data_diag:"2025-07-10",
+      f_nome_un:"HOSPITAL DAS CLÍNICAS FMUSP", f_cnes:"1234567",
+      f_mun_notif:"SAO PAULO", f_uf_notif:"SP", f_ibge_notif:"355030",
+      f_nome:"ANA PAULA SOUZA OLIVEIRA", f_nasc:"1983-03-05", f_raca:"1", f_escol:"8",
+      f_sus:"706012300000031", f_mae:"MARIA SOUZA",
+      f_mun_res:"SAO PAULO", f_uf_res:"SP", f_ibge_res:"355030",
+      f_bairro_res:"BUTANTA", f_logr_res:"AVENIDA PROF. LINEU PRESTES", f_num_res:"2500",
+      f_cep:"05508-000", f_tel_res:"(11) 97777-6666", f_zona_res:"1",
+      f_ocupacao:"TECNICO DE LABORATORIO DE ANALISES CLINICAS",
+      f_sit_mercado:"1", f_tempo_trab_val:"15", f_tempo_trab_tipo:"A",
+      f_tempo_exp_val:"12", f_tempo_exp_tipo:"A",
+      f_emp_nome:"LABORATORIO CENTRAL LTDA", f_emp_cnae:"8640202",
+      f_emp_uf:"SP", f_emp_mun:"SAO PAULO", f_emp_bairro:"BUTANTA",
+      f_emp_end:"RUA DO LAGO", f_emp_num:"540",
+      f_diag_cid:"C95", f_topografia:"MEDULA ÓSSEA / SANGUE", f_tipo_tumor:"1", f_estadiamento:"II",
+      f_agentes:"BENZENO, SOLVENTES ORGÂNICOS", f_local_exposicao:"LABORATÓRIO DE ANÁLISES QUÍMICAS",
+      habito_fumar:"2", habito_alcool:"3",
+      f_evolucao:"1", f_cat:"1"
     },
-    radios: {sexo:"F", outros_quant:"2", atend:"1", cat:"1"}
+    radios: {sexo:"F", habito_fumar:"2", habito_alcool:"3", f_obito:"2", f_cat:"1", f_evolucao:"1", f_tipo_tumor:"1", f_estadiamento:"II"},
+    checks: {base_diag:["2","3","5","6"]}
   }
 ];
 
@@ -2949,9 +2619,8 @@ function _setChecks(name, vals){
 function _applyVisibility(){
   onSexoChange();
   onEmpTerc();
-  onOutrosQuant();
-  onAtend();
-  onEvolucao();
+  onTabagismoChange();
+  onObitoChange();
 }
 
 // ------ Nova Ficha ------
@@ -2960,19 +2629,10 @@ function _clearForm(){
   document.querySelectorAll('.pill input:checked').forEach(function(inp){ inp.closest('.pill').click(); });
   document.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]):not(#f-import):not([readonly]), select, textarea')
     .forEach(function(el){ el.value=''; });
-  // Limpar seleção de partes do corpo
-  document.querySelectorAll('.parte-pill.checked').forEach(function(p){
-    var inp = p.querySelector('input');
-    if(inp){ inp.checked = false; }
-    p.classList.remove('checked','disabled');
-  });
-  ['f_corpo1_display','f_corpo2_display','f_corpo3_display'].forEach(function(id){
-    var el=document.getElementById(id); if(el){ el.value=''; el.placeholder='—'; }
-  });
-  ['row_gest','box_emp_terc_detalhe','box_outros_num','box_atend_detalhe','box_obito']
-    .forEach(function(id){ var el=document.getElementById(id); if(el) el.style.display='none'; });
-  var hints = ['f_ocupacao_hint','f_emp_cnae_hint','f_causa_cid_hint','f_diag_cid_hint'];
-  hints.forEach(function(id){ var h=document.getElementById(id); if(h){h.textContent='';h.style.display='none';} });
+  ['row_gest','box_emp_terc','box_tabaco_tempos','box_obito_data']
+  .forEach(function(id){ var el=document.getElementById(id); if(el) el.style.display='none'; });
+  var h=document.getElementById('f_ocupacao_hint'); if(h){h.textContent='';h.style.display='none';}
+  var h2=document.getElementById('f_diag_cid_hint'); if(h2){h2.textContent='';h2.style.display='none';}
   updateProgress();
 }
 
@@ -2989,8 +2649,7 @@ function carregarPaciente(idx){
   Object.keys(p.radios||{}).forEach(function(name){ _setRadio(name, p.radios[name]); });
   Object.keys(p.checks||{}).forEach(function(name){ _setChecks(name, p.checks[name]); });
   _applyVisibility();
-  // Re-aplica municípios após UF (handler de change da UF pode ter apagado)
-  ['notif','res','ac'].forEach(function(suf){
+  ['notif','res'].forEach(function(suf){
     var id = 'f_mun_' + suf;
     if(p.fields && p.fields[id]){
       var el = document.getElementById(id);
@@ -2999,13 +2658,17 @@ function carregarPaciente(idx){
   });
   document.querySelectorAll('.ac-drop').forEach(function(d){ d.innerHTML=''; d.classList.remove('show'); });
   updateProgress();
-  // Define hint de CBO
   var ocEl = document.getElementById('f_ocupacao');
   var ocHint = document.getElementById('f_ocupacao_hint');
   if(ocEl && ocHint && ocEl.value && window.SINAN_CBOS){
-    var ocMatch = null;
-    for(var i=0;i<(window.SINAN_CBOS||[]).length;i++){ if(window.SINAN_CBOS[i].nome===ocEl.value){ocMatch=window.SINAN_CBOS[i];break;} }
+    var ocMatch = (window.SINAN_CBOS||[]).filter(function(c){ return c.nome === ocEl.value; })[0];
     if(ocMatch){ ocHint.textContent='CBO: '+ocMatch.cbo; ocHint.style.display='block'; }
+  }
+  var cidEl = document.getElementById('f_diag_cid');
+  var cidHint = document.getElementById('f_diag_cid_hint');
+  if(cidEl && cidHint && cidEl.value && window.SINAN_AGRAVOS){
+    var cidMatch = (window.SINAN_AGRAVOS||[]).filter(function(a){ return a.cid === cidEl.value; })[0];
+    if(cidMatch){ cidHint.textContent=cidMatch.nome; cidHint.style.display='block'; }
   }
   window.scrollTo({top:0, behavior:'smooth'});
   showToast('Paciente fictício carregado: '+p.label,'t-ok',3500);
@@ -3025,7 +2688,7 @@ function exportarRascunho(){
   var blob = new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'rascunho-sinan-acidente-'+new Date().toISOString().slice(0,10)+'.json';
+  a.download = 'rascunho-sinan-cancer-'+new Date().toISOString().slice(0,10)+'.json';
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
   URL.revokeObjectURL(a.href);
   showToast('💾 Rascunho exportado com sucesso!','t-ok',3000);
@@ -3055,19 +2718,166 @@ function importarRascunho(input){
   reader.readAsText(file);
 }
 
-/* ── MOBILE SYNC ────────────────────────────────────────────── */
+/* ── TOOLTIP TOGGLE ─────────────────────────────────────────
+   Usa position:fixed calculado para escapar de overflow:hidden
+──────────────────────────────────────────────────────────── */
+function _tipClose(){
+  document.querySelectorAll('.tip-wrap.open').forEach(function(w){
+    w.classList.remove('open');
+    w.querySelector('.tip-btn').classList.remove('open');
+    var pop = w.querySelector('.tip-pop');
+    if(pop){ pop.removeAttribute('style'); }
+  });
+}
+
+function tipToggle(btn){
+  var wrap = btn.closest('.tip-wrap');
+  if(!wrap) return;
+  var pop  = wrap.querySelector('.tip-pop');
+  var isOpen = wrap.classList.contains('open');
+
+  _tipClose();
+
+  if(isOpen) return;
+
+  wrap.classList.add('open');
+  btn.classList.add('open');
+
+  var rect = btn.getBoundingClientRect();
+  var GAP  = 10;
+  var MAX_W = Math.min(pop.dataset.wide ? 360 : 290, window.innerWidth - 24);
+
+  pop.style.cssText = [
+    'position:fixed',
+    'width:' + MAX_W + 'px',
+    'max-width:' + MAX_W + 'px',
+    'display:block',
+    'visibility:hidden',
+    'bottom:auto',
+    'left:0',
+    'top:0',
+    'transform:none'
+  ].join(';');
+
+  var popH = pop.offsetHeight;
+  var popW = pop.offsetWidth || MAX_W;
+
+  var left = rect.left + rect.width / 2 - popW / 2;
+  left = Math.max(12, Math.min(left, window.innerWidth - popW - 12));
+
+  var topAbove = rect.top - popH - GAP;
+  var topBelow = rect.bottom + GAP;
+  var top, arrowBelow;
+  if(topAbove >= 8){
+    top = topAbove;
+    arrowBelow = true;
+  } else {
+    top = topBelow;
+    arrowBelow = false;
+  }
+
+  pop.style.cssText = [
+    'position:fixed',
+    'width:' + MAX_W + 'px',
+    'max-width:' + MAX_W + 'px',
+    'top:' + Math.round(top) + 'px',
+    'left:' + Math.round(left) + 'px',
+    'bottom:auto',
+    'transform:none',
+    'visibility:visible',
+    'display:block',
+    '--tip-arrow-left:' + Math.round(rect.left + rect.width/2 - left) + 'px'
+  ].join(';');
+
+  pop.dataset.arrowBelow = arrowBelow ? '1' : '0';
+
+  setTimeout(function(){
+    function _close(ev){
+      if(!wrap.contains(ev.target)){ _tipClose(); }
+      document.removeEventListener('click',  _close);
+      document.removeEventListener('touchstart', _close);
+    }
+    document.addEventListener('click',     _close);
+    document.addEventListener('touchstart', _close);
+  }, 10);
+}
+
+/* ── TRANSFERÊNCIA PARA OUTRA FICHA ──────────────────────────
+   sessionStorage: salva todos os dados e redireciona
+──────────────────────────────────────────────────────────── */
+var _transferTarget = null;
+var TRANSFER_FICHAS_CA = [
+  {id:'acidente',       label:'Acidente de Trabalho',   sub:'Acidente de trabalho típico ou de trajeto',         url:'sinan_acidente.html',              color:'#1e40af'},
+  {id:'acidente_bio',   label:'Acidente Biológico',     sub:'Exposição a material biológico',                    url:'sinan_acidente_biologico.html',  color:'#7c3aed'},
+  {id:'violencia',      label:'Violência',              sub:'Violência doméstica, sexual e/ou interpessoal',     url:'sinan_violencia.html',           color:'#0f766e'},
+  {id:'lerdort',        label:'LER/DORT',               sub:'Lesão por esforço repetitivo / DORT',               url:'sinan_lerdort.html',             color:'#4338ca'},
+  {id:'transtornos',    label:'Transtornos Mentais',    sub:'Transtornos mentais relacionados ao trabalho',      url:'sinan_transtornos.html',         color:'#0369a1'},
+  {id:'pair',           label:'PAIR',                   sub:'Perda auditiva induzida por ruído',                 url:'sinan_pair.html',                color:'#be185d'},
+  {id:'dermatoses',     label:'Dermatoses',             sub:'Dermatoses ocupacionais',                           url:'sinan_dermatoses.html',          color:'#dc2626'}
+];
+
+function clickTransfer(){
+  var btn = document.getElementById('btn-transfer');
+  if(btn && btn.classList.contains('btn-disabled')){
+    document.getElementById('ov-transfer-warn').classList.add('show');
+  } else {
+    abrirTransferencia();
+  }
+}
+
+function abrirTransferencia(){
+  _transferTarget = null;
+  var okBtn = document.getElementById('btn-transfer-ok');
+  okBtn.style.opacity = '.45'; okBtn.style.pointerEvents = 'none';
+  var cont = document.getElementById('transfer-fichas');
+  cont.innerHTML = TRANSFER_FICHAS_CA.map(function(f){
+    return '<div class="transfer-ficha-opt" data-id="'+f.id+'" onclick="selectTransfer(this,\''+f.id+'\')">'+
+      '<span class="transfer-ficha-dot" style="background:'+f.color+'"></span>'+
+      '<span><strong class="transfer-ficha-name">'+f.label+'</strong><span class="transfer-ficha-sub">'+f.sub+'</span></span>'+
+      '</div>';
+  }).join('');
+  document.getElementById('ov-transfer').classList.add('show');
+}
+
+function selectTransfer(el, id){
+  document.querySelectorAll('#transfer-fichas .transfer-ficha-opt').forEach(function(o){ o.classList.remove('selected'); });
+  el.classList.add('selected');
+  _transferTarget = id;
+  var okBtn = document.getElementById('btn-transfer-ok');
+  okBtn.style.opacity = '1'; okBtn.style.pointerEvents = '';
+}
+
+function confirmarTransferencia(){
+  if(!_transferTarget) return;
+  var ficha = TRANSFER_FICHAS_CA.filter(function(f){ return f.id===_transferTarget; })[0];
+  if(!ficha) return;
+  var payload = {source:'cancer', ts:new Date().toISOString(), fields:{}, radios:{}, checks:{}};
+  document.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]):not(#f-import), select, textarea')
+    .forEach(function(el){ if(el.id && el.value!=='') payload.fields[el.id]=el.value; });
+  document.querySelectorAll('input[type="radio"]:checked').forEach(function(inp){ payload.radios[inp.name]=inp.value; });
+  document.querySelectorAll('input[type="checkbox"]:checked').forEach(function(inp){
+    if(!payload.checks[inp.name]) payload.checks[inp.name]=[];
+    payload.checks[inp.name].push(inp.value);
+  });
+  sessionStorage.setItem('sinan_transfer', JSON.stringify(payload));
+  window.location.href = ficha.url;
+}
+
+/* ── MOBILE SYNC ──────────────────────────────────────────────
+   Sincroniza barra inferior com progresso
+──────────────────────────────────────────────────────────── */
 (function(){
   var btnGerar = document.getElementById('btn-gerar');
   var mobBtn   = document.getElementById('mob-pdf-btn');
   if(!mobBtn || !btnGerar) return;
+
   new MutationObserver(function(){
     setTimeout(function(){ if(btnGerar.disabled){ mobBtn.disabled = false; } }, 5000);
   }).observe(btnGerar, {attributes:true, attributeFilter:['disabled']});
 
-  var numericIds = ['f_sus','f_cnes','f_ibge_notif','f_ibge_res','f_ibge_ac','f_ibge_atend',
-                    'f_cep','f_num_res','f_hora_h','f_hora_m','f_jorn_h','f_jorn_m',
-                    'f_emp_num','f_emp_ibge','f_outros_num'];
-  var telIds = ['f_tel_res','f_emp_tel'];
+  var numericIds = ['f_sus','f_cnes','f_ibge_notif','f_ibge_res','f_cep','f_num_res',
+                    'f_tempo_exp_val','f_tempo_trab_val','f_tempo_tabaco_val'];
+  var telIds     = ['f_tel_res','f_emp_tel'];
   numericIds.forEach(function(id){
     var el = document.getElementById(id);
     if(el) el.setAttribute('inputmode','numeric');
@@ -3076,6 +2886,28 @@ function importarRascunho(input){
     var el = document.getElementById(id);
     if(el) el.setAttribute('inputmode','tel');
   });
+})();
+
+/* ── sessionStorage Transfer Import ──────────────────────── */
+(function(){
+  var raw = sessionStorage.getItem('sinan_transfer');
+  if(!raw) return;
+  try {
+    var data = JSON.parse(raw);
+    sessionStorage.removeItem('sinan_transfer');
+    setTimeout(function(){
+      Object.keys(data.fields||{}).forEach(function(id){ _setField(id, data.fields[id]); });
+      Object.keys(data.radios||{}).forEach(function(name){ _setRadio(name, data.radios[name]); });
+      ['notif','res'].forEach(function(suf){
+        var id='f_mun_'+suf;
+        if(data.fields&&data.fields[id]){var el=document.getElementById(id);if(el)el.value=data.fields[id];}
+      });
+      document.querySelectorAll('.ac-drop').forEach(function(d){d.innerHTML='';d.classList.remove('show');});
+      _applyVisibility();
+      updateProgress();
+      showToast('✓ Dados da ficha anterior transferidos!','t-ok',4000);
+    }, 200);
+  } catch(e){ sessionStorage.removeItem('sinan_transfer'); }
 })();
 
 /* === UNIDADE NOTIFICADORA - CADEADO PERSISTENTE ========================= */

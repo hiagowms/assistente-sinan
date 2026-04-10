@@ -2,7 +2,7 @@
 
 ## O que é
 
-Aplicação web **100% client-side** (HTML + CSS + JS vanilla) que auxilia profissionais de saúde no preenchimento de fichas de notificação do **SINAN NET** (Sistema de Informação de Agravos de Notificação). O projeto faz parte do programa **PET-Saúde Inova & Saúde Digital**.
+Aplicação web **100% client-side** (HTML + CSS + JS vanilla) que auxilia profissionais de saúde no preenchimento de fichas de notificação do **SINAN NET** (Sistema de Informação de Agravos de Notificação). 
 
 ## Estrutura do projeto
 

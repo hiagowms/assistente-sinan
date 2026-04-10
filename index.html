@@ -94,10 +94,10 @@ main{max-width:1100px;margin:0 auto;padding:28px 24px 60px}
 .sec-title::after{content:'';flex:1;height:1px;background:#d2e3ef}
 
 /* GRID */
-.fichas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px;margin-bottom:20px}
+.fichas-grid{columns:310px;column-gap:14px;margin-bottom:20px}
 
 /* CARD */
-.card{background:#fff;border-radius:10px;border:1px solid #dce8f0;box-shadow:0 1px 4px rgba(0,0,0,.05);overflow:hidden;transition:box-shadow .2s,transform .2s;display:flex;flex-direction:column;border-left:3px solid #dce8f0}
+.card{background:#fff;border-radius:10px;border:1px solid #dce8f0;box-shadow:0 1px 4px rgba(0,0,0,.05);overflow:hidden;transition:box-shadow .2s,transform .2s;display:flex;flex-direction:column;border-left:3px solid #dce8f0;break-inside:avoid;margin-bottom:14px}
 .card.active{border-left-color:#1a5276}
 .card.active:hover{box-shadow:0 6px 22px rgba(26,82,118,.12);transform:translateY(-2px)}
 /* Category left borders */
@@ -211,7 +211,7 @@ footer a{color:#1a5276;text-decoration:none}
   .sec-title{font-size:10px;margin-bottom:12px;letter-spacing:1.3px}
 
   /* ── GRID — coluna única no mobile ─────────────────────── */
-  .fichas-grid{grid-template-columns:1fr;gap:9px;margin-bottom:16px}
+  .fichas-grid{column-count:1;column-gap:9px;margin-bottom:16px}
 
   /* ── CARDS ──────────────────────────────────────────────── */
   .card{border-radius:9px}
@@ -391,7 +391,10 @@ function toggleDarkMode(){
         <span class="cerest-chip">CEREST Botucatu</span>
       </div>
     </div>
-    <button class="dm-toggle" id="dm-toggle" onclick="toggleDarkMode()" title="Alternar modo escuro">
+    <button class="dm-toggle" id="help-btn" onclick="openDrawer()" title="Sobre o projeto e base legal" style="margin-left:auto">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </button>
+    <button class="dm-toggle" id="dm-toggle" onclick="toggleDarkMode()" title="Alternar modo escuro" style="margin-left:6px">
       <svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
       <svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
     </button>
@@ -408,26 +411,6 @@ function toggleDarkMode(){
 </div>
 
 <main>
-
-  <!-- ABOUT BANNER — opens drawer -->
-  <button class="about-banner" onclick="openDrawer()" aria-label="Sobre o Projeto e Base Legal — clique para saber mais">
-    <div class="about-banner-icon">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><line x1="10" y1="9" x2="10" y2="14"/><circle cx="10" cy="6.5" r=".5" fill="currentColor"/></svg>
-    </div>
-    <div class="about-banner-body">
-      <div class="about-banner-title">Assistente SINAN — conheça a ferramenta, seus recursos e a base legal</div>
-      <div class="about-banner-chips">
-        <span class="about-chip chip-green">Dados extraídos do SINAN NET</span>
-        <span class="about-chip chip-blue">Busca de município por nome</span>
-        <span class="about-chip chip-yellow">Busca por sinônimos de ocupação CBO</span>
-        <span class="about-chip chip-purple">Gera PDF para impressão</span>
-        <span class="about-chip chip-green">Transferência de dados entre fichas</span>
-      </div>
-    </div>
-    <svg class="about-banner-arrow" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l5 5-5 5"/></svg>
-  </button>
-
-  <div class="sec-title">Fichas de Notificação SINAN</div>
 
   <div class="fichas-grid">
 
@@ -590,15 +573,15 @@ function toggleDarkMode(){
     </div>
 
     <!-- ACIDENTE MATERIAL BIOLÓGICO -->
-    <div class="card cat-bio">
+    <div class="card active cat-bio">
       <div class="card-main">
         <div class="card-head">
           <div class="card-icon-wrap">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="2"/><path d="M10 8A3.5 3.5 0 116.5 12M10 8A3.5 3.5 0 1113.5 12M10 12v2.5"/><circle cx="8" cy="15.5" r="1"/><circle cx="12" cy="15.5" r="1"/></svg>
           </div>
           <div class="card-info">
-            <div class="card-title dim">Acidente de Trabalho com Exposição a Material Biológico</div>
-            <span class="card-status status-wip"><span class="status-dot"></span>Em construção</span>
+            <div class="card-title">Acidente de Trabalho com Exposição a Material Biológico</div>
+            <span class="card-status status-active"><span class="status-dot"></span>Assistente disponível</span>
           </div>
         </div>
         <details class="def">
@@ -607,11 +590,18 @@ function toggleDarkMode(){
         </details>
       </div>
       <div class="card-actions">
+        <a class="btn-assistente" href="sinan_acidente_biologico.html">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
+          Usar assistente
+        </a>
+        <a class="btn-download" href="fichas/DRT_Acidente_Trabalho_Biologico_editavel.pdf" download>
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+          Ficha editável
+        </a>
         <a class="btn-download" href="fichas/DRT_Acidente_Trabalho_Biologico.pdf" download>
           <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
           Ficha em branco
         </a>
-        <span class="btn-wip">Assistente em construção</span>
       </div>
     </div>
 
@@ -708,15 +698,15 @@ function toggleDarkMode(){
     </div>
 
     <!-- CÂNCER -->
-    <div class="card cat-cancer">
+    <div class="card active cat-cancer">
       <div class="card-main">
         <div class="card-head">
           <div class="card-icon-wrap">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="10" cy="10" r="3.5"/><line x1="10" y1="2" x2="10" y2="5"/><line x1="10" y1="15" x2="10" y2="18"/><line x1="2" y1="10" x2="5" y2="10"/><line x1="15" y1="10" x2="18" y2="10"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="13.66" y1="13.66" x2="15.78" y2="15.78"/><line x1="4.22" y1="15.78" x2="6.34" y2="13.66"/><line x1="13.66" y1="6.34" x2="15.78" y2="4.22"/></svg>
           </div>
           <div class="card-info">
-            <div class="card-title dim">Câncer Relacionado ao Trabalho</div>
-            <span class="card-status status-wip"><span class="status-dot"></span>Em construção</span>
+            <div class="card-title">Câncer Relacionado ao Trabalho</div>
+            <span class="card-status status-active"><span class="status-dot"></span>Assistente disponível</span>
           </div>
         </div>
         <details class="def">
@@ -725,11 +715,18 @@ function toggleDarkMode(){
         </details>
       </div>
       <div class="card-actions">
+        <a class="btn-assistente" href="sinan_cancer.html">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
+          Usar assistente
+        </a>
+        <a class="btn-download" href="fichas/DRT_CANCER_editavel.pdf" download>
+          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+          Ficha editável
+        </a>
         <a class="btn-download" href="fichas/DRT_CANCER.pdf" download>
           <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
           Ficha em branco
         </a>
-        <span class="btn-wip">Assistente em construção</span>
       </div>
     </div>
 
