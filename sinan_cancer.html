@@ -1245,6 +1245,11 @@ function toggleDarkMode(){
         </select>
       </div>
     </div>
+    <div class="sublabel">Regime de Tratamento</div>
+    <div class="pills">
+      <label class="pill"><input type="radio" name="f_regime" value="1"> Hospitalar</label>
+      <label class="pill"><input type="radio" name="f_regime" value="2"> Ambulatorial</label>
+    </div>
   </div>
 </div>
 
@@ -1256,21 +1261,36 @@ function toggleDarkMode(){
     <div class="sec-num">7</div>
     <div class="sec-info">
       <h3>Agentes Carcinogênicos</h3>
-      <p>Substâncias e agentes de exposição ocupacional</p>
+      <p>Exposição ocupacional durante toda a vida profissional</p>
     </div>
     <span class="sec-badge badge-empty" id="badge7">—</span>
   </div>
   <div class="sec-body">
-    <div class="row row-wide">
-      <div class="fld col-2">
-        <label>Agentes Carcinogênicos Exposição</label>
-        <textarea id="f_agentes" placeholder="Liste os agentes: amianto, benzeno, radiação ionizante, sílica, cromo, arsênio, níquel, cádmio, berílio, alcatrão, outros..." data-caps rows="3"></textarea>
-      </div>
+    <div class="sublabel">Agentes aos quais houve exposição</div>
+    <div class="pills">
+      <label class="pill"><input type="checkbox" id="exp_asbesto"> Asbesto ou amianto</label>
+      <label class="pill"><input type="checkbox" id="exp_silica"> Sílica, sílicates e compostos arsenicais</label>
+      <label class="pill"><input type="checkbox" id="exp_aminas"> Aminas aromáticas</label>
+      <label class="pill"><input type="checkbox" id="exp_benzeno"> Benzeno ou suas homologias tóxicas</label>
+      <label class="pill"><input type="checkbox" id="exp_alcatrao"> Alcatrão, breu, betume, hulha mineral, parafina</label>
+      <label class="pill"><input type="checkbox" id="exp_hidrocarbonetos"> Hidrocarbonetos alifáticos/aromáticos</label>
+      <label class="pill"><input type="checkbox" id="exp_oleos"> Óleos minerais</label>
+      <label class="pill"><input type="checkbox" id="exp_berilio"> Berílio e seus compostos tóxicos</label>
+      <label class="pill"><input type="checkbox" id="exp_cadmio"> Cádmio</label>
+      <label class="pill"><input type="checkbox" id="exp_cromo"> Cromo ou seus compostos tóxicos</label>
+      <label class="pill"><input type="checkbox" id="exp_radiacoes_ionizantes"> Radiações ionizantes</label>
+      <label class="pill"><input type="checkbox" id="exp_compostos_niquel"> Compostos de níquel</label>
+      <label class="pill"><input type="checkbox" id="exp_radiacoes_nao_ionizantes"> Radiações não ionizantes</label>
+      <label class="pill"><input type="checkbox" id="exp_hormonios"> Hormônios</label>
+      <label class="pill"><input type="checkbox" id="exp_antineoplasicos"> Antineoplásicos</label>
+      <label class="pill" onclick="onExpOutrosChange()"><input type="checkbox" id="exp_outros"> Outros</label>
     </div>
-    <div class="row row-wide">
-      <div class="fld col-2">
-        <label>Local de Exposição ao Agente</label>
-        <input type="text" id="f_local_exposicao" placeholder="Onde ocorreu a exposição ao agente cancerígeno..." data-caps>
+    <div id="box_exp_outros" style="display:none;margin-top:10px">
+      <div class="row row-wide">
+        <div class="fld col-2">
+          <label>Descreva o(s) outro(s) agente(s)</label>
+          <input type="text" id="f_exp_outros_detalhe" data-caps placeholder="Descreva o agente carcinogênico...">
+        </div>
       </div>
     </div>
   </div>
@@ -1298,12 +1318,18 @@ function toggleDarkMode(){
     <div id="box_tabaco_tempos" style="display:none">
       <div class="row">
         <div class="fld">
-          <label>Tempo de Tabagismo (anos)</label>
+          <label>Tempo de Exposição ao Tabaco</label>
           <input type="text" id="f_tempo_tabaco_val" placeholder="0" maxlength="3" style="max-width:100px">
         </div>
         <div class="fld">
-          <label>Cigarros/dia (maços)</label>
-          <input type="text" id="f_cigarros_dia" placeholder="0" maxlength="4">
+          <label>Unidade</label>
+          <div class="pills" id="grp_tempo_tabaco_tipo" data-hidden="f_tempo_tabaco_tipo">
+            <label class="pill" data-val="1"><input type="radio" name="f_tempo_tabaco_tipo" value="1"> Hora</label>
+            <label class="pill" data-val="2"><input type="radio" name="f_tempo_tabaco_tipo" value="2"> Dia</label>
+            <label class="pill" data-val="3"><input type="radio" name="f_tempo_tabaco_tipo" value="3"> Mês</label>
+            <label class="pill" data-val="4"><input type="radio" name="f_tempo_tabaco_tipo" value="4" checked> Ano</label>
+          </div>
+          <input type="hidden" id="f_tempo_tabaco_tipo" value="4">
         </div>
       </div>
     </div>
@@ -1313,11 +1339,11 @@ function toggleDarkMode(){
       <label class="pill"><input type="radio" name="habito_alcool" value="2"> Não</label>
       <label class="pill"><input type="radio" name="habito_alcool" value="3"> Social</label>
     </div>
-    <div class="row row-wide" style="margin-top:10px">
-      <div class="fld col-2">
-        <label>Observações sobre Hábitos</label>
-        <textarea id="f_obs_hab" placeholder="Outros hábitos e fatores de risco relevantes..." rows="2"></textarea>
-      </div>
+    <div class="sublabel" style="margin-top:14px">Há ou houve outros trabalhadores com a mesma doença no local de trabalho?</div>
+    <div class="pills">
+      <label class="pill"><input type="radio" name="f_outros_trab" value="1"> Sim</label>
+      <label class="pill"><input type="radio" name="f_outros_trab" value="2"> Não</label>
+      <label class="pill"><input type="radio" name="f_outros_trab" value="9"> Ignorado</label>
     </div>
   </div>
 </div>
@@ -1554,7 +1580,7 @@ function onEmpTerc(){
 
 function onTabagismoChange(){
   var v = document.querySelector('[name="habito_fumar"]:checked');
-  document.getElementById('box_tabaco_tempos').style.display = (v && v.value === '1') ? 'block' : 'none';
+  document.getElementById('box_tabaco_tempos').style.display = (v && (v.value === '1' || v.value === '3')) ? 'block' : 'none';
 }
 
 function onObitoChange(){
@@ -1564,6 +1590,11 @@ function onObitoChange(){
 
 function onBaseDiagChange(){
   updateProgress();
+}
+
+function onExpOutrosChange(){
+  var el = document.getElementById('exp_outros');
+  document.getElementById('box_exp_outros').style.display = (el && el.checked) ? 'block' : 'none';
 }
 
 /*==========================================================
@@ -2390,79 +2421,94 @@ async function gerarPDF(force){
     function setTxt(acroName, val){
       try{var f=form.getTextField(acroName);if(f)f.setText(val||'');}catch(e){}
     }
+    function setChk(acroName, checked){
+      try{var f=form.getCheckBox(acroName);if(checked)f.check();else f.uncheck();}catch(e){
+        try{var f=form.getTextField(acroName);f.setText(checked?'Sim':'');}catch(e2){}
+      }
+    }
 
     // Secao 1
-    setTxt('numero_notificacao', tv('f_num_notif'));
+    setTxt('notificacao_numero', tv('f_num_notif'));
     setTxt('data_notificacao', fmtDate(tv('f_data_notif')));
     setTxt('data_diagnostico', fmtDate(tv('f_data_diag')));
-    setTxt('municipio_notificacao', tv('f_mun_notif'));
+    setTxt('municipio_notificacao_nome', tv('f_mun_notif'));
+    setTxt('municipio_notificacao_codigo_ibge', tv('f_ibge_notif'));
     setTxt('uf_notificacao', tv('f_uf_notif'));
-    setTxt('nome_unidade_notificadora', tv('f_nome_un'));
-    setTxt('cnes', tv('f_cnes'));
+    setTxt('unidade_notificadora_nome', tv('f_nome_un'));
+    setTxt('unidade_notificadora_cnes', tv('f_cnes'));
 
     // Secao 2
-    setTxt('nome_paciente', tv('f_nome'));
-    setTxt('data_nascimento', fmtDate(tv('f_nasc')));
-    setTxt('idade', tv('f_idade_val') + ' ' + tv('f_idade_un'));
-    setTxt('sexo', getRadio('sexo'));
-    setTxt('gestacao', tv('f_gest'));
-    setTxt('raca', tv('f_raca'));
-    setTxt('escolaridade', tv('f_escol'));
-    setTxt('cartao_sus', tv('f_sus'));
-    setTxt('nome_mae', tv('f_mae'));
+    setTxt('paciente_nome', tv('f_nome'));
+    setTxt('paciente_data_nascimento', fmtDate(tv('f_nasc')));
+    setTxt('paciente_idade_valor', tv('f_idade_val'));
+    setTxt('paciente_idade_tipo', tv('f_idade_un'));
+    setTxt('paciente_sexo', getRadio('sexo'));
+    setTxt('paciente_gestante', tv('f_gest'));
+    setTxt('paciente_raca_cor', tv('f_raca'));
+    setTxt('paciente_escolaridade', tv('f_escol'));
+    setTxt('paciente_cartao_sus', tv('f_sus'));
+    setTxt('paciente_mae_nome', tv('f_mae'));
 
     // Secao 3
-    setTxt('municipio_residencia', tv('f_mun_res'));
-    setTxt('uf_residencia', tv('f_uf_res'));
-    setTxt('logradouro', tv('f_logr_res'));
-    setTxt('numero', tv('f_num_res'));
-    setTxt('complemento', tv('f_compl_res'));
-    setTxt('bairro', tv('f_bairro_res'));
-    setTxt('cep', tv('f_cep'));
-    setTxt('telefone', tv('f_tel_res'));
-    setTxt('zona', tv('f_zona_res'));
+    setTxt('residencia_municipio_nome', tv('f_mun_res'));
+    setTxt('residencia_municipio_codigo_ibge', tv('f_ibge_res'));
+    setTxt('residencia_uf', tv('f_uf_res'));
+    setTxt('residencia_logradouro', tv('f_logr_res'));
+    setTxt('residencia_numero', tv('f_num_res'));
+    setTxt('residencia_complemento', tv('f_compl_res'));
+    setTxt('residencia_bairro', tv('f_bairro_res'));
+    setTxt('residencia_cep', tv('f_cep'));
+    setTxt('residencia_telefone', tv('f_tel_res'));
+    setTxt('residencia_zona', tv('f_zona_res'));
+    setTxt('residencia_ponto_de_referencia', tv('f_pref_res'));
+    setTxt('residencia_pais', tv('f_pais_res'));
 
     // Secao 4
-    setTxt('ocupacao', tv('f_ocupacao'));
-    setTxt('situacao_mercado', tv('f_sit_mercado'));
-    setTxt('tempo_trabalho', tv('f_tempo_trab_val') + ' ' + tv('f_tempo_trab_tipo'));
-    setTxt('tempo_exposicao', tv('f_tempo_exp_val') + ' ' + tv('f_tempo_exp_tipo'));
+    setTxt('pessoa_ocupacao', tv('f_ocupacao'));
+    setTxt('situacao_mercado_trabalho', tv('f_sit_mercado'));
+    setTxt('tempo_trabalho_ocupacao_valor', tv('f_tempo_trab_val'));
+    setTxt('tempo_trabalho_ocupacao_tipo', tv('f_tempo_trab_tipo'));
+    setTxt('tempo_exposicao_valor', tv('f_tempo_exp_val'));
+    setTxt('tempo_exposicao_tipo', tv('f_tempo_exp_tipo'));
 
     // Secao 5 — Empresa
-    setTxt('cnpj_empresa', tv('f_emp_reg'));
-    setTxt('razao_social', tv('f_emp_nome'));
-    setTxt('cnae', sinanCnaeVal());
-    setTxt('endereco_empresa', tv('f_emp_end'));
-    setTxt('num_empresa', tv('f_emp_num'));
-    setTxt('bairro_empresa', tv('f_emp_bairro'));
-    setTxt('municipio_empresa', tv('f_emp_mun'));
-    setTxt('uf_empresa', tv('f_emp_uf'));
+    setTxt('empresa_registro_cnpj_cpf', tv('f_emp_reg'));
+    setTxt('empresa_nome', tv('f_emp_nome'));
+    setTxt('empresa_cnae', sinanCnaeVal());
+    setTxt('empresa_cnae_codigo_ibge', tv('f_emp_ibge'));
+    setTxt('empresa_uf', tv('f_emp_uf'));
+    setTxt('empresa_municipio', tv('f_emp_mun'));
+    setTxt('empresa_distrito', tv('f_emp_dist'));
+    setTxt('empresa_bairro', tv('f_emp_bairro'));
+    setTxt('empresa_endereco', tv('f_emp_end'));
+    setTxt('empresa_numero', tv('f_emp_num'));
+    setTxt('empresa_ponto_referencia', tv('f_emp_pref'));
+    setTxt('empresa_telefone', tv('f_emp_tel'));
     setTxt('empresa_terceirizada', getRadio('emp_terc'));
 
-    // Secao 6 — Diagnostico Cancer
-    setTxt('diagnostico_cancer_cid10', tv('f_diag_cid'));
-    setTxt('topografia_cancer', tv('f_topografia'));
-    setTxt('tipo_tumor', tv('f_tipo_tumor'));
-    var bases = []; document.querySelectorAll('input[name="base_diag"]:checked').forEach(function(c){bases.push(c.value);});
-    setTxt('base_diagnostica', bases.join(', '));
-    setTxt('estadiamento', tv('f_estadiamento'));
+    // Secao 6 — Diagnostico
+    setTxt('diagnostico_especifico_cid10', tv('f_diag_cid'));
+    setTxt('regime_tratamento', getRadio('f_regime'));
 
-    // Secao 7 — Agentes
-    setTxt('agente_cancerigeno', tv('f_agentes'));
-    setTxt('local_exposicao_agente', tv('f_local_exposicao'));
+    // Secao 7 — Exposicoes (checkboxes individuais)
+    var EXPS = ['asbesto','silica','aminas','benzeno','alcatrao','hidrocarbonetos','oleos','berilio','cadmio','cromo','radiacoes_ionizantes','compostos_niquel','radiacoes_nao_ionizantes','hormonios','antineoplasicos','outros'];
+    EXPS.forEach(function(exp){
+      var el = document.getElementById('exp_'+exp);
+      setChk('exposicao_'+exp, el && el.checked);
+    });
+    setTxt('exposicao_outros_detalhe', tv('f_exp_outros_detalhe'));
 
     // Secao 8 — Habitos
     setTxt('habito_fumar', getRadio('habito_fumar'));
-    setTxt('tempo_exposicao_tabaco_anos', tv('f_tempo_tabaco_val'));
-    setTxt('cigarros_dia', tv('f_cigarros_dia'));
-    setTxt('habito_alcool', getRadio('habito_alcool'));
-    setTxt('observacoes_habitos', tv('f_obs_hab'));
+    setTxt('tempo_exposicao_tabaco_valor', tv('f_tempo_tabaco_val'));
+    setTxt('tempo_exposicao_tabaco_tipo', getRadio('f_tempo_tabaco_tipo'));
+    setTxt('outros_trabalhadores_doenca', getRadio('f_outros_trab'));
 
     // Secao 9 — Encerramento
     setTxt('evolucao_caso', tv('f_evolucao'));
     setTxt('cat_emitida', getRadio('f_cat'));
     setTxt('obito_data', fmtDate(tv('f_obito_data')));
-    setTxt('observacoes', tv('f_obs'));
+    setTxt('observacoes_complementares', tv('f_obs'));
 
     var outBytes = await pdfDoc.save();
     var blob = new Blob([outBytes],{type:'application/pdf'});
@@ -2621,6 +2667,7 @@ function _applyVisibility(){
   onEmpTerc();
   onTabagismoChange();
   onObitoChange();
+  onExpOutrosChange();
 }
 
 // ------ Nova Ficha ------
@@ -2629,7 +2676,7 @@ function _clearForm(){
   document.querySelectorAll('.pill input:checked').forEach(function(inp){ inp.closest('.pill').click(); });
   document.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]):not(#f-import):not([readonly]), select, textarea')
     .forEach(function(el){ el.value=''; });
-  ['row_gest','box_emp_terc','box_tabaco_tempos','box_obito_data']
+  ['row_gest','box_emp_terc','box_tabaco_tempos','box_obito_data','box_exp_outros']
   .forEach(function(id){ var el=document.getElementById(id); if(el) el.style.display='none'; });
   var h=document.getElementById('f_ocupacao_hint'); if(h){h.textContent='';h.style.display='none';}
   var h2=document.getElementById('f_diag_cid_hint'); if(h2){h2.textContent='';h2.style.display='none';}
