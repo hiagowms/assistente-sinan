@@ -1046,11 +1046,12 @@ function toggleDarkMode(){
       <div class="fld">
         <label>Tempo de Exposição</label>
         <div style="display:flex;gap:8px;align-items:flex-start">
-          <input type="number" id="f_tempo_exp_val" min="0" placeholder="Ex: 12" style="flex:1">
+          <input type="text" id="f_tempo_exp_val" placeholder="Ex: 12" maxlength="4" style="flex:1;max-width:90px">
           <div class="pills" id="grp_tempo_exp_tipo" data-hidden="f_tempo_exp_tipo" style="margin-top:2px">
-            <label class="pill" data-val="A"><input type="radio" name="tempo_exp_tipo" value="A"> A</label>
-            <label class="pill" data-val="M"><input type="radio" name="tempo_exp_tipo" value="M"> M</label>
-            <label class="pill" data-val="D"><input type="radio" name="tempo_exp_tipo" value="D"> D</label>
+            <label class="pill" data-val="1"><input type="radio" name="tempo_exp_tipo" value="1"> Hora</label>
+            <label class="pill" data-val="2"><input type="radio" name="tempo_exp_tipo" value="2"> Dia</label>
+            <label class="pill" data-val="3"><input type="radio" name="tempo_exp_tipo" value="3"> Mês</label>
+            <label class="pill" data-val="4"><input type="radio" name="tempo_exp_tipo" value="4"> Ano</label>
           </div>
           <input type="hidden" id="f_tempo_exp_tipo">
         </div>
@@ -1058,11 +1059,12 @@ function toggleDarkMode(){
       <div class="fld">
         <label>Tempo no Trabalho/Ocupação</label>
         <div style="display:flex;gap:8px;align-items:flex-start">
-          <input type="number" id="f_tempo_trab_val" min="0" placeholder="Ex: 12" style="flex:1">
+          <input type="text" id="f_tempo_trab_val" placeholder="Ex: 12" maxlength="4" style="flex:1;max-width:90px">
           <div class="pills" id="grp_tempo_trab_tipo" data-hidden="f_tempo_trab_tipo" style="margin-top:2px">
-            <label class="pill" data-val="A"><input type="radio" name="tempo_trab_tipo" value="A"> A</label>
-            <label class="pill" data-val="M"><input type="radio" name="tempo_trab_tipo" value="M"> M</label>
-            <label class="pill" data-val="D"><input type="radio" name="tempo_trab_tipo" value="D"> D</label>
+            <label class="pill" data-val="1"><input type="radio" name="tempo_trab_tipo" value="1"> Hora</label>
+            <label class="pill" data-val="2"><input type="radio" name="tempo_trab_tipo" value="2"> Dia</label>
+            <label class="pill" data-val="3"><input type="radio" name="tempo_trab_tipo" value="3"> Mês</label>
+            <label class="pill" data-val="4"><input type="radio" name="tempo_trab_tipo" value="4"> Ano</label>
           </div>
           <input type="hidden" id="f_tempo_trab_tipo">
         </div>
@@ -1212,10 +1214,8 @@ function toggleDarkMode(){
       <div class="fld">
         <label>Regime de Tratamento</label>
         <div class="pills" id="grp_regime" data-hidden="f_regime">
-          <label class="pill" data-val="1"><input type="radio" name="regime" value="1"> Ambulatorial</label>
-          <label class="pill" data-val="2"><input type="radio" name="regime" value="2"> Internação</label>
-          <label class="pill" data-val="3"><input type="radio" name="regime" value="3"> Day hosp.</label>
-          <label class="pill" data-val="9"><input type="radio" name="regime" value="9"> Ign.</label>
+          <label class="pill" data-val="1"><input type="radio" name="regime" value="1"> Hospitalar</label>
+          <label class="pill" data-val="2"><input type="radio" name="regime" value="2"> Ambulatorial</label>
         </div>
         <input type="hidden" id="f_regime">
       </div>
@@ -1315,13 +1315,48 @@ function toggleDarkMode(){
       </div>
     </div>
 
-    <div class="sublabel">Sintomas Associados <span style="font-size:10px;font-weight:400;color:#9ca3af;text-transform:none;margin-left:6px">Marque todos que se aplicam</span></div>
-    <div class="pills" id="grp_sintomas_pair" style="margin-bottom:14px">
-      <label class="pill" data-val="1" data-name="sintomas_pair"><input type="checkbox" name="sintomas_pair" value="1"> Zumbido (tinnitus)</label>
-      <label class="pill" data-val="2" data-name="sintomas_pair"><input type="checkbox" name="sintomas_pair" value="2"> Tontura/Vertigem</label>
-      <label class="pill" data-val="3" data-name="sintomas_pair"><input type="checkbox" name="sintomas_pair" value="3"> Dificuldade de compreensão da fala</label>
-      <label class="pill" data-val="4" data-name="sintomas_pair"><input type="checkbox" name="sintomas_pair" value="4"> Cefaleia</label>
-      <label class="pill" data-val="5" data-name="sintomas_pair"><input type="checkbox" name="sintomas_pair" value="5" onchange="onSintOutros()"> Outros</label>
+    <div class="sublabel">Sintomas <small style="color:#6b7280;font-weight:400;text-transform:none;margin-left:6px">(1=Sim, 2=Não, 9=Ignorado)</small></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin-bottom:14px">
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Zumbido (tinnitus)</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="sintoma_zumbid" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="sintoma_zumbid" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="sintoma_zumbid" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Tontura/Vertigem</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="sintoma_tontur" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="sintoma_tontur" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="sintoma_tontur" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Dificuldade de compreensão da fala</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="sintoma_dificuldade_fala" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="sintoma_dificuldade_fala" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="sintoma_dificuldade_fala" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Cefaléia</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="sintoma_cefaleia" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="sintoma_cefaleia" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="sintoma_cefaleia" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Outros</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="sintoma_outros" value="1" onchange="onSintOutros()"> Sim</label>
+          <label class="pill"><input type="radio" name="sintoma_outros" value="2" onchange="onSintOutros()"> Não</label>
+          <label class="pill"><input type="radio" name="sintoma_outros" value="9" onchange="onSintOutros()"> Ign.</label>
+        </div>
+      </div>
     </div>
     <div id="box_sint_outros" style="display:none;margin-bottom:14px">
       <div class="fld">
@@ -1344,8 +1379,8 @@ function toggleDarkMode(){
       <div class="fld">
         <label>Resultado do Afastamento</label>
         <div class="pills" id="grp_afastamento_result" data-hidden="f_afastamento_result">
-          <label class="pill" data-val="1"><input type="radio" name="afastamento_result" value="1"> Retornou</label>
-          <label class="pill" data-val="2"><input type="radio" name="afastamento_result" value="2"> Não retornou</label>
+          <label class="pill" data-val="1"><input type="radio" name="afastamento_result" value="1"> Melhora</label>
+          <label class="pill" data-val="2"><input type="radio" name="afastamento_result" value="2"> Piora</label>
           <label class="pill" data-val="9"><input type="radio" name="afastamento_result" value="9"> Ign.</label>
         </div>
         <input type="hidden" id="f_afastamento_result">
@@ -1353,11 +1388,12 @@ function toggleDarkMode(){
       <div class="fld">
         <label>Tempo de Afastamento</label>
         <div style="display:flex;gap:8px;align-items:flex-start">
-          <input type="number" id="f_tempo_afast_val" min="0" placeholder="Ex: 30" style="flex:1">
+          <input type="text" id="f_tempo_afast_val" placeholder="Ex: 30" maxlength="4" style="flex:1;max-width:90px">
           <div class="pills" id="grp_tempo_afast_tipo" data-hidden="f_tempo_afast_tipo" style="margin-top:2px">
-            <label class="pill" data-val="A"><input type="radio" name="tempo_afast_tipo" value="A"> A</label>
-            <label class="pill" data-val="M"><input type="radio" name="tempo_afast_tipo" value="M"> M</label>
-            <label class="pill" data-val="D"><input type="radio" name="tempo_afast_tipo" value="D"> D</label>
+            <label class="pill" data-val="1"><input type="radio" name="tempo_afast_tipo" value="1"> Hora</label>
+            <label class="pill" data-val="2"><input type="radio" name="tempo_afast_tipo" value="2"> Dia</label>
+            <label class="pill" data-val="3"><input type="radio" name="tempo_afast_tipo" value="3"> Mês</label>
+            <label class="pill" data-val="4"><input type="radio" name="tempo_afast_tipo" value="4"> Ano</label>
           </div>
           <input type="hidden" id="f_tempo_afast_tipo">
         </div>
@@ -1388,8 +1424,8 @@ function toggleDarkMode(){
       <div class="fld col-2">
         <label>Tipo de Ruído Predominante</label>
         <div class="pills" id="grp_tipo_ruido" data-hidden="f_tipo_ruido">
-          <label class="pill" data-val="1"><input type="radio" name="tipo_ruido" value="1"> Contínuo/Intermitente</label>
-          <label class="pill" data-val="2"><input type="radio" name="tipo_ruido" value="2"> De impacto/Impulsivo</label>
+          <label class="pill" data-val="1"><input type="radio" name="tipo_ruido" value="1"> Ruído Contínuo</label>
+          <label class="pill" data-val="2"><input type="radio" name="tipo_ruido" value="2"> Ruído Intermitente</label>
           <label class="pill" data-val="3"><input type="radio" name="tipo_ruido" value="3"> Ambos</label>
           <label class="pill" data-val="9"><input type="radio" name="tipo_ruido" value="9"> Ignorado</label>
         </div>
@@ -1401,14 +1437,48 @@ function toggleDarkMode(){
       </div>
     </div>
 
-    <div class="sublabel">Substâncias Químicas Ototóxicas <span style="font-size:10px;font-weight:400;color:#9ca3af;text-transform:none;margin-left:6px">Marque todas que se aplicam</span></div>
-    <div class="pills" id="grp_ototoxicos" style="margin-bottom:14px">
-      <label class="pill" data-val="1" data-name="ototoxicos"><input type="checkbox" name="ototoxicos" value="1"> Solventes/Tolueno</label>
-      <label class="pill" data-val="2" data-name="ototoxicos"><input type="checkbox" name="ototoxicos" value="2"> Metais pesados (Pb, Hg)</label>
-      <label class="pill" data-val="3" data-name="ototoxicos"><input type="checkbox" name="ototoxicos" value="3"> Medicamentos ototóxicos</label>
-      <label class="pill" data-val="4" data-name="ototoxicos"><input type="checkbox" name="ototoxicos" value="4"> Gases tóxicos (CO, etc.)</label>
-      <label class="pill" data-val="5" data-name="ototoxicos"><input type="checkbox" name="ototoxicos" value="5" onchange="onOtotoxOutros()"> Outros</label>
-      <label class="pill" data-val="6" data-name="ototoxicos"><input type="checkbox" name="ototoxicos" value="6"> Nenhum</label>
+    <div class="sublabel">Exposição Concomitante a Ruído e: <small style="color:#6b7280;font-weight:400;text-transform:none;margin-left:6px">(1=Sim, 2=Não, 9=Ignorado)</small></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin-bottom:14px">
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Solvente a Base de Tolueno</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="exposicao_solvente_toluen" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="exposicao_solvente_toluen" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="exposicao_solvente_toluen" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Metais Pesados</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="exposicao_metais_pesados" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="exposicao_metais_pesados" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="exposicao_metais_pesados" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Medicamentos Ototóxicos</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="exposicao_medicamentos_ototo" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="exposicao_medicamentos_ototo" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="exposicao_medicamentos_ototo" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Gases Tóxicos</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="exposicao_gases_toxicos" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="exposicao_gases_toxicos" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="exposicao_gases_toxicos" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Outros</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="exposicao_outros" value="1" onchange="onOtotoxOutros()"> Sim</label>
+          <label class="pill"><input type="radio" name="exposicao_outros" value="2" onchange="onOtotoxOutros()"> Não</label>
+          <label class="pill"><input type="radio" name="exposicao_outros" value="9" onchange="onOtotoxOutros()"> Ign.</label>
+        </div>
+      </div>
     </div>
     <div id="box_ototox_outros" style="display:none;margin-bottom:14px">
       <div class="fld">
@@ -1417,15 +1487,64 @@ function toggleDarkMode(){
       </div>
     </div>
 
-    <div class="sublabel">Agravos Concomitantes <span style="font-size:10px;font-weight:400;color:#9ca3af;text-transform:none;margin-left:6px">Marque todos que se aplicam</span></div>
-    <div class="pills" id="grp_agravos_pair" style="margin-bottom:14px">
-      <label class="pill" data-val="1" data-name="agravos_pair"><input type="checkbox" name="agravos_pair" value="1"> Hipertensão arterial</label>
-      <label class="pill" data-val="2" data-name="agravos_pair"><input type="checkbox" name="agravos_pair" value="2"> Diabetes</label>
-      <label class="pill" data-val="3" data-name="agravos_pair"><input type="checkbox" name="agravos_pair" value="3"> Transtorno mental</label>
-      <label class="pill" data-val="4" data-name="agravos_pair"><input type="checkbox" name="agravos_pair" value="4"> Tuberculose</label>
-      <label class="pill" data-val="5" data-name="agravos_pair"><input type="checkbox" name="agravos_pair" value="5"> Hanseníase</label>
-      <label class="pill" data-val="6" data-name="agravos_pair"><input type="checkbox" name="agravos_pair" value="6" onchange="onAgravosOutros()"> Asma</label>
-      <label class="pill" data-val="7" data-name="agravos_pair"><input type="checkbox" name="agravos_pair" value="7" onchange="onAgravosOutros()"> Outros</label>
+    <div class="sublabel">Agravos Associados <small style="color:#6b7280;font-weight:400;text-transform:none;margin-left:6px">(1=Sim, 2=Não, 9=Ignorado)</small></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin-bottom:14px">
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Hipertensão Arterial</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="agravo_hipertensa" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="agravo_hipertensa" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="agravo_hipertensa" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Diabetes Mellitus</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="agravo_diabetes" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="agravo_diabetes" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="agravo_diabetes" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Hanseníase</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="agravo_hansenia" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="agravo_hansenia" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="agravo_hansenia" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Transtorno Mental</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="agravo_transtorno_men" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="agravo_transtorno_men" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="agravo_transtorno_men" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Tuberculose</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="agravo_tuberculose" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="agravo_tuberculose" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="agravo_tuberculose" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Asma</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="agravo_asma" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="agravo_asma" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="agravo_asma" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Outras</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="agravo_outras" value="1" onchange="onAgravosOutros()"> Sim</label>
+          <label class="pill"><input type="radio" name="agravo_outras" value="2" onchange="onAgravosOutros()"> Não</label>
+          <label class="pill"><input type="radio" name="agravo_outras" value="9" onchange="onAgravosOutros()"> Ign.</label>
+        </div>
+      </div>
     </div>
     <div id="box_agravos_outros" style="display:none;margin-bottom:14px">
       <div class="fld">
@@ -1476,11 +1595,12 @@ function toggleDarkMode(){
       <div class="fld">
         <label>Tempo de Exposição ao Tabaco</label>
         <div style="display:flex;gap:8px;align-items:flex-start">
-          <input type="number" id="f_tempo_tabaco_val" min="0" placeholder="Quantidade" style="flex:1">
+          <input type="text" id="f_tempo_tabaco_val" placeholder="Quantidade" maxlength="4" style="flex:1;max-width:90px">
           <div class="pills" id="grp_tempo_tabaco_tipo" data-hidden="f_tempo_tabaco_tipo" style="margin-top:2px">
-            <label class="pill" data-val="A"><input type="radio" name="tempo_tabaco_tipo" value="A"> A</label>
-            <label class="pill" data-val="M"><input type="radio" name="tempo_tabaco_tipo" value="M"> M</label>
-            <label class="pill" data-val="D"><input type="radio" name="tempo_tabaco_tipo" value="D"> D</label>
+            <label class="pill" data-val="1"><input type="radio" name="tempo_tabaco_tipo" value="1"> Hora</label>
+            <label class="pill" data-val="2"><input type="radio" name="tempo_tabaco_tipo" value="2"> Dia</label>
+            <label class="pill" data-val="3"><input type="radio" name="tempo_tabaco_tipo" value="3"> Mês</label>
+            <label class="pill" data-val="4"><input type="radio" name="tempo_tabaco_tipo" value="4"> Ano</label>
           </div>
           <input type="hidden" id="f_tempo_tabaco_tipo">
         </div>
@@ -1541,15 +1661,57 @@ function toggleDarkMode(){
       </div>
     </div>
 
-    <div class="sublabel">Conduta Adotada <span style="font-size:10px;font-weight:400;color:#9ca3af;text-transform:none;margin-left:6px">Marque todas que se aplicam</span></div>
-    <div class="pills" id="grp_conduta" style="margin-bottom:14px">
-      <label class="pill" data-val="1" data-name="conduta"><input type="checkbox" name="conduta" value="1"> Afastamento do risco (ruído)</label>
-      <label class="pill" data-val="2" data-name="conduta"><input type="checkbox" name="conduta" value="2"> Proteção individual (EPI)</label>
-      <label class="pill" data-val="3" data-name="conduta"><input type="checkbox" name="conduta" value="3"> Mudança na organização do trabalho</label>
-      <label class="pill" data-val="4" data-name="conduta"><input type="checkbox" name="conduta" value="4"> Proteção coletiva (EPC)</label>
-      <label class="pill" data-val="5" data-name="conduta"><input type="checkbox" name="conduta" value="5"> Afastamento do local de trabalho</label>
-      <label class="pill" data-val="6" data-name="conduta"><input type="checkbox" name="conduta" value="6" onchange="onCondutaOutros()"> Outros</label>
-      <label class="pill" data-val="7" data-name="conduta"><input type="checkbox" name="conduta" value="7"> Nenhuma</label>
+    <div class="sublabel">Conduta Geral <small style="color:#6b7280;font-weight:400;text-transform:none;margin-left:6px">(1=Sim, 2=Não)</small></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin-bottom:14px">
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Afastamento do agente do risco com mudança de função</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="conduta_afastamento_risco" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="conduta_afastamento_risco" value="2"> Não</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Adoção de mudança na organização do trabalho</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="conduta_mudanca_organizac" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="conduta_mudanca_organizac" value="2"> Não</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Adoção de proteção coletiva</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="conduta_protecao_coletiva" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="conduta_protecao_coletiva" value="2"> Não</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Afastamento do local de trabalho</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="conduta_afastamento_loca" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="conduta_afastamento_loca" value="2"> Não</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Adoção de proteção individual</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="conduta_protecao_individual" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="conduta_protecao_individual" value="2"> Não</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Nenhum</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="conduta_nenhum" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="conduta_nenhum" value="2"> Não</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Outros</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="conduta_outros" value="1" onchange="onCondutaOutros()"> Sim</label>
+          <label class="pill"><input type="radio" name="conduta_outros" value="2" onchange="onCondutaOutros()"> Não</label>
+        </div>
+      </div>
     </div>
 
     <div id="box_conduta_outros" style="display:none;margin-bottom:14px">
@@ -1581,11 +1743,13 @@ function toggleDarkMode(){
         <label>Evolução do Caso</label>
         <div class="pills" id="grp_evolucao" data-hidden="f_evolucao">
           <label class="pill" data-val="1"><input type="radio" name="evolucao" value="1"> Cura</label>
-          <label class="pill" data-val="2"><input type="radio" name="evolucao" value="2"> Incap. temp.</label>
-          <label class="pill" data-val="3"><input type="radio" name="evolucao" value="3"> Incap. parc. perm.</label>
-          <label class="pill" data-val="4"><input type="radio" name="evolucao" value="4"> Incap. tot. perm.</label>
-          <label class="pill" data-val="5"><input type="radio" name="evolucao" value="5"> Óbito doença</label>
-          <label class="pill" data-val="6"><input type="radio" name="evolucao" value="6"> Óbito outro</label>
+          <label class="pill" data-val="2"><input type="radio" name="evolucao" value="2"> Cura não conf.</label>
+          <label class="pill" data-val="3"><input type="radio" name="evolucao" value="3"> Incap. temp.</label>
+          <label class="pill" data-val="4"><input type="radio" name="evolucao" value="4"> Incap. parc. perm.</label>
+          <label class="pill" data-val="5"><input type="radio" name="evolucao" value="5"> Incap. tot. perm.</label>
+          <label class="pill" data-val="6"><input type="radio" name="evolucao" value="6"> Óbito doença</label>
+          <label class="pill" data-val="7"><input type="radio" name="evolucao" value="7"> Óbito outra causa</label>
+          <label class="pill" data-val="8"><input type="radio" name="evolucao" value="8"> Outro</label>
           <label class="pill" data-val="9"><input type="radio" name="evolucao" value="9"> Ign.</label>
         </div>
         <input type="hidden" id="f_evolucao">
@@ -1595,6 +1759,7 @@ function toggleDarkMode(){
         <div class="pills" id="grp_cat">
           <label class="pill" data-val="1"><input type="radio" name="cat" value="1"> Sim</label>
           <label class="pill" data-val="2"><input type="radio" name="cat" value="2"> Não</label>
+          <label class="pill" data-val="3"><input type="radio" name="cat" value="3"> Não se aplica</label>
           <label class="pill" data-val="9"><input type="radio" name="cat" value="9"> Ignorado</label>
         </div>
       </div>
@@ -1798,12 +1963,12 @@ function onFumar(){
 
 function onEvolucao(){
   var v = document.getElementById('f_evolucao').value;
-  document.getElementById('box_obito').style.display = (v==='5'||v==='6') ? 'grid' : 'none';
+  document.getElementById('box_obito').style.display = (v==='6'||v==='7') ? 'grid' : 'none';
 }
 
 function onCondutaOutros(){
-  var has = Array.from(document.querySelectorAll('[name="conduta"]:checked')).some(function(c){return c.value==='6';});
-  document.getElementById('box_conduta_outros').style.display = has ? 'block' : 'none';
+  var sel = document.querySelector('input[name="conduta_outros"]:checked');
+  document.getElementById('box_conduta_outros').style.display = (sel && sel.value === '1') ? 'block' : 'none';
 }
 
 document.getElementById('f_evolucao').addEventListener('change', onEvolucao);
@@ -2674,7 +2839,7 @@ async function gerarPDF(force){
     setTxt('situacao_mercado_trabalho',        tv('f_sit_mercado'));
     setTxt('tempo_trabalho_ocupacao_valor',    tv('f_tempo_trab_val'));
     setTxt('tempo_trabalho_ocupacao_tipo',     tv('f_tempo_trab_tipo'));
-    setTxt('tempo_exposicao_valor',            tv('f_tempo_exp_val'));
+    setTxt('tempo_exposicao_valo',             tv('f_tempo_exp_val'));
     setTxt('tempo_exposicao_tipo',             tv('f_tempo_exp_tipo'));
 
     // Seção 5 — Empresa
@@ -2691,61 +2856,65 @@ async function gerarPDF(force){
     setTxt('empresa_telefone',             tv('f_emp_tel'));
     setTxt('empresa_terceirizada',         getRadio('emp_terc'));
 
-    // Seção 6 — Diagnóstico
+    // Campo 46 — Agravos Associados (1=Sim, 2=Não, 9=Ignorado)
+    setTxt('agravo_hipertensa',    getRadio('agravo_hipertensa'));
+    setTxt('agravo_diabetes',      getRadio('agravo_diabetes'));
+    setTxt('agravo_hansenia',      getRadio('agravo_hansenia'));
+    setTxt('agravo_transtorno_men',getRadio('agravo_transtorno_men'));
+    setTxt('agravo_tuberculose',   getRadio('agravo_tuberculose'));
+    setTxt('agravo_asma',          getRadio('agravo_asma'));
+    setTxt('agravo_outras',        getRadio('agravo_outras'));
+    if(getRadio('agravo_outras')==='1') setTxt('agravo_outras_detalhe', tv('f_agravos_outros_det'));
+
+    // Campo 48 — Regime de Tratamento
+    setTxt('regime_tratamento', tv('f_regime'));
+
+    // Campo 49 — Tipo de Ruído
+    setTxt('tipo_ruido', tv('f_tipo_ruido'));
+
+    // Campo 50 — Exposição Concomitante (1=Sim, 2=Não, 9=Ignorado)
+    setTxt('exposicao_solvente_toluen',      getRadio('exposicao_solvente_toluen'));
+    setTxt('exposicao_metais_pesados',       getRadio('exposicao_metais_pesados'));
+    setTxt('exposicao_medicamentos_ototo',   getRadio('exposicao_medicamentos_ototo'));
+    setTxt('exposicao_gases_toxicos',        getRadio('exposicao_gases_toxicos'));
+    setTxt('exposicao_outros',               getRadio('exposicao_outros'));
+    if(getRadio('exposicao_outros')==='1') setTxt('exposicao_outros_detalhe', tv('f_ototox_outros_det'));
+
+    // Campo 51 — Sintomas (1=Sim, 2=Não, 9=Ignorado)
+    setTxt('sintoma_zumbid',           getRadio('sintoma_zumbid'));
+    setTxt('sintoma_tontur',           getRadio('sintoma_tontur'));
+    setTxt('sintoma_dificuldade_fala', getRadio('sintoma_dificuldade_fala'));
+    setTxt('sintoma_cefaleia',         getRadio('sintoma_cefaleia'));
+    setTxt('sintoma_outros',           getRadio('sintoma_outros'));
+    if(getRadio('sintoma_outros')==='1') setTxt('sintoma_outros_detalhe', tv('f_sint_outros_det'));
+
+    // Campo 52 — Diagnóstico CID-10
     setTxt('diagnostico_especifico_cid10', tv('f_diag_cid'));
-    setTxt('regime_tratamento',            tv('f_regime'));
 
-    // Seção 7 — Exames Audiométricos (PAIR)
-    setTxt('tipo_ruido',                   tv('f_tipo_ruido'));
-    var sinChecks = getChecks('sintomas_pair');
-    setTxt('sintoma_zumbido',             sinChecks.indexOf('1')!==-1?'S':'');
-    setTxt('sintoma_tontura',             sinChecks.indexOf('2')!==-1?'S':'');
-    setTxt('sintoma_dificuldade_fala',    sinChecks.indexOf('3')!==-1?'S':'');
-    setTxt('sintoma_cefaleia',            sinChecks.indexOf('4')!==-1?'S':'');
-    setTxt('sintoma_outros',              sinChecks.indexOf('5')!==-1?tv('f_sint_outros_det'):'');
-    setTxt('afastamento_tratamento',      tv('f_afastamento_trat'));
-    setTxt('afastamento_resultado',       tv('f_afastamento_result'));
-    setTxt('tempo_afastamento_valor',     tv('f_tempo_afast_val'));
-    setTxt('tempo_afastamento_tipo',      tv('f_tempo_afast_tipo'));
-
-    // Seção 8 — Agentes de Exposição (PAIR)
-    var otoxChecks = getChecks('ototoxicos');
-    setTxt('exposicao_solvente_tolueno',      otoxChecks.indexOf('1')!==-1?'S':'');
-    setTxt('exposicao_metais_pesados',        otoxChecks.indexOf('2')!==-1?'S':'');
-    setTxt('exposicao_medicamentos_ototoxicos',otoxChecks.indexOf('3')!==-1?'S':'');
-    setTxt('exposicao_gases_toxicos',         otoxChecks.indexOf('4')!==-1?'S':'');
-    setTxt('exposicao_outros',                otoxChecks.indexOf('5')!==-1?'S':'');
-    setTxt('exposicao_outros_detalhe',        tv('f_ototox_outros_det'));
-    var agravosChecks = getChecks('agravos_pair');
-    setTxt('agravo_hipertensao',   agravosChecks.indexOf('1')!==-1?'S':'');
-    setTxt('agravo_diabetes',      agravosChecks.indexOf('2')!==-1?'S':'');
-    setTxt('agravo_transtorno_mental', agravosChecks.indexOf('3')!==-1?'S':'');
-    setTxt('agravo_tuberculose',   agravosChecks.indexOf('4')!==-1?'S':'');
-    setTxt('agravo_hanseniase',    agravosChecks.indexOf('5')!==-1?'S':'');
-    setTxt('agravo_asma',          agravosChecks.indexOf('6')!==-1?'S':'');
-    setTxt('agravo_outras',        agravosChecks.indexOf('7')!==-1?'S':'');
-    setTxt('agravo_outras_detalhe',tv('f_agravos_outros_det'));
+    // Campo 53-54-55 — Afastamento
+    setTxt('afastamento_tratame',      tv('f_afastamento_trat'));
+    setTxt('tempo_afastamento_valor',  tv('f_tempo_afast_val'));
+    setTxt('tempo_afastamento_tipo',   tv('f_tempo_afast_tipo'));
+    setTxt('afastamento_resultado',    tv('f_afastamento_result'));
 
     // Seção 9 — Hábitos
-    setTxt('habito_alcool',                    getRadio('alcool'));
-    setTxt('habito_fumar',                     getRadio('fumar'));
-    setTxt('tempo_exposicao_tabaco_valor',     tv('f_tempo_tabaco_val'));
-    setTxt('tempo_exposicao_tabaco_tipo',      tv('f_tempo_tabaco_tipo'));
-    setTxt('habito_psicofarmacos',             getRadio('psicofarmacos'));
-    setTxt('habito_drogas_psicoativas',        getRadio('drogas'));
+    setTxt('habito_alcool',                getRadio('alcool'));
+    setTxt('habito_fumar',                 getRadio('fumar'));
+    setTxt('tempo_exposicao_tabaco_valor', tv('f_tempo_tabaco_val'));
+    setTxt('tempo_exposicao_tabaco_tipo',  tv('f_tempo_tabaco_tipo'));
+    setTxt('habito_psicofarmacos',         getRadio('psicofarmacos'));
+    setTxt('habito_drogas_psicoativas',    getRadio('drogas'));
 
-    // Seção 8 — Conduta
-    setTxt('outros_trabalhadores_doenca',      getRadio('outros_trab'));
-    // encam_caps nao tem campo especifico no pdf PAIR
-    var condChecks = getChecks('conduta');
-    setTxt('conduta_afastamento_risco',    condChecks.indexOf('1')!==-1?'S':'');
-    setTxt('conduta_protecao_individual',  condChecks.indexOf('2')!==-1?'S':'');
-    setTxt('conduta_mudanca_organizacao',  condChecks.indexOf('3')!==-1?'S':'');
-    setTxt('conduta_protecao_coletiva',    condChecks.indexOf('4')!==-1?'S':'');
-    setTxt('conduta_afastamento_local',    condChecks.indexOf('5')!==-1?'S':'');
-    setTxt('conduta_outros',               condChecks.indexOf('6')!==-1?'S':'');
-    setTxt('conduta_nenhum',               condChecks.indexOf('7')!==-1?'S':'');
-    setTxt('conduta_outros_detalhe',       tv('f_conduta_outros_det'));
+    // Campo 56-57 — Outros trabalhadores + Conduta (1=Sim, 2=Não)
+    setTxt('outros_trabalhadores_doenca',  getRadio('outros_trab'));
+    setTxt('conduta_afastamento_risco',    getRadio('conduta_afastamento_risco'));
+    setTxt('conduta_mudanca_organizac',    getRadio('conduta_mudanca_organizac'));
+    setTxt('conduta_protecao_coletiva',    getRadio('conduta_protecao_coletiva'));
+    setTxt('conduta_afastamento_loca',     getRadio('conduta_afastamento_loca'));
+    setTxt('conduta_protecao_individual',  getRadio('conduta_protecao_individual'));
+    setTxt('conduta_nenhum',               getRadio('conduta_nenhum'));
+    setTxt('conduta_outros',               getRadio('conduta_outros'));
+    if(getRadio('conduta_outros')==='1') setTxt('conduta_outros_detalhe', tv('f_conduta_outros_det'));
 
     // Seção 9 — Encerramento
     setTxt('evolucao_caso',                tv('f_evolucao'));
@@ -2796,20 +2965,22 @@ var FAKE_PATIENTS = [
       f_bairro_res:"PIRITUBA", f_logr_res:"RUA JOAO RAMALHO", f_num_res:"1540",
       f_cep:"05009-000", f_tel_res:"(11) 96789-1234", f_zona_res:"1",
       f_ocupacao:"TORNEIRO MECANICO",
-      f_sit_mercado:"1", f_tempo_exp_val:"15", f_tempo_exp_tipo:"A",
-      f_tempo_trab_val:"15", f_tempo_trab_tipo:"A",
+      f_sit_mercado:"1", f_tempo_exp_val:"15", f_tempo_exp_tipo:"4",
+      f_tempo_trab_val:"15", f_tempo_trab_tipo:"4",
       f_emp_nome:"METALURGICA SAO PAULO INDUSTRIA LTDA", f_emp_cnae:"2539000",
       f_emp_uf:"SP", f_emp_mun:"SAO PAULO",
       f_nivel_ruido_db:"96",
-      f_diag_cid:"H83.3", f_regime:"1",
-      f_grau_od:"2", f_grau_oe:"2"
+      f_diag_cid:"H83.3", f_grau_od:"2", f_grau_oe:"2"
     },
-    radios: {sexo:"M", tipo_ruido:"1", pair_bilateral:"1", pair_progressao:"2",
+    radios: {sexo:"M", regime:"1", tipo_ruido:"1", pair_bilateral:"1", pair_progressao:"2",
              result_audiometria:"2", tipo_audiometria:"1",
              afastamento_trat:"1", afastamento_result:"1",
              alcool:"2", fumar:"1", psicofarmacos:"2", drogas:"2",
-             outros_trab:"1", encam_caps:"1", cat:"1"},
-    checks: {conduta:["1","2"], sintomas_pair:["1","3"], ototoxicos:["6"]}
+             outros_trab:"1", encam_caps:"1", cat:"1",
+             sintoma_zumbid:"1", sintoma_tontur:"2", sintoma_dificuldade_fala:"1", sintoma_cefaleia:"2", sintoma_outros:"2",
+             exposicao_solvente_toluen:"2", exposicao_metais_pesados:"2", exposicao_medicamentos_ototo:"2", exposicao_gases_toxicos:"2", exposicao_outros:"2",
+             agravo_hipertensa:"2", agravo_diabetes:"2", agravo_hansenia:"2", agravo_transtorno_men:"2", agravo_tuberculose:"2", agravo_asma:"2", agravo_outras:"2",
+             conduta_afastamento_risco:"1", conduta_mudanca_organizac:"2", conduta_protecao_coletiva:"2", conduta_afastamento_loca:"2", conduta_protecao_individual:"1", conduta_nenhum:"2", conduta_outros:"2"}
   },
   {
     label: "Maria Aparecida Gonçalves, 55 anos",
@@ -2824,20 +2995,22 @@ var FAKE_PATIENTS = [
       f_bairro_res:"JARDIM DAS ALTEROSAS", f_logr_res:"RUA CORONEL JOSE HONORIO", f_num_res:"210",
       f_cep:"32600-000", f_tel_res:"(31) 99456-7890", f_zona_res:"1",
       f_ocupacao:"OPERADOR DE MAQUINAS FIXAS EM GERAL",
-      f_sit_mercado:"1", f_tempo_exp_val:"22", f_tempo_exp_tipo:"A",
-      f_tempo_trab_val:"22", f_tempo_trab_tipo:"A",
+      f_sit_mercado:"1", f_tempo_exp_val:"22", f_tempo_exp_tipo:"4",
+      f_tempo_trab_val:"22", f_tempo_trab_tipo:"4",
       f_emp_nome:"INDUSTRIA TEXTIL BETIM SA", f_emp_cnae:"1340502",
       f_emp_uf:"MG", f_emp_mun:"BETIM",
       f_nivel_ruido_db:"89",
-      f_diag_cid:"H83.3", f_regime:"1",
-      f_grau_od:"3", f_grau_oe:"2"
+      f_diag_cid:"H83.3", f_grau_od:"3", f_grau_oe:"2"
     },
-    radios: {sexo:"F", tipo_ruido:"1", pair_bilateral:"1", pair_progressao:"2",
+    radios: {sexo:"F", regime:"1", tipo_ruido:"1", pair_bilateral:"1", pair_progressao:"2",
              result_audiometria:"2", tipo_audiometria:"1",
              afastamento_trat:"2",
              alcool:"2", fumar:"2", psicofarmacos:"2", drogas:"2",
-             outros_trab:"1", encam_caps:"1", cat:"2"},
-    checks: {conduta:["1","2","4"], sintomas_pair:["1","2","3"], ototoxicos:["1","6"], agravos_pair:["1"]}
+             outros_trab:"1", encam_caps:"1", cat:"2",
+             sintoma_zumbid:"1", sintoma_tontur:"1", sintoma_dificuldade_fala:"1", sintoma_cefaleia:"2", sintoma_outros:"2",
+             exposicao_solvente_toluen:"1", exposicao_metais_pesados:"2", exposicao_medicamentos_ototo:"2", exposicao_gases_toxicos:"2", exposicao_outros:"2",
+             agravo_hipertensa:"1", agravo_diabetes:"2", agravo_hansenia:"2", agravo_transtorno_men:"2", agravo_tuberculose:"2", agravo_asma:"2", agravo_outras:"2",
+             conduta_afastamento_risco:"1", conduta_mudanca_organizac:"2", conduta_protecao_coletiva:"1", conduta_afastamento_loca:"2", conduta_protecao_individual:"1", conduta_nenhum:"2", conduta_outros:"2"}
   }
 ];
 
@@ -2912,16 +3085,16 @@ function _setChecks(name, vals){
 }
 
 function onSintOutros(){
-  var has = Array.from(document.querySelectorAll('[name="sintomas_pair"]:checked')).some(function(c){return c.value==='5';});
-  document.getElementById('box_sint_outros').style.display = has ? 'block' : 'none';
+  var sel = document.querySelector('input[name="sintoma_outros"]:checked');
+  document.getElementById('box_sint_outros').style.display = (sel && sel.value === '1') ? 'block' : 'none';
 }
 function onOtotoxOutros(){
-  var has = Array.from(document.querySelectorAll('[name="ototoxicos"]:checked')).some(function(c){return c.value==='5';});
-  document.getElementById('box_ototox_outros').style.display = has ? 'block' : 'none';
+  var sel = document.querySelector('input[name="exposicao_outros"]:checked');
+  document.getElementById('box_ototox_outros').style.display = (sel && sel.value === '1') ? 'block' : 'none';
 }
 function onAgravosOutros(){
-  var has = Array.from(document.querySelectorAll('[name="agravos_pair"]:checked')).some(function(c){return c.value==='7';});
-  document.getElementById('box_agravos_outros').style.display = has ? 'block' : 'none';
+  var sel = document.querySelector('input[name="agravo_outras"]:checked');
+  document.getElementById('box_agravos_outros').style.display = (sel && sel.value === '1') ? 'block' : 'none';
 }
 
 function _applyVisibility(){
