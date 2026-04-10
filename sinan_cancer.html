@@ -1044,25 +1044,14 @@ function toggleDarkMode(){
 
     <div class="row">
       <div class="fld">
-        <label>Tempo de Exposição</label>
-        <div style="display:flex;gap:8px;align-items:flex-start">
-          <input type="number" id="f_tempo_exp_val" min="0" placeholder="Ex: 12" style="flex:1">
-          <div class="pills" id="grp_tempo_exp_tipo" data-hidden="f_tempo_exp_tipo" style="margin-top:2px">
-            <label class="pill" data-val="A"><input type="radio" name="tempo_exp_tipo" value="A"> A</label>
-            <label class="pill" data-val="M"><input type="radio" name="tempo_exp_tipo" value="M"> M</label>
-            <label class="pill" data-val="D"><input type="radio" name="tempo_exp_tipo" value="D"> D</label>
-          </div>
-          <input type="hidden" id="f_tempo_exp_tipo">
-        </div>
-      </div>
-      <div class="fld">
         <label>Tempo no Trabalho/Ocupação</label>
         <div style="display:flex;gap:8px;align-items:flex-start">
-          <input type="number" id="f_tempo_trab_val" min="0" placeholder="Ex: 12" style="flex:1">
+          <input type="text" id="f_tempo_trab_val" placeholder="Ex: 12" maxlength="4" style="flex:1;max-width:90px">
           <div class="pills" id="grp_tempo_trab_tipo" data-hidden="f_tempo_trab_tipo" style="margin-top:2px">
-            <label class="pill" data-val="A"><input type="radio" name="tempo_trab_tipo" value="A"> A</label>
-            <label class="pill" data-val="M"><input type="radio" name="tempo_trab_tipo" value="M"> M</label>
-            <label class="pill" data-val="D"><input type="radio" name="tempo_trab_tipo" value="D"> D</label>
+            <label class="pill" data-val="1"><input type="radio" name="tempo_trab_tipo" value="1"> Hora</label>
+            <label class="pill" data-val="2"><input type="radio" name="tempo_trab_tipo" value="2"> Dia</label>
+            <label class="pill" data-val="3"><input type="radio" name="tempo_trab_tipo" value="3"> Mês</label>
+            <label class="pill" data-val="4"><input type="radio" name="tempo_trab_tipo" value="4"> Ano</label>
           </div>
           <input type="hidden" id="f_tempo_trab_tipo">
         </div>
@@ -1208,43 +1197,6 @@ function toggleDarkMode(){
         <span class="info" id="f_diag_cid_hint" style="font-size:11px;color:#6b7280;display:none;margin-top:4px"></span>
       </div>
     </div>
-    <div class="row">
-      <div class="fld">
-        <label>Topografia (Localização do Tumor)</label>
-        <input type="text" id="f_topografia" placeholder="Ex: Pulmão, Mama, Próstada..." data-caps>
-      </div>
-      <div class="fld">
-        <label>Tipo de Tumor</label>
-        <select id="f_tipo_tumor">
-          <option value="">Selecione...</option>
-          <option value="1">Primário</option>
-          <option value="2">Secundário (Metástase)</option>
-          <option value="3">In situ</option>
-        </select>
-      </div>
-    </div>
-    <div class="sublabel">Base Diagnóstica</div>
-    <div class="pills" id="box_base_diag">
-      <label class="pill"><input type="checkbox" name="base_diag" value="1" onchange="onBaseDiagChange()"> Clínica</label>
-      <label class="pill"><input type="checkbox" name="base_diag" value="2" onchange="onBaseDiagChange()"> Biópsia</label>
-      <label class="pill"><input type="checkbox" name="base_diag" value="3" onchange="onBaseDiagChange()"> Anatomopatológico</label>
-      <label class="pill"><input type="checkbox" name="base_diag" value="4" onchange="onBaseDiagChange()"> Citologia</label>
-      <label class="pill"><input type="checkbox" name="base_diag" value="5" onchange="onBaseDiagChange()"> Citogenética</label>
-      <label class="pill"><input type="checkbox" name="base_diag" value="6" onchange="onBaseDiagChange()"> Imuno-histoquímica</label>
-    </div>
-    <div class="row">
-      <div class="fld">
-        <label>Estadiamento</label>
-        <select id="f_estadiamento">
-          <option value="">Selecione...</option>
-          <option value="I">Estádio I</option>
-          <option value="II">Estádio II</option>
-          <option value="III">Estádio III</option>
-          <option value="IV">Estádio IV</option>
-          <option value="X">Estádio X (Não determinado)</option>
-        </select>
-      </div>
-    </div>
     <div class="sublabel">Regime de Tratamento</div>
     <div class="pills">
       <label class="pill"><input type="radio" name="f_regime" value="1"> Hospitalar</label>
@@ -1266,24 +1218,151 @@ function toggleDarkMode(){
     <span class="sec-badge badge-empty" id="badge7">—</span>
   </div>
   <div class="sec-body">
-    <div class="sublabel">Agentes aos quais houve exposição</div>
-    <div class="pills">
-      <label class="pill"><input type="checkbox" id="exp_asbesto"> Asbesto ou amianto</label>
-      <label class="pill"><input type="checkbox" id="exp_silica"> Sílica, sílicates e compostos arsenicais</label>
-      <label class="pill"><input type="checkbox" id="exp_aminas"> Aminas aromáticas</label>
-      <label class="pill"><input type="checkbox" id="exp_benzeno"> Benzeno ou suas homologias tóxicas</label>
-      <label class="pill"><input type="checkbox" id="exp_alcatrao"> Alcatrão, breu, betume, hulha mineral, parafina</label>
-      <label class="pill"><input type="checkbox" id="exp_hidrocarbonetos"> Hidrocarbonetos alifáticos/aromáticos</label>
-      <label class="pill"><input type="checkbox" id="exp_oleos"> Óleos minerais</label>
-      <label class="pill"><input type="checkbox" id="exp_berilio"> Berílio e seus compostos tóxicos</label>
-      <label class="pill"><input type="checkbox" id="exp_cadmio"> Cádmio</label>
-      <label class="pill"><input type="checkbox" id="exp_cromo"> Cromo ou seus compostos tóxicos</label>
-      <label class="pill"><input type="checkbox" id="exp_radiacoes_ionizantes"> Radiações ionizantes</label>
-      <label class="pill"><input type="checkbox" id="exp_compostos_niquel"> Compostos de níquel</label>
-      <label class="pill"><input type="checkbox" id="exp_radiacoes_nao_ionizantes"> Radiações não ionizantes</label>
-      <label class="pill"><input type="checkbox" id="exp_hormonios"> Hormônios</label>
-      <label class="pill"><input type="checkbox" id="exp_antineoplasicos"> Antineoplásicos</label>
-      <label class="pill" onclick="onExpOutrosChange()"><input type="checkbox" id="exp_outros"> Outros</label>
+    <div class="row">
+      <div class="fld">
+        <label>Tempo de Exposição ao Agente de Risco</label>
+        <div style="display:flex;gap:8px;align-items:flex-start">
+          <input type="text" id="f_tempo_exp_val" placeholder="Ex: 12" maxlength="4" style="flex:1;max-width:90px">
+          <div class="pills" id="grp_tempo_exp_tipo" data-hidden="f_tempo_exp_tipo" style="margin-top:2px">
+            <label class="pill" data-val="1"><input type="radio" name="tempo_exp_tipo" value="1"> Hora</label>
+            <label class="pill" data-val="2"><input type="radio" name="tempo_exp_tipo" value="2"> Dia</label>
+            <label class="pill" data-val="3"><input type="radio" name="tempo_exp_tipo" value="3"> Mês</label>
+            <label class="pill" data-val="4"><input type="radio" name="tempo_exp_tipo" value="4"> Ano</label>
+          </div>
+          <input type="hidden" id="f_tempo_exp_tipo">
+        </div>
+      </div>
+    </div>
+    <div class="sublabel" style="margin-top:14px">Houve exposição nos locais de trabalho, durante toda a sua vida profissional, a algum dos itens abaixo? <small style="color:#6b7280">(1=Sim, 2=Não, 9=Ignorado)</small></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin-top:8px">
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Asbesto ou amianto</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="exp_asbesto" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="exp_asbesto" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="exp_asbesto" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Sílica, sílicates e compostos arsenicais</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="exp_silica" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="exp_silica" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="exp_silica" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Aminas aromáticas</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="exp_aminas" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="exp_aminas" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="exp_aminas" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Benzeno ou suas homologias tóxicas</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="exp_benzeno" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="exp_benzeno" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="exp_benzeno" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Alcatrão, breu, betume, hulha mineral, parafina</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="exp_alcatrao" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="exp_alcatrao" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="exp_alcatrao" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Hidrocarbonetos alifáticos/aromáticos</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="exp_hidrocarbonetos" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="exp_hidrocarbonetos" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="exp_hidrocarbonetos" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Óleos minerais</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="exp_oleos" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="exp_oleos" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="exp_oleos" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Berílio e seus compostos tóxicos</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="exp_berilio" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="exp_berilio" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="exp_berilio" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Cádmio</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="exp_cadmio" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="exp_cadmio" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="exp_cadmio" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Cromo ou seus compostos tóxicos</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="exp_cromo" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="exp_cromo" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="exp_cromo" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Radiações ionizantes</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="exp_radiacoes_ionizantes" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="exp_radiacoes_ionizantes" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="exp_radiacoes_ionizantes" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Compostos de níquel</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="exp_compostos_niquel" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="exp_compostos_niquel" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="exp_compostos_niquel" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Radiações não ionizantes</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="exp_radiacoes_nao_ionizantes" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="exp_radiacoes_nao_ionizantes" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="exp_radiacoes_nao_ionizantes" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Hormônios</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="exp_hormonios" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="exp_hormonios" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="exp_hormonios" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Antineoplásicos</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="exp_antineoplasicos" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="exp_antineoplasicos" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="exp_antineoplasicos" value="9"> Ign.</label>
+        </div>
+      </div>
+      <div class="fld" style="margin:0">
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Outros</div>
+        <div class="pills">
+          <label class="pill"><input type="radio" name="exp_outros" value="1" onchange="onExpOutrosChange()"> Sim</label>
+          <label class="pill"><input type="radio" name="exp_outros" value="2" onchange="onExpOutrosChange()"> Não</label>
+          <label class="pill"><input type="radio" name="exp_outros" value="9" onchange="onExpOutrosChange()"> Ign.</label>
+        </div>
+      </div>
     </div>
     <div id="box_exp_outros" style="display:none;margin-top:10px">
       <div class="row row-wide">
@@ -1304,7 +1383,7 @@ function toggleDarkMode(){
     <div class="sec-num">8</div>
     <div class="sec-info">
       <h3>Hábitos e Estilo de Vida</h3>
-      <p>Tabagismo, etilismo e fatores associados</p>
+      <p>Tabagismo e outros fatores associados</p>
     </div>
     <span class="sec-badge badge-empty" id="badge8">—</span>
   </div>
@@ -1332,12 +1411,6 @@ function toggleDarkMode(){
           <input type="hidden" id="f_tempo_tabaco_tipo" value="4">
         </div>
       </div>
-    </div>
-    <div class="sublabel">Etilismo</div>
-    <div class="pills">
-      <label class="pill"><input type="radio" name="habito_alcool" value="1"> Sim</label>
-      <label class="pill"><input type="radio" name="habito_alcool" value="2"> Não</label>
-      <label class="pill"><input type="radio" name="habito_alcool" value="3"> Social</label>
     </div>
     <div class="sublabel" style="margin-top:14px">Há ou houve outros trabalhadores com a mesma doença no local de trabalho?</div>
     <div class="pills">
@@ -1588,13 +1661,9 @@ function onObitoChange(){
   document.getElementById('box_obito_data').style.display = (v && v.value === '1') ? 'block' : 'none';
 }
 
-function onBaseDiagChange(){
-  updateProgress();
-}
-
 function onExpOutrosChange(){
-  var el = document.getElementById('exp_outros');
-  document.getElementById('box_exp_outros').style.display = (el && el.checked) ? 'block' : 'none';
+  var sel = document.querySelector('input[name="exp_outros"]:checked');
+  document.getElementById('box_exp_outros').style.display = (sel && sel.value === '1') ? 'block' : 'none';
 }
 
 /*==========================================================
@@ -2468,8 +2537,6 @@ async function gerarPDF(force){
     setTxt('situacao_mercado_trabalho', tv('f_sit_mercado'));
     setTxt('tempo_trabalho_ocupacao_valor', tv('f_tempo_trab_val'));
     setTxt('tempo_trabalho_ocupacao_tipo', tv('f_tempo_trab_tipo'));
-    setTxt('tempo_exposicao_valor', tv('f_tempo_exp_val'));
-    setTxt('tempo_exposicao_tipo', tv('f_tempo_exp_tipo'));
 
     // Secao 5 — Empresa
     setTxt('empresa_registro_cnpj_cpf', tv('f_emp_reg'));
@@ -2490,11 +2557,12 @@ async function gerarPDF(force){
     setTxt('diagnostico_especifico_cid10', tv('f_diag_cid'));
     setTxt('regime_tratamento', getRadio('f_regime'));
 
-    // Secao 7 — Exposicoes (checkboxes individuais)
+    // Secao 7 — Exposicoes (1=Sim, 2=Não, 9=Ignorado)
+    setTxt('tempo_exposicao_valor', tv('f_tempo_exp_val'));
+    setTxt('tempo_exposicao_tipo', tv('f_tempo_exp_tipo'));
     var EXPS = ['asbesto','silica','aminas','benzeno','alcatrao','hidrocarbonetos','oleos','berilio','cadmio','cromo','radiacoes_ionizantes','compostos_niquel','radiacoes_nao_ionizantes','hormonios','antineoplasicos','outros'];
     EXPS.forEach(function(exp){
-      var el = document.getElementById('exp_'+exp);
-      setChk('exposicao_'+exp, el && el.checked);
+      setTxt('exposicao_'+exp, getRadio('exp_'+exp));
     });
     setTxt('exposicao_outros_detalhe', tv('f_exp_outros_detalhe'));
 
@@ -2551,18 +2619,19 @@ var FAKE_PATIENTS = [
       f_bairro_res:"VENDA NOVA", f_logr_res:"RUA DAS FLORES", f_num_res:"100",
       f_cep:"31615-000", f_tel_res:"(31) 98888-7777", f_zona_res:"1",
       f_ocupacao:"OPERADOR DE MAQUINAS PERFURATRIZ DE MINAS",
-      f_sit_mercado:"1", f_tempo_trab_val:"30", f_tempo_trab_tipo:"A",
-      f_tempo_exp_val:"25", f_tempo_exp_tipo:"A",
+      f_sit_mercado:"1", f_tempo_trab_val:"30", f_tempo_trab_tipo:"4",
+      f_tempo_exp_val:"25", f_tempo_exp_tipo:"4",
       f_emp_nome:"MINERAÇÃO VALE DO AÇO LTDA", f_emp_cnae:"0710301",
       f_emp_uf:"MG", f_emp_mun:"ITABIRA", f_emp_bairro:"DISTRITO INDUSTRIAL",
       f_emp_end:"RODOVIA BR-381", f_emp_num:"KM 50",
-      f_diag_cid:"C34", f_topografia:"PULMÃO", f_tipo_tumor:"1", f_estadiamento:"III",
-      f_agentes:"SÍLICA CRISTALINA, POEIRA MINERAL", f_local_exposicao:"GALERIAS SUBTERRÂNEAS DE MINERAÇÃO",
-      habito_fumar:"1", f_tempo_tabaco_val:"35", f_cigarros_dia:"20", habito_alcool:"2",
+      f_diag_cid:"C34", f_tempo_tabaco_val:"35",
       f_evolucao:"2", f_cat:"1"
     },
-    radios: {sexo:"M", habito_fumar:"1", habito_alcool:"2", f_obito:"2", f_cat:"1", f_evolucao:"2", f_tipo_tumor:"1", f_estadiamento:"III"},
-    checks: {base_diag:["2","3","4"]}
+    radios: {sexo:"M", habito_fumar:"1", f_obito:"2", f_cat:"1", f_evolucao:"2", f_regime:"2",
+             exp_silica:"1", exp_asbesto:"2", exp_aminas:"2", exp_benzeno:"2", exp_alcatrao:"2",
+             exp_hidrocarbonetos:"2", exp_oleos:"2", exp_berilio:"2", exp_cadmio:"2", exp_cromo:"2",
+             exp_radiacoes_ionizantes:"2", exp_compostos_niquel:"2", exp_radiacoes_nao_ionizantes:"2",
+             exp_hormonios:"2", exp_antineoplasicos:"2", exp_outros:"2"}
   },
   {
     label: "Ana Souza, 42 anos",
@@ -2577,18 +2646,19 @@ var FAKE_PATIENTS = [
       f_bairro_res:"BUTANTA", f_logr_res:"AVENIDA PROF. LINEU PRESTES", f_num_res:"2500",
       f_cep:"05508-000", f_tel_res:"(11) 97777-6666", f_zona_res:"1",
       f_ocupacao:"TECNICO DE LABORATORIO DE ANALISES CLINICAS",
-      f_sit_mercado:"1", f_tempo_trab_val:"15", f_tempo_trab_tipo:"A",
-      f_tempo_exp_val:"12", f_tempo_exp_tipo:"A",
+      f_sit_mercado:"1", f_tempo_trab_val:"15", f_tempo_trab_tipo:"4",
+      f_tempo_exp_val:"12", f_tempo_exp_tipo:"4",
       f_emp_nome:"LABORATORIO CENTRAL LTDA", f_emp_cnae:"8640202",
       f_emp_uf:"SP", f_emp_mun:"SAO PAULO", f_emp_bairro:"BUTANTA",
       f_emp_end:"RUA DO LAGO", f_emp_num:"540",
-      f_diag_cid:"C95", f_topografia:"MEDULA ÓSSEA / SANGUE", f_tipo_tumor:"1", f_estadiamento:"II",
-      f_agentes:"BENZENO, SOLVENTES ORGÂNICOS", f_local_exposicao:"LABORATÓRIO DE ANÁLISES QUÍMICAS",
-      habito_fumar:"2", habito_alcool:"3",
+      f_diag_cid:"C95",
       f_evolucao:"1", f_cat:"1"
     },
-    radios: {sexo:"F", habito_fumar:"2", habito_alcool:"3", f_obito:"2", f_cat:"1", f_evolucao:"1", f_tipo_tumor:"1", f_estadiamento:"II"},
-    checks: {base_diag:["2","3","5","6"]}
+    radios: {sexo:"F", habito_fumar:"2", f_obito:"2", f_cat:"1", f_evolucao:"1", f_regime:"2",
+             exp_benzeno:"1", exp_silica:"2", exp_asbesto:"2", exp_aminas:"2", exp_alcatrao:"2",
+             exp_hidrocarbonetos:"1", exp_oleos:"2", exp_berilio:"2", exp_cadmio:"2", exp_cromo:"2",
+             exp_radiacoes_ionizantes:"2", exp_compostos_niquel:"2", exp_radiacoes_nao_ionizantes:"2",
+             exp_hormonios:"9", exp_antineoplasicos:"9", exp_outros:"2"}
   }
 ];
 
