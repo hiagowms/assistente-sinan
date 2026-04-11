@@ -1231,89 +1231,12 @@ function toggleDarkMode(){
   <div class="sec-hdr">
     <div class="sec-num">7</div>
     <div class="sec-info">
-      <h3>Exames Audiométricos</h3>
-      <p>Resultados da audiometria tonal e achados específicos de PAIR</p>
+      <h3>Sintomas e Afastamento</h3>
+      <p>Sintomas associados e afastamento do trabalho para tratamento</p>
     </div>
     <span class="sec-badge badge-empty" id="badge7">—</span>
   </div>
   <div class="sec-body">
-
-    <div class="info"><span class="ico">🎧</span><div>Registre os dados da <strong>audiometria tonal liminar</strong>. A PAIR caracteriza-se por perda neurossensorial, geralmente bilateral, irreversível, com entalhe audiométrico típico nas frequências de 3000–6000 Hz.</div></div>
-
-    <div class="sublabel">Tipo e Resultado da Audiometria</div>
-    <div class="row">
-      <div class="fld">
-        <label>Tipo de Audiometria</label>
-        <div class="pills" id="grp_tipo_audiometria" data-hidden="f_tipo_audiometria">
-          <label class="pill" data-val="1"><input type="radio" name="tipo_audiometria" value="1"> Tonal liminar</label>
-          <label class="pill" data-val="2"><input type="radio" name="tipo_audiometria" value="2"> Vocal</label>
-          <label class="pill" data-val="3"><input type="radio" name="tipo_audiometria" value="3"> Imitânciometria</label>
-          <label class="pill" data-val="9"><input type="radio" name="tipo_audiometria" value="9"> Ign.</label>
-        </div>
-        <input type="hidden" id="f_tipo_audiometria">
-      </div>
-      <div class="fld">
-        <label>Resultado Audiometria</label>
-        <div class="pills" id="grp_result_audiometria" data-hidden="f_result_audiometria">
-          <label class="pill" data-val="1"><input type="radio" name="result_audiometria" value="1"> Normal</label>
-          <label class="pill" data-val="2"><input type="radio" name="result_audiometria" value="2"> Alterado</label>
-          <label class="pill" data-val="9"><input type="radio" name="result_audiometria" value="9"> Ign.</label>
-        </div>
-        <input type="hidden" id="f_result_audiometria">
-      </div>
-    </div>
-
-    <div class="sublabel">Grau da Perda Auditiva</div>
-    <div class="row">
-      <div class="fld">
-        <label>Grau — Orelha Direita (OD)</label>
-        <select id="f_grau_od">
-          <option value="">— Selecione —</option>
-          <option value="0">Audição normal</option>
-          <option value="1">Perda leve (26–40 dB)</option>
-          <option value="2">Perda moderada (41–55 dB)</option>
-          <option value="3">Perda moderadamente severa (56–70 dB)</option>
-          <option value="4">Perda severa (71–90 dB)</option>
-          <option value="5">Perda profunda (>90 dB)</option>
-          <option value="9">Ignorado</option>
-        </select>
-      </div>
-      <div class="fld">
-        <label>Grau — Orelha Esquerda (OE)</label>
-        <select id="f_grau_oe">
-          <option value="">— Selecione —</option>
-          <option value="0">Audição normal</option>
-          <option value="1">Perda leve (26–40 dB)</option>
-          <option value="2">Perda moderada (41–55 dB)</option>
-          <option value="3">Perda moderadamente severa (56–70 dB)</option>
-          <option value="4">Perda severa (71–90 dB)</option>
-          <option value="5">Perda profunda (>90 dB)</option>
-          <option value="9">Ignorado</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="sublabel">Características da PAIR</div>
-    <div class="row">
-      <div class="fld">
-        <label>PAIR Bilateral?</label>
-        <div class="pills" id="grp_pair_bilateral" data-hidden="f_pair_bilateral">
-          <label class="pill" data-val="1"><input type="radio" name="pair_bilateral" value="1"> Sim</label>
-          <label class="pill" data-val="2"><input type="radio" name="pair_bilateral" value="2"> Não (unilateral)</label>
-          <label class="pill" data-val="9"><input type="radio" name="pair_bilateral" value="9"> Ign.</label>
-        </div>
-        <input type="hidden" id="f_pair_bilateral">
-      </div>
-      <div class="fld">
-        <label>Progressão após retirada do ruído?</label>
-        <div class="pills" id="grp_pair_progressao" data-hidden="f_pair_progressao">
-          <label class="pill" data-val="1"><input type="radio" name="pair_progressao" value="1"> Sim</label>
-          <label class="pill" data-val="2"><input type="radio" name="pair_progressao" value="2"> Não</label>
-          <label class="pill" data-val="9"><input type="radio" name="pair_progressao" value="9"> Ign.</label>
-        </div>
-        <input type="hidden" id="f_pair_progressao">
-      </div>
-    </div>
 
     <div class="sublabel">Sintomas <small style="color:#6b7280;font-weight:400;text-transform:none;margin-left:6px">(1=Sim, 2=Não, 9=Ignorado)</small></div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin-bottom:14px">
@@ -1365,7 +1288,7 @@ function toggleDarkMode(){
       </div>
     </div>
 
-    <div class="sublabel">Afastamento por Audiometria</div>
+    <div class="sublabel">Afastamento para Tratamento</div>
     <div class="row">
       <div class="fld">
         <label>Afastamento para Tratamento</label>
@@ -1430,10 +1353,6 @@ function toggleDarkMode(){
           <label class="pill" data-val="9"><input type="radio" name="tipo_ruido" value="9"> Ignorado</label>
         </div>
         <input type="hidden" id="f_tipo_ruido">
-      </div>
-      <div class="fld">
-        <label>Nível de Exposição (dB)</label>
-        <input type="number" id="f_nivel_ruido_db" min="0" max="200" placeholder="Ex: 92 dB(A)">
       </div>
     </div>
 
@@ -1557,80 +1476,7 @@ function toggleDarkMode(){
 </div>
 
 <!-- =========================================================
-  SEÇÃO 9 — HÁBITOS E ESTILO DE VIDA (renumerada)
-========================================================= -->
-<div class="sec" id="sec9">
-  <div class="sec-hdr">
-    <div class="sec-num">9</div>
-    <div class="sec-info">
-      <h3>Hábitos e Estilo de Vida</h3>
-      <p>Uso de álcool, tabaco, psicofármacos e drogas psicoativas</p>
-    </div>
-    <span class="sec-badge badge-empty" id="badge11">—</span>
-  </div>
-  <div class="sec-body">
-
-    <div class="info"><span class="ico">ℹ️</span><div>Informações sobre hábitos e estilo de vida relevantes para o diagnóstico dos transtornos mentais relacionados ao trabalho.</div></div>
-
-    <div class="row">
-      <div class="fld">
-        <label>Uso de Álcool</label>
-        <div class="pills" id="grp_alcool">
-          <label class="pill" data-val="1"><input type="radio" name="alcool" value="1"> Sim</label>
-          <label class="pill" data-val="2"><input type="radio" name="alcool" value="2"> Não</label>
-          <label class="pill" data-val="9"><input type="radio" name="alcool" value="9"> Ignorado</label>
-        </div>
-      </div>
-      <div class="fld">
-        <label>Uso de Tabaco</label>
-        <div class="pills" id="grp_fumar">
-          <label class="pill" data-val="1"><input type="radio" name="fumar" value="1" onchange="onFumar()"> Sim</label>
-          <label class="pill" data-val="2"><input type="radio" name="fumar" value="2" onchange="onFumar()"> Não</label>
-          <label class="pill" data-val="9"><input type="radio" name="fumar" value="9" onchange="onFumar()"> Ignorado</label>
-        </div>
-      </div>
-    </div>
-
-    <div id="box_tempo_tabaco" style="display:none" class="row">
-      <div class="fld">
-        <label>Tempo de Exposição ao Tabaco</label>
-        <div style="display:flex;gap:8px;align-items:flex-start">
-          <input type="text" id="f_tempo_tabaco_val" placeholder="Quantidade" maxlength="4" style="flex:1;max-width:90px">
-          <div class="pills" id="grp_tempo_tabaco_tipo" data-hidden="f_tempo_tabaco_tipo" style="margin-top:2px">
-            <label class="pill" data-val="1"><input type="radio" name="tempo_tabaco_tipo" value="1"> Hora</label>
-            <label class="pill" data-val="2"><input type="radio" name="tempo_tabaco_tipo" value="2"> Dia</label>
-            <label class="pill" data-val="3"><input type="radio" name="tempo_tabaco_tipo" value="3"> Mês</label>
-            <label class="pill" data-val="4"><input type="radio" name="tempo_tabaco_tipo" value="4"> Ano</label>
-          </div>
-          <input type="hidden" id="f_tempo_tabaco_tipo">
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="fld">
-        <label>Uso de Psicofármacos</label>
-        <div class="pills" id="grp_psicofarmacos">
-          <label class="pill" data-val="1"><input type="radio" name="psicofarmacos" value="1"> Sim</label>
-          <label class="pill" data-val="2"><input type="radio" name="psicofarmacos" value="2"> Não</label>
-          <label class="pill" data-val="9"><input type="radio" name="psicofarmacos" value="9"> Ignorado</label>
-        </div>
-      </div>
-      <div class="fld">
-        <label>Uso de Drogas Psicoativas</label>
-        <div class="pills" id="grp_drogas">
-          <label class="pill" data-val="1"><input type="radio" name="drogas" value="1"> Sim</label>
-          <label class="pill" data-val="2"><input type="radio" name="drogas" value="2"> Não</label>
-          <label class="pill" data-val="9"><input type="radio" name="drogas" value="9"> Ignorado</label>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- =========================================================
-  SEÇÃO 8 — CONDUTA
+  SEÇÃO 9 — CONDUTA
 ========================================================= -->
 <div class="sec" id="sec10">
   <div class="sec-hdr">
@@ -1645,18 +1491,11 @@ function toggleDarkMode(){
 
     <div class="row">
       <div class="fld">
-        <label>Outros trabalhadores com PAIR no setor?</label>
+        <label>Há ou houve outros trabalhadores com a mesma doença no local de trabalho?</label>
         <div class="pills" id="grp_outros_trab">
           <label class="pill" data-val="1"><input type="radio" name="outros_trab" value="1"> Sim</label>
           <label class="pill" data-val="2"><input type="radio" name="outros_trab" value="2"> Não</label>
           <label class="pill" data-val="9"><input type="radio" name="outros_trab" value="9"> Ignorado</label>
-        </div>
-      </div>
-      <div class="fld">
-        <label>Encaminhado para reabilitação auditiva?</label>
-        <div class="pills" id="grp_encam_caps">
-          <label class="pill" data-val="1"><input type="radio" name="encam_caps" value="1"> Sim</label>
-          <label class="pill" data-val="2"><input type="radio" name="encam_caps" value="2"> Não</label>
         </div>
       </div>
     </div>
@@ -1954,11 +1793,6 @@ function onSexoChange(){
 function onEmpTerc(){
   var v = document.querySelector('[name="emp_terc"]:checked');
   document.getElementById('box_emp_terc').style.display = (v&&v.value==='1') ? 'block' : 'none';
-}
-
-function onFumar(){
-  var v = document.querySelector('[name="fumar"]:checked');
-  document.getElementById('box_tempo_tabaco').style.display = (v && v.value === '1') ? 'flex' : 'none';
 }
 
 function onEvolucao(){
@@ -2526,7 +2360,7 @@ var STD_W = 1;
 // Grupos essenciais
 var ESS_GROUPS = ['sexo'];
 // Grupos padrão
-var STD_GROUPS = ['cat','outros_trab','encam_caps','alcool','fumar','psicofarmacos','drogas','tipo_ruido','pair_bilateral','result_audiometria','tipo_audiometria'];
+var STD_GROUPS = ['cat','outros_trab','tipo_ruido'];
 
 function isElemVisible(el){
   var node = el;
@@ -2897,14 +2731,6 @@ async function gerarPDF(force){
     setTxt('tempo_afastamento_tipo',   tv('f_tempo_afast_tipo'));
     setTxt('afastamento_resultado',    tv('f_afastamento_result'));
 
-    // Seção 9 — Hábitos
-    setTxt('habito_alcool',                getRadio('alcool'));
-    setTxt('habito_fumar',                 getRadio('fumar'));
-    setTxt('tempo_exposicao_tabaco_valor', tv('f_tempo_tabaco_val'));
-    setTxt('tempo_exposicao_tabaco_tipo',  tv('f_tempo_tabaco_tipo'));
-    setTxt('habito_psicofarmacos',         getRadio('psicofarmacos'));
-    setTxt('habito_drogas_psicoativas',    getRadio('drogas'));
-
     // Campo 56-57 — Outros trabalhadores + Conduta (1=Sim, 2=Não)
     setTxt('outros_trabalhadores_doenca',  getRadio('outros_trab'));
     setTxt('conduta_afastamento_risco',    getRadio('conduta_afastamento_risco'));
@@ -2920,7 +2746,7 @@ async function gerarPDF(force){
     setTxt('evolucao_caso',                tv('f_evolucao'));
     setTxt('cat_emitida',                  getRadio('cat'));
     setTxt('obito_data',                   fmtDate(tv('f_obito')));
-    // observacoes ja tratadas junto com habitos acima
+    setTxt('observacoes_complementares',   tv('f_obs'));
 
     var outBytes = await pdfDoc.save();
     var blob = new Blob([outBytes],{type:'application/pdf'});
@@ -2969,14 +2795,11 @@ var FAKE_PATIENTS = [
       f_tempo_trab_val:"15", f_tempo_trab_tipo:"4",
       f_emp_nome:"METALURGICA SAO PAULO INDUSTRIA LTDA", f_emp_cnae:"2539000",
       f_emp_uf:"SP", f_emp_mun:"SAO PAULO",
-      f_nivel_ruido_db:"96",
-      f_diag_cid:"H83.3", f_grau_od:"2", f_grau_oe:"2"
+      f_diag_cid:"H83.3"
     },
-    radios: {sexo:"M", regime:"1", tipo_ruido:"1", pair_bilateral:"1", pair_progressao:"2",
-             result_audiometria:"2", tipo_audiometria:"1",
+    radios: {sexo:"M", regime:"1", tipo_ruido:"1",
              afastamento_trat:"1", afastamento_result:"1",
-             alcool:"2", fumar:"1", psicofarmacos:"2", drogas:"2",
-             outros_trab:"1", encam_caps:"1", cat:"1",
+             outros_trab:"1", cat:"1",
              sintoma_zumbid:"1", sintoma_tontur:"2", sintoma_dificuldade_fala:"1", sintoma_cefaleia:"2", sintoma_outros:"2",
              exposicao_solvente_toluen:"2", exposicao_metais_pesados:"2", exposicao_medicamentos_ototo:"2", exposicao_gases_toxicos:"2", exposicao_outros:"2",
              agravo_hipertensa:"2", agravo_diabetes:"2", agravo_hansenia:"2", agravo_transtorno_men:"2", agravo_tuberculose:"2", agravo_asma:"2", agravo_outras:"2",
@@ -2999,14 +2822,11 @@ var FAKE_PATIENTS = [
       f_tempo_trab_val:"22", f_tempo_trab_tipo:"4",
       f_emp_nome:"INDUSTRIA TEXTIL BETIM SA", f_emp_cnae:"1340502",
       f_emp_uf:"MG", f_emp_mun:"BETIM",
-      f_nivel_ruido_db:"89",
-      f_diag_cid:"H83.3", f_grau_od:"3", f_grau_oe:"2"
+      f_diag_cid:"H83.3"
     },
-    radios: {sexo:"F", regime:"1", tipo_ruido:"1", pair_bilateral:"1", pair_progressao:"2",
-             result_audiometria:"2", tipo_audiometria:"1",
+    radios: {sexo:"F", regime:"1", tipo_ruido:"1",
              afastamento_trat:"2",
-             alcool:"2", fumar:"2", psicofarmacos:"2", drogas:"2",
-             outros_trab:"1", encam_caps:"1", cat:"2",
+             outros_trab:"1", cat:"2",
              sintoma_zumbid:"1", sintoma_tontur:"1", sintoma_dificuldade_fala:"1", sintoma_cefaleia:"2", sintoma_outros:"2",
              exposicao_solvente_toluen:"1", exposicao_metais_pesados:"2", exposicao_medicamentos_ototo:"2", exposicao_gases_toxicos:"2", exposicao_outros:"2",
              agravo_hipertensa:"1", agravo_diabetes:"2", agravo_hansenia:"2", agravo_transtorno_men:"2", agravo_tuberculose:"2", agravo_asma:"2", agravo_outras:"2",
@@ -3100,7 +2920,6 @@ function onAgravosOutros(){
 function _applyVisibility(){
   onSexoChange();
   onEmpTerc();
-  onFumar();
   onEvolucao();
   onCondutaOutros();
   onSintOutros();
@@ -3114,7 +2933,7 @@ function _clearForm(){
   document.querySelectorAll('.pill input:checked').forEach(function(inp){ inp.closest('.pill').click(); });
   document.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]):not(#f-import):not([readonly]), select, textarea')
     .forEach(function(el){ el.value=''; });
-  ['row_gest','box_emp_terc','box_tempo_tabaco','box_obito','box_conduta_outros','box_sint_outros','box_ototox_outros','box_agravos_outros']
+  ['row_gest','box_emp_terc','box_obito','box_conduta_outros','box_sint_outros','box_ototox_outros','box_agravos_outros']
   .forEach(function(id){ var el=document.getElementById(id); if(el) el.style.display='none'; });
   var h=document.getElementById('f_ocupacao_hint'); if(h){h.textContent='';h.style.display='none';}
   var h2=document.getElementById('f_diag_cid_hint'); if(h2){h2.textContent='';h2.style.display='none';}
