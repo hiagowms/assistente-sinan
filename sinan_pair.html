@@ -725,7 +725,7 @@ function toggleDarkMode(){
 </div>
 
 <!-- =========================================================
-  SEÇÃO 1 — DADOS DA NOTIFICAÇÃO
+  SEÇÃO 1 — DADOS GERAIS
 ========================================================= -->
 <div class="sec" id="sec1">
   <div class="sec-hdr">
@@ -807,7 +807,7 @@ function toggleDarkMode(){
 </div>
 
 <!-- =========================================================
-  SEÇÃO 2 — IDENTIFICAÇÃO DO PACIENTE
+  SEÇÃO 2 — NOTIFICAÇÃO INDIVIDUAL
 ========================================================= -->
 <div class="sec" id="sec2">
   <div class="sec-hdr">
@@ -1008,7 +1008,7 @@ function toggleDarkMode(){
 </div>
 
 <!-- =========================================================
-  SEÇÃO 4 — OCUPAÇÃO E MERCADO DE TRABALHO
+  SEÇÃO 4 — ANTECEDENTES EPIDEMIOLÓGICOS
 ========================================================= -->
 <div class="sec" id="sec4">
   <div class="sec-hdr">
@@ -1033,14 +1033,19 @@ function toggleDarkMode(){
       <div class="fld">
         <label>Situação no Mercado de Trabalho</label>
         <div class="pills" id="grp_sit_mercado" data-hidden="f_sit_mercado">
-          <label class="pill" data-val="1"><input type="radio" name="sit_mercado" value="1"> Empregado reg.</label>
-          <label class="pill" data-val="2"><input type="radio" name="sit_mercado" value="2"> Empregado n.reg.</label>
-          <label class="pill" data-val="3"><input type="radio" name="sit_mercado" value="3"> Autônomo</label>
-          <label class="pill" data-val="4"><input type="radio" name="sit_mercado" value="4"> Desempregado</label>
-          <label class="pill" data-val="5"><input type="radio" name="sit_mercado" value="5"> Aposentado</label>
-          <label class="pill" data-val="6"><input type="radio" name="sit_mercado" value="6"> Doméstico</label>
-          <label class="pill" data-val="7"><input type="radio" name="sit_mercado" value="7"> Servidor públ.</label>
-          <label class="pill" data-val="9"><input type="radio" name="sit_mercado" value="9"> Ignorado</label>
+          <label class="pill" data-val="1"><input type="radio" name="sit_mercado" value="1"> Empregado registrado com carteira assinada</label>
+          <label class="pill" data-val="2"><input type="radio" name="sit_mercado" value="2"> Empregado não registrado</label>
+          <label class="pill" data-val="3"><input type="radio" name="sit_mercado" value="3"> Autônomo/conta própria</label>
+          <label class="pill" data-val="4"><input type="radio" name="sit_mercado" value="4"> Servidor público estatutário</label>
+          <label class="pill" data-val="5"><input type="radio" name="sit_mercado" value="5"> Servidor público celetista</label>
+          <label class="pill" data-val="6"><input type="radio" name="sit_mercado" value="6"> Aposentado</label>
+          <label class="pill" data-val="7"><input type="radio" name="sit_mercado" value="7"> Desempregado</label>
+          <label class="pill" data-val="8"><input type="radio" name="sit_mercado" value="8"> Trabalho temporário</label>
+          <label class="pill" data-val="9"><input type="radio" name="sit_mercado" value="9"> Cooperativado</label>
+          <label class="pill" data-val="10"><input type="radio" name="sit_mercado" value="10"> Trabalhador avulso</label>
+          <label class="pill" data-val="11"><input type="radio" name="sit_mercado" value="11"> Empregador</label>
+          <label class="pill" data-val="12"><input type="radio" name="sit_mercado" value="12"> Outros</label>
+          <label class="pill" data-val="99"><input type="radio" name="sit_mercado" value="99"> Ignorado</label>
         </div>
         <input type="hidden" id="f_sit_mercado">
       </div>
@@ -1048,20 +1053,7 @@ function toggleDarkMode(){
 
     <div class="row">
       <div class="fld">
-        <label>Tempo de Exposição</label>
-        <div style="display:flex;gap:8px;align-items:flex-start">
-          <input type="text" id="f_tempo_exp_val" placeholder="Ex: 12" maxlength="4" style="flex:1;max-width:90px">
-          <div class="pills" id="grp_tempo_exp_tipo" data-hidden="f_tempo_exp_tipo" style="margin-top:2px">
-            <label class="pill" data-val="1"><input type="radio" name="tempo_exp_tipo" value="1"> Hora</label>
-            <label class="pill" data-val="2"><input type="radio" name="tempo_exp_tipo" value="2"> Dia</label>
-            <label class="pill" data-val="3"><input type="radio" name="tempo_exp_tipo" value="3"> Mês</label>
-            <label class="pill" data-val="4"><input type="radio" name="tempo_exp_tipo" value="4"> Ano</label>
-          </div>
-          <input type="hidden" id="f_tempo_exp_tipo">
-        </div>
-      </div>
-      <div class="fld">
-        <label>Tempo no Trabalho/Ocupação</label>
+        <label>Tempo de Trabalho na Ocupação</label>
         <div style="display:flex;gap:8px;align-items:flex-start">
           <input type="text" id="f_tempo_trab_val" placeholder="Ex: 12" maxlength="4" style="flex:1;max-width:90px">
           <div class="pills" id="grp_tempo_trab_tipo" data-hidden="f_tempo_trab_tipo" style="margin-top:2px">
@@ -1207,7 +1199,7 @@ function toggleDarkMode(){
 
     <div class="info"><span class="ico">ℹ️</span><div>Para PAIR o CID-10 mais comum é <strong>H83.3</strong> (Efeitos do ruído sobre o ouvido interno). Outros: H90.3, H90.4, H90.5 (perdas neuro-sensoriais). Digite o código ou busque por nome.</div></div>
 
-    <div class="row row-wide">
+    <div class="row">
       <div class="fld col-2">
         <label>CID-10 Específico <span class="req-star">⭐</span></label>
         <div class="ac-wrap">
@@ -1215,6 +1207,22 @@ function toggleDarkMode(){
           <div class="ac-drop" id="f_diag_cid-drop"></div>
         </div>
         <span id="f_diag_cid_hint" style="font-size:12px;color:#2563eb;margin-top:4px;display:none;line-height:1.4;font-weight:600"></span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="fld">
+        <label>Tempo de Exposição ao Agente de Risco</label>
+        <div style="display:flex;gap:8px;align-items:flex-start">
+          <input type="text" id="f_tempo_exp_val" placeholder="Ex: 12" maxlength="4" style="flex:1;max-width:90px">
+          <div class="pills" id="grp_tempo_exp_tipo" data-hidden="f_tempo_exp_tipo" style="margin-top:2px">
+            <label class="pill" data-val="1"><input type="radio" name="tempo_exp_tipo" value="1"> Hora</label>
+            <label class="pill" data-val="2"><input type="radio" name="tempo_exp_tipo" value="2"> Dia</label>
+            <label class="pill" data-val="3"><input type="radio" name="tempo_exp_tipo" value="3"> Mês</label>
+            <label class="pill" data-val="4"><input type="radio" name="tempo_exp_tipo" value="4"> Ano</label>
+          </div>
+          <input type="hidden" id="f_tempo_exp_tipo">
+        </div>
       </div>
       <div class="fld">
         <label>Regime de Tratamento</label>
@@ -1230,7 +1238,7 @@ function toggleDarkMode(){
 </div>
 
 <!-- =========================================================
-  SEÇÃO 7 — EXAMES AUDIOMÉTRICOS (PAIR-específico)
+  SEÇÃO 7 — SINTOMAS E AFASTAMENTO
 ========================================================= -->
 <div class="sec" id="sec7">
   <div class="sec-hdr">
@@ -1246,7 +1254,7 @@ function toggleDarkMode(){
     <div class="sublabel">Sintomas <small style="color:#6b7280;font-weight:400;text-transform:none;margin-left:6px">(1=Sim, 2=Não, 9=Ignorado)</small></div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin-bottom:14px">
       <div class="fld" style="margin:0">
-        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Zumbido (tinnitus)</div>
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Zumbido</div>
         <div class="pills">
           <label class="pill"><input type="radio" name="sintoma_zumbido" value="1"> Sim</label>
           <label class="pill"><input type="radio" name="sintoma_zumbido" value="2"> Não</label>
@@ -1254,7 +1262,7 @@ function toggleDarkMode(){
         </div>
       </div>
       <div class="fld" style="margin:0">
-        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Tontura/Vertigem</div>
+        <div class="sublabel" style="font-size:12px;margin-bottom:3px">Tontura</div>
         <div class="pills">
           <label class="pill"><input type="radio" name="sintoma_tontu" value="1"> Sim</label>
           <label class="pill"><input type="radio" name="sintoma_tontu" value="2"> Não</label>
@@ -1332,7 +1340,7 @@ function toggleDarkMode(){
 </div>
 
 <!-- =========================================================
-  SEÇÃO 8 — AGENTES DE EXPOSIÇÃO (PAIR-específico)
+  SEÇÃO 8 — PAIR — EXPOSIÇÃO AO RUÍDO
 ========================================================= -->
 <div class="sec" id="sec8">
   <div class="sec-hdr">
@@ -1587,12 +1595,12 @@ function toggleDarkMode(){
         <label>Evolução do Caso</label>
         <div class="pills" id="grp_evolucao" data-hidden="f_evolucao">
           <label class="pill" data-val="1"><input type="radio" name="evolucao" value="1"> Cura</label>
-          <label class="pill" data-val="2"><input type="radio" name="evolucao" value="2"> Cura não conf.</label>
-          <label class="pill" data-val="3"><input type="radio" name="evolucao" value="3"> Incap. temp.</label>
-          <label class="pill" data-val="4"><input type="radio" name="evolucao" value="4"> Incap. parc. perm.</label>
-          <label class="pill" data-val="5"><input type="radio" name="evolucao" value="5"> Incap. tot. perm.</label>
-          <label class="pill" data-val="6"><input type="radio" name="evolucao" value="6"> Óbito doença</label>
-          <label class="pill" data-val="7"><input type="radio" name="evolucao" value="7"> Óbito outra causa</label>
+          <label class="pill" data-val="2"><input type="radio" name="evolucao" value="2"> Cura não confirmada</label>
+          <label class="pill" data-val="3"><input type="radio" name="evolucao" value="3"> Incapacidade Temporária</label>
+          <label class="pill" data-val="4"><input type="radio" name="evolucao" value="4"> Incapacidade Permanente Parcial</label>
+          <label class="pill" data-val="5"><input type="radio" name="evolucao" value="5"> Incapacidade Permanente Total</label>
+          <label class="pill" data-val="6"><input type="radio" name="evolucao" value="6"> Óbito por doença relacionada ao trabalho</label>
+          <label class="pill" data-val="7"><input type="radio" name="evolucao" value="7"> Óbito por outra causa</label>
           <label class="pill" data-val="8"><input type="radio" name="evolucao" value="8"> Outro</label>
           <label class="pill" data-val="9"><input type="radio" name="evolucao" value="9"> Ignorado</label>
         </div>
