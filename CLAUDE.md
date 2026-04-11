@@ -48,6 +48,73 @@ assets/img/                 — Logos PET-Saúde
 
 Todo arquivo HTML novo deve incluir o snippet GA4 (`G-XBCCJ6GTG6`) logo após `<meta name="viewport">`.
 
+## Mapeamento AcroForm
+
+- **Fonte dos nomes AcroForm**: para cada ficha `sinan_X.html`, o arquivo `fichas/DRT_X_editavel.md` contém o mapeamento autoritativo de todos os campos AcroForm. **NUNCA tente ler o PDF binário** para descobrir campos — use o `.md` correspondente. Leitura de PDF só se o usuário solicitar explicitamente.
+- **Correspondência máxima**: o HTML deve ter exatamente os campos listados no `.md`. Campos sem AcroForm correspondente no `.md` não devem aparecer no HTML (o usuário pode preencher direto no PDF depois).
+- **Geo campos e códigos de logradouro**: os campos `residencia_geo_campo_1`, `residencia_geo_campo_2` e `residencia_logradouro_codigo` (e equivalentes em outros contextos) **nunca** devem aparecer no HTML — ficam em branco no PDF.
+
+## Comportamento de pills com valores numéricos
+
+Quando o PDF usa códigos numéricos mas o usuário deve ver rótulos descritivos:
+- **Labels no HTML**: sempre sem o número (ex: "1ºTrimestre", não "1 — 1ºTrimestre").
+- **Valor gravado no PDF**: apenas o número (ex: `1`).
+- **Padrão**: `<label class="pill" data-val="1"><input type="radio" name="..." value="1"> Rótulo descritivo</label>`.
+- Exemplos de campos com esse comportamento: Gestante, Escolaridade, Situação no Mercado de Trabalho, Evolução do Caso, Regime de Tratamento, todos os agravos, exposições, sintomas e condutas.
+
+## Gestante — opções padrão SINAN
+
+| Valor | Label no HTML |
+|---|---|
+| 1 | 1ºTrimestre |
+| 2 | 2ºTrimestre |
+| 3 | 3ºTrimestre |
+| 4 | Idade gestacional Ignorada |
+| 5 | Não |
+| 6 | Não se aplica |
+| 9 | Ignorado |
+
+## Escolaridade — opções padrão SINAN
+
+| Valor | Label no HTML |
+|---|---|
+| 0 | Analfabeto |
+| 1 | 1ª a 4ª série incompleta do EF |
+| 2 | 4ª série completa do EF |
+| 3 | 5ª à 8ª série incompleta do EF |
+| 4 | Ensino fundamental completo |
+| 5 | Ensino médio incompleto |
+| 6 | Ensino médio completo |
+| 7 | Educação superior incompleta |
+| 8 | Educação superior completa |
+| 9 | Ignorado |
+| 10 | Não se aplica |
+
+Escolaridade deve sempre ser implementada como **pills** (não select/dropdown).
+
+## Sem abreviações
+
+**Nunca abreviar** rótulos de campos, labels de pills ou textos de interface, a menos que o usuário forneça o termo já abreviado. Exemplos do que não fazer:
+- "Ign." → usar "Ignorado"
+- "N/A" → usar "Não se aplica"
+- "1º Trim" → usar "1ºTrimestre"
+- "H/D/M/A" para unidades de tempo → usar "Hora/Dia/Mês/Ano"
+- "EF" sozinho → usar nome completo "Ensino Fundamental"
+- "EM" sozinho → usar nome completo "Ensino Médio"
+
+## Unidades de tempo — padrão numérico SINAN
+
+Pills de unidade de tempo (idade, tempo de trabalho, tempo de exposição, tempo de afastamento) usam valores numéricos:
+
+| Valor | Label |
+|---|---|
+| 1 | Hora |
+| 2 | Dia |
+| 3 | Mês |
+| 4 | Ano |
+
+Ao preencher a data de nascimento, a unidade de idade é calculada automaticamente. Ao digitar manualmente no campo de idade sem unidade selecionada, "Ano" é marcado automaticamente.
+
 ## Padrão de nova ficha assistente
 
 Para criar um novo `sinan_*.html`:
