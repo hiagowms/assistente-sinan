@@ -1052,18 +1052,19 @@ function toggleDarkMode(){
     </div>
 
     <div class="row">
-      <div class="fld">
+      <div class="fld" style="max-width:120px">
         <label>Tempo de Trabalho na Ocupação</label>
-        <div style="display:flex;gap:8px;align-items:flex-start">
-          <input type="text" id="f_tempo_trab_val" placeholder="Ex: 12" maxlength="4" style="flex:1;max-width:90px">
-          <div class="pills" id="grp_tempo_trab_tipo" data-hidden="f_tempo_trab_tipo" style="margin-top:2px">
-            <label class="pill" data-val="1"><input type="radio" name="tempo_trab_tipo" value="1"> Hora</label>
-            <label class="pill" data-val="2"><input type="radio" name="tempo_trab_tipo" value="2"> Dia</label>
-            <label class="pill" data-val="3"><input type="radio" name="tempo_trab_tipo" value="3"> Mês</label>
-            <label class="pill" data-val="4"><input type="radio" name="tempo_trab_tipo" value="4"> Ano</label>
-          </div>
-          <input type="hidden" id="f_tempo_trab_tipo">
+        <input type="text" id="f_tempo_trab_val" placeholder="Ex: 12" maxlength="4">
+      </div>
+      <div class="fld">
+        <label>Unidade</label>
+        <div class="pills" id="grp_tempo_trab_tipo" data-hidden="f_tempo_trab_tipo">
+          <label class="pill" data-val="1"><input type="radio" name="tempo_trab_tipo" value="1"> Hora</label>
+          <label class="pill" data-val="2"><input type="radio" name="tempo_trab_tipo" value="2"> Dia</label>
+          <label class="pill" data-val="3"><input type="radio" name="tempo_trab_tipo" value="3"> Mês</label>
+          <label class="pill" data-val="4"><input type="radio" name="tempo_trab_tipo" value="4"> Ano</label>
         </div>
+        <input type="hidden" id="f_tempo_trab_tipo">
       </div>
     </div>
 
@@ -1211,18 +1212,19 @@ function toggleDarkMode(){
     </div>
 
     <div class="row">
-      <div class="fld">
+      <div class="fld" style="max-width:120px">
         <label>Tempo de Exposição ao Agente de Risco</label>
-        <div style="display:flex;gap:8px;align-items:flex-start">
-          <input type="text" id="f_tempo_exp_val" placeholder="Ex: 12" maxlength="4" style="flex:1;max-width:90px">
-          <div class="pills" id="grp_tempo_exp_tipo" data-hidden="f_tempo_exp_tipo" style="margin-top:2px">
-            <label class="pill" data-val="1"><input type="radio" name="tempo_exp_tipo" value="1"> Hora</label>
-            <label class="pill" data-val="2"><input type="radio" name="tempo_exp_tipo" value="2"> Dia</label>
-            <label class="pill" data-val="3"><input type="radio" name="tempo_exp_tipo" value="3"> Mês</label>
-            <label class="pill" data-val="4"><input type="radio" name="tempo_exp_tipo" value="4"> Ano</label>
-          </div>
-          <input type="hidden" id="f_tempo_exp_tipo">
+        <input type="text" id="f_tempo_exp_val" placeholder="Ex: 12" maxlength="4">
+      </div>
+      <div class="fld">
+        <label>Unidade</label>
+        <div class="pills" id="grp_tempo_exp_tipo" data-hidden="f_tempo_exp_tipo">
+          <label class="pill" data-val="1"><input type="radio" name="tempo_exp_tipo" value="1"> Hora</label>
+          <label class="pill" data-val="2"><input type="radio" name="tempo_exp_tipo" value="2"> Dia</label>
+          <label class="pill" data-val="3"><input type="radio" name="tempo_exp_tipo" value="3"> Mês</label>
+          <label class="pill" data-val="4"><input type="radio" name="tempo_exp_tipo" value="4"> Ano</label>
         </div>
+        <input type="hidden" id="f_tempo_exp_tipo">
       </div>
       <div class="fld">
         <label>Regime de Tratamento</label>
@@ -1321,18 +1323,19 @@ function toggleDarkMode(){
         </div>
         <input type="hidden" id="f_afastamento_result">
       </div>
-      <div class="fld">
+      <div class="fld" style="max-width:120px">
         <label>Tempo de Afastamento</label>
-        <div style="display:flex;gap:8px;align-items:flex-start">
-          <input type="text" id="f_tempo_afast_val" placeholder="Ex: 30" maxlength="4" style="flex:1;max-width:90px">
-          <div class="pills" id="grp_tempo_afast_tipo" data-hidden="f_tempo_afast_tipo" style="margin-top:2px">
-            <label class="pill" data-val="1"><input type="radio" name="tempo_afast_tipo" value="1"> Hora</label>
-            <label class="pill" data-val="2"><input type="radio" name="tempo_afast_tipo" value="2"> Dia</label>
-            <label class="pill" data-val="3"><input type="radio" name="tempo_afast_tipo" value="3"> Mês</label>
-            <label class="pill" data-val="4"><input type="radio" name="tempo_afast_tipo" value="4"> Ano</label>
-          </div>
-          <input type="hidden" id="f_tempo_afast_tipo">
+        <input type="text" id="f_tempo_afast_val" placeholder="Ex: 30" maxlength="4">
+      </div>
+      <div class="fld">
+        <label>Unidade</label>
+        <div class="pills" id="grp_tempo_afast_tipo" data-hidden="f_tempo_afast_tipo">
+          <label class="pill" data-val="1"><input type="radio" name="tempo_afast_tipo" value="1"> Hora</label>
+          <label class="pill" data-val="2"><input type="radio" name="tempo_afast_tipo" value="2"> Dia</label>
+          <label class="pill" data-val="3"><input type="radio" name="tempo_afast_tipo" value="3"> Mês</label>
+          <label class="pill" data-val="4"><input type="radio" name="tempo_afast_tipo" value="4"> Ano</label>
         </div>
+        <input type="hidden" id="f_tempo_afast_tipo">
       </div>
     </div>
 
