@@ -12,618 +12,7 @@
   gtag('js', new Date());
   gtag('config', 'G-XBCCJ6GTG6');
 </script>
-<style>
-/*==============================================================
-  RESET
-==============================================================*/
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f6;color:#1f2937;min-height:100vh;font-size:15px;line-height:1.5}
-
-/*==============================================================
-  STICKY HEADER + PROGRESS GAMIFICATION
-==============================================================*/
-#hdr{position:sticky;top:0;z-index:300;background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 55%,#1e40af 100%);box-shadow:0 4px 20px rgba(0,0,0,.28)}
-.hdr-row{display:flex;align-items:center;gap:12px;padding:10px 28px;max-width:1180px;margin:0 auto}
-.hdr-logo{height:38px;object-fit:contain}
-.hdr-vline{width:1px;height:32px;background:rgba(255,255,255,.2);flex-shrink:0}
-.hdr-title{flex:1;min-width:0;overflow:hidden}
-.hdr-title h1{color:#fff;font-size:16px;font-weight:700;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.hdr-title p{color:rgba(255,255,255,.65);font-size:13px;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-
-/* PROGRESS DISPLAY */
-.hdr-progress{display:flex;align-items:center;gap:16px;flex-shrink:0}
-.prog-ring-wrap{position:relative;width:72px;height:72px;flex-shrink:0}
-.prog-ring-wrap svg{transform:rotate(-90deg)}
-.prog-ring-bg{fill:none;stroke:rgba(255,255,255,.15);stroke-width:5}
-.prog-ring-fill{fill:none;stroke:#2ecc71;stroke-width:5;stroke-linecap:round;stroke-dasharray:182;stroke-dashoffset:182;transition:stroke-dashoffset .5s ease,stroke .5s ease}
-.prog-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.prog-pct{font-size:16px;font-weight:900;color:#fff;line-height:1}
-.prog-meta{text-align:right}
-.prog-meta .prog-status{font-size:13px;font-weight:700;color:rgba(255,255,255,.95);line-height:1.3}
-.prog-meta .prog-count{font-size:12px;color:rgba(255,255,255,.65);margin-top:3px}
-/* GLOBAL PROGRESS BAR STRIP */
-#prog-bar-strip{height:6px;background:rgba(255,255,255,.1);overflow:hidden;transition:background .3s}
-#prog-bar-fill{height:100%;width:0%;background:#2ecc71;transition:width .5s ease,background .5s ease;border-radius:0 4px 4px 0}
-
-/* GERAR PDF BUTTON */
-.hdr-btn{background:linear-gradient(135deg,#27ae60,#2ecc71);color:#fff;border:none;padding:12px 26px;border-radius:30px;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.2)}
-.hdr-btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.25)}
-.hdr-btn:disabled{background:#5a8870;box-shadow:none;cursor:not-allowed;transform:none}
-.hdr-back{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.85);font-size:13px;font-weight:600;text-decoration:none;padding:8px 16px;border-radius:30px;border:1.5px solid rgba(255,255,255,.3);background:rgba(255,255,255,.07);transition:all .2s;white-space:nowrap;flex-shrink:0}
-.hdr-back:hover{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.55);transform:translateX(-2px)}
-
-/* TOOLS BAR */
-#tools-bar{background:#f1f5f9;border-bottom:1px solid #dde3ec}
-.tools-inner{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 28px;max-width:1180px;margin:0 auto;flex-wrap:wrap}
-.tools-label{font-size:10.5px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.7px;margin-right:4px;flex-shrink:0}
-.tb-group{display:flex;align-items:center;gap:2px}
-.tb-sep{width:1px;height:16px;background:#cbd5e1;margin:0 6px;flex-shrink:0}
-.tb-btn{background:transparent;color:#475569;border:1px solid transparent;padding:5px 11px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .15s;line-height:1.4;display:flex;align-items:center;gap:6px}
-.tb-btn svg{flex-shrink:0;opacity:.7;transition:opacity .15s}
-.tb-btn:hover{background:#fff;color:#1e3a8a;border-color:#cbd5e1;box-shadow:0 1px 3px rgba(0,0,0,.08)}
-.tb-btn:hover svg{opacity:1}
-.tb-danger{color:#b91c1c}
-.tb-danger svg{color:#dc2626}
-.tb-danger:hover{background:#fff5f5;color:#991b1b;border-color:#fecaca;box-shadow:0 1px 3px rgba(220,38,38,.1)}
-.tb-dd{position:relative}
-.tb-menu{position:absolute;top:calc(100% + 6px);left:0;background:#fff;border:1.5px solid #e5e7eb;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.18);z-index:600;min-width:280px;overflow:hidden;display:none}
-.tb-menu.open{display:block}
-.tb-menu-hdr{padding:8px 16px 4px;font-size:10px;font-weight:800;color:#9ca3af;text-transform:uppercase;letter-spacing:.6px;background:#f9fafb;border-bottom:1px solid #f3f4f6}
-.tb-mi{padding:10px 16px;font-size:13px;color:#1f2937;cursor:pointer;border-bottom:1px solid #f3f4f6;line-height:1.4;transition:background .1s}
-.tb-mi:last-child{border-bottom:none}
-.tb-mi:hover{background:#eff6ff;color:#1e40af}
-.tb-mi-name{font-weight:700;display:block}
-.tb-mi-sub{font-size:11px;color:#6b7280;margin-top:1px}
-/* CONFIRM MODAL */
-#confirm-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9000;align-items:center;justify-content:center}
-#confirm-modal.show{display:flex}
-.cm-box{background:#fff;border-radius:16px;padding:32px;max-width:360px;width:92%;box-shadow:0 24px 64px rgba(0,0,0,.3);text-align:center}
-.cm-icon{width:48px;height:48px;background:#fee2e2;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;color:#dc2626}
-.cm-box h3{font-size:17px;font-weight:800;color:#1f2937;margin-bottom:8px}
-.cm-box p{font-size:13px;color:#6b7280;line-height:1.6;margin-bottom:22px}
-.cm-actions{display:flex;gap:10px;justify-content:center}
-.cm-cancel{background:#f3f4f6;color:#374151;border:none;padding:10px 22px;border-radius:30px;font-size:14px;font-weight:600;cursor:pointer;transition:background .15s}
-.cm-cancel:hover{background:#e5e7eb}
-.cm-ok{background:linear-gradient(135deg,#dc2626,#ef4444);color:#fff;border:none;padding:10px 22px;border-radius:30px;font-size:14px;font-weight:600;cursor:pointer;transition:opacity .15s}
-.cm-ok:hover{opacity:.88}
-
-/*==============================================================
-  LAYOUT
-==============================================================*/
-.wrapper{max-width:1180px;margin:0 auto;padding:20px 20px 60px}
-
-/* DISCLAIMER */
-.banner-warn{background:#fff3cd;border:1px solid #ffd047;border-radius:10px;padding:14px 20px;margin-bottom:20px;display:flex;gap:14px;align-items:flex-start;font-size:14px;color:#7d5a00;line-height:1.7}
-.banner-warn strong{color:#5c4200}
-
-/* INTRO */
-.intro{background:#ffffff;border-radius:14px;border:1px solid #e5e7eb;padding:20px 24px;margin-bottom:24px;display:flex;gap:18px;align-items:flex-start;font-size:14px;color:#4b5563;line-height:1.7;box-shadow:0 2px 10px rgba(0,0,0,.05)}
-.intro h2{font-size:16px;font-weight:800;color:#1f2937;margin-bottom:8px}
-.intro a{color:#2563eb}
-
-/*==============================================================
-  SECTION CARDS
-==============================================================*/
-.sec{background:#ffffff;border-radius:14px;border:1px solid #e5e7eb;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:20px;overflow:hidden}
-
-/* Section header — NOT clickable (no accordion) */
-.sec-hdr{display:flex;align-items:center;gap:14px;padding:16px 22px 14px;border-bottom:2px solid #f3f4f6;border-left:5px solid #d1d5db;transition:border-color .4s}
-.sec.done .sec-hdr{border-left-color:#27ae60;background:linear-gradient(90deg,rgba(39,174,96,.04) 0%,transparent 60%)}
-.sec.partial .sec-hdr{border-left-color:#f39c12;background:linear-gradient(90deg,rgba(243,156,18,.04) 0%,transparent 60%)}
-.sec-num{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;background:#6b7280;transition:background .4s}
-.sec.done .sec-num{background:#27ae60}
-.sec.partial .sec-num{background:#f39c12}
-.sec-info{flex:1}
-.sec-info h3{font-size:16px;font-weight:700;color:#1f2937}
-.sec-info p{font-size:13px;color:#9ca3af;margin-top:3px}
-.sec-badge{font-size:13px;font-weight:700;padding:5px 12px;border-radius:20px;letter-spacing:.3px;white-space:nowrap;transition:all .4s}
-.badge-empty{background:#f3f4f6;color:#6b7280}
-.badge-partial{background:#fef9e7;color:#c07000}
-.badge-done{background:#e8f5e9;color:#1e8449}
-
-.sec-body{padding:20px 22px 22px}
-
-/*==============================================================
-  FORM ELEMENTS
-==============================================================*/
-.row{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-bottom:14px}
-.row.row-wide{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
-.row.row-full{grid-template-columns:1fr}
-.col-2{grid-column:span 2}
-.col-3{grid-column:span 3}
-
-.fld{display:flex;flex-direction:column;gap:5px}
-.fld label{font-size:13px;font-weight:700;color:#374151;line-height:1.4;white-space:nowrap}
-.fld label .req{color:#c0392b;font-size:15px;line-height:1}
-.fld label .cn{font-size:11px;color:#9ca3af;font-weight:600;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;vertical-align:middle}
-.fld label .cn .tip-wrap{margin-left:0;vertical-align:unset}
-.fld input,.fld select,.fld textarea{padding:11px 14px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:15px;font-family:inherit;background:#f9fafb;color:#1f2937;outline:none;transition:border-color .15s,box-shadow .15s;width:100%}
-.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
-.fld input.filled{border-color:#27ae60}
-.fld input.error,.fld select.error{border-color:#e74c3c!important;box-shadow:0 0 0 3px rgba(231,76,60,.1)!important}
-.fld select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239ca3af'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;cursor:pointer}
-.fld textarea{resize:vertical;min-height:80px}
-
-/* Sublabel dentro de seção */
-.sublabel{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;color:#4b5563;padding:16px 0 10px;border-bottom:1px solid #e5e7eb;margin-bottom:14px;display:flex;align-items:center;gap:6px}
-.sublabel .req-mark{color:#c0392b;font-size:14px;font-weight:700}
-
-/* Botão copiar data */
-.btn-copy-date{padding:9px 14px;background:#eff6ff;border:1.5px solid #e5e7eb;border-radius:8px;font-size:12px;font-weight:700;color:#2563eb;cursor:pointer;white-space:nowrap;transition:background .15s,border-color .15s}
-.btn-copy-date:hover{background:#dbeafe;border-color:#93c5fd}
-
-/*==============================================================
-  PILLS (radio / checkbox)
-==============================================================*/
-.pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:2px}
-.pill{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:8px;border:1.5px solid #e5e7eb;cursor:pointer;font-size:14px;font-weight:600;color:#374151;background:#ffffff;transition:all .15s;user-select:none}
-.pill:hover{border-color:#2563eb;background:#eff6ff}
-.pill input{position:absolute;opacity:0;pointer-events:none;width:0;height:0}
-.pill.checked{border-color:#2563eb;background:#eff6ff;color:#1e40af}
-.pill.checked-danger{border-color:#e74c3c;background:#fdf2f2;color:#c0392b}
-
-/*==============================================================
-  INFO / WARN / DANGER BOXES
-==============================================================*/
-.info{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:12px 16px;font-size:14px;color:#1e40af;line-height:1.7;margin-bottom:14px;display:flex;gap:12px}
-.info .ico{flex-shrink:0;font-size:18px;line-height:1.4}
-.warn{background:#fef9e7;border:1px solid #f9e79f;border-radius:8px;padding:12px 16px;font-size:14px;color:#7d6608;line-height:1.7;margin-bottom:14px;display:flex;gap:12px}
-.danger-alert{background:#fdf2f2;border:1.5px solid #f5b7b1;border-radius:8px;padding:14px 16px;font-size:14px;color:#922b21;line-height:1.7;margin-bottom:14px;display:none;gap:12px}
-.danger-alert .ico{flex-shrink:0;font-size:18px;line-height:1.3}
-
-/*==============================================================
-  TOAST
-==============================================================*/
-#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(10px);padding:12px 24px;border-radius:30px;font-size:13px;font-weight:700;opacity:0;transition:all .35s;z-index:800;pointer-events:none;white-space:nowrap;box-shadow:0 8px 28px rgba(0,0,0,.25);background:#1f2937;color:#fff}
-#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-#toast.t-ok{background:#1e8449}
-#toast.t-warn{background:#c07000}
-#toast.t-err{background:#c0392b}
-#toast.t-mile{background:linear-gradient(135deg,#2563eb,#1e8449)}
-
-/*==============================================================
-  VALIDATION MODAL
-==============================================================*/
-.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:900;align-items:center;justify-content:center}
-.ov.show{display:flex}
-.modal{background:#ffffff;border-radius:18px;padding:28px 32px;max-width:460px;width:94%;box-shadow:0 20px 60px rgba(0,0,0,.2)}
-.modal-ico{font-size:40px;text-align:center;margin-bottom:10px}
-.modal h2{font-size:17px;font-weight:800;color:#1f2937;margin-bottom:8px;text-align:center}
-.modal p{font-size:13px;color:#6b7280;line-height:1.6;text-align:center}
-.err-list{margin-top:14px;display:flex;flex-direction:column;gap:5px;max-height:280px;overflow-y:auto}
-.err-item{background:#fef3f2;border:1px solid #f5b7b1;border-radius:6px;padding:7px 12px;font-size:12px;color:#922b21}
-.modal-actions{display:flex;justify-content:center;gap:10px;margin-top:22px}
-.mbtn{padding:10px 28px;border-radius:30px;font-size:13px;font-weight:700;cursor:pointer;border:none}
-.mbtn-p{background:linear-gradient(135deg,#2563eb,#1e8449);color:#fff}
-.mbtn-s{background:#f3f4f6;color:#6b7280}
-
-/*==============================================================
-  AUTOCOMPLETE (municipio / CID10)
-==============================================================*/
-.ac-wrap{position:relative}
-.ac-drop{position:absolute;top:100%;left:0;right:0;z-index:500;background:#ffffff;border:1.5px solid #2563eb;border-top:none;border-radius:0 0 8px 8px;box-shadow:0 6px 20px rgba(0,0,0,.15);max-height:220px;overflow-y:auto;display:none}
-.ac-drop.show{display:block}
-.ac-item{padding:10px 14px;font-size:14px;cursor:pointer;border-bottom:1px solid #f3f4f6;line-height:1.5;overflow:hidden;text-overflow:ellipsis}
-.ac-item.ac-synonym{background:#fef9e7;border-left:3px solid #f39c12}
-.ac-item:last-child{border-bottom:none}
-.ac-item:hover,.ac-item.focused{background:#eff6ff}
-.ac-item b{color:#2563eb}
-.fld input[readonly]{background:#f3f4f6;color:#6b7280;cursor:default}
-
-/* ⭐ CAMPO ESSENCIAL — discreto */
-.req-star{color:#d97706;font-size:10px;line-height:1;vertical-align:middle;margin-left:2px;opacity:.7;cursor:help;position:relative}
-.sublabel .req-star{font-size:10px;margin-left:3px}
-/* Tooltip "Campo essencial" ao hover/foco na estrela */
-.req-star::after{content:'Campo essencial';position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#1e293b;color:#cbd5e1;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;z-index:9999;box-shadow:0 3px 12px rgba(0,0,0,.3)}
-.req-star:hover::after,.req-star:focus::after{opacity:1}
-/* Ocultar estilos antigos de obrigatório */
-.fld label .req{display:none!important}
-.sublabel .req-mark{display:none!important}
-
-/* NÍVEL DE PROGRESSO */
-.prog-level{font-size:11px;font-weight:800;padding:3px 10px;border-radius:12px;background:rgba(255,255,255,.13);color:rgba(255,255,255,.85);white-space:nowrap;transition:all .5s;letter-spacing:.3px;margin-top:4px;display:inline-block}
-
-/* TOOLTIP DE PROPÓSITO (ícone i) */
-.tip-wrap{position:relative;display:inline-flex;align-items:center;margin-left:4px;vertical-align:middle}
-.tip-btn{width:18px;height:18px;border-radius:50%;background:#0056b3;border:none;font-size:11px;font-weight:800;color:#fff;cursor:pointer;padding:0;display:inline-flex;align-items:center;justify-content:center;line-height:1;flex-shrink:0;transition:background .15s,box-shadow .15s;font-style:italic}
-.tip-btn:hover,.tip-btn.open{background:#003d82;box-shadow:0 0 0 3px rgba(0,86,179,.22)}
-
-.tip-pop{
-  display:none;
-  position:fixed; /* JS sobrescreve coordenadas — fixed escapa de overflow:hidden */
-  background:#1e293b;color:#cbd5e1;
-  font-size:12px;font-weight:400;line-height:1.6;
-  padding:12px 14px;border-radius:10px;
-  box-shadow:0 6px 28px rgba(0,0,0,.45);
-  z-index:9999;text-align:left;
-  pointer-events:none;font-style:normal;
-  white-space:normal;
-  --tip-arrow-left:50%
-}
-/* Seta apontando para baixo (tooltip acima do botão — padrão) */
-.tip-pop::after{
-  content:'';position:absolute;
-  top:100%;
-  left:var(--tip-arrow-left);
-  transform:translateX(-50%);
-  border:7px solid transparent;
-  border-top-color:#1e293b
-}
-/* Seta apontando para cima (tooltip abaixo do botão) */
-.tip-pop[data-arrow-below="0"]::after{
-  top:auto;bottom:100%;
-  border-top-color:transparent;
-  border-bottom-color:#1e293b
-}
-.tip-pop b{color:#93c5fd;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.4px}
-.tip-r{display:block}
-.tip-r+.tip-r{margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.1)}
-
-/* ANIMAÇÃO 80% */
-@keyframes celebrate80{0%{transform:scale(1)}25%{transform:scale(1.18)}60%{transform:scale(.93)}100%{transform:scale(1)}}
-.prog-ring-wrap.celebrate{animation:celebrate80 .55s ease}
-
-/*==============================================================
-  MOBILE BOTTOM BAR — oculta no desktop, visível no mobile
-==============================================================*/
-#mob-bottom{display:none}
-
-/* BOTTOM SHEET MOBILE — menu de pacientes (fix iOS Safari) */
-#pac-mob-sheet{display:none;position:fixed;inset:0;z-index:2000}
-#pac-mob-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.45)}
-#pac-mob-panel{position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:18px 18px 0 0;max-height:65vh;overflow-y:auto;box-shadow:0 -6px 32px rgba(0,0,0,.22);-webkit-overflow-scrolling:touch}
-#pac-mob-panel .tb-menu-hdr{padding:14px 18px 6px;font-size:11px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:.7px;background:#f9fafb;border-bottom:1px solid #f3f4f6;position:sticky;top:0;z-index:1}
-#pac-mob-panel .tb-mi{padding:13px 18px;font-size:14px;color:#1f2937;cursor:pointer;border-bottom:1px solid #f3f4f6;line-height:1.4;transition:background .1s}
-#pac-mob-panel .tb-mi:last-child{border-bottom:none}
-#pac-mob-panel .tb-mi:hover{background:#eff6ff;color:#1e40af}
-#pac-mob-panel .tb-mi-name{font-weight:700;display:block}
-#pac-mob-panel .tb-mi-sub{font-size:12px;color:#6b7280;margin-top:2px}
-#pac-mob-sheet.show{display:block}
-
-/*==============================================================
-  MOBILE RESPONSIVE — @media max-width:768px
-  Todas as regras abaixo NÃO afetam o layout desktop
-==============================================================*/
-@media(max-width:768px){
-
-  /* ── HEADER ────────────────────────────────────────────── */
-  .hdr-row{padding:8px 14px;gap:8px;flex-wrap:nowrap}
-  .hdr-logo{height:26px}
-  .hdr-vline{display:none}
-  .hdr-title h1{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px}
-  .hdr-title p{display:none}
-
-  /* Progress ring — reduzido */
-  .hdr-progress{gap:8px}
-  .prog-ring-wrap{width:42px;height:42px}
-  .prog-ring-wrap svg{width:42px;height:42px}
-  .prog-pct{font-size:11px;font-weight:800}
-  .prog-meta{display:none}
-
-  /* Botão PDF e botão Voltar — escondidos no header (movidos para barra inferior) */
-  .hdr-btn{display:none}
-  .hdr-back{display:none}
-
-  /* ── TOOLS BAR ─────────────────────────────────────────── */
-  .tools-inner{
-    padding:5px 10px;gap:3px;
-    flex-wrap:nowrap;overflow-x:auto;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none
-  }
-  .tools-inner::-webkit-scrollbar{display:none}
-  .tools-label{display:none}
-  .tb-sep{display:none}
-  .tb-group{gap:3px}
-  .tb-btn{padding:7px 10px;font-size:12px;min-height:36px;white-space:nowrap}
-
-  /* Dropdown paciente: desabilitado no mobile — usa bottom sheet (#pac-mob-sheet) */
-  .tb-menu{ display:none!important }
-
-  /* ── LAYOUT ─────────────────────────────────────────────── */
-  .wrapper{padding:12px 12px 76px}
-
-  /* ── SEÇÕES ─────────────────────────────────────────────── */
-  .sec{border-radius:10px;margin-bottom:10px}
-  .sec-hdr{padding:12px 14px;gap:10px}
-  .sec-body{padding:14px 12px 16px}
-  .sec-num{width:28px;height:28px;font-size:12px}
-  .sec-info h3{font-size:14px}
-  .sec-info p{font-size:11px}
-  .sec-badge{font-size:11px;padding:3px 8px}
-
-  /* ── GRADE DE FORMULÁRIO — coluna única ─────────────────── */
-  .row{grid-template-columns:1fr!important;gap:10px;margin-bottom:10px}
-  .row.row-wide{grid-template-columns:1fr!important}
-  .col-2,.col-3{grid-column:span 1!important}
-
-  /* ── CAMPOS ─────────────────────────────────────────────── */
-  /* font-size 16px evita o zoom automático do iOS */
-  .fld input,.fld select,.fld textarea{
-    font-size:16px!important;
-    padding:11px 13px;
-    min-height:46px
-  }
-  .fld label{font-size:12px}
-  .fld label .cn{font-size:10px}
-  .sublabel{font-size:11px;padding:10px 0 7px;letter-spacing:.4px}
-
-  /* ── PILLS ──────────────────────────────────────────────── */
-  .pills{gap:7px}
-  .pill{padding:10px 14px;font-size:14px;min-height:44px;border-radius:8px}
-
-  /* ── CAIXAS INFO / ALERTA ───────────────────────────────── */
-  .info,.warn,.danger-alert{font-size:13px;padding:10px 12px}
-  .banner-warn{font-size:13px;padding:12px 14px}
-  .intro{flex-direction:column;padding:14px 14px;font-size:13px}
-  .intro h2{font-size:14px}
-
-  /* ── MODAIS ─────────────────────────────────────────────── */
-  .modal{padding:20px 18px;border-radius:14px}
-  .cm-box{padding:22px 18px}
-  .cm-actions{flex-direction:column;gap:8px}
-  .cm-cancel,.cm-ok{width:100%;padding:13px}
-
-  /* ── AUTOCOMPLETE ───────────────────────────────────────── */
-  .ac-drop{max-height:180px}
-  .ac-item{padding:12px 14px;font-size:14px;min-height:44px;display:flex;align-items:center}
-
-  /* ── TOAST ──────────────────────────────────────────────── */
-  #toast{
-    font-size:12px;padding:10px 16px;
-    max-width:88vw;white-space:normal;
-    text-align:center;bottom:70px
-  }
-
-  /* ── BARRA INFERIOR MOBILE ──────────────────────────────── */
-  #mob-bottom{
-    display:flex!important;
-    position:fixed;bottom:0;left:0;right:0;
-    z-index:400;height:58px;
-    background:#fff;
-    border-top:1px solid #e2e8f0;
-    box-shadow:0 -4px 20px rgba(0,0,0,.1);
-    align-items:center;justify-content:space-between;
-    padding:0 12px;gap:8px
-  }
-  #mob-back-btn{
-    display:flex;align-items:center;gap:5px;
-    color:#475569;font-size:12px;font-weight:600;
-    text-decoration:none;padding:8px 11px;
-    border-radius:7px;border:1px solid #e2e8f0;
-    background:#f8fafc;white-space:nowrap;flex-shrink:0
-  }
-  #mob-prog-wrap{
-    flex:1;display:flex;flex-direction:column;
-    align-items:center;justify-content:center;gap:1px
-  }
-  #mob-prog-pct{
-    font-size:15px;font-weight:800;color:#1f2937;line-height:1
-  }
-  #mob-prog-label{
-    font-size:10px;color:#94a3b8;font-weight:600;
-    text-transform:uppercase;letter-spacing:.5px
-  }
-  #mob-pdf-btn{
-    display:flex;align-items:center;gap:6px;
-    background:linear-gradient(135deg,#27ae60,#2ecc71);
-    color:#fff;border:none;padding:10px 15px;
-    border-radius:8px;font-size:13px;font-weight:700;
-    cursor:pointer;white-space:nowrap;flex-shrink:0;
-    box-shadow:0 2px 8px rgba(39,174,96,.35)
-  }
-  #mob-pdf-btn:disabled{
-    background:#8fb8a0;box-shadow:none;cursor:not-allowed
-  }
-}
-
-/*==============================================================
-  DARK MODE TOGGLE
-==============================================================*/
-.dm-toggle{background:none;border:1.5px solid rgba(255,255,255,.25);color:rgba(255,255,255,.85);width:34px;height:34px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,border-color .2s;padding:0}
-.dm-toggle:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.45)}
-.dm-toggle svg{width:18px;height:18px}
-.dm-toggle .ico-sun{display:none}
-.dm-toggle .ico-moon{display:block}
-
-/*==============================================================
-  DARK MODE — [data-theme="dark"]
-==============================================================*/
-[data-theme="dark"]{
-  --bg:       #0f1117;
-  --bg-card:  #1a1d27;
-  --bg-card2: #222633;
-  --bg-input: #1e2130;
-  --border:   #2d3348;
-  --text:     #e2e4eb;
-  --text2:    #9ea3b5;
-  --text3:    #6b7190;
-  --accent:   #3b82f6;
-  --accent-bg:rgba(59,130,246,.12);
-  --green:    #22c55e;
-  --red:      #ef4444;
-  --yellow:   #eab308;
-  --warn-bg:  #2a2518;
-  --warn-border:#5c4a1e;
-  --warn-text:#d4a017;
-  --danger-bg:#2d1a1a;
-  --danger-border:#6b2a2a;
-  --danger-text:#f87171;
-}
-[data-theme="dark"] .dm-toggle .ico-sun{display:block}
-[data-theme="dark"] .dm-toggle .ico-moon{display:none}
-
-[data-theme="dark"] body{background:var(--bg);color:var(--text)}
-
-/* Header — mantém gradiente mas ajusta opacidade */
-[data-theme="dark"] #hdr{box-shadow:0 4px 20px rgba(0,0,0,.5)}
-[data-theme="dark"] #prog-bar-strip{background:rgba(255,255,255,.06)}
-
-/* Tools bar */
-[data-theme="dark"] #tools-bar{background:var(--bg-card);border-bottom-color:var(--border)}
-[data-theme="dark"] .tools-label{color:var(--text3)}
-[data-theme="dark"] .tb-sep{background:var(--border)}
-[data-theme="dark"] .tb-btn{color:var(--text2)}
-[data-theme="dark"] .tb-btn:hover{background:var(--bg-card2);color:var(--accent);border-color:var(--border)}
-[data-theme="dark"] #btn-pac-menu{background:var(--accent-bg)!important;border-color:rgba(59,130,246,.3)!important;color:#93c5fd!important}
-[data-theme="dark"] .tb-danger{color:#f87171}
-[data-theme="dark"] .tb-danger:hover{background:var(--danger-bg);color:#fca5a5;border-color:var(--danger-border)}
-
-/* Sections */
-[data-theme="dark"] .sec{background:var(--bg-card);border-color:var(--border);box-shadow:0 2px 12px rgba(0,0,0,.2)}
-[data-theme="dark"] .sec-hdr{border-bottom-color:var(--border);border-left-color:var(--text3)}
-[data-theme="dark"] .sec.done .sec-hdr{border-left-color:var(--green);background:linear-gradient(90deg,rgba(34,197,94,.06) 0%,transparent 60%)}
-[data-theme="dark"] .sec.partial .sec-hdr{border-left-color:var(--yellow);background:linear-gradient(90deg,rgba(234,179,8,.06) 0%,transparent 60%)}
-[data-theme="dark"] .sec-info h3{color:var(--text)}
-[data-theme="dark"] .sec-info p{color:var(--text3)}
-[data-theme="dark"] .badge-empty{background:var(--bg-card2);color:var(--text3)}
-[data-theme="dark"] .badge-partial{background:#2a2518;color:#eab308}
-[data-theme="dark"] .badge-done{background:#162816;color:#4ade80}
-
-/* Form elements */
-[data-theme="dark"] .fld label{color:var(--text2)}
-[data-theme="dark"] .fld label .cn{color:var(--text3)}
-[data-theme="dark"] .fld input,[data-theme="dark"] .fld select,[data-theme="dark"] .fld textarea{background-color:var(--bg-input);border-color:var(--border);color:var(--text)}
-[data-theme="dark"] .fld input:focus,[data-theme="dark"] .fld select:focus,[data-theme="dark"] .fld textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,130,246,.15)}
-[data-theme="dark"] .fld input.filled{border-color:var(--green)}
-[data-theme="dark"] .fld input[readonly]{background-color:var(--bg-card2);color:var(--text3)}
-[data-theme="dark"] .fld select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236b7190'/%3E%3C/svg%3E")}
-[data-theme="dark"] .sublabel{color:var(--text2);border-bottom-color:var(--border)}
-[data-theme="dark"] .btn-copy-date{background:var(--accent-bg);border-color:rgba(59,130,246,.3);color:#60a5fa}
-[data-theme="dark"] .btn-copy-date:hover{background:rgba(59,130,246,.2);border-color:rgba(59,130,246,.5)}
-
-/* Pills */
-[data-theme="dark"] .pill{background:var(--bg-card2);border-color:var(--border);color:var(--text2)}
-[data-theme="dark"] .pill:hover{border-color:var(--accent);background:var(--accent-bg)}
-[data-theme="dark"] .pill.checked{border-color:var(--accent);background:var(--accent-bg);color:#93c5fd}
-[data-theme="dark"] .pill.checked-danger{border-color:#dc2626;background:var(--danger-bg);color:#fca5a5}
-
-/* Info/warn/danger boxes */
-[data-theme="dark"] .info{background:var(--accent-bg);border-color:rgba(59,130,246,.25);color:#93c5fd}
-[data-theme="dark"] .warn{background:var(--warn-bg);border-color:var(--warn-border);color:var(--warn-text)}
-[data-theme="dark"] .banner-warn{background:var(--warn-bg);border-color:var(--warn-border);color:var(--warn-text)}
-[data-theme="dark"] .banner-warn strong{color:#eab308}
-[data-theme="dark"] .danger-alert{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger-text)}
-[data-theme="dark"] .intro{background:var(--bg-card);border-color:var(--border);color:var(--text2)}
-[data-theme="dark"] .intro h2{color:var(--text)}
-[data-theme="dark"] .intro a{color:#60a5fa}
-
-/* Autocomplete */
-[data-theme="dark"] .ac-drop{background:var(--bg-card);border-color:var(--accent)}
-[data-theme="dark"] .ac-item{color:var(--text);border-bottom-color:var(--border)}
-[data-theme="dark"] .ac-item:hover,[data-theme="dark"] .ac-item.focused{background:var(--accent-bg)}
-[data-theme="dark"] .ac-item.ac-synonym{background:#2a2518;border-left-color:#eab308}
-[data-theme="dark"] .ac-item b{color:#60a5fa}
-
-/* Tooltips */
-[data-theme="dark"] .tip-btn{background:#1e40af;color:#fff}
-[data-theme="dark"] .tip-btn:hover,[data-theme="dark"] .tip-btn.open{background:#1d4ed8;box-shadow:0 0 0 3px rgba(59,130,246,.28)}
-
-/* Modals */
-[data-theme="dark"] .modal{background:var(--bg-card);box-shadow:0 20px 60px rgba(0,0,0,.5)}
-[data-theme="dark"] .modal h2{color:var(--text)}
-[data-theme="dark"] .modal p{color:var(--text2)}
-[data-theme="dark"] .err-item{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger-text)}
-[data-theme="dark"] .mbtn-s{background:var(--bg-card2);color:var(--text2)}
-[data-theme="dark"] .ov{background:rgba(0,0,0,.7)}
-
-/* Confirm modal */
-[data-theme="dark"] .cm-box{background:var(--bg-card)}
-[data-theme="dark"] .cm-box h3{color:var(--text)}
-[data-theme="dark"] .cm-box p{color:var(--text2)}
-[data-theme="dark"] .cm-icon{background:var(--danger-bg)}
-[data-theme="dark"] .cm-cancel{background:var(--bg-card2);color:var(--text2)}
-
-/* Toast */
-[data-theme="dark"] #toast{background:#2d3348;box-shadow:0 8px 28px rgba(0,0,0,.4)}
-
-/* Bottom sheet */
-[data-theme="dark"] #pac-mob-panel{background:var(--bg-card)}
-[data-theme="dark"] #pac-mob-panel .tb-menu-hdr{background:var(--bg-card2);color:var(--text3);border-bottom-color:var(--border)}
-[data-theme="dark"] #pac-mob-panel .tb-mi{color:var(--text);border-bottom-color:var(--border)}
-[data-theme="dark"] #pac-mob-panel .tb-mi:hover{background:var(--accent-bg);color:#93c5fd}
-[data-theme="dark"] #pac-mob-panel .tb-mi-sub{color:var(--text3)}
-
-/* Desktop dropdown menu */
-[data-theme="dark"] .tb-menu{background:var(--bg-card);border-color:var(--border);box-shadow:0 8px 28px rgba(0,0,0,.4)}
-[data-theme="dark"] .tb-menu-hdr{background:var(--bg-card2);color:var(--text3);border-bottom-color:var(--border)}
-[data-theme="dark"] .tb-mi{color:var(--text);border-bottom-color:var(--border)}
-[data-theme="dark"] .tb-mi:hover{background:var(--accent-bg);color:#93c5fd}
-[data-theme="dark"] .tb-mi-sub{color:var(--text3)}
-
-/* Mobile bottom bar */
-[data-theme="dark"] #mob-bottom{background:var(--bg-card);border-top-color:var(--border);box-shadow:0 -4px 20px rgba(0,0,0,.3)}
-[data-theme="dark"] #mob-back-btn{color:var(--text2);border-color:var(--border);background:var(--bg-card2)}
-[data-theme="dark"] #mob-prog-pct{color:var(--text)}
-[data-theme="dark"] #mob-prog-label{color:var(--text3)}
-
-/* Star tooltip in dark mode */
-[data-theme="dark"] .req-star::after{background:#334155;color:#e2e4eb}
-
-/* TRANSFER BUTTON */
-.hdr-btn-transfer{background:rgba(255,255,255,.1);color:rgba(255,255,255,.9);border:1.5px solid rgba(255,255,255,.28);padding:8px 14px;border-radius:30px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s;display:flex;align-items:center;gap:6px;flex-shrink:0}
-.hdr-btn-transfer:not(.btn-disabled):hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);transform:translateY(-1px)}
-.hdr-btn-transfer.btn-disabled{opacity:.38;cursor:not-allowed}
-@media(max-width:768px){.hdr-btn-transfer{display:none}}
-/* Oculta metadados do anel em telas médias para liberar espaço ao título */
-@media(max-width:1200px){.prog-meta{display:none}}
-
-/* TRANSFER FICHA OPTIONS */
-.transfer-ficha-opt{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:10px;border:2px solid #e5e7eb;cursor:pointer;transition:all .15s;user-select:none}
-.transfer-ficha-opt:hover{border-color:#93c5fd;background:#f0f9ff}
-.transfer-ficha-opt.selected{border-color:#2563eb;background:#eff6ff}
-.transfer-ficha-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
-.transfer-ficha-name{font-size:14px;font-weight:700;color:#1f2937;display:block}
-.transfer-ficha-sub{font-size:12px;color:#6b7280}
-[data-theme="dark"] .transfer-ficha-opt{border-color:var(--border);background:transparent}
-[data-theme="dark"] .transfer-ficha-opt:hover{border-color:#3b82f6;background:var(--accent-bg)}
-[data-theme="dark"] .transfer-ficha-opt.selected{border-color:#3b82f6;background:var(--accent-bg)}
-[data-theme="dark"] .transfer-ficha-name{color:var(--text)}
-[data-theme="dark"] .transfer-ficha-sub{color:var(--text3)}
-
-/* === UNIDADE NOTIFICADORA - CADEADO PERSISTENTE ========================= */
-.lock-grp{border:1.5px solid #f59e0b;border-radius:10px;padding:14px 0 14px 14px;margin:0 0 14px;background:#fffbeb;transition:border-color .3s,background .3s}
-.lock-grp.locked{border-color:#22c55e;background:#f0fdf4}
-.lock-inner{display:flex;align-items:stretch;gap:0}
-.lock-fields{flex:1;min-width:0}
-.lock-rail{display:flex;flex-direction:column;align-items:center;width:50px;flex-shrink:0;padding:3px 0}
-.lock-seg{width:2px;flex:1;border-radius:1px;min-height:16px;transition:all .3s}
-.lock-grp:not(.locked) .lock-seg{background:rgba(245,158,11,.3)}
-.lock-grp.locked .lock-seg{background:rgba(34,197,94,.45)}
-.lock-btn-rail{width:36px;height:36px;border-radius:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0;transition:all .2s;margin:5px 0}
-.lock-grp:not(.locked) .lock-btn-rail{border:1.5px dashed #d97706;background:transparent;color:#d97706}
-.lock-grp:not(.locked) .lock-btn-rail:hover{background:#fef3c7;border-style:solid;box-shadow:0 2px 8px rgba(217,119,6,.2)}
-.lock-grp.locked .lock-btn-rail{border:2px solid #16a34a;background:#dcfce7;color:#15803d;box-shadow:0 1px 4px rgba(22,163,74,.18)}
-.lock-grp.locked .lock-btn-rail:hover{background:#bbf7d0}
-.lock-ico-open{display:block}
-.lock-ico-closed{display:none}
-.lock-grp.locked .lock-ico-open{display:none}
-.lock-grp.locked .lock-ico-closed{display:block}
-.lock-hint{display:flex;align-items:flex-start;gap:8px;font-size:11.5px;line-height:1.55;padding:7px 11px;margin-bottom:10px;border-radius:6px;border:1px solid;transition:all .3s}
-.lock-grp:not(.locked) .lock-hint{background:#fef9c3;border-color:#fde68a;color:#92400e}
-.lock-grp.locked .lock-hint{background:#f0fdf4;border-color:#bbf7d0;color:#166534}
-.lock-grp.locked input:not([type="hidden"]):not([type="date"]),
-.lock-grp.locked select{background:#f0fdf4!important;color:#166534!important;border-color:#bbf7d0!important;pointer-events:none;cursor:default}
-.lock-grp.locked .pill{pointer-events:none}
-.lock-grp.locked .pill input{pointer-events:none}
-[data-theme="dark"] .lock-grp{border-color:#b45309;background:rgba(120,53,15,.15)}
-[data-theme="dark"] .lock-grp.locked{border-color:#16a34a;background:rgba(22,101,52,.15)}
-[data-theme="dark"] .lock-grp:not(.locked) .lock-seg{background:rgba(217,119,6,.28)}
-[data-theme="dark"] .lock-grp.locked .lock-seg{background:rgba(22,163,74,.32)}
-[data-theme="dark"] .lock-grp:not(.locked) .lock-btn-rail{border-color:#d97706;color:#d97706}
-[data-theme="dark"] .lock-grp:not(.locked) .lock-btn-rail:hover{background:rgba(217,119,6,.12)}
-[data-theme="dark"] .lock-grp.locked .lock-btn-rail{border-color:#16a34a;background:rgba(22,163,74,.18);color:#4ade80}
-[data-theme="dark"] .lock-grp.locked .lock-btn-rail:hover{background:rgba(22,163,74,.28)}
-[data-theme="dark"] .lock-grp:not(.locked) .lock-hint{background:rgba(120,53,15,.22);border-color:#92400e;color:#fbbf24}
-[data-theme="dark"] .lock-grp.locked .lock-hint{background:rgba(22,101,52,.2);border-color:#16a34a;color:#4ade80}
-[data-theme="dark"] .lock-grp.locked input:not([type="hidden"]):not([type="date"]),
-[data-theme="dark"] .lock-grp.locked select{background:rgba(22,101,52,.22)!important;color:#4ade80!important;border-color:#16a34a!important}
-@media(max-width:768px){.lock-grp{padding:11px 0 11px 10px}.lock-rail{width:42px}.lock-btn-rail{width:32px;height:32px}}
-.lock-tipo-warn{display:flex;align-items:flex-start;gap:8px;font-size:11.5px;line-height:1.55;padding:7px 11px;margin-bottom:10px;border-radius:6px;border:1px solid #fca5a5;background:#fff1f2;color:#991b1b}
-.lock-tipo-warn strong{color:#7f1d1d}
-[data-theme="dark"] .lock-tipo-warn{background:rgba(153,27,27,.18);border-color:#7f1d1d;color:#fca5a5}
-[data-theme="dark"] .lock-tipo-warn strong{color:#fca5a5}
-</style>
+<link rel="stylesheet" href="shared.css">
 </head>
 <body>
 <script>
@@ -850,10 +239,10 @@ function toggleDarkMode(){
       <div class="fld" style="max-width:130px">
         <label>Unidade</label>
         <div class="pills" id="grp_idade_un" data-hidden="f_idade_un">
-          <label class="pill" data-val="H"><input type="radio" name="idade_un" value="H"> H — Hora</label>
-          <label class="pill" data-val="D"><input type="radio" name="idade_un" value="D"> D — Dia</label>
-          <label class="pill" data-val="M"><input type="radio" name="idade_un" value="M"> M — Mês</label>
-          <label class="pill" data-val="A"><input type="radio" name="idade_un" value="A"> A — Ano</label>
+          <label class="pill" data-val="1"><input type="radio" name="idade_un" value="1"> Hora</label>
+          <label class="pill" data-val="2"><input type="radio" name="idade_un" value="2"> Dia</label>
+          <label class="pill" data-val="3"><input type="radio" name="idade_un" value="3"> Mês</label>
+          <label class="pill" data-val="4"><input type="radio" name="idade_un" value="4"> Ano</label>
         </div>
         <input type="hidden" id="f_idade_un">
       </div>
@@ -1567,1003 +956,41 @@ function toggleDarkMode(){
 <!-- tb_cnae.js carregado apenas nas fichas DRT (Saude do Trabalhador) -->
 <script src="lib/pdf-lib.min.js"></script>
 <script>
-/*==========================================================
-  CAPS LOCK + SEM ACENTO (todos inputs com data-caps)
-==========================================================*/
-document.querySelectorAll('input[data-caps]').forEach(function(inp){
-  inp.addEventListener('input', function(){
-    var pos = this.selectionStart;
-    this.value = this.value.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-    try{ this.setSelectionRange(pos,pos); }catch(e){}
-  });
-});
-
-/*==========================================================
-  PILL TOGGLE
-==========================================================*/
-document.querySelectorAll('.pill').forEach(function(lbl){
-  lbl.addEventListener('click', function(e){
-    var inp = this.querySelector('input');
-    if(!inp) return;
-    e.preventDefault(); // impede que o browser também ative o input nativamente (causaria duplo-toggle)
-    if(inp.type === 'radio'){
-      if(inp.checked){
-        inp.checked = false;
-        this.classList.remove('checked','checked-danger');
-      } else {
-        document.querySelectorAll('[name="'+inp.name+'"]').forEach(function(r){
-          r.closest('.pill').classList.remove('checked','checked-danger');
-        });
-        inp.checked = true;
-        this.classList.add('checked');
-      }
-    } else {
-      inp.checked = !inp.checked;
-      this.classList.toggle('checked', inp.checked);
-    }
-    inp.dispatchEvent(new Event('change',{bubbles:true}));
-  });
-});
-
-/*==========================================================
-  SYNC PILL GROUPS COM HIDDEN INPUTS
-==========================================================*/
-(function(){
-  document.querySelectorAll('.pills[data-hidden]').forEach(function(grp){
-    var hidId = grp.dataset.hidden;
-    var hidEl = document.getElementById(hidId);
-    if(!hidEl) return;
-    /* pill → hidden: ao clicar no pill, atualiza hidden e dispara change */
-    grp.querySelectorAll('.pill').forEach(function(p){
-      p.addEventListener('click', function(){
-        var radio = p.querySelector('input[type="radio"]');
-        if(!radio) return;
-        setTimeout(function(){
-          hidEl.value = radio.checked ? radio.value : '';
-          hidEl.dispatchEvent(new Event('change', {bubbles:true}));
-        }, 0);
-      });
-    });
-    /* hidden → pill: quando _setField() seta o hidden, sincroniza visualmente */
-    hidEl.addEventListener('change', function(){
-      var val = hidEl.value;
-      grp.querySelectorAll('.pill').forEach(function(p){
-        var radio = p.querySelector('input[type="radio"]');
-        var match = !!val && radio && radio.value === val;
-        p.classList.toggle('checked', match);
-        if(radio) radio.checked = match;
-      });
-    });
-  });
-})();
-
-/*==========================================================
-  CONDITIONALS
-==========================================================*/
-function onSexoChange(){
-  var s = document.querySelector('[name="sexo"]:checked');
-  document.getElementById('row_gest').style.display = (s&&s.value==='F')?'grid':'none';
-}
-
-document.querySelectorAll('[name="defic"]').forEach(function(r){
-  r.addEventListener('change', function(){
-    var sel = document.querySelector('[name="defic"]:checked');
-    document.getElementById('row_defic_tipos').style.display = (sel && sel.value==='1') ? 'block' : 'none';
-  });
-});
-
-function onTipoViol(){
-  var checked = Array.from(document.querySelectorAll('[name="tipo_viol"]:checked'));
-  document.getElementById('sec_viol_sex').style.display = checked.some(function(c){return c.value==='4';}) ? 'block' : 'none';
-  document.getElementById('box_tipo_viol_outros').style.display = checked.some(function(c){return c.value==='10';}) ? 'block' : 'none';
-}
-
-document.querySelectorAll('[name="meio_agr"]').forEach(function(chk){
-  chk.addEventListener('change', function(){
-    var has = Array.from(document.querySelectorAll('[name="meio_agr"]:checked')).some(function(c){return c.value==='9';});
-    document.getElementById('box_meio_agr_outro').style.display = has ? 'block' : 'none';
-  });
-});
-
-document.querySelectorAll('[name="vinc"]').forEach(function(chk){
-  chk.addEventListener('change', function(){
-    var has = Array.from(document.querySelectorAll('[name="vinc"]:checked')).some(function(c){return c.value==='18';});
-    document.getElementById('box_vinc_outro').style.display = has ? 'block' : 'none';
-  });
-});
-
-document.querySelectorAll('[name="viol_sex"]').forEach(function(chk){
-  chk.addEventListener('change', function(){
-    var has = Array.from(document.querySelectorAll('[name="viol_sex"]:checked')).some(function(c){return c.value==='5';});
-    document.getElementById('box_viol_sex_outros').style.display = has ? 'block' : 'none';
-  });
-});
-
-document.getElementById('f_local_oc').addEventListener('change', function(){
-  document.getElementById('box_local_outro').style.display = this.value === '09' ? 'block' : 'none';
-});
-
-function onAutoProv(){
-  var v = document.querySelector('[name="auto_prov"]:checked');
-  var box = document.getElementById('box_auto_prov');
-  if(v&&v.value==='1'){
-    box.style.display='flex';
-    document.getElementById('ov-auto').classList.add('show');
-  } else {
-    box.style.display='none';
-  }
-}
-
-/*==========================================================
-  SINAN DATA — UF / MUNICIPIO / CID10
-  Dados carregados de data/tb_uf.js, tb_municipios.js, tb_agravo.js
-==========================================================*/
-
-// Popula todos os <select> de UF com SINAN_UFS
-(function(){
-  var opts = '<option value="">— UF —</option>';
-  (window.SINAN_UFS || []).forEach(function(u){
-    opts += '<option value="' + u.sigla + '">' + u.sigla + '</option>';
-  });
-  ['f_uf_notif','f_uf_res','f_uf_oc'].forEach(function(id){
-    var el = document.getElementById(id);
-    if(el) el.innerHTML = opts;
-  });
-})();
-
-// Motor genérico de autocomplete
-function acSetup(inputId, dropId, datafn, matchfn, labelFn, selectFn){
-  var inp  = document.getElementById(inputId);
-  var drop = document.getElementById(dropId);
-  if(!inp || !drop) return;
-
-  var _items = [], _active = -1;
-
-  function render(items){
-    _items = items; _active = -1;
-    if(!items.length){ drop.innerHTML = ''; drop.classList.remove('show'); return; }
-    drop.innerHTML = items.map(function(it, i){
-      return '<div class="ac-item" data-i="' + i + '">' + labelFn(it) + '</div>';
-    }).join('');
-    drop.classList.add('show');
-    drop.querySelectorAll('.ac-item').forEach(function(el, i){
-      el.addEventListener('mousedown', function(e){
-        e.preventDefault();
-        selectFn(inp, _items[i]);
-        drop.classList.remove('show');
-        updateProgress();
-      });
-    });
-  }
-
-  inp.addEventListener('input', function(){
-    var q = inp.value.trim().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-    if(q.length < 1){ drop.classList.remove('show'); return; }
-    render(datafn().filter(function(d){ return matchfn(d, q); }).slice(0, 20));
-  });
-
-  inp.addEventListener('keydown', function(e){
-    var els = drop.querySelectorAll('.ac-item');
-    if(e.key === 'ArrowDown'){ e.preventDefault(); _active = Math.min(_active+1, els.length-1); }
-    else if(e.key === 'ArrowUp'){ e.preventDefault(); _active = Math.max(_active-1, 0); }
-    else if(e.key === 'Enter' && _active >= 0){ e.preventDefault(); selectFn(inp, _items[_active]); drop.classList.remove('show'); updateProgress(); return; }
-    else if(e.key === 'Escape'){ drop.classList.remove('show'); return; }
-    else { return; }
-    els.forEach(function(el, i){ el.classList.toggle('focused', i === _active); });
-  });
-
-  inp.addEventListener('blur', function(){
-    setTimeout(function(){ drop.classList.remove('show'); }, 160);
-  });
-}
-
-// Autocomplete de Município (3 instâncias: notif, res, oc)
-[
+// ── CONFIGURAÇÃO DA FICHA ────────────────────────────────
+window.FICHA_NOME = 'violencia';
+window.FICHA_TRANSFER_SOURCE = 'violencia';
+window.FICHA_PROG_CONFIG = {
+  ESS_IDS: {f_data_notif:1,f_data_ocorr:1,f_tipo_un:1,f_nome:1,f_raca:1,f_or_sex:1,f_id_gen:1,f_motiv:1,f_data_enc:1,f_mun_res:1},
+  ESS_GROUPS: ['sexo','tipo_viol','meio_agr','auto_prov'],
+  STD_GROUPS: ['outr_vez','nenv','sex_autor','alcool','defic','viol_trab','cat','vinc','encam'],
+  COND_GROUPS: {viol_sex:'sec_viol_sex',proc:'sec_viol_sex',tdefic:'row_defic_tipos'},
+  PROG_EXCLUDE_IDS: {f_num_notif:1,f_nome_social:1,f_compl_res:1,f_pais_res:1,f_acomp_nome:1,f_acomp_vinc:1,f_acomp_tel:1},
+  ESS_GROUP_LABELS: {sexo:'Sexo',tipo_viol:'Tipo de Violência',meio_agr:'Meio de Agressão',auto_prov:'Lesão Autoprovocada'}
+};
+window.FICHA_UF_SELECTS = ['f_uf_notif','f_uf_res','f_uf_oc'];
+window.FICHA_MUN_CONFIGS = [
   {suf:'notif', ibge:'f_ibge_notif'},
   {suf:'res',   ibge:'f_ibge_res'},
   {suf:'oc',    ibge:'f_ibge_oc'}
-].forEach(function(cfg){
-  var ufId  = 'f_uf_'  + cfg.suf;
-  var munId = 'f_mun_' + cfg.suf;
-  acSetup(
-    munId, munId + '-drop',
-    function(){ return window.SINAN_MUNICIPIOS || []; }, // todos os municípios
-    function(m, q){ // match: início ou palavra interna
-      var n = m.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-      return n.indexOf(q) === 0 || n.indexOf(' '+q) !== -1;
-    },
-    function(m){ return '<b>' + m.nome + '</b> <span style="color:#9ca3af;font-size:11px">' + m.uf + ' &mdash; ' + m.ibge + '</span>'; },
-    function(inp, m){
-      inp.value = m.nome;
-      // Auto-preenche UF a partir do município selecionado
-      var ufEl = document.getElementById(ufId);
-      if(ufEl) ufEl.value = m.uf;
-      // Auto-preenche IBGE
-      if(cfg.ibge){
-        var ibgeEl = document.getElementById(cfg.ibge);
-        if(ibgeEl) ibgeEl.value = m.ibge;
-      }
-    }
-  );
-  // Ao trocar UF manualmente, limpa município e IBGE
-  var ufEl = document.getElementById(ufId);
-  if(ufEl) ufEl.addEventListener('change', function(){
-    var munEl = document.getElementById(munId);
-    if(munEl) munEl.value = '';
-    if(cfg.ibge){ var ibgeEl = document.getElementById(cfg.ibge); if(ibgeEl) ibgeEl.value = ''; }
-    var dr = document.getElementById(munId+'-drop');
-    if(dr) dr.classList.remove('show');
-    updateProgress();
-  });
-});
-
-// Autocomplete de CID-10
-// Normaliza código removendo ponto para comparação (M751 == M75.1)
-function normCid(s){ return s.replace('.',''); }
-acSetup(
-  'f_cid10', 'f_cid10-drop',
-  function(){ return window.SINAN_AGRAVOS || []; },
-  function(a, q){
-    var qn = normCid(q);
-    var nome = a.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-    return normCid(a.cid).indexOf(qn) === 0 || nome.indexOf(q) !== -1;
-  },
-  function(a){ return '<b>' + a.cid + '</b> &mdash; ' + a.nome; },
-  function(inp, a){
-    inp.value = a.cid;
-    var hint = document.getElementById('f_cid10_hint');
-    if(hint){ hint.textContent = a.nome; hint.style.display = 'block'; }
-  }
-);
-// Esconde hint ao limpar o campo manualmente
-document.getElementById('f_cid10').addEventListener('input', function(){
-  if(!this.value.trim()){ var h=document.getElementById('f_cid10_hint'); if(h){h.style.display='none';h.textContent='';} }
-});
-
-// Autocomplete de Ocupação / CBO (Campo 34)
-// SINAN_CBOS disponível em data/tb_ocupacao.js
-// cboSinonimosMap disponível em data/cbo_sinonimos_map.js
-
-// Monta mapa reverso: SINONIMO_NORMALIZADO -> { cboCode, synonymText }
-var _cboRevSyn = null;
-function buildCboRevSyn(){
-  if(_cboRevSyn) return _cboRevSyn;
-  _cboRevSyn = {};
-  var map = window.cboSinonimosMap || {};
-  Object.keys(map).forEach(function(code){
-    (map[code]||[]).forEach(function(syn){
-      var key = syn.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim();
-      if(!_cboRevSyn[key]) _cboRevSyn[key] = [];
-      _cboRevSyn[key].push({cboCode: code, synonymText: syn});
-    });
-  });
-  return _cboRevSyn;
-}
-
-// Busca sinônimos para uma query
-function searchCboSynonyms(q){
-  var revMap = buildCboRevSyn();
-  var cbos = window.SINAN_CBOS || [];
-  var results = [];
-  var seen = {};
-  // Busca por prefixo ou substring nos sinônimos
-  Object.keys(revMap).forEach(function(key){
-    if(key.indexOf(q) === 0 || key.indexOf(' '+q) !== -1 || key.indexOf(q) !== -1){
-      revMap[key].forEach(function(entry){
-        if(seen[entry.cboCode]) return;
-        seen[entry.cboCode] = true;
-        // Encontrar o nome SINAN correspondente
-        var cboItem = cbos.find ? cbos.find(function(c){ return c.cbo === entry.cboCode; }) : null;
-        if(!cboItem){ for(var i=0;i<cbos.length;i++){ if(cbos[i].cbo===entry.cboCode){cboItem=cbos[i];break;} } }
-        if(cboItem){
-          results.push({ cbo: cboItem.cbo, nome: cboItem.nome, synonymText: entry.synonymText, isSynonym: true });
-        }
-      });
-    }
-  });
-  return results;
-}
-
-acSetup(
-  'f_ocupacao', 'f_ocupacao-drop',
-  function(){ return window.SINAN_CBOS || []; },
-  function(c, q){
-    var nome = c.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-    return c.cbo.indexOf(q) === 0 || nome.indexOf(q) !== -1;
-  },
-  function(c){
-    if(c.isSynonym){
-      return '<span class="ac-synonym-badge" style="font-size:11px;background:#f39c12;color:#fff;padding:1px 6px;border-radius:4px;margin-right:4px">sinônimo</span><b>' + c.cbo + '</b> &mdash; ' + c.nome + ' <span style="color:#9ca3af;font-size:12px">(você digitou: ' + c.synonymText + ')</span>';
-    }
-    return '<b>' + c.cbo + '</b> &mdash; ' + c.nome;
-  },
-  function(inp, c){
-    inp.value = c.nome; // descrição da ocupação (padrão SINAN NET) — NUNCA o sinônimo
-    var hint = document.getElementById('f_ocupacao_hint');
-    if(hint){
-      var txt = 'CBO: ' + c.cbo;
-      if(c.isSynonym) txt += ' · Inserido: nome oficial SINAN NET';
-      hint.textContent = txt;
-      hint.style.display = 'block';
-    }
-  }
-);
-
-// Sobrescreve o comportamento do input de ocupação para buscar também sinônimos
-(function(){
-  var inp = document.getElementById('f_ocupacao');
-  var drop = document.getElementById('f_ocupacao-drop');
-  if(!inp||!drop) return;
-  var _origInput = null;
-  // Captura o input event APÓS o acSetup para adicionar busca de sinônimos
-  inp.addEventListener('input', function(){
-    var q = inp.value.trim().toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-    if(q.length < 2) return;
-    // Aguarda um microtask para o acSetup processar primeiro
-    setTimeout(function(){
-      var cbos = window.SINAN_CBOS || [];
-      // Verifica quantos resultados diretos existem
-      var directCount = cbos.filter(function(c){
-        var nome = c.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-        return c.cbo.indexOf(q) === 0 || nome.indexOf(q) !== -1;
-      }).length;
-      // Busca sinônimos
-      var synonymResults = searchCboSynonyms(q).slice(0, 5);
-      if(synonymResults.length === 0) return;
-      // Adiciona sinônimos ao dropdown se houver espaço ou se não houver resultados diretos
-      var existingItems = drop.querySelectorAll('.ac-item');
-      if(existingItems.length === 0 && synonymResults.length > 0){
-        // Sem resultados diretos — mostra sinônimos com cabeçalho
-        var header = '<div style="padding:6px 14px;font-size:11px;font-weight:800;color:#9ca3af;text-transform:uppercase;letter-spacing:.5px;background:#f9fafb;border-bottom:1px solid #f3f4f6">Sinônimos encontrados</div>';
-        drop.innerHTML = header + synonymResults.map(function(c, i){
-          return '<div class="ac-item ac-synonym" data-i="syn-'+i+'">' +
-            '<span style="font-size:11px;background:#f39c12;color:#fff;padding:1px 6px;border-radius:4px;margin-right:4px">sinônimo</span>' +
-            '<b>' + c.cbo + '</b> &mdash; ' + c.nome +
-            ' <span style="color:#9ca3af;font-size:12px">(você digitou: ' + c.synonymText + ')</span>' +
-            '</div>';
-        }).join('');
-        drop.classList.add('show');
-        drop.querySelectorAll('.ac-item').forEach(function(el, i){
-          el.addEventListener('mousedown', function(e){
-            e.preventDefault();
-            var c = synonymResults[i];
-            inp.value = c.nome;
-            var hint = document.getElementById('f_ocupacao_hint');
-            if(hint){ hint.textContent = 'CBO: ' + c.cbo + ' · Nome oficial SINAN NET'; hint.style.display = 'block'; }
-            drop.classList.remove('show');
-            updateProgress();
-          });
-        });
-      } else if(directCount < 8 && synonymResults.length > 0){
-        // Há resultados diretos mas poucos — acrescenta sinônimos ao final
-        var sepDiv = document.createElement('div');
-        sepDiv.style.cssText = 'padding:4px 14px;font-size:11px;font-weight:800;color:#9ca3af;text-transform:uppercase;letter-spacing:.5px;background:#f9fafb;border-top:1px solid #f3f4f6;border-bottom:1px solid #f3f4f6';
-        sepDiv.textContent = 'Sinônimos';
-        drop.appendChild(sepDiv);
-        synonymResults.forEach(function(c){
-          var el = document.createElement('div');
-          el.className = 'ac-item ac-synonym';
-          el.innerHTML = '<span style="font-size:11px;background:#f39c12;color:#fff;padding:1px 6px;border-radius:4px;margin-right:4px">sinônimo</span><b>' + c.cbo + '</b> &mdash; ' + c.nome + ' <span style="color:#9ca3af;font-size:12px">(você digitou: ' + c.synonymText + ')</span>';
-          el.addEventListener('mousedown', function(e){
-            e.preventDefault();
-            inp.value = c.nome;
-            var hint = document.getElementById('f_ocupacao_hint');
-            if(hint){ hint.textContent = 'CBO: ' + c.cbo + ' · Nome oficial SINAN NET'; hint.style.display = 'block'; }
-            drop.classList.remove('show');
-            updateProgress();
-          });
-          drop.appendChild(el);
-        });
-        drop.classList.add('show');
-      }
-    }, 0);
-  });
-})();
-
-/*==========================================================
-  AUTO-IDADE (calcula a partir da data de nascimento)
-  O usuário pode sobrescrever manualmente após o cálculo.
-==========================================================*/
-document.getElementById('f_nasc').addEventListener('change', function(){
-  var nasc = new Date(this.value + 'T00:00:00');
-  if(isNaN(nasc)) return;
-  var hoje = new Date();
-  hoje.setHours(0,0,0,0);
-  var diffMs = hoje - nasc;
-  if(diffMs < 0) return; // data futura
-  var diffDias = Math.floor(diffMs / 86400000);
-  var idadeEl = document.getElementById('f_idade_val');
-  var unEl    = document.getElementById('f_idade_un');
-  if(!idadeEl || !unEl) return;
-  if(diffDias < 29){
-    idadeEl.value = diffDias;
-    unEl.value = 'D';
-  } else if(diffDias < 365){
-    idadeEl.value = Math.floor(diffDias / 30.44);
-    unEl.value = 'M';
-  } else {
-    idadeEl.value = Math.floor(diffDias / 365.25);
-    unEl.value = 'A';
-  }
-  unEl.dispatchEvent(new Event('change', {bubbles:true}));
-  updateProgress();
-});
-
-/*==========================================================
-  CAMPO 39 — "OUTRAS" deficiências: exibe campo de detalhe
-==========================================================*/
-document.querySelectorAll('[name="tdefic"]').forEach(function(chk){
-  chk.addEventListener('change', function(){
-    if(this.value === '7'){
-      var box = document.getElementById('box_tdefic_outras');
-      if(box) box.style.display = this.checked ? 'block' : 'none';
-    }
-  });
-});
-
-/*==========================================================
-  COPY DATE HELPER
-==========================================================*/
-function copiarDataNotif(){
-  var d = document.getElementById('f_data_notif').value;
-  if(d){ document.getElementById('f_data_enc').value=d; updateProgress(); }
-}
-
-/*==========================================================
-  MODALS
-==========================================================*/
-function closeModal(id){ document.getElementById(id).classList.remove('show'); }
-document.querySelectorAll('.ov').forEach(function(ov){
-  ov.addEventListener('click', function(e){ if(e.target===this) this.classList.remove('show'); });
-});
-
-/*==========================================================
-  TOAST
-==========================================================*/
-var _toastTimer = null;
-function showToast(msg, type, dur){
-  var t = document.getElementById('toast');
-  clearTimeout(_toastTimer);
-  t.textContent = msg;
-  t.className = 'show '+(type||'');
-  _toastTimer = setTimeout(function(){ t.className=''; }, dur||3000);
-}
-
-/*==========================================================
-  PROGRESS + GAMIFICATION
-==========================================================*/
-var CIRCUMFERENCE = 2 * Math.PI * 29; // r=29
-var _prevPct = -1;
-var _sectionMilestones = {}; // track completed sections
-var _globalMilestones = {25:false,50:false,80:false,100:false};
-var _celebrated80 = false;
-
-// IDs excluídos do progresso
-var PROG_EXCLUDE_IDS = {'f_num_notif':1,'f_nome_social':1,'f_compl_res':1,'f_pais_res':1,'f_acomp_nome':1,'f_acomp_vinc':1,'f_acomp_tel':1};
-
-// Campos essenciais (⭐) — peso alto
-var ESS_IDS = {'f_data_notif':1,'f_data_ocorr':1,'f_tipo_un':1,'f_nome':1,'f_raca':1,'f_or_sex':1,'f_id_gen':1,'f_motiv':1,'f_data_enc':1,'f_mun_res':1};
-var ESS_W = 8; // peso de cada campo essencial
-var STD_W = 1; // peso de campo padrão
-
-// Grupos essenciais (radio/checkbox) — checar se algum está marcado
-var ESS_GROUPS = ['sexo','tipo_viol','meio_agr','auto_prov'];
-// Grupos padrão (não essenciais, não condicionais)
-var STD_GROUPS = ['outr_vez','nenv','sex_autor','alcool','defic','viol_trab','cat','vinc','encam'];
-// Grupos condicionais (só contam quando container visível)
-var COND_GROUPS = {viol_sex:'sec_viol_sex',proc:'sec_viol_sex',tdefic:'row_defic_tipos'};
-
-// Verifica se elemento está visível (nenhum ancestral com display:none até .wrapper)
-function isElemVisible(el){
-  var node = el;
-  while(node && node.className !== 'wrapper'){
-    if(node.style && node.style.display === 'none') return false;
-    node = node.parentElement;
-  }
-  return true;
-}
-
-// Calcula idade do paciente em anos (retorna null se não for possível)
-function getPatientAgeYears(){
-  var nascEl = document.getElementById('f_nasc');
-  if(nascEl && nascEl.value){
-    var nasc = new Date(nascEl.value + 'T00:00:00');
-    if(!isNaN(nasc)){
-      var today = new Date();
-      var age = today.getFullYear() - nasc.getFullYear();
-      var m = today.getMonth() - nasc.getMonth();
-      if(m < 0 || (m === 0 && today.getDate() < nasc.getDate())) age--;
-      return age;
-    }
-  }
-  var valEl = document.getElementById('f_idade_val');
-  var unEl  = document.getElementById('f_idade_un');
-  if(valEl && valEl.value && unEl && unEl.value === 'A') return parseInt(valEl.value, 10);
-  return null;
-}
-
-// Verifica se grupo (radio/checkbox) tem pelo menos um marcado
-function groupHasCheck(name){
-  return !!document.querySelector('[name="'+name+'"]:checked');
-}
-
-var STATUS_MSGS = [
-  [0,'Pronto para iniciar ✏️'],[1,'Ótimo, começando!'],[10,'Continue assim! 💪'],
-  [25,'25% — bom ritmo!'],[40,'Quase na metade!'],[50,'50% — na metade! 🔥'],
-  [65,'Mais da metade! Quase lá!'],[79,'Faltam poucos campos essenciais!'],[90,'Finalizando...'],
-  [99,'Último campo!'],[100,'🎉 Ficha completa!']
 ];
-function getStatusMsg(pct){
-  var msg = STATUS_MSGS[0][1];
-  for(var i=0;i<STATUS_MSGS.length;i++){ if(pct>=STATUS_MSGS[i][0]) msg=STATUS_MSGS[i][1]; }
-  return msg;
-}
-
-var COUNT_MSGS = [
-  [0,  'Comece pelos campos marcados com ⭐ — são os mais importantes'],
-  [1,  'Priorize os campos essenciais ⭐ para um registro de qualidade'],
-  [26, 'Cada detalhe fortalece a vigilância epidemiológica'],
-  [51, 'Você está construindo um registro de qualidade'],
-  [80, 'Parabéns pelo cuidado — o registro está quase completo!'],
-  [100,'Ficha exemplar — obrigado pelo compromisso com a saúde!']
+window.FICHA_CID_INPUT_ID = 'f_cid10';
+window.FICHA_CID_HINT_ID  = 'f_cid10_hint';
+window.FICHA_MOBILE_NUMERIC_IDS = ['f_sus','f_cnes','f_ibge_notif','f_ibge_res','f_cep','f_num_res','f_num_oc','f_hora_oc'];
+window.FICHA_MOBILE_TEL_IDS = ['f_tel_res','f_acomp_tel'];
+window.FICHA_TRANSFER_MUN_SUFS = ['notif','res','oc'];
+window.FICHA_UNIT_IDS = ['f_mun_notif','f_uf_notif','f_ibge_notif','f_tipo_un','f_nome_un','f_cnes'];
+window.FICHA_HIDDEN_BOXES = ['row_gest','row_defic_tipos','sec_viol_sex','box_local_outro','box_auto_prov','box_tipo_viol_outros','box_meio_agr_outro','box_viol_sex_outros','box_tdefic_outras','box_vinc_outro'];
+window.FICHA_TRANSFER_FICHAS = [
+  {id:'acidente',    label:'Acidente de Trabalho', sub:'Acidentes típicos, de trajeto ou fatais',                                        url:'sinan_acidente.html',             color:'#c2410c'},
+  {id:'lerdort',     label:'LER/DORT',             sub:'Lesão por esforço repetitivo / DORT',                                        url:'sinan_lerdort.html',              color:'#0f766e'},
+  {id:'transtornos', label:'Transtornos Mentais',  sub:'Transtornos mentais relacionados ao trabalho',                                         url:'sinan_transtornos.html',          color:'#4338ca'},
+  {id:'pair',        label:'PAIR',                 sub:'Perda auditiva induzida por ruído',                                               url:'sinan_pair.html',                 color:'#0369a1'},
+  {id:'dermatoses',  label:'Dermatoses',           sub:'Dermatoses ocupacionais',                                                              url:'sinan_dermatoses.html',           color:'#be185d'},
+  {id:'cancer',      label:'Câncer',              sub:'Câncer relacionado ao trabalho',                                                  url:'sinan_cancer.html',               color:'#dc2626'},
+  {id:'acidente_bio',label:'Acidente Biológico',  sub:'Exposição a material biológico potencialmente contaminado',          url:'sinan_acidente_biologico.html',   color:'#7c3aed'}
 ];
-function getCountMsg(pct){
-  var msg = COUNT_MSGS[0][1];
-  for(var i=0;i<COUNT_MSGS.length;i++){ if(pct>=COUNT_MSGS[i][0]) msg=COUNT_MSGS[i][1]; }
-  return msg;
-}
 
-// Nível de progresso
-var PROG_LEVELS = [
-  [0,  'Ficha Inicial',  '#9ca3af'],
-  [26, 'Ficha Básica',   '#60a5fa'],
-  [51, 'Ficha Útil',     '#2563eb'],
-  [80, 'Padrão Ouro ✅', '#22c55e'],
-  [100,'Diamante 💎',    '#d97706']
-];
-function getLevel(pct){
-  var lv = PROG_LEVELS[0];
-  for(var i=0;i<PROG_LEVELS.length;i++){ if(pct>=PROG_LEVELS[i][0]) lv=PROG_LEVELS[i]; }
-  return lv;
-}
-
-function updateProgress(){
-  var totalW = 0, filledW = 0;
-  var essTotal = 0, essFilled = 0;
-
-  // --- Campos essenciais (texto/select) ---
-  Object.keys(ESS_IDS).forEach(function(id){
-    var el = document.getElementById(id);
-    if(!el) return;
-    totalW += ESS_W; essTotal++;
-    if(el.value && el.value.trim()){ filledW += ESS_W; essFilled++; }
-  });
-
-  // --- Grupos essenciais ---
-  ESS_GROUPS.forEach(function(name){
-    totalW += ESS_W; essTotal++;
-    if(groupHasCheck(name)){ filledW += ESS_W; essFilled++; }
-  });
-
-  // --- Campos padrão (text/select, não essenciais, não excluídos) ---
-  var stdEls = Array.from(document.querySelectorAll('input:not([type=radio]):not([type=checkbox]):not([type=hidden]),select'));
-  var _ageYrs = getPatientAgeYears();
-  var _skipOcup = _ageYrs !== null && _ageYrs < 14; // criança: sem campo de ocupação
-  stdEls.forEach(function(el){
-    if(PROG_EXCLUDE_IDS[el.id] || el.readOnly) return;
-    if(ESS_IDS[el.id]) return; // já contou
-    if(!isElemVisible(el)) return; // condicional oculto
-    if(el.id === 'f_ocupacao' && _skipOcup) return; // criança: ocupação não se aplica
-    totalW += STD_W;
-    if(el.value && el.value.trim()) filledW += STD_W;
-  });
-
-  // --- Grupos padrão ---
-  STD_GROUPS.forEach(function(name){
-    var grpEl = document.querySelector('[name="'+name+'"]');
-    if(!grpEl || !isElemVisible(grpEl)) return;
-    totalW += STD_W;
-    if(groupHasCheck(name)) filledW += STD_W;
-  });
-
-  // --- Grupos condicionais ---
-  Object.keys(COND_GROUPS).forEach(function(name){
-    var cont = document.getElementById(COND_GROUPS[name]);
-    if(!cont || cont.style.display === 'none') return;
-    totalW += STD_W;
-    if(groupHasCheck(name)) filledW += STD_W;
-  });
-
-  var pct = totalW > 0 ? Math.round(filledW/totalW*100) : 0;
-  // contagem exibida: campos de texto/select preenchidos para display
-  var allTextEls = stdEls.filter(function(el){ return !PROG_EXCLUDE_IDS[el.id] && !el.readOnly && isElemVisible(el); });
-  var allFilled = allTextEls.filter(function(el){ return el.value && el.value.trim(); }).length;
-
-  var level = getLevel(pct);
-
-  // Progress bar strip
-  var barFill = document.getElementById('prog-bar-fill');
-  if(barFill){ barFill.style.width = pct+'%'; barFill.style.background = level[2]; }
-  var barStrip = document.getElementById('prog-bar-strip');
-  if(barStrip){ barStrip.style.background = pct>0?'rgba(0,0,0,.1)':'rgba(255,255,255,.08)'; }
-
-  // Milestone toasts
-  [25,50].forEach(function(m){
-    if(pct>=m && !_globalMilestones[m]){
-      _globalMilestones[m]=true;
-      showToast(m===25?'🎯 25% preenchido — ótimo começo!':'🔥 Metade concluída! Continue assim!','t-mile',3800);
-    }
-  });
-  if(pct>=80 && !_globalMilestones[80]){
-    _globalMilestones[80]=true;
-    showToast('🏆 Padrão Ouro! Todos os campos essenciais preenchidos!','t-ok',4500);
-  }
-  if(pct===100 && !_globalMilestones[100]){
-    _globalMilestones[100]=true;
-    showToast('Ficha completa! Preenchimento 100%.','t-ok',4500);
-  }
-  if(pct<80) _globalMilestones[80]=false;
-  if(pct<100) _globalMilestones[100]=false;
-
-  // Section badges
-  updateSectionBadges();
-
-  _prevPct = pct;
-}
-
-function updateSectionBadges(){
-  for(var s=1;s<=9;s++){
-    var secEl = document.getElementById('sec'+s);
-    var badge = document.getElementById('badge'+s);
-    if(!secEl||!badge) continue;
-
-    var essFlds = secEl.querySelectorAll('[data-ess]');
-    var essFilled=0;
-    essFlds.forEach(function(el){ if(el.value&&el.value.trim()) essFilled++; });
-
-    var allInSec = Array.from(secEl.querySelectorAll('input:not([type=radio]):not([type=checkbox]):not([type=hidden]),select'))
-      .filter(function(el){ return !PROG_EXCLUDE_IDS[el.id] && !el.readOnly && isElemVisible(el); });
-    var allFilled=0;
-    allInSec.forEach(function(el){ if(el.value&&el.value.trim()) allFilled++; });
-    var allTotal = allInSec.length;
-
-    if(allTotal===0){
-      badge.textContent = '—';
-      badge.className = 'sec-badge badge-empty';
-      secEl.classList.remove('done','partial');
-      continue;
-    }
-
-    var essDone = essFlds.length===0 || essFilled===essFlds.length;
-    var allDone = allFilled===allTotal;
-
-    if(allDone){
-      badge.textContent = '✓ Completo';
-      badge.className = 'sec-badge badge-done';
-      if(!_sectionMilestones[s]){
-        _sectionMilestones[s]=true;
-        showToast('✅ Seção '+s+' totalmente preenchida!', 't-ok', 2500);
-      }
-      secEl.classList.remove('partial');
-      secEl.classList.add('done');
-    } else if(essDone && allFilled>0){
-      badge.textContent = '⭐ Essenciais OK';
-      badge.className = 'sec-badge badge-done';
-      if(!_sectionMilestones[s]){
-        _sectionMilestones[s]=true;
-        showToast('⭐ Seção '+s+' — campos essenciais preenchidos!', 't-ok', 2500);
-      }
-      secEl.classList.remove('partial');
-      secEl.classList.add('done');
-    } else if(allFilled>0){
-      badge.textContent = 'Em andamento';
-      badge.className = 'sec-badge badge-partial';
-      _sectionMilestones[s]=false;
-      secEl.classList.remove('done');
-      secEl.classList.add('partial');
-    } else {
-      badge.textContent = '—';
-      badge.className = 'sec-badge badge-empty';
-      _sectionMilestones[s]=false;
-      secEl.classList.remove('done','partial');
-    }
-  }
-}
-
-// Attach to all interactable elements
-document.querySelectorAll('input,select,textarea').forEach(function(el){
-  el.addEventListener('input', updateProgress);
-  el.addEventListener('change', updateProgress);
-});
-updateProgress();
-
-/*==========================================================
-  VALIDATION — verifica campos essenciais (data-ess)
-==========================================================*/
-function getMissingEssentials(){
-  var missing = [];
-  document.querySelectorAll('[data-ess]').forEach(function(el){
-    if(!el.value||!el.value.trim()){
-      el.classList.add('error');
-      missing.push(el.dataset.label||el.id);
-    } else {
-      el.classList.remove('error');
-    }
-  });
-  // Grupos essenciais (radio/checkbox)
-  var groupLabels = {sexo:'Sexo',tipo_viol:'Tipo de Violência',meio_agr:'Meio de Agressão',auto_prov:'Lesão Autoprovocada'};
-  ESS_GROUPS.forEach(function(name){
-    if(!groupHasCheck(name)) missing.push(groupLabels[name]||name);
-  });
-  return missing;
-}
-
-/*==========================================================
-  HELPERS
-==========================================================*/
-function getRadio(name){
-  var el=document.querySelector('[name="'+name+'"]:checked');
-  return el?el.value:'';
-}
-function getChecks(name){
-  var v=[];
-  document.querySelectorAll('[name="'+name+'"]:checked').forEach(function(c){v.push(c.value);});
-  return v;
-}
-function fmtDate(val){
-  if(!val) return '';
-  var p=val.split('-');
-  return p.length===3?p[2]+'/'+p[1]+'/'+p[0]:val;
-}
-function tv(id){ return (document.getElementById(id)||{}).value||''; }
-
-/*==========================================================
-  GERAR PDF — sempre habilitado; modal se faltar campo essencial
-==========================================================*/
-async function gerarPDF(force){
-  if(!force){
-    var missing = getMissingEssentials();
-    if(missing.length>0){
-      document.getElementById('ov-quase-list').innerHTML = missing.map(function(e){
-        return '<div class="err-item">⭐ '+e+'</div>';
-      }).join('');
-      // Botão "baixar mesmo assim"
-      var dlBtn = document.getElementById('ov-quase-dl');
-      dlBtn.onclick = function(){ closeModal('ov-quase'); gerarPDF(true); };
-      document.getElementById('ov-quase').classList.add('show');
-      return;
-    }
-  }
-
-  var btn = document.getElementById('btn-gerar');
-  btn.disabled=true;
-  btn.textContent='⏳ Gerando...';
-
-  try{
-    var resp = await fetch('fichas/violencia_editavel.pdf');
-    if(!resp.ok) throw new Error('Arquivo violencia_editavel.pdf não encontrado em fichas/');
-    var pdfBytes = await resp.arrayBuffer();
-    var pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
-    var form = pdfDoc.getForm();
-
-    function setTxt(name,val){
-      try{ form.getTextField(name).setText(val||''); }catch(e){}
-    }
-    function setRadio(name,val){
-      try{ form.getRadioGroup(name).select(val); }catch(e){
-        try{ form.getDropdown(name).select(val); }catch(e2){}
-      }
-    }
-    function setChkGroup(prefix,vals){
-      (vals||[]).forEach(function(v){
-        try{ form.getCheckBox(prefix+'_'+v).check(); }catch(e){}
-        try{ form.getCheckBox(prefix+v).check(); }catch(e){}
-      });
-    }
-
-    // Seção 1
-    setTxt('notificacao_numero',              tv('f_num_notif'));
-    setTxt('data_notificacao',                fmtDate(tv('f_data_notif')));
-    setTxt('uf_notificacao',                  tv('f_uf_notif'));
-    setTxt('municipio_notificacao_nome',      tv('f_mun_notif'));
-    setTxt('municipio_notificacao_codigo_ibge', tv('f_ibge_notif'));
-    setTxt('unidade_notificadora_codigo',     tv('f_tipo_un'));
-    setTxt('unidade_notificadora_nome',       tv('f_nome_un'));
-    setTxt('unidade_notificadora_cnes',       tv('f_cnes'));
-    setTxt('data_ocorrencia',                 fmtDate(tv('f_data_ocorr')));
-    // Seção 2
-    setTxt('paciente_nome',           tv('f_nome'));
-    setTxt('paciente_data_nascimento', fmtDate(tv('f_nasc')));
-    setTxt('paciente_idade_valor',    tv('f_idade_val'));
-    setTxt('paciente_idade_tipo',     ({H:'1',D:'2',M:'3',A:'4'})[tv('f_idade_un')] || ''); // 1=H 2=D 3=M 4=A
-    var _sexoPDF = getRadio('sexo');
-    setTxt('paciente_sexo',           _sexoPDF); // M/F/I
-    setTxt('paciente_gestante',       _sexoPDF === 'M' ? '6' : tv('f_gest')); // 6=Não se aplica quando masculino
-    setTxt('paciente_raca_cor',       tv('f_raca'));
-    setTxt('paciente_escolaridade',   tv('f_escol'));
-    setTxt('paciente_cartao_sus',     tv('f_sus'));
-    setTxt('paciente_mae_nome',       tv('f_mae'));
-    // Seção 3
-    setTxt('residencia_uf',                   tv('f_uf_res'));
-    setTxt('residencia_municipio_nome',       tv('f_mun_res'));
-    setTxt('residencia_municipio_codigo_ibge', tv('f_ibge_res'));
-    setTxt('residencia_distrito',             tv('f_bairro_res'));
-    setTxt('residencia_logradouro',           tv('f_logr_res'));
-    setTxt('residencia_numero',               tv('f_num_res'));
-    setTxt('residencia_complemento',          tv('f_compl_res'));
-    setTxt('residencia_ponto_de_referencia',  tv('f_pref_res'));
-    setTxt('residencia_cep',                  tv('f_cep'));
-    setTxt('residencia_telefone',             tv('f_tel_res'));
-    setTxt('residencia_zona',                 tv('f_zona_res'));
-    setTxt('residencia_pais',                 tv('f_pais_res'));
-    // Seção 4
-    setTxt('pessoa_nome_social',        tv('f_nome_social'));
-    setTxt('pessoa_ocupacao',           tv('f_ocupacao'));
-    setTxt('pessoa_situacao_conjugal',  tv('f_est_civil'));
-    setTxt('pessoa_orientacao_sexual',  tv('f_or_sex'));
-    setTxt('pessoa_identidade_genero',  tv('f_id_gen'));
-    setTxt('pessoa_possui_deficiencia', getRadio('defic')); // 1=Sim 2=Não 9=Ignorado
-    // C.39 — Tipo de Deficiência (1=Sim 2=Não por tipo)
-    var _tdef = getChecks('tdefic').map(String);
-    ['deficiencia_fisica','deficiencia_visual','deficiencia_intelectual','deficiencia_auditiva',
-     'deficiencia_transtorno_mental','deficiencia_transtorno_comportamento','deficiencia_outras']
-    .forEach(function(fn,i){ setTxt(fn, _tdef.indexOf(String(i+1))!==-1?'1':'2'); });
-    setTxt('deficiencia_outras_detalhe', tv('f_tdefic_outras'));
-    // Seção 5
-    setTxt('ocorrencia_uf',                   tv('f_uf_oc'));
-    setTxt('ocorrencia_municipio_nome',        tv('f_mun_oc'));
-    setTxt('ocorrencia_municipio_codigo_ibge', tv('f_ibge_oc'));
-    setTxt('ocorrencia_bairro',               tv('f_bairro_oc'));
-    setTxt('ocorrencia_logradouro',           tv('f_logr_oc'));
-    setTxt('ocorrencia_numero',               tv('f_num_oc'));
-    setTxt('ocorrencia_zona',                 tv('f_zona_oc'));
-    setTxt('ocorrencia_hora',                 tv('f_hora_oc'));
-    setTxt('ocorrencia_local_tipo',           tv('f_local_oc'));
-    setTxt('ocorrencia_repetida',             getRadio('outr_vez'));
-    setTxt('ocorrencia_lesao_autoprovocada',  getRadio('auto_prov'));
-    // Seção 6
-    setTxt('motivacao_codigo', tv('f_motiv'));
-    // C.56 — Tipo de Violência (10 opções, 1=sim 2=não)
-    var _tv56 = getChecks('tipo_viol').map(String);
-    ['violencia_fisica','violencia_psicologica_moral','violencia_tortura','violencia_sexual',
-     'violencia_trafico_seres_humanos','violencia_financeira_economica','violencia_negligencia_abandono',
-     'violencia_trabalho_infantil','violencia_intervencao_legal','violencia_outras']
-    .forEach(function(fn,i){ setTxt(fn, _tv56.indexOf(String(i+1))!==-1?'1':'2'); });
-    setTxt('violencia_outras_detalhe', tv('f_tipo_viol_outros'));
-    // C.57 — Meio de Agressão (9 opções)
-    var _tv57 = getChecks('meio_agr').map(String);
-    ['agressao_forca_corporal','agressao_enforcamento','agressao_objeto_contundente',
-     'agressao_objeto_perfurocortante','agressao_envenenamento','agressao_arma_de_fogo',
-     'agressao_substancia_quente','agressao_ameaca','agressao_outro']
-    .forEach(function(fn,i){ setTxt(fn, _tv57.indexOf(String(i+1))!==-1?'1':'2'); });
-    setTxt('agressao_outro_detalhe', tv('f_meio_agr_outro'));
-    // C.58 — Violência Sexual (5 opções)
-    var _tv58 = getChecks('viol_sex').map(String);
-    ['sexual_assedio','sexual_estupro','sexual_pornografia_infantil','sexual_exploracao','sexual_outros']
-    .forEach(function(fn,i){ setTxt(fn, _tv58.indexOf(String(i+1))!==-1?'1':'2'); });
-    setTxt('sexual_outros_detalhe', tv('f_viol_sex_outros'));
-    // C.59 — Procedimentos (8 opções)
-    var _tv59 = getChecks('proc').map(String);
-    ['procedimento_profilaxia_dst','procedimento_profilaxia_hiv','procedimento_profilaxia_hepatite_b',
-     'procedimento_coleta_sangue','procedimento_coleta_secrecao_vaginal','procedimento_coleta_semen',
-     'procedimento_contracepcao_emergencia','procedimento_aborto_previsto_lei']
-    .forEach(function(fn,i){ setTxt(fn, _tv59.indexOf(String(i+1))!==-1?'1':'2'); });
-    // C.60 — Número de envolvidos
-    setTxt('autor_numero_envolvidos', getRadio('nenv'));
-    // C.61 — Vínculo do autor (18 opções)
-    var _tv61 = getChecks('vinc').map(String);
-    ['autor_vinculo_pai','autor_vinculo_mae','autor_vinculo_padrasto','autor_vinculo_madrasta',
-     'autor_vinculo_conjuge','autor_vinculo_ex_conjuge','autor_vinculo_namorado','autor_vinculo_ex_namorado',
-     'autor_vinculo_filho','autor_vinculo_irmao','autor_vinculo_amigo_conhecido','autor_vinculo_desconhecido',
-     'autor_vinculo_cuidador','autor_vinculo_patrao_chefe','autor_vinculo_relacao_institucional',
-     'autor_vinculo_policial','autor_vinculo_propria_pessoa','autor_vinculo_outros']
-    .forEach(function(fn,i){ setTxt(fn, _tv61.indexOf(String(i+1))!==-1?'1':'2'); });
-    setTxt('autor_vinculo_outros_detalhe', tv('f_vinc_outro'));
-    setTxt('autor_sexo',               getRadio('sex_autor'));
-    setTxt('autor_suspeita_uso_alcool', getRadio('alcool'));
-    setTxt('autor_ciclo_vida',         tv('f_ciclo'));
-    // C.65 — Encaminhamento (13 opções da interface)
-    var _tv65 = getChecks('encam').map(String);
-    ['encaminhamento_rede_saude','encaminhamento_rede_assistencia_social','encaminhamento_rede_educacao',
-     'encaminhamento_rede_atendimento_mulher','encaminhamento_conselho_tutelar','encaminhamento_conselho_idoso',
-     'encaminhamento_delegacia_mulher','encaminhamento_delegacia_idoso','encaminhamento_outras_delegacias',
-     'encaminhamento_centro_direitos_humanos','encaminhamento_justica_infancia_juventude',
-     'encaminhamento_ministerio_publico','encaminhamento_defensoria_publica']
-    .forEach(function(fn,i){ setTxt(fn, _tv65.indexOf(String(i+1))!==-1?'1':'2'); });
-    setTxt('encaminhamento_delegacia_crianca_adolescente', '2'); // sem opção na interface
-    setTxt('trabalho_violencia_relacionada', getRadio('viol_trab'));
-    setTxt('trabalho_cat_emitida',           getRadio('cat'));
-    // C.68 — CID: envia apenas o código (sem descrição)
-    setTxt('circunstancia_lesao_cid10', tv('f_cid10').split(' ')[0].substring(0,7));
-    // Seção 7 + extras
-    setTxt('data_encerramento',      fmtDate(tv('f_data_enc')));
-    setTxt('observacoes_adicionais', document.getElementById('f_obs').value||'');
-    setTxt('acompanhante_nome',      tv('f_acomp_nome'));
-    setTxt('acompanhante_vinculo',   tv('f_acomp_vinc'));
-    setTxt('acompanhante_telefone',  tv('f_acomp_tel'));
-
-    var outBytes = await pdfDoc.save();
-    var blob = new Blob([outBytes],{type:'application/pdf'});
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href=url;
-    var ds = fmtDate(tv('f_data_notif')).replace(/\//g,'-')||'sem-data';
-    var nm = tv('f_nome').split(' ')[0]||'PACIENTE';
-    a.download = 'SINAN_Violencia_'+nm+'_'+ds+'.pdf';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    showToast('✓ PDF gerado e baixado com sucesso!','t-ok',4000);
-    // Habilita o botão de transferência após PDF gerado com sucesso
-    var btnTr = document.getElementById('btn-transfer');
-    if(btnTr) btnTr.classList.remove('btn-disabled');
-
-  } catch(e){
-    console.error(e);
-    showToast('Erro ao gerar PDF: '+e.message,'t-err',5000);
-  }
-
-  btn.disabled=false;
-  btn.innerHTML='📄 Gerar PDF';
-}
-</script>
-
-<!-- CONFIRM MODAL -->
-<div id="confirm-modal">
-  <div class="cm-box">
-    <div class="cm-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,4 1,10 7,10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg></div>
-    <h3>Apagar tudo e começar do zero?</h3>
-    <p>Todos os dados inseridos serão perdidos. Se quiser preservá-los, use <strong>Exportar Rascunho</strong> antes de continuar.</p>
-    <div class="cm-actions">
-      <button class="cm-cancel" onclick="fecharModalNova()">Cancelar</button>
-      <button class="cm-ok" onclick="novaFichaConfirmado()">Apagar tudo</button>
-    </div>
-  </div>
-</div>
-
-<!-- TRANSFER MODAL -->
-<div class="ov" id="ov-transfer">
-  <div class="modal" style="max-width:500px">
-    <div class="modal-ico">🔁</div>
-    <h2>Usar dados em outra ficha</h2>
-    <p>Os dados do paciente, notificação e residência já preenchidos serão transferidos automaticamente para a nova ficha. Selecione o destino:</p>
-    <div id="transfer-fichas" style="margin-top:16px;display:flex;flex-direction:column;gap:8px"></div>
-    <div class="modal-actions">
-      <button class="mbtn mbtn-s" onclick="closeModal('ov-transfer')">Cancelar</button>
-      <button class="mbtn mbtn-p" id="btn-transfer-ok" onclick="confirmarTransferencia()" style="opacity:.45;pointer-events:none">Continuar →</button>
-    </div>
-  </div>
-</div>
-
-<!-- TRANSFER SEM PDF — aviso -->
-<div class="ov" id="ov-transfer-warn">
-  <div class="modal" style="max-width:400px">
-    <div class="modal-ico">⚠️</div>
-    <h2>PDF ainda não gerado</h2>
-    <p>Você ainda não gerou o PDF desta ficha. Se prosseguir, os dados desta ficha <strong>não serão salvos em PDF</strong> — apenas transferidos para a próxima.</p>
-    <div class="modal-actions">
-      <button class="mbtn mbtn-s" onclick="closeModal('ov-transfer-warn')">Voltar e gerar PDF</button>
-      <button class="mbtn mbtn-p" onclick="closeModal('ov-transfer-warn');abrirTransferencia()">Transferir mesmo assim</button>
-    </div>
-  </div>
-</div>
-
-<!-- BOTTOM SHEET MOBILE — menu de pacientes fictícios (fix iOS Safari) -->
-<div id="pac-mob-sheet">
-  <div id="pac-mob-backdrop" onclick="closePacSheet()"></div>
-  <div id="pac-mob-panel">
-    <div class="tb-menu-hdr">Selecione um caso didático</div>
-    <div id="pac-mob-list"></div>
-  </div>
-</div>
-
-<script>
-/*==========================================================
-  TOOLS — Paciente Teste | Exportar | Importar | Nova Ficha
-==========================================================*/
-
-var FAKE_PATIENTS = [
+window.FAKE_PATIENTS = [
   {
     label:"João Pedro, 6 anos",
     sub:"Física + Negligência · padrasto · São Paulo/SP",
@@ -2803,79 +1230,84 @@ var FAKE_PATIENTS = [
   }
 ];
 
-// Monta menu de pacientes (desktop e mobile)
-(function(){
-  var listHtml = FAKE_PATIENTS.map(function(p,i){
-    return '<div class="tb-mi" onclick="carregarPaciente('+i+');closePacMenuAll()">' +
-      '<span class="tb-mi-name">'+p.label+'</span>' +
-      '<span class="tb-mi-sub">'+p.sub+'</span></div>';
-  }).join('');
+// ── CONDITIONALS ─────────────────────────────────
+function onSexoChange(){
+  var s = document.querySelector('[name="sexo"]:checked');
+  document.getElementById('row_gest').style.display = (s&&s.value==='F')?'grid':'none';
+}
 
-  // Desktop dropdown
-  var menu = document.getElementById('pac-menu');
-  if(menu) menu.innerHTML = '<div class="tb-menu-hdr">Selecione um caso didático</div>' + listHtml;
+document.querySelectorAll('[name="defic"]').forEach(function(r){
+  r.addEventListener('change', function(){
+    var sel = document.querySelector('[name="defic"]:checked');
+    document.getElementById('row_defic_tipos').style.display = (sel && sel.value==='1') ? 'block' : 'none';
+  });
+});
 
-  // Mobile bottom sheet
-  var mobList = document.getElementById('pac-mob-list');
-  if(mobList) mobList.innerHTML = listHtml;
-})();
+function onTipoViol(){
+  var checked = Array.from(document.querySelectorAll('[name="tipo_viol"]:checked'));
+  document.getElementById('sec_viol_sex').style.display = checked.some(function(c){return c.value==='4';}) ? 'block' : 'none';
+  document.getElementById('box_tipo_viol_outros').style.display = checked.some(function(c){return c.value==='10';}) ? 'block' : 'none';
+}
 
-function isMobile(){ return window.innerWidth <= 768; }
+document.querySelectorAll('[name="meio_agr"]').forEach(function(chk){
+  chk.addEventListener('change', function(){
+    var has = Array.from(document.querySelectorAll('[name="meio_agr"]:checked')).some(function(c){return c.value==='9';});
+    document.getElementById('box_meio_agr_outro').style.display = has ? 'block' : 'none';
+  });
+});
 
-function togglePacMenu(e){
-  if(e) e.stopPropagation();
-  if(isMobile()){
-    openPacSheet();
+document.querySelectorAll('[name="vinc"]').forEach(function(chk){
+  chk.addEventListener('change', function(){
+    var has = Array.from(document.querySelectorAll('[name="vinc"]:checked')).some(function(c){return c.value==='18';});
+    document.getElementById('box_vinc_outro').style.display = has ? 'block' : 'none';
+  });
+});
+
+document.querySelectorAll('[name="viol_sex"]').forEach(function(chk){
+  chk.addEventListener('change', function(){
+    var has = Array.from(document.querySelectorAll('[name="viol_sex"]:checked')).some(function(c){return c.value==='5';});
+    document.getElementById('box_viol_sex_outros').style.display = has ? 'block' : 'none';
+  });
+});
+
+document.getElementById('f_local_oc').addEventListener('change', function(){
+  document.getElementById('box_local_outro').style.display = this.value === '09' ? 'block' : 'none';
+});
+
+function onAutoProv(){
+  var v = document.querySelector('[name="auto_prov"]:checked');
+  var box = document.getElementById('box_auto_prov');
+  if(v&&v.value==='1'){
+    box.style.display='flex';
+    document.getElementById('ov-auto').classList.add('show');
   } else {
-    document.getElementById('pac-menu').classList.toggle('open');
+    box.style.display='none';
   }
 }
 
-function openPacSheet(){
-  document.getElementById('pac-mob-sheet').classList.add('show');
-  document.body.style.overflow = 'hidden';
-}
-
-function closePacSheet(){
-  document.getElementById('pac-mob-sheet').classList.remove('show');
-  document.body.style.overflow = '';
-}
-
-function closePacMenuAll(){
-  document.getElementById('pac-menu').classList.remove('open');
-  closePacSheet();
-}
-
-document.addEventListener('click', function(){ document.getElementById('pac-menu').classList.remove('open'); });
-
-// ------ helpers ------
-
-function _setField(id, val){
-  var el = document.getElementById(id);
-  if(!el || val === undefined || val === null || val === '') return;
-  el.value = val;
-  el.dispatchEvent(new Event('input',{bubbles:true}));
-  el.dispatchEvent(new Event('change',{bubbles:true}));
-}
-
-function _setRadio(name, val){
-  var inp = document.querySelector('input[name="'+name+'"][value="'+val+'"]');
-  if(!inp) return;
-  inp.closest('.pill').click();
-  inp.dispatchEvent(new Event('change',{bubbles:true}));
-}
-
-function _setChecks(name, vals){
-  document.querySelectorAll('input[name="'+name+'"]:checked').forEach(function(inp){
-    inp.closest('.pill').click();
+/*==========================================================
+  CAMPO 39 — "OUTRAS" deficiências: exibe campo de detalhe
+==========================================================*/
+document.querySelectorAll('[name="tdefic"]').forEach(function(chk){
+  chk.addEventListener('change', function(){
+    if(this.value === '7'){
+      var box = document.getElementById('box_tdefic_outras');
+      if(box) box.style.display = this.checked ? 'block' : 'none';
+    }
   });
-  (vals||[]).forEach(function(v){
-    var inp = document.querySelector('input[name="'+name+'"][value="'+v+'"]');
-    if(inp && !inp.checked){ inp.closest('.pill').click(); inp.dispatchEvent(new Event('change',{bubbles:true})); }
-  });
+});
+
+
+  COPY DATE HELPER
+==========================================================*/
+function copiarDataNotif(){
+  var d = document.getElementById('f_data_notif').value;
+  if(d){ document.getElementById('f_data_enc').value=d; updateProgress(); }
 }
 
-function _applyVisibility(){
+
+// ── HOOKS ───────────────────────────────────────────
+window._applyVisibility = function(){
   onSexoChange();
   onTipoViol();
   onAutoProv();
@@ -2890,109 +1322,271 @@ function _applyVisibility(){
   document.getElementById('box_local_outro').style.display = (document.getElementById('f_local_oc').value==='09') ? 'block' : 'none';
   var tdOutro = Array.from(document.querySelectorAll('[name="tdefic"]:checked')).some(function(c){return c.value==='7';});
   var tdBox = document.getElementById('box_tdefic_outras'); if(tdBox) tdBox.style.display = tdOutro ? 'block' : 'none';
-}
+};
 
-// ------ Nova Ficha ------
-
-function _clearForm(){
-  document.querySelectorAll('.pill input:checked').forEach(function(inp){ inp.closest('.pill').click(); });
-  document.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]):not(#f-import):not([readonly]), select, textarea')
-    .forEach(function(el){ el.value=''; });
+window._onPostClearForm = function(){
   var ov = document.getElementById('ov-auto'); if(ov) ov.classList.remove('show');
-  ['row_gest','row_defic_tipos','sec_viol_sex','box_local_outro','box_auto_prov',
-   'box_tipo_viol_outros','box_meio_agr_outro','box_viol_sex_outros','box_tdefic_outras','box_vinc_outro']
-  .forEach(function(id){ var el=document.getElementById(id); if(el) el.style.display='none'; });
-  var h=document.getElementById('f_ocupacao_hint'); if(h){h.textContent='';h.style.display='none';}
-  var h2=document.getElementById('f_cid10_hint'); if(h2){h2.textContent='';h2.style.display='none';}
-  updateProgress();
-}
+  var h = document.getElementById('f_ocupacao_hint'); if(h){h.textContent='';h.style.display='none';}
+  var h2 = document.getElementById('f_cid10_hint'); if(h2){h2.textContent='';h2.style.display='none';}
+};
 
-function abrirModalNova(){ document.getElementById('confirm-modal').classList.add('show'); }
-function fecharModalNova(){ document.getElementById('confirm-modal').classList.remove('show'); }
-function novaFichaConfirmado(){ fecharModalNova(); _clearForm(); }
-
-// ------ Carregar paciente fictício ------
-
-function carregarPaciente(idx){
-  var p = FAKE_PATIENTS[idx]; if(!p) return;
-  _clearForm();
-  Object.keys(p.fields||{}).forEach(function(id){ _setField(id, p.fields[id]); });
-  Object.keys(p.radios||{}).forEach(function(name){ _setRadio(name, p.radios[name]); });
-  Object.keys(p.checks||{}).forEach(function(name){ _setChecks(name, p.checks[name]); });
-  _applyVisibility();
-  // Re-aplica nomes de município ANTES de updateProgress (handler de change da UF apaga o mun)
-  ['notif','res','oc'].forEach(function(suf){
-    var id = 'f_mun_' + suf;
-    if(p.fields && p.fields[id]){
-      var el = document.getElementById(id);
-      if(el) el.value = p.fields[id];
-    }
-  });
-  // Fecha todos os dropdowns de autocomplete abertos durante o preenchimento
-  document.querySelectorAll('.ac-drop').forEach(function(d){ d.innerHTML=''; d.classList.remove('show'); });
-  updateProgress(); // depois da re-aplicação, com todos os valores corretos
-  // Define hint de CBO se o campo de ocupação foi preenchido
+window._onPostCarregarPaciente = function(p){
   var ocEl = document.getElementById('f_ocupacao');
   var ocHint = document.getElementById('f_ocupacao_hint');
   if(ocEl && ocHint && ocEl.value && window.SINAN_CBOS){
     var ocMatch = (window.SINAN_CBOS||[]).filter(function(c){ return c.nome === ocEl.value; })[0];
     if(ocMatch){ ocHint.textContent='CBO: '+ocMatch.cbo; ocHint.style.display='block'; }
   }
-  // Define hint de CID-10 se o campo foi preenchido
   var cidEl = document.getElementById('f_cid10');
   var cidHint = document.getElementById('f_cid10_hint');
   if(cidEl && cidHint && cidEl.value && window.SINAN_AGRAVOS){
     var cidMatch = (window.SINAN_AGRAVOS||[]).filter(function(a){ return a.cid === cidEl.value; })[0];
     if(cidMatch){ cidHint.textContent=cidMatch.nome; cidHint.style.display='block'; }
   }
-  window.scrollTo({top:0, behavior:'smooth'});
-  showToast('Paciente fictício carregado: '+p.label,'t-ok',3500);
-}
+};
 
-// ------ Exportar Rascunho ------
-
-function exportarRascunho(){
-  var data = {v:1, ts:new Date().toISOString(), fields:{}, radios:{}, checks:{}};
-  document.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]):not(#f-import), select, textarea')
-    .forEach(function(el){ if(el.id && el.value!=='') data.fields[el.id]=el.value; });
-  document.querySelectorAll('input[type="radio"]:checked').forEach(function(inp){ data.radios[inp.name]=inp.value; });
-  document.querySelectorAll('input[type="checkbox"]:checked').forEach(function(inp){
-    if(!data.checks[inp.name]) data.checks[inp.name]=[];
-    data.checks[inp.name].push(inp.value);
-  });
-  var blob = new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
-  var a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'rascunho-sinan-violencia-'+new Date().toISOString().slice(0,10)+'.json';
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  URL.revokeObjectURL(a.href);
-  showToast('💾 Rascunho exportado com sucesso!','t-ok',3000);
-}
-
-// ------ Importar Rascunho ------
-
-function importarRascunho(input){
-  var file = input.files[0]; if(!file) return;
-  var reader = new FileReader();
-  reader.onload = function(e){
-    try{
-      var data = JSON.parse(e.target.result);
-      if(!data.fields && !data.radios && !data.checks) throw new Error('formato inválido');
-      _clearForm();
-      Object.keys(data.fields||{}).forEach(function(id){ _setField(id, data.fields[id]); });
-      Object.keys(data.radios||{}).forEach(function(name){ _setRadio(name, data.radios[name]); });
-      Object.keys(data.checks||{}).forEach(function(name){ _setChecks(name, data.checks[name]); });
-      _applyVisibility();
-      updateProgress();
-      showToast('📂 Rascunho importado com sucesso!','t-ok',3000);
-    }catch(err){
-      showToast('Arquivo inválido ou corrompido','t-err',4000);
+// ── GERAR PDF ────────────────────────────────────────
+async function gerarPDF(force){
+  if(!force){
+    var missing = getMissingEssentials();
+    if(missing.length>0){
+      document.getElementById('ov-quase-list').innerHTML = missing.map(function(e){
+        return '<div class="err-item">⭐ '+e+'</div>';
+      }).join('');
+      // Botão "baixar mesmo assim"
+      var dlBtn = document.getElementById('ov-quase-dl');
+      dlBtn.onclick = function(){ closeModal('ov-quase'); gerarPDF(true); };
+      document.getElementById('ov-quase').classList.add('show');
+      return;
     }
-    input.value='';
-  };
-  reader.readAsText(file);
+  }
+
+  var btn = document.getElementById('btn-gerar');
+  btn.disabled=true;
+  btn.textContent='⏳ Gerando...';
+
+  try{
+    var resp = await fetch('fichas/violencia_editavel.pdf');
+    if(!resp.ok) throw new Error('Arquivo violencia_editavel.pdf não encontrado em fichas/');
+    var pdfBytes = await resp.arrayBuffer();
+    var pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
+    var form = pdfDoc.getForm();
+
+    function setTxt(name,val){
+      try{ form.getTextField(name).setText(val||''); }catch(e){}
+    }
+    function setRadio(name,val){
+      try{ form.getRadioGroup(name).select(val); }catch(e){
+        try{ form.getDropdown(name).select(val); }catch(e2){}
+      }
+    }
+    function setChkGroup(prefix,vals){
+      (vals||[]).forEach(function(v){
+        try{ form.getCheckBox(prefix+'_'+v).check(); }catch(e){}
+        try{ form.getCheckBox(prefix+v).check(); }catch(e){}
+      });
+    }
+
+    // Seção 1
+    setTxt('notificacao_numero',              tv('f_num_notif'));
+    setTxt('data_notificacao',                fmtDate(tv('f_data_notif')));
+    setTxt('uf_notificacao',                  tv('f_uf_notif'));
+    setTxt('municipio_notificacao_nome',      tv('f_mun_notif'));
+    setTxt('municipio_notificacao_codigo_ibge', tv('f_ibge_notif'));
+    setTxt('unidade_notificadora_codigo',     tv('f_tipo_un'));
+    setTxt('unidade_notificadora_nome',       tv('f_nome_un'));
+    setTxt('unidade_notificadora_cnes',       tv('f_cnes'));
+    setTxt('data_ocorrencia',                 fmtDate(tv('f_data_ocorr')));
+    // Seção 2
+    setTxt('paciente_nome',           tv('f_nome'));
+    setTxt('paciente_data_nascimento', fmtDate(tv('f_nasc')));
+    setTxt('paciente_idade_valor',    tv('f_idade_val'));
+    setTxt('paciente_idade_tipo',     tv('f_idade_un')); // 1=Hora 2=Dia 3=Mês 4=Ano
+    var _sexoPDF = getRadio('sexo');
+    setTxt('paciente_sexo',           _sexoPDF); // M/F/I
+    setTxt('paciente_gestante',       _sexoPDF === 'M' ? '6' : tv('f_gest')); // 6=Não se aplica quando masculino
+    setTxt('paciente_raca_cor',       tv('f_raca'));
+    setTxt('paciente_escolaridade',   tv('f_escol'));
+    setTxt('paciente_cartao_sus',     tv('f_sus'));
+    setTxt('paciente_mae_nome',       tv('f_mae'));
+    // Seção 3
+    setTxt('residencia_uf',                   tv('f_uf_res'));
+    setTxt('residencia_municipio_nome',       tv('f_mun_res'));
+    setTxt('residencia_municipio_codigo_ibge', tv('f_ibge_res'));
+    setTxt('residencia_distrito',             tv('f_bairro_res'));
+    setTxt('residencia_logradouro',           tv('f_logr_res'));
+    setTxt('residencia_numero',               tv('f_num_res'));
+    setTxt('residencia_complemento',          tv('f_compl_res'));
+    setTxt('residencia_ponto_de_referencia',  tv('f_pref_res'));
+    setTxt('residencia_cep',                  tv('f_cep'));
+    setTxt('residencia_telefone',             tv('f_tel_res'));
+    setTxt('residencia_zona',                 tv('f_zona_res'));
+    setTxt('residencia_pais',                 tv('f_pais_res'));
+    // Seção 4
+    setTxt('pessoa_nome_social',        tv('f_nome_social'));
+    setTxt('pessoa_ocupacao',           tv('f_ocupacao'));
+    setTxt('pessoa_situacao_conjugal',  tv('f_est_civil'));
+    setTxt('pessoa_orientacao_sexual',  tv('f_or_sex'));
+    setTxt('pessoa_identidade_genero',  tv('f_id_gen'));
+    setTxt('pessoa_possui_deficiencia', getRadio('defic')); // 1=Sim 2=Não 9=Ignorado
+    // C.39 — Tipo de Deficiência (1=Sim 2=Não por tipo)
+    var _tdef = getChecks('tdefic').map(String);
+    ['deficiencia_fisica','deficiencia_visual','deficiencia_intelectual','deficiencia_auditiva',
+     'deficiencia_transtorno_mental','deficiencia_transtorno_comportamento','deficiencia_outras']
+    .forEach(function(fn,i){ setTxt(fn, _tdef.indexOf(String(i+1))!==-1?'1':'2'); });
+    setTxt('deficiencia_outras_detalhe', tv('f_tdefic_outras'));
+    // Seção 5
+    setTxt('ocorrencia_uf',                   tv('f_uf_oc'));
+    setTxt('ocorrencia_municipio_nome',        tv('f_mun_oc'));
+    setTxt('ocorrencia_municipio_codigo_ibge', tv('f_ibge_oc'));
+    setTxt('ocorrencia_bairro',               tv('f_bairro_oc'));
+    setTxt('ocorrencia_logradouro',           tv('f_logr_oc'));
+    setTxt('ocorrencia_numero',               tv('f_num_oc'));
+    setTxt('ocorrencia_zona',                 tv('f_zona_oc'));
+    setTxt('ocorrencia_hora',                 tv('f_hora_oc'));
+    setTxt('ocorrencia_local_tipo',           tv('f_local_oc'));
+    setTxt('ocorrencia_repetida',             getRadio('outr_vez'));
+    setTxt('ocorrencia_lesao_autoprovocada',  getRadio('auto_prov'));
+    // Seção 6
+    setTxt('motivacao_codigo', tv('f_motiv'));
+    // C.56 — Tipo de Violência (10 opções, 1=sim 2=não)
+    var _tv56 = getChecks('tipo_viol').map(String);
+    ['violencia_fisica','violencia_psicologica_moral','violencia_tortura','violencia_sexual',
+     'violencia_trafico_seres_humanos','violencia_financeira_economica','violencia_negligencia_abandono',
+     'violencia_trabalho_infantil','violencia_intervencao_legal','violencia_outras']
+    .forEach(function(fn,i){ setTxt(fn, _tv56.indexOf(String(i+1))!==-1?'1':'2'); });
+    setTxt('violencia_outras_detalhe', tv('f_tipo_viol_outros'));
+    // C.57 — Meio de Agressão (9 opções)
+    var _tv57 = getChecks('meio_agr').map(String);
+    ['agressao_forca_corporal','agressao_enforcamento','agressao_objeto_contundente',
+     'agressao_objeto_perfurocortante','agressao_envenenamento','agressao_arma_de_fogo',
+     'agressao_substancia_quente','agressao_ameaca','agressao_outro']
+    .forEach(function(fn,i){ setTxt(fn, _tv57.indexOf(String(i+1))!==-1?'1':'2'); });
+    setTxt('agressao_outro_detalhe', tv('f_meio_agr_outro'));
+    // C.58 — Violência Sexual (5 opções)
+    var _tv58 = getChecks('viol_sex').map(String);
+    ['sexual_assedio','sexual_estupro','sexual_pornografia_infantil','sexual_exploracao','sexual_outros']
+    .forEach(function(fn,i){ setTxt(fn, _tv58.indexOf(String(i+1))!==-1?'1':'2'); });
+    setTxt('sexual_outros_detalhe', tv('f_viol_sex_outros'));
+    // C.59 — Procedimentos (8 opções)
+    var _tv59 = getChecks('proc').map(String);
+    ['procedimento_profilaxia_dst','procedimento_profilaxia_hiv','procedimento_profilaxia_hepatite_b',
+     'procedimento_coleta_sangue','procedimento_coleta_secrecao_vaginal','procedimento_coleta_semen',
+     'procedimento_contracepcao_emergencia','procedimento_aborto_previsto_lei']
+    .forEach(function(fn,i){ setTxt(fn, _tv59.indexOf(String(i+1))!==-1?'1':'2'); });
+    // C.60 — Número de envolvidos
+    setTxt('autor_numero_envolvidos', getRadio('nenv'));
+    // C.61 — Vínculo do autor (18 opções)
+    var _tv61 = getChecks('vinc').map(String);
+    ['autor_vinculo_pai','autor_vinculo_mae','autor_vinculo_padrasto','autor_vinculo_madrasta',
+     'autor_vinculo_conjuge','autor_vinculo_ex_conjuge','autor_vinculo_namorado','autor_vinculo_ex_namorado',
+     'autor_vinculo_filho','autor_vinculo_irmao','autor_vinculo_amigo_conhecido','autor_vinculo_desconhecido',
+     'autor_vinculo_cuidador','autor_vinculo_patrao_chefe','autor_vinculo_relacao_institucional',
+     'autor_vinculo_policial','autor_vinculo_propria_pessoa','autor_vinculo_outros']
+    .forEach(function(fn,i){ setTxt(fn, _tv61.indexOf(String(i+1))!==-1?'1':'2'); });
+    setTxt('autor_vinculo_outros_detalhe', tv('f_vinc_outro'));
+    setTxt('autor_sexo',               getRadio('sex_autor'));
+    setTxt('autor_suspeita_uso_alcool', getRadio('alcool'));
+    setTxt('autor_ciclo_vida',         tv('f_ciclo'));
+    // C.65 — Encaminhamento (13 opções da interface)
+    var _tv65 = getChecks('encam').map(String);
+    ['encaminhamento_rede_saude','encaminhamento_rede_assistencia_social','encaminhamento_rede_educacao',
+     'encaminhamento_rede_atendimento_mulher','encaminhamento_conselho_tutelar','encaminhamento_conselho_idoso',
+     'encaminhamento_delegacia_mulher','encaminhamento_delegacia_idoso','encaminhamento_outras_delegacias',
+     'encaminhamento_centro_direitos_humanos','encaminhamento_justica_infancia_juventude',
+     'encaminhamento_ministerio_publico','encaminhamento_defensoria_publica']
+    .forEach(function(fn,i){ setTxt(fn, _tv65.indexOf(String(i+1))!==-1?'1':'2'); });
+    setTxt('encaminhamento_delegacia_crianca_adolescente', '2'); // sem opção na interface
+    setTxt('trabalho_violencia_relacionada', getRadio('viol_trab'));
+    setTxt('trabalho_cat_emitida',           getRadio('cat'));
+    // C.68 — CID: envia apenas o código (sem descrição)
+    setTxt('circunstancia_lesao_cid10', tv('f_cid10').split(' ')[0].substring(0,7));
+    // Seção 7 + extras
+    setTxt('data_encerramento',      fmtDate(tv('f_data_enc')));
+    setTxt('observacoes_adicionais', document.getElementById('f_obs').value||'');
+    setTxt('acompanhante_nome',      tv('f_acomp_nome'));
+    setTxt('acompanhante_vinculo',   tv('f_acomp_vinc'));
+    setTxt('acompanhante_telefone',  tv('f_acomp_tel'));
+
+    var outBytes = await pdfDoc.save();
+    var blob = new Blob([outBytes],{type:'application/pdf'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href=url;
+    var ds = fmtDate(tv('f_data_notif')).replace(/\//g,'-')||'sem-data';
+    var nm = tv('f_nome').split(' ')[0]||'PACIENTE';
+    a.download = 'SINAN_Violencia_'+nm+'_'+ds+'.pdf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('✓ PDF gerado e baixado com sucesso!','t-ok',4000);
+    // Habilita o botão de transferência após PDF gerado com sucesso
+    var btnTr = document.getElementById('btn-transfer');
+    if(btnTr) btnTr.classList.remove('btn-disabled');
+
+  } catch(e){
+    console.error(e);
+    showToast('Erro ao gerar PDF: '+e.message,'t-err',5000);
+  }
+
+  btn.disabled=false;
+  btn.innerHTML='📄 Gerar PDF';
 }
+
 </script>
+<script src="shared.js"></script>
+
+
+<!-- CONFIRM MODAL -->
+<div id="confirm-modal">
+  <div class="cm-box">
+    <div class="cm-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,4 1,10 7,10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg></div>
+    <h3>Apagar tudo e começar do zero?</h3>
+    <p>Todos os dados inseridos serão perdidos. Se quiser preservá-los, use <strong>Exportar Rascunho</strong> antes de continuar.</p>
+    <div class="cm-actions">
+      <button class="cm-cancel" onclick="fecharModalNova()">Cancelar</button>
+      <button class="cm-ok" onclick="novaFichaConfirmado()">Apagar tudo</button>
+    </div>
+  </div>
+</div>
+
+<!-- TRANSFER MODAL -->
+<div class="ov" id="ov-transfer">
+  <div class="modal" style="max-width:500px">
+    <div class="modal-ico">🔁</div>
+    <h2>Usar dados em outra ficha</h2>
+    <p>Os dados do paciente, notificação e residência já preenchidos serão transferidos automaticamente para a nova ficha. Selecione o destino:</p>
+    <div id="transfer-fichas" style="margin-top:16px;display:flex;flex-direction:column;gap:8px"></div>
+    <div class="modal-actions">
+      <button class="mbtn mbtn-s" onclick="closeModal('ov-transfer')">Cancelar</button>
+      <button class="mbtn mbtn-p" id="btn-transfer-ok" onclick="confirmarTransferencia()" style="opacity:.45;pointer-events:none">Continuar →</button>
+    </div>
+  </div>
+</div>
+
+<!-- TRANSFER SEM PDF — aviso -->
+<div class="ov" id="ov-transfer-warn">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-ico">⚠️</div>
+    <h2>PDF ainda não gerado</h2>
+    <p>Você ainda não gerou o PDF desta ficha. Se prosseguir, os dados desta ficha <strong>não serão salvos em PDF</strong> — apenas transferidos para a próxima.</p>
+    <div class="modal-actions">
+      <button class="mbtn mbtn-s" onclick="closeModal('ov-transfer-warn')">Voltar e gerar PDF</button>
+      <button class="mbtn mbtn-p" onclick="closeModal('ov-transfer-warn');abrirTransferencia()">Transferir mesmo assim</button>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM SHEET MOBILE — menu de pacientes fictícios (fix iOS Safari) -->
+<div id="pac-mob-sheet">
+  <div id="pac-mob-backdrop" onclick="closePacSheet()"></div>
+  <div id="pac-mob-panel">
+    <div class="tb-menu-hdr">Selecione um caso didático</div>
+    <div id="pac-mob-list"></div>
+  </div>
+</div>
+
 
 <!-- BARRA INFERIOR — visível apenas em mobile (CSS oculta no desktop) -->
 <div id="mob-bottom">
@@ -3006,241 +1600,5 @@ function importarRascunho(input){
   </button>
 </div>
 
-<script>
-/* ── TOOLTIP TOGGLE ─────────────────────────────────────────
-   Usa position:fixed calculado para escapar de overflow:hidden
-   nos cards .sec — evita corte em qualquer container
-────────────────────────────────────────────────────────── */
-function _tipClose(){
-  document.querySelectorAll('.tip-wrap.open').forEach(function(w){
-    w.classList.remove('open');
-    w.querySelector('.tip-btn').classList.remove('open');
-    var pop = w.querySelector('.tip-pop');
-    if(pop){ pop.removeAttribute('style'); }
-  });
-}
-
-function tipToggle(btn){
-  var wrap = btn.closest('.tip-wrap');
-  if(!wrap) return;
-  var pop  = wrap.querySelector('.tip-pop');
-  var isOpen = wrap.classList.contains('open');
-
-  _tipClose(); // fecha qualquer aberto
-
-  if(isOpen) return; // era o mesmo — já fechou
-
-  wrap.classList.add('open');
-  btn.classList.add('open');
-
-  // Posiciona via fixed para não ser cortado por overflow:hidden
-  var rect = btn.getBoundingClientRect();
-  var GAP  = 10;
-  var MAX_W = Math.min(pop.dataset.wide ? 360 : 290, window.innerWidth - 24);
-
-  pop.style.cssText = [
-    'position:fixed',
-    'width:' + MAX_W + 'px',
-    'max-width:' + MAX_W + 'px',
-    'display:block',           // mostra para medir altura
-    'visibility:hidden',
-    'bottom:auto',
-    'left:0',
-    'top:0',
-    'transform:none'
-  ].join(';');
-
-  var popH = pop.offsetHeight;
-  var popW = pop.offsetWidth || MAX_W;
-
-  // Posição horizontal: centraliza no botão, clamped à viewport
-  var left = rect.left + rect.width / 2 - popW / 2;
-  left = Math.max(12, Math.min(left, window.innerWidth - popW - 12));
-
-  // Preferência: acima do botão; se não couber, abaixo
-  var topAbove = rect.top - popH - GAP;
-  var topBelow = rect.bottom + GAP;
-  var top, arrowBelow;
-  if(topAbove >= 8){
-    top = topAbove;
-    arrowBelow = true;   // seta aponta para baixo (tooltip está acima)
-  } else {
-    top = topBelow;
-    arrowBelow = false;  // seta aponta para cima
-  }
-
-  // Aplica estilos finais
-  pop.style.cssText = [
-    'position:fixed',
-    'width:' + MAX_W + 'px',
-    'max-width:' + MAX_W + 'px',
-    'top:' + Math.round(top) + 'px',
-    'left:' + Math.round(left) + 'px',
-    'bottom:auto',
-    'transform:none',
-    'visibility:visible',
-    'display:block',
-    // Ajusta pseudo-elemento da seta via variável CSS
-    '--tip-arrow-left:' + Math.round(rect.left + rect.width/2 - left) + 'px'
-  ].join(';');
-
-  // Seta dinâmica: posiciona horizontalmente sobre o botão
-  pop.dataset.arrowBelow = arrowBelow ? '1' : '0';
-
-  // Fecha ao clicar ou tocar fora
-  setTimeout(function(){
-    function _close(ev){
-      if(!wrap.contains(ev.target)){ _tipClose(); }
-      document.removeEventListener('click',  _close);
-      document.removeEventListener('touchstart', _close);
-    }
-    document.addEventListener('click',     _close);
-    document.addEventListener('touchstart', _close);
-  }, 10);
-}
-
-/* ── TRANSFERÊNCIA PARA OUTRA FICHA ──────────────────────────
-   sessionStorage: salva todos os dados e redireciona
-──────────────────────────────────────────────────────────── */
-var _transferTarget = null;
-var TRANSFER_FICHAS_VIO = [
-  {id:'acidente',    label:'Acidente de Trabalho', sub:'Acidentes t\u00edpicos, de trajeto ou fatais',          url:'sinan_acidente.html',    color:'#c2410c'},
-  {id:'lerdort',     label:'LER/DORT',             sub:'Les\u00e3o por esfor\u00e7o repetitivo / DORT',              url:'sinan_lerdort.html',     color:'#0f766e'},
-  {id:'transtornos', label:'Transtornos Mentais',  sub:'Transtornos mentais relacionados ao trabalho',     url:'sinan_transtornos.html', color:'#4338ca'},
-  {id:'pair',        label:'PAIR',                 sub:'Perda auditiva induzida por ru\u00eddo',                url:'sinan_pair.html',        color:'#0369a1'},
-  {id:'dermatoses',  label:'Dermatoses',           sub:'Dermatoses ocupacionais',                          url:'sinan_dermatoses.html',  color:'#be185d'},
-  {id:'cancer',      label:'C\u00e2ncer',              sub:'C\u00e2ncer relacionado ao trabalho',                        url:'sinan_cancer.html',            color:'#dc2626'},
-  {id:'acidente_bio',label:'Acidente Biol\u00f3gico',  sub:'Exposi\u00e7\u00e3o a material biol\u00f3gico potencialmente contaminado', url:'sinan_acidente_biologico.html', color:'#7c3aed'}
-];
-
-function clickTransfer(){
-  var btn = document.getElementById('btn-transfer');
-  if(btn && btn.classList.contains('btn-disabled')){
-    document.getElementById('ov-transfer-warn').classList.add('show');
-  } else {
-    abrirTransferencia();
-  }
-}
-
-function abrirTransferencia(){
-  _transferTarget = null;
-  var okBtn = document.getElementById('btn-transfer-ok');
-  okBtn.style.opacity = '.45'; okBtn.style.pointerEvents = 'none';
-  var cont = document.getElementById('transfer-fichas');
-  cont.innerHTML = TRANSFER_FICHAS_VIO.map(function(f){
-    return '<div class="transfer-ficha-opt" data-id="'+f.id+'" onclick="selectTransfer(this,\''+f.id+'\')">'+
-      '<span class="transfer-ficha-dot" style="background:'+f.color+'"></span>'+
-      '<span><strong class="transfer-ficha-name">'+f.label+'</strong><span class="transfer-ficha-sub">'+f.sub+'</span></span>'+
-      '</div>';
-  }).join('');
-  document.getElementById('ov-transfer').classList.add('show');
-}
-
-function selectTransfer(el, id){
-  document.querySelectorAll('#transfer-fichas .transfer-ficha-opt').forEach(function(o){ o.classList.remove('selected'); });
-  el.classList.add('selected');
-  _transferTarget = id;
-  var okBtn = document.getElementById('btn-transfer-ok');
-  okBtn.style.opacity = '1'; okBtn.style.pointerEvents = '';
-}
-
-function confirmarTransferencia(){
-  if(!_transferTarget) return;
-  var ficha = TRANSFER_FICHAS_VIO.filter(function(f){ return f.id===_transferTarget; })[0];
-  if(!ficha) return;
-  var payload = {source:'violencia', ts:new Date().toISOString(), fields:{}, radios:{}, checks:{}};
-  document.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]):not(#f-import), select, textarea')
-    .forEach(function(el){ if(el.id && el.value!=='') payload.fields[el.id]=el.value; });
-  document.querySelectorAll('input[type="radio"]:checked').forEach(function(inp){ payload.radios[inp.name]=inp.value; });
-  document.querySelectorAll('input[type="checkbox"]:checked').forEach(function(inp){
-    if(!payload.checks[inp.name]) payload.checks[inp.name]=[];
-    payload.checks[inp.name].push(inp.value);
-  });
-  sessionStorage.setItem('sinan_transfer', JSON.stringify(payload));
-  window.location.href = ficha.url;
-}
-
-/* ── MOBILE SYNC ──────────────────────────────────────────────
-   Sincroniza barra inferior com progresso (btn sempre habilitado)
-──────────────────────────────────────────────────────────── */
-(function(){
-  var btnGerar = document.getElementById('btn-gerar');
-  var mobBtn   = document.getElementById('mob-pdf-btn');
-  var srcPct   = document.getElementById('prog-pct');
-  if(!mobBtn || !btnGerar || !srcPct) return;
-
-  // Re-habilita mob-pdf-btn sempre (PDF é sempre acessível)
-  new MutationObserver(function(){
-    setTimeout(function(){ if(btnGerar.disabled){ mobBtn.disabled = false; } }, 5000);
-  }).observe(btnGerar, {attributes:true, attributeFilter:['disabled']});
-
-  /* ── INPUTMODE — teclados corretos no celular ──────────── */
-  var numericIds = ['f_sus','f_cnes','f_ibge_notif','f_ibge_res','f_cep','f_num_res',
-                    'f_num_oc','f_hora_oc'];
-  var telIds     = ['f_tel_res','f_acomp_tel'];
-  numericIds.forEach(function(id){
-    var el = document.getElementById(id);
-    if(el) el.setAttribute('inputmode','numeric');
-  });
-  telIds.forEach(function(id){
-    var el = document.getElementById(id);
-    if(el) el.setAttribute('inputmode','tel');
-  });
-})();
-
-/* === UNIDADE NOTIFICADORA - CADEADO PERSISTENTE ========================= */
-var UNIT_KEY = 'sinan_unidade';
-var UNIT_IDS = ['f_mun_notif','f_uf_notif','f_ibge_notif','f_tipo_un','f_nome_un','f_cnes'];
-
-function _unitSetUI(locked){
-  var g=document.getElementById('lock-grp-notif'); if(!g) return;
-  if(locked){g.classList.add('locked');}else{g.classList.remove('locked');}
-  var ht=g.querySelector('.lock-hint-txt');
-  if(ht) ht.textContent=locked
-    ?'\u2713 Unidade notificadora salva \u2014 n\u00e3o ser\u00e1 necess\u00e1rio preencher novamente neste computador. Clique no cadeado para editar.'
-    :'Estes campos representam a unidade notificadora deste computador. Trave o cadeado para salvar e n\u00e3o precisar preencher novamente nas pr\u00f3ximas fichas.';
-}
-
-function toggleUnitLock(){
-  var g=document.getElementById('lock-grp-notif'); if(!g) return;
-  var warn=document.getElementById('lock-tipo-un-warn');
-  if(g.classList.contains('locked')){
-    _unitSetUI(false); localStorage.removeItem(UNIT_KEY);
-    if(warn) warn.style.display='none';
-  } else {
-    var d={};
-    UNIT_IDS.forEach(function(id){var el=document.getElementById(id);if(el)d[id]=el.value;});
-    localStorage.setItem(UNIT_KEY,JSON.stringify(d));
-    _unitSetUI(true);
-    if(warn) warn.style.display='none';
-    showToast('\uD83D\uDD12 Unidade notificadora salva neste computador','t-ok',3500);
-  }
-}
-
-(function initUnitLock(){
-  var raw=localStorage.getItem(UNIT_KEY); if(!raw) return;
-  try{
-    var d=JSON.parse(raw);
-    UNIT_IDS.forEach(function(id){
-      var el=document.getElementById(id); if(!el||d[id]===undefined) return;
-      el.value=d[id];
-      // f_tipo_un é um hidden conectado a pill group — precisa do change para sincronizar visual
-      // Os demais campos (incluindo f_mun_notif) NÃO devem disparar change para não acionar o autocomplete
-      if(id==='f_tipo_un') el.dispatchEvent(new Event('change',{bubbles:true}));
-    });
-    // Se o tipo de unidade nao foi salvo (dados vieram de outra ficha),
-    // deixa desbloqueado e exibe aviso para o usuario preencher o campo extra.
-    var tipoEl=document.getElementById('f_tipo_un');
-    var tipoSalvo=d['f_tipo_un']&&d['f_tipo_un']!=='';
-    if(!tipoSalvo){
-      var warn=document.getElementById('lock-tipo-un-warn');
-      if(warn) warn.style.display='flex';
-    } else {
-      setTimeout(function(){_unitSetUI(true);},80);
-    }
-  }catch(e){localStorage.removeItem(UNIT_KEY);}
-})();
-
-</script>
 </body>
 </html>
