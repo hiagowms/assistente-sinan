@@ -1,5 +1,5 @@
 ## Contexto
-Este documento mapeia os campos AcroForm de um formulário PDF (SINAN — Ficha de Investigação Pneumoconioses) para seus respectivos rótulos e valores aceitos. Com base nas respostas do usuário em um formulário HTML, preencha cada campo com o valor correspondente à escala indicada. Campos de texto livre devem receber a string exatamente como o usuário digitou.
+Este documento mapeia os campos AcroForm de um formulário PDF (SINAN — Ficha de Investigação LER/DORT) para seus respectivos rótulos e valores aceitos. Com base nas respostas do usuário em um formulário HTML, preencha cada campo com o valor correspondente à escala indicada. Campos de texto livre devem receber a string exatamente como o usuário digitou.
 
 ---
 
@@ -16,7 +16,7 @@ Este documento mapeia os campos AcroForm de um formulário PDF (SINAN — Ficha 
 
 Campo 1 — Tipo de Notificação: valor fixo, não editável (2 - Individual)
 
-Campo 2 — Agravo/doença: valor fixo, não editável (Pneumoconioses)
+Campo 2 — Agravo/doença: valor fixo, não editável (LER/DORT / CID10: Z57.9)
 
 ## Campo 3 — Data da Notificação
 
@@ -84,7 +84,7 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Pneumoconioses)
 
 | AcroForm | Rótulo |
 |---|---|
-| `paciente_raca` | 1=Branca, 2=Preta, 3=Amarela, 4=Parda, 5=Indígena, 9=Ignorado |
+| `paciente_raca_cor` | 1=Branca, 2=Preta, 3=Amarela, 4=Parda, 5=Indígena, 9=Ignorado |
 
 ## Campo 14 — Escolaridade
 
@@ -209,7 +209,7 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Pneumoconioses)
 
 | AcroForm | Rótulo |
 |---|---|
-| `tempo_trabalho_ocupacao_val` | Valor numérico do tempo |
+| `tempo_trabalho_ocupacao_valor` | Valor numérico do tempo |
 | `tempo_trabalho_ocupacao_tipo` | Unidade: 1=Hora, 2=Dia, 3=Mês, 4=Ano |
 
 ## Campo 34 — Registro / CNPJ ou CPF da Empresa
@@ -285,16 +285,17 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Pneumoconioses)
 |---|---|
 | `empresa_terceirizada` | 1=Sim, 2=Não, 3=Não se aplica, 9=Ignorado |
 
-## Campo 46 — Agravos Associadas
+## Campo 46 — Agravos Associados
 *(1=Sim, 2=Não, 9=Ignorado)*
 
 | AcroForm | Rótulo |
 |---|---|
-| `agravo_limitacao_fluxo` | Limitação crônica ao fluxo aéreo |
+| `agravo_hipertensao` | Hipertensão Arterial |
+| `agravo_diabetes` | Diabetes Mellitus |
+| `agravo_hanseniase` | Hanseníase |
+| `agravo_transtorno_mental` | Transtorno Mental |
 | `agravo_tuberculose` | Tuberculose |
-| `agravo_cancer` | Câncer |
-| `agravo_artrite` | Artrite reumatóide |
-| `agravo_tireoidite` | Tireoidite |
+| `agravo_asma` | Asma |
 | `agravo_outras` | Outras (mesma escala 1/2/9) |
 | `agravo_outras_detalhe` | Texto livre — especificar quando "Outras" = Sim |
 
@@ -313,62 +314,67 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Pneumoconioses)
 
 ---
 
-# Seção: Pneumoconioses
+# Seção: LER/DORT
 
-## Campo 49 — A exposição a poeiras e minerais ocorreu em um ou mais vínculos distintos da empresa
-
-| AcroForm | Rótulo |
-|---|---|
-| `exposicao_vinculos_distintos` | 1=Sim, 2=Não, 9=Ignorado |
-
-## Campo 50 — Especificar
-
-| AcroForm | Rótulo |
-|---|---|
-| `exposicao_vinculos_distintos_especificar` | Texto livre — especificar os vínculos distintos |
-
-## Campo 51 — Agentes de Exposição
+## Campo 49 — Sinais e Sintomas
 *(1=Sim, 2=Não, 9=Ignorado)*
 
 | AcroForm | Rótulo |
 |---|---|
-| `exposicao_silica` | Sílica |
-| `exposicao_asbesto` | Asbesto |
-| `exposicao_poeiras_carvao` | Poeiras de carvão mineral |
-| `exposicao_poeiras_mistas` | Poeiras mistas (silicatos, talco) |
-| `exposicao_metais_duros` | Metais duros (cobalto, titânio, tungstênio) |
-| `exposicao_poeiras_abrasivos` | Poeiras de abrasivos |
-| `exposicao_berilio` | Berílio |
-| `exposicao_poeiras_organicas` | Poeiras orgânicas |
+| `sintoma_alteracao_sensibilidade` | Alteração de sensibilidade |
+| `sintoma_diminuicao_forca` | Diminuição de força muscular |
+| `sintoma_diminuicao_movimento` | Diminuição de movimento |
+| `sintoma_limitacao_movimentos` | Limitação de movimentos |
+| `sintoma_sinais_flogisticos` | Sinais flogísticos |
+| `sintoma_dor` | Dor |
+| `sintoma_outro` | Outros (mesma escala 1/2/9) |
+| `sintoma_outro_detalhe` | Texto livre — especificar quando "Outros" = Sim |
 
-## Campo 52 — Hábito de Fumar
-
-| AcroForm | Rótulo |
-|---|---|
-| `habito_fumar` | 1=Sim, 2=Não, 3=Ex-fumante, 9=Ignorado |
-
-## Campo 53 — Tempo de Exposição ao Tabaco
+## Campo 50 — Limitação e incapacidade para o exercício de tarefas
 
 | AcroForm | Rótulo |
 |---|---|
-| `tempo_exposicao_tabaco_valor` | Valor numérico do tempo |
-| `tempo_exposicao_tabaco_tipo` | Unidade: 1=Hora, 2=Dia, 3=Mês, 4=Ano |
+| `limitacao_incapacidade` | 1=Sim, 2=Não, 9=Ignorado |
 
-## Campo 54 — Confirmação Diagnóstica
+## Campo 51 — O paciente está exposto em seu local de trabalho à:
 *(1=Sim, 2=Não, 9=Ignorado)*
 
 | AcroForm | Rótulo |
 |---|---|
-| `confirmacao_diagnostico_radiografia` | Radiografia de tórax |
-| `confirmacao_diagnostico_biopsia` | Biópsia pulmonar |
-| `confirmacao_diagnostico_tomografia` | Tomografia de tórax de alta resolução |
-| `confirmacao_diagnostico_outro` | Outro |
+| `exposicao_premios_producao` | Prêmios de produção |
+| `exposicao_movimentos_repetitivos` | Movimentos repetitivos |
+| `exposicao_ambiente_estressante` | Ambiente estressante |
+| `exposicao_tempo_pausas` | Tempo de pausas |
+| `exposicao_jornada_6h` | Jornada de trabalho de mais de 6 horas |
 
-## Campo 55 — Diagnóstico Específico
+## Campo 52 — Diagnóstico Específico
 
 | AcroForm | Rótulo |
 |---|---|
 | `diagnostico_especifico_cid10` | Código CID-10 (texto livre) |
+
+---
+
+# Seção: Conclusão
+
+## Campo 53 — Houve afastamento do trabalho para tratamento?
+
+| AcroForm | Rótulo |
+|---|---|
+| `afastamento_tratamento` | 1=Sim, 2=Não, 9=Ignorado |
+
+## Campo 54 — Tempo de Afastamento do Trabalho para Tratamento
+
+| AcroForm | Rótulo |
+|---|---|
+| `tempo_afastamento_valor` | Valor numérico do tempo |
+| `tempo_afastamento_tipo` | Unidade: 1=Hora, 2=Dia, 3=Mês, 4=Ano |
+
+## Campo 55 — Com Afastamento do Trabalho
+
+| AcroForm | Rótulo |
+|---|---|
+| `afastamento_resultado` | 1=Melhora, 2=Piora, 9=Ignorado |
 
 ## Campo 56 — Há ou Houve Outros Trabalhadores com a mesma Doença no Local de Trabalho
 
@@ -376,23 +382,7 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Pneumoconioses)
 |---|---|
 | `outros_trabalhadores_doenca` | 1=Sim, 2=Não, 9=Ignorado |
 
-## Campo 57 — Avaliação Funcional (prova de função pulmonar)
-
-| AcroForm | Rótulo |
-|---|---|
-| `avaliacao_funcional` | 1=Sim, 2=Não, 9=Ignorado |
-
-## Campo 58 — Resultado da Avaliação Funcional
-
-| AcroForm | Rótulo |
-|---|---|
-| `avaliacao_funcional_resultado` | 1=Normal, 2=Alterada |
-
----
-
-# Seção: Conclusão
-
-## Campo 59 — Conduta Geral
+## Campo 57 — Conduta Geral
 *(1=Sim, 2=Não para cada opção)*
 
 | AcroForm | Rótulo |
@@ -406,19 +396,19 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Pneumoconioses)
 | `conduta_outros` | Outros |
 | `conduta_outros_detalhe` | Texto livre — especificar quando "Outros" = Sim |
 
-## Campo 60 — Evolução do Caso
+## Campo 58 — Evolução do Caso
 
 | AcroForm | Rótulo |
 |---|---|
 | `evolucao_caso` | 1=Cura, 2=Cura não confirmada, 3=Incapacidade Temporária, 4=Incapacidade Permanente Parcial, 5=Incapacidade Permanente Total, 6=Óbito por doença relacionada ao trabalho, 7=Óbito por Outra Causa, 8=Outro, 9=Ignorado |
 
-## Campo 61 — Se Óbito, Data
+## Campo 59 — Se Óbito, Data
 
 | AcroForm | Rótulo |
 |---|---|
 | `obito_data` | Data do óbito |
 
-## Campo 62 — Foi emitida a Comunicação de Acidente do Trabalho (CAT)
+## Campo 60 — Foi emitida a Comunicação de Acidente do Trabalho (CAT)
 
 | AcroForm | Rótulo |
 |---|---|

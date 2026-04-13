@@ -1,5 +1,5 @@
 ## Contexto
-Este documento mapeia os campos AcroForm de um formulário PDF (SINAN — Ficha de Investigação Pneumoconioses) para seus respectivos rótulos e valores aceitos. Com base nas respostas do usuário em um formulário HTML, preencha cada campo com o valor correspondente à escala indicada. Campos de texto livre devem receber a string exatamente como o usuário digitou.
+Este documento mapeia os campos AcroForm de um formulário PDF (SINAN — Ficha de Investigação Acidente de Trabalho com Exposição a Material Biológico) para seus respectivos rótulos e valores aceitos. Com base nas respostas do usuário em um formulário HTML, preencha cada campo com o valor correspondente à escala indicada. Campos de texto livre devem receber a string exatamente como o usuário digitou.
 
 ---
 
@@ -16,7 +16,7 @@ Este documento mapeia os campos AcroForm de um formulário PDF (SINAN — Ficha 
 
 Campo 1 — Tipo de Notificação: valor fixo, não editável (2 - Individual)
 
-Campo 2 — Agravo/doença: valor fixo, não editável (Pneumoconioses)
+Campo 2 — Agravo/doença: valor fixo, não editável (Acidente de Trabalho com Exposição a Material Biológico / CID10: Z20.9)
 
 ## Campo 3 — Data da Notificação
 
@@ -39,11 +39,11 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Pneumoconioses)
 | `unidade_notificadora_nome` | Unidade de Saúde (ou outra fonte notificadora) — Nome |
 | `unidade_notificadora_cnes` | Unidade de Saúde — Código CNES |
 
-## Campo 7 — Data do Diagnóstico
+## Campo 7 — Data do Acidente
 
 | AcroForm | Rótulo |
 |---|---|
-| `data_diagnostico` | Data do Diagnóstico |
+| `data_acidente` | Data do Acidente |
 
 ---
 
@@ -72,7 +72,7 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Pneumoconioses)
 
 | AcroForm | Rótulo |
 |---|---|
-| `paciente_sexo` | Sexo: M=Masculino, F=Feminino, I=Ignorado |
+| `paciente_sexo` | M=Masculino, F=Feminino, I=Ignorado |
 
 ## Campo 12 — Gestante
 
@@ -84,7 +84,7 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Pneumoconioses)
 
 | AcroForm | Rótulo |
 |---|---|
-| `paciente_raca` | 1=Branca, 2=Preta, 3=Amarela, 4=Parda, 5=Indígena, 9=Ignorado |
+| `paciente_raca_cor` | 1=Branca, 2=Preta, 3=Amarela, 4=Parda, 5=Indígena, 9=Ignorado |
 
 ## Campo 14 — Escolaridade
 
@@ -209,10 +209,12 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Pneumoconioses)
 
 | AcroForm | Rótulo |
 |---|---|
-| `tempo_trabalho_ocupacao_val` | Valor numérico do tempo |
+| `tempo_trabalho_ocupacao_valor` | Valor numérico do tempo |
 | `tempo_trabalho_ocupacao_tipo` | Unidade: 1=Hora, 2=Dia, 3=Mês, 4=Ano |
 
-## Campo 34 — Registro / CNPJ ou CPF da Empresa
+## Dados da Empresa Contratante
+
+## Campo 34 — Registro / CNPJ ou CPF
 
 | AcroForm | Rótulo |
 |---|---|
@@ -230,16 +232,11 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Pneumoconioses)
 |---|---|
 | `empresa_cnae` | Atividade Econômica — CNAE |
 
-## Campo 37 — UF da Empresa
+## Campos 37 e 38 — UF e Município da Empresa
 
 | AcroForm | Rótulo |
 |---|---|
 | `empresa_uf` | UF da Empresa |
-
-## Campo 38 — Município da Empresa
-
-| AcroForm | Rótulo |
-|---|---|
 | `empresa_municipio` | Município da Empresa |
 | `empresa_cnae_codigo_ibge` | Município da Empresa — Código IBGE |
 
@@ -285,140 +282,118 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Pneumoconioses)
 |---|---|
 | `empresa_terceirizada` | 1=Sim, 2=Não, 3=Não se aplica, 9=Ignorado |
 
-## Campo 46 — Agravos Associadas
-*(1=Sim, 2=Não, 9=Ignorado)*
-
-| AcroForm | Rótulo |
-|---|---|
-| `agravo_limitacao_fluxo` | Limitação crônica ao fluxo aéreo |
-| `agravo_tuberculose` | Tuberculose |
-| `agravo_cancer` | Câncer |
-| `agravo_artrite` | Artrite reumatóide |
-| `agravo_tireoidite` | Tireoidite |
-| `agravo_outras` | Outras (mesma escala 1/2/9) |
-| `agravo_outras_detalhe` | Texto livre — especificar quando "Outras" = Sim |
-
-## Campo 47 — Tempo de Exposição ao Agente de Risco
-
-| AcroForm | Rótulo |
-|---|---|
-| `tempo_exposicao_valor` | Valor numérico do tempo |
-| `tempo_exposicao_tipo` | Unidade: 1=Hora, 2=Dia, 3=Mês, 4=Ano |
-
-## Campo 48 — Regime de Tratamento
-
-| AcroForm | Rótulo |
-|---|---|
-| `regime_tratamento` | 1=Hospitalar, 2=Ambulatorial |
-
 ---
 
-# Seção: Pneumoconioses
+# Seção: Acidente com Material Biológico
 
-## Campo 49 — A exposição a poeiras e minerais ocorreu em um ou mais vínculos distintos da empresa
-
-| AcroForm | Rótulo |
-|---|---|
-| `exposicao_vinculos_distintos` | 1=Sim, 2=Não, 9=Ignorado |
-
-## Campo 50 — Especificar
-
-| AcroForm | Rótulo |
-|---|---|
-| `exposicao_vinculos_distintos_especificar` | Texto livre — especificar os vínculos distintos |
-
-## Campo 51 — Agentes de Exposição
+## Campo 46 — Tipo de Exposição
 *(1=Sim, 2=Não, 9=Ignorado)*
 
 | AcroForm | Rótulo |
 |---|---|
-| `exposicao_silica` | Sílica |
-| `exposicao_asbesto` | Asbesto |
-| `exposicao_poeiras_carvao` | Poeiras de carvão mineral |
-| `exposicao_poeiras_mistas` | Poeiras mistas (silicatos, talco) |
-| `exposicao_metais_duros` | Metais duros (cobalto, titânio, tungstênio) |
-| `exposicao_poeiras_abrasivos` | Poeiras de abrasivos |
-| `exposicao_berilio` | Berílio |
-| `exposicao_poeiras_organicas` | Poeiras orgânicas |
+| `tipo_exposicao_percutanea` | Percutânea |
+| `tipo_exposicao_mucosa` | Mucosa (oral/ocular) |
+| `tipo_exposicao_pele_integra` | Pele íntegra |
+| `tipo_exposicao_pele_nao_integra` | Pele não íntegra |
+| `tipo_exposicao_outros` | Outros (mesma escala 1/2/9) |
+| `tipo_exposicao_outros_detalhe` | Texto livre — especificar quando "Outros" = Sim |
 
-## Campo 52 — Hábito de Fumar
+## Campo 47 — Material Orgânico
 
 | AcroForm | Rótulo |
 |---|---|
-| `habito_fumar` | 1=Sim, 2=Não, 3=Ex-fumante, 9=Ignorado |
+| `material_organico` | 1=Sangue, 2=Líquor, 3=Líquido pleural, 4=Líquido ascítico, 5=Ignorado, 6=Fluido com sangue, 7=Soro/plasma, 8=Outros |
+| `material_organico_outros` | Texto livre — especificar quando "Outros" selecionado |
 
-## Campo 53 — Tempo de Exposição ao Tabaco
+## Campo 48 — Circunstância do Acidente
 
 | AcroForm | Rótulo |
 |---|---|
-| `tempo_exposicao_tabaco_valor` | Valor numérico do tempo |
-| `tempo_exposicao_tabaco_tipo` | Unidade: 1=Hora, 2=Dia, 3=Mês, 4=Ano |
+| `circunstancia_acidente` | 01=Administ. de medicação endovenosa, 02=Administ. de medicação intramuscular, 03=Administ. de medicação subcutânea, 04=Administ. de medicação intradérmica, 05=Punção venosa/arterial para coleta de sangue, 06=Punção venosa/arterial não especificada, 07=Descarte inadequado de material perfurocortante em saco de lixo, 08=Descarte inadequado de material perfurocortante em bancada/cama/chão, 09=Lavanderia, 10=Lavagem de material, 11=Manipulação de caixa com material perfurocortante, 12=Procedimento cirúrgico, 13=Procedimento odontológico, 14=Procedimento laboratorial, 15=Dextro, 16=Reencape, 98=Outros, 99=Ignorado |
 
-## Campo 54 — Confirmação Diagnóstica
+## Campo 49 — Agente
+
+| AcroForm | Rótulo |
+|---|---|
+| `agente_tipo` | 1=Agulha com lúmen (luz), 2=Agulha sem lúmen/maciça, 3=Intracath, 4=Vidros, 5=Lâmina/lanceta (qualquer tipo), 6=Outros, 9=Ignorado |
+
+## Campo 50 — Uso de EPI
 *(1=Sim, 2=Não, 9=Ignorado)*
 
 | AcroForm | Rótulo |
 |---|---|
-| `confirmacao_diagnostico_radiografia` | Radiografia de tórax |
-| `confirmacao_diagnostico_biopsia` | Biópsia pulmonar |
-| `confirmacao_diagnostico_tomografia` | Tomografia de tórax de alta resolução |
-| `confirmacao_diagnostico_outro` | Outro |
+| `uso_epi_luva` | Luva |
+| `uso_epi_avental` | Avental |
+| `uso_epi_oculos` | Óculos |
+| `uso_epi_mascara` | Máscara |
+| `uso_epi_protecao_facial` | Proteção facial |
+| `uso_epi_bota` | Bota |
 
-## Campo 55 — Diagnóstico Específico
-
-| AcroForm | Rótulo |
-|---|---|
-| `diagnostico_especifico_cid10` | Código CID-10 (texto livre) |
-
-## Campo 56 — Há ou Houve Outros Trabalhadores com a mesma Doença no Local de Trabalho
+## Campo 51 — Situação Vacinal do Acidentado em Relação à Hepatite B (3 doses)
 
 | AcroForm | Rótulo |
 |---|---|
-| `outros_trabalhadores_doenca` | 1=Sim, 2=Não, 9=Ignorado |
+| `situacal_vacinal_hepb` | 1=Vacinado, 2=Não vacinado, 9=Ignorado |
 
-## Campo 57 — Avaliação Funcional (prova de função pulmonar)
-
-| AcroForm | Rótulo |
-|---|---|
-| `avaliacao_funcional` | 1=Sim, 2=Não, 9=Ignorado |
-
-## Campo 58 — Resultado da Avaliação Funcional
+## Campo 52 — Resultados de Exames do Acidentado (no momento do acidente — data ZERO)
+*(1=Positivo, 2=Negativo, 3=Inconclusivo, 4=Não realizado, 9=Ignorado)*
 
 | AcroForm | Rótulo |
 |---|---|
-| `avaliacao_funcional_resultado` | 1=Normal, 2=Alterada |
+| `resultados_acidentado_hiv` | Anti-HIV |
+| `resultados_acidentado_hbsag` | HbsAg |
+| `resultados_acidentado_antihbs` | Anti-HBs |
+| `resultados_acidentado_antihcv` | Anti-HCV |
+
+## Campo 53 — Paciente Fonte Conhecida?
+
+| AcroForm | Rótulo |
+|---|---|
+| `fonte_conhecida` | 1=Sim, 2=Não, 9=Ignorado |
+
+## Campo 54 — Se Sim, Qual o Resultado dos Testes Sorológicos?
+*(1=Positivo, 2=Negativo, 3=Inconclusivo, 4=Não Realizado, 9=Ignorado)*
+
+| AcroForm | Rótulo |
+|---|---|
+| `resultados_fonte_hiv` | Anti-HIV |
+| `resultados_fonte_hbsag` | HbsAg |
+| `resultados_fonte_antihbc` | Anti-HBc |
+| `resultados_fonte_antihcv` | Anti-HCV |
+
+## Campo 55 — Conduta no Momento do Acidente
+*(1=Sim, 2=Não, 9=Ignorado)*
+
+| AcroForm | Rótulo |
+|---|---|
+| `conduta_sem_quimioprofilaxia` | Sem quimioprofilaxia |
+| `conduta_recusou_quimioprofilaxia` | Recusou quimioprofilaxia |
+| `conduta_azt_3tc` | AZT+3TC |
+| `conduta_azt_3tc_indinavir` | AZT+3TC+Indinavir |
+| `conduta_azt_3tc_nelfinavir` | AZT+3TC+Nelfinavir |
+| `conduta_hbig` | Imunoglobulina humana contra hepatite B |
+| `conduta_vacina_hepatiteb` | Vacina hepatite B |
+| `conduta_outro` | Outro |
+| `conduta_outro_detalhe` | Texto livre — especificar quando "Outro" = Sim |
 
 ---
 
 # Seção: Conclusão
 
-## Campo 59 — Conduta Geral
-*(1=Sim, 2=Não para cada opção)*
+## Campo 56 — Evolução do Caso
 
 | AcroForm | Rótulo |
 |---|---|
-| `conduta_afastamento_risco` | Afastamento do agente do risco com mudança de função e/ou posto de trabalho |
-| `conduta_mudanca_organizacao` | Adoção de mudança na organização do trabalho |
-| `conduta_protecao_coletiva` | Adoção de proteção coletiva |
-| `conduta_afastamento_local` | Afastamento do local de trabalho |
-| `conduta_protecao_individual` | Adoção de proteção individual |
-| `conduta_nenhum` | Nenhum |
-| `conduta_outros` | Outros |
-| `conduta_outros_detalhe` | Texto livre — especificar quando "Outros" = Sim |
+| `evolucao_caso` | 1=Alta com conversão sorológica (especificar vírus), 2=Alta sem conversão sorológica, 3=Alta paciente fonte negativo, 4=Abandono, 5=Óbito por acidente com exposição a material biológico, 6=Óbito por Outra Causa, 9=Ignorado |
+| `evolucao_caso_alta_conversao_virus` | Texto livre — especificar o vírus quando evolução = 1 |
 
-## Campo 60 — Evolução do Caso
-
-| AcroForm | Rótulo |
-|---|---|
-| `evolucao_caso` | 1=Cura, 2=Cura não confirmada, 3=Incapacidade Temporária, 4=Incapacidade Permanente Parcial, 5=Incapacidade Permanente Total, 6=Óbito por doença relacionada ao trabalho, 7=Óbito por Outra Causa, 8=Outro, 9=Ignorado |
-
-## Campo 61 — Se Óbito, Data
+## Campo 57 — Se Óbito, Data
 
 | AcroForm | Rótulo |
 |---|---|
 | `obito_data` | Data do óbito |
 
-## Campo 62 — Foi emitida a Comunicação de Acidente do Trabalho (CAT)
+## Campo 58 — Foi Emitida a Comunicação de Acidente do Trabalho (CAT)
 
 | AcroForm | Rótulo |
 |---|---|

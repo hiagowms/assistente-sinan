@@ -1,5 +1,5 @@
 ## Contexto
-Este documento mapeia os campos AcroForm de um formulário PDF (SINAN — Ficha de Investigação Pneumoconioses) para seus respectivos rótulos e valores aceitos. Com base nas respostas do usuário em um formulário HTML, preencha cada campo com o valor correspondente à escala indicada. Campos de texto livre devem receber a string exatamente como o usuário digitou.
+Este documento mapeia os campos AcroForm de um formulário PDF (SINAN — Ficha de Investigação Acidente de Trabalho) para seus respectivos rótulos e valores aceitos. Com base nas respostas do usuário em um formulário HTML, preencha cada campo com o valor correspondente à escala indicada. Campos de texto livre devem receber a string exatamente como o usuário digitou.
 
 ---
 
@@ -16,7 +16,7 @@ Este documento mapeia os campos AcroForm de um formulário PDF (SINAN — Ficha 
 
 Campo 1 — Tipo de Notificação: valor fixo, não editável (2 - Individual)
 
-Campo 2 — Agravo/doença: valor fixo, não editável (Pneumoconioses)
+Campo 2 — Agravo/doença: valor fixo, não editável (Acidente de Trabalho / CID10: Y96)
 
 ## Campo 3 — Data da Notificação
 
@@ -39,11 +39,11 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Pneumoconioses)
 | `unidade_notificadora_nome` | Unidade de Saúde (ou outra fonte notificadora) — Nome |
 | `unidade_notificadora_cnes` | Unidade de Saúde — Código CNES |
 
-## Campo 7 — Data do Diagnóstico
+## Campo 7 — Data do Acidente
 
 | AcroForm | Rótulo |
 |---|---|
-| `data_diagnostico` | Data do Diagnóstico |
+| `data_acidente` | Data do Acidente |
 
 ---
 
@@ -72,7 +72,7 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Pneumoconioses)
 
 | AcroForm | Rótulo |
 |---|---|
-| `paciente_sexo` | Sexo: M=Masculino, F=Feminino, I=Ignorado |
+| `paciente_sexo` | M=Masculino, F=Feminino, I=Ignorado |
 
 ## Campo 12 — Gestante
 
@@ -84,7 +84,7 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Pneumoconioses)
 
 | AcroForm | Rótulo |
 |---|---|
-| `paciente_raca` | 1=Branca, 2=Preta, 3=Amarela, 4=Parda, 5=Indígena, 9=Ignorado |
+| `paciente_raca_cor` | 1=Branca, 2=Preta, 3=Amarela, 4=Parda, 5=Indígena, 9=Ignorado |
 
 ## Campo 14 — Escolaridade
 
@@ -209,216 +209,226 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Pneumoconioses)
 
 | AcroForm | Rótulo |
 |---|---|
-| `tempo_trabalho_ocupacao_val` | Valor numérico do tempo |
-| `tempo_trabalho_ocupacao_tipo` | Unidade: 1=Hora, 2=Dia, 3=Mês, 4=Ano |
+| `tempo_trabalho_ocupacao_valor` | Valor numérico do tempo |
+| `tempo_trabalho_ocupacao` | Unidade: 1=Hora, 2=Dia, 3=Mês, 4=Ano |
 
-## Campo 34 — Registro / CNPJ ou CPF da Empresa
+## Campo 34 — Local Onde Ocorreu o Acidente
+
+| AcroForm | Rótulo |
+|---|---|
+| `local_acidente` | 1=Instalações do contratante, 2=Via pública, 3=Instalações de terceiros, 4=Domicílio próprio, 9=Ignorado |
+
+## Dados da Empresa Contratante
+
+## Campo 35 — Registro / CNPJ ou CPF
 
 | AcroForm | Rótulo |
 |---|---|
 | `empresa_registro_cnpj_cpf` | Registro / CNPJ ou CPF |
 
-## Campo 35 — Nome da Empresa ou Empregador
+## Campo 36 — Nome da Empresa ou Empregador
 
 | AcroForm | Rótulo |
 |---|---|
 | `empresa_nome` | Nome da Empresa ou Empregador |
 
-## Campo 36 — Atividade Econômica (CNAE)
+## Campo 37 — Atividade Econômica (CNAE)
 
 | AcroForm | Rótulo |
 |---|---|
 | `empresa_cnae` | Atividade Econômica — CNAE |
 
-## Campo 37 — UF da Empresa
+## Campos 38 e 39 — UF e Município da Empresa
 
 | AcroForm | Rótulo |
 |---|---|
 | `empresa_uf` | UF da Empresa |
-
-## Campo 38 — Município da Empresa
-
-| AcroForm | Rótulo |
-|---|---|
 | `empresa_municipio` | Município da Empresa |
 | `empresa_cnae_codigo_ibge` | Município da Empresa — Código IBGE |
 
-## Campo 39 — Distrito da Empresa
+## Campo 40 — Distrito da Empresa
 
 | AcroForm | Rótulo |
 |---|---|
 | `empresa_distrito` | Distrito |
 
-## Campo 40 — Bairro da Empresa
+## Campo 41 — Bairro da Empresa
 
 | AcroForm | Rótulo |
 |---|---|
 | `empresa_bairro` | Bairro |
 
-## Campo 41 — Endereço da Empresa
+## Campo 42 — Endereço da Empresa
 
 | AcroForm | Rótulo |
 |---|---|
 | `empresa_endereco` | Endereço |
 
-## Campo 42 — Número da Empresa
+## Campo 43 — Número da Empresa
 
 | AcroForm | Rótulo |
 |---|---|
-| `empresa_numero` | Número |
+| `empresa_num` | Número |
 
-## Campo 43 — Ponto de Referência da Empresa
+## Campo 44 — Ponto de Referência da Empresa
 
 | AcroForm | Rótulo |
 |---|---|
 | `empresa_ponto_referencia` | Ponto de Referência |
 
-## Campo 44 — Telefone da Empresa
+## Campo 45 — Telefone da Empresa
 
 | AcroForm | Rótulo |
 |---|---|
 | `empresa_telefone` | (DDD) Telefone |
 
-## Campo 45 — O Empregador é Empresa Terceirizada
+## Campo 46 — O Empregador é Empresa Terceirizada
 
 | AcroForm | Rótulo |
 |---|---|
 | `empresa_terceirizada` | 1=Sim, 2=Não, 3=Não se aplica, 9=Ignorado |
 
-## Campo 46 — Agravos Associadas
-*(1=Sim, 2=Não, 9=Ignorado)*
+## Campo 47 — Se Empresa Terceirizada, Qual o CNAE da Empresa Principal
 
 | AcroForm | Rótulo |
 |---|---|
-| `agravo_limitacao_fluxo` | Limitação crônica ao fluxo aéreo |
-| `agravo_tuberculose` | Tuberculose |
-| `agravo_cancer` | Câncer |
-| `agravo_artrite` | Artrite reumatóide |
-| `agravo_tireoidite` | Tireoidite |
-| `agravo_outras` | Outras (mesma escala 1/2/9) |
-| `agravo_outras_detalhe` | Texto livre — especificar quando "Outras" = Sim |
+| `empresa_terceirizada_cnae` | CNAE da Empresa Principal (texto livre) |
 
-## Campo 47 — Tempo de Exposição ao Agente de Risco
+## Campo 48 — CNPJ da Empresa Principal
 
 | AcroForm | Rótulo |
 |---|---|
-| `tempo_exposicao_valor` | Valor numérico do tempo |
-| `tempo_exposicao_tipo` | Unidade: 1=Hora, 2=Dia, 3=Mês, 4=Ano |
+| `empresa_principal_cnpj` | CNPJ da Empresa Principal |
 
-## Campo 48 — Regime de Tratamento
+## Campo 49 — Razão Social (Nome da Empresa)
 
 | AcroForm | Rótulo |
 |---|---|
-| `regime_tratamento` | 1=Hospitalar, 2=Ambulatorial |
+| `empresa_principal_razao_social` | Razão Social da Empresa Principal (texto livre) |
 
 ---
 
-# Seção: Pneumoconioses
+# Seção: Dados do Acidente
 
-## Campo 49 — A exposição a poeiras e minerais ocorreu em um ou mais vínculos distintos da empresa
-
-| AcroForm | Rótulo |
-|---|---|
-| `exposicao_vinculos_distintos` | 1=Sim, 2=Não, 9=Ignorado |
-
-## Campo 50 — Especificar
+## Campo 50 — Hora do Acidente
 
 | AcroForm | Rótulo |
 |---|---|
-| `exposicao_vinculos_distintos_especificar` | Texto livre — especificar os vínculos distintos |
+| `hora_acidente_hora` | Hora (hh) |
+| `hora_acidente_minuto` | Minuto (mm) |
 
-## Campo 51 — Agentes de Exposição
-*(1=Sim, 2=Não, 9=Ignorado)*
-
-| AcroForm | Rótulo |
-|---|---|
-| `exposicao_silica` | Sílica |
-| `exposicao_asbesto` | Asbesto |
-| `exposicao_poeiras_carvao` | Poeiras de carvão mineral |
-| `exposicao_poeiras_mistas` | Poeiras mistas (silicatos, talco) |
-| `exposicao_metais_duros` | Metais duros (cobalto, titânio, tungstênio) |
-| `exposicao_poeiras_abrasivos` | Poeiras de abrasivos |
-| `exposicao_berilio` | Berílio |
-| `exposicao_poeiras_organicas` | Poeiras orgânicas |
-
-## Campo 52 — Hábito de Fumar
+## Campo 51 — Horas Após o Início da Jornada
 
 | AcroForm | Rótulo |
 |---|---|
-| `habito_fumar` | 1=Sim, 2=Não, 3=Ex-fumante, 9=Ignorado |
+| `horas_apos_jornada_hora` | Hora (hh) |
+| `horas_apos_jornada_minuto` | Minuto (mm) |
 
-## Campo 53 — Tempo de Exposição ao Tabaco
-
-| AcroForm | Rótulo |
-|---|---|
-| `tempo_exposicao_tabaco_valor` | Valor numérico do tempo |
-| `tempo_exposicao_tabaco_tipo` | Unidade: 1=Hora, 2=Dia, 3=Mês, 4=Ano |
-
-## Campo 54 — Confirmação Diagnóstica
-*(1=Sim, 2=Não, 9=Ignorado)*
+## Campos 52 e 53 — UF e Município de Ocorrência do Acidente
 
 | AcroForm | Rótulo |
 |---|---|
-| `confirmacao_diagnostico_radiografia` | Radiografia de tórax |
-| `confirmacao_diagnostico_biopsia` | Biópsia pulmonar |
-| `confirmacao_diagnostico_tomografia` | Tomografia de tórax de alta resolução |
-| `confirmacao_diagnostico_outro` | Outro |
+| `acidente_uf` | UF de Ocorrência do Acidente |
+| `acidente_municipio_nome` | Município de Ocorrência do Acidente (nome) |
+| `acidente_municipio_codigo_ibge` | Município de Ocorrência do Acidente — Código IBGE |
 
-## Campo 55 — Diagnóstico Específico
-
-| AcroForm | Rótulo |
-|---|---|
-| `diagnostico_especifico_cid10` | Código CID-10 (texto livre) |
-
-## Campo 56 — Há ou Houve Outros Trabalhadores com a mesma Doença no Local de Trabalho
+## Campo 54 — Código da Causa do Acidente CID-10 (de V01 a Y98)
 
 | AcroForm | Rótulo |
 |---|---|
-| `outros_trabalhadores_doenca` | 1=Sim, 2=Não, 9=Ignorado |
+| `acidente_causa_cid10` | Código CID-10 da causa do acidente (texto livre) |
 
-## Campo 57 — Avaliação Funcional (prova de função pulmonar)
-
-| AcroForm | Rótulo |
-|---|---|
-| `avaliacao_funcional` | 1=Sim, 2=Não, 9=Ignorado |
-
-## Campo 58 — Resultado da Avaliação Funcional
+## Campo 55 — Tipo de Acidente
 
 | AcroForm | Rótulo |
 |---|---|
-| `avaliacao_funcional_resultado` | 1=Normal, 2=Alterada |
+| `tipo_acidente` | 1=Típico, 2=Trajeto, 9=Ignorado |
+
+## Campo 56 — Houve Outros Trabalhadores Atingidos
+
+| AcroForm | Rótulo |
+|---|---|
+| `outros_trabalhadores_atingidos` | 1=Sim, 2=Não, 9=Ignorado |
+
+## Campo 57 — Se Sim, Quantos
+
+| AcroForm | Rótulo |
+|---|---|
+| `outros_trabalhadores_quantos` | Quantidade (numérico) |
+
+---
+
+# Seção: Dados do Atendimento Médico
+
+## Campo 58 — Ocorreu Atendimento Médico?
+
+| AcroForm | Rótulo |
+|---|---|
+| `atendimento_medico_ocorreu` | 1=Sim, 2=Não, 9=Ignorado |
+
+## Campo 59 — Data do Atendimento
+
+| AcroForm | Rótulo |
+|---|---|
+| `data_atendimento` | Data do Atendimento |
+
+## Campo 60 — UF do Atendimento
+
+| AcroForm | Rótulo |
+|---|---|
+| `atendimento_uf` | UF do Atendimento |
+
+## Campo 61 — Município do Atendimento
+
+| AcroForm | Rótulo |
+|---|---|
+| `atendimento_municipio_nome` | Município do Atendimento (nome) |
+| `atendimento_municipio_codigo_ibge` | Município do Atendimento — Código IBGE |
+
+## Campo 62 — Nome da Unidade de Saúde de Atendimento
+
+| AcroForm | Rótulo |
+|---|---|
+| `atendimento_unidade_saude_nome` | Nome da Unidade de Saúde de Atendimento |
+| `atendimento_unidade_saude_codigo` | Código da Unidade de Saúde de Atendimento |
+
+## Campo 63 — Partes do Corpo Atingidas
+
+| AcroForm | Rótulo |
+|---|---|
+| `corpo_atingido_1` | Parte do corpo atingida 1: 01=Olho, 02=Cabeça, 03=Pescoço, 04=Tórax, 05=Abdome, 06=Mão, 07=Membro superior, 08=Membro inferior, 09=Pé, 10=Todo o corpo, 11=Outro, 99=Ignorado |
+| `corpo_atingido_2` | Parte do corpo atingida 2 (mesma escala) |
+| `corpo_atingido_3` | Parte do corpo atingida 3 (mesma escala) |
+
+## Campo 64 — Diagnóstico da Lesão (CID-10)
+
+| AcroForm | Rótulo |
+|---|---|
+| `diagnostico_lesao_cid10` | Código CID-10 do diagnóstico da lesão (texto livre) |
+
+## Campo 65 — Regime de Tratamento
+
+| AcroForm | Rótulo |
+|---|---|
+| `regime_tratamento` | 1=Hospitalar, 2=Ambulatorial, 3=Ambos, 9=Ignorado |
 
 ---
 
 # Seção: Conclusão
 
-## Campo 59 — Conduta Geral
-*(1=Sim, 2=Não para cada opção)*
+## Campo 66 — Evolução do Caso
 
 | AcroForm | Rótulo |
 |---|---|
-| `conduta_afastamento_risco` | Afastamento do agente do risco com mudança de função e/ou posto de trabalho |
-| `conduta_mudanca_organizacao` | Adoção de mudança na organização do trabalho |
-| `conduta_protecao_coletiva` | Adoção de proteção coletiva |
-| `conduta_afastamento_local` | Afastamento do local de trabalho |
-| `conduta_protecao_individual` | Adoção de proteção individual |
-| `conduta_nenhum` | Nenhum |
-| `conduta_outros` | Outros |
-| `conduta_outros_detalhe` | Texto livre — especificar quando "Outros" = Sim |
+| `evolucao_caso` | 1=Cura, 2=Incapacidade temporária, 3=Incapacidade parcial permanente, 4=Incapacidade total permanente, 5=Óbito por acidente de trabalho grave, 6=Óbito por outras causas, 7=Outro, 9=Ignorado |
 
-## Campo 60 — Evolução do Caso
-
-| AcroForm | Rótulo |
-|---|---|
-| `evolucao_caso` | 1=Cura, 2=Cura não confirmada, 3=Incapacidade Temporária, 4=Incapacidade Permanente Parcial, 5=Incapacidade Permanente Total, 6=Óbito por doença relacionada ao trabalho, 7=Óbito por Outra Causa, 8=Outro, 9=Ignorado |
-
-## Campo 61 — Se Óbito, Data
+## Campo 67 — Se Óbito, Data do Óbito
 
 | AcroForm | Rótulo |
 |---|---|
 | `obito_data` | Data do óbito |
 
-## Campo 62 — Foi emitida a Comunicação de Acidente do Trabalho (CAT)
+## Campo 68 — Foi Emitida a Comunicação de Acidente no Trabalho (CAT)
 
 | AcroForm | Rótulo |
 |---|---|
@@ -430,4 +440,5 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Pneumoconioses)
 
 | AcroForm | Rótulo |
 |---|---|
-| `observacoes_complementares` | Texto livre — campo de área ampla para informações complementares e observações gerais |
+| `descricao_acidente` | Texto livre — Descrição sumária de como ocorreu o acidente / atividade / causas / condições / objeto / agentes que concorreram direta ou indiretamente para a ocorrência do acidente |
+| `observacoes_complementares` | Texto livre — Outras informações |
