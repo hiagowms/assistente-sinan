@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SINAN — Câncer Relacionado ao Trabalho | Assistente PET Saúde Digital</title>
+<title>SINAN — Intoxicação Exógena | Assistente PET Saúde Digital</title>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XBCCJ6GTG6"></script>
 <script>
@@ -14,24 +14,14 @@
 </script>
 <link rel="stylesheet" href="shared.css">
 <style>
-/* Estilos exclusivos da ficha de Câncer */
-.rf-toggle-btn{background:transparent;border:1.5px dashed var(--border);color:var(--text2);padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;white-space:nowrap;margin-bottom:12px}
-.rf-toggle-btn:hover,.rf-toggle-btn.active{border-color:#2563eb;color:#2563eb;background:rgba(37,99,235,.06);border-style:solid}
-.rf-panel{background:var(--bg-hover);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:16px;display:none}
-.rf-instr{font-size:12px;color:var(--text2);margin:0 0 10px;line-height:1.5}
-.rf-instr kbd{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:11px;font-family:monospace}
-.rf-textarea{width:100%;min-height:90px;resize:vertical;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:12px;font-family:monospace;background:var(--bg-card);color:var(--text);box-sizing:border-box;line-height:1.4}
-.rf-textarea:focus{outline:none;border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
-.rf-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+/* Estilos exclusivos da ficha de Intoxicação Exógena */
 .rf-cnae-warn{background:#fffbeb;border:1px solid #fbbf24;border-radius:8px;padding:9px 12px;margin-bottom:8px;font-size:12px;color:#92400e;line-height:1.5}
 [data-theme="dark"] .rf-cnae-warn{background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.35);color:#fcd34d}
-.rf-cnae-warn strong{font-weight:700}
 .rf-cnae-sugs{display:flex;flex-direction:column;gap:5px;margin-top:8px}
 .rf-cnae-sug-item{background:var(--bg-card);border:1.5px solid var(--border);border-radius:7px;padding:7px 11px;cursor:pointer;display:flex;align-items:baseline;gap:10px;transition:border-color .15s}
 .rf-cnae-sug-item:hover{border-color:#2563eb}
 .rf-cnae-sug-code{font-size:12px;font-weight:700;color:#2563eb;white-space:nowrap;flex-shrink:0}
 .rf-cnae-sug-name{font-size:11px;color:var(--text);line-height:1.3}
-.rf-instr a{color:#2563eb;text-decoration:underline}
 </style>
 </head>
 <body>
@@ -62,7 +52,7 @@ function toggleDarkMode(){
     <img class="hdr-logo" src="assets/img/pet-saude-logo-png.png" alt="PET Saúde Digital">
     <div class="hdr-vline"></div>
     <div class="hdr-title">
-      <h1>SINAN — Câncer Relacionado ao Trabalho</h1>
+      <h1>SINAN — Intoxicação Exógena</h1>
       <p>Assistente de preenchimento</p>
     </div>
     <button class="hdr-btn" id="btn-gerar" onclick="gerarPDF()">📄 Gerar PDF</button>
@@ -143,8 +133,8 @@ function toggleDarkMode(){
         <input type="date" id="f_data_notif" data-ess data-label="Data da notificação">
       </div>
       <div class="fld">
-        <label>Data do Diagnóstico <span class="req-star">⭐</span></label>
-        <input type="date" id="f_data_diag" data-ess data-label="Data do diagnóstico">
+        <label>Data dos Primeiros Sintomas <span class="req-star">⭐</span></label>
+        <input type="date" id="f_data_sintomas" data-ess data-label="Data dos primeiros sintomas">
       </div>
     </div>
 
@@ -405,11 +395,18 @@ function toggleDarkMode(){
     <div class="sec-num">4</div>
     <div class="sec-info">
       <h3>Antecedentes Epidemiológicos</h3>
-      <p>Ocupação, mercado de trabalho e dados da empresa</p>
+      <p>Ocupação, mercado de trabalho e local da exposição</p>
     </div>
     <span class="sec-badge badge-empty" id="badge4">—</span>
   </div>
   <div class="sec-body">
+
+    <div class="row">
+      <div class="fld">
+        <label>Data da Investigação</label>
+        <input type="date" id="f_data_investigacao">
+      </div>
+    </div>
 
     <div class="row row-wide">
       <div class="fld col-2">
@@ -440,21 +437,31 @@ function toggleDarkMode(){
         <input type="hidden" id="f_sit_mercado">
       </div>
     </div>
+    <div id="box_sit_mercado_outro" style="display:none; margin-bottom:14px">
+      <div class="fld">
+        <label>Especificar "Outros"</label>
+        <input type="text" id="f_sit_mercado_outro" data-caps placeholder="Qual situação?">
+      </div>
+    </div>
 
     <div class="row">
-      <div class="fld" style="max-width:120px">
-        <label>Tempo de Trabalho na Ocupação</label>
-        <input type="text" id="f_tempo_trab_val" placeholder="Ex: 12" maxlength="4">
-      </div>
       <div class="fld">
-        <label>Unidade</label>
-        <div class="pills" id="grp_tempo_trab_tipo" data-hidden="f_tempo_trab_tipo">
-          <label class="pill" data-val="1"><input type="radio" name="tempo_trab_tipo" value="1"> Hora</label>
-          <label class="pill" data-val="2"><input type="radio" name="tempo_trab_tipo" value="2"> Dia</label>
-          <label class="pill" data-val="3"><input type="radio" name="tempo_trab_tipo" value="3"> Mês</label>
-          <label class="pill" data-val="4"><input type="radio" name="tempo_trab_tipo" value="4"> Ano</label>
-        </div>
-        <input type="hidden" id="f_tempo_trab_tipo">
+        <label>Local de Ocorrência da Exposição</label>
+        <select id="f_local_exposicao">
+          <option value="">— Selecione —</option>
+          <option value="1">1 - Residência</option>
+          <option value="2">2 - Ambiente de trabalho</option>
+          <option value="3">3 - Trajeto do trabalho</option>
+          <option value="4">4 - Serviços de saúde</option>
+          <option value="5">5 - Escola/creche</option>
+          <option value="6">6 - Ambiente externo</option>
+          <option value="7">7 - Outro</option>
+          <option value="9">9 - Ignorado</option>
+        </select>
+      </div>
+      <div class="fld" id="box_local_exposicao_outro" style="display:none">
+        <label>Especificar "Outro"</label>
+        <input type="text" id="f_local_exposicao_outro" data-caps placeholder="Qual local?">
       </div>
     </div>
 
@@ -462,108 +469,106 @@ function toggleDarkMode(){
 </div>
 
 <!-- =========================================================
-  SEÇÃO 5 — DADOS DA EMPRESA CONTRATANTE
+  SEÇÃO 5 — DADOS DA EXPOSIÇÃO (ESTABELECIMENTO)
 ========================================================= -->
 <div class="sec" id="sec5">
   <div class="sec-hdr">
     <div class="sec-num">5</div>
     <div class="sec-info">
-      <h3>Dados da Empresa Contratante</h3>
-      <p>Empresa onde ocorreu a exposição</p>
+      <h3>Dados da Exposição</h3>
+      <p>Local/estabelecimento de ocorrência</p>
     </div>
     <span class="sec-badge badge-empty" id="badge5">—</span>
   </div>
   <div class="sec-body">
 
-    <button type="button" class="rf-toggle-btn" id="rf-toggle-btn" onclick="rfTogglePanel()">&#128203; Importar via Receita Federal</button>
-    <div class="rf-panel" id="rf-panel">
-      <p class="rf-instr">Acesse o site da <a href="https://solucoes.receita.fazenda.gov.br/servicos/cnpjreva/Cnpjreva_Solicitacao.asp" target="_blank" rel="noopener">Receita Federal</a>, abra a ficha do CNPJ, selecione tudo (<kbd>Ctrl+A</kbd>) e cole abaixo:</p>
-      <textarea id="rf-textarea" class="rf-textarea" rows="5" placeholder="Cole aqui o texto completo da página da Receita Federal..."></textarea>
-      <div class="rf-actions">
-        <button type="button" class="mbtn mbtn-p" onclick="rfExtrair()">Extrair e preencher</button>
-        <button type="button" class="mbtn mbtn-s" onclick="document.getElementById('rf-textarea').value=''">Limpar</button>
+    <div class="row row-full">
+      <div class="fld">
+        <label>Nome do Local/Estabelecimento de Ocorrência</label>
+        <input type="text" id="f_exposicao_nome_local" data-caps placeholder="Nome do local">
       </div>
     </div>
 
-    <div class="row row-wide">
+    <div class="row">
       <div class="fld">
-        <label>Registro/CNPJ/CPF</label>
-        <input type="text" id="f_emp_reg" placeholder="CNPJ ou CPF">
-      </div>
-      <div class="fld col-2">
-        <label>Nome da Empresa <span class="req-star">⭐</span></label>
-        <input type="text" id="f_emp_nome" data-caps data-ess data-label="Nome da empresa" placeholder="Razão social ou nome fantasia">
-      </div>
-      <div class="fld">
-        <label>CNAE</label>
-        <div class="rf-cnae-warn" id="rf-cnae-warn" style="display:none">&#9888;&#65039; CNAE <strong id="rf-cnae-warn-code"></strong><span id="rf-cnae-warn-ramo"></span> não consta na lista do SINAN NET. Selecione a classe mais próxima ou pesquise manualmente no campo abaixo:
-          <div class="rf-cnae-sugs" id="rf-cnae-sugs"></div>
-        </div>
+        <label>CNAE do Estabelecimento</label>
         <div class="ac-wrap">
-          <input type="text" id="f_emp_cnae" placeholder="Digite código ou atividade..." autocomplete="off">
-          <div class="ac-drop" id="f_emp_cnae-drop"></div>
+          <input type="text" id="f_exposicao_cnae" placeholder="Digite código ou atividade..." autocomplete="off">
+          <div class="ac-drop" id="f_exposicao_cnae-drop"></div>
         </div>
-        <span id="f_emp_cnae_hint" style="font-size:12px;color:#2563eb;margin-top:4px;display:none;line-height:1.4;font-weight:600"></span>
+        <span id="f_exposicao_cnae_hint" style="font-size:12px;color:#2563eb;margin-top:4px;display:none;line-height:1.4;font-weight:600"></span>
       </div>
     </div>
 
     <div class="row">
       <div class="fld" style="max-width:100px">
         <label>UF</label>
-        <input type="text" id="f_emp_uf" maxlength="2" data-caps placeholder="SP">
+        <input type="text" id="f_exposicao_uf" maxlength="2" data-caps placeholder="SP">
       </div>
       <div class="fld">
-        <label>Município</label>
+        <label>Município do Estabelecimento</label>
         <div class="ac-wrap">
-          <input type="text" id="f_emp_mun" data-caps placeholder="Nome do município" autocomplete="off">
-          <div class="ac-drop" id="f_emp_mun-drop"></div>
+          <input type="text" id="f_exposicao_mun" data-caps placeholder="Nome do município" autocomplete="off">
+          <div class="ac-drop" id="f_exposicao_mun-drop"></div>
         </div>
       </div>
       <div class="fld" style="max-width:120px">
         <label>IBGE</label>
-        <input type="text" id="f_emp_ibge" maxlength="7" placeholder="0000000" readonly>
+        <input type="text" id="f_exposicao_ibge" maxlength="7" placeholder="0000000" readonly>
       </div>
       <div class="fld">
         <label>Distrito</label>
-        <input type="text" id="f_emp_dist" data-caps>
+        <input type="text" id="f_exposicao_dist" data-caps>
       </div>
     </div>
 
     <div class="row">
       <div class="fld">
         <label>Bairro</label>
-        <input type="text" id="f_emp_bairro" data-caps>
+        <input type="text" id="f_exposicao_bairro" data-caps>
       </div>
       <div class="fld col-2">
-        <label>Endereço</label>
-        <input type="text" id="f_emp_end" data-caps>
+        <label>Logradouro</label>
+        <input type="text" id="f_exposicao_logr" data-caps>
       </div>
       <div class="fld" style="max-width:100px">
         <label>Número</label>
-        <input type="text" id="f_emp_num">
+        <input type="text" id="f_exposicao_num">
       </div>
     </div>
 
     <div class="row">
       <div class="fld col-2">
-        <label>Ponto de Referência</label>
-        <input type="text" id="f_emp_pref" data-caps>
+        <label>Complemento</label>
+        <input type="text" id="f_exposicao_compl" data-caps>
       </div>
-      <div class="fld">
-        <label>Telefone</label>
-        <input type="text" id="f_emp_tel" placeholder="(00) 00000-0000">
+      <div class="fld col-2">
+        <label>Ponto de Referência</label>
+        <input type="text" id="f_exposicao_pref" data-caps>
       </div>
     </div>
 
     <div class="row">
       <div class="fld">
-        <label>Empresa Terceirizada?</label>
-        <div class="pills" id="grp_emp_terc">
-          <label class="pill" data-val="1"><input type="radio" name="emp_terc" value="1"> Sim</label>
-          <label class="pill" data-val="2"><input type="radio" name="emp_terc" value="2"> Não</label>
-          <label class="pill" data-val="3"><input type="radio" name="emp_terc" value="3"> Não se aplica</label>
-          <label class="pill" data-val="9"><input type="radio" name="emp_terc" value="9"> Ignorado</label>
+        <label>CEP</label>
+        <input type="text" id="f_exposicao_cep" maxlength="9" placeholder="00000-000">
+      </div>
+      <div class="fld">
+        <label>Telefone</label>
+        <input type="text" id="f_exposicao_tel" placeholder="(00) 00000-0000">
+      </div>
+      <div class="fld">
+        <label>Zona</label>
+        <div class="pills" id="grp_exposicao_zona">
+          <label class="pill" data-val="1"><input type="radio" name="exposicao_zona" value="1"> Urbana</label>
+          <label class="pill" data-val="2"><input type="radio" name="exposicao_zona" value="2"> Rural</label>
+          <label class="pill" data-val="3"><input type="radio" name="exposicao_zona" value="3"> Periurbana</label>
+          <label class="pill" data-val="9"><input type="radio" name="exposicao_zona" value="9"> Ignorado</label>
         </div>
+      </div>
+      <div class="fld">
+        <label>País (se fora do Brasil)</label>
+        <input type="text" id="f_exposicao_pais" data-caps>
       </div>
     </div>
 
@@ -571,108 +576,256 @@ function toggleDarkMode(){
 </div>
 
 <!-- =========================================================
-  SEÇÃO 6 — CÂNCER RELACIONADO AO TRABALHO
+  SEÇÃO 6 — AGENTE TÓXICO E CIRCUNSTÂNCIAS
 ========================================================= -->
 <div class="sec" id="sec6">
   <div class="sec-hdr">
     <div class="sec-num">6</div>
     <div class="sec-info">
-      <h3>Câncer Relacionado ao Trabalho</h3>
-      <p>Exposição ocupacional, hábitos e diagnóstico</p>
+      <h3>Agente Tóxico e Circunstâncias</h3>
+      <p>Classificação, via de exposição, tipo e circunstância</p>
     </div>
     <span class="sec-badge badge-empty" id="badge6">—</span>
   </div>
   <div class="sec-body">
 
     <div class="row">
-      <div class="fld" style="max-width:120px">
-        <label>Tempo de Exposição ao Agente de Risco</label>
-        <input type="text" id="f_tempo_exp_val" placeholder="Ex: 12" maxlength="4">
-      </div>
       <div class="fld">
-        <label>Unidade</label>
-        <div class="pills" id="grp_tempo_exp_tipo" data-hidden="f_tempo_exp_tipo">
-          <label class="pill" data-val="1"><input type="radio" name="tempo_exp_tipo" value="1"> Hora</label>
-          <label class="pill" data-val="2"><input type="radio" name="tempo_exp_tipo" value="2"> Dia</label>
-          <label class="pill" data-val="3"><input type="radio" name="tempo_exp_tipo" value="3"> Mês</label>
-          <label class="pill" data-val="4"><input type="radio" name="tempo_exp_tipo" value="4"> Ano</label>
-        </div>
-        <input type="hidden" id="f_tempo_exp_tipo">
+        <label>Grupo do Agente Tóxico / Classificação Geral</label>
+        <select id="f_grupo_agente">
+          <option value="">— Selecione —</option>
+          <option value="01">01 - Medicamento</option>
+          <option value="02">02 - Agrotóxico uso agrícola</option>
+          <option value="03">03 - Agrotóxico uso doméstico</option>
+          <option value="04">04 - Agrotóxico uso saúde pública</option>
+          <option value="05">05 - Raticida</option>
+          <option value="06">06 - Produto veterinário</option>
+          <option value="07">07 - Produto de uso domiciliar</option>
+          <option value="08">08 - Cosmético/higiene pessoal</option>
+          <option value="09">09 - Produto químico de uso industrial</option>
+          <option value="10">10 - Metal</option>
+          <option value="11">11 - Drogas de abuso</option>
+          <option value="12">12 - Planta tóxica</option>
+          <option value="13">13 - Alimento e bebida</option>
+          <option value="14">14 - Outro</option>
+        </select>
       </div>
-      <div class="fld">
-        <label>Regime de Tratamento</label>
-        <div class="pills" id="grp_regime" data-hidden="f_regime">
-          <label class="pill" data-val="1"><input type="radio" name="regime" value="1"> Hospitalar</label>
-          <label class="pill" data-val="2"><input type="radio" name="regime" value="2"> Ambulatorial</label>
-        </div>
-        <input type="hidden" id="f_regime">
+      <div class="fld" id="box_grupo_outro" style="display:none">
+        <label>Especificar "Outro"</label>
+        <input type="text" id="f_grupo_outro" data-caps placeholder="Qual grupo?">
       </div>
     </div>
 
-    <div class="row">
-      <div class="fld col-2">
-        <label>Diagnóstico Específico (CID-10) <span class="req-star">⭐</span></label>
-        <div class="ac-wrap">
-          <input type="text" id="f_diag_cid" data-caps data-ess data-label="CID-10 do diagnóstico" autocomplete="off" placeholder="Ex: C34.9 — Neoplasia maligna do pulmão">
-          <div class="ac-drop" id="f_diag_cid-drop"></div>
-        </div>
-        <span id="f_diag_cid_hint" style="font-size:12px;color:#2563eb;margin-top:4px;display:none;line-height:1.4;font-weight:600"></span>
-      </div>
-    </div>
-
-    <div class="sublabel">Exposição Ocupacional a Agentes Cancerígenos <small style="color:#6b7280;font-weight:400;text-transform:none;margin-left:6px">(1=Sim, 2=Não, 9=Ignorado)</small></div>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px 20px;margin-bottom:14px">
-      <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Asbesto</div><div class="pills"><label class="pill"><input type="radio" name="exp_asbesto" value="1"> Sim</label><label class="pill"><input type="radio" name="exp_asbesto" value="2"> Não</label><label class="pill"><input type="radio" name="exp_asbesto" value="9"> Ignorado</label></div></div>
-      <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Sílica</div><div class="pills"><label class="pill"><input type="radio" name="exp_silica" value="1"> Sim</label><label class="pill"><input type="radio" name="exp_silica" value="2"> Não</label><label class="pill"><input type="radio" name="exp_silica" value="9"> Ignorado</label></div></div>
-      <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Aminas aromáticas</div><div class="pills"><label class="pill"><input type="radio" name="exp_aminas" value="1"> Sim</label><label class="pill"><input type="radio" name="exp_aminas" value="2"> Não</label><label class="pill"><input type="radio" name="exp_aminas" value="9"> Ignorado</label></div></div>
-      <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Benzeno e homólogos tóxicos</div><div class="pills"><label class="pill"><input type="radio" name="exp_benzeno" value="1"> Sim</label><label class="pill"><input type="radio" name="exp_benzeno" value="2"> Não</label><label class="pill"><input type="radio" name="exp_benzeno" value="9"> Ignorado</label></div></div>
-      <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Alcatrão, breu, betume, hulha, parafina</div><div class="pills"><label class="pill"><input type="radio" name="exp_alcatrao" value="1"> Sim</label><label class="pill"><input type="radio" name="exp_alcatrao" value="2"> Não</label><label class="pill"><input type="radio" name="exp_alcatrao" value="9"> Ignorado</label></div></div>
-      <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Hidrocarbonetos alifáticos ou aromáticos</div><div class="pills"><label class="pill"><input type="radio" name="exp_hidrocarbonetos" value="1"> Sim</label><label class="pill"><input type="radio" name="exp_hidrocarbonetos" value="2"> Não</label><label class="pill"><input type="radio" name="exp_hidrocarbonetos" value="9"> Ignorado</label></div></div>
-      <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Óleos</div><div class="pills"><label class="pill"><input type="radio" name="exp_oleos" value="1"> Sim</label><label class="pill"><input type="radio" name="exp_oleos" value="2"> Não</label><label class="pill"><input type="radio" name="exp_oleos" value="9"> Ignorado</label></div></div>
-      <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Berílio e compostos tóxicos</div><div class="pills"><label class="pill"><input type="radio" name="exp_berilio" value="1"> Sim</label><label class="pill"><input type="radio" name="exp_berilio" value="2"> Não</label><label class="pill"><input type="radio" name="exp_berilio" value="9"> Ignorado</label></div></div>
-      <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Cádmio e compostos</div><div class="pills"><label class="pill"><input type="radio" name="exp_cadmio" value="1"> Sim</label><label class="pill"><input type="radio" name="exp_cadmio" value="2"> Não</label><label class="pill"><input type="radio" name="exp_cadmio" value="9"> Ignorado</label></div></div>
-      <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Cromo e compostos tóxicos</div><div class="pills"><label class="pill"><input type="radio" name="exp_cromo" value="1"> Sim</label><label class="pill"><input type="radio" name="exp_cromo" value="2"> Não</label><label class="pill"><input type="radio" name="exp_cromo" value="9"> Ignorado</label></div></div>
-      <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Compostos de níquel</div><div class="pills"><label class="pill"><input type="radio" name="exp_niquel" value="1"> Sim</label><label class="pill"><input type="radio" name="exp_niquel" value="2"> Não</label><label class="pill"><input type="radio" name="exp_niquel" value="9"> Ignorado</label></div></div>
-      <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Radiações ionizantes</div><div class="pills"><label class="pill"><input type="radio" name="exp_rad_ionizantes" value="1"> Sim</label><label class="pill"><input type="radio" name="exp_rad_ionizantes" value="2"> Não</label><label class="pill"><input type="radio" name="exp_rad_ionizantes" value="9"> Ignorado</label></div></div>
-      <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Radiações não ionizantes</div><div class="pills"><label class="pill"><input type="radio" name="exp_rad_nao_ionizantes" value="1"> Sim</label><label class="pill"><input type="radio" name="exp_rad_nao_ionizantes" value="2"> Não</label><label class="pill"><input type="radio" name="exp_rad_nao_ionizantes" value="9"> Ignorado</label></div></div>
-      <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Hormônios</div><div class="pills"><label class="pill"><input type="radio" name="exp_hormonios" value="1"> Sim</label><label class="pill"><input type="radio" name="exp_hormonios" value="2"> Não</label><label class="pill"><input type="radio" name="exp_hormonios" value="9"> Ignorado</label></div></div>
-      <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Antineoplásicos</div><div class="pills"><label class="pill"><input type="radio" name="exp_antineoplasicos" value="1"> Sim</label><label class="pill"><input type="radio" name="exp_antineoplasicos" value="2"> Não</label><label class="pill"><input type="radio" name="exp_antineoplasicos" value="9"> Ignorado</label></div></div>
-      <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Outros</div><div class="pills"><label class="pill"><input type="radio" name="exp_outros" value="1" onchange="onExpOutros()"> Sim</label><label class="pill"><input type="radio" name="exp_outros" value="2" onchange="onExpOutros()"> Não</label><label class="pill"><input type="radio" name="exp_outros" value="9" onchange="onExpOutros()"> Ignorado</label></div></div>
-    </div>
-    <div id="box_exp_outros" style="display:none;margin-bottom:14px">
-      <div class="fld">
-        <label>Especificar "Outros" agentes</label>
-        <input type="text" id="f_exp_outros_det" data-caps placeholder="Descreva outros agentes cancerígenos">
-      </div>
-    </div>
-
+    <div class="sublabel">Agente Tóxico (até três agentes)</div>
     <div class="row">
       <div class="fld">
-        <label>Hábito de Fumar</label>
-        <div class="pills" id="grp_hab_fumar">
-          <label class="pill" data-val="1"><input type="radio" name="hab_fumar" value="1" onchange="onFumarChange()"> Sim</label>
-          <label class="pill" data-val="2"><input type="radio" name="hab_fumar" value="2" onchange="onFumarChange()"> Não</label>
-          <label class="pill" data-val="3"><input type="radio" name="hab_fumar" value="3" onchange="onFumarChange()"> Ex-fumante</label>
-          <label class="pill" data-val="9"><input type="radio" name="hab_fumar" value="9" onchange="onFumarChange()"> Ignorado</label>
-        </div>
+        <label>Agente 1 - Nome Comercial/popular</label>
+        <input type="text" id="f_agente1_nome" data-caps placeholder="Ex: Paracetamol">
+      </div>
+      <div class="fld">
+        <label>Agente 1 - Princípio Ativo</label>
+        <input type="text" id="f_agente1_principio" data-caps placeholder="Ex: Paracetamol">
+      </div>
+    </div>
+    <div class="row">
+      <div class="fld">
+        <label>Agente 2 - Nome Comercial/popular</label>
+        <input type="text" id="f_agente2_nome" data-caps>
+      </div>
+      <div class="fld">
+        <label>Agente 2 - Princípio Ativo</label>
+        <input type="text" id="f_agente2_principio" data-caps>
+      </div>
+    </div>
+    <div class="row">
+      <div class="fld">
+        <label>Agente 3 - Nome Comercial/popular</label>
+        <input type="text" id="f_agente3_nome" data-caps>
+      </div>
+      <div class="fld">
+        <label>Agente 3 - Princípio Ativo</label>
+        <input type="text" id="f_agente3_principio" data-caps>
       </div>
     </div>
 
-    <div id="box_tabaco" style="display:none;margin-bottom:14px">
+    <div id="box_agrotoxico" style="display:none">
       <div class="row">
-        <div class="fld" style="max-width:120px">
-          <label>Tempo de Exposição ao Tabaco</label>
-          <input type="text" id="f_tempo_tabaco_val" placeholder="Ex: 12" maxlength="4">
+        <div class="fld">
+          <label>Se Agrotóxico, Qual a Finalidade da Utilização</label>
+          <select id="f_agrotoxico_finalidade">
+            <option value="">— Selecione —</option>
+            <option value="1">1 - Inseticida</option>
+            <option value="2">2 - Herbicida</option>
+            <option value="3">3 - Carrapaticida</option>
+            <option value="4">4 - Raticida</option>
+            <option value="5">5 - Fungicida</option>
+            <option value="6">6 - Preservante para madeira</option>
+            <option value="7">7 - Outro</option>
+            <option value="9">9 - Ignorado</option>
+          </select>
+        </div>
+        <div class="fld" id="box_agrotoxico_finalidade_outro" style="display:none">
+          <label>Especificar "Outro"</label>
+          <input type="text" id="f_agrotoxico_finalidade_outro" data-caps placeholder="Qual finalidade?">
+        </div>
+      </div>
+
+      <div class="sublabel">Atividades Exercidas na Exposição Atual</div>
+      <div class="row">
+        <div class="fld">
+          <label>Atividade 1</label>
+          <select id="f_agrotoxico_atividade1">
+            <option value="">— Selecione —</option>
+            <option value="01">01 - Diluição</option>
+            <option value="02">02 - Pulverização</option>
+            <option value="03">03 - Tratamento de sementes</option>
+            <option value="04">04 - Armazenagem</option>
+            <option value="05">05 - Colheita</option>
+            <option value="06">06 - Transporte</option>
+            <option value="07">07 - Desinsetização</option>
+            <option value="08">08 - Produção/formulação</option>
+            <option value="09">09 - Outros</option>
+            <option value="10">10 - Não se aplica</option>
+            <option value="99">99 - Ignorado</option>
+          </select>
         </div>
         <div class="fld">
-          <label>Unidade</label>
-          <div class="pills" id="grp_tempo_tabaco_tipo" data-hidden="f_tempo_tabaco_tipo">
-            <label class="pill" data-val="1"><input type="radio" name="tempo_tabaco_tipo" value="1"> Hora</label>
-            <label class="pill" data-val="2"><input type="radio" name="tempo_tabaco_tipo" value="2"> Dia</label>
-            <label class="pill" data-val="3"><input type="radio" name="tempo_tabaco_tipo" value="3"> Mês</label>
-            <label class="pill" data-val="4"><input type="radio" name="tempo_tabaco_tipo" value="4"> Ano</label>
-          </div>
-          <input type="hidden" id="f_tempo_tabaco_tipo">
+          <label>Atividade 2</label>
+          <select id="f_agrotoxico_atividade2">
+            <option value="">— Selecione —</option>
+            <option value="01">01 - Diluição</option>
+            <option value="02">02 - Pulverização</option>
+            <option value="03">03 - Tratamento de sementes</option>
+            <option value="04">04 - Armazenagem</option>
+            <option value="05">05 - Colheita</option>
+            <option value="06">06 - Transporte</option>
+            <option value="07">07 - Desinsetização</option>
+            <option value="08">08 - Produção/formulação</option>
+            <option value="09">09 - Outros</option>
+            <option value="10">10 - Não se aplica</option>
+            <option value="99">99 - Ignorado</option>
+          </select>
+        </div>
+        <div class="fld">
+          <label>Atividade 3</label>
+          <select id="f_agrotoxico_atividade3">
+            <option value="">— Selecione —</option>
+            <option value="01">01 - Diluição</option>
+            <option value="02">02 - Pulverização</option>
+            <option value="03">03 - Tratamento de sementes</option>
+            <option value="04">04 - Armazenagem</option>
+            <option value="05">05 - Colheita</option>
+            <option value="06">06 - Transporte</option>
+            <option value="07">07 - Desinsetização</option>
+            <option value="08">08 - Produção/formulação</option>
+            <option value="09">09 - Outros</option>
+            <option value="10">10 - Não se aplica</option>
+            <option value="99">99 - Ignorado</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="fld">
+          <label>Cultura/Lavoura (se agrotóxico de uso agrícola)</label>
+          <input type="text" id="f_agrotoxico_cultura" data-caps placeholder="Ex: Soja, Milho...">
+        </div>
+      </div>
+    </div>
+
+    <div class="sublabel">Via de Exposição/Contaminação</div>
+    <div class="row">
+      <div class="fld">
+        <label>1ª Opção</label>
+        <select id="f_via_exposicao1">
+          <option value="">— Selecione —</option>
+          <option value="1">1 - Digestiva</option>
+          <option value="2">2 - Cutânea</option>
+          <option value="3">3 - Respiratória</option>
+          <option value="4">4 - Ocular</option>
+          <option value="5">5 - Parenteral</option>
+          <option value="6">6 - Vaginal</option>
+          <option value="7">7 - Transplacentária</option>
+          <option value="8">8 - Outra</option>
+          <option value="9">9 - Ignorada</option>
+        </select>
+      </div>
+      <div class="fld">
+        <label>2ª Opção</label>
+        <select id="f_via_exposicao2">
+          <option value="">— Selecione —</option>
+          <option value="1">1 - Digestiva</option>
+          <option value="2">2 - Cutânea</option>
+          <option value="3">3 - Respiratória</option>
+          <option value="4">4 - Ocular</option>
+          <option value="5">5 - Parenteral</option>
+          <option value="6">6 - Vaginal</option>
+          <option value="7">7 - Transplacentária</option>
+          <option value="8">8 - Outra</option>
+          <option value="9">9 - Ignorada</option>
+        </select>
+      </div>
+      <div class="fld">
+        <label>3ª Opção</label>
+        <select id="f_via_exposicao3">
+          <option value="">— Selecione —</option>
+          <option value="1">1 - Digestiva</option>
+          <option value="2">2 - Cutânea</option>
+          <option value="3">3 - Respiratória</option>
+          <option value="4">4 - Ocular</option>
+          <option value="5">5 - Parenteral</option>
+          <option value="6">6 - Vaginal</option>
+          <option value="7">7 - Transplacentária</option>
+          <option value="8">8 - Outra</option>
+          <option value="9">9 - Ignorada</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="fld">
+        <label>Circunstância da Exposição/Contaminação</label>
+        <select id="f_circunstancia_exposicao">
+          <option value="">— Selecione —</option>
+          <option value="01">01 - Uso habitual</option>
+          <option value="02">02 - Acidental</option>
+          <option value="03">03 - Ambiental</option>
+          <option value="04">04 - Uso terapêutico</option>
+          <option value="05">05 - Prescrição médica inadequada</option>
+          <option value="06">06 - Erro de administração</option>
+          <option value="07">07 - Automedicação</option>
+          <option value="08">08 - Abuso</option>
+          <option value="09">09 - Ingestão de alimento ou bebida</option>
+          <option value="10">10 - Tentativa de suicídio</option>
+          <option value="11">11 - Tentativa de aborto</option>
+          <option value="12">12 - Violência/homicídio</option>
+          <option value="13">13 - Outra</option>
+          <option value="99">99 - Ignorado</option>
+        </select>
+      </div>
+      <div class="fld" id="box_circunstancia_outra" style="display:none">
+        <label>Especificar "Outra"</label>
+        <input type="text" id="f_circunstancia_outra" data-caps placeholder="Qual circunstância?">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="fld">
+        <label>A Exposição/Contaminação foi Decorrente do Trabalho/Ocupação?</label>
+        <div class="pills" id="grp_exposicao_trabalho">
+          <label class="pill" data-val="1"><input type="radio" name="exposicao_trabalho" value="1"> Sim</label>
+          <label class="pill" data-val="2"><input type="radio" name="exposicao_trabalho" value="2"> Não</label>
+          <label class="pill" data-val="9"><input type="radio" name="exposicao_trabalho" value="9"> Ignorado</label>
+        </div>
+      </div>
+      <div class="fld">
+        <label>Tipo de Exposição</label>
+        <div class="pills" id="grp_tipo_exposicao">
+          <label class="pill" data-val="1"><input type="radio" name="tipo_exposicao" value="1"> Aguda única</label>
+          <label class="pill" data-val="2"><input type="radio" name="tipo_exposicao" value="2"> Aguda repetida</label>
+          <label class="pill" data-val="3"><input type="radio" name="tipo_exposicao" value="3"> Crônica</label>
+          <label class="pill" data-val="4"><input type="radio" name="tipo_exposicao" value="4"> Aguda sobre Crônica</label>
+          <label class="pill" data-val="9"><input type="radio" name="tipo_exposicao" value="9"> Ignorado</label>
         </div>
       </div>
     </div>
@@ -681,43 +834,160 @@ function toggleDarkMode(){
 </div>
 
 <!-- =========================================================
-  SEÇÃO 7 — CONCLUSÃO
+  SEÇÃO 7 — DADOS DO ATENDIMENTO
 ========================================================= -->
 <div class="sec" id="sec7">
   <div class="sec-hdr">
     <div class="sec-num">7</div>
     <div class="sec-info">
-      <h3>Conclusão</h3>
-      <p>Outros casos, evolução, CAT e observações</p>
+      <h3>Dados do Atendimento</h3>
+      <p>Tempo decorrido, hospitalização e unidade de saúde</p>
     </div>
     <span class="sec-badge badge-empty" id="badge7">—</span>
   </div>
   <div class="sec-body">
 
     <div class="row">
+      <div class="fld" style="max-width:120px">
+        <label>Tempo Decorrido Exposição → Atendimento</label>
+        <input type="number" id="f_tempo_decorrido_val" min="0" placeholder="Valor">
+      </div>
       <div class="fld">
-        <label>Há ou houve outros trabalhadores com a mesma doença no local de trabalho?</label>
-        <div class="pills" id="grp_outros_trab">
-          <label class="pill" data-val="1"><input type="radio" name="outros_trab" value="1"> Sim</label>
-          <label class="pill" data-val="2"><input type="radio" name="outros_trab" value="2"> Não</label>
-          <label class="pill" data-val="9"><input type="radio" name="outros_trab" value="9"> Ignorado</label>
+        <label>Unidade</label>
+        <div class="pills" id="grp_tempo_decorrido_tipo">
+          <label class="pill" data-val="1"><input type="radio" name="tempo_decorrido_tipo" value="1"> Hora</label>
+          <label class="pill" data-val="2"><input type="radio" name="tempo_decorrido_tipo" value="2"> Dia</label>
+          <label class="pill" data-val="3"><input type="radio" name="tempo_decorrido_tipo" value="3"> Mês</label>
+          <label class="pill" data-val="4"><input type="radio" name="tempo_decorrido_tipo" value="4"> Ano</label>
+          <label class="pill" data-val="9"><input type="radio" name="tempo_decorrido_tipo" value="9"> Ignorado</label>
+        </div>
+      </div>
+      <div class="fld">
+        <label>Tipo de Atendimento</label>
+        <div class="pills" id="grp_tipo_atendimento">
+          <label class="pill" data-val="1"><input type="radio" name="tipo_atendimento" value="1"> Hospitalar</label>
+          <label class="pill" data-val="2"><input type="radio" name="tipo_atendimento" value="2"> Ambulatorial</label>
+          <label class="pill" data-val="3"><input type="radio" name="tipo_atendimento" value="3"> Domiciliar</label>
+          <label class="pill" data-val="9"><input type="radio" name="tipo_atendimento" value="9"> Nenhum</label>
         </div>
       </div>
     </div>
 
-    <div class="row row-wide">
-      <div class="fld col-2">
+    <div class="row">
+      <div class="fld">
+        <label>Houve Hospitalização?</label>
+        <div class="pills" id="grp_hospitalizacao">
+          <label class="pill" data-val="1"><input type="radio" name="hospitalizacao" value="1" onchange="onHospitalizacao()"> Sim</label>
+          <label class="pill" data-val="2"><input type="radio" name="hospitalizacao" value="2" onchange="onHospitalizacao()"> Não</label>
+          <label class="pill" data-val="9"><input type="radio" name="hospitalizacao" value="9" onchange="onHospitalizacao()"> Ignorado</label>
+        </div>
+      </div>
+    </div>
+
+    <div id="box_hospitalizacao" style="display:none">
+      <div class="row">
+        <div class="fld">
+          <label>Data da Internação</label>
+          <input type="date" id="f_data_internacao">
+        </div>
+        <div class="fld" style="max-width:100px">
+          <label>UF do Atendimento</label>
+          <input type="text" id="f_atend_uf" maxlength="2" data-caps placeholder="SP">
+        </div>
+        <div class="fld">
+          <label>Município de Hospitalização</label>
+          <div class="ac-wrap">
+            <input type="text" id="f_mun_hosp" data-caps placeholder="Nome do município" autocomplete="off">
+            <div class="ac-drop" id="f_mun_hosp-drop"></div>
+          </div>
+        </div>
+        <div class="fld" style="max-width:120px">
+          <label>IBGE</label>
+          <input type="text" id="f_mun_hosp_ibge" maxlength="7" placeholder="0000000" readonly>
+        </div>
+      </div>
+      <div class="row">
+        <div class="fld col-2">
+          <label>Unidade de Saúde</label>
+          <input type="text" id="f_unidade_saude_nome" data-caps placeholder="Nome da unidade">
+        </div>
+        <div class="fld">
+          <label>CNES</label>
+          <input type="text" id="f_unidade_saude_cnes" maxlength="7" placeholder="0000000">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- =========================================================
+  SEÇÃO 8 — CONCLUSÃO DO CASO
+========================================================= -->
+<div class="sec" id="sec8">
+  <div class="sec-hdr">
+    <div class="sec-num">8</div>
+    <div class="sec-info">
+      <h3>Conclusão do Caso</h3>
+      <p>Classificação final, diagnóstico, evolução e encerramento</p>
+    </div>
+    <span class="sec-badge badge-empty" id="badge8">—</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="row">
+      <div class="fld">
+        <label>Classificação Final</label>
+        <select id="f_classificacao_final">
+          <option value="">— Selecione —</option>
+          <option value="1">1 - Intoxicação confirmada</option>
+          <option value="2">2 - Só exposição</option>
+          <option value="3">3 - Reação adversa</option>
+          <option value="4">4 - Outro diagnóstico</option>
+          <option value="5">5 - Síndrome de abstinência</option>
+          <option value="9">9 - Ignorado</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="box_intoxicacao_confirmada" style="display:none">
+      <div class="row">
+        <div class="fld col-2">
+          <label>Diagnóstico (texto livre)</label>
+          <input type="text" id="f_diag_texto" data-caps placeholder="Descreva o diagnóstico">
+        </div>
+        <div class="fld">
+          <label>CID-10 <span class="req-star">⭐</span></label>
+          <div class="ac-wrap">
+            <input type="text" id="f_diag_cid" data-caps data-ess data-label="CID-10 do diagnóstico" autocomplete="off" placeholder="Ex: T65.9">
+            <div class="ac-drop" id="f_diag_cid-drop"></div>
+          </div>
+          <span id="f_diag_cid_hint" style="font-size:12px;color:#2563eb;margin-top:4px;display:none;line-height:1.4;font-weight:600"></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="fld">
+          <label>Critério de Confirmação</label>
+          <select id="f_criterio_confirmacao">
+            <option value="">— Selecione —</option>
+            <option value="1">1 - Laboratorial</option>
+            <option value="2">2 - Clínico-epidemiológico</option>
+            <option value="3">3 - Clínico</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="fld">
         <label>Evolução do Caso</label>
         <select id="f_evolucao">
           <option value="">— Selecione —</option>
-          <option value="1">1 - Sem evidência da doença (remissão completa)</option>
-          <option value="2">2 - Remissão parcial</option>
-          <option value="3">3 - Doença estável</option>
-          <option value="4">4 - Doença em progressão</option>
-          <option value="5">5 - Fora de possibilidade terapêutica</option>
-          <option value="6">6 - Óbito por câncer relacionado ao trabalho</option>
-          <option value="7">7 - Óbito por outras causas</option>
-          <option value="8">8 - Não se aplica</option>
+          <option value="1">1 - Cura sem sequela</option>
+          <option value="2">2 - Cura com sequela</option>
+          <option value="3">3 - Óbito por intoxicação exógena</option>
+          <option value="4">4 - Óbito por outra causa</option>
+          <option value="5">5 - Perda de seguimento</option>
           <option value="9">9 - Ignorado</option>
         </select>
       </div>
@@ -732,13 +1002,17 @@ function toggleDarkMode(){
 
     <div class="row">
       <div class="fld">
-        <label>CAT Emitida?</label>
+        <label>Comunicação de Acidente de Trabalho (CAT)</label>
         <div class="pills" id="grp_cat">
           <label class="pill" data-val="1"><input type="radio" name="cat" value="1"> Sim</label>
           <label class="pill" data-val="2"><input type="radio" name="cat" value="2"> Não</label>
           <label class="pill" data-val="3"><input type="radio" name="cat" value="3"> Não se aplica</label>
           <label class="pill" data-val="9"><input type="radio" name="cat" value="9"> Ignorado</label>
         </div>
+      </div>
+      <div class="fld">
+        <label>Data do Encerramento</label>
+        <input type="date" id="f_data_encerramento">
       </div>
     </div>
 
@@ -844,19 +1118,18 @@ function toggleDarkMode(){
 
 <script>
 /*==========================================================
-  FICHA CÂNCER — Configuração e funções específicas
-  Deve ser carregado ANTES de shared.js
+  FICHA INTOXICAÇÃO EXÓGENA — Configuração e funções específicas
 ==========================================================*/
 
-window.FICHA_NOME = 'cancer';
-window.FICHA_TRANSFER_SOURCE = 'cancer';
+window.FICHA_NOME = 'intoxicacao';
+window.FICHA_TRANSFER_SOURCE = 'intoxicacao';
 
 window.FICHA_PROG_CONFIG = {
-  ESS_IDS: {f_data_notif:1,f_data_diag:1,f_nome:1,f_raca:1,f_mun_res:1,f_ocupacao:1,f_emp_nome:1,f_diag_cid:1},
+  ESS_IDS: {f_data_notif:1,f_data_sintomas:1,f_nome:1,f_raca:1,f_mun_res:1,f_ocupacao:1,f_diag_cid:1},
   ESS_GROUPS: ['sexo'],
-  STD_GROUPS: ['cat','outros_trab','hab_fumar'],
+  STD_GROUPS: ['cat','exposicao_trabalho','tipo_exposicao'],
   COND_GROUPS: {},
-  PROG_EXCLUDE_IDS: {f_num_notif:1,f_compl_res:1,f_pais_res:1,f_pref_res:1,f_emp_reg:1,f_emp_dist:1,f_emp_pref:1,f_emp_ibge:1},
+  PROG_EXCLUDE_IDS: {f_num_notif:1,f_compl_res:1,f_pais_res:1,f_pref_res:1,f_exposicao_compl:1,f_exposicao_pref:1},
   ESS_GROUP_LABELS: {sexo:'Sexo'}
 };
 
@@ -864,17 +1137,18 @@ window.FICHA_UF_SELECTS = ['f_uf_notif','f_uf_res'];
 window.FICHA_MUN_CONFIGS = [
   {suf:'notif', ibge:'f_ibge_notif'},
   {suf:'res',   ibge:'f_ibge_res'},
-  {suf:'emp',   ibge:'f_emp_ibge', ufId:'f_emp_uf', munId:'f_emp_mun'}
+  {suf:'exposicao', ibge:'f_exposicao_ibge', ufId:'f_exposicao_uf', munId:'f_exposicao_mun'},
+  {suf:'hosp', ibge:'f_mun_hosp_ibge', ufId:'f_atend_uf', munId:'f_mun_hosp'}
 ];
 window.FICHA_CID_INPUT_ID = 'f_diag_cid';
 window.FICHA_CID_HINT_ID  = 'f_diag_cid_hint';
-window.FICHA_CNAE_INPUT_ID = 'f_emp_cnae';
-window.FICHA_CNAE_HINT_ID  = 'f_emp_cnae_hint';
-window.FICHA_MOBILE_NUMERIC_IDS = ['f_sus','f_cnes','f_ibge_notif','f_ibge_res','f_cep','f_num_res','f_tempo_exp_val','f_tempo_trab_val','f_tempo_tabaco_val'];
-window.FICHA_MOBILE_TEL_IDS = ['f_tel_res','f_emp_tel'];
+window.FICHA_CNAE_INPUT_ID = 'f_exposicao_cnae';
+window.FICHA_CNAE_HINT_ID  = 'f_exposicao_cnae_hint';
+window.FICHA_MOBILE_NUMERIC_IDS = ['f_sus','f_cnes','f_ibge_notif','f_ibge_res','f_cep','f_num_res','f_tempo_decorrido_val','f_unidade_saude_cnes'];
+window.FICHA_MOBILE_TEL_IDS = ['f_tel_res','f_exposicao_tel'];
 window.FICHA_TRANSFER_MUN_SUFS = ['notif','res'];
 window.FICHA_UNIT_IDS = ['f_mun_notif','f_uf_notif','f_ibge_notif','f_nome_un','f_cnes'];
-window.FICHA_HIDDEN_BOXES = ['row_gest','box_obito','box_tabaco','box_exp_outros'];
+window.FICHA_HIDDEN_BOXES = ['row_gest','box_obito','box_sit_mercado_outro','box_local_exposicao_outro','box_grupo_outro','box_agrotoxico','box_agrotoxico_finalidade_outro','box_circunstancia_outra','box_hospitalizacao','box_intoxicacao_confirmada'];
 window.FICHA_TRANSFER_FICHAS = [
   {id:'violencia',   label:'Violência',            sub:'Violência doméstica, sexual e/ou interpessoal',                               url:'sinan_violencia.html',           color:'#1e40af'},
   {id:'acidente',    label:'Acidente de Trabalho', sub:'Acidentes típicos, de trajeto ou fatais',                                     url:'sinan_acidente.html',            color:'#c2410c'},
@@ -882,7 +1156,9 @@ window.FICHA_TRANSFER_FICHAS = [
   {id:'lerdort',     label:'LER/DORT',             sub:'Lesão por esforço repetitivo / DORT',                                         url:'sinan_lerdort.html',             color:'#0f766e'},
   {id:'transtornos', label:'Transtornos Mentais',  sub:'Transtornos mentais relacionados ao trabalho',                                url:'sinan_transtornos.html',         color:'#4338ca'},
   {id:'pair',        label:'PAIR',                 sub:'Perda Auditiva Induzida por Ruído',                                           url:'sinan_pair.html',                color:'#2563eb'},
-  {id:'pneumoconioses',label:'Pneumoconioses',     sub:'Pneumoconioses relacionadas ao trabalho',                                     url:'sinan_pneumoconioses.html',      color:'#b45309'}
+  {id:'pneumoconioses',label:'Pneumoconioses',     sub:'Pneumoconioses relacionadas ao trabalho',                                     url:'sinan_pneumoconioses.html',      color:'#b45309'},
+  {id:'cancer',      label:'Câncer',               sub:'Câncer relacionado ao trabalho',                                              url:'sinan_cancer.html',              color:'#dc2626'},
+  {id:'dermatoses',  label:'Dermatoses',           sub:'Dermatoses ocupacionais',                                                     url:'sinan_dermatoses.html',          color:'#be185d'}
 ];
 
 /*==========================================================
@@ -890,55 +1166,84 @@ window.FICHA_TRANSFER_FICHAS = [
 ==========================================================*/
 window.FAKE_PATIENTS = [
   {
-    label: "José Aparecido, 58 anos",
-    sub: "Mesotelioma · exposição a asbesto · Osasco/SP",
+    label: "Juliana Mendes, 24 anos",
+    sub: "Tentativa de suicídio · medicamento · São Paulo/SP",
     fields: {
-      f_data_notif:"2025-11-20", f_data_diag:"2025-11-15",
-      f_nome_un:"HOSPITAL DO CÂNCER", f_cnes:"6123456",
-      f_mun_notif:"OSASCO", f_uf_notif:"SP", f_ibge_notif:"353440",
-      f_nome:"JOSE APARECIDO DOS SANTOS", f_nasc:"1967-05-10", f_raca:"4", f_escol:"3",
-      f_sus:"706012300000053", f_mae:"MARIA DOS SANTOS",
-      f_mun_res:"OSASCO", f_uf_res:"SP", f_ibge_res:"353440",
-      f_bairro_res:"CENTRO", f_logr_res:"RUA DA FABRICA", f_num_res:"500",
-      f_cep:"06000-000", f_tel_res:"(11) 99876-1234", f_zona_res:"1",
-      f_ocupacao:"OPERADOR DE MAQUINAS FIXAS",
-      f_sit_mercado:"06", f_tempo_trab_val:"30", f_tempo_trab_tipo:"4",
-      f_emp_nome:"INDUSTRIA DE FIBROCIMENTO SA", f_emp_cnae:"2341900",
-      f_emp_uf:"SP", f_emp_mun:"OSASCO",
-      f_diag_cid:"C45.0",
-      f_tempo_exp_val:"25", f_tempo_exp_tipo:"4",
-      f_regime:"2"
+      f_data_notif:"2025-12-01", f_data_sintomas:"2025-11-30",
+      f_nome_un:"HOSPITAL MUNICIPAL", f_cnes:"6123456",
+      f_mun_notif:"SAO PAULO", f_uf_notif:"SP", f_ibge_notif:"355030",
+      f_nome:"JULIANA MENDES OLIVEIRA", f_nasc:"2001-03-15", f_raca:"1", f_escol:"6",
+      f_sus:"706012300000057", f_mae:"MARIA MENDES",
+      f_mun_res:"SAO PAULO", f_uf_res:"SP", f_ibge_res:"355030",
+      f_bairro_res:"VILA MARIANA", f_logr_res:"RUA DOMINGOS DE MORAIS", f_num_res:"1000",
+      f_cep:"04010-000", f_tel_res:"(11) 99876-1234", f_zona_res:"1",
+      f_ocupacao:"ESTUDANTE",
+      f_sit_mercado:"99",
+      f_local_exposicao:"1",
+      f_grupo_agente:"01",
+      f_agente1_nome:"PARACETAMOL", f_agente1_principio:"PARACETAMOL",
+      f_via_exposicao1:"1",
+      f_circunstancia_exposicao:"10",
+      f_tempo_decorrido_val:"2", f_tempo_decorrido_tipo:"1",
+      f_tipo_atendimento:"1",
+      f_hospitalizacao:"1",
+      f_data_internacao:"2025-11-30", f_atend_uf:"SP", f_mun_hosp:"SAO PAULO", f_mun_hosp_ibge:"355030",
+      f_unidade_saude_nome:"HOSPITAL MUNICIPAL", f_unidade_saude_cnes:"6123456",
+      f_classificacao_final:"1",
+      f_diag_texto:"INTOXICACAO AGUDA POR PARACETAMOL",
+      f_diag_cid:"T39.1",
+      f_criterio_confirmacao:"1",
+      f_evolucao:"1",
+      f_cat:"3",
+      f_data_encerramento:"2025-12-02"
     },
-    radios: {sexo:"M", raca:"4", regime:"2",
-             exp_asbesto:"1", exp_silica:"2", exp_aminas:"2", exp_benzeno:"2", exp_alcatrao:"2", exp_hidrocarbonetos:"2", exp_oleos:"2", exp_berilio:"2", exp_cadmio:"2", exp_cromo:"2", exp_niquel:"2", exp_rad_ionizantes:"2", exp_rad_nao_ionizantes:"2", exp_hormonios:"2", exp_antineoplasicos:"2", exp_outros:"2",
-             hab_fumar:"1", tempo_tabaco_tipo:"4",
-             outros_trab:"2",
-             cat:"1"}
+    radios: {sexo:"F", gest:"5", raca:"1",
+             exposicao_zona:"1",
+             exposicao_trabalho:"2", tipo_exposicao:"1",
+             tempo_decorrido_tipo:"1", tipo_atendimento:"1", hospitalizacao:"1",
+             cat:"3"}
   },
   {
-    label: "Maria do Carmo, 62 anos",
-    sub: "Câncer de pulmão · exposição a sílica · ceramista · Criciúma/SC",
+    label: "Antônio Carlos, 52 anos",
+    sub: "Intoxicação ocupacional · agrotóxico · Rio Verde/GO",
     fields: {
-      f_data_notif:"2025-11-22", f_data_diag:"2025-11-18",
-      f_nome_un:"CEREST CRICIUMA", f_cnes:"4234567",
-      f_mun_notif:"CRICIUMA", f_uf_notif:"SC", f_ibge_notif:"420460",
-      f_nome:"MARIA DO CARMO OLIVEIRA", f_nasc:"1963-08-22", f_raca:"2", f_escol:"2",
-      f_sus:"706012300000054", f_mae:"JOSEFA OLIVEIRA",
-      f_mun_res:"CRICIUMA", f_uf_res:"SC", f_ibge_res:"420460",
-      f_bairro_res:"RIO MAINA", f_logr_res:"RUA DAS CERAMICAS", f_num_res:"350",
-      f_cep:"88800-000", f_tel_res:"(48) 99665-3322", f_zona_res:"1",
-      f_ocupacao:"CERAMISTA",
-      f_sit_mercado:"06", f_tempo_trab_val:"28", f_tempo_trab_tipo:"4",
-      f_emp_nome:"CERAMICA ELIZABETH SUL LTDA", f_emp_cnae:"2341900",
-      f_emp_uf:"SC", f_emp_mun:"CRICIUMA",
-      f_diag_cid:"C34.9",
-      f_tempo_exp_val:"20", f_tempo_exp_tipo:"4",
-      f_regime:"1"
+      f_data_notif:"2025-12-03", f_data_sintomas:"2025-12-02",
+      f_nome_un:"UPA RIO VERDE", f_cnes:"5212345",
+      f_mun_notif:"RIO VERDE", f_uf_notif:"GO", f_ibge_notif:"521880",
+      f_nome:"ANTONIO CARLOS DA SILVA", f_nasc:"1973-08-10", f_raca:"4", f_escol:"2",
+      f_sus:"706012300000058", f_mae:"JOSEFA SILVA",
+      f_mun_res:"RIO VERDE", f_uf_res:"GO", f_ibge_res:"521880",
+      f_bairro_res:"CENTRO", f_logr_res:"RUA DA LAVOURA", f_num_res:"500",
+      f_cep:"75900-000", f_tel_res:"(64) 99876-4321", f_zona_res:"2",
+      f_data_investigacao:"2025-12-03",
+      f_ocupacao:"TRABALHADOR RURAL",
+      f_sit_mercado:"01",
+      f_local_exposicao:"2",
+      f_exposicao_nome_local:"FAZENDA BOA ESPERANCA",
+      f_exposicao_cnae:"0151201",
+      f_exposicao_uf:"GO", f_exposicao_mun:"RIO VERDE", f_exposicao_ibge:"521880",
+      f_grupo_agente:"02",
+      f_agente1_nome:"ROUNDUP", f_agente1_principio:"GLIFOSATO",
+      f_agrotoxico_finalidade:"2",
+      f_agrotoxico_atividade1:"02",
+      f_agrotoxico_cultura:"SOJA",
+      f_via_exposicao1:"2", f_via_exposicao2:"3",
+      f_circunstancia_exposicao:"01",
+      f_tempo_decorrido_val:"6", f_tempo_decorrido_tipo:"1",
+      f_tipo_atendimento:"1",
+      f_hospitalizacao:"2",
+      f_classificacao_final:"1",
+      f_diag_texto:"INTOXICACAO POR GLIFOSATO",
+      f_diag_cid:"T60.0",
+      f_criterio_confirmacao:"2",
+      f_evolucao:"1",
+      f_cat:"1",
+      f_data_encerramento:"2025-12-05"
     },
-    radios: {sexo:"F", gest:"6", raca:"2", regime:"1",
-             exp_asbesto:"2", exp_silica:"1", exp_aminas:"2", exp_benzeno:"2", exp_alcatrao:"2", exp_hidrocarbonetos:"2", exp_oleos:"2", exp_berilio:"2", exp_cadmio:"2", exp_cromo:"2", exp_niquel:"2", exp_rad_ionizantes:"2", exp_rad_nao_ionizantes:"2", exp_hormonios:"2", exp_antineoplasicos:"2", exp_outros:"2",
-             hab_fumar:"2",
-             outros_trab:"1",
+    radios: {sexo:"M", raca:"4",
+             exposicao_zona:"2",
+             exposicao_trabalho:"1", tipo_exposicao:"1",
+             tempo_decorrido_tipo:"1", tipo_atendimento:"1", hospitalizacao:"2",
              cat:"1"}
   }
 ];
@@ -951,36 +1256,76 @@ function onSexoChange(){
   document.getElementById('row_gest').style.display = (s&&s.value==='F')?'grid':'none';
 }
 
-function onFumarChange(){
-  var v = document.querySelector('[name="hab_fumar"]:checked');
-  document.getElementById('box_tabaco').style.display = (v&&v.value==='1') ? 'block' : 'none';
+function onSitMercadoChange(){
+  var sel = document.querySelector('input[name="sit_mercado"]:checked');
+  document.getElementById('box_sit_mercado_outro').style.display = (sel && sel.value === '12') ? 'block' : 'none';
 }
 
-function onExpOutros(){
-  var sel = document.querySelector('input[name="exp_outros"]:checked');
-  document.getElementById('box_exp_outros').style.display = (sel && sel.value === '1') ? 'block' : 'none';
+function onLocalExposicao(){
+  var sel = document.getElementById('f_local_exposicao');
+  document.getElementById('box_local_exposicao_outro').style.display = (sel.value === '7') ? 'block' : 'none';
+}
+
+function onGrupoAgente(){
+  var sel = document.getElementById('f_grupo_agente');
+  document.getElementById('box_grupo_outro').style.display = (sel.value === '14') ? 'block' : 'none';
+  var agro = ['02','03','04'].includes(sel.value);
+  document.getElementById('box_agrotoxico').style.display = agro ? 'block' : 'none';
+}
+
+function onAgrotoxicoFinalidade(){
+  var sel = document.getElementById('f_agrotoxico_finalidade');
+  document.getElementById('box_agrotoxico_finalidade_outro').style.display = (sel.value === '7') ? 'block' : 'none';
+}
+
+function onCircunstancia(){
+  var sel = document.getElementById('f_circunstancia_exposicao');
+  document.getElementById('box_circunstancia_outra').style.display = (sel.value === '13') ? 'block' : 'none';
+}
+
+function onHospitalizacao(){
+  var v = document.querySelector('input[name="hospitalizacao"]:checked');
+  document.getElementById('box_hospitalizacao').style.display = (v&&v.value==='1') ? 'block' : 'none';
+}
+
+function onClassificacaoFinal(){
+  var sel = document.getElementById('f_classificacao_final');
+  document.getElementById('box_intoxicacao_confirmada').style.display = (sel.value === '1') ? 'block' : 'none';
 }
 
 function onEvolucao(){
   var v = document.getElementById('f_evolucao').value;
-  document.getElementById('box_obito').style.display = (v==='6'||v==='7') ? 'grid' : 'none';
+  document.getElementById('box_obito').style.display = (v==='3'||v==='4') ? 'grid' : 'none';
 }
 
+document.getElementById('f_local_exposicao').addEventListener('change', onLocalExposicao);
+document.getElementById('f_grupo_agente').addEventListener('change', onGrupoAgente);
+document.getElementById('f_agrotoxico_finalidade').addEventListener('change', onAgrotoxicoFinalidade);
+document.getElementById('f_circunstancia_exposicao').addEventListener('change', onCircunstancia);
+document.getElementById('f_classificacao_final').addEventListener('change', onClassificacaoFinal);
 document.getElementById('f_evolucao').addEventListener('change', onEvolucao);
+
+document.querySelectorAll('input[name="sit_mercado"]').forEach(r => r.addEventListener('change', onSitMercadoChange));
 
 /*==========================================================
   HOOKS
 ==========================================================*/
 window._applyVisibility = function(){
   onSexoChange();
-  onFumarChange();
-  onExpOutros();
+  onSitMercadoChange();
+  onLocalExposicao();
+  onGrupoAgente();
+  onAgrotoxicoFinalidade();
+  onCircunstancia();
+  onHospitalizacao();
+  onClassificacaoFinal();
   onEvolucao();
 };
 
 window._onPostClearForm = function(){
   var h = document.getElementById('f_ocupacao_hint'); if(h){h.textContent='';h.style.display='none';}
   var h2 = document.getElementById('f_diag_cid_hint'); if(h2){h2.textContent='';h2.style.display='none';}
+  var h3 = document.getElementById('f_exposicao_cnae_hint'); if(h3){h3.textContent='';h3.style.display='none';}
 };
 
 window._onPostCarregarPaciente = function(p){
@@ -997,185 +1342,6 @@ window._onPostCarregarPaciente = function(p){
     if(cidMatch){ cidHint.textContent=cidMatch.nome; cidHint.style.display='block'; }
   }
 };
-
-/*==========================================================
-  RECEITA FEDERAL — EXTRAÇÃO DE CNPJ
-==========================================================*/
-function rfTogglePanel(){
-  var panel = document.getElementById('rf-panel');
-  var btn   = document.getElementById('rf-toggle-btn');
-  var open  = panel.style.display === 'block';
-  panel.style.display = open ? 'none' : 'block';
-  btn.classList.toggle('active', !open);
-}
-
-function extractCompanyInfo(text){
-  var r = {};
-  var cnpjM = text.match(/\d{2}[\.\s]?\d{3}[\.\s]?\d{3}[\/\s]?\d{4}[-\s]?\d{2}/);
-  r.cnpj = cnpjM ? cnpjM[0].replace(/\s/g,'') : '';
-  function getVal(labelRe){
-    var re1 = new RegExp(labelRe+'[^:\\n\\r]*:[\\t ]*([^\\n\\r]+)','i');
-    var re2 = new RegExp(labelRe+'[^\\n\\r]*[\\n\\r]+(?:[ \\t]*[\\n\\r]+)*[ \\t]*([^\\n\\r]+)','i');
-    var m = text.match(re1) || text.match(re2);
-    return m ? m[1].trim() : '';
-  }
-  r.razaoSocial = getVal('NOME EMPRESARIAL') || getVal('Raz[aã]o\\s+Social');
-  var cnaeM = text.match(/CNAE[^\n:]*:?\s*([\d]{2}\.[\d]{2}-[\d](?:-[\d]{2})?)\s*[-–]\s*([^\n\r]+)/i);
-  if(!cnaeM){
-    var actBlock = text.match(/ATIVIDADE\s+ECON[ÔO]MICA[^\n]*\n([\s\S]{1,300})/i);
-    if(actBlock) cnaeM = actBlock[1].match(/([\d]{2}\.[\d]{2}-[\d](?:-[\d]{2})?)\s*[-–]\s*([^\n\r]+)/);
-  }
-  if(!cnaeM) cnaeM = text.match(/([\d]{2}\.[\d]{2}-[\d]-[\d]{2})\s*[-–]\s*([^\n\r]+)/);
-  r.cnaeCode      = cnaeM ? cnaeM[1].trim() : '';
-  r.ramoAtividade = cnaeM ? cnaeM[2].trim() : '';
-  var logr  = getVal('LOGRADOURO');
-  var compl = getVal('COMPLEMENTO');
-  var complVal = (compl && !/^\*+$/.test(compl)) ? compl : '';
-  r.logradouro = complVal ? logr + ' ' + complVal : logr;
-  r.numero = getVal('N[ÚU]MERO(?!\\s+DE\\s)');
-  r.bairro = getVal('BAIRRO[\\s\\/]DISTRITO') || getVal('Bairro');
-  r.municipio = getVal('MUNIC.PIO');
-  var ufRaw = getVal('\\bUF\\b');
-  r.uf = (ufRaw && /^[A-Za-z]{2}/.test(ufRaw)) ? ufRaw.substring(0,2).toUpperCase() : '';
-  if(!r.uf){ var ufM = text.match(/\bUF[:\s]+([A-Za-z]{2})\b/i); r.uf = ufM ? ufM[1].toUpperCase() : ''; }
-  var telBlock = getVal('TELEFONE');
-  var telM = telBlock.match(/\(?\d{2}\)?\s*\d{4,5}[-\s]?\d{4}/);
-  r.telefone = telM ? telM[0].replace(/\s+/g,' ').trim() : '';
-  return r;
-}
-
-function normCnaeRF(s){ return (s||'').replace(/[.\-\/\s]/g,''); }
-
-function rfFillCnae(sinanEntry, rfCode){
-  var inp  = document.getElementById('f_emp_cnae');
-  var hint = document.getElementById('f_emp_cnae_hint');
-  var displayCode = rfCode || sinanEntry.codigo;
-  if(inp){
-    inp.value = displayCode;
-    inp.dataset.sinanCnae = sinanEntry.codigo;
-  }
-  if(hint){
-    var hintText = rfCode && rfCode !== sinanEntry.codigo
-      ? rfCode + ' (RF) \u2192 SINAN: ' + sinanEntry.codigo + ' \u2014 ' + sinanEntry.nome
-      : sinanEntry.nome;
-    hint.textContent = hintText;
-    hint.style.display = 'block';
-  }
-}
-
-function rfMatchCnae(rfCode){
-  if(!rfCode || !window.SINAN_CNAES) return null;
-  var normExt = normCnaeRF(rfCode);
-  var found = window.SINAN_CNAES.find(function(c){ return normCnae(c.codigo) === normExt; });
-  if(found) return found;
-  found = window.SINAN_CNAES.find(function(c){
-    var nc = normCnae(c.codigo);
-    return nc.length < normExt.length && normExt.indexOf(nc) === 0;
-  });
-  return found || null;
-}
-
-function cnaeSemantic(query, topN){
-  if(!window.SINAN_CNAES || !query) return [];
-  var words = query.toUpperCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-    .replace(/[^A-Z0-9\s]/g,' ')
-    .split(/\s+/).filter(function(w){ return w.length > 3; });
-  if(!words.length) return [];
-  var scored = window.SINAN_CNAES.map(function(c){
-    var nome = c.nome.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-    var sc = 0; words.forEach(function(w){ if(nome.indexOf(w) >= 0) sc++; });
-    return {c:c, sc:sc};
-  }).filter(function(x){ return x.sc > 0; });
-  scored.sort(function(a,b){ return b.sc - a.sc; });
-  return scored.slice(0, topN||3).map(function(x){ return x.c; });
-}
-
-function rfExtrair(){
-  var text = document.getElementById('rf-textarea').value;
-  if(!text.trim()){ showToast('Cole o texto da Receita Federal antes de extrair.','warn'); return; }
-  var info = extractCompanyInfo(text);
-
-  if(info.cnpj)        _setField('f_emp_reg',    info.cnpj);
-  if(info.razaoSocial) _setField('f_emp_nome',   info.razaoSocial);
-  if(info.logradouro)  _setField('f_emp_end',    info.logradouro);
-  if(info.numero)      _setField('f_emp_num',    info.numero);
-  if(info.bairro){     _setField('f_emp_bairro', info.bairro);
-                       _setField('f_emp_dist',   info.bairro); }
-  if(info.uf) _setField('f_emp_uf', info.uf);
-  if(info.municipio){
-    var munNorm = info.municipio.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-    var munFound = (window.SINAN_MUNICIPIOS||[]).find(function(m){
-      return m.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'') === munNorm;
-    });
-    if(munFound){
-      _setField('f_emp_mun', munFound.nome);
-      var ibgeEl = document.getElementById('f_emp_ibge');
-      if(ibgeEl){ ibgeEl.value = munFound.ibge; ibgeEl.dispatchEvent(new Event('change',{bubbles:true})); }
-      if(!info.uf){ var empUfEl = document.getElementById('f_emp_uf'); if(empUfEl) empUfEl.value = munFound.uf; }
-    } else {
-      _setField('f_emp_mun', info.municipio);
-    }
-  }
-  if(info.telefone) _setField('f_emp_tel', info.telefone);
-
-  var cnaeOk = false;
-  if(info.cnaeCode || info.ramoAtividade){
-    var matched = rfMatchCnae(info.cnaeCode);
-    if(matched){ rfFillCnae(matched, info.cnaeCode); cnaeOk = true; }
-  }
-
-  var warn = document.getElementById('rf-cnae-warn');
-  if(!cnaeOk){
-    if(warn){
-      document.getElementById('rf-cnae-warn-code').textContent = info.cnaeCode || '(não identificado)';
-      document.getElementById('rf-cnae-warn-ramo').textContent = info.ramoAtividade ? ' \u2014 ' + info.ramoAtividade : '';
-      var sug = cnaeSemantic(info.ramoAtividade || info.cnaeCode, 3);
-      var rfCodeEsc = (info.cnaeCode || '').replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-      var html = sug.map(function(c){
-        return '<div class="rf-cnae-sug-item" onclick="rfSelectCnaeSug(\''+c.codigo.replace(/'/g,"\\'")+'\',\''+rfCodeEsc+'\')">'
-             + '<span class="rf-cnae-sug-code">'+c.codigo+'</span>'
-             + '<span class="rf-cnae-sug-name">'+c.nome+'</span></div>';
-      }).join('');
-      document.getElementById('rf-cnae-sugs').innerHTML = html;
-      warn.style.display = 'block';
-    }
-    showToast('Demais campos preenchidos. Escolha o CNAE manualmente.','warn',4000);
-  } else {
-    if(warn) warn.style.display = 'none';
-    showToast('Dados da empresa preenchidos com sucesso.','ok');
-  }
-  document.getElementById('rf-panel').style.display = 'none';
-  document.getElementById('rf-toggle-btn').classList.remove('active');
-  updateProgress();
-}
-
-function rfSelectCnaeSug(codigo, rfCode){
-  var found = (window.SINAN_CNAES||[]).find(function(c){ return c.codigo === codigo; });
-  if(found) rfFillCnae(found, rfCode || found.codigo);
-  var warn = document.getElementById('rf-cnae-warn');
-  if(warn) warn.style.display = 'none';
-  showToast('CNAE selecionado.','ok');
-  updateProgress();
-}
-
-function sinanCnaeVal(){
-  var el = document.getElementById('f_emp_cnae');
-  if(!el) return '';
-  if(el.dataset && el.dataset.sinanCnae) return el.dataset.sinanCnae;
-  return el.value.replace(/-\d{2}$/, '').trim();
-}
-
-(function(){
-  var el = document.getElementById('f_emp_cnae');
-  if(el) el.addEventListener('input', function(){
-    if(this.dataset) delete this.dataset.sinanCnae;
-    if(this.value.trim()){
-      var w = document.getElementById('rf-cnae-warn');
-      if(w) w.style.display = 'none';
-    }
-  });
-})();
 
 /*==========================================================
   GERAR PDF
@@ -1199,8 +1365,8 @@ async function gerarPDF(force){
   btn.textContent='\u23f3 Gerando...';
 
   try{
-    var resp = await fetch('fichas/DRT_CANCER_editavel.pdf');
-    if(!resp.ok) throw new Error('Arquivo DRT_CANCER_editavel.pdf não encontrado em fichas/');
+    var resp = await fetch('fichas/Intoxicacao_Exogena_v5_editavel.pdf');
+    if(!resp.ok) throw new Error('Arquivo Intoxicacao_Exogena_v5_editavel.pdf não encontrado em fichas/');
     var pdfBytes = await resp.arrayBuffer();
     var pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
     var form = pdfDoc.getForm();
@@ -1212,10 +1378,10 @@ async function gerarPDF(force){
     // Seção 1
     setTxt('notificacao_numero',                tv('f_num_notif'));
     setTxt('data_notificacao',                  fmtDate(tv('f_data_notif')));
-    setTxt('data_diagnostico',                  fmtDate(tv('f_data_diag')));
+    setTxt('data_primeiros_sintomas',           fmtDate(tv('f_data_sintomas')));
     setTxt('municipio_notificacao_nome',        tv('f_mun_notif'));
-    setTxt('uf_notificacao',                    tv('f_uf_notif'));
-    setTxt('municipio_notificacao_codigo_ibge', tv('f_ibge_notif'));
+    setTxt('uf_notifi',                         tv('f_uf_notif'));
+    setTxt('municipio_notificacao_codic',       tv('f_ibge_notif'));
     setTxt('unidade_notificadora_nome',         tv('f_nome_un'));
     setTxt('unidade_notificadora_cnes',         tv('f_cnes'));
 
@@ -1248,59 +1414,81 @@ async function gerarPDF(force){
     setTxt('residencia_pais',                  tv('f_pais_res'));
 
     // Seção 4
-    setTxt('pessoa_ocupacao',             tv('f_ocupacao'));
-    setTxt('situacao_mercado_trabalho',   tv('f_sit_mercado'));
-    setTxt('tempo_trabalho_ocupacao_valor', tv('f_tempo_trab_val'));
-    setTxt('tempo_trabalho_ocupacao_tipo',  tv('f_tempo_trab_tipo'));
+    setTxt('data_investigacao',            fmtDate(tv('f_data_investigacao')));
+    setTxt('pessoa_ocupacao',              tv('f_ocupacao'));
+    setTxt('situacao_mercado_trabalho',    tv('f_sit_mercado'));
+    setTxt('situacao_mercado_trabalho_ou', tv('f_sit_mercado_outro'));
+    setTxt('local_exposicao',              tv('f_local_exposicao'));
+    setTxt('local_exposicao_outro_detalhe',tv('f_local_exposicao_outro'));
 
-    // Seção 5 — Empresa
-    setTxt('empresa_registro_cnpj_cpf',  tv('f_emp_reg'));
-    setTxt('empresa_nome',               tv('f_emp_nome'));
-    setTxt('empresa_cnae',               sinanCnaeVal());
-    setTxt('empresa_uf',                 tv('f_emp_uf'));
-    setTxt('empresa_municipio',          tv('f_emp_mun'));
-    setTxt('empresa_cnae_codigo_ibge',   tv('f_emp_ibge'));
-    setTxt('empresa_distrito',           tv('f_emp_dist'));
-    setTxt('empresa_bairro',             tv('f_emp_bairro'));
-    setTxt('empresa_endereco',           tv('f_emp_end'));
-    setTxt('empresa_num',                tv('f_emp_num'));
-    setTxt('empresa_ponto_referencia',   tv('f_emp_pref'));
-    setTxt('empresa_telefone',           tv('f_emp_tel'));
-    setTxt('empresa_terceirizada',       getRadio('emp_terc'));
+    // Seção 5
+    setTxt('exposical_nome_local',           tv('f_exposicao_nome_local'));
+    setTxt('exposicao_cnae',                 tv('f_exposicao_cnae'));
+    setTxt('exposicao_uf',                   tv('f_exposicao_uf'));
+    setTxt('exposicao_municipio',            tv('f_exposicao_mun'));
+    setTxt('exposicao_municipio_ibge',       tv('f_exposicao_ibge'));
+    setTxt('exposicao_distrito',             tv('f_exposicao_dist'));
+    setTxt('exposicao_bairro',               tv('f_exposicao_bairro'));
+    setTxt('exposicao_logradouro',           tv('f_exposicao_logr'));
+    setTxt('exposicao_numero',               tv('f_exposicao_num'));
+    setTxt('exposicao_complemento',          tv('f_exposicao_compl'));
+    setTxt('exposicao_ponto_de_referencia',  tv('f_exposicao_pref'));
+    setTxt('exposicao_cep',                  tv('f_exposicao_cep'));
+    setTxt('exposicao_telefone',             tv('f_exposicao_tel'));
+    setTxt('exposicao_zona',                 getRadio('exposicao_zona'));
+    setTxt('exposicao_pais',                 tv('f_exposicao_pais'));
 
-    // Seção 6 — Câncer
-    setTxt('tempo_exposicao_valor', tv('f_tempo_exp_val'));
-    setTxt('tempo_exposicao_tipo',  tv('f_tempo_exp_tipo'));
-    setTxt('regime_tratamento',     tv('f_regime'));
-    setTxt('diagnostico_especifico_cid10', tv('f_diag_cid'));
+    // Seção 6
+    setTxt('grupo_agente_toxico',               tv('f_grupo_agente'));
+    setTxt('grupo_agente_toxico_outro_detalhe', tv('f_grupo_outro'));
 
-    setTxt('exposicao_asbesto',               getRadio('exp_asbesto'));
-    setTxt('exposicao_silica',                getRadio('exp_silica'));
-    setTxt('exposicao_aminas',                getRadio('exp_aminas'));
-    setTxt('exposicao_benzeno',               getRadio('exp_benzeno'));
-    setTxt('exposicao_alcatrao',              getRadio('exp_alcatrao'));
-    setTxt('exposicao_hidrocarbonetos',       getRadio('exp_hidrocarbonetos'));
-    setTxt('exposicao_oleos',                 getRadio('exp_oleos'));
-    setTxt('exposicao_berilio',               getRadio('exp_berilio'));
-    setTxt('exposicao_cadmio',                getRadio('exp_cadmio'));
-    setTxt('exposicao_cromo',                 getRadio('exp_cromo'));
-    setTxt('exposicao_compostos_niquel',      getRadio('exp_niquel'));
-    setTxt('exposicao_radiacoes_ionizantes',  getRadio('exp_rad_ionizantes'));
-    setTxt('exposicao_radiacoes_nao_ionizantes', getRadio('exp_rad_nao_ionizantes'));
-    setTxt('exposicao_hormonios',             getRadio('exp_hormonios'));
-    setTxt('exposicao_antineoplasicos',       getRadio('exp_antineoplasicos'));
-    setTxt('exposicao_outros',                getRadio('exp_outros'));
-    if(getRadio('exp_outros')==='1') setTxt('exposicao_outros_detalhe', tv('f_exp_outros_det'));
+    setTxt('agente_toxico_nome1',           tv('f_agente1_nome'));
+    setTxt('agente_toxico_nome2',           tv('f_agente2_nome'));
+    setTxt('agente_toxico_nome3',           tv('f_agente3_nome'));
+    setTxt('agente_toxico_principioativo1', tv('f_agente1_principio'));
+    setTxt('agente_toxico_principioativo2', tv('f_agente2_principio'));
+    setTxt('agente_toxico_principioativo3', tv('f_agente3_principio'));
 
-    setTxt('habito_fumar',                 getRadio('hab_fumar'));
-    setTxt('tempo_exposicao_tabaco_valor', tv('f_tempo_tabaco_val'));
-    setTxt('tempo_exposicao_tabaco_tipo',  tv('f_tempo_tabaco_tipo'));
+    setTxt('agrotoxico_finalidade',               tv('f_agrotoxico_finalidade'));
+    setTxt('agrotoxico_finalidade_outro_detalhe', tv('f_agrotoxico_finalidade_outro'));
 
-    // Seção 7 — Conclusão
-    setTxt('outros_trabalhadores_doenca', getRadio('outros_trab'));
-    setTxt('evolucao_caso',               tv('f_evolucao'));
-    setTxt('obito_data',                  fmtDate(tv('f_obito')));
-    setTxt('cat_emitida',                 getRadio('cat'));
+    setTxt('agrotoxico_atividade1', tv('f_agrotoxico_atividade1'));
+    setTxt('agrotoxico_atividade2', tv('f_agrotoxico_atividade2'));
+    setTxt('agrotoxico_atividade3', tv('f_agrotoxico_atividade3'));
+
+    setTxt('agrotoxico_cultura', tv('f_agrotoxico_cultura'));
+
+    setTxt('via_exposicao1', tv('f_via_exposicao1'));
+    setTxt('via_exposicao2', tv('f_via_exposicao2'));
+    setTxt('via_exposicao3', tv('f_via_exposicao3'));
+
+    setTxt('circunstancia_exposicao',               tv('f_circunstancia_exposicao'));
+    setTxt('circunstancia_exposicao_outra_detalhe', tv('f_circunstancia_outra'));
+
+    setTxt('exposicao_trabalho', getRadio('exposicao_trabalho'));
+    setTxt('tipo_exposicao',     getRadio('tipo_exposicao'));
+
+    // Seção 7
+    setTxt('tempo_decorrido_valor', tv('f_tempo_decorrido_val'));
+    setTxt('tempo_decorrido_tipo',  getRadio('tempo_decorrido_tipo'));
+    setTxt('tipo_atendimento',      getRadio('tipo_atendimento'));
+    setTxt('hospitalizacao',        getRadio('hospitalizacao'));
+    setTxt('data_internacao',       fmtDate(tv('f_data_internacao')));
+    setTxt('atendimento_uf',        tv('f_atend_uf'));
+    setTxt('municipio_hospitalizacao',        tv('f_mun_hosp'));
+    setTxt('hospitalizacao_municipio_ibge',   tv('f_mun_hosp_ibge'));
+    setTxt('unidade_saude',                   tv('f_unidade_saude_nome'));
+    setTxt('cnes_unidade_saude',              tv('f_unidade_saude_cnes'));
+
+    // Seção 8
+    setTxt('classificacao_final',                tv('f_classificacao_final'));
+    setTxt('intoxicacao_confirmada_diagnostico', tv('f_diag_texto'));
+    setTxt('intoxicacao_confirmada_cid',         tv('f_diag_cid'));
+    setTxt('criterio_confirmacao',               tv('f_criterio_confirmacao'));
+    setTxt('evolucao_caso',                      tv('f_evolucao'));
+    setTxt('obito_data',                         fmtDate(tv('f_obito')));
+    setTxt('cat_emitida',                        getRadio('cat'));
+    setTxt('data_encerramento',                  fmtDate(tv('f_data_encerramento')));
 
     setTxt('observacoes_complementares', tv('f_obs'));
 
@@ -1311,7 +1499,7 @@ async function gerarPDF(force){
     a.href=url;
     var ds = fmtDate(tv('f_data_notif')).replace(/\//g,'-')||'sem-data';
     var nm = tv('f_nome').split(' ')[0]||'PACIENTE';
-    a.download = 'SINAN_Cancer_'+nm+'_'+ds+'.pdf';
+    a.download = 'SINAN_IntoxicacaoExogena_'+nm+'_'+ds+'.pdf';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

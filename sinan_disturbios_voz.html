@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SINAN — Distúrbios de Voz Relacionados ao Trabalho | Assistente PET Saúde Digital</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XBCCJ6GTG6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XBCCJ6GTG6');
+</script>
+<link rel="stylesheet" href="shared.css">
+<style>
+/* Estilos exclusivos da ficha de Distúrbios de Voz */
+.info-voice{background:#e8f5e9;border:1px solid #a5d6a7;border-radius:8px;padding:12px 16px;font-size:14px;color:#1b5e20;line-height:1.7;margin-bottom:14px;display:flex;gap:12px}
+[data-theme="dark"] .info-voice{background:rgba(27,94,32,.15);border-color:#2e7d32;color:#81c784}
+</style>
+</head>
+<body>
+<script>
+// Dark Mode — aplica antes do paint para evitar flash
+(function(){
+  var stored = localStorage.getItem('sinan-theme');
+  var theme;
+  if(stored === 'dark' || stored === 'light'){
+    theme = stored;
+  } else {
+    theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  if(theme === 'dark') document.documentElement.setAttribute('data-theme','dark');
+})();
+function toggleDarkMode(){
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  var next = isDark ? 'light' : 'dark';
+  if(next === 'dark') document.documentElement.setAttribute('data-theme','dark');
+  else document.documentElement.removeAttribute('data-theme');
+  localStorage.setItem('sinan-theme', next);
+}
+</script>
+
+<!-- ===== STICKY HEADER ===== -->
+<header id="hdr">
+  <div class="hdr-row">
+    <img class="hdr-logo" src="assets/img/pet-saude-logo-png.png" alt="PET Saúde Digital">
+    <div class="hdr-vline"></div>
+    <div class="hdr-title">
+      <h1>SINAN — Distúrbios de Voz Relacionados ao Trabalho</h1>
+      <p>Assistente de preenchimento (Ficha de Notificação Individual genérica · CID-10: R49)</p>
+    </div>
+    <button class="hdr-btn" id="btn-gerar" onclick="gerarPDF()">📄 Gerar PDF</button>
+    <button class="hdr-btn-transfer btn-disabled" id="btn-transfer" onclick="clickTransfer()" title="Transferir dados preenchidos para outra ficha">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      Usar em outra ficha
+    </button>
+    <a class="hdr-back" href="index.html">&#8592; Menu</a>
+    <button class="dm-toggle" id="dm-toggle" onclick="toggleDarkMode()" title="Alternar modo escuro">
+      <svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+      <svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </div>
+</header>
+<div id="prog-bar-strip"><div id="prog-bar-fill"></div></div>
+
+<div id="tools-bar">
+  <div class="tools-inner">
+    <div class="tb-group">
+      <span class="tools-label">Ferramentas</span>
+      <div class="tb-dd" id="dd-pac">
+        <button class="tb-btn" id="btn-pac-menu" onclick="togglePacMenu(event)" style="background:#eff6ff;border-color:#bfdbfe;color:#1e40af;font-weight:700">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5.5 20c0-3.5 2.9-6 6.5-6s6.5 2.5 6.5 6"/></svg>
+          Carregar Caso Didático
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:.55"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="tb-menu" id="pac-menu"></div>
+      </div>
+      <span class="tb-sep"></span>
+      <button class="tb-btn" onclick="document.getElementById('f-import').click()" title="Importar rascunho salvo (.json)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17,8 12,3 7,8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        📂 Importar
+      </button>
+      <input type="file" id="f-import" accept=".json" style="display:none" onchange="importarRascunho(this)">
+      <button class="tb-btn" onclick="exportarRascunho()" title="Salvar rascunho como arquivo .json">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        💾 Exportar
+      </button>
+    </div>
+    <div class="tb-group">
+      <button class="tb-btn tb-danger" onclick="abrirModalNova()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,4 1,10 7,10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg>
+        Nova Ficha
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper">
+
+<!-- DISCLAIMER -->
+<div class="banner-warn">
+  <span style="font-size:18px;flex-shrink:0">⚠️</span>
+  <div><strong>Ferramenta NÃO oficial.</strong> Gera uma ficha impressa adaptada do SINAN para facilitar o preenchimento. As informações aqui inseridas <strong>não são enviadas a nenhum sistema</strong> — a digitação posterior no <strong>SINAN NET</strong> permanece obrigatória para registro oficial no Ministério da Saúde.</div>
+</div>
+
+<!-- AVISO: Ficha genérica -->
+<div class="info-voice">
+  <span style="font-size:20px;flex-shrink:0">🎤</span>
+  <div><strong>Esta ficha utiliza o modelo de Notificação Individual genérica do SINAN.</strong> Não existe ficha de investigação específica para distúrbios de voz. Campos não aplicáveis (exantema, líquor, surto, etc.) são automaticamente preenchidos como "Não" ou "Não se aplica" no PDF gerado.</div>
+</div>
+
+<!-- =========================================================
+  SEÇÃO 1 — DADOS GERAIS
+========================================================= -->
+<div class="sec" id="sec1">
+  <div class="sec-hdr">
+    <div class="sec-num">1</div>
+    <div class="sec-info">
+      <h3>Dados Gerais</h3>
+      <p>Unidade notificadora, datas, UF e município</p>
+    </div>
+    <span class="sec-badge badge-empty" id="badge1">—</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="row">
+      <div class="fld">
+        <label>Nº da Notificação</label>
+        <input type="text" id="f_num_notif" placeholder="Fornecido pela VE local">
+      </div>
+      <div class="fld">
+        <label>Data da Notificação <span class="req-star">⭐</span></label>
+        <input type="date" id="f_data_notif" data-ess data-label="Data da notificação">
+      </div>
+      <div class="fld">
+        <label>Data dos Primeiros Sintomas <span class="req-star">⭐</span></label>
+        <input type="date" id="f_data_sintomas" data-ess data-label="Data dos primeiros sintomas">
+      </div>
+    </div>
+
+    <div class="lock-grp" id="lock-grp-notif">
+      <div class="lock-hint">
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-top:1px"><rect x="5" y="9" width="10" height="9" rx="1.5"/><path d="M8 9V7a2 2 0 014 0v2"/></svg>
+        <span class="lock-hint-txt">Estes campos representam a unidade notificadora deste computador. Trave o cadeado para salvar e não precisar preencher novamente nas próximas fichas.</span>
+      </div>
+      <div class="lock-inner">
+        <div class="lock-fields">
+    <div class="row">
+      <div class="fld col-2">
+        <label>Município de Notificação</label>
+        <div class="ac-wrap">
+          <input type="text" id="f_mun_notif" placeholder="Digite para buscar — UF preenchida automaticamente" data-caps autocomplete="off">
+          <div class="ac-drop" id="f_mun_notif-drop"></div>
+        </div>
+      </div>
+      <div class="fld" style="max-width:100px">
+        <label>UF</label>
+        <select id="f_uf_notif"></select>
+      </div>
+      <div class="fld" style="max-width:120px">
+        <label>Código IBGE</label>
+        <input type="text" id="f_ibge_notif" maxlength="7" placeholder="0000000" readonly>
+      </div>
+    </div>
+
+    <div class="row row-wide">
+      <div class="fld col-2">
+        <label>Nome da Unidade Notificadora</label>
+        <input type="text" id="f_nome_un" placeholder="Nome completo da unidade" data-caps>
+      </div>
+      <div class="fld">
+        <label>CNES</label>
+        <input type="text" id="f_cnes" maxlength="7" placeholder="0000000">
+      </div>
+    </div>
+        </div>
+        <div class="lock-rail">
+          <div class="lock-seg"></div>
+          <button type="button" class="lock-btn-rail" onclick="toggleUnitLock()" title="Travar dados da unidade notificadora neste computador">
+            <svg class="lock-ico-open" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="9" width="12" height="9" rx="1.5"/><path d="M8 9V6a4 4 0 018 0"/></svg>
+            <svg class="lock-ico-closed" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="9" width="12" height="9" rx="1.5"/><path d="M7 9V6a3 3 0 016 0v3"/></svg>
+          </button>
+          <div class="lock-seg"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- =========================================================
+  SEÇÃO 2 — NOTIFICAÇÃO INDIVIDUAL
+========================================================= -->
+<div class="sec" id="sec2">
+  <div class="sec-hdr">
+    <div class="sec-num">2</div>
+    <div class="sec-info">
+      <h3>Notificação Individual</h3>
+      <p>Dados pessoais do paciente</p>
+    </div>
+    <span class="sec-badge badge-empty" id="badge2">—</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="row row-full">
+      <div class="fld">
+        <label>Nome Completo do Paciente <span class="req-star">⭐</span></label>
+        <input type="text" id="f_nome" placeholder="Nome completo — ou IGNORADO se desconhecido" data-caps data-ess data-label="Nome do paciente">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="fld">
+        <label>Data de Nascimento</label>
+        <input type="date" id="f_nasc">
+      </div>
+      <div class="fld" style="max-width:120px">
+        <label>Idade</label>
+        <input type="number" id="f_idade_val" min="0" max="999" placeholder="Ex: 35">
+      </div>
+      <div class="fld">
+        <label>Unidade</label>
+        <div class="pills" id="grp_idade_un" data-hidden="f_idade_un">
+          <label class="pill" data-val="1"><input type="radio" name="idade_un" value="1"> Hora</label>
+          <label class="pill" data-val="2"><input type="radio" name="idade_un" value="2"> Dia</label>
+          <label class="pill" data-val="3"><input type="radio" name="idade_un" value="3"> Mês</label>
+          <label class="pill" data-val="4"><input type="radio" name="idade_un" value="4"> Ano</label>
+        </div>
+        <input type="hidden" id="f_idade_un">
+      </div>
+      <div class="fld">
+        <label>Sexo <span class="req-star">⭐</span></label>
+        <div class="pills" id="grp_sexo">
+          <label class="pill" data-val="M"><input type="radio" name="sexo" value="M" onchange="onSexoChange()"> Masculino</label>
+          <label class="pill" data-val="F"><input type="radio" name="sexo" value="F" onchange="onSexoChange()"> Feminino</label>
+          <label class="pill" data-val="I"><input type="radio" name="sexo" value="I" onchange="onSexoChange()"> Ignorado</label>
+        </div>
+      </div>
+    </div>
+
+    <div id="row_gest" style="display:none" class="row">
+      <div class="fld col-2">
+        <label>Gestante</label>
+        <div class="pills" id="grp_gest" data-hidden="f_gest">
+          <label class="pill" data-val="1"><input type="radio" name="gest" value="1"> 1ºTrimestre</label>
+          <label class="pill" data-val="2"><input type="radio" name="gest" value="2"> 2ºTrimestre</label>
+          <label class="pill" data-val="3"><input type="radio" name="gest" value="3"> 3ºTrimestre</label>
+          <label class="pill" data-val="4"><input type="radio" name="gest" value="4"> Idade gestacional Ignorada</label>
+          <label class="pill" data-val="5"><input type="radio" name="gest" value="5"> Não</label>
+          <label class="pill" data-val="6"><input type="radio" name="gest" value="6"> Não se aplica</label>
+          <label class="pill" data-val="9"><input type="radio" name="gest" value="9"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_gest">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="fld">
+        <label>Raça/Cor <span class="req-star">⭐</span></label>
+        <div class="pills" id="grp_raca" data-hidden="f_raca">
+          <label class="pill" data-val="1"><input type="radio" name="raca" value="1"> Branca</label>
+          <label class="pill" data-val="2"><input type="radio" name="raca" value="2"> Preta</label>
+          <label class="pill" data-val="3"><input type="radio" name="raca" value="3"> Amarela</label>
+          <label class="pill" data-val="4"><input type="radio" name="raca" value="4"> Parda</label>
+          <label class="pill" data-val="5"><input type="radio" name="raca" value="5"> Indígena</label>
+          <label class="pill" data-val="9"><input type="radio" name="raca" value="9"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_raca" data-ess data-label="Raça/Cor">
+      </div>
+      <div class="fld col-2">
+        <label>Escolaridade</label>
+        <div class="pills" id="grp_escol" data-hidden="f_escol">
+          <label class="pill" data-val="0"><input type="radio" name="escol" value="0"> Analfabeto</label>
+          <label class="pill" data-val="1"><input type="radio" name="escol" value="1"> 1ª a 4ª série incompleta do EF</label>
+          <label class="pill" data-val="2"><input type="radio" name="escol" value="2"> 4ª série completa do EF</label>
+          <label class="pill" data-val="3"><input type="radio" name="escol" value="3"> 5ª à 8ª série incompleta do EF</label>
+          <label class="pill" data-val="4"><input type="radio" name="escol" value="4"> Ensino fundamental completo</label>
+          <label class="pill" data-val="5"><input type="radio" name="escol" value="5"> Ensino médio incompleto</label>
+          <label class="pill" data-val="6"><input type="radio" name="escol" value="6"> Ensino médio completo</label>
+          <label class="pill" data-val="7"><input type="radio" name="escol" value="7"> Educação superior incompleta</label>
+          <label class="pill" data-val="8"><input type="radio" name="escol" value="8"> Educação superior completa</label>
+          <label class="pill" data-val="9"><input type="radio" name="escol" value="9"> Ignorado</label>
+          <label class="pill" data-val="10"><input type="radio" name="escol" value="10"> Não se aplica</label>
+        </div>
+        <input type="hidden" id="f_escol">
+      </div>
+      <div class="fld">
+        <label>Nº Cartão SUS (CNS)</label>
+        <input type="text" id="f_sus" maxlength="15" placeholder="000000000000000">
+      </div>
+    </div>
+
+    <div class="row row-full">
+      <div class="fld">
+        <label>Nome da Mãe <span style="font-weight:400;color:#9ca3af">(sem abreviações)</span></label>
+        <input type="text" id="f_mae" placeholder="Nome completo da mãe — se desconhecido, IGNORADO" data-caps>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- =========================================================
+  SEÇÃO 3 — DADOS DE RESIDÊNCIA
+========================================================= -->
+<div class="sec" id="sec3">
+  <div class="sec-hdr">
+    <div class="sec-num">3</div>
+    <div class="sec-info">
+      <h3>Dados de Residência</h3>
+      <p>Endereço e contato do paciente</p>
+    </div>
+    <span class="sec-badge badge-empty" id="badge3">—</span>
+  </div>
+  <div class="sec-body">
+    <div class="row">
+      <div class="fld col-2">
+        <label>Município <span class="req-star">⭐</span></label>
+        <div class="ac-wrap">
+          <input type="text" id="f_mun_res" data-ess data-label="Município de residência" placeholder="Digite para buscar — UF preenchida automaticamente" data-caps autocomplete="off">
+          <div class="ac-drop" id="f_mun_res-drop"></div>
+        </div>
+      </div>
+      <div class="fld" style="max-width:100px">
+        <label>UF</label>
+        <select id="f_uf_res"></select>
+      </div>
+      <div class="fld" style="max-width:120px">
+        <label>Código IBGE</label>
+        <input type="text" id="f_ibge_res" maxlength="7" placeholder="0000000" readonly>
+      </div>
+    </div>
+    <div class="row">
+      <div class="fld">
+        <label>Distrito</label>
+        <input type="text" id="f_dist_res" data-caps>
+      </div>
+      <div class="fld">
+        <label>Bairro</label>
+        <input type="text" id="f_bairro_res" data-caps>
+      </div>
+      <div class="fld col-2">
+        <label>Logradouro</label>
+        <input type="text" id="f_logr_res" data-caps>
+      </div>
+    </div>
+    <div class="row">
+      <div class="fld" style="max-width:100px">
+        <label>Número</label>
+        <input type="text" id="f_num_res">
+      </div>
+      <div class="fld col-2">
+        <label>Complemento</label>
+        <input type="text" id="f_compl_res" data-caps>
+      </div>
+    </div>
+    <div class="row">
+      <div class="fld col-2">
+        <label>Ponto de Referência</label>
+        <input type="text" id="f_pref_res" data-caps>
+      </div>
+      <div class="fld">
+        <label>CEP</label>
+        <input type="text" id="f_cep" maxlength="9" placeholder="00000-000">
+      </div>
+      <div class="fld">
+        <label>Telefone (DDD)</label>
+        <input type="text" id="f_tel_res" placeholder="(00) 00000-0000">
+      </div>
+    </div>
+    <div class="row">
+      <div class="fld">
+        <label>Zona</label>
+        <div class="pills" id="grp_zona_res" data-hidden="f_zona_res">
+          <label class="pill" data-val="1"><input type="radio" name="zona_res" value="1"> Urbana</label>
+          <label class="pill" data-val="2"><input type="radio" name="zona_res" value="2"> Rural</label>
+          <label class="pill" data-val="3"><input type="radio" name="zona_res" value="3"> Periurbana</label>
+          <label class="pill" data-val="9"><input type="radio" name="zona_res" value="9"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_zona_res">
+      </div>
+      <div class="fld col-2">
+        <label>País (se residente fora do Brasil)</label>
+        <input type="text" id="f_pais_res" data-caps>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+  SEÇÃO 4 — NOTIFICANTE
+========================================================= -->
+<div class="sec" id="sec4">
+  <div class="sec-hdr">
+    <div class="sec-num">4</div>
+    <div class="sec-info">
+      <h3>Notificante</h3>
+      <p>Profissional responsável pela notificação</p>
+    </div>
+    <span class="sec-badge badge-empty" id="badge4">—</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="row">
+      <div class="fld">
+        <label>Município da Unidade Notificante</label>
+        <div class="ac-wrap">
+          <input type="text" id="f_notif_mun" placeholder="Digite para buscar — UF preenchida automaticamente" data-caps autocomplete="off">
+          <div class="ac-drop" id="f_notif_mun-drop"></div>
+        </div>
+      </div>
+      <div class="fld" style="max-width:100px">
+        <label>UF</label>
+        <input type="text" id="f_notif_uf" maxlength="2" data-caps placeholder="SP" readonly style="background:#f3f4f6">
+      </div>
+      <div class="fld" style="max-width:120px">
+        <label>IBGE</label>
+        <input type="text" id="f_notif_ibge" maxlength="7" placeholder="0000000" readonly>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="fld">
+        <label>Nome do Notificante</label>
+        <input type="text" id="f_notif_nome" data-caps placeholder="Nome completo do profissional">
+      </div>
+      <div class="fld">
+        <label>Função do Notificante</label>
+        <input type="text" id="f_notif_funcao" data-caps placeholder="Ex: Médico, Enfermeiro...">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- =========================================================
+  SEÇÃO 5 — OBSERVAÇÕES
+========================================================= -->
+<div class="sec" id="sec5">
+  <div class="sec-hdr">
+    <div class="sec-num">5</div>
+    <div class="sec-info">
+      <h3>Observações Complementares</h3>
+      <p>Informações adicionais relevantes (história ocupacional, fatores de risco, etc.)</p>
+    </div>
+    <span class="sec-badge badge-empty" id="badge5">—</span>
+  </div>
+  <div class="sec-body">
+
+    <div class="row row-full">
+      <div class="fld">
+        <textarea id="f_obs" placeholder="Descreva aqui dados sobre a ocupação, tempo de exposição, fatores agravantes, etc." rows="6"></textarea>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /.wrapper -->
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- MODAIS DE VALIDAÇÃO -->
+<div class="ov" id="ov-quase">
+  <div class="modal">
+    <div class="modal-ico">⚠️</div>
+    <h2>Campos essenciais incompletos</h2>
+    <p>Os seguintes campos ⭐ não foram preenchidos. Recomendamos completá-los antes de gerar o PDF.</p>
+    <div class="err-list" id="ov-quase-list"></div>
+    <div class="modal-actions">
+      <button class="mbtn mbtn-s" onclick="closeModal('ov-quase')">Voltar e preencher</button>
+      <button class="mbtn mbtn-p" id="ov-quase-dl">Gerar mesmo assim</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM MODAL -->
+<div id="confirm-modal">
+  <div class="cm-box">
+    <div class="cm-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,4 1,10 7,10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg></div>
+    <h3>Apagar tudo e começar do zero?</h3>
+    <p>Todos os dados inseridos serão perdidos. Se quiser preservá-los, use <strong>Exportar Rascunho</strong> antes de continuar.</p>
+    <div class="cm-actions">
+      <button class="cm-cancel" onclick="fecharModalNova()">Cancelar</button>
+      <button class="cm-ok" onclick="novaFichaConfirmado()">Apagar tudo</button>
+    </div>
+  </div>
+</div>
+
+<!-- TRANSFER MODAL -->
+<div class="ov" id="ov-transfer">
+  <div class="modal" style="max-width:500px">
+    <div class="modal-ico">🔁</div>
+    <h2>Usar dados em outra ficha</h2>
+    <p>Os dados do paciente, notificação e residência já preenchidos serão transferidos automaticamente para a nova ficha. Selecione o destino:</p>
+    <div id="transfer-fichas" style="margin-top:16px;display:flex;flex-direction:column;gap:8px"></div>
+    <div class="modal-actions">
+      <button class="mbtn mbtn-s" onclick="closeModal('ov-transfer')">Cancelar</button>
+      <button class="mbtn mbtn-p" id="btn-transfer-ok" onclick="confirmarTransferencia()" style="opacity:.45;pointer-events:none">Continuar →</button>
+    </div>
+  </div>
+</div>
+
+<!-- TRANSFER SEM PDF — aviso -->
+<div class="ov" id="ov-transfer-warn">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-ico">⚠️</div>
+    <h2>PDF ainda não gerado</h2>
+    <p>Você ainda não gerou o PDF desta ficha. Se prosseguir, os dados desta ficha <strong>não serão salvos em PDF</strong> — apenas transferidos para a próxima.</p>
+    <div class="modal-actions">
+      <button class="mbtn mbtn-s" onclick="closeModal('ov-transfer-warn')">Voltar e gerar PDF</button>
+      <button class="mbtn mbtn-p" onclick="closeModal('ov-transfer-warn');abrirTransferencia()">Transferir mesmo assim</button>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM SHEET MOBILE — menu de pacientes fictícios -->
+<div id="pac-mob-sheet">
+  <div id="pac-mob-backdrop" onclick="closePacSheet()"></div>
+  <div id="pac-mob-panel">
+    <div class="tb-menu-hdr">Selecione um caso didático</div>
+    <div id="pac-mob-list"></div>
+  </div>
+</div>
+
+<!-- BARRA INFERIOR — visível apenas em mobile -->
+<div id="mob-bottom">
+  <a id="mob-back-btn" href="index.html">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15,18 9,12 15,6"/></svg>
+    Menu
+  </a>
+  <button id="mob-pdf-btn" onclick="gerarPDF()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+    Gerar PDF
+  </button>
+</div>
+
+<!-- DATA SCRIPTS -->
+<script src="data/tb_regiao.js"></script>
+<script src="data/tb_uf.js"></script>
+<script src="data/tb_municipios.js"></script>
+<script src="lib/pdf-lib.min.js"></script>
+
+<script>
+/*==========================================================
+  FICHA DISTÚRBIOS DE VOZ — Configuração e funções específicas
+  Deve ser carregado ANTES de shared.js
+==========================================================*/
+
+window.FICHA_NOME = 'disturbios_voz';
+window.FICHA_TRANSFER_SOURCE = 'disturbios_voz';
+
+window.FICHA_PROG_CONFIG = {
+  ESS_IDS: {f_data_notif:1,f_data_sintomas:1,f_nome:1,f_raca:1,f_mun_res:1},
+  ESS_GROUPS: ['sexo'],
+  STD_GROUPS: [],
+  COND_GROUPS: {},
+  PROG_EXCLUDE_IDS: {f_num_notif:1,f_compl_res:1,f_pais_res:1,f_pref_res:1},
+  ESS_GROUP_LABELS: {sexo:'Sexo'}
+};
+
+window.FICHA_UF_SELECTS = ['f_uf_notif','f_uf_res'];
+window.FICHA_MUN_CONFIGS = [
+  {suf:'notif', ibge:'f_ibge_notif'},
+  {suf:'res',   ibge:'f_ibge_res'},
+  {suf:'notif_mun', ibge:'f_notif_ibge', ufId:'f_notif_uf', munId:'f_notif_mun'}
+];
+window.FICHA_CID_INPUT_ID = null;
+window.FICHA_CNAE_INPUT_ID = null;
+window.FICHA_MOBILE_NUMERIC_IDS = ['f_sus','f_cnes','f_ibge_notif','f_ibge_res','f_cep','f_num_res'];
+window.FICHA_MOBILE_TEL_IDS = ['f_tel_res'];
+window.FICHA_TRANSFER_MUN_SUFS = ['notif','res'];
+window.FICHA_UNIT_IDS = ['f_mun_notif','f_uf_notif','f_ibge_notif','f_nome_un','f_cnes'];
+window.FICHA_HIDDEN_BOXES = ['row_gest'];
+window.FICHA_TRANSFER_FICHAS = [
+  {id:'violencia',   label:'Violência',            sub:'Violência doméstica, sexual e/ou interpessoal',                               url:'sinan_violencia.html',           color:'#1e40af'},
+  {id:'acidente',    label:'Acidente de Trabalho', sub:'Acidentes típicos, de trajeto ou fatais',                                     url:'sinan_acidente.html',            color:'#c2410c'},
+  {id:'acidente_bio',label:'Acidente Biológico',   sub:'Exposição a material biológico',                                              url:'sinan_acidente_biologico.html',  color:'#7c3aed'},
+  {id:'lerdort',     label:'LER/DORT',             sub:'Lesão por esforço repetitivo / DORT',                                         url:'sinan_lerdort.html',             color:'#0f766e'},
+  {id:'transtornos', label:'Transtornos Mentais',  sub:'Transtornos mentais relacionados ao trabalho',                                url:'sinan_transtornos.html',         color:'#4338ca'},
+  {id:'pair',        label:'PAIR',                 sub:'Perda Auditiva Induzida por Ruído',                                           url:'sinan_pair.html',                color:'#2563eb'},
+  {id:'pneumoconioses',label:'Pneumoconioses',     sub:'Pneumoconioses relacionadas ao trabalho',                                     url:'sinan_pneumoconioses.html',      color:'#b45309'},
+  {id:'cancer',      label:'Câncer',               sub:'Câncer relacionado ao trabalho',                                              url:'sinan_cancer.html',              color:'#dc2626'},
+  {id:'dermatoses',  label:'Dermatoses',           sub:'Dermatoses ocupacionais',                                                     url:'sinan_dermatoses.html',          color:'#be185d'},
+  {id:'intoxicacao', label:'Intoxicação Exógena',  sub:'Intoxicação por agentes químicos',                                            url:'sinan_intoxicacao_exogena.html', color:'#b45309'}
+];
+
+/*==========================================================
+  PACIENTES FICTÍCIOS
+==========================================================*/
+window.FAKE_PATIENTS = [
+  {
+    label: "Carla Mendes, 34 anos",
+    sub: "Disfonia · professora · São Paulo/SP",
+    fields: {
+      f_data_notif:"2025-12-05", f_data_sintomas:"2025-09-15",
+      f_nome_un:"CEREST CENTRO", f_cnes:"6123456",
+      f_mun_notif:"SAO PAULO", f_uf_notif:"SP", f_ibge_notif:"355030",
+      f_nome:"CARLA MENDES OLIVEIRA", f_nasc:"1991-04-10", f_raca:"1", f_escol:"8",
+      f_sus:"706012300000059", f_mae:"MARIA MENDES",
+      f_mun_res:"SAO PAULO", f_uf_res:"SP", f_ibge_res:"355030",
+      f_bairro_res:"VILA MARIANA", f_logr_res:"RUA DOMINGOS DE MORAIS", f_num_res:"1500",
+      f_cep:"04010-000", f_tel_res:"(11) 99876-1234", f_zona_res:"1",
+      f_notif_mun:"SAO PAULO", f_notif_uf:"SP", f_notif_ibge:"355030",
+      f_notif_nome:"DRA. FERNANDA LIMA", f_notif_funcao:"MÉDICA DO TRABALHO",
+      f_obs:"PROFESSORA DO ENSINO FUNDAMENTAL. TRABALHA EM SALA DE AULA COM 35 ALUNOS, 6 HORAS/DIA, COM USO INTENSO DA VOZ. REFERE ROUQUIDÃO PROGRESSIVA HÁ 6 MESES, SEM OUTROS SINTOMAS. AVALIAÇÃO OTORRINOLARINGOLÓGICA EVIDENCIOU FENDA GLÓTICA TRIANGULAR POSTERIOR E NÓDULOS VOCAIS BILATERAIS. AFASTADA POR 30 DIAS PARA FONOTERAPIA."
+    },
+    radios: {sexo:"F", gest:"5", raca:"1", zona_res:"1"}
+  },
+  {
+    label: "Marcos Vinícius, 45 anos",
+    sub: "Disfonia · operador de telemarketing · Belo Horizonte/MG",
+    fields: {
+      f_data_notif:"2025-12-06", f_data_sintomas:"2025-08-01",
+      f_nome_un:"CEREST BH", f_cnes:"3140070",
+      f_mun_notif:"BELO HORIZONTE", f_uf_notif:"MG", f_ibge_notif:"310620",
+      f_nome:"MARCOS VINICIUS SANTOS", f_nasc:"1980-06-20", f_raca:"4", f_escol:"6",
+      f_sus:"706012300000060", f_mae:"ANA SANTOS",
+      f_mun_res:"BELO HORIZONTE", f_uf_res:"MG", f_ibge_res:"310620",
+      f_bairro_res:"CENTRO", f_logr_res:"AVENIDA AFONSO PENA", f_num_res:"2000",
+      f_cep:"30100-000", f_tel_res:"(31) 98765-4321", f_zona_res:"1",
+      f_notif_mun:"BELO HORIZONTE", f_notif_uf:"MG", f_notif_ibge:"310620",
+      f_notif_nome:"DR. PEDRO HENRIQUE", f_notif_funcao:"FONOAUDIÓLOGO",
+      f_obs:"OPERADOR DE TELEMARKETING, JORNADA 6 HORAS/DIA COM PAUSAS PROGRAMADAS. REFERE ROUQUIDÃO E FADIGA VOCAL DESDE HÁ 4 MESES. NEGA TABAGISMO. VIDEOLARINGOSCOPIA EVIDENCIOU HIPEREMIA DE PREGAS VOCAIS E FENDA FUSIFORME. DIAGNÓSTICO: DISFONIA FUNCIONAL."
+    },
+    radios: {sexo:"M", raca:"4", zona_res:"1"}
+  }
+];
+
+/*==========================================================
+  CONDICIONAIS
+==========================================================*/
+function onSexoChange(){
+  var s = document.querySelector('[name="sexo"]:checked');
+  document.getElementById('row_gest').style.display = (s&&s.value==='F')?'grid':'none';
+}
+
+/*==========================================================
+  HOOKS
+==========================================================*/
+window._applyVisibility = function(){
+  onSexoChange();
+};
+
+window._onPostClearForm = function(){
+  // nada específico
+};
+
+window._onPostCarregarPaciente = function(p){
+  // nada específico
+};
+
+/*==========================================================
+  GERAR PDF
+==========================================================*/
+async function gerarPDF(force){
+  if(!force){
+    var missing = getMissingEssentials();
+    if(missing.length>0){
+      document.getElementById('ov-quase-list').innerHTML = missing.map(function(e){
+        return '<div class="err-item">\u2b50 '+e+'</div>';
+      }).join('');
+      var dlBtn = document.getElementById('ov-quase-dl');
+      dlBtn.onclick = function(){ closeModal('ov-quase'); gerarPDF(true); };
+      document.getElementById('ov-quase').classList.add('show');
+      return;
+    }
+  }
+
+  var btn = document.getElementById('btn-gerar');
+  btn.disabled=true;
+  btn.textContent='\u23f3 Gerando...';
+
+  try{
+    var resp = await fetch('fichas/disturbio_voz_editavel.pdf');
+    if(!resp.ok) throw new Error('Arquivo disturbio_voz_editavel.pdf não encontrado em fichas/');
+    var pdfBytes = await resp.arrayBuffer();
+    var pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
+    var form = pdfDoc.getForm();
+
+    function setTxt(name,val){
+      try{ form.getTextField(name).setText(val||''); }catch(e){}
+    }
+
+    // Seção 1 - Dados Gerais
+    setTxt('notificacao_numero',                tv('f_num_notif'));
+    setTxt('data_notificacao',                  fmtDate(tv('f_data_notif')));
+    setTxt('data_primeiros_sintomas',           fmtDate(tv('f_data_sintomas')));
+    setTxt('municipio_notificacao_nome',        tv('f_mun_notif'));
+    setTxt('uf_notificacao',                    tv('f_uf_notif'));
+    setTxt('municipio_notificacao_codigo_ibge', tv('f_ibge_notif'));
+    setTxt('unidade_notificadora_nome',         tv('f_nome_un'));
+    setTxt('unidade_notificadora_cnes',         tv('f_cnes'));
+
+    // Valores fixos do PDF (não aparecem no HTML)
+    setTxt('tipo_notificacao', '2');
+    setTxt('agravo_cid', 'R49');
+    setTxt('agravo_descricao', 'Distúrbios da Voz');
+
+    // Seção 2 - Notificação Individual
+    setTxt('paciente_nome',            tv('f_nome'));
+    setTxt('paciente_data_nascimento', fmtDate(tv('f_nasc')));
+    setTxt('paciente_idade_valor',     tv('f_idade_val'));
+    setTxt('paciente_idade_tipo',      tv('f_idade_un'));
+    var _sexoPDF = getRadio('sexo');
+    setTxt('paciente_sexo',            _sexoPDF);
+    setTxt('paciente_gestante',        _sexoPDF==='M'?'6':tv('f_gest'));
+    setTxt('paciente_raca_cor',        tv('f_raca'));
+    setTxt('paciente_escolaridade',    tv('f_escol'));
+    setTxt('paciente_cartao_sus',      tv('f_sus'));
+    setTxt('paciente_mae_nome',        tv('f_mae'));
+
+    // Seção 3 - Residência
+    setTxt('residencia_uf',                    tv('f_uf_res'));
+    setTxt('residencia_municipio_nome',        tv('f_mun_res'));
+    setTxt('residencia_municipio_codigo_ibge', tv('f_ibge_res'));
+    setTxt('residencia_distrito',              tv('f_dist_res'));
+    setTxt('residencia_bairro',                tv('f_bairro_res'));
+    setTxt('residencia_logradouro',            tv('f_logr_res'));
+    setTxt('residencia_numero',                tv('f_num_res'));
+    setTxt('residencia_complemento',           tv('f_compl_res'));
+    setTxt('residencia_ponto_de_referencia',   tv('f_pref_res'));
+    setTxt('residencia_cep',                   tv('f_cep'));
+    setTxt('residencia_telefone',              tv('f_tel_res'));
+    setTxt('residencia_zona',                  tv('f_zona_res'));
+    setTxt('residencia_pais',                  tv('f_pais_res'));
+
+    // Seção 4 - Notificante
+    setTxt('notificante_municipio', tv('f_notif_mun'));
+    setTxt('notificante_nome',      tv('f_notif_nome'));
+    setTxt('notificante_funcao',    tv('f_notif_funcao'));
+
+    // Observações (campo livre)
+    setTxt('observacoes_complementares', tv('f_obs'));
+
+    // Campos fixos como "Não" ou "Não se aplica" (conforme markdown)
+    setTxt('obito', '2');
+    setTxt('contato_caso_semelhante', '2');
+    setTxt('presenca_exantema', '2');
+    setTxt('presenca_petequias', '2');
+    setTxt('liquor', '2');
+    setTxt('vacina_agravo', '6');
+
+    // Campos de surto e exames são deixados em branco automaticamente (não mapeados)
+
+    var outBytes = await pdfDoc.save();
+    var blob = new Blob([outBytes],{type:'application/pdf'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href=url;
+    var ds = fmtDate(tv('f_data_notif')).replace(/\//g,'-')||'sem-data';
+    var nm = tv('f_nome').split(' ')[0]||'PACIENTE';
+    a.download = 'SINAN_DisturbiosVoz_'+nm+'_'+ds+'.pdf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('\u2713 PDF gerado e baixado com sucesso!','t-ok',4000);
+    var btnTr = document.getElementById('btn-transfer');
+    if(btnTr) btnTr.classList.remove('btn-disabled');
+
+  } catch(e){
+    console.error(e);
+    showToast('Erro ao gerar PDF: '+e.message,'t-err',5000);
+  }
+
+  btn.disabled=false;
+  btn.innerHTML='📄 Gerar PDF';
+}
+</script>
+<script src="shared.js"></script>
+
+</body>
+</html>
