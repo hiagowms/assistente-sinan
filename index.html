@@ -94,10 +94,10 @@ main{max-width:1100px;margin:0 auto;padding:28px 24px 60px}
 .sec-title::after{content:'';flex:1;height:1px;background:#d2e3ef}
 
 /* GRID */
-.fichas-grid{columns:310px;column-gap:14px;margin-bottom:20px}
+.fichas-grid{columns:340px;column-gap:14px;margin-bottom:20px}
 
 /* CARD */
-.card{background:#fff;border-radius:10px;border:1px solid #dce8f0;box-shadow:0 1px 4px rgba(0,0,0,.05);overflow:hidden;transition:box-shadow .2s,transform .2s;display:flex;flex-direction:column;border-left:3px solid #dce8f0;break-inside:avoid;margin-bottom:14px}
+.card{background:#fff;border-radius:10px;border:1px solid #dce8f0;box-shadow:0 1px 4px rgba(0,0,0,.05);overflow:visible;transition:box-shadow .2s,transform .2s,border-color .2s,opacity .18s;display:flex;flex-direction:column;border-left:3px solid #dce8f0;position:relative;break-inside:avoid;margin-bottom:14px}
 .card.active{border-left-color:#1a5276}
 .card.active:hover{box-shadow:0 6px 22px rgba(26,82,118,.12);transform:translateY(-2px)}
 /* Category left borders */
@@ -147,16 +147,62 @@ details.def summary::-webkit-details-marker{display:none}
 details.def summary::before{content:'›';font-size:14px;transition:transform .2s;display:inline-block;line-height:1}
 details[open].def summary::before{transform:rotate(90deg)}
 details.def summary:hover{color:#1a5276}
-.def-text{font-size:12px;color:#5a7a9a;line-height:1.65;margin-top:7px;padding:10px 12px;background:#f7fafd;border-radius:4px;border-left:2px solid #c5ddef}
+.def-text{font-size:13px;color:#1f2937;line-height:1.55;margin-top:7px;padding:11px 13px;background:#f0f5fa;border-radius:4px;border-left:2px solid #c5ddef}
+
+/* DRAG HANDLE */
+.drag-handle{
+  position:absolute;top:8px;right:8px;width:22px;height:22px;border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+  color:#9ca3af;opacity:0;transition:all .18s;cursor:grab;user-select:none;
+}
+.card:hover .drag-handle{opacity:1}
+.drag-handle:hover{background:#f0f5fa;color:#4a7a9b}
+.drag-handle:active{cursor:grabbing}
+/* dashed corner — drag affordance */
+.card::after{
+  content:"";position:absolute;top:6px;right:6px;width:26px;height:26px;
+  border-top:1px dashed #c5ddef;border-right:1px dashed #c5ddef;
+  border-top-right-radius:8px;opacity:0;transition:opacity .18s;pointer-events:none;
+}
+.card:hover::after{opacity:1}
+.card.dragging{opacity:.35;cursor:grabbing}
+.card.drag-over{border-color:#1a5276;box-shadow:0 0 0 2px rgba(26,82,118,.25),0 6px 18px rgba(26,82,118,.12);transform:translateY(-1px)}
+.card.drag-over::after{opacity:0}
+
+/* SECTION HEADER */
+.sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding-left:2px}
+.sec-title-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#4a7a9b}
+.sec-drag-hint{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:10.5px;color:#6b7280;font-weight:600;
+  padding:4px 10px;background:#fff;border:1px dashed #c5ddef;border-radius:14px;
+}
 
 /* ACTIONS */
-.card-actions{padding:12px 20px 16px;display:flex;gap:7px;flex-wrap:wrap;border-top:1px solid #f0f4f8}
-.btn-assistente{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#1a5276,#1a6b45);color:#fff;padding:8px 16px;border-radius:6px;font-size:13px;font-weight:700;text-decoration:none;border:none;cursor:pointer;transition:opacity .15s}
-.btn-assistente:hover{opacity:.88}
-.btn-assistente svg{opacity:.9}
-.btn-download{display:inline-flex;align-items:center;gap:6px;background:#f5f8fc;color:#1a5276;padding:8px 14px;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;border:1px solid #c5ddef;cursor:pointer;transition:background .15s}
-.btn-download:hover{background:#e8f0f9}
-.btn-download svg{opacity:.7}
+.card-actions{padding:12px 20px 16px;display:flex;flex-direction:column;gap:10px;border-top:1px solid #f0f4f8}
+.btn-assistente{
+  width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:linear-gradient(135deg,#1e3a8a 0%,#1e40af 100%);color:#fff;
+  padding:11px 16px;border-radius:8px;font-size:13.5px;font-weight:700;
+  text-decoration:none;border:none;cursor:pointer;
+  transition:all .18s;box-shadow:0 2px 6px rgba(30,58,138,.22);position:relative;
+}
+.btn-assistente .btn-arrow{margin-left:auto;transition:transform .18s}
+.btn-assistente:hover{
+  background:linear-gradient(135deg,#1e40af 0%,#2563eb 100%);
+  transform:translateY(-1px);box-shadow:0 6px 16px rgba(30,58,138,.4);
+}
+.btn-assistente:hover .btn-arrow{transform:translateX(3px)}
+.btn-assistente:active{transform:translateY(0)}
+.btn-assistente svg:first-child{flex-shrink:0}
+.card-sec-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.btn-link{
+  display:inline-flex;align-items:center;gap:5px;padding:3px 6px;
+  background:none;border:none;color:#4a7a9b;font-size:11.5px;font-weight:500;
+  cursor:pointer;border-radius:4px;text-decoration:none;transition:color .15s;
+}
+.btn-link:hover{color:#1e3a8a;text-decoration:underline}
+.btn-link svg{opacity:.7;flex-shrink:0}
 .btn-wip{display:inline-flex;align-items:center;gap:6px;background:#f9f8ff;color:#8b7ec8;padding:8px 14px;border-radius:6px;font-size:12px;font-weight:600;border:1px solid #e0d9f5;cursor:not-allowed;opacity:.75}
 .btn-noficha{display:inline-flex;align-items:center;gap:6px;background:#fff8f0;color:#b07030;padding:8px 14px;border-radius:6px;font-size:12px;font-weight:600;border:1px solid #f0d8b0;cursor:default;opacity:.85}
 
@@ -211,7 +257,7 @@ footer a{color:#1a5276;text-decoration:none}
   .sec-title{font-size:10px;margin-bottom:12px;letter-spacing:1.3px}
 
   /* ── GRID — coluna única no mobile ─────────────────────── */
-  .fichas-grid{column-count:1;column-gap:9px;margin-bottom:16px}
+  .fichas-grid{columns:1;column-gap:9px;margin-bottom:16px}
 
   /* ── CARDS ──────────────────────────────────────────────── */
   .card{border-radius:9px}
@@ -224,12 +270,10 @@ footer a{color:#1a5276;text-decoration:none}
   .def-text{font-size:11px;padding:8px 10px}
 
   /* ── CARD ACTIONS ───────────────────────────────────────── */
-  .card-actions{padding:9px 16px 12px;gap:7px;flex-wrap:wrap}
-  .btn-assistente,.btn-download,.btn-wip,.btn-noficha{
-    padding:10px 14px;font-size:13px;border-radius:6px
-  }
-  .btn-assistente{flex:1;justify-content:center;min-height:44px}
-  .btn-download{min-height:44px}
+  .card-actions{padding:9px 16px 12px;gap:8px}
+  .btn-assistente{min-height:44px;font-size:13px;border-radius:7px}
+  .btn-link{font-size:11px}
+  .sec-drag-hint{display:none}
 
   /* ── FOOTER ─────────────────────────────────────────────── */
   footer{padding:16px 18px}
@@ -318,7 +362,7 @@ footer a{color:#1a5276;text-decoration:none}
 [data-theme="dark"] .status-noficha{background:#2a1a0f;color:#fb923c;border-color:#5c3a1e}
 [data-theme="dark"] details.def summary{color:var(--text3)}
 [data-theme="dark"] details.def summary:hover{color:#60a5fa}
-[data-theme="dark"] .def-text{background:var(--bg-card2);color:var(--text2);border-left-color:var(--border)}
+[data-theme="dark"] .def-text{background:rgba(74,158,217,.08);color:#e6eef7;border-left-color:var(--border)}
 [data-theme="dark"] details.def{border-top-color:var(--border)}
 
 /* Card icon wraps — fundos escuros harmonizados */
@@ -337,10 +381,15 @@ footer a{color:#1a5276;text-decoration:none}
 
 /* Card actions */
 [data-theme="dark"] .card-actions{border-top-color:var(--border)}
-[data-theme="dark"] .btn-download{background:var(--bg-card2);color:#60a5fa;border-color:var(--border)}
-[data-theme="dark"] .btn-download:hover{background:var(--accent-bg)}
+[data-theme="dark"] .btn-link{color:#8fb0cc}
+[data-theme="dark"] .btn-link:hover{color:#60a5fa}
 [data-theme="dark"] .btn-wip{background:#1a152e;color:#8b7ec8;border-color:#2e2550}
 [data-theme="dark"] .btn-noficha{background:#2a1a0f;color:#c08040;border-color:#5c3a1e}
+[data-theme="dark"] .drag-handle{color:#6b7280}
+[data-theme="dark"] .drag-handle:hover{background:#222633;color:#8fb0cc}
+[data-theme="dark"] .card::after{border-top-color:#2d3348;border-right-color:#2d3348}
+[data-theme="dark"] .sec-drag-hint{background:var(--bg-card);border-color:var(--border);color:var(--text3)}
+[data-theme="dark"] .sec-title-label{color:var(--text3)}
 
 /* Footer */
 [data-theme="dark"] footer{background:var(--bg-card);border-top-color:var(--border)}
@@ -412,10 +461,19 @@ function toggleDarkMode(){
 
 <main>
 
-  <div class="fichas-grid">
+  <div class="sec-head">
+    <div class="sec-title-label">Agravos disponíveis</div>
+    <div class="sec-drag-hint">
+      <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><circle cx="7" cy="5" r="1.3"/><circle cx="13" cy="5" r="1.3"/><circle cx="7" cy="10" r="1.3"/><circle cx="13" cy="10" r="1.3"/><circle cx="7" cy="15" r="1.3"/><circle cx="13" cy="15" r="1.3"/></svg>
+      Arraste os cards para reordenar
+    </div>
+  </div>
+
+  <div class="fichas-grid" id="fichas-grid">
 
     <!-- VIOLÊNCIA -->
-    <div class="card active cat-violence">
+    <div class="card active cat-violence" draggable="true" data-id="violencia">
+      <div class="drag-handle" title="Arraste para reordenar"><svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><circle cx="7" cy="5" r="1.3"/><circle cx="13" cy="5" r="1.3"/><circle cx="7" cy="10" r="1.3"/><circle cx="13" cy="10" r="1.3"/><circle cx="7" cy="15" r="1.3"/><circle cx="13" cy="15" r="1.3"/></svg></div>
       <div class="card-main">
         <div class="card-head">
           <div class="card-icon-wrap">
@@ -433,22 +491,26 @@ function toggleDarkMode(){
       </div>
       <div class="card-actions">
         <a class="btn-assistente" href="sinan_violencia.html">
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
           Usar assistente
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l6 6-6 6"/></svg>
         </a>
-        <a class="btn-download" href="fichas/violencia_editavel.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha editável
-        </a>
-        <a class="btn-download" href="fichas/violencia.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha em branco
-        </a>
+        <div class="card-sec-actions">
+          <a class="btn-link" href="fichas/violencia_editavel.pdf" download>
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+            Ficha editável (PDF)
+          </a>
+          <a class="btn-link" href="fichas/violencia.pdf" download>
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+            Ficha em branco
+          </a>
+        </div>
       </div>
     </div>
 
     <!-- ACIDENTE DE TRABALHO -->
-    <div class="card active cat-accident">
+    <div class="card active cat-accident" draggable="true" data-id="acidente">
+      <div class="drag-handle" title="Arraste para reordenar"><svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><circle cx="7" cy="5" r="1.3"/><circle cx="13" cy="5" r="1.3"/><circle cx="7" cy="10" r="1.3"/><circle cx="13" cy="10" r="1.3"/><circle cx="7" cy="15" r="1.3"/><circle cx="13" cy="15" r="1.3"/></svg></div>
       <div class="card-main">
         <div class="card-head">
           <div class="card-icon-wrap">
@@ -466,22 +528,26 @@ function toggleDarkMode(){
       </div>
       <div class="card-actions">
         <a class="btn-assistente" href="sinan_acidente.html">
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
           Usar assistente
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l6 6-6 6"/></svg>
         </a>
-        <a class="btn-download" href="fichas/DRT_Acidente_Trabalho_editavel.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha editável
-        </a>
-        <a class="btn-download" href="fichas/DRT_Acidente_Trabalho.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha em branco
-        </a>
+        <div class="card-sec-actions">
+          <a class="btn-link" href="fichas/DRT_Acidente_Trabalho_editavel.pdf" download>
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+            Ficha editável (PDF)
+          </a>
+          <a class="btn-link" href="fichas/DRT_Acidente_Trabalho.pdf" download>
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+            Ficha em branco
+          </a>
+        </div>
       </div>
     </div>
 
     <!-- LER/DORT -->
-    <div class="card active cat-lerdort">
+    <div class="card active cat-lerdort" draggable="true" data-id="lerdort">
+      <div class="drag-handle" title="Arraste para reordenar"><svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><circle cx="7" cy="5" r="1.3"/><circle cx="13" cy="5" r="1.3"/><circle cx="7" cy="10" r="1.3"/><circle cx="13" cy="10" r="1.3"/><circle cx="7" cy="15" r="1.3"/><circle cx="13" cy="15" r="1.3"/></svg></div>
       <div class="card-main">
         <div class="card-head">
           <div class="card-icon-wrap">
@@ -499,22 +565,26 @@ function toggleDarkMode(){
       </div>
       <div class="card-actions">
         <a class="btn-assistente" href="sinan_lerdort.html">
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
           Usar assistente
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l6 6-6 6"/></svg>
         </a>
-        <a class="btn-download" href="fichas/DRT_LERDORT_editavel.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha editável
-        </a>
-        <a class="btn-download" href="fichas/DRT_LERDORT.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha em branco
-        </a>
+        <div class="card-sec-actions">
+          <a class="btn-link" href="fichas/DRT_LERDORT_editavel.pdf" download>
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+            Ficha editável (PDF)
+          </a>
+          <a class="btn-link" href="fichas/DRT_LERDORT.pdf" download>
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+            Ficha em branco
+          </a>
+        </div>
       </div>
     </div>
 
     <!-- TRANSTORNOS MENTAIS -->
-    <div class="card active cat-mental">
+    <div class="card active cat-mental" draggable="true" data-id="transtornos">
+      <div class="drag-handle" title="Arraste para reordenar"><svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><circle cx="7" cy="5" r="1.3"/><circle cx="13" cy="5" r="1.3"/><circle cx="7" cy="10" r="1.3"/><circle cx="13" cy="10" r="1.3"/><circle cx="7" cy="15" r="1.3"/><circle cx="13" cy="15" r="1.3"/></svg></div>
       <div class="card-main">
         <div class="card-head">
           <div class="card-icon-wrap">
@@ -532,22 +602,26 @@ function toggleDarkMode(){
       </div>
       <div class="card-actions">
         <a class="btn-assistente" href="sinan_transtornos.html">
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
           Usar assistente
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l6 6-6 6"/></svg>
         </a>
-        <a class="btn-download" href="fichas/DRT_TranstornosMentais_editavel.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha editável
-        </a>
-        <a class="btn-download" href="fichas/DRT_TranstornosMentais.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha em branco
-        </a>
+        <div class="card-sec-actions">
+          <a class="btn-link" href="fichas/DRT_TranstornosMentais_editavel.pdf" download>
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+            Ficha editável (PDF)
+          </a>
+          <a class="btn-link" href="fichas/DRT_TranstornosMentais.pdf" download>
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+            Ficha em branco
+          </a>
+        </div>
       </div>
     </div>
 
     <!-- INTOXICAÇÃO EXÓGENA -->
-    <div class="card active cat-intox">
+    <div class="card active cat-intox" draggable="true" data-id="intoxicacao">
+      <div class="drag-handle" title="Arraste para reordenar"><svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><circle cx="7" cy="5" r="1.3"/><circle cx="13" cy="5" r="1.3"/><circle cx="7" cy="10" r="1.3"/><circle cx="13" cy="10" r="1.3"/><circle cx="7" cy="15" r="1.3"/><circle cx="13" cy="15" r="1.3"/></svg></div>
       <div class="card-main">
         <div class="card-head">
           <div class="card-icon-wrap">
@@ -565,22 +639,26 @@ function toggleDarkMode(){
       </div>
       <div class="card-actions">
         <a class="btn-assistente" href="sinan_intoxicacao.html">
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
           Usar assistente
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l6 6-6 6"/></svg>
         </a>
-        <a class="btn-download" href="fichas/Intoxicacao_Exogena_v5_editavel.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha editável
-        </a>
-        <a class="btn-download" href="fichas/Intoxicacao_Exogena_v5.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha em branco
-        </a>
+        <div class="card-sec-actions">
+          <a class="btn-link" href="fichas/Intoxicacao_Exogena_v5_editavel.pdf" download>
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+            Ficha editável (PDF)
+          </a>
+          <a class="btn-link" href="fichas/Intoxicacao_Exogena_v5.pdf" download>
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+            Ficha em branco
+          </a>
+        </div>
       </div>
     </div>
 
     <!-- ACIDENTE MATERIAL BIOLÓGICO -->
-    <div class="card active cat-bio">
+    <div class="card active cat-bio" draggable="true" data-id="biologico">
+      <div class="drag-handle" title="Arraste para reordenar"><svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><circle cx="7" cy="5" r="1.3"/><circle cx="13" cy="5" r="1.3"/><circle cx="7" cy="10" r="1.3"/><circle cx="13" cy="10" r="1.3"/><circle cx="7" cy="15" r="1.3"/><circle cx="13" cy="15" r="1.3"/></svg></div>
       <div class="card-main">
         <div class="card-head">
           <div class="card-icon-wrap">
@@ -598,22 +676,26 @@ function toggleDarkMode(){
       </div>
       <div class="card-actions">
         <a class="btn-assistente" href="sinan_acidente_biologico.html">
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
           Usar assistente
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l6 6-6 6"/></svg>
         </a>
-        <a class="btn-download" href="fichas/DRT_Acidente_Trabalho_Biologico_editavel.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha editável
-        </a>
-        <a class="btn-download" href="fichas/DRT_Acidente_Trabalho_Biologico.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha em branco
-        </a>
+        <div class="card-sec-actions">
+          <a class="btn-link" href="fichas/DRT_Acidente_Trabalho_Biologico_editavel.pdf" download>
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+            Ficha editável (PDF)
+          </a>
+          <a class="btn-link" href="fichas/DRT_Acidente_Trabalho_Biologico.pdf" download>
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+            Ficha em branco
+          </a>
+        </div>
       </div>
     </div>
 
     <!-- DERMATOSES -->
-    <div class="card active cat-derm">
+    <div class="card active cat-derm" draggable="true" data-id="dermatoses">
+      <div class="drag-handle" title="Arraste para reordenar"><svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><circle cx="7" cy="5" r="1.3"/><circle cx="13" cy="5" r="1.3"/><circle cx="7" cy="10" r="1.3"/><circle cx="13" cy="10" r="1.3"/><circle cx="7" cy="15" r="1.3"/><circle cx="13" cy="15" r="1.3"/></svg></div>
       <div class="card-main">
         <div class="card-head">
           <div class="card-icon-wrap">
@@ -631,22 +713,26 @@ function toggleDarkMode(){
       </div>
       <div class="card-actions">
         <a class="btn-assistente" href="sinan_dermatoses.html">
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
           Usar assistente
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l6 6-6 6"/></svg>
         </a>
-        <a class="btn-download" href="fichas/DRT_DERMATOSES_editavel.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha editável
-        </a>
-        <a class="btn-download" href="fichas/DRT_DERMATOSES.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha em branco
-        </a>
+        <div class="card-sec-actions">
+          <a class="btn-link" href="fichas/DRT_DERMATOSES_editavel.pdf" download>
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+            Ficha editável (PDF)
+          </a>
+          <a class="btn-link" href="fichas/DRT_DERMATOSES.pdf" download>
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+            Ficha em branco
+          </a>
+        </div>
       </div>
     </div>
 
     <!-- PAIR -->
-    <div class="card active cat-pair">
+    <div class="card active cat-pair" draggable="true" data-id="pair">
+      <div class="drag-handle" title="Arraste para reordenar"><svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><circle cx="7" cy="5" r="1.3"/><circle cx="13" cy="5" r="1.3"/><circle cx="7" cy="10" r="1.3"/><circle cx="13" cy="10" r="1.3"/><circle cx="7" cy="15" r="1.3"/><circle cx="13" cy="15" r="1.3"/></svg></div>
       <div class="card-main">
         <div class="card-head">
           <div class="card-icon-wrap">
@@ -664,22 +750,26 @@ function toggleDarkMode(){
       </div>
       <div class="card-actions">
         <a class="btn-assistente" href="sinan_pair.html">
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
           Usar assistente
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l6 6-6 6"/></svg>
         </a>
-        <a class="btn-download" href="fichas/DRT_PAIR_editavel.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha editável
-        </a>
-        <a class="btn-download" href="fichas/DRT_PAIR.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha em branco
-        </a>
+        <div class="card-sec-actions">
+          <a class="btn-link" href="fichas/DRT_PAIR_editavel.pdf" download>
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+            Ficha editável (PDF)
+          </a>
+          <a class="btn-link" href="fichas/DRT_PAIR.pdf" download>
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+            Ficha em branco
+          </a>
+        </div>
       </div>
     </div>
 
     <!-- PNEUMOCONIOSES -->
-    <div class="card active cat-pneumo">
+    <div class="card active cat-pneumo" draggable="true" data-id="pneumoconioses">
+      <div class="drag-handle" title="Arraste para reordenar"><svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><circle cx="7" cy="5" r="1.3"/><circle cx="13" cy="5" r="1.3"/><circle cx="7" cy="10" r="1.3"/><circle cx="13" cy="10" r="1.3"/><circle cx="7" cy="15" r="1.3"/><circle cx="13" cy="15" r="1.3"/></svg></div>
       <div class="card-main">
         <div class="card-head">
           <div class="card-icon-wrap">
@@ -697,22 +787,26 @@ function toggleDarkMode(){
       </div>
       <div class="card-actions">
         <a class="btn-assistente" href="sinan_pneumoconioses.html">
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
           Usar assistente
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l6 6-6 6"/></svg>
         </a>
-        <a class="btn-download" href="fichas/DRT_Pneumoconioses_editavel.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha editável
-        </a>
-        <a class="btn-download" href="fichas/DRT_Pneumoconioses.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha em branco
-        </a>
+        <div class="card-sec-actions">
+          <a class="btn-link" href="fichas/DRT_Pneumoconioses_editavel.pdf" download>
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+            Ficha editável (PDF)
+          </a>
+          <a class="btn-link" href="fichas/DRT_Pneumoconioses.pdf" download>
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+            Ficha em branco
+          </a>
+        </div>
       </div>
     </div>
 
     <!-- CÂNCER -->
-    <div class="card active cat-cancer">
+    <div class="card active cat-cancer" draggable="true" data-id="cancer">
+      <div class="drag-handle" title="Arraste para reordenar"><svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><circle cx="7" cy="5" r="1.3"/><circle cx="13" cy="5" r="1.3"/><circle cx="7" cy="10" r="1.3"/><circle cx="13" cy="10" r="1.3"/><circle cx="7" cy="15" r="1.3"/><circle cx="13" cy="15" r="1.3"/></svg></div>
       <div class="card-main">
         <div class="card-head">
           <div class="card-icon-wrap">
@@ -730,22 +824,26 @@ function toggleDarkMode(){
       </div>
       <div class="card-actions">
         <a class="btn-assistente" href="sinan_cancer.html">
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
           Usar assistente
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l6 6-6 6"/></svg>
         </a>
-        <a class="btn-download" href="fichas/DRT_CANCER_editavel.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha editável
-        </a>
-        <a class="btn-download" href="fichas/DRT_CANCER.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha em branco
-        </a>
+        <div class="card-sec-actions">
+          <a class="btn-link" href="fichas/DRT_CANCER_editavel.pdf" download>
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+            Ficha editável (PDF)
+          </a>
+          <a class="btn-link" href="fichas/DRT_CANCER.pdf" download>
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+            Ficha em branco
+          </a>
+        </div>
       </div>
     </div>
 
     <!-- DISTÚRBIO DE VOZ -->
-    <div class="card active cat-voice">
+    <div class="card active cat-voice" draggable="true" data-id="voz">
+      <div class="drag-handle" title="Arraste para reordenar"><svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><circle cx="7" cy="5" r="1.3"/><circle cx="13" cy="5" r="1.3"/><circle cx="7" cy="10" r="1.3"/><circle cx="13" cy="10" r="1.3"/><circle cx="7" cy="15" r="1.3"/><circle cx="13" cy="15" r="1.3"/></svg></div>
       <div class="card-main">
         <div class="card-head">
           <div class="card-icon-wrap">
@@ -763,17 +861,20 @@ function toggleDarkMode(){
       </div>
       <div class="card-actions">
         <a class="btn-assistente" href="sinan_disturbios_voz.html">
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M14.7 3.3a1 1 0 011.4 1.4l-9 9-4 1 1-4 9-9z"/></svg>
           Usar assistente
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l6 6-6 6"/></svg>
         </a>
-        <a class="btn-download" href="fichas/disturbio_voz_editavel.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha editável
-        </a>
-        <a class="btn-download" href="fichas/disturbio_voz.pdf" download>
-          <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
-          Ficha de referência
-        </a>
+        <div class="card-sec-actions">
+          <a class="btn-link" href="fichas/disturbio_voz_editavel.pdf" download>
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+            Ficha editável (PDF)
+          </a>
+          <a class="btn-link" href="fichas/disturbio_voz.pdf" download>
+            <svg width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3v10M6 9l4 4 4-4M4 17h12"/></svg>
+            Ficha de referência
+          </a>
+        </div>
       </div>
     </div>
 
@@ -887,6 +988,90 @@ function closeDrawer(){
   document.body.style.overflow='';
 }
 document.addEventListener('keydown',function(e){if(e.key==='Escape') closeDrawer();});
+
+// DRAG-AND-DROP REORDERING
+(function(){
+  var STORAGE_KEY = 'sinan-card-order';
+  var grid = document.getElementById('fichas-grid');
+  if(!grid) return;
+  var dragSrc = null;
+  var lastSwapTarget = null;
+
+  function getCards(){ return Array.from(grid.querySelectorAll('.card[draggable]')); }
+
+  // ── Persistência ──────────────────────────────────────────
+  function saveOrder(){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(getCards().map(function(c){ return c.dataset.id; }))); }catch(_){}
+  }
+
+  function restoreOrder(){
+    var stored;
+    try{ stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); }catch(_){ stored = null; }
+    if(!stored || !Array.isArray(stored)) return;
+    var map = {};
+    getCards().forEach(function(c){ map[c.dataset.id] = c; });
+    stored.forEach(function(id){ if(map[id]) grid.appendChild(map[id]); });
+  }
+
+  // ── Eventos ───────────────────────────────────────────────
+  function init(){
+    restoreOrder();
+    getCards().forEach(function(card){
+      card.addEventListener('dragstart', onDragStart);
+      card.addEventListener('dragover',  onDragOver);
+      card.addEventListener('dragleave', onDragLeave);
+      card.addEventListener('drop',      onDrop);
+      card.addEventListener('dragend',   onDragEnd);
+    });
+  }
+
+  function onDragStart(e){
+    dragSrc = this;
+    lastSwapTarget = null;
+    this.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    try{ e.dataTransfer.setData('text/plain', this.dataset.id); }catch(_){}
+  }
+
+  function onDragOver(e){
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    if(!dragSrc || this === dragSrc) return;
+    this.classList.add('drag-over');
+    // Troca imediata: assim que o card arrastado entra no espaço de outro card, os dois trocam de lugar
+    if(this !== lastSwapTarget){
+      lastSwapTarget = this;
+      var cards = getCards();
+      var srcIdx = cards.indexOf(dragSrc);
+      var tgtIdx = cards.indexOf(this);
+      if(srcIdx < tgtIdx){
+        grid.insertBefore(dragSrc, this.nextSibling);
+      } else {
+        grid.insertBefore(dragSrc, this);
+      }
+    }
+  }
+
+  function onDragLeave(){
+    this.classList.remove('drag-over');
+  }
+
+  function onDrop(e){
+    e.preventDefault();
+    getCards().forEach(function(c){ c.classList.remove('drag-over'); });
+    saveOrder();
+  }
+
+  function onDragEnd(){
+    this.classList.remove('dragging');
+    getCards().forEach(function(c){ c.classList.remove('drag-over'); });
+    dragSrc = null;
+    lastSwapTarget = null;
+    saveOrder(); // salva mesmo se o drop ocorreu fora de um card alvo
+  }
+
+  init();
+})();
 </script>
 
 </body>
