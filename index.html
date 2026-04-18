@@ -995,7 +995,6 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape') closeDrawer
   var grid = document.getElementById('fichas-grid');
   if(!grid) return;
   var dragSrc = null;
-  var lastSwapTarget = null;
 
   function getCards(){ return Array.from(grid.querySelectorAll('.card[draggable]')); }
 
@@ -1027,7 +1026,6 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape') closeDrawer
 
   function onDragStart(e){
     dragSrc = this;
-    lastSwapTarget = null;
     this.classList.add('dragging');
     e.dataTransfer.effectAllowed = 'move';
     try{ e.dataTransfer.setData('text/plain', this.dataset.id); }catch(_){}
@@ -1038,17 +1036,9 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape') closeDrawer
     e.dataTransfer.dropEffect = 'move';
     if(!dragSrc || this === dragSrc) return;
     this.classList.add('drag-over');
-    // Troca imediata: assim que o card arrastado entra no espaço de outro card, os dois trocam de lugar
-    if(this !== lastSwapTarget){
-      lastSwapTarget = this;
-      var cards = getCards();
-      var srcIdx = cards.indexOf(dragSrc);
-      var tgtIdx = cards.indexOf(this);
-      if(srcIdx < tgtIdx){
-        grid.insertBefore(dragSrc, this.nextSibling);
-      } else {
-        grid.insertBefore(dragSrc, this);
-      }
+    // Inserção: card arrastado é inserido imediatamente antes do card alvo
+    if(dragSrc.nextSibling !== this){
+      grid.insertBefore(dragSrc, this);
     }
   }
 
@@ -1066,8 +1056,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape') closeDrawer
     this.classList.remove('dragging');
     getCards().forEach(function(c){ c.classList.remove('drag-over'); });
     dragSrc = null;
-    lastSwapTarget = null;
-    saveOrder(); // salva mesmo se o drop ocorreu fora de um card alvo
+    saveOrder();
   }
 
   init();

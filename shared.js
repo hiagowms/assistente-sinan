@@ -1139,3 +1139,351 @@ function toggleUnitLock(){
     }
   }catch(e){localStorage.removeItem(UNIT_KEY);}
 })();
+
+/*==========================================================
+  MÁSCARAS DE INPUT
+==========================================================*/
+(function(){
+  function applyMaskOnInput(el, maskFn){
+    el.addEventListener('input', function(){
+      var pos = this.selectionStart;
+      var raw = this.value.replace(/\D/g,'');
+      var masked = maskFn(raw);
+      var diff = masked.length - this.value.length;
+      this.value = masked;
+      try{ this.setSelectionRange(pos+diff, pos+diff); }catch(e){}
+    });
+  }
+
+  // CEP: 00000-000
+  var cepEl = document.getElementById('f_cep');
+  if(cepEl) applyMaskOnInput(cepEl, function(r){
+    r = r.slice(0,8);
+    if(r.length > 5) r = r.slice(0,5) + '-' + r.slice(5);
+    return r;
+  });
+
+  // Telefones: (00) 00000-0000
+  function maskTel(r){
+    r = r.slice(0,11);
+    if(r.length === 0) return r;
+    if(r.length <= 2)  return '(' + r;
+    if(r.length <= 7)  return '(' + r.slice(0,2) + ') ' + r.slice(2);
+    if(r.length <= 11) return '(' + r.slice(0,2) + ') ' + r.slice(2,7) + '-' + r.slice(7);
+    return r;
+  }
+  ['f_tel_res','f_emp_tel','f_acompanhante_tel'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) applyMaskOnInput(el, maskTel);
+  });
+
+  // CNS (Cartão Nacional de Saúde): somente dígitos, máx 15
+  var cnsEl = document.getElementById('f_sus');
+  if(cnsEl){
+    cnsEl.addEventListener('input', function(){
+      this.value = this.value.replace(/\D/g,'').slice(0,15);
+    });
+    cnsEl.addEventListener('blur', function(){
+      var v = this.value.replace(/\D/g,'');
+      if(!v) return;
+      var hint = document.getElementById('f_sus_cns_hint');
+      if(!hint){
+        hint = document.createElement('span');
+        hint.id = 'f_sus_cns_hint';
+        hint.style.cssText = 'font-size:11px;margin-top:3px;display:block;font-weight:600';
+        this.parentNode.appendChild(hint);
+      }
+      if(v.length !== 15){
+        hint.textContent = '⚠ CNS deve ter 15 dígitos';
+        hint.style.color = '#b45309';
+      } else if(_validarCNS(v)){
+        hint.textContent = '✓ CNS válido';
+        hint.style.color = '#16a34a';
+      } else {
+        hint.textContent = '⚠ CNS inválido — verifique os dígitos';
+        hint.style.color = '#b45309';
+      }
+    });
+    cnsEl.addEventListener('input', function(){
+      var hint = document.getElementById('f_sus_cns_hint');
+      if(hint && !this.value) hint.textContent = '';
+    });
+  }
+})();
+
+function _validarCNS(cns){
+  cns = cns.replace(/\D/g,'');
+  if(cns.length !== 15) return false;
+  var p = parseInt(cns[0]);
+  if(p >= 1 && p <= 2){
+    var pis = cns.substring(0,11);
+    var soma = 0;
+    for(var i=0;i<11;i++) soma += parseInt(pis[i])*(15-i);
+    var dsc = soma % 11;
+    var expected;
+    if(dsc !== 0){
+      var resto = 11 - dsc;
+      if(resto >= 10){
+        soma += 2; dsc = soma % 11;
+        resto = dsc !== 0 ? 11 - dsc : 0;
+        expected = pis + '001' + String(resto);
+      } else {
+        expected = pis + '000' + String(resto);
+      }
+    } else {
+      expected = pis + '0000';
+    }
+    return expected === cns;
+  } else if(p >= 7 && p <= 9){
+    var soma2 = 0;
+    for(var j=0;j<15;j++) soma2 += parseInt(cns[j])*(15-j);
+    return soma2 % 11 === 0;
+  }
+  return false;
+}
+
+/*==========================================================
+  GESTANTE — AUTO-SELEÇÃO "NÃO SE APLICA" AO ESCOLHER MASCULINO
+==========================================================*/
+(function(){
+  document.querySelectorAll('input[name="sexo"]').forEach(function(inp){
+    inp.addEventListener('change', function(){
+      var gestHid = document.getElementById('f_gest');
+      if(!gestHid) return;
+      if(this.value === 'M'){
+        gestHid.value = '6';
+        gestHid.dispatchEvent(new Event('change',{bubbles:true}));
+      } else if(gestHid.value === '6'){
+        gestHid.value = '';
+        gestHid.dispatchEvent(new Event('change',{bubbles:true}));
+      }
+    });
+  });
+})();
+
+/*==========================================================
+  BUSCA INVERSA DE CEP VIA VIACEP
+==========================================================*/
+(function(){
+  var cepEl = document.getElementById('f_cep');
+  if(!cepEl) return;
+
+  var btn = document.createElement('button');
+  btn.type = 'button';
+  btn.title = 'Buscar CEP por logradouro';
+  btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
+  btn.style.cssText = 'position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#6b7280;padding:4px;line-height:0;transition:color .15s';
+  btn.addEventListener('mouseenter', function(){ this.style.color='#2563eb'; });
+  btn.addEventListener('mouseleave', function(){ this.style.color='#6b7280'; });
+
+  var wrap = cepEl.parentNode;
+  if(wrap.style.position !== 'relative') wrap.style.position = 'relative';
+  cepEl.style.paddingRight = '34px';
+  wrap.appendChild(btn);
+
+  // Dropdown de resultados
+  var drop = document.createElement('div');
+  drop.className = 'ac-drop';
+  drop.id = 'f_cep-drop';
+  wrap.appendChild(drop);
+
+  btn.addEventListener('click', function(){
+    var uf  = (document.getElementById('f_uf_res')  || {}).value || '';
+    var mun = (document.getElementById('f_mun_res') || {}).value || '';
+    var logr= (document.getElementById('f_logr_res')|| {}).value || '';
+    if(!uf || !mun || !logr){
+      showToast('Preencha UF, Município e Logradouro para buscar o CEP','t-warn',3500);
+      return;
+    }
+    btn.innerHTML = '…';
+    drop.classList.remove('show');
+    fetch('https://viacep.com.br/ws/'+encodeURIComponent(uf)+'/'+encodeURIComponent(mun)+'/'+encodeURIComponent(logr)+'/json/')
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
+        if(!Array.isArray(data) || data.length === 0){
+          showToast('Nenhum CEP encontrado para este endereço','t-warn',3500);
+          return;
+        }
+        var items = data.slice(0,10);
+        drop.innerHTML = items.map(function(d,i){
+          return '<div class="ac-item" data-i="'+i+'">' +
+            '<b>' + d.cep + '</b> — ' + (d.logradouro||logr) + ', ' + (d.bairro||'') +
+            ' <span style="color:#9ca3af;font-size:11px">'+d.localidade+'/'+d.uf+'</span>' +
+            '</div>';
+        }).join('');
+        drop.classList.add('show');
+        drop.querySelectorAll('.ac-item').forEach(function(el, i){
+          el.addEventListener('mousedown', function(e){
+            e.preventDefault();
+            var d = items[i];
+            cepEl.value = d.cep;
+            cepEl.dispatchEvent(new Event('input',{bubbles:true}));
+            var bairroEl = document.getElementById('f_bairro_res');
+            if(bairroEl && d.bairro){ bairroEl.value = d.bairro.toUpperCase(); bairroEl.dispatchEvent(new Event('input',{bubbles:true})); }
+            drop.classList.remove('show');
+            updateProgress();
+          });
+        });
+      })
+      .catch(function(){
+        btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
+        showToast('Falha na consulta ao ViaCEP — verifique sua conexão','t-err',4000);
+      });
+  });
+
+  document.addEventListener('click', function(e){
+    if(!wrap.contains(e.target)) drop.classList.remove('show');
+  });
+})();
+
+/*==========================================================
+  AUTO-SAVE COM LOCALSTORAGE
+==========================================================*/
+(function(){
+  var KEY = 'sinan_autosave_' + (window.FICHA_NOME || 'ficha');
+  var _saveTimer = null;
+
+  function _doSave(){
+    try{
+      var data = {ts: new Date().toISOString(), fields:{}, radios:{}, checks:{}};
+      document.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]):not(#f-import), select, textarea')
+        .forEach(function(el){ if(el.id && el.value!=='') data.fields[el.id]=el.value; });
+      document.querySelectorAll('input[type="radio"]:checked')
+        .forEach(function(inp){ data.radios[inp.name]=inp.value; });
+      document.querySelectorAll('input[type="checkbox"]:checked')
+        .forEach(function(inp){
+          if(!data.checks[inp.name]) data.checks[inp.name]=[];
+          data.checks[inp.name].push(inp.value);
+        });
+      localStorage.setItem(KEY, JSON.stringify(data));
+    }catch(e){}
+  }
+
+  function _schedSave(){
+    clearTimeout(_saveTimer);
+    _saveTimer = setTimeout(_doSave, 500);
+  }
+
+  // Restaurar rascunho salvo ao carregar (pula se houver transferência pendente)
+  (function _restore(){
+    if(sessionStorage.getItem('sinan_transfer')) return;
+    var raw;
+    try{ raw = localStorage.getItem(KEY); }catch(e){ return; }
+    if(!raw) return;
+    try{
+      var data = JSON.parse(raw);
+      if(!data.fields && !data.radios) return;
+      setTimeout(function(){
+        Object.keys(data.fields||{}).forEach(function(id){ _setField(id, data.fields[id]); });
+        Object.keys(data.radios||{}).forEach(function(name){ _setRadio(name, data.radios[name]); });
+        Object.keys(data.checks||{}).forEach(function(name){ _setChecks(name, data.checks[name]); });
+        if(typeof window._applyVisibility==='function') window._applyVisibility();
+        (window.FICHA_TRANSFER_MUN_SUFS||[]).forEach(function(suf){
+          var id='f_mun_'+suf;
+          if(data.fields&&data.fields[id]){ var el=document.getElementById(id); if(el) el.value=data.fields[id]; }
+        });
+        document.querySelectorAll('.ac-drop').forEach(function(d){ d.innerHTML=''; d.classList.remove('show'); });
+        updateProgress();
+        showToast('📋 Rascunho restaurado automaticamente','t-ok',3000);
+      }, 300);
+    }catch(e){ try{localStorage.removeItem(KEY);}catch(_){} }
+  })();
+
+  // Monitorar mudanças
+  document.querySelectorAll('input,select,textarea').forEach(function(el){
+    el.addEventListener('input', _schedSave);
+    el.addEventListener('change', _schedSave);
+  });
+
+  // Limpar ao gerar PDF
+  var btnGerar = document.getElementById('btn-gerar');
+  if(btnGerar) btnGerar.addEventListener('click', function(){
+    try{ localStorage.removeItem(KEY); }catch(e){}
+  }, true);
+  var mobBtn = document.getElementById('mob-pdf-btn');
+  if(mobBtn) mobBtn.addEventListener('click', function(){
+    try{ localStorage.removeItem(KEY); }catch(e){}
+  }, true);
+})();
+
+/*==========================================================
+  ACESSIBILIDADE — NAVEGAÇÃO POR TECLADO NAS PILLS
+==========================================================*/
+(function(){
+  document.querySelectorAll('.pill').forEach(function(lbl){
+    if(!lbl.querySelector('input')) return;
+    lbl.setAttribute('tabindex','0');
+    lbl.setAttribute('role','button');
+    lbl.addEventListener('keydown', function(e){
+      if(e.key === ' ' || e.key === 'Enter'){
+        e.preventDefault();
+        lbl.click();
+      }
+    });
+  });
+})();
+
+/*==========================================================
+  SELEÇÃO EM MASSA (BATCH SELECTION)
+==========================================================*/
+(function(){
+  // Encontra grupos de sublabel seguidos de grids com subgrupos Sim/Não
+  var BATCH_VALUES = {
+    'Sim':    '1',
+    'Não':    '2',
+    'Ignorado':'9'
+  };
+  var MIN_ITEMS = 3;
+
+  document.querySelectorAll('.sublabel').forEach(function(sl){
+    // Próximo sibling deve ser um grid de flds com pills Sim/Não
+    var grid = sl.nextElementSibling;
+    if(!grid) return;
+    if(grid.tagName !== 'DIV') return;
+    // Verificar se é um grid de subgrupos
+    var subFlds = grid.querySelectorAll('.fld');
+    if(subFlds.length < MIN_ITEMS) return;
+    // Verificar se os flds contêm pills com Sim/Não
+    var hasSim = grid.querySelector('[value="1"]');
+    var hasNao = grid.querySelector('[value="2"]');
+    if(!hasSim || !hasNao) return;
+    var hasIgn = grid.querySelector('[value="9"]');
+
+    // Determinar nome do grupo (todos os radios no grid devem ser diferentes)
+    var names = new Set();
+    grid.querySelectorAll('input[type="radio"]').forEach(function(inp){ names.add(inp.name); });
+    if(names.size < MIN_ITEMS) return;
+
+    // Criar barra de batch selection
+    var bar = document.createElement('div');
+    bar.style.cssText = 'display:flex;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap';
+
+    var lbl = document.createElement('span');
+    lbl.style.cssText = 'font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.5px';
+    lbl.textContent = 'Marcar todos:';
+    bar.appendChild(lbl);
+
+    var opts = [['Sim','1','#16a34a'],['Não','2','#dc2626']];
+    if(hasIgn) opts.push(['Ignorado','9','#9ca3af']);
+
+    opts.forEach(function(opt){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = opt[0];
+      b.style.cssText = 'padding:3px 11px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid '+opt[2]+';color:'+opt[2]+';background:transparent;transition:all .15s';
+      b.addEventListener('mouseenter', function(){ this.style.background=opt[2]; this.style.color='#fff'; });
+      b.addEventListener('mouseleave', function(){ this.style.background='transparent'; this.style.color=opt[2]; });
+      b.addEventListener('click', function(){
+        names.forEach(function(name){
+          _setRadio(name, opt[1]);
+        });
+        updateProgress();
+      });
+      bar.appendChild(b);
+    });
+
+    sl.insertAdjacentElement('afterend', bar);
+    bar.insertAdjacentElement('afterend', grid);
+  });
+})();

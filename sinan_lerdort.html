@@ -130,7 +130,6 @@ function toggleDarkMode(){
     <div class="sec-num">1</div>
     <div class="sec-info">
       <h3>Dados Gerais</h3>
-      <p>Unidade notificadora, datas, UF e município</p>
     </div>
     <span class="sec-badge badge-empty" id="badge1">—</span>
   </div>
@@ -209,7 +208,6 @@ function toggleDarkMode(){
     <div class="sec-num">2</div>
     <div class="sec-info">
       <h3>Notificação Individual</h3>
-      <p>Dados pessoais do trabalhador</p>
     </div>
     <span class="sec-badge badge-empty" id="badge2">—</span>
   </div>
@@ -321,7 +319,6 @@ function toggleDarkMode(){
     <div class="sec-num">3</div>
     <div class="sec-info">
       <h3>Dados de Residência</h3>
-      <p>Endereço e contato do paciente</p>
     </div>
     <span class="sec-badge badge-empty" id="badge3">—</span>
   </div>
@@ -408,7 +405,6 @@ function toggleDarkMode(){
     <div class="sec-num">4</div>
     <div class="sec-info">
       <h3>Antecedentes Epidemiológicos</h3>
-      <p>Ocupação, mercado de trabalho e dados da empresa</p>
     </div>
     <span class="sec-badge badge-empty" id="badge4">—</span>
   </div>
@@ -472,7 +468,6 @@ function toggleDarkMode(){
     <div class="sec-num">5</div>
     <div class="sec-info">
       <h3>Dados da Empresa</h3>
-      <p>Local de trabalho onde ocorreu a exposição</p>
     </div>
     <span class="sec-badge badge-empty" id="badge5">—</span>
   </div>
@@ -581,13 +576,12 @@ function toggleDarkMode(){
     <div class="sec-num">6</div>
     <div class="sec-info">
       <h3>Agravos Associados e Exposição</h3>
-      <p>Doenças concomitantes, tempo de exposição e regime</p>
     </div>
     <span class="sec-badge badge-empty" id="badge6">—</span>
   </div>
   <div class="sec-body">
 
-    <div class="sublabel">Agravos Associados <small style="color:#6b7280;font-weight:400;text-transform:none;margin-left:6px">(1=Sim, 2=Não, 9=Ignorado)</small></div>
+    <div class="sublabel">Agravos Associados</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin-bottom:14px">
       <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Hipertensão Arterial</div><div class="pills"><label class="pill"><input type="radio" name="agravo_hipertensao" value="1"> Sim</label><label class="pill"><input type="radio" name="agravo_hipertensao" value="2"> Não</label><label class="pill"><input type="radio" name="agravo_hipertensao" value="9"> Ignorado</label></div></div>
       <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Diabetes Mellitus</div><div class="pills"><label class="pill"><input type="radio" name="agravo_diabetes" value="1"> Sim</label><label class="pill"><input type="radio" name="agravo_diabetes" value="2"> Não</label><label class="pill"><input type="radio" name="agravo_diabetes" value="9"> Ignorado</label></div></div>
@@ -606,7 +600,7 @@ function toggleDarkMode(){
 
     <div class="row">
       <div class="fld" style="max-width:120px">
-        <label>Tempo de Exposição ao Agente de Risco</label>
+        <label><span style="white-space:normal;display:block;line-height:1.3">Tempo de Exposição ao Agente de Risco</span></label>
         <input type="text" id="f_tempo_exp_val" placeholder="Ex: 12" maxlength="4">
       </div>
       <div class="fld">
@@ -640,13 +634,12 @@ function toggleDarkMode(){
     <div class="sec-num">7</div>
     <div class="sec-info">
       <h3>LER/DORT</h3>
-      <p>Sinais e sintomas, exposição ocupacional, diagnóstico</p>
     </div>
     <span class="sec-badge badge-empty" id="badge7">—</span>
   </div>
   <div class="sec-body">
 
-    <div class="sublabel">Sinais e Sintomas <small style="color:#6b7280;font-weight:400;text-transform:none;margin-left:6px">(1=Sim, 2=Não, 9=Ignorado)</small></div>
+    <div class="sublabel">Sinais e Sintomas</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin-bottom:14px">
       <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Alteração de sensibilidade</div><div class="pills"><label class="pill"><input type="radio" name="sintoma_alteracao_sensibilidade" value="1"> Sim</label><label class="pill"><input type="radio" name="sintoma_alteracao_sensibilidade" value="2"> Não</label><label class="pill"><input type="radio" name="sintoma_alteracao_sensibilidade" value="9"> Ignorado</label></div></div>
       <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Diminuição de força muscular</div><div class="pills"><label class="pill"><input type="radio" name="sintoma_diminuicao_forca" value="1"> Sim</label><label class="pill"><input type="radio" name="sintoma_diminuicao_forca" value="2"> Não</label><label class="pill"><input type="radio" name="sintoma_diminuicao_forca" value="9"> Ignorado</label></div></div>
@@ -674,7 +667,7 @@ function toggleDarkMode(){
       </div>
     </div>
 
-    <div class="sublabel">Exposição no Local de Trabalho <small style="color:#6b7280;font-weight:400;text-transform:none;margin-left:6px">(1=Sim, 2=Não, 9=Ignorado)</small></div>
+    <div class="sublabel">Exposição no Local de Trabalho</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin-bottom:14px">
       <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Prêmios de produção</div><div class="pills"><label class="pill"><input type="radio" name="exposicao_premios_producao" value="1"> Sim</label><label class="pill"><input type="radio" name="exposicao_premios_producao" value="2"> Não</label><label class="pill"><input type="radio" name="exposicao_premios_producao" value="9"> Ignorado</label></div></div>
       <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Movimentos repetitivos</div><div class="pills"><label class="pill"><input type="radio" name="exposicao_movimentos_repetitivos" value="1"> Sim</label><label class="pill"><input type="radio" name="exposicao_movimentos_repetitivos" value="2"> Não</label><label class="pill"><input type="radio" name="exposicao_movimentos_repetitivos" value="9"> Ignorado</label></div></div>
@@ -705,7 +698,6 @@ function toggleDarkMode(){
     <div class="sec-num">8</div>
     <div class="sec-info">
       <h3>Afastamento e Condutas</h3>
-      <p>Afastamento para tratamento, outros casos, conduta geral</p>
     </div>
     <span class="sec-badge badge-empty" id="badge8">—</span>
   </div>
@@ -763,7 +755,7 @@ function toggleDarkMode(){
       </div>
     </div>
 
-    <div class="sublabel">Conduta Geral <small style="color:#6b7280;font-weight:400;text-transform:none;margin-left:6px">(1=Sim, 2=Não)</small></div>
+    <div class="sublabel">Conduta Geral</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin-bottom:14px">
       <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Afastamento do agente do risco com mudança de função/posto</div><div class="pills"><label class="pill"><input type="radio" name="conduta_afastamento_risco" value="1"> Sim</label><label class="pill"><input type="radio" name="conduta_afastamento_risco" value="2"> Não</label></div></div>
       <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Mudança na organização do trabalho</div><div class="pills"><label class="pill"><input type="radio" name="conduta_mudanca_organizacao" value="1"> Sim</label><label class="pill"><input type="radio" name="conduta_mudanca_organizacao" value="2"> Não</label></div></div>
@@ -792,7 +784,6 @@ function toggleDarkMode(){
     <div class="sec-num">9</div>
     <div class="sec-info">
       <h3>Conclusão</h3>
-      <p>Evolução do caso, CAT e observações</p>
     </div>
     <span class="sec-badge badge-empty" id="badge9">—</span>
   </div>

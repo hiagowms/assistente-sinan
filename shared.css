@@ -601,6 +601,10 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 [data-theme="dark"] .lock-grp.locked select{background:rgba(22,101,52,.22)!important;color:#4ade80!important;border-color:#16a34a!important}
 @media(max-width:768px){.lock-grp{padding:11px 0 11px 10px}.lock-rail{width:42px}.lock-btn-rail{width:32px;height:32px}}
 
+/* CNS VALIDATION HINT */
+#f_sus_cns_hint{transition:color .2s}
+[data-theme="dark"] #f_sus_cns_hint{filter:brightness(1.2)}
+
 /* AVISO TIPO DE UNIDADE NOTIFICADORA (violencia — exibido quando tipo não foi salvo no cadeado) */
 .lock-tipo-warn{display:flex;align-items:flex-start;gap:8px;font-size:11.5px;line-height:1.55;padding:7px 11px;margin-bottom:10px;border-radius:6px;border:1px solid #fca5a5;background:#fff1f2;color:#991b1b}
 .lock-tipo-warn strong{color:#7f1d1d}

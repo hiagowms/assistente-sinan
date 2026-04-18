@@ -112,7 +112,6 @@ function toggleDarkMode(){
     <div class="sec-num">1</div>
     <div class="sec-info">
       <h3>Dados Gerais</h3>
-      <p>Unidade notificadora, datas, UF e município</p>
     </div>
     <span class="sec-badge badge-empty" id="badge1">—</span>
   </div>
@@ -218,7 +217,6 @@ function toggleDarkMode(){
     <div class="sec-num">2</div>
     <div class="sec-info">
       <h3>Notificação Individual</h3>
-      <p>Dados pessoais da pessoa atendida</p>
     </div>
     <span class="sec-badge badge-empty" id="badge2">—</span>
   </div>
@@ -337,7 +335,6 @@ function toggleDarkMode(){
     <div class="sec-num">3</div>
     <div class="sec-info">
       <h3>Dados de Residência</h3>
-      <p>Endereço e contato</p>
     </div>
     <span class="sec-badge badge-empty" id="badge3">—</span>
   </div>
@@ -424,7 +421,6 @@ function toggleDarkMode(){
     <div class="sec-num">4</div>
     <div class="sec-info">
       <h3>Dados da Pessoa Atendida</h3>
-      <p>Ocupação, situação conjugal, orientação sexual, deficiência</p>
     </div>
     <span class="sec-badge badge-empty" id="badge4">—</span>
   </div>
@@ -490,7 +486,7 @@ function toggleDarkMode(){
     </div>
 
     <div id="box_deficiencia" style="display:none">
-      <div class="sublabel">Tipo de Deficiência/Transtorno <small style="color:#6b7280;font-weight:400;text-transform:none;margin-left:6px">(1=Sim, 2=Não, 8=Não se aplica, 9=Ignorado)</small></div>
+      <div class="sublabel">Tipo de Deficiência/Transtorno</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin-bottom:14px">
         <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Física</div><div class="pills"><label class="pill"><input type="radio" name="def_fisica" value="1"> Sim</label><label class="pill"><input type="radio" name="def_fisica" value="2"> Não</label><label class="pill"><input type="radio" name="def_fisica" value="8"> Não se aplica</label><label class="pill"><input type="radio" name="def_fisica" value="9"> Ignorado</label></div></div>
         <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Visual</div><div class="pills"><label class="pill"><input type="radio" name="def_visual" value="1"> Sim</label><label class="pill"><input type="radio" name="def_visual" value="2"> Não</label><label class="pill"><input type="radio" name="def_visual" value="8"> Não se aplica</label><label class="pill"><input type="radio" name="def_visual" value="9"> Ignorado</label></div></div>
@@ -519,7 +515,6 @@ function toggleDarkMode(){
     <div class="sec-num">5</div>
     <div class="sec-info">
       <h3>Dados da Ocorrência</h3>
-      <p>Local, hora e circunstâncias da violência</p>
     </div>
     <span class="sec-badge badge-empty" id="badge5">—</span>
   </div>
@@ -643,7 +638,6 @@ function toggleDarkMode(){
     <div class="sec-num">6</div>
     <div class="sec-info">
       <h3>Violência</h3>
-      <p>Motivação, tipo de violência e meio de agressão</p>
     </div>
     <span class="sec-badge badge-empty" id="badge6">—</span>
   </div>
@@ -672,7 +666,7 @@ function toggleDarkMode(){
       </div>
     </div>
 
-    <div class="sublabel">Tipo de Violência <small style="color:#6b7280;font-weight:400;text-transform:none;margin-left:6px">(1=Sim, 2=Não, 9=Ignorado)</small></div>
+    <div class="sublabel">Tipo de Violência</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin-bottom:14px">
       <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Física</div><div class="pills"><label class="pill"><input type="radio" name="viol_fisica" value="1"> Sim</label><label class="pill"><input type="radio" name="viol_fisica" value="2"> Não</label><label class="pill"><input type="radio" name="viol_fisica" value="9"> Ignorado</label></div></div>
       <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Psicológica/moral</div><div class="pills"><label class="pill"><input type="radio" name="viol_psicologica" value="1"> Sim</label><label class="pill"><input type="radio" name="viol_psicologica" value="2"> Não</label><label class="pill"><input type="radio" name="viol_psicologica" value="9"> Ignorado</label></div></div>
@@ -692,7 +686,7 @@ function toggleDarkMode(){
       </div>
     </div>
 
-    <div class="sublabel">Meio de Agressão <small style="color:#6b7280;font-weight:400;text-transform:none;margin-left:6px">(1=Sim, 2=Não, 9=Ignorado)</small></div>
+    <div class="sublabel">Meio de Agressão</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin-bottom:14px">
       <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Força corporal/espancamento</div><div class="pills"><label class="pill"><input type="radio" name="meio_forca" value="1"> Sim</label><label class="pill"><input type="radio" name="meio_forca" value="2"> Não</label><label class="pill"><input type="radio" name="meio_forca" value="9"> Ignorado</label></div></div>
       <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Enforcamento</div><div class="pills"><label class="pill"><input type="radio" name="meio_enforcamento" value="1"> Sim</label><label class="pill"><input type="radio" name="meio_enforcamento" value="2"> Não</label><label class="pill"><input type="radio" name="meio_enforcamento" value="9"> Ignorado</label></div></div>
@@ -722,14 +716,13 @@ function toggleDarkMode(){
     <div class="sec-num">7</div>
     <div class="sec-info">
       <h3>Violência Sexual</h3>
-      <p>Tipo de violência sexual e procedimentos realizados</p>
     </div>
     <span class="sec-badge badge-empty" id="badge7">—</span>
   </div>
   <div class="sec-body">
 
     <div id="box_violencia_sexual" style="display:none">
-      <div class="sublabel">Tipo de Violência Sexual <small style="color:#6b7280;font-weight:400;text-transform:none;margin-left:6px">(1=Sim, 2=Não, 8=Não se aplica, 9=Ignorado)</small></div>
+      <div class="sublabel">Tipo de Violência Sexual</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin-bottom:14px">
         <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Assédio sexual</div><div class="pills"><label class="pill"><input type="radio" name="sexual_assedio" value="1"> Sim</label><label class="pill"><input type="radio" name="sexual_assedio" value="2"> Não</label><label class="pill"><input type="radio" name="sexual_assedio" value="8"> Não se aplica</label><label class="pill"><input type="radio" name="sexual_assedio" value="9"> Ignorado</label></div></div>
         <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Estupro</div><div class="pills"><label class="pill"><input type="radio" name="sexual_estupro" value="1"> Sim</label><label class="pill"><input type="radio" name="sexual_estupro" value="2"> Não</label><label class="pill"><input type="radio" name="sexual_estupro" value="8"> Não se aplica</label><label class="pill"><input type="radio" name="sexual_estupro" value="9"> Ignorado</label></div></div>
@@ -744,7 +737,7 @@ function toggleDarkMode(){
         </div>
       </div>
 
-      <div class="sublabel">Procedimento Realizado <small style="color:#6b7280;font-weight:400;text-transform:none;margin-left:6px">(1=Sim, 2=Não, 8=Não se aplica, 9=Ignorado)</small></div>
+      <div class="sublabel">Procedimento Realizado</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin-bottom:14px">
         <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Profilaxia DST</div><div class="pills"><label class="pill"><input type="radio" name="proc_prof_dst" value="1"> Sim</label><label class="pill"><input type="radio" name="proc_prof_dst" value="2"> Não</label><label class="pill"><input type="radio" name="proc_prof_dst" value="8"> Não se aplica</label><label class="pill"><input type="radio" name="proc_prof_dst" value="9"> Ignorado</label></div></div>
         <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Profilaxia HIV</div><div class="pills"><label class="pill"><input type="radio" name="proc_prof_hiv" value="1"> Sim</label><label class="pill"><input type="radio" name="proc_prof_hiv" value="2"> Não</label><label class="pill"><input type="radio" name="proc_prof_hiv" value="8"> Não se aplica</label><label class="pill"><input type="radio" name="proc_prof_hiv" value="9"> Ignorado</label></div></div>
@@ -771,7 +764,6 @@ function toggleDarkMode(){
     <div class="sec-num">8</div>
     <div class="sec-info">
       <h3>Dados do Provável Autor da Violência</h3>
-      <p>Vínculo, sexo, uso de álcool, ciclo de vida</p>
     </div>
     <span class="sec-badge badge-empty" id="badge8">—</span>
   </div>
@@ -797,7 +789,7 @@ function toggleDarkMode(){
       </div>
     </div>
 
-    <div class="sublabel">Vínculo/Grau de Parentesco com a Pessoa Atendida <small style="color:#6b7280;font-weight:400;text-transform:none;margin-left:6px">(1=Sim, 2=Não, 9=Ignorado)</small></div>
+    <div class="sublabel">Vínculo/Grau de Parentesco com a Pessoa Atendida</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin-bottom:14px">
       <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Pai</div><div class="pills"><label class="pill"><input type="radio" name="vinculo_pai" value="1"> Sim</label><label class="pill"><input type="radio" name="vinculo_pai" value="2"> Não</label><label class="pill"><input type="radio" name="vinculo_pai" value="9"> Ignorado</label></div></div>
       <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Mãe</div><div class="pills"><label class="pill"><input type="radio" name="vinculo_mae" value="1"> Sim</label><label class="pill"><input type="radio" name="vinculo_mae" value="2"> Não</label><label class="pill"><input type="radio" name="vinculo_mae" value="9"> Ignorado</label></div></div>
@@ -859,13 +851,12 @@ function toggleDarkMode(){
     <div class="sec-num">9</div>
     <div class="sec-info">
       <h3>Encaminhamento</h3>
-      <p>Serviços para os quais a pessoa foi encaminhada</p>
     </div>
     <span class="sec-badge badge-empty" id="badge9">—</span>
   </div>
   <div class="sec-body">
 
-    <div class="sublabel">Encaminhamento <small style="color:#6b7280;font-weight:400;text-transform:none;margin-left:6px">(1=Sim, 2=Não, 9=Ignorado)</small></div>
+    <div class="sublabel">Encaminhamento</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin-bottom:14px">
       <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Rede de Saúde</div><div class="pills"><label class="pill"><input type="radio" name="enc_saude" value="1"> Sim</label><label class="pill"><input type="radio" name="enc_saude" value="2"> Não</label><label class="pill"><input type="radio" name="enc_saude" value="9"> Ignorado</label></div></div>
       <div class="fld" style="margin:0"><div class="sublabel" style="font-size:12px;margin-bottom:3px">Rede de Assistência Social</div><div class="pills"><label class="pill"><input type="radio" name="enc_assist_social" value="1"> Sim</label><label class="pill"><input type="radio" name="enc_assist_social" value="2"> Não</label><label class="pill"><input type="radio" name="enc_assist_social" value="9"> Ignorado</label></div></div>
@@ -894,7 +885,6 @@ function toggleDarkMode(){
     <div class="sec-num">10</div>
     <div class="sec-info">
       <h3>Dados Finais</h3>
-      <p>Relação com trabalho, CAT, CID-10, encerramento</p>
     </div>
     <span class="sec-badge badge-empty" id="badge10">—</span>
   </div>
