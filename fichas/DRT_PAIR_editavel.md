@@ -84,7 +84,7 @@ Campo 2 — Agravo/doença: valor fixo, não editável (PAIR / CID10: H83.3)
 
 | AcroForm | Rótulo |
 |---|---|
-| `paciente_raca` | 1=Branca, 2=Preta, 3=Amarela, 4=Parda, 5=Indígena, 9=Ignorado |
+| `paciente_raca_cor` | 1=Branca, 2=Preta, 3=Amarela, 4=Parda, 5=Indígena, 9=Ignorado |
 
 ## Campo 14 — Escolaridade
 
@@ -209,8 +209,8 @@ Campo 2 — Agravo/doença: valor fixo, não editável (PAIR / CID10: H83.3)
 
 | AcroForm | Rótulo |
 |---|---|
-| `tempo_trabalho_ocupacao_va` | Valor numérico do tempo |
-| `tempo_trabalho_ocupacao_t` | Unidade: 1=Hora, 2=Dia, 3=Mês, 4=Ano |
+| `tempo_trabalho_ocupacao_valor` | Valor numérico do tempo |
+| `tempo_trabalho_ocupacao_tipo` | Unidade: 1=Hora, 2=Dia, 3=Mês, 4=Ano |
 
 ## Campo 34 — Registro / CNPJ ou CPF da Empresa
 
@@ -303,7 +303,7 @@ Campo 2 — Agravo/doença: valor fixo, não editável (PAIR / CID10: H83.3)
 
 | AcroForm | Rótulo |
 |---|---|
-| `tempo_exposicao_valo` | Valor numérico do tempo |
+| `tempo_exposicao_valor` | Valor numérico do tempo |
 | `tempo_exposicao_tipo` | Unidade: 1=Hora, 2=Dia, 3=Mês, 4=Ano |
 
 ## Campo 48 — Regime de Tratamento
@@ -329,8 +329,8 @@ Campo 2 — Agravo/doença: valor fixo, não editável (PAIR / CID10: H83.3)
 |---|---|
 | `exposicao_solvente_tolueno` | Solvente a Base de Tolueno |
 | `exposicao_metais_pesados` | Metais Pesados |
-| `exposicao_medicamentos_ototoxic` | Medicamentos Ototóxicos |
-| `exposicao_gases_toxico` | Gases Tóxicos |
+| `exposicao_medicamentos_ototoxicos` | Medicamentos Ototóxicos |
+| `exposicao_gases_toxicos` | Gases Tóxicos |
 | `exposicao_outros` | Outros (mesma escala 1/2/9) |
 | `exposicao_outros_detalhe` | Texto livre — especificar quando "Outros" = Sim |
 
@@ -340,7 +340,7 @@ Campo 2 — Agravo/doença: valor fixo, não editável (PAIR / CID10: H83.3)
 | AcroForm | Rótulo |
 |---|---|
 | `sintoma_zumbido` | Zumbido |
-| `sintoma_tontu` | Tontura |
+| `sintoma_tontura` | Tontura |
 | `sintoma_dificuldade_fala` | Dificuldade para compreensão da fala |
 | `sintoma_cefaleia` | Cefaléia |
 | `sintoma_outros` | Outros |
@@ -349,7 +349,7 @@ Campo 2 — Agravo/doença: valor fixo, não editável (PAIR / CID10: H83.3)
 
 | AcroForm | Rótulo |
 |---|---|
-| `diagnostico_especifico_cid` | Código CID-10 (texto livre) |
+| `diagnostico_especifico_cid10` | Código CID-10 (texto livre) |
 
 ---
 

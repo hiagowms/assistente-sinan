@@ -27,8 +27,7 @@ Com base nas respostas do usuário em um formulário HTML, preencha cada campo c
 | AcroForm | Rótulo | Comportamento | Valor fixo |
 |---|---|---|---|
 | `tipo_notificacao` | Tipo de Notificação | [FIXO-PDF] | `2` (Individual) |
-| `agravo_cid` | Agravo / CID-10 | [FIXO-PDF] | `R49` |
-| `agravo_descricao` | Descrição do Agravo | [FIXO-PDF] | `Distúrbios da Voz` |
+| `agravo` | Agravo / CID-10 | [FIXO-PDF] | `R49` |
 
 ## Campo 3 — Data da Notificação
 
@@ -274,6 +273,31 @@ Com base nas respostas do usuário em um formulário HTML, preencha cada campo c
 
 | AcroForm | Rótulo | Comportamento |
 |---|---|---|
-| `notificante_municipio` | Município da Unidade Notificante | [NORMAL] |
-| `notificante_nome` | Nome do Notificante | [NORMAL] |
-| `notificante_funcao` | Função do Notificante | [NORMAL] |
+| `municipio_unidade_notificante` | Município da Unidade Notificante | [NORMAL] |
+| `nome_notificante` | Nome do Notificante | [NORMAL] |
+| `funcao_notificante` | Função do Notificante | [NORMAL] |
+
+---
+
+# Seção: Hospitalização
+
+| AcroForm | Rótulo | Comportamento |
+|---|---|---|
+| `hospitalizacao` | Houve Hospitalização? 1=Sim, 2=Não, 9=Ignorado | [NORMAL] |
+| `data_hospitalizacao` | Data da Hospitalização | [NORMAL] |
+| `hospital_uf` | UF do Hospital | [NORMAL] |
+| `hospital_municipio` | Município do Hospital (nome) | [NORMAL] |
+| `hospital_municipio_codigo_ibge` | Município do Hospital — Código IBGE | [NORMAL] |
+| `hospital_nome` | Nome do Hospital | [NORMAL] |
+| `hospital_cnes` | Código CNES do Hospital | [NORMAL] |
+
+---
+
+# Seção: Provável Local de Infecção
+
+| AcroForm | Rótulo | Comportamento |
+|---|---|---|
+| `provavel_infeccao_pais` | País do Provável Local de Infecção | [BRANCO] — nunca aparece no HTML |
+| `provavel_infeccao_municipio` | Município do Provável Local de Infecção | [BRANCO] — nunca aparece no HTML |
+| `provavel_infeccao_distrito` | Distrito do Provável Local de Infecção | [BRANCO] — nunca aparece no HTML |
+| `provavel_infeccao_bairro` | Bairro do Provável Local de Infecção | [BRANCO] — nunca aparece no HTML |

@@ -658,9 +658,9 @@ function toggleDarkMode(){
       <div class="fld" style="margin:0">
         <div class="sublabel" style="font-size:12px;margin-bottom:3px">Tontura</div>
         <div class="pills">
-          <label class="pill"><input type="radio" name="sintoma_tontu" value="1"> Sim</label>
-          <label class="pill"><input type="radio" name="sintoma_tontu" value="2"> Não</label>
-          <label class="pill"><input type="radio" name="sintoma_tontu" value="9"> Ignorado</label>
+          <label class="pill"><input type="radio" name="sintoma_tontura" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="sintoma_tontura" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="sintoma_tontura" value="9"> Ignorado</label>
         </div>
       </div>
       <div class="fld" style="margin:0">
@@ -784,17 +784,17 @@ function toggleDarkMode(){
       <div class="fld" style="margin:0">
         <div class="sublabel" style="font-size:12px;margin-bottom:3px">Medicamentos Ototóxicos</div>
         <div class="pills">
-          <label class="pill"><input type="radio" name="exposicao_medicamentos_ototoxic" value="1"> Sim</label>
-          <label class="pill"><input type="radio" name="exposicao_medicamentos_ototoxic" value="2"> Não</label>
-          <label class="pill"><input type="radio" name="exposicao_medicamentos_ototoxic" value="9"> Ignorado</label>
+          <label class="pill"><input type="radio" name="exposicao_medicamentos_ototoxicos" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="exposicao_medicamentos_ototoxicos" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="exposicao_medicamentos_ototoxicos" value="9"> Ignorado</label>
         </div>
       </div>
       <div class="fld" style="margin:0">
         <div class="sublabel" style="font-size:12px;margin-bottom:3px">Gases Tóxicos</div>
         <div class="pills">
-          <label class="pill"><input type="radio" name="exposicao_gases_toxico" value="1"> Sim</label>
-          <label class="pill"><input type="radio" name="exposicao_gases_toxico" value="2"> Não</label>
-          <label class="pill"><input type="radio" name="exposicao_gases_toxico" value="9"> Ignorado</label>
+          <label class="pill"><input type="radio" name="exposicao_gases_toxicos" value="1"> Sim</label>
+          <label class="pill"><input type="radio" name="exposicao_gases_toxicos" value="2"> Não</label>
+          <label class="pill"><input type="radio" name="exposicao_gases_toxicos" value="9"> Ignorado</label>
         </div>
       </div>
       <div class="fld" style="margin:0">
@@ -1185,8 +1185,8 @@ window.FAKE_PATIENTS = [
     radios: {sexo:"M", regime:"1", tipo_ruido:"1",
              afastamento_trat:"1", afastamento_result:"1",
              outros_trab:"1", cat:"1",
-             sintoma_zumbido:"1", sintoma_tontu:"2", sintoma_dificuldade_fala:"1", sintoma_cefaleia:"2", sintoma_outros:"2",
-             exposicao_solvente_tolueno:"2", exposicao_metais_pesados:"2", exposicao_medicamentos_ototoxic:"2", exposicao_gases_toxico:"2", exposicao_outros:"2",
+             sintoma_zumbido:"1", sintoma_tontura:"2", sintoma_dificuldade_fala:"1", sintoma_cefaleia:"2", sintoma_outros:"2",
+             exposicao_solvente_tolueno:"2", exposicao_metais_pesados:"2", exposicao_medicamentos_ototoxicos:"2", exposicao_gases_toxicos:"2", exposicao_outros:"2",
              agravo_hipertensao:"2", agravo_diabetes:"2", agravo_hanseniase:"2", agravo_transtorno_mental:"2", agravo_tuberculose:"2", agravo_asma:"2", agravo_outras:"2",
              conduta_afastamento_risco:"1", conduta_mudanca_organizacao:"2", conduta_protecao_coletiva:"2", conduta_afastamento_local:"2", conduta_protecao_individual:"1", conduta_nenhum:"2", conduta_outros:"2"}
   },
@@ -1212,8 +1212,8 @@ window.FAKE_PATIENTS = [
     radios: {sexo:"F", regime:"1", tipo_ruido:"1",
              afastamento_trat:"2",
              outros_trab:"1", cat:"2",
-             sintoma_zumbido:"1", sintoma_tontu:"1", sintoma_dificuldade_fala:"1", sintoma_cefaleia:"2", sintoma_outros:"2",
-             exposicao_solvente_tolueno:"1", exposicao_metais_pesados:"2", exposicao_medicamentos_ototoxic:"2", exposicao_gases_toxico:"2", exposicao_outros:"2",
+             sintoma_zumbido:"1", sintoma_tontura:"1", sintoma_dificuldade_fala:"1", sintoma_cefaleia:"2", sintoma_outros:"2",
+             exposicao_solvente_tolueno:"1", exposicao_metais_pesados:"2", exposicao_medicamentos_ototoxicos:"2", exposicao_gases_toxicos:"2", exposicao_outros:"2",
              agravo_hipertensao:"1", agravo_diabetes:"2", agravo_hanseniase:"2", agravo_transtorno_mental:"2", agravo_tuberculose:"2", agravo_asma:"2", agravo_outras:"2",
              conduta_afastamento_risco:"1", conduta_mudanca_organizacao:"2", conduta_protecao_coletiva:"1", conduta_afastamento_local:"2", conduta_protecao_individual:"1", conduta_nenhum:"2", conduta_outros:"2"}
   }
@@ -1545,7 +1545,7 @@ async function gerarPDF(force){
     var _sexoPDF = getRadio('sexo');
     setTxt('paciente_sexo',            _sexoPDF);
     setTxt('paciente_gestante',        _sexoPDF==='M'?'6':tv('f_gest'));
-    setTxt('paciente_raca',            tv('f_raca'));
+    setTxt('paciente_raca_cor',         tv('f_raca'));
     setTxt('paciente_escolaridade',    tv('f_escol'));
     setTxt('paciente_cartao_sus',      tv('f_sus'));
     setTxt('paciente_mae_nome',        tv('f_mae'));
@@ -1567,9 +1567,9 @@ async function gerarPDF(force){
     // Seção 4
     setTxt('pessoa_ocupacao',             tv('f_ocupacao'));
     setTxt('situacao_mercado_trabalho',   tv('f_sit_mercado'));
-    setTxt('tempo_trabalho_ocupacao_va',  tv('f_tempo_trab_val'));
-    setTxt('tempo_trabalho_ocupacao_t',   tv('f_tempo_trab_tipo'));
-    setTxt('tempo_exposicao_valo',        tv('f_tempo_exp_val'));
+    setTxt('tempo_trabalho_ocupacao_valor', tv('f_tempo_trab_val'));
+    setTxt('tempo_trabalho_ocupacao_tipo',  tv('f_tempo_trab_tipo'));
+    setTxt('tempo_exposicao_valor',         tv('f_tempo_exp_val'));
     setTxt('tempo_exposicao_tipo',        tv('f_tempo_exp_tipo'));
 
     // Seção 5 — Empresa
@@ -1589,7 +1589,7 @@ async function gerarPDF(force){
     // Campo 46 — Agravos Associados
     setTxt('agravo_hipertensao',       getRadio('agravo_hipertensao'));
     setTxt('agravo_diabetes',          getRadio('agravo_diabetes'));
-    setTxt('agravo_hansenia',          getRadio('agravo_hansenia'));
+    setTxt('agravo_hanseniase',        getRadio('agravo_hanseniase'));
     setTxt('agravo_transtorno_mental', getRadio('agravo_transtorno_mental'));
     setTxt('agravo_tuberculose',       getRadio('agravo_tuberculose'));
     setTxt('agravo_asma',              getRadio('agravo_asma'));
@@ -1603,23 +1603,23 @@ async function gerarPDF(force){
     setTxt('tipo_ruido', tv('f_tipo_ruido'));
 
     // Campo 50 — Exposição Concomitante
-    setTxt('exposicao_solvente_toluen',        getRadio('exposicao_solvente_toluen'));
+    setTxt('exposicao_solvente_tolueno',       getRadio('exposicao_solvente_tolueno'));
     setTxt('exposicao_metais_pesados',         getRadio('exposicao_metais_pesados'));
-    setTxt('exposicao_medicamentos_ototoxic',  getRadio('exposicao_medicamentos_ototoxic'));
-    setTxt('exposicao_gases_toxico',           getRadio('exposicao_gases_toxico'));
+    setTxt('exposicao_medicamentos_ototoxicos',  getRadio('exposicao_medicamentos_ototoxicos'));
+    setTxt('exposicao_gases_toxicos',           getRadio('exposicao_gases_toxicos'));
     setTxt('exposicao_outros',                 getRadio('exposicao_outros'));
     if(getRadio('exposicao_outros')==='1') setTxt('exposicao_outros_detalhe', tv('f_ototox_outros_det'));
 
     // Campo 51 — Sintomas
     setTxt('sintoma_zumbido',          getRadio('sintoma_zumbido'));
-    setTxt('sintoma_tontu',            getRadio('sintoma_tontu'));
+    setTxt('sintoma_tontura',            getRadio('sintoma_tontura'));
     setTxt('sintoma_dificuldade_fala', getRadio('sintoma_dificuldade_fala'));
     setTxt('sintoma_cefaleia',         getRadio('sintoma_cefaleia'));
     setTxt('sintoma_outros',           getRadio('sintoma_outros'));
     if(getRadio('sintoma_outros')==='1') setTxt('sintoma_outros_detalhe', tv('f_sint_outros_det'));
 
     // Campo 52 — Diagnóstico CID-10
-    setTxt('diagnostico_especifico_cid', tv('f_diag_cid'));
+    setTxt('diagnostico_especifico_cid10', tv('f_diag_cid'));
 
     // Campo 53-54-55 — Afastamento
     setTxt('afastamento_tratamento',  tv('f_afastamento_trat'));

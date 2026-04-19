@@ -262,7 +262,7 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Câncer Relacionado ao T
 
 | AcroForm | Rótulo |
 |---|---|
-| `empresa_num` | Número |
+| `empresa_numero` | Número |
 
 ## Campo 43 — Ponto de Referência da Empresa
 

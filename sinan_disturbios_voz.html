@@ -691,8 +691,7 @@ async function gerarPDF(force){
 
     // Valores fixos do PDF (não aparecem no HTML)
     setTxt('tipo_notificacao', '2');
-    setTxt('agravo_cid', 'R49');
-    setTxt('agravo_descricao', 'Distúrbios da Voz');
+    setTxt('agravo', 'R49');
 
     // Seção 2 - Notificação Individual
     setTxt('paciente_nome',            tv('f_nome'));
@@ -723,9 +722,9 @@ async function gerarPDF(force){
     setTxt('residencia_pais',                  tv('f_pais_res'));
 
     // Seção 4 - Notificante
-    setTxt('notificante_municipio', tv('f_notif_mun'));
-    setTxt('notificante_nome',      tv('f_notif_nome'));
-    setTxt('notificante_funcao',    tv('f_notif_funcao'));
+    setTxt('municipio_unidade_notificante', tv('f_notif_mun'));
+    setTxt('nome_notificante',             tv('f_notif_nome'));
+    setTxt('funcao_notificante',           tv('f_notif_funcao'));
 
     // Observações (campo livre)
     setTxt('observacoes_complementares', tv('f_obs'));

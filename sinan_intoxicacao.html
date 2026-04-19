@@ -1372,8 +1372,8 @@ async function gerarPDF(force){
     setTxt('data_notificacao',                  fmtDate(tv('f_data_notif')));
     setTxt('data_primeiros_sintomas',           fmtDate(tv('f_data_sintomas')));
     setTxt('municipio_notificacao_nome',        tv('f_mun_notif'));
-    setTxt('uf_notifi',                         tv('f_uf_notif'));
-    setTxt('municipio_notificacao_codic',       tv('f_ibge_notif'));
+    setTxt('uf_notificacao',                    tv('f_uf_notif'));
+    setTxt('municipio_notificacao_codigo_ibge', tv('f_ibge_notif'));
     setTxt('unidade_notificadora_nome',         tv('f_nome_un'));
     setTxt('unidade_notificadora_cnes',         tv('f_cnes'));
 
@@ -1409,7 +1409,7 @@ async function gerarPDF(force){
     setTxt('data_investigacao',            fmtDate(tv('f_data_investigacao')));
     setTxt('pessoa_ocupacao',              tv('f_ocupacao'));
     setTxt('situacao_mercado_trabalho',    tv('f_sit_mercado'));
-    setTxt('situacao_mercado_trabalho_ou', tv('f_sit_mercado_outro'));
+    setTxt('situacao_mercado_trabalho_outros_detalhe', tv('f_sit_mercado_outro'));
     setTxt('local_exposicao',              tv('f_local_exposicao'));
     setTxt('local_exposicao_outro_detalhe',tv('f_local_exposicao_outro'));
 

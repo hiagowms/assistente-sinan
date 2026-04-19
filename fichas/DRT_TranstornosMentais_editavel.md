@@ -84,7 +84,7 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Transtornos Mentais Rela
 
 | AcroForm | Rótulo |
 |---|---|
-| `paciente_raca` | 1=Branca, 2=Preta, 3=Amarela, 4=Parda, 5=Indígena, 9=Ignorado |
+| `paciente_raca_cor` | 1=Branca, 2=Preta, 3=Amarela, 4=Parda, 5=Indígena, 9=Ignorado |
 
 ## Campo 14 — Escolaridade
 
@@ -209,8 +209,8 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Transtornos Mentais Rela
 
 | AcroForm | Rótulo |
 |---|---|
-| `tempo_trabalho_ocupacao_va` | Valor numérico do tempo |
-| `tempo_trabalho_ocupacao_t` | Unidade: 1=Hora, 2=Dia, 3=Mês, 4=Ano |
+| `tempo_trabalho_ocupacao_valor` | Valor numérico do tempo |
+| `tempo_trabalho_ocupacao_tipo` | Unidade: 1=Hora, 2=Dia, 3=Mês, 4=Ano |
 
 ## Campo 34 — Registro / CNPJ ou CPF da Empresa
 
@@ -241,7 +241,7 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Transtornos Mentais Rela
 | AcroForm | Rótulo |
 |---|---|
 | `empresa_municipio` | Município da Empresa |
-| `empresa_municipio_codigo_ibge` | Município da Empresa — Código IBGE |
+| `empresa_cnae_codigo_ibge` | Município da Empresa — Código IBGE |
 
 ## Campo 39 — Distrito da Empresa
 

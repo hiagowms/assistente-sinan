@@ -28,9 +28,9 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Intoxicação Exógena /
 
 | AcroForm | Rótulo |
 |---|---|
-| `uf_notifi` | UF de Notificação |
+| `uf_notificacao` | UF de Notificação |
 | `municipio_notificacao_nome` | Município de Notificação (nome) |
-| `municipio_notificacao_codic` | Município de Notificação — Código IBGE |
+| `municipio_notificacao_codigo_ibge` | Município de Notificação — Código IBGE |
 
 ## Campo 6 — Unidade de Saúde Notificadora
 
@@ -210,7 +210,7 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Intoxicação Exógena /
 | AcroForm | Rótulo |
 |---|---|
 | `situacao_mercado_trabalho` | 01=Empregado registrado com carteira assinada, 02=Empregado não registrado, 03=Autônomo/conta própria, 04=Servidor público estatutário, 05=Servidor público celetista, 06=Aposentado, 07=Desempregado, 08=Trabalho temporário, 09=Cooperativado, 10=Trabalhador avulso, 11=Empregador, 12=Outros, 99=Ignorado |
-| `situacao_mercado_trabalho_ou` | Texto livre — especificar quando "Outros" selecionado |
+| `situacao_mercado_trabalho_outros_detalhe` | Texto livre — especificar quando "Outros" selecionado |
 
 ## Campo 34 — Local de Ocorrência da Exposição
 

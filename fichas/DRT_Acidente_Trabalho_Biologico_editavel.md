@@ -403,6 +403,4 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Acidente de Trabalho com
 
 # Seção: Informações Complementares e Observações
 
-| AcroForm | Rótulo |
-|---|---|
-| `observacoes_complementares` | Texto livre — campo de área ampla para informações complementares e observações gerais |
+*(Este PDF não possui campo AcroForm para observações complementares — o preenchimento deve ser feito diretamente no PDF após a geração.)*

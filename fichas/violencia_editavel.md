@@ -297,19 +297,13 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Violência Interpessoal/
 
 | AcroForm | Rótulo |
 |---|---|
-| `ocorrencia_bairro` | Complemento (apto., casa, ...) |
+| `ocorrencia_complemento` | Complemento (apto., casa, ...) *(nunca aparece no HTML — deixar em branco no PDF)* |
 
 ## Campo 47 — Geo campo 3
 
 | AcroForm | Rótulo |
 |---|---|
 | `ocorrencia_geo_campo3` | Geo campo 3 *(nunca aparece no HTML — deixar em branco no PDF)* |
-
-## Campo 48 — Geo campo 4
-
-| AcroForm | Rótulo |
-|---|---|
-| `ocorrencia_complemento` | Geo campo 4 *(nunca aparece no HTML — deixar em branco no PDF)* |
 
 ## Campo 49 — Ponto de Referência
 
@@ -419,7 +413,7 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Violência Interpessoal/
 | `procedimento_coleta_sangue` | Coleta de sangue |
 | `procedimento_coleta_semen` | Coleta de sêmen |
 | `procedimento_coleta_secrecao_vaginal` | Coleta de secreção vaginal |
-| `procedimento_contracepcao_emergencial` | Contracepção emergencial |
+| `procedimento_contracepcao_emergencia` | Contracepção emergencial |
 | `procedimento_aborto_previsto_lei` | Aborto previsto em lei |
 
 ---
@@ -487,7 +481,7 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Violência Interpessoal/
 | `encaminhamento_rede_saude` | Rede de Saúde (Unidade Básica de Saúde, hospital, outras) |
 | `encaminhamento_rede_assistencia_social` | Rede de Assistência Social (CRAS, CREAS, outras) |
 | `encaminhamento_rede_educacao` | Rede de Educação (creche, escola, outras) |
-| `encaminhamento_atendimento_mulher` | Rede de Atendimento à Mulher (Centro Especializado de Atendimento à Mulher, Casa da Mulher Brasileira, outras) |
+| `encaminhamento_rede_atendimento_mulher` | Rede de Atendimento à Mulher (Centro Especializado de Atendimento à Mulher, Casa da Mulher Brasileira, outras) |
 | `encaminhamento_delegacia_mulher` | Delegacia de Atendimento à Mulher |
 | `encaminhamento_conselho_tutelar` | Conselho Tutelar |
 | `encaminhamento_conselho_idoso` | Conselho do Idoso |

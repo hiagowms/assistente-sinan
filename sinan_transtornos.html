@@ -1289,7 +1289,7 @@ async function gerarPDF(force){
     var _sexoPDF = getRadio('sexo');
     setTxt('paciente_sexo',            _sexoPDF);
     setTxt('paciente_gestante',        _sexoPDF==='M'?'6':tv('f_gest'));
-    setTxt('paciente_raca',            tv('f_raca'));
+    setTxt('paciente_raca_cor',         tv('f_raca'));
     setTxt('paciente_escolaridade',    tv('f_escol'));
     setTxt('paciente_cartao_sus',      tv('f_sus'));
     setTxt('paciente_mae_nome',        tv('f_mae'));
@@ -1312,8 +1312,8 @@ async function gerarPDF(force){
     // Seção 4
     setTxt('pessoa_ocupacao',             tv('f_ocupacao'));
     setTxt('situacao_mercado_trabalho',   tv('f_sit_mercado'));
-    setTxt('tempo_trabalho_ocupacao_va',  tv('f_tempo_trab_val'));
-    setTxt('tempo_trabalho_ocupacao_t',   tv('f_tempo_trab_tipo'));
+    setTxt('tempo_trabalho_ocupacao_valor', tv('f_tempo_trab_val'));
+    setTxt('tempo_trabalho_ocupacao_tipo',  tv('f_tempo_trab_tipo'));
 
     // Seção 5 — Empresa
     setTxt('empresa_registro_cnpj_cpf',  tv('f_emp_reg'));
@@ -1321,7 +1321,7 @@ async function gerarPDF(force){
     setTxt('empresa_cnae',               sinanCnaeVal());
     setTxt('empresa_uf',                 tv('f_emp_uf'));
     setTxt('empresa_municipio',          tv('f_emp_mun'));
-    setTxt('empresa_municipio_codigo_ibge', tv('f_emp_ibge'));
+    setTxt('empresa_cnae_codigo_ibge',      tv('f_emp_ibge'));
     setTxt('empresa_distrito',           tv('f_emp_dist'));
     setTxt('empresa_bairro',             tv('f_emp_bairro'));
     setTxt('empresa_endereco',           tv('f_emp_end'));
