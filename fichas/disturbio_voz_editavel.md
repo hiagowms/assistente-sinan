@@ -232,7 +232,6 @@ Com base nas respostas do usuário em um formulário HTML, preencha cada campo c
 | AcroForm | Rótulo | Comportamento | Valor fixo |
 |---|---|---|---|
 | `presenca_exantema` | Presença de Exantema | [FIXO-NÃO] | `2` |
-| `data_inicio_exantema` | Data de Início do Exantema | [BRANCO] — nunca aparece no HTML | — |
 
 ## Petéquias
 *(Não se aplica ao contexto)*

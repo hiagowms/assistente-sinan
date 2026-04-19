@@ -139,7 +139,6 @@ Campo 2 — Agravo/doença: valor fixo, não editável (Violência Interpessoal/
 
 | AcroForm | Rótulo |
 |---|---|
-| `residencia_bairro` | Bairro |
 
 ## Campo 23 — Logradouro
 
