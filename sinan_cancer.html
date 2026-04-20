@@ -698,21 +698,21 @@ function toggleDarkMode(){
       </div>
     </div>
 
-    <div class="row row-wide">
+    <div class="row row-full">
       <div class="fld col-2">
         <label>Evolução do Caso</label>
-        <select id="f_evolucao">
-          <option value="">— Selecione —</option>
-          <option value="1">1 - Sem evidência da doença (remissão completa)</option>
-          <option value="2">2 - Remissão parcial</option>
-          <option value="3">3 - Doença estável</option>
-          <option value="4">4 - Doença em progressão</option>
-          <option value="5">5 - Fora de possibilidade terapêutica</option>
-          <option value="6">6 - Óbito por câncer relacionado ao trabalho</option>
-          <option value="7">7 - Óbito por outras causas</option>
-          <option value="8">8 - Não se aplica</option>
-          <option value="9">9 - Ignorado</option>
-        </select>
+        <div class="pills" id="grp_evolucao" data-hidden="f_evolucao">
+          <label class="pill"><input type="radio" name="evolucao" value="1"> Sem evidência da doença (remissão completa)</label>
+          <label class="pill"><input type="radio" name="evolucao" value="2"> Remissão parcial</label>
+          <label class="pill"><input type="radio" name="evolucao" value="3"> Doença estável</label>
+          <label class="pill"><input type="radio" name="evolucao" value="4"> Doença em progressão</label>
+          <label class="pill"><input type="radio" name="evolucao" value="5"> Fora de possibilidade terapêutica</label>
+          <label class="pill"><input type="radio" name="evolucao" value="6"> Óbito por câncer relacionado ao trabalho</label>
+          <label class="pill"><input type="radio" name="evolucao" value="7"> Óbito por outras causas</label>
+          <label class="pill"><input type="radio" name="evolucao" value="8"> Não se aplica</label>
+          <label class="pill"><input type="radio" name="evolucao" value="9"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_evolucao">
       </div>
     </div>
 
@@ -847,7 +847,7 @@ window.FICHA_TRANSFER_SOURCE = 'cancer';
 window.FICHA_PROG_CONFIG = {
   ESS_IDS: {f_data_notif:1,f_data_diag:1,f_nome:1,f_raca:1,f_mun_res:1,f_ocupacao:1,f_emp_nome:1,f_diag_cid:1},
   ESS_GROUPS: ['sexo'],
-  STD_GROUPS: ['cat','outros_trab','hab_fumar'],
+  STD_GROUPS: ['cat','outros_trab','hab_fumar','evolucao'],
   COND_GROUPS: {},
   PROG_EXCLUDE_IDS: {f_num_notif:1,f_compl_res:1,f_pais_res:1,f_pref_res:1,f_emp_reg:1,f_emp_dist:1,f_emp_pref:1,f_emp_ibge:1},
   ESS_GROUP_LABELS: {sexo:'Sexo'}

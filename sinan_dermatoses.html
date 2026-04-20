@@ -636,25 +636,25 @@ function toggleDarkMode(){
   </div>
   <div class="sec-body">
 
-    <div class="row">
-      <div class="fld">
+    <div class="row row-full">
+      <div class="fld col-2">
         <label>Principal Agente Causador da Dermatose</label>
-        <select id="f_agente_causador">
-          <option value="">— Selecione —</option>
-          <option value="01">01 - Cimento</option>
-          <option value="02">02 - Borracha</option>
-          <option value="03">03 - Plástico</option>
-          <option value="04">04 - Solventes Orgânicos</option>
-          <option value="05">05 - Graxas</option>
-          <option value="06">06 - Óleo de Corte</option>
-          <option value="07">07 - Resinas</option>
-          <option value="08">08 - Níquel</option>
-          <option value="09">09 - Cosméticos</option>
-          <option value="10">10 - Madeiras</option>
-          <option value="11">11 - Cromo</option>
-          <option value="12">12 - Outros</option>
-          <option value="99">99 - Ignorado</option>
-        </select>
+        <div class="pills" id="grp_agente_causador" data-hidden="f_agente_causador">
+          <label class="pill"><input type="radio" name="agente_causador" value="01"> Cimento</label>
+          <label class="pill"><input type="radio" name="agente_causador" value="02"> Borracha</label>
+          <label class="pill"><input type="radio" name="agente_causador" value="03"> Plástico</label>
+          <label class="pill"><input type="radio" name="agente_causador" value="04"> Solventes Orgânicos</label>
+          <label class="pill"><input type="radio" name="agente_causador" value="05"> Graxas</label>
+          <label class="pill"><input type="radio" name="agente_causador" value="06"> Óleo de Corte</label>
+          <label class="pill"><input type="radio" name="agente_causador" value="07"> Resinas</label>
+          <label class="pill"><input type="radio" name="agente_causador" value="08"> Níquel</label>
+          <label class="pill"><input type="radio" name="agente_causador" value="09"> Cosméticos</label>
+          <label class="pill"><input type="radio" name="agente_causador" value="10"> Madeiras</label>
+          <label class="pill"><input type="radio" name="agente_causador" value="11"> Cromo</label>
+          <label class="pill"><input type="radio" name="agente_causador" value="12"> Outros</label>
+          <label class="pill"><input type="radio" name="agente_causador" value="99"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_agente_causador">
       </div>
       <div class="fld" id="box_agente_outros" style="display:none">
         <label>Especificar "Outros"</label>
@@ -662,23 +662,23 @@ function toggleDarkMode(){
       </div>
     </div>
 
-    <div class="row">
-      <div class="fld">
+    <div class="row row-full">
+      <div class="fld col-2">
         <label>Localização da Lesão (parte do corpo atingida)</label>
-        <select id="f_localizacao_lesao">
-          <option value="">— Selecione —</option>
-          <option value="01">01 - Mão</option>
-          <option value="02">02 - Membro superior</option>
-          <option value="03">03 - Cabeça</option>
-          <option value="04">04 - Pescoço</option>
-          <option value="05">05 - Tórax</option>
-          <option value="06">06 - Abdome</option>
-          <option value="07">07 - Membro inferior</option>
-          <option value="08">08 - Pé</option>
-          <option value="09">09 - Todo o corpo</option>
-          <option value="10">10 - Outro</option>
-          <option value="99">99 - Ignorado</option>
-        </select>
+        <div class="pills" id="grp_localizacao_lesao" data-hidden="f_localizacao_lesao">
+          <label class="pill"><input type="radio" name="localizacao_lesao" value="01"> Mão</label>
+          <label class="pill"><input type="radio" name="localizacao_lesao" value="02"> Membro superior</label>
+          <label class="pill"><input type="radio" name="localizacao_lesao" value="03"> Cabeça</label>
+          <label class="pill"><input type="radio" name="localizacao_lesao" value="04"> Pescoço</label>
+          <label class="pill"><input type="radio" name="localizacao_lesao" value="05"> Tórax</label>
+          <label class="pill"><input type="radio" name="localizacao_lesao" value="06"> Abdome</label>
+          <label class="pill"><input type="radio" name="localizacao_lesao" value="07"> Membro inferior</label>
+          <label class="pill"><input type="radio" name="localizacao_lesao" value="08"> Pé</label>
+          <label class="pill"><input type="radio" name="localizacao_lesao" value="09"> Todo o corpo</label>
+          <label class="pill"><input type="radio" name="localizacao_lesao" value="10"> Outro</label>
+          <label class="pill"><input type="radio" name="localizacao_lesao" value="99"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_localizacao_lesao">
       </div>
       <div class="fld" id="box_localizacao_outro" style="display:none">
         <label>Especificar "Outro"</label>
@@ -956,7 +956,7 @@ window.FICHA_TRANSFER_SOURCE = 'dermatoses';
 window.FICHA_PROG_CONFIG = {
   ESS_IDS: {f_data_notif:1,f_data_diag:1,f_nome:1,f_raca:1,f_mun_res:1,f_ocupacao:1,f_emp_nome:1,f_diag_cid:1},
   ESS_GROUPS: ['sexo'],
-  STD_GROUPS: ['cat','outros_trab','teste_epicutaneo'],
+  STD_GROUPS: ['cat','outros_trab','teste_epicutaneo','agente_causador','localizacao_lesao'],
   COND_GROUPS: {},
   PROG_EXCLUDE_IDS: {f_num_notif:1,f_compl_res:1,f_pais_res:1,f_pref_res:1,f_emp_reg:1,f_emp_dist:1,f_emp_pref:1,f_emp_ibge:1},
   ESS_GROUP_LABELS: {sexo:'Sexo'}

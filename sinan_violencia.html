@@ -157,19 +157,19 @@ function toggleDarkMode(){
       </div>
     </div>
 
-    <div class="row">
-      <div class="fld">
+    <div class="row row-wide">
+      <div class="fld col-2">
         <label>Tipo de Unidade Notificadora</label>
-        <select id="f_unidade_tipo">
-          <option value="">— Selecione —</option>
-          <option value="1">1 - Unidade de Saúde</option>
-          <option value="2">2 - Unidade de Assistência Social</option>
-          <option value="3">3 - Estabelecimento de Ensino</option>
-          <option value="4">4 - Conselho Tutelar</option>
-          <option value="5">5 - Unidade de Saúde Indígena</option>
-          <option value="6">6 - Centro Especializado de Atendimento à Mulher</option>
-          <option value="7">7 - Outros</option>
-        </select>
+        <div class="pills" id="grp_unidade_tipo" data-hidden="f_unidade_tipo">
+          <label class="pill"><input type="radio" name="unidade_tipo" value="1"> Unidade de Saúde</label>
+          <label class="pill"><input type="radio" name="unidade_tipo" value="2"> Unidade de Assistência Social</label>
+          <label class="pill"><input type="radio" name="unidade_tipo" value="3"> Estabelecimento de Ensino</label>
+          <label class="pill"><input type="radio" name="unidade_tipo" value="4"> Conselho Tutelar</label>
+          <label class="pill"><input type="radio" name="unidade_tipo" value="5"> Unidade de Saúde Indígena</label>
+          <label class="pill"><input type="radio" name="unidade_tipo" value="6"> Centro Especializado de Atendimento à Mulher</label>
+          <label class="pill"><input type="radio" name="unidade_tipo" value="7"> Outros</label>
+        </div>
+        <input type="hidden" id="f_unidade_tipo">
       </div>
     </div>
 
@@ -585,22 +585,22 @@ function toggleDarkMode(){
       </div>
     </div>
 
-    <div class="row">
-      <div class="fld">
+    <div class="row row-full">
+      <div class="fld col-2">
         <label>Local de Ocorrência</label>
-        <select id="f_local_ocorrencia">
-          <option value="">— Selecione —</option>
-          <option value="01">01 - Residência</option>
-          <option value="02">02 - Habitação coletiva</option>
-          <option value="03">03 - Escola</option>
-          <option value="04">04 - Local de prática esportiva</option>
-          <option value="05">05 - Bar ou similar</option>
-          <option value="06">06 - Via pública</option>
-          <option value="07">07 - Comércio/serviços</option>
-          <option value="08">08 - Indústrias/construção</option>
-          <option value="09">09 - Outro</option>
-          <option value="99">99 - Ignorado</option>
-        </select>
+        <div class="pills" id="grp_local_ocorrencia" data-hidden="f_local_ocorrencia">
+          <label class="pill"><input type="radio" name="local_ocorrencia" value="01"> Residência</label>
+          <label class="pill"><input type="radio" name="local_ocorrencia" value="02"> Habitação coletiva</label>
+          <label class="pill"><input type="radio" name="local_ocorrencia" value="03"> Escola</label>
+          <label class="pill"><input type="radio" name="local_ocorrencia" value="04"> Local de prática esportiva</label>
+          <label class="pill"><input type="radio" name="local_ocorrencia" value="05"> Bar ou similar</label>
+          <label class="pill"><input type="radio" name="local_ocorrencia" value="06"> Via pública</label>
+          <label class="pill"><input type="radio" name="local_ocorrencia" value="07"> Comércio/serviços</label>
+          <label class="pill"><input type="radio" name="local_ocorrencia" value="08"> Indústrias/construção</label>
+          <label class="pill"><input type="radio" name="local_ocorrencia" value="09"> Outro</label>
+          <label class="pill"><input type="radio" name="local_ocorrencia" value="99"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_local_ocorrencia">
       </div>
       <div class="fld" id="box_local_outro" style="display:none">
         <label>Especificar "Outro"</label>
@@ -643,22 +643,22 @@ function toggleDarkMode(){
   </div>
   <div class="sec-body">
 
-    <div class="row">
-      <div class="fld">
+    <div class="row row-full">
+      <div class="fld col-2">
         <label>Essa Violência Foi Motivada Por:</label>
-        <select id="f_motivacao">
-          <option value="">— Selecione —</option>
-          <option value="01">01 - Sexismo</option>
-          <option value="02">02 - Homofobia/Lesbofobia/Bifobia/Transfobia</option>
-          <option value="03">03 - Racismo</option>
-          <option value="04">04 - Intolerância religiosa</option>
-          <option value="05">05 - Xenofobia</option>
-          <option value="06">06 - Conflito geracional</option>
-          <option value="07">07 - Situação de rua</option>
-          <option value="08">08 - Deficiência</option>
-          <option value="09">09 - Outros</option>
-          <option value="99">99 - Ignorado</option>
-        </select>
+        <div class="pills" id="grp_motivacao" data-hidden="f_motivacao">
+          <label class="pill"><input type="radio" name="motivacao" value="01"> Sexismo</label>
+          <label class="pill"><input type="radio" name="motivacao" value="02"> Homofobia/Lesbofobia/Bifobia/Transfobia</label>
+          <label class="pill"><input type="radio" name="motivacao" value="03"> Racismo</label>
+          <label class="pill"><input type="radio" name="motivacao" value="04"> Intolerância religiosa</label>
+          <label class="pill"><input type="radio" name="motivacao" value="05"> Xenofobia</label>
+          <label class="pill"><input type="radio" name="motivacao" value="06"> Conflito geracional</label>
+          <label class="pill"><input type="radio" name="motivacao" value="07"> Situação de rua</label>
+          <label class="pill"><input type="radio" name="motivacao" value="08"> Deficiência</label>
+          <label class="pill"><input type="radio" name="motivacao" value="09"> Outros</label>
+          <label class="pill"><input type="radio" name="motivacao" value="99"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_motivacao">
       </div>
       <div class="fld" id="box_motivacao_outros" style="display:none">
         <label>Especificar "Outros"</label>
@@ -826,17 +826,17 @@ function toggleDarkMode(){
           <label class="pill" data-val="9"><input type="radio" name="autor_alcool" value="9"> Ignorado</label>
         </div>
       </div>
-      <div class="fld">
+      <div class="fld col-2">
         <label>Ciclo de Vida do Provável Autor</label>
-        <select id="f_autor_ciclo">
-          <option value="">— Selecione —</option>
-          <option value="1">1 - Criança (0 a 9 anos)</option>
-          <option value="2">2 - Adolescente (10 a 19 anos)</option>
-          <option value="3">3 - Jovem (20 a 24 anos)</option>
-          <option value="4">4 - Pessoa adulta (25 a 59 anos)</option>
-          <option value="5">5 - Pessoa idosa (60 anos ou mais)</option>
-          <option value="9">9 - Ignorado</option>
-        </select>
+        <div class="pills" id="grp_autor_ciclo" data-hidden="f_autor_ciclo">
+          <label class="pill"><input type="radio" name="autor_ciclo" value="1"> Criança (0 a 9 anos)</label>
+          <label class="pill"><input type="radio" name="autor_ciclo" value="2"> Adolescente (10 a 19 anos)</label>
+          <label class="pill"><input type="radio" name="autor_ciclo" value="3"> Jovem (20 a 24 anos)</label>
+          <label class="pill"><input type="radio" name="autor_ciclo" value="4"> Pessoa adulta (25 a 59 anos)</label>
+          <label class="pill"><input type="radio" name="autor_ciclo" value="5"> Pessoa idosa (60 anos ou mais)</label>
+          <label class="pill"><input type="radio" name="autor_ciclo" value="9"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_autor_ciclo">
       </div>
     </div>
 
@@ -1052,7 +1052,7 @@ window.FICHA_TRANSFER_SOURCE = 'violencia';
 window.FICHA_PROG_CONFIG = {
   ESS_IDS: {f_data_notif:1,f_data_ocorrencia:1,f_nome:1,f_raca:1,f_mun_res:1,f_ocupacao:1},
   ESS_GROUPS: ['sexo'],
-  STD_GROUPS: ['cat','violencia_trabalho','ocorrencia_repetida','lesao_autoprovocada'],
+  STD_GROUPS: ['cat','violencia_trabalho','ocorrencia_repetida','lesao_autoprovocada','unidade_tipo','local_ocorrencia','motivacao','autor_ciclo'],
   COND_GROUPS: {},
   PROG_EXCLUDE_IDS: {f_num_notif:1,f_compl_res:1,f_pais_res:1,f_pref_res:1,f_compl_ocorrencia:1,f_pref_ocorrencia:1,f_ibge_ocorrencia:1},
   ESS_GROUP_LABELS: {sexo:'Sexo'}

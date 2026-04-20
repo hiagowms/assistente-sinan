@@ -440,20 +440,20 @@ function toggleDarkMode(){
       </div>
     </div>
 
-    <div class="row">
-      <div class="fld">
+    <div class="row row-wide">
+      <div class="fld col-2">
         <label>Local de Ocorrência da Exposição</label>
-        <select id="f_local_exposicao">
-          <option value="">— Selecione —</option>
-          <option value="1">1 - Residência</option>
-          <option value="2">2 - Ambiente de trabalho</option>
-          <option value="3">3 - Trajeto do trabalho</option>
-          <option value="4">4 - Serviços de saúde</option>
-          <option value="5">5 - Escola/creche</option>
-          <option value="6">6 - Ambiente externo</option>
-          <option value="7">7 - Outro</option>
-          <option value="9">9 - Ignorado</option>
-        </select>
+        <div class="pills" id="grp_local_exposicao" data-hidden="f_local_exposicao">
+          <label class="pill"><input type="radio" name="local_exposicao" value="1"> Residência</label>
+          <label class="pill"><input type="radio" name="local_exposicao" value="2"> Ambiente de trabalho</label>
+          <label class="pill"><input type="radio" name="local_exposicao" value="3"> Trajeto do trabalho</label>
+          <label class="pill"><input type="radio" name="local_exposicao" value="4"> Serviços de saúde</label>
+          <label class="pill"><input type="radio" name="local_exposicao" value="5"> Escola/creche</label>
+          <label class="pill"><input type="radio" name="local_exposicao" value="6"> Ambiente externo</label>
+          <label class="pill"><input type="radio" name="local_exposicao" value="7"> Outro</label>
+          <label class="pill"><input type="radio" name="local_exposicao" value="9"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_local_exposicao">
       </div>
       <div class="fld" id="box_local_exposicao_outro" style="display:none">
         <label>Especificar "Outro"</label>
@@ -583,26 +583,26 @@ function toggleDarkMode(){
   </div>
   <div class="sec-body">
 
-    <div class="row">
-      <div class="fld">
+    <div class="row row-full">
+      <div class="fld col-2">
         <label>Grupo do Agente Tóxico / Classificação Geral</label>
-        <select id="f_grupo_agente">
-          <option value="">— Selecione —</option>
-          <option value="01">01 - Medicamento</option>
-          <option value="02">02 - Agrotóxico uso agrícola</option>
-          <option value="03">03 - Agrotóxico uso doméstico</option>
-          <option value="04">04 - Agrotóxico uso saúde pública</option>
-          <option value="05">05 - Raticida</option>
-          <option value="06">06 - Produto veterinário</option>
-          <option value="07">07 - Produto de uso domiciliar</option>
-          <option value="08">08 - Cosmético/higiene pessoal</option>
-          <option value="09">09 - Produto químico de uso industrial</option>
-          <option value="10">10 - Metal</option>
-          <option value="11">11 - Drogas de abuso</option>
-          <option value="12">12 - Planta tóxica</option>
-          <option value="13">13 - Alimento e bebida</option>
-          <option value="14">14 - Outro</option>
-        </select>
+        <div class="pills" id="grp_grupo_agente" data-hidden="f_grupo_agente">
+          <label class="pill"><input type="radio" name="grupo_agente" value="01"> Medicamento</label>
+          <label class="pill"><input type="radio" name="grupo_agente" value="02"> Agrotóxico uso agrícola</label>
+          <label class="pill"><input type="radio" name="grupo_agente" value="03"> Agrotóxico uso doméstico</label>
+          <label class="pill"><input type="radio" name="grupo_agente" value="04"> Agrotóxico uso saúde pública</label>
+          <label class="pill"><input type="radio" name="grupo_agente" value="05"> Raticida</label>
+          <label class="pill"><input type="radio" name="grupo_agente" value="06"> Produto veterinário</label>
+          <label class="pill"><input type="radio" name="grupo_agente" value="07"> Produto de uso domiciliar</label>
+          <label class="pill"><input type="radio" name="grupo_agente" value="08"> Cosmético/higiene pessoal</label>
+          <label class="pill"><input type="radio" name="grupo_agente" value="09"> Produto químico de uso industrial</label>
+          <label class="pill"><input type="radio" name="grupo_agente" value="10"> Metal</label>
+          <label class="pill"><input type="radio" name="grupo_agente" value="11"> Drogas de abuso</label>
+          <label class="pill"><input type="radio" name="grupo_agente" value="12"> Planta tóxica</label>
+          <label class="pill"><input type="radio" name="grupo_agente" value="13"> Alimento e bebida</label>
+          <label class="pill"><input type="radio" name="grupo_agente" value="14"> Outro</label>
+        </div>
+        <input type="hidden" id="f_grupo_agente">
       </div>
       <div class="fld" id="box_grupo_outro" style="display:none">
         <label>Especificar "Outro"</label>
@@ -643,20 +643,20 @@ function toggleDarkMode(){
     </div>
 
     <div id="box_agrotoxico" style="display:none">
-      <div class="row">
-        <div class="fld">
+      <div class="row row-wide">
+        <div class="fld col-2">
           <label>Se Agrotóxico, Qual a Finalidade da Utilização</label>
-          <select id="f_agrotoxico_finalidade">
-            <option value="">— Selecione —</option>
-            <option value="1">1 - Inseticida</option>
-            <option value="2">2 - Herbicida</option>
-            <option value="3">3 - Carrapaticida</option>
-            <option value="4">4 - Raticida</option>
-            <option value="5">5 - Fungicida</option>
-            <option value="6">6 - Preservante para madeira</option>
-            <option value="7">7 - Outro</option>
-            <option value="9">9 - Ignorado</option>
-          </select>
+          <div class="pills" id="grp_agrotoxico_finalidade" data-hidden="f_agrotoxico_finalidade">
+            <label class="pill"><input type="radio" name="agrotoxico_finalidade" value="1"> Inseticida</label>
+            <label class="pill"><input type="radio" name="agrotoxico_finalidade" value="2"> Herbicida</label>
+            <label class="pill"><input type="radio" name="agrotoxico_finalidade" value="3"> Carrapaticida</label>
+            <label class="pill"><input type="radio" name="agrotoxico_finalidade" value="4"> Raticida</label>
+            <label class="pill"><input type="radio" name="agrotoxico_finalidade" value="5"> Fungicida</label>
+            <label class="pill"><input type="radio" name="agrotoxico_finalidade" value="6"> Preservante para madeira</label>
+            <label class="pill"><input type="radio" name="agrotoxico_finalidade" value="7"> Outro</label>
+            <label class="pill"><input type="radio" name="agrotoxico_finalidade" value="9"> Ignorado</label>
+          </div>
+          <input type="hidden" id="f_agrotoxico_finalidade">
         </div>
         <div class="fld" id="box_agrotoxico_finalidade_outro" style="display:none">
           <label>Especificar "Outro"</label>
@@ -665,57 +665,57 @@ function toggleDarkMode(){
       </div>
 
       <div class="sublabel">Atividades Exercidas na Exposição Atual</div>
-      <div class="row">
+      <div class="row row-full">
         <div class="fld">
           <label>Atividade 1</label>
-          <select id="f_agrotoxico_atividade1">
-            <option value="">— Selecione —</option>
-            <option value="01">01 - Diluição</option>
-            <option value="02">02 - Pulverização</option>
-            <option value="03">03 - Tratamento de sementes</option>
-            <option value="04">04 - Armazenagem</option>
-            <option value="05">05 - Colheita</option>
-            <option value="06">06 - Transporte</option>
-            <option value="07">07 - Desinsetização</option>
-            <option value="08">08 - Produção/formulação</option>
-            <option value="09">09 - Outros</option>
-            <option value="10">10 - Não se aplica</option>
-            <option value="99">99 - Ignorado</option>
-          </select>
+          <div class="pills" id="grp_agrotoxico_atividade1" data-hidden="f_agrotoxico_atividade1">
+            <label class="pill"><input type="radio" name="agrotoxico_atividade1" value="01"> Diluição</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade1" value="02"> Pulverização</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade1" value="03"> Tratamento de sementes</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade1" value="04"> Armazenagem</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade1" value="05"> Colheita</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade1" value="06"> Transporte</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade1" value="07"> Desinsetização</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade1" value="08"> Produção/formulação</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade1" value="09"> Outros</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade1" value="10"> Não se aplica</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade1" value="99"> Ignorado</label>
+          </div>
+          <input type="hidden" id="f_agrotoxico_atividade1">
         </div>
         <div class="fld">
           <label>Atividade 2</label>
-          <select id="f_agrotoxico_atividade2">
-            <option value="">— Selecione —</option>
-            <option value="01">01 - Diluição</option>
-            <option value="02">02 - Pulverização</option>
-            <option value="03">03 - Tratamento de sementes</option>
-            <option value="04">04 - Armazenagem</option>
-            <option value="05">05 - Colheita</option>
-            <option value="06">06 - Transporte</option>
-            <option value="07">07 - Desinsetização</option>
-            <option value="08">08 - Produção/formulação</option>
-            <option value="09">09 - Outros</option>
-            <option value="10">10 - Não se aplica</option>
-            <option value="99">99 - Ignorado</option>
-          </select>
+          <div class="pills" id="grp_agrotoxico_atividade2" data-hidden="f_agrotoxico_atividade2">
+            <label class="pill"><input type="radio" name="agrotoxico_atividade2" value="01"> Diluição</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade2" value="02"> Pulverização</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade2" value="03"> Tratamento de sementes</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade2" value="04"> Armazenagem</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade2" value="05"> Colheita</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade2" value="06"> Transporte</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade2" value="07"> Desinsetização</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade2" value="08"> Produção/formulação</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade2" value="09"> Outros</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade2" value="10"> Não se aplica</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade2" value="99"> Ignorado</label>
+          </div>
+          <input type="hidden" id="f_agrotoxico_atividade2">
         </div>
         <div class="fld">
           <label>Atividade 3</label>
-          <select id="f_agrotoxico_atividade3">
-            <option value="">— Selecione —</option>
-            <option value="01">01 - Diluição</option>
-            <option value="02">02 - Pulverização</option>
-            <option value="03">03 - Tratamento de sementes</option>
-            <option value="04">04 - Armazenagem</option>
-            <option value="05">05 - Colheita</option>
-            <option value="06">06 - Transporte</option>
-            <option value="07">07 - Desinsetização</option>
-            <option value="08">08 - Produção/formulação</option>
-            <option value="09">09 - Outros</option>
-            <option value="10">10 - Não se aplica</option>
-            <option value="99">99 - Ignorado</option>
-          </select>
+          <div class="pills" id="grp_agrotoxico_atividade3" data-hidden="f_agrotoxico_atividade3">
+            <label class="pill"><input type="radio" name="agrotoxico_atividade3" value="01"> Diluição</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade3" value="02"> Pulverização</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade3" value="03"> Tratamento de sementes</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade3" value="04"> Armazenagem</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade3" value="05"> Colheita</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade3" value="06"> Transporte</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade3" value="07"> Desinsetização</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade3" value="08"> Produção/formulação</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade3" value="09"> Outros</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade3" value="10"> Não se aplica</label>
+            <label class="pill"><input type="radio" name="agrotoxico_atividade3" value="99"> Ignorado</label>
+          </div>
+          <input type="hidden" id="f_agrotoxico_atividade3">
         </div>
       </div>
 
@@ -728,74 +728,74 @@ function toggleDarkMode(){
     </div>
 
     <div class="sublabel">Via de Exposição/Contaminação</div>
-    <div class="row">
+    <div class="row row-full">
       <div class="fld">
         <label>1ª Opção</label>
-        <select id="f_via_exposicao1">
-          <option value="">— Selecione —</option>
-          <option value="1">1 - Digestiva</option>
-          <option value="2">2 - Cutânea</option>
-          <option value="3">3 - Respiratória</option>
-          <option value="4">4 - Ocular</option>
-          <option value="5">5 - Parenteral</option>
-          <option value="6">6 - Vaginal</option>
-          <option value="7">7 - Transplacentária</option>
-          <option value="8">8 - Outra</option>
-          <option value="9">9 - Ignorada</option>
-        </select>
+        <div class="pills" id="grp_via_exposicao1" data-hidden="f_via_exposicao1">
+          <label class="pill"><input type="radio" name="via_exposicao1" value="1"> Digestiva</label>
+          <label class="pill"><input type="radio" name="via_exposicao1" value="2"> Cutânea</label>
+          <label class="pill"><input type="radio" name="via_exposicao1" value="3"> Respiratória</label>
+          <label class="pill"><input type="radio" name="via_exposicao1" value="4"> Ocular</label>
+          <label class="pill"><input type="radio" name="via_exposicao1" value="5"> Parenteral</label>
+          <label class="pill"><input type="radio" name="via_exposicao1" value="6"> Vaginal</label>
+          <label class="pill"><input type="radio" name="via_exposicao1" value="7"> Transplacentária</label>
+          <label class="pill"><input type="radio" name="via_exposicao1" value="8"> Outra</label>
+          <label class="pill"><input type="radio" name="via_exposicao1" value="9"> Ignorada</label>
+        </div>
+        <input type="hidden" id="f_via_exposicao1">
       </div>
       <div class="fld">
         <label>2ª Opção</label>
-        <select id="f_via_exposicao2">
-          <option value="">— Selecione —</option>
-          <option value="1">1 - Digestiva</option>
-          <option value="2">2 - Cutânea</option>
-          <option value="3">3 - Respiratória</option>
-          <option value="4">4 - Ocular</option>
-          <option value="5">5 - Parenteral</option>
-          <option value="6">6 - Vaginal</option>
-          <option value="7">7 - Transplacentária</option>
-          <option value="8">8 - Outra</option>
-          <option value="9">9 - Ignorada</option>
-        </select>
+        <div class="pills" id="grp_via_exposicao2" data-hidden="f_via_exposicao2">
+          <label class="pill"><input type="radio" name="via_exposicao2" value="1"> Digestiva</label>
+          <label class="pill"><input type="radio" name="via_exposicao2" value="2"> Cutânea</label>
+          <label class="pill"><input type="radio" name="via_exposicao2" value="3"> Respiratória</label>
+          <label class="pill"><input type="radio" name="via_exposicao2" value="4"> Ocular</label>
+          <label class="pill"><input type="radio" name="via_exposicao2" value="5"> Parenteral</label>
+          <label class="pill"><input type="radio" name="via_exposicao2" value="6"> Vaginal</label>
+          <label class="pill"><input type="radio" name="via_exposicao2" value="7"> Transplacentária</label>
+          <label class="pill"><input type="radio" name="via_exposicao2" value="8"> Outra</label>
+          <label class="pill"><input type="radio" name="via_exposicao2" value="9"> Ignorada</label>
+        </div>
+        <input type="hidden" id="f_via_exposicao2">
       </div>
       <div class="fld">
         <label>3ª Opção</label>
-        <select id="f_via_exposicao3">
-          <option value="">— Selecione —</option>
-          <option value="1">1 - Digestiva</option>
-          <option value="2">2 - Cutânea</option>
-          <option value="3">3 - Respiratória</option>
-          <option value="4">4 - Ocular</option>
-          <option value="5">5 - Parenteral</option>
-          <option value="6">6 - Vaginal</option>
-          <option value="7">7 - Transplacentária</option>
-          <option value="8">8 - Outra</option>
-          <option value="9">9 - Ignorada</option>
-        </select>
+        <div class="pills" id="grp_via_exposicao3" data-hidden="f_via_exposicao3">
+          <label class="pill"><input type="radio" name="via_exposicao3" value="1"> Digestiva</label>
+          <label class="pill"><input type="radio" name="via_exposicao3" value="2"> Cutânea</label>
+          <label class="pill"><input type="radio" name="via_exposicao3" value="3"> Respiratória</label>
+          <label class="pill"><input type="radio" name="via_exposicao3" value="4"> Ocular</label>
+          <label class="pill"><input type="radio" name="via_exposicao3" value="5"> Parenteral</label>
+          <label class="pill"><input type="radio" name="via_exposicao3" value="6"> Vaginal</label>
+          <label class="pill"><input type="radio" name="via_exposicao3" value="7"> Transplacentária</label>
+          <label class="pill"><input type="radio" name="via_exposicao3" value="8"> Outra</label>
+          <label class="pill"><input type="radio" name="via_exposicao3" value="9"> Ignorada</label>
+        </div>
+        <input type="hidden" id="f_via_exposicao3">
       </div>
     </div>
 
-    <div class="row">
-      <div class="fld">
+    <div class="row row-full">
+      <div class="fld col-2">
         <label>Circunstância da Exposição/Contaminação</label>
-        <select id="f_circunstancia_exposicao">
-          <option value="">— Selecione —</option>
-          <option value="01">01 - Uso habitual</option>
-          <option value="02">02 - Acidental</option>
-          <option value="03">03 - Ambiental</option>
-          <option value="04">04 - Uso terapêutico</option>
-          <option value="05">05 - Prescrição médica inadequada</option>
-          <option value="06">06 - Erro de administração</option>
-          <option value="07">07 - Automedicação</option>
-          <option value="08">08 - Abuso</option>
-          <option value="09">09 - Ingestão de alimento ou bebida</option>
-          <option value="10">10 - Tentativa de suicídio</option>
-          <option value="11">11 - Tentativa de aborto</option>
-          <option value="12">12 - Violência/homicídio</option>
-          <option value="13">13 - Outra</option>
-          <option value="99">99 - Ignorado</option>
-        </select>
+        <div class="pills" id="grp_circunstancia_exposicao" data-hidden="f_circunstancia_exposicao">
+          <label class="pill"><input type="radio" name="circunstancia_exposicao" value="01"> Uso habitual</label>
+          <label class="pill"><input type="radio" name="circunstancia_exposicao" value="02"> Acidental</label>
+          <label class="pill"><input type="radio" name="circunstancia_exposicao" value="03"> Ambiental</label>
+          <label class="pill"><input type="radio" name="circunstancia_exposicao" value="04"> Uso terapêutico</label>
+          <label class="pill"><input type="radio" name="circunstancia_exposicao" value="05"> Prescrição médica inadequada</label>
+          <label class="pill"><input type="radio" name="circunstancia_exposicao" value="06"> Erro de administração</label>
+          <label class="pill"><input type="radio" name="circunstancia_exposicao" value="07"> Automedicação</label>
+          <label class="pill"><input type="radio" name="circunstancia_exposicao" value="08"> Abuso</label>
+          <label class="pill"><input type="radio" name="circunstancia_exposicao" value="09"> Ingestão de alimento ou bebida</label>
+          <label class="pill"><input type="radio" name="circunstancia_exposicao" value="10"> Tentativa de suicídio</label>
+          <label class="pill"><input type="radio" name="circunstancia_exposicao" value="11"> Tentativa de aborto</label>
+          <label class="pill"><input type="radio" name="circunstancia_exposicao" value="12"> Violência/homicídio</label>
+          <label class="pill"><input type="radio" name="circunstancia_exposicao" value="13"> Outra</label>
+          <label class="pill"><input type="radio" name="circunstancia_exposicao" value="99"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_circunstancia_exposicao">
       </div>
       <div class="fld" id="box_circunstancia_outra" style="display:none">
         <label>Especificar "Outra"</label>
@@ -927,18 +927,18 @@ function toggleDarkMode(){
   </div>
   <div class="sec-body">
 
-    <div class="row">
-      <div class="fld">
+    <div class="row row-wide">
+      <div class="fld col-2">
         <label>Classificação Final</label>
-        <select id="f_classificacao_final">
-          <option value="">— Selecione —</option>
-          <option value="1">1 - Intoxicação confirmada</option>
-          <option value="2">2 - Só exposição</option>
-          <option value="3">3 - Reação adversa</option>
-          <option value="4">4 - Outro diagnóstico</option>
-          <option value="5">5 - Síndrome de abstinência</option>
-          <option value="9">9 - Ignorado</option>
-        </select>
+        <div class="pills" id="grp_classificacao_final" data-hidden="f_classificacao_final">
+          <label class="pill"><input type="radio" name="classificacao_final" value="1"> Intoxicação confirmada</label>
+          <label class="pill"><input type="radio" name="classificacao_final" value="2"> Só exposição</label>
+          <label class="pill"><input type="radio" name="classificacao_final" value="3"> Reação adversa</label>
+          <label class="pill"><input type="radio" name="classificacao_final" value="4"> Outro diagnóstico</label>
+          <label class="pill"><input type="radio" name="classificacao_final" value="5"> Síndrome de abstinência</label>
+          <label class="pill"><input type="radio" name="classificacao_final" value="9"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_classificacao_final">
       </div>
     </div>
 
@@ -960,28 +960,28 @@ function toggleDarkMode(){
       <div class="row">
         <div class="fld">
           <label>Critério de Confirmação</label>
-          <select id="f_criterio_confirmacao">
-            <option value="">— Selecione —</option>
-            <option value="1">1 - Laboratorial</option>
-            <option value="2">2 - Clínico-epidemiológico</option>
-            <option value="3">3 - Clínico</option>
-          </select>
+          <div class="pills" id="grp_criterio_confirmacao" data-hidden="f_criterio_confirmacao">
+            <label class="pill"><input type="radio" name="criterio_confirmacao" value="1"> Laboratorial</label>
+            <label class="pill"><input type="radio" name="criterio_confirmacao" value="2"> Clínico-epidemiológico</label>
+            <label class="pill"><input type="radio" name="criterio_confirmacao" value="3"> Clínico</label>
+          </div>
+          <input type="hidden" id="f_criterio_confirmacao">
         </div>
       </div>
     </div>
 
-    <div class="row">
-      <div class="fld">
+    <div class="row row-wide">
+      <div class="fld col-2">
         <label>Evolução do Caso</label>
-        <select id="f_evolucao">
-          <option value="">— Selecione —</option>
-          <option value="1">1 - Cura sem sequela</option>
-          <option value="2">2 - Cura com sequela</option>
-          <option value="3">3 - Óbito por intoxicação exógena</option>
-          <option value="4">4 - Óbito por outra causa</option>
-          <option value="5">5 - Perda de seguimento</option>
-          <option value="9">9 - Ignorado</option>
-        </select>
+        <div class="pills" id="grp_evolucao" data-hidden="f_evolucao">
+          <label class="pill"><input type="radio" name="evolucao" value="1"> Cura sem sequela</label>
+          <label class="pill"><input type="radio" name="evolucao" value="2"> Cura com sequela</label>
+          <label class="pill"><input type="radio" name="evolucao" value="3"> Óbito por intoxicação exógena</label>
+          <label class="pill"><input type="radio" name="evolucao" value="4"> Óbito por outra causa</label>
+          <label class="pill"><input type="radio" name="evolucao" value="5"> Perda de seguimento</label>
+          <label class="pill"><input type="radio" name="evolucao" value="9"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_evolucao">
       </div>
     </div>
 
@@ -1119,8 +1119,8 @@ window.FICHA_TRANSFER_SOURCE = 'intoxicacao';
 window.FICHA_PROG_CONFIG = {
   ESS_IDS: {f_data_notif:1,f_data_sintomas:1,f_nome:1,f_raca:1,f_mun_res:1,f_ocupacao:1,f_diag_cid:1},
   ESS_GROUPS: ['sexo'],
-  STD_GROUPS: ['cat','exposicao_trabalho','tipo_exposicao'],
-  COND_GROUPS: {},
+  STD_GROUPS: ['cat','exposicao_trabalho','tipo_exposicao','local_exposicao','grupo_agente','via_exposicao1','circunstancia_exposicao','classificacao_final','evolucao'],
+  COND_GROUPS: {'agrotoxico_finalidade':'box_agrotoxico','agrotoxico_atividade1':'box_agrotoxico','criterio_confirmacao':'box_intoxicacao_confirmada'},
   PROG_EXCLUDE_IDS: {f_num_notif:1,f_compl_res:1,f_pais_res:1,f_pref_res:1,f_exposicao_compl:1,f_exposicao_pref:1},
   ESS_GROUP_LABELS: {sexo:'Sexo'}
 };

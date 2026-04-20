@@ -1120,8 +1120,8 @@ function toggleUnitLock(){
     UNIT_IDS.forEach(function(id){
       var el=document.getElementById(id); if(!el||d[id]===undefined) return;
       el.value=d[id];
-      // f_tipo_un é hidden conectado a pill group — precisa de change para sincronizar visual
-      if(id==='f_tipo_un') el.dispatchEvent(new Event('change',{bubbles:true}));
+      // campos hidden conectados a pill group — precisam de change para sincronizar visual
+      if(document.querySelector('.pills[data-hidden="'+id+'"]')) el.dispatchEvent(new Event('change',{bubbles:true}));
     });
     // Se tipo de unidade não foi salvo (dados vieram de outra ficha),
     // deixa desbloqueado e exibe aviso para o usuário preencher o campo extra.

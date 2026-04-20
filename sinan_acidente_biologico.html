@@ -593,20 +593,20 @@ function toggleDarkMode(){
       </div>
     </div>
 
-    <div class="row">
-      <div class="fld">
+    <div class="row row-wide">
+      <div class="fld col-2">
         <label>Material Orgânico</label>
-        <select id="f_material_organico">
-          <option value="">— Selecione —</option>
-          <option value="1">1 - Sangue</option>
-          <option value="2">2 - Líquor</option>
-          <option value="3">3 - Líquido pleural</option>
-          <option value="4">4 - Líquido ascítico</option>
-          <option value="5">5 - Ignorado</option>
-          <option value="6">6 - Fluido com sangue</option>
-          <option value="7">7 - Soro/plasma</option>
-          <option value="8">8 - Outros</option>
-        </select>
+        <div class="pills" id="grp_material_organico" data-hidden="f_material_organico">
+          <label class="pill"><input type="radio" name="material_organico" value="1"> Sangue</label>
+          <label class="pill"><input type="radio" name="material_organico" value="2"> Líquor</label>
+          <label class="pill"><input type="radio" name="material_organico" value="3"> Líquido pleural</label>
+          <label class="pill"><input type="radio" name="material_organico" value="4"> Líquido ascítico</label>
+          <label class="pill"><input type="radio" name="material_organico" value="6"> Fluido com sangue</label>
+          <label class="pill"><input type="radio" name="material_organico" value="7"> Soro/plasma</label>
+          <label class="pill"><input type="radio" name="material_organico" value="8"> Outros</label>
+          <label class="pill"><input type="radio" name="material_organico" value="5"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_material_organico">
       </div>
       <div class="fld" id="box_material_outros" style="display:none">
         <label>Especificar "Outros"</label>
@@ -614,43 +614,46 @@ function toggleDarkMode(){
       </div>
     </div>
 
-    <div class="row">
-      <div class="fld">
+    <div class="row row-full">
+      <div class="fld col-2">
         <label>Circunstância do Acidente</label>
-        <select id="f_circunstancia_acidente">
-          <option value="">— Selecione —</option>
-          <option value="01">01 - Administ. de medicação endovenosa</option>
-          <option value="02">02 - Administ. de medicação intramuscular</option>
-          <option value="03">03 - Administ. de medicação subcutânea</option>
-          <option value="04">04 - Administ. de medicação intradérmica</option>
-          <option value="05">05 - Punção venosa/arterial para coleta de sangue</option>
-          <option value="06">06 - Punção venosa/arterial não especificada</option>
-          <option value="07">07 - Descarte inadequado de material perfurocortante em saco de lixo</option>
-          <option value="08">08 - Descarte inadequado de material perfurocortante em bancada/cama/chão</option>
-          <option value="09">09 - Lavanderia</option>
-          <option value="10">10 - Lavagem de material</option>
-          <option value="11">11 - Manipulação de caixa com material perfurocortante</option>
-          <option value="12">12 - Procedimento cirúrgico</option>
-          <option value="13">13 - Procedimento odontológico</option>
-          <option value="14">14 - Procedimento laboratorial</option>
-          <option value="15">15 - Dextro</option>
-          <option value="16">16 - Reencape</option>
-          <option value="98">98 - Outros</option>
-          <option value="99">99 - Ignorado</option>
-        </select>
+        <div class="pills" id="grp_circunstancia_acidente" data-hidden="f_circunstancia_acidente">
+          <label class="pill"><input type="radio" name="circunstancia_acidente" value="01"> Administração de medicação endovenosa</label>
+          <label class="pill"><input type="radio" name="circunstancia_acidente" value="02"> Administração de medicação intramuscular</label>
+          <label class="pill"><input type="radio" name="circunstancia_acidente" value="03"> Administração de medicação subcutânea</label>
+          <label class="pill"><input type="radio" name="circunstancia_acidente" value="04"> Administração de medicação intradérmica</label>
+          <label class="pill"><input type="radio" name="circunstancia_acidente" value="05"> Punção venosa/arterial para coleta de sangue</label>
+          <label class="pill"><input type="radio" name="circunstancia_acidente" value="06"> Punção venosa/arterial não especificada</label>
+          <label class="pill"><input type="radio" name="circunstancia_acidente" value="07"> Descarte inadequado em saco de lixo</label>
+          <label class="pill"><input type="radio" name="circunstancia_acidente" value="08"> Descarte inadequado em bancada/cama/chão</label>
+          <label class="pill"><input type="radio" name="circunstancia_acidente" value="09"> Lavanderia</label>
+          <label class="pill"><input type="radio" name="circunstancia_acidente" value="10"> Lavagem de material</label>
+          <label class="pill"><input type="radio" name="circunstancia_acidente" value="11"> Manipulação de caixa com material perfurocortante</label>
+          <label class="pill"><input type="radio" name="circunstancia_acidente" value="12"> Procedimento cirúrgico</label>
+          <label class="pill"><input type="radio" name="circunstancia_acidente" value="13"> Procedimento odontológico</label>
+          <label class="pill"><input type="radio" name="circunstancia_acidente" value="14"> Procedimento laboratorial</label>
+          <label class="pill"><input type="radio" name="circunstancia_acidente" value="15"> Dextro</label>
+          <label class="pill"><input type="radio" name="circunstancia_acidente" value="16"> Reencape</label>
+          <label class="pill"><input type="radio" name="circunstancia_acidente" value="98"> Outros</label>
+          <label class="pill"><input type="radio" name="circunstancia_acidente" value="99"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_circunstancia_acidente">
       </div>
-      <div class="fld">
+    </div>
+
+    <div class="row row-wide">
+      <div class="fld col-2">
         <label>Agente</label>
-        <select id="f_agente">
-          <option value="">— Selecione —</option>
-          <option value="1">1 - Agulha com lúmen (luz)</option>
-          <option value="2">2 - Agulha sem lúmen/maciça</option>
-          <option value="3">3 - Intracath</option>
-          <option value="4">4 - Vidros</option>
-          <option value="5">5 - Lâmina/lanceta (qualquer tipo)</option>
-          <option value="6">6 - Outros</option>
-          <option value="9">9 - Ignorado</option>
-        </select>
+        <div class="pills" id="grp_agente" data-hidden="f_agente">
+          <label class="pill"><input type="radio" name="agente" value="1"> Agulha com lúmen (luz)</label>
+          <label class="pill"><input type="radio" name="agente" value="2"> Agulha sem lúmen/maciça</label>
+          <label class="pill"><input type="radio" name="agente" value="3"> Intracath</label>
+          <label class="pill"><input type="radio" name="agente" value="4"> Vidros</label>
+          <label class="pill"><input type="radio" name="agente" value="5"> Lâmina/lanceta (qualquer tipo)</label>
+          <label class="pill"><input type="radio" name="agente" value="6"> Outros</label>
+          <label class="pill"><input type="radio" name="agente" value="9"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_agente">
       </div>
     </div>
 
@@ -739,19 +742,19 @@ function toggleDarkMode(){
   </div>
   <div class="sec-body">
 
-    <div class="row row-wide">
+    <div class="row row-full">
       <div class="fld col-2">
         <label>Evolução do Caso</label>
-        <select id="f_evolucao">
-          <option value="">— Selecione —</option>
-          <option value="1">1 - Alta com conversão sorológica (especificar vírus)</option>
-          <option value="2">2 - Alta sem conversão sorológica</option>
-          <option value="3">3 - Alta paciente fonte negativo</option>
-          <option value="4">4 - Abandono</option>
-          <option value="5">5 - Óbito por acidente com exposição a material biológico</option>
-          <option value="6">6 - Óbito por Outra Causa</option>
-          <option value="9">9 - Ignorado</option>
-        </select>
+        <div class="pills" id="grp_evolucao" data-hidden="f_evolucao">
+          <label class="pill"><input type="radio" name="evolucao" value="1"> Alta com conversão sorológica (especificar vírus)</label>
+          <label class="pill"><input type="radio" name="evolucao" value="2"> Alta sem conversão sorológica</label>
+          <label class="pill"><input type="radio" name="evolucao" value="3"> Alta paciente fonte negativo</label>
+          <label class="pill"><input type="radio" name="evolucao" value="4"> Abandono</label>
+          <label class="pill"><input type="radio" name="evolucao" value="5"> Óbito por acidente com exposição a material biológico</label>
+          <label class="pill"><input type="radio" name="evolucao" value="6"> Óbito por outra causa</label>
+          <label class="pill"><input type="radio" name="evolucao" value="9"> Ignorado</label>
+        </div>
+        <input type="hidden" id="f_evolucao">
       </div>
       <div class="fld" id="box_virus_conversao" style="display:none">
         <label>Especificar o vírus</label>
@@ -889,7 +892,7 @@ window.FICHA_TRANSFER_SOURCE = 'acidente_bio';
 window.FICHA_PROG_CONFIG = {
   ESS_IDS: {f_data_notif:1,f_data_acidente:1,f_nome:1,f_raca:1,f_mun_res:1,f_ocupacao:1,f_emp_nome:1},
   ESS_GROUPS: ['sexo'],
-  STD_GROUPS: ['cat','vacina_hepb','fonte_conhecida'],
+  STD_GROUPS: ['cat','vacina_hepb','fonte_conhecida','material_organico','circunstancia_acidente','agente','evolucao'],
   COND_GROUPS: {},
   PROG_EXCLUDE_IDS: {f_num_notif:1,f_compl_res:1,f_pais_res:1,f_pref_res:1,f_emp_reg:1,f_emp_dist:1,f_emp_pref:1,f_emp_ibge:1},
   ESS_GROUP_LABELS: {sexo:'Sexo'}
