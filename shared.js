@@ -6,7 +6,6 @@
   window.FICHA_NOME              — string (ex: 'pair')
   window.FICHA_PROG_CONFIG       — {ESS_IDS, ESS_GROUPS, STD_GROUPS,
                                      COND_GROUPS, PROG_EXCLUDE_IDS}
-  window.FICHA_TRANSFER_FICHAS   — array [{id,label,sub,url,color}]
   window.FICHA_TRANSFER_SOURCE   — string (ex: 'pair')
   window.FICHA_UNIT_IDS          — array de IDs do cadeado
   window.FICHA_MUN_CONFIGS       — array [{suf, ibge, ufId?, munId?}]
@@ -715,6 +714,55 @@ function getMissingEssentials(){
 }
 
 /*==========================================================
+  MODAL ov-quase — injetado uma vez no final do body
+==========================================================*/
+(function injectQuaseModal(){
+  if(document.getElementById('ov-quase')) return;
+  var div = document.createElement('div');
+  div.className = 'ov';
+  div.id = 'ov-quase';
+  div.innerHTML =
+    '<div class="modal">' +
+      '<div class="modal-ico">⚠️</div>' +
+      '<h2>Campos essenciais incompletos</h2>' +
+      '<p>Os seguintes campos ⭐ não foram preenchidos. Recomendamos completá-los antes de gerar o PDF.</p>' +
+      '<div class="err-list" id="ov-quase-list"></div>' +
+      '<div class="modal-actions">' +
+        '<button class="mbtn mbtn-s" onclick="closeModal(\'ov-quase\')">Voltar e preencher</button>' +
+        '<button class="mbtn mbtn-p" id="ov-quase-dl">Gerar mesmo assim</button>' +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(div);
+})();
+
+/*==========================================================
+  WRAPPER gerarPDF — valida essenciais antes de gerar
+  (a ficha define gerarPDF antes de carregar shared.js;
+   aqui envolvemos a versão original com o gate de validação)
+==========================================================*/
+(function wrapGerarPDF(){
+  var orig = window.gerarPDF;
+  if(typeof orig !== 'function') return;
+  window.gerarPDF = function(force){
+    if(!force){
+      var missing = getMissingEssentials();
+      if(missing.length>0){
+        document.getElementById('ov-quase-list').innerHTML = missing.map(function(e){
+          return '<div class="err-item">⭐ '+e+'</div>';
+        }).join('');
+        document.getElementById('ov-quase-dl').onclick = function(){
+          closeModal('ov-quase');
+          window.gerarPDF(true);
+        };
+        document.getElementById('ov-quase').classList.add('show');
+        return;
+      }
+    }
+    return orig.apply(this, arguments);
+  };
+})();
+
+/*==========================================================
   HELPERS
 ==========================================================*/
 function getRadio(name){
@@ -980,6 +1028,29 @@ function tipToggle(btn){
 }
 
 /*==========================================================
+  CATÁLOGO ÚNICO DE FICHAS (fonte única — usado pela
+  transferência "Usar dados em outra ficha"). A ordem default
+  corresponde à ordem padrão dos cards na index.html. O id
+  corresponde ao data-id de cada card na home (para sincronizar
+  ordenação via localStorage 'sinan-card-order-v2'); o nome
+  corresponde a window.FICHA_NOME (para excluir a ficha atual).
+==========================================================*/
+window.SINAN_HOME_ORDER_KEY = 'sinan-card-order-v2';
+window.SINAN_FICHAS_CATALOG = [
+  {id:'violencia',     nome:'violencia',      url:'sinan_violencia.html',          label:'Violência Doméstica, Sexual e/ou Outras Violências Interpessoais', sub:'Violência doméstica, sexual e/ou interpessoal',        color:'#1e40af', catClass:'cat-violence', icon:'<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2L3.5 5v5c0 4.1 2.9 7.2 6.5 8.2 3.6-1 6.5-4.1 6.5-8.2V5L10 2z"/></svg>'},
+  {id:'intoxicacao',   nome:'intoxicacao',    url:'sinan_intoxicacao.html',         label:'Intoxicação Exógena',                                              sub:'Intoxicação por agentes químicos',                       color:'#b45309', catClass:'cat-intox',    icon:'<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 2h5M8.5 2v5L5 14.5A1.5 1.5 0 006.5 17h7a1.5 1.5 0 001.5-2.5L11.5 7V2"/><line x1="6" y1="12" x2="14" y2="12"/></svg>'},
+  {id:'acidente',      nome:'acidente',       url:'sinan_acidente.html',            label:'Acidente de Trabalho',                                             sub:'Acidentes típicos, de trajeto ou fatais',                color:'#c2410c', catClass:'cat-accident', icon:'<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h12v2H4zM5 11V9a5 5 0 0110 0v2"/><rect x="3" y="13" width="14" height="3" rx="1"/><line x1="8" y1="9" x2="8" y2="11"/><line x1="12" y1="9" x2="12" y2="11"/></svg>'},
+  {id:'biologico',     nome:'acidente_bio',   url:'sinan_acidente_biologico.html',  label:'Acidente de Trabalho com Exposição a Material Biológico',          sub:'Exposição a material biológico potencialmente contaminado', color:'#7c3aed', catClass:'cat-bio',  icon:'<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="2"/><path d="M10 8A3.5 3.5 0 116.5 12M10 8A3.5 3.5 0 1113.5 12M10 12v2.5"/><circle cx="8" cy="15.5" r="1"/><circle cx="12" cy="15.5" r="1"/></svg>'},
+  {id:'lerdort',       nome:'lerdort',        url:'sinan_lerdort.html',             label:'LER/DORT',                                                         sub:'Lesão por esforço repetitivo / DORT',                    color:'#0f766e', catClass:'cat-lerdort',  icon:'<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17V9M13 17V9M7 9a3 3 0 006 0"/><path d="M5 17h10"/><ellipse cx="10" cy="7" rx="4" ry="2"/></svg>'},
+  {id:'transtornos',   nome:'transtornos',    url:'sinan_transtornos.html',         label:'Transtornos Mentais Relacionados ao Trabalho',                      sub:'Transtornos mentais relacionados ao trabalho',           color:'#4338ca', catClass:'cat-mental',   icon:'<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3a4.5 4.5 0 014.5 4.5c0 2-.9 3.2-1.5 4v1.5h-6V11.5C6.4 10.7 5.5 9.5 5.5 7.5A4.5 4.5 0 0110 3z"/><line x1="7.5" y1="13" x2="12.5" y2="13"/><line x1="8" y1="16" x2="12" y2="16"/></svg>'},
+  {id:'dermatoses',    nome:'dermatoses',     url:'sinan_dermatoses.html',          label:'Dermatoses Ocupacionais',                                          sub:'Dermatoses ocupacionais',                                color:'#be185d', catClass:'cat-derm',     icon:'<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="14" height="8" rx="1.5"/><path d="M6 9V7a4 4 0 018 0v2"/><line x1="3" y1="12" x2="17" y2="12"/><line x1="3" y1="15" x2="17" y2="15"/></svg>'},
+  {id:'pair',          nome:'pair',           url:'sinan_pair.html',                label:'PAIR — Perda Auditiva Induzida por Ruído',                          sub:'Perda Auditiva Induzida por Ruído',                      color:'#0369a1', catClass:'cat-pair',     icon:'<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3a5.5 5.5 0 015.5 5.5c0 2.5-1.5 4-2 5.5v1H9l-1-2c-.8-1.3-.5-3.5.5-4.5"/><path d="M10 9a2 2 0 011 3.5"/><path d="M16.5 5.5a8 8 0 010 9M18 4a10.5 10.5 0 010 12"/></svg>'},
+  {id:'pneumoconioses',nome:'pneumoconioses', url:'sinan_pneumoconioses.html',      label:'Pneumoconioses',                                                    sub:'Pneumoconioses relacionadas ao trabalho',                color:'#475569', catClass:'cat-pneumo',   icon:'<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4v12"/><path d="M7 8c-3.5 1-4.5 3-4.5 5.5 0 1.5 1 2 2.5 2C7 15.5 7 14 7 13V8z"/><path d="M13 8c3.5 1 4.5 3 4.5 5.5 0 1.5-1 2-2.5 2C13 15.5 13 14 13 13V8z"/></svg>'},
+  {id:'cancer',        nome:'cancer',         url:'sinan_cancer.html',              label:'Câncer Relacionado ao Trabalho',                                    sub:'Câncer relacionado ao trabalho',                         color:'#dc2626', catClass:'cat-cancer',   icon:'<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="10" cy="10" r="3.5"/><line x1="10" y1="2" x2="10" y2="5"/><line x1="10" y1="15" x2="10" y2="18"/><line x1="2" y1="10" x2="5" y2="10"/><line x1="15" y1="10" x2="18" y2="10"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="13.66" y1="13.66" x2="15.78" y2="15.78"/><line x1="4.22" y1="15.78" x2="6.34" y2="13.66"/><line x1="13.66" y1="6.34" x2="15.78" y2="4.22"/></svg>'},
+  {id:'voz',           nome:'disturbios_voz', url:'sinan_disturbios_voz.html',      label:'Distúrbio de Voz Relacionado ao Trabalho',                          sub:'Distúrbios de voz relacionados ao trabalho',             color:'#6b7280', catClass:'cat-voice',    icon:'<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7l-3 2.5v1L7 13V7z"/><rect x="7" y="6" width="4" height="8" rx="1"/><path d="M13 8.5a2.5 2.5 0 010 3"/><path d="M14.5 6.5a5 5 0 010 7"/></svg>'}
+];
+
+/*==========================================================
   TRANSFERÊNCIA PARA OUTRA FICHA
 ==========================================================*/
 var _transferTarget = null;
@@ -998,17 +1069,32 @@ function abrirTransferencia(){
   var okBtn = document.getElementById('btn-transfer-ok');
   okBtn.style.opacity = '.45'; okBtn.style.pointerEvents = 'none';
   var cont = document.getElementById('transfer-fichas');
-  cont.innerHTML = (window.FICHA_TRANSFER_FICHAS || []).map(function(f){
-    return '<div class="transfer-ficha-opt" data-id="'+f.id+'" onclick="selectTransfer(this,\''+f.id+'\')">'+
-      '<span class="transfer-ficha-dot" style="background:'+f.color+'"></span>'+
-      '<span><strong class="transfer-ficha-name">'+f.label+'</strong><span class="transfer-ficha-sub">'+f.sub+'</span></span>'+
-      '</div>';
+  var current = window.FICHA_NOME;
+  var fichas = (window.SINAN_FICHAS_CATALOG || []).filter(function(f){ return f.nome !== current; });
+  var stored = null;
+  try{ stored = JSON.parse(localStorage.getItem(window.SINAN_HOME_ORDER_KEY)||'null'); }catch(_){ stored = null; }
+  if(stored && Array.isArray(stored)){
+    var idx = {}; stored.forEach(function(id,i){ idx[id]=i; });
+    fichas.sort(function(a,b){
+      var ai = (idx[a.id] !== undefined) ? idx[a.id] : 999;
+      var bi = (idx[b.id] !== undefined) ? idx[b.id] : 999;
+      return ai - bi;
+    });
+  }
+  cont.innerHTML = fichas.map(function(f){
+    return '<div class="tx-card '+f.catClass+'" data-id="'+f.id+'" onclick="selectTransfer(this,\''+f.id+'\')">'+
+      '<div class="tx-icon-wrap">'+f.icon+'</div>'+
+      '<div class="tx-info">'+
+        '<div class="tx-title">'+f.label+'</div>'+
+        '<div class="tx-sub">'+f.sub+'</div>'+
+      '</div>'+
+    '</div>';
   }).join('');
   document.getElementById('ov-transfer').classList.add('show');
 }
 
 function selectTransfer(el, id){
-  document.querySelectorAll('#transfer-fichas .transfer-ficha-opt').forEach(function(o){ o.classList.remove('selected'); });
+  document.querySelectorAll('#transfer-fichas .tx-card').forEach(function(o){ o.classList.remove('selected'); });
   el.classList.add('selected');
   _transferTarget = id;
   var okBtn = document.getElementById('btn-transfer-ok');
@@ -1017,7 +1103,7 @@ function selectTransfer(el, id){
 
 function confirmarTransferencia(){
   if(!_transferTarget) return;
-  var ficha = (window.FICHA_TRANSFER_FICHAS||[]).filter(function(f){ return f.id===_transferTarget; })[0];
+  var ficha = (window.SINAN_FICHAS_CATALOG||[]).filter(function(f){ return f.id===_transferTarget; })[0];
   if(!ficha) return;
   var source = window.FICHA_TRANSFER_SOURCE || window.FICHA_NOME || 'ficha';
   var payload = {source:source, ts:new Date().toISOString(), fields:{}, radios:{}, checks:{}};

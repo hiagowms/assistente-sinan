@@ -457,20 +457,6 @@ function toggleDarkMode(){
 <!-- TOAST -->
 <div id="toast"></div>
 
-<!-- MODAIS DE VALIDAÇÃO -->
-<div class="ov" id="ov-quase">
-  <div class="modal">
-    <div class="modal-ico">⚠️</div>
-    <h2>Campos essenciais incompletos</h2>
-    <p>Os seguintes campos ⭐ não foram preenchidos. Recomendamos completá-los antes de gerar o PDF.</p>
-    <div class="err-list" id="ov-quase-list"></div>
-    <div class="modal-actions">
-      <button class="mbtn mbtn-s" onclick="closeModal('ov-quase')">Voltar e preencher</button>
-      <button class="mbtn mbtn-p" id="ov-quase-dl">Gerar mesmo assim</button>
-    </div>
-  </div>
-</div>
-
 <!-- CONFIRM MODAL -->
 <div id="confirm-modal">
   <div class="cm-box">
@@ -569,19 +555,6 @@ window.FICHA_MOBILE_TEL_IDS = ['f_tel_res'];
 window.FICHA_TRANSFER_MUN_SUFS = ['notif','res'];
 window.FICHA_UNIT_IDS = ['f_mun_notif','f_uf_notif','f_ibge_notif','f_nome_un','f_cnes'];
 window.FICHA_HIDDEN_BOXES = ['row_gest'];
-window.FICHA_TRANSFER_FICHAS = [
-  {id:'violencia',   label:'Violência',            sub:'Violência doméstica, sexual e/ou interpessoal',                               url:'sinan_violencia.html',           color:'#1e40af'},
-  {id:'acidente',    label:'Acidente de Trabalho', sub:'Acidentes típicos, de trajeto ou fatais',                                     url:'sinan_acidente.html',            color:'#c2410c'},
-  {id:'acidente_bio',label:'Acidente Biológico',   sub:'Exposição a material biológico',                                              url:'sinan_acidente_biologico.html',  color:'#7c3aed'},
-  {id:'lerdort',     label:'LER/DORT',             sub:'Lesão por esforço repetitivo / DORT',                                         url:'sinan_lerdort.html',             color:'#0f766e'},
-  {id:'transtornos', label:'Transtornos Mentais',  sub:'Transtornos mentais relacionados ao trabalho',                                url:'sinan_transtornos.html',         color:'#4338ca'},
-  {id:'pair',        label:'PAIR',                 sub:'Perda Auditiva Induzida por Ruído',                                           url:'sinan_pair.html',                color:'#2563eb'},
-  {id:'pneumoconioses',label:'Pneumoconioses',     sub:'Pneumoconioses relacionadas ao trabalho',                                     url:'sinan_pneumoconioses.html',      color:'#b45309'},
-  {id:'cancer',      label:'Câncer',               sub:'Câncer relacionado ao trabalho',                                              url:'sinan_cancer.html',              color:'#dc2626'},
-  {id:'dermatoses',  label:'Dermatoses',           sub:'Dermatoses ocupacionais',                                                     url:'sinan_dermatoses.html',          color:'#be185d'},
-  {id:'intoxicacao', label:'Intoxicação Exógena',  sub:'Intoxicação por agentes químicos',                                            url:'sinan_intoxicacao_exogena.html', color:'#b45309'}
-];
-
 /*==========================================================
   PACIENTES FICTÍCIOS
 ==========================================================*/
@@ -650,19 +623,7 @@ window._onPostCarregarPaciente = function(p){
 /*==========================================================
   GERAR PDF
 ==========================================================*/
-async function gerarPDF(force){
-  if(!force){
-    var missing = getMissingEssentials();
-    if(missing.length>0){
-      document.getElementById('ov-quase-list').innerHTML = missing.map(function(e){
-        return '<div class="err-item">\u2b50 '+e+'</div>';
-      }).join('');
-      var dlBtn = document.getElementById('ov-quase-dl');
-      dlBtn.onclick = function(){ closeModal('ov-quase'); gerarPDF(true); };
-      document.getElementById('ov-quase').classList.add('show');
-      return;
-    }
-  }
+async function gerarPDF(){
 
   var btn = document.getElementById('btn-gerar');
   btn.disabled=true;

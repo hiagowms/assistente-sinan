@@ -143,32 +143,26 @@ details.def summary:hover{color:#1a5276}
 
 /* DRAG HANDLE */
 .drag-handle{
-  position:absolute;top:8px;right:8px;width:22px;height:22px;border-radius:5px;
+  position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:6px;
   display:flex;align-items:center;justify-content:center;
-  color:#9ca3af;opacity:0;transition:all .18s;cursor:grab;user-select:none;
+  background:#f0f5fa;color:#4a7a9b;opacity:.85;transition:all .18s;cursor:grab;user-select:none;
+  border:1px solid #dce8f0;
 }
-.card:hover .drag-handle{opacity:1}
-.drag-handle:hover{background:#f0f5fa;color:#4a7a9b}
-.drag-handle:active{cursor:grabbing}
-/* dashed corner — drag affordance */
-.card::after{
-  content:"";position:absolute;top:6px;right:6px;width:26px;height:26px;
-  border-top:1px dashed #c5ddef;border-right:1px dashed #c5ddef;
-  border-top-right-radius:8px;opacity:0;transition:opacity .18s;pointer-events:none;
-}
-.card:hover::after{opacity:1}
+.card:hover .drag-handle{opacity:1;background:#1a5276;color:#fff;border-color:#1a5276;box-shadow:0 2px 6px rgba(26,82,118,.25)}
+.drag-handle:hover{transform:scale(1.08)}
+.drag-handle:active{cursor:grabbing;transform:scale(.95)}
 .card.dragging{opacity:.35;cursor:grabbing}
 .card.drag-over{border-color:#1a5276;box-shadow:0 0 0 2px rgba(26,82,118,.25),0 6px 18px rgba(26,82,118,.12);transform:translateY(-1px)}
-.card.drag-over::after{opacity:0}
 
 /* SECTION HEADER */
-.sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding-left:2px}
+.sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding-left:2px;gap:10px;flex-wrap:wrap}
 .sec-title-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#4a7a9b}
 .sec-drag-hint{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:10.5px;color:#6b7280;font-weight:600;
-  padding:4px 10px;background:#fff;border:1px dashed #c5ddef;border-radius:14px;
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:12px;color:#1a5276;font-weight:700;
+  padding:6px 12px;background:#eef5fa;border:1px solid #c5ddef;border-radius:14px;
 }
+.sec-drag-hint svg{flex-shrink:0}
 
 /* ACTIONS */
 .card-actions{padding:12px 20px 16px;display:flex;flex-direction:column;gap:10px;border-top:1px solid #f0f4f8}
@@ -371,10 +365,10 @@ footer a{color:#1a5276;text-decoration:none}
 [data-theme="dark"] .card-actions{border-top-color:var(--border)}
 [data-theme="dark"] .btn-link{color:#8fb0cc}
 [data-theme="dark"] .btn-link:hover{color:#60a5fa}
-[data-theme="dark"] .drag-handle{color:#6b7280}
-[data-theme="dark"] .drag-handle:hover{background:#222633;color:#8fb0cc}
+[data-theme="dark"] .drag-handle{background:#222633;color:#8fb0cc;border-color:var(--border)}
+[data-theme="dark"] .card:hover .drag-handle{background:#3b82f6;color:#fff;border-color:#3b82f6}
 [data-theme="dark"] .card::after{border-top-color:#2d3348;border-right-color:#2d3348}
-[data-theme="dark"] .sec-drag-hint{background:var(--bg-card);border-color:var(--border);color:var(--text3)}
+[data-theme="dark"] .sec-drag-hint{background:rgba(59,130,246,.12);border-color:rgba(59,130,246,.35);color:#93c5fd}
 [data-theme="dark"] .sec-title-label{color:var(--text3)}
 
 /* Footer */
@@ -450,8 +444,8 @@ function toggleDarkMode(){
   <div class="sec-head">
     <div class="sec-title-label">Agravos disponíveis</div>
     <div class="sec-drag-hint">
-      <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><circle cx="7" cy="5" r="1.3"/><circle cx="13" cy="5" r="1.3"/><circle cx="7" cy="10" r="1.3"/><circle cx="13" cy="10" r="1.3"/><circle cx="7" cy="15" r="1.3"/><circle cx="13" cy="15" r="1.3"/></svg>
-      Arraste os cards para reordenar
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><circle cx="7" cy="5" r="1.3"/><circle cx="13" cy="5" r="1.3"/><circle cx="7" cy="10" r="1.3"/><circle cx="13" cy="10" r="1.3"/><circle cx="7" cy="15" r="1.3"/><circle cx="13" cy="15" r="1.3"/></svg>
+      Arraste o ícone <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor" style="vertical-align:-1px"><circle cx="7" cy="5" r="1.3"/><circle cx="13" cy="5" r="1.3"/><circle cx="7" cy="10" r="1.3"/><circle cx="13" cy="10" r="1.3"/><circle cx="7" cy="15" r="1.3"/><circle cx="13" cy="15" r="1.3"/></svg> para reordenar os cards
     </div>
   </div>
 
