@@ -649,3 +649,27 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 .lock-tipo-warn strong{color:#7f1d1d}
 [data-theme="dark"] .lock-tipo-warn{background:rgba(153,27,27,.18);border-color:#7f1d1d;color:#fca5a5}
 [data-theme="dark"] .lock-tipo-warn strong{color:#fca5a5}
+
+/*==============================================================
+  RECEITA FEDERAL — Painel de extração de CNPJ
+  Usado em fichas DRT (pair, lerdort, transtornos, dermatoses,
+  acidente, acidente_biologico, pneumoconioses, cancer)
+==============================================================*/
+.rf-toggle-btn{background:transparent;border:1.5px dashed var(--border);color:var(--text2);padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;white-space:nowrap;margin-bottom:12px}
+.rf-toggle-btn:hover,.rf-toggle-btn.active{border-color:#2563eb;color:#2563eb;background:rgba(37,99,235,.06);border-style:solid}
+.rf-panel{background:var(--bg-hover);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:16px;display:none}
+.rf-instr{font-size:12px;color:var(--text2);margin:0 0 10px;line-height:1.5}
+.rf-instr kbd{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:11px;font-family:monospace}
+.rf-instr a{color:#2563eb;text-decoration:underline}
+.rf-textarea{width:100%;min-height:90px;resize:vertical;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:12px;font-family:monospace;background:var(--bg-card);color:var(--text);box-sizing:border-box;line-height:1.4}
+.rf-textarea:focus{outline:none;border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.rf-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.rf-cnae-warn{background:#fffbeb;border:1px solid #fbbf24;border-radius:8px;padding:9px 12px;margin-bottom:8px;font-size:12px;color:#92400e;line-height:1.5}
+[data-theme="dark"] .rf-cnae-warn{background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.35);color:#fcd34d}
+.rf-cnae-warn strong{font-weight:700}
+.rf-cnae-warn em{font-style:italic;opacity:.85}
+.rf-cnae-sugs{display:flex;flex-direction:column;gap:5px;margin-top:8px}
+.rf-cnae-sug-item{background:var(--bg-card);border:1.5px solid var(--border);border-radius:7px;padding:7px 11px;cursor:pointer;display:flex;align-items:baseline;gap:10px;transition:border-color .15s}
+.rf-cnae-sug-item:hover{border-color:#2563eb}
+.rf-cnae-sug-code{font-size:12px;font-weight:700;color:#2563eb;white-space:nowrap;flex-shrink:0}
+.rf-cnae-sug-name{font-size:11px;color:var(--text);line-height:1.3}

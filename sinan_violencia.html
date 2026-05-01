@@ -1024,6 +1024,7 @@ function toggleDarkMode(){
 <script src="data/tb_agravo.js"></script>
 <script src="data/tb_ocupacao.js"></script>
 <script src="data/cbo_sinonimos_map.js"></script>
+<script src="data/casos/pacientes_violencia.js"></script>
 <script src="lib/pdf-lib.min.js"></script>
 
 <script>
@@ -1058,50 +1059,6 @@ window.FICHA_MOBILE_TEL_IDS = ['f_tel_res','f_acompanhante_tel'];
 window.FICHA_TRANSFER_MUN_SUFS = ['notif','res'];
 window.FICHA_UNIT_IDS = ['f_mun_notif','f_uf_notif','f_ibge_notif','f_nome_un','f_cnes','f_unidade_tipo','f_unidade_saude_nome','f_unidade_saude_cnes'];
 window.FICHA_HIDDEN_BOXES = ['row_gest','box_deficiencia','box_def_outras','box_local_outro','box_motivacao_outros','box_viol_outras','box_meio_outro','box_violencia_sexual','box_violencia_sexual_nao','box_sexual_outros','box_vinculo_outros'];
-/*==========================================================
-  PACIENTES FICTÍCIOS
-==========================================================*/
-window.FAKE_PATIENTS = [
-  {
-    label: "Mariana Oliveira, 28 anos",
-    sub: "Violência doméstica · agressão física pelo cônjuge · São Paulo/SP",
-    fields: {
-      f_data_notif:"2025-12-10", f_data_ocorrencia:"2025-12-09",
-      f_unidade_tipo:"1", f_nome_un:"HOSPITAL MUNICIPAL", f_cnes:"6123456",
-      f_unidade_saude_nome:"HOSPITAL MUNICIPAL", f_unidade_saude_cnes:"6123456",
-      f_mun_notif:"SAO PAULO", f_uf_notif:"SP", f_ibge_notif:"355030",
-      f_nome:"MARIANA OLIVEIRA SANTOS", f_nome_social:"",
-      f_nasc:"1997-05-20", f_raca:"4", f_escol:"6",
-      f_sus:"706012300000061", f_mae:"ANA OLIVEIRA",
-      f_mun_res:"SAO PAULO", f_uf_res:"SP", f_ibge_res:"355030",
-      f_bairro_res:"VILA PRUDENTE", f_logr_res:"RUA DAS FLORES", f_num_res:"123",
-      f_cep:"03100-000", f_tel_res:"(11) 98765-4321", f_zona_res:"1",
-      f_ocupacao:"VENDEDORA",
-      f_sit_conjugal:"2", f_orient_sexual:"1", f_ident_genero:"8",
-      f_possui_deficiencia:"2",
-      f_mun_ocorrencia:"SAO PAULO", f_uf_ocorrencia:"SP", f_ibge_ocorrencia:"355030",
-      f_bairro_ocorrencia:"VILA PRUDENTE", f_logr_ocorrencia:"RUA DAS FLORES", f_num_ocorrencia:"123",
-      f_zona_ocorrencia:"1", f_hora_ocorrencia:"21:30",
-      f_local_ocorrencia:"01",
-      f_ocorrencia_repetida:"1", f_lesao_autoprovocada:"2",
-      f_motivacao:"01",
-      f_autor_ciclo:"4", f_autor_alcool:"1",
-      f_violencia_trabalho:"2",
-      f_circunstancia_cid:"Y04"
-    },
-    radios: {sexo:"F", gest:"5", raca:"4", sit_conjugal:"2", orient_sexual:"1", ident_genero:"8",
-             possui_deficiencia:"2",
-             zona_res:"1", zona_ocorrencia:"1",
-             ocorrencia_repetida:"1", lesao_autoprovocada:"2",
-             viol_fisica:"1", viol_psicologica:"1", viol_tortura:"2", viol_sexual:"2", viol_trafico:"2", viol_financeira:"2", viol_negligencia:"2", viol_trab_infantil:"2", viol_interv_legal:"2", viol_outras:"2",
-             meio_forca:"1", meio_enforcamento:"2", meio_perfurocortante:"2", meio_contundente:"2", meio_subst_quente:"2", meio_envenenamento:"2", meio_arma_fogo:"2", meio_ameaca:"1", meio_outro:"2",
-             num_envolvidos:"1", autor_sexo:"1",
-             vinculo_conjuge:"1", vinculo_pai:"2", vinculo_mae:"2", vinculo_padrasto:"2", vinculo_madrasta:"2", vinculo_ex_conjuge:"2", vinculo_namorado:"2", vinculo_ex_namorado:"2", vinculo_filho:"2", vinculo_irmao:"2", vinculo_amigo:"2", vinculo_desconhecido:"2", vinculo_cuidador:"2", vinculo_rel_inst:"2", vinculo_patrao:"2", vinculo_policial:"2", vinculo_propria:"2", vinculo_outros:"2",
-             autor_alcool:"1",
-             enc_saude:"1", enc_assist_social:"1", enc_atend_mulher:"1", enc_deleg_mulher:"1",
-             violencia_trabalho:"2", cat:"8"}
-  }
-];
 
 /*==========================================================
   CONDICIONAIS

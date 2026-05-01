@@ -13,16 +13,6 @@
   gtag('config', 'G-XBCCJ6GTG6');
 </script>
 <link rel="stylesheet" href="shared.css">
-<style>
-/* Estilos exclusivos da ficha de Intoxicação Exógena */
-.rf-cnae-warn{background:#fffbeb;border:1px solid #fbbf24;border-radius:8px;padding:9px 12px;margin-bottom:8px;font-size:12px;color:#92400e;line-height:1.5}
-[data-theme="dark"] .rf-cnae-warn{background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.35);color:#fcd34d}
-.rf-cnae-sugs{display:flex;flex-direction:column;gap:5px;margin-top:8px}
-.rf-cnae-sug-item{background:var(--bg-card);border:1.5px solid var(--border);border-radius:7px;padding:7px 11px;cursor:pointer;display:flex;align-items:baseline;gap:10px;transition:border-color .15s}
-.rf-cnae-sug-item:hover{border-color:#2563eb}
-.rf-cnae-sug-code{font-size:12px;font-weight:700;color:#2563eb;white-space:nowrap;flex-shrink:0}
-.rf-cnae-sug-name{font-size:11px;color:var(--text);line-height:1.3}
-</style>
 </head>
 <body>
 <script>
@@ -1092,6 +1082,7 @@ function toggleDarkMode(){
 <script src="data/tb_ocupacao.js"></script>
 <script src="data/cbo_sinonimos_map.js"></script>
 <script src="data/tb_cnae.js"></script>
+<script src="data/casos/pacientes_intoxicacao.js"></script>
 <script src="lib/pdf-lib.min.js"></script>
 
 <script>
@@ -1127,92 +1118,6 @@ window.FICHA_MOBILE_TEL_IDS = ['f_tel_res','f_exposicao_tel'];
 window.FICHA_TRANSFER_MUN_SUFS = ['notif','res'];
 window.FICHA_UNIT_IDS = ['f_mun_notif','f_uf_notif','f_ibge_notif','f_nome_un','f_cnes'];
 window.FICHA_HIDDEN_BOXES = ['row_gest','box_obito','box_sit_mercado_outro','box_local_exposicao_outro','box_grupo_outro','box_agrotoxico','box_agrotoxico_finalidade_outro','box_circunstancia_outra','box_hospitalizacao','box_intoxicacao_confirmada'];
-/*==========================================================
-  PACIENTES FICTÍCIOS
-==========================================================*/
-window.FAKE_PATIENTS = [
-  {
-    label: "Juliana Mendes, 24 anos",
-    sub: "Tentativa de suicídio · medicamento · São Paulo/SP",
-    fields: {
-      f_data_notif:"2025-12-01", f_data_sintomas:"2025-11-30",
-      f_nome_un:"HOSPITAL MUNICIPAL", f_cnes:"6123456",
-      f_mun_notif:"SAO PAULO", f_uf_notif:"SP", f_ibge_notif:"355030",
-      f_nome:"JULIANA MENDES OLIVEIRA", f_nasc:"2001-03-15", f_raca:"1", f_escol:"6",
-      f_sus:"706012300000057", f_mae:"MARIA MENDES",
-      f_mun_res:"SAO PAULO", f_uf_res:"SP", f_ibge_res:"355030",
-      f_bairro_res:"VILA MARIANA", f_logr_res:"RUA DOMINGOS DE MORAIS", f_num_res:"1000",
-      f_cep:"04010-000", f_tel_res:"(11) 99876-1234", f_zona_res:"1",
-      f_ocupacao:"ESTUDANTE",
-      f_sit_mercado:"99",
-      f_local_exposicao:"1",
-      f_grupo_agente:"01",
-      f_agente1_nome:"PARACETAMOL", f_agente1_principio:"PARACETAMOL",
-      f_via_exposicao1:"1",
-      f_circunstancia_exposicao:"10",
-      f_tempo_decorrido_val:"2", f_tempo_decorrido_tipo:"1",
-      f_tipo_atendimento:"1",
-      f_hospitalizacao:"1",
-      f_data_internacao:"2025-11-30", f_atend_uf:"SP", f_mun_hosp:"SAO PAULO", f_mun_hosp_ibge:"355030",
-      f_unidade_saude_nome:"HOSPITAL MUNICIPAL", f_unidade_saude_cnes:"6123456",
-      f_classificacao_final:"1",
-      f_diag_texto:"INTOXICACAO AGUDA POR PARACETAMOL",
-      f_diag_cid:"T39.1",
-      f_criterio_confirmacao:"1",
-      f_evolucao:"1",
-      f_cat:"3",
-      f_data_encerramento:"2025-12-02"
-    },
-    radios: {sexo:"F", gest:"5", raca:"1",
-             exposicao_zona:"1",
-             exposicao_trabalho:"2", tipo_exposicao:"1",
-             tempo_decorrido_tipo:"1", tipo_atendimento:"1", hospitalizacao:"1",
-             cat:"3"}
-  },
-  {
-    label: "Antônio Carlos, 52 anos",
-    sub: "Intoxicação ocupacional · agrotóxico · Rio Verde/GO",
-    fields: {
-      f_data_notif:"2025-12-03", f_data_sintomas:"2025-12-02",
-      f_nome_un:"UPA RIO VERDE", f_cnes:"5212345",
-      f_mun_notif:"RIO VERDE", f_uf_notif:"GO", f_ibge_notif:"521880",
-      f_nome:"ANTONIO CARLOS DA SILVA", f_nasc:"1973-08-10", f_raca:"4", f_escol:"2",
-      f_sus:"706012300000058", f_mae:"JOSEFA SILVA",
-      f_mun_res:"RIO VERDE", f_uf_res:"GO", f_ibge_res:"521880",
-      f_bairro_res:"CENTRO", f_logr_res:"RUA DA LAVOURA", f_num_res:"500",
-      f_cep:"75900-000", f_tel_res:"(64) 99876-4321", f_zona_res:"2",
-      f_data_investigacao:"2025-12-03",
-      f_ocupacao:"TRABALHADOR RURAL",
-      f_sit_mercado:"01",
-      f_local_exposicao:"2",
-      f_exposicao_nome_local:"FAZENDA BOA ESPERANCA",
-      f_exposicao_cnae:"0151201",
-      f_exposicao_uf:"GO", f_exposicao_mun:"RIO VERDE", f_exposicao_ibge:"521880",
-      f_grupo_agente:"02",
-      f_agente1_nome:"ROUNDUP", f_agente1_principio:"GLIFOSATO",
-      f_agrotoxico_finalidade:"2",
-      f_agrotoxico_atividade1:"02",
-      f_agrotoxico_cultura:"SOJA",
-      f_via_exposicao1:"2", f_via_exposicao2:"3",
-      f_circunstancia_exposicao:"01",
-      f_tempo_decorrido_val:"6", f_tempo_decorrido_tipo:"1",
-      f_tipo_atendimento:"1",
-      f_hospitalizacao:"2",
-      f_classificacao_final:"1",
-      f_diag_texto:"INTOXICACAO POR GLIFOSATO",
-      f_diag_cid:"T60.0",
-      f_criterio_confirmacao:"2",
-      f_evolucao:"1",
-      f_cat:"1",
-      f_data_encerramento:"2025-12-05"
-    },
-    radios: {sexo:"M", raca:"4",
-             exposicao_zona:"2",
-             exposicao_trabalho:"1", tipo_exposicao:"1",
-             tempo_decorrido_tipo:"1", tipo_atendimento:"1", hospitalizacao:"2",
-             cat:"1"}
-  }
-];
 
 /*==========================================================
   CONDICIONAIS

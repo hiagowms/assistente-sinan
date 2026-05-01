@@ -522,6 +522,7 @@ function toggleDarkMode(){
 <script src="data/tb_regiao.js"></script>
 <script src="data/tb_uf.js"></script>
 <script src="data/tb_municipios.js"></script>
+<script src="data/casos/pacientes_voz.js"></script>
 <script src="lib/pdf-lib.min.js"></script>
 
 <script>
@@ -555,47 +556,6 @@ window.FICHA_MOBILE_TEL_IDS = ['f_tel_res'];
 window.FICHA_TRANSFER_MUN_SUFS = ['notif','res'];
 window.FICHA_UNIT_IDS = ['f_mun_notif','f_uf_notif','f_ibge_notif','f_nome_un','f_cnes'];
 window.FICHA_HIDDEN_BOXES = ['row_gest'];
-/*==========================================================
-  PACIENTES FICTÍCIOS
-==========================================================*/
-window.FAKE_PATIENTS = [
-  {
-    label: "Carla Mendes, 34 anos",
-    sub: "Disfonia · professora · São Paulo/SP",
-    fields: {
-      f_data_notif:"2025-12-05", f_data_sintomas:"2025-09-15",
-      f_nome_un:"CEREST CENTRO", f_cnes:"6123456",
-      f_mun_notif:"SAO PAULO", f_uf_notif:"SP", f_ibge_notif:"355030",
-      f_nome:"CARLA MENDES OLIVEIRA", f_nasc:"1991-04-10", f_raca:"1", f_escol:"8",
-      f_sus:"706012300000059", f_mae:"MARIA MENDES",
-      f_mun_res:"SAO PAULO", f_uf_res:"SP", f_ibge_res:"355030",
-      f_bairro_res:"VILA MARIANA", f_logr_res:"RUA DOMINGOS DE MORAIS", f_num_res:"1500",
-      f_cep:"04010-000", f_tel_res:"(11) 99876-1234", f_zona_res:"1",
-      f_notif_mun:"SAO PAULO", f_notif_uf:"SP", f_notif_ibge:"355030",
-      f_notif_nome:"DRA. FERNANDA LIMA", f_notif_funcao:"MÉDICA DO TRABALHO",
-      f_obs:"PROFESSORA DO ENSINO FUNDAMENTAL. TRABALHA EM SALA DE AULA COM 35 ALUNOS, 6 HORAS/DIA, COM USO INTENSO DA VOZ. REFERE ROUQUIDÃO PROGRESSIVA HÁ 6 MESES, SEM OUTROS SINTOMAS. AVALIAÇÃO OTORRINOLARINGOLÓGICA EVIDENCIOU FENDA GLÓTICA TRIANGULAR POSTERIOR E NÓDULOS VOCAIS BILATERAIS. AFASTADA POR 30 DIAS PARA FONOTERAPIA."
-    },
-    radios: {sexo:"F", gest:"5", raca:"1", zona_res:"1"}
-  },
-  {
-    label: "Marcos Vinícius, 45 anos",
-    sub: "Disfonia · operador de telemarketing · Belo Horizonte/MG",
-    fields: {
-      f_data_notif:"2025-12-06", f_data_sintomas:"2025-08-01",
-      f_nome_un:"CEREST BH", f_cnes:"3140070",
-      f_mun_notif:"BELO HORIZONTE", f_uf_notif:"MG", f_ibge_notif:"310620",
-      f_nome:"MARCOS VINICIUS SANTOS", f_nasc:"1980-06-20", f_raca:"4", f_escol:"6",
-      f_sus:"706012300000060", f_mae:"ANA SANTOS",
-      f_mun_res:"BELO HORIZONTE", f_uf_res:"MG", f_ibge_res:"310620",
-      f_bairro_res:"CENTRO", f_logr_res:"AVENIDA AFONSO PENA", f_num_res:"2000",
-      f_cep:"30100-000", f_tel_res:"(31) 98765-4321", f_zona_res:"1",
-      f_notif_mun:"BELO HORIZONTE", f_notif_uf:"MG", f_notif_ibge:"310620",
-      f_notif_nome:"DR. PEDRO HENRIQUE", f_notif_funcao:"FONOAUDIÓLOGO",
-      f_obs:"OPERADOR DE TELEMARKETING, JORNADA 6 HORAS/DIA COM PAUSAS PROGRAMADAS. REFERE ROUQUIDÃO E FADIGA VOCAL DESDE HÁ 4 MESES. NEGA TABAGISMO. VIDEOLARINGOSCOPIA EVIDENCIOU HIPEREMIA DE PREGAS VOCAIS E FENDA FUSIFORME. DIAGNÓSTICO: DISFONIA FUNCIONAL."
-    },
-    radios: {sexo:"M", raca:"4", zona_res:"1"}
-  }
-];
 
 /*==========================================================
   CONDICIONAIS

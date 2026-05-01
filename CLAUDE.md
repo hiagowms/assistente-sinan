@@ -13,10 +13,12 @@ sinan_acidente.html         — Assistente: Acidente de Trabalho Grave
 sinan_lerdort.html          — Assistente: LER/DORT
 sinan_transtornos.html      — Assistente: Transtornos Mentais Relacionados ao Trabalho
 sinan_pair.html             — Assistente: PAIR (Perda Auditiva Induzida por Ruído)
-shared.css                  — CSS compartilhado (sinan_pair.html + sinan_violencia.html)
-shared.js                   — JS compartilhado (sinan_pair.html + sinan_violencia.html)
+shared.css                  — CSS compartilhado por todas as fichas
+shared.js                   — JS compartilhado por todas as fichas
+rf_parser.js                — Motor de extração da Receita Federal (CNPJ → empresa) das fichas DRT
 fichas/                     — PDFs editáveis (AcroForms) das fichas DRT/SINAN
 data/                       — Tabelas de referência SINAN (JS): municípios, UFs, CBO, CNAE, agravos
+data/casos/                 — Casos didáticos (pacientes fictícios) por ficha — definem `window.FAKE_PATIENTS`
 lib/                        — Bibliotecas locais: pdf-lib (gerar PDF), pdf.js (ler PDF)
 assets/img/                 — Logos PET-Saúde
 ```
@@ -30,12 +32,16 @@ assets/img/                 — Logos PET-Saúde
 - **Dark mode** — toggle no header com persistência via `localStorage('sinan-theme')`.
 - **Responsivo** — layout mobile-first com breakpoint `768px`.
 
-### Arquivos shared (shared.css + shared.js)
+### Arquivos shared (shared.css + shared.js + rf_parser.js)
 
-`sinan_pair.html` e `sinan_violencia.html` foram refatorados para extrair o boilerplate (~70-80% do código) em dois arquivos externos:
+Todas as fichas (`sinan_*.html`) usam `shared.css` e `shared.js` para extrair o boilerplate (~70-80% do código) em arquivos externos:
 
-- **`shared.css`** — CSS comum: reset, header, progress bar, tools bar, botões, layout de seções, formulários, pills, info boxes, toast, modais de validação, autocomplete, tooltips, barra mobile, dark mode, botão de transferência, lock-grp, `.lock-tipo-warn`.
+- **`shared.css`** — CSS comum: reset, header, progress bar, tools bar, botões, layout de seções, formulários, pills, info boxes, toast, modais de validação, autocomplete, tooltips, barra mobile, dark mode, botão de transferência, lock-grp, `.lock-tipo-warn`, painel da Receita Federal (`.rf-*`).
 - **`shared.js`** — JS comum: caps lock, pill toggle, sync pill↔hidden, UF selects, autocomplete (municípios, CID-10, CNAE, CBO+sinônimos), auto-idade, modais, toast, progress+gamification, validação, helpers, menu de pacientes fictícios, _setField/_clearForm/carregarPaciente, exportar/importar, tipToggle, transferência de dados entre fichas, mobile sync, sessionStorage import, cadeado unidade notificadora.
+- **`rf_parser.js`** — Motor de extração do "Comprovante de Inscrição e de Situação Cadastral" da Receita Federal/REDESIM. Tem **duas camadas**:
+  - **Parser genérico** (sempre disponível): `window.RFParser.parse(text) → Object` com todos os campos do comprovante (`cnpj`, `matrizFilial`, `dataAbertura`, `nomeEmpresarial`, `nomeFantasia`, `porte`, `cnaePrincipal {codigo,descricao}`, `cnaesSecundarios []`, `naturezaJuridica {codigo,descricao}`, `endereco {logradouro,numero,complemento,cep,bairro,municipio,uf}`, `email`, `telefone`, `efr`, `situacaoCadastral`, `dataSituacaoCadastral`, `motivoSituacaoCadastral`, `situacaoEspecial`, `dataSituacaoEspecial`). Sem dependência de DOM nem do SINAN — reutilizável em qualquer projeto. Trata máscaras `********`, `*****`, `Não informada`, listas multi-linha de CNAEs secundários, MATRIZ/FILIAL e formatação de CEP/telefone/UF.
+  - **Integração SINAN** (somente se `#rf-panel` existir): `window.rfTogglePanel`, `window.rfExtrair`, `window.rfSelectCnaeSug`, `window.sinanCnaeVal`. Usada nas fichas DRT (pair, lerdort, transtornos, dermatoses, acidente, acidente_biologico, pneumoconioses, cancer). Depende de `shared.js` (helpers `_setField`, `showToast`, `updateProgress`, `normCnae`) e das tabelas `SINAN_CNAES` e `SINAN_MUNICIPIOS`. Mantém aliases legados (`razaoSocial`, `cnaeCode`, `ramoAtividade`) para compatibilidade.
+  - Validação: amostras reais ficam em `cnpj_teste/` (no `.gitignore`). Não comprometer essa pasta.
 
 #### Interface de configuração (window globals)
 
@@ -80,7 +86,9 @@ Cada ficha que usa shared.js deve definir os seguintes globals **antes** de `<sc
   window._applyVisibility = function(){ ... };
   async function gerarPDF(){ ... }
 </script>
-<!-- 4. shared.js (após os globals estarem definidos) -->
+<!-- 4. rf_parser.js (apenas fichas DRT que têm o painel da Receita Federal) -->
+<script src="rf_parser.js"></script>
+<!-- 5. shared.js (após os globals estarem definidos) -->
 <script src="shared.js"></script>
 ```
 
@@ -90,14 +98,14 @@ O bloco `<script>` de dark mode (que aplica o tema antes do primeiro paint) deve
 
 #### CSS inline em fichas com shared.js
 
-Apenas CSS **exclusivo da ficha** (ex: painel RF em sinan_pair.html) deve ficar em `<style>` inline. O restante vem de `shared.css`.
+Apenas CSS **exclusivo da ficha** deve ficar em `<style>` inline. O restante vem de `shared.css`. As fichas atuais não possuem CSS inline (todas as regras estão em `shared.css`, incluindo as do painel da Receita Federal).
 
 ## Convenções
 
 - **Idioma**: todo HTML, labels, placeholders e comentários em **português brasileiro**.
 - **Commits**: em português, prefixo convencional (`feat:`, `fix:`, `refactor:`, `ui:`, `revert:`).
-- **CSS**: inline em `<style>` dentro de cada HTML, **exceto** `sinan_pair.html` e `sinan_violencia.html` que usam `shared.css` (+ CSS inline somente para estilos exclusivos da ficha).
-- **JS**: inline em `<script>` ao final do `<body>`, **exceto** `sinan_pair.html` e `sinan_violencia.html` que usam `shared.js` (+ script inline apenas para configuração da ficha).
+- **CSS**: todas as fichas carregam `shared.css`. CSS inline somente para estilos exclusivos da ficha quando estritamente necessário.
+- **JS**: todas as fichas carregam `shared.js` (e `rf_parser.js` quando há painel da Receita Federal). Cada ficha define seu `gerarPDF()` e seus globals de configuração inline antes de `<script src="shared.js">`.
 - **Inputs SINAN**: campos com `data-caps` forçam uppercase e removem acentos (padrão SINAN NET).
 - **IDs de campo**: prefixo `f_` (ex: `f_nome`, `f_dt_nasc`, `f_ibge_notif`).
 - **Nomes AcroForm**: os nomes dos campos no PDF editável devem ser descritivos (ex: `paciente_nome`, `empresa_razao_social`).

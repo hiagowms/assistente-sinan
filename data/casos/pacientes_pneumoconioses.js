@@ -1,0 +1,88 @@
+// SINAN -- Pacientes fictícios -- Pneumoconioses
+// Casos didáticos para a ficha sinan_pneumoconioses.html
+window.FAKE_PATIENTS = [
+  {
+    label: "João Mineiro, 58 anos",
+    sub: "Silicose · mineiro de subsolo · Nova Lima/MG",
+    fields: {
+      f_data_notif:"2025-11-10", f_data_diag:"2025-11-02",
+      f_nome_un:"CEREST BELO HORIZONTE", f_cnes:"3123456",
+      f_mun_notif:"NOVA LIMA", f_uf_notif:"MG", f_ibge_notif:"314480",
+      f_nome:"JOAO MINEIRO DA SILVA", f_nasc:"1967-09-15", f_raca:"4", f_escol:"2",
+      f_sus:"706012300000045", f_mae:"MARIA MINEIRA",
+      f_mun_res:"NOVA LIMA", f_uf_res:"MG", f_ibge_res:"314480",
+      f_bairro_res:"CENTRO", f_logr_res:"RUA DO OURO", f_num_res:"100",
+      f_cep:"34000-000", f_tel_res:"(31) 99887-6543", f_zona_res:"1",
+      f_ocupacao:"MINEIRO",
+      f_sit_mercado:"01", f_tempo_trab_val:"28", f_tempo_trab_tipo:"4",
+      f_emp_nome:"MINERACAO MORRO VELHO LTDA", f_emp_cnae:"0710301",
+      f_emp_uf:"MG", f_emp_mun:"NOVA LIMA",
+      f_diag_cid:"J62.8",
+      f_tempo_exp_val:"30", f_tempo_exp_tipo:"4"
+    },
+    radios: {sexo:"M", regime:"2", vinculos_distintos:"2",
+             agravo_limitacao_fluxo:"1", agravo_tuberculose:"2", agravo_cancer:"2", agravo_artrite:"2", agravo_tireoidite:"2", agravo_outras:"2",
+             exposicao_silica:"1", exposicao_asbesto:"2", exposicao_poeiras_carvao:"2", exposicao_poeiras_mistas:"1", exposicao_metais_duros:"2", exposicao_poeiras_abrasivos:"2", exposicao_berilio:"2", exposicao_poeiras_organicas:"2",
+             hab_fumar:"1", tempo_tabaco_tipo:"4",
+             conf_radio:"1", conf_biopsia:"2", conf_tomografia:"1", conf_outro:"2",
+             outros_trab:"1", avaliacao_funcional:"1", resultado_avaliacao:"2",
+             conduta_afastamento_risco:"1", conduta_mudanca_organizacao:"2", conduta_protecao_coletiva:"1", conduta_afastamento_local:"2", conduta_protecao_individual:"1", conduta_nenhum:"2", conduta_outros:"2",
+             evolucao:"4", cat:"1"}
+  },
+  {
+    label: "Antônio Cerâmico, 52 anos",
+    sub: "Asbestose · forneiro em fábrica de revestimentos · Criciúma/SC",
+    fields: {
+      f_data_notif:"2025-12-01", f_data_diag:"2025-11-28",
+      f_nome_un:"CEREST CRICIUMA", f_cnes:"4234567",
+      f_mun_notif:"CRICIUMA", f_uf_notif:"SC", f_ibge_notif:"420460",
+      f_nome:"ANTONIO CERAMICO DE SOUZA", f_nasc:"1973-04-22", f_raca:"2", f_escol:"3",
+      f_sus:"706012300000046", f_mae:"JOSEFA CERAMICA",
+      f_mun_res:"CRICIUMA", f_uf_res:"SC", f_ibge_res:"420460",
+      f_bairro_res:"RIO MAINA", f_logr_res:"RUA DAS CERAMICAS", f_num_res:"350",
+      f_cep:"88800-000", f_tel_res:"(48) 99665-3322", f_zona_res:"1",
+      f_ocupacao:"FORNEIRO (MATERIAIS DE CONSTRUCAO)",
+      f_sit_mercado:"01", f_tempo_trab_val:"18", f_tempo_trab_tipo:"4",
+      f_emp_nome:"CERAMICA ELIZABETH SUL LTDA", f_emp_cnae:"2341900",
+      f_emp_uf:"SC", f_emp_mun:"CRICIUMA",
+      f_diag_cid:"J61",
+      f_tempo_exp_val:"20", f_tempo_exp_tipo:"4"
+    },
+    radios: {sexo:"M", regime:"2", vinculos_distintos:"1",
+             agravo_limitacao_fluxo:"1", agravo_tuberculose:"2", agravo_cancer:"2", agravo_artrite:"2", agravo_tireoidite:"2", agravo_outras:"2",
+             exposicao_silica:"2", exposicao_asbesto:"1", exposicao_poeiras_carvao:"2", exposicao_poeiras_mistas:"2", exposicao_metais_duros:"2", exposicao_poeiras_abrasivos:"2", exposicao_berilio:"2", exposicao_poeiras_organicas:"2",
+             hab_fumar:"2",
+             conf_radio:"1", conf_biopsia:"1", conf_tomografia:"1", conf_outro:"2",
+             outros_trab:"1", avaliacao_funcional:"1", resultado_avaliacao:"2",
+             conduta_afastamento_risco:"1", conduta_mudanca_organizacao:"2", conduta_protecao_coletiva:"1", conduta_afastamento_local:"2", conduta_protecao_individual:"1", conduta_nenhum:"2", conduta_outros:"2",
+             evolucao:"3", cat:"1"}
+  },
+  {
+    label: "Davi Antunes, 48 anos",
+    sub: "Silicose acelerada · garimpeiro de ouro · Itaituba/PA",
+    fields: {
+      f_data_notif:"2026-03-25", f_data_diag:"2026-03-18",
+      f_nome_un:"CEREST PARA", f_cnes:"1500125",
+      f_mun_notif:"ITAITUBA", f_uf_notif:"PA", f_ibge_notif:"150420",
+      f_nome:"DAVI ANTUNES DOS SANTOS", f_nasc:"1977-08-04", f_raca:"4", f_escol:"1",
+      f_sus:"706012300000701", f_mae:"BENEDITA ANTUNES",
+      f_mun_res:"ITAITUBA", f_uf_res:"PA", f_ibge_res:"150420",
+      f_bairro_res:"BELA VISTA", f_logr_res:"RUA DA AMAZONIA", f_num_res:"54",
+      f_cep:"68180-000", f_tel_res:"(93) 98112-3344", f_zona_res:"2",
+      f_ocupacao:"GARIMPEIRO",
+      f_sit_mercado:"03", f_tempo_trab_val:"22", f_tempo_trab_tipo:"4",
+      f_emp_nome:"AUTONOMO GARIMPO ARTESANAL",
+      f_emp_uf:"PA", f_emp_mun:"ITAITUBA",
+      f_diag_cid:"J62.8",
+      f_tempo_exp_val:"22", f_tempo_exp_tipo:"4"
+    },
+    radios: {sexo:"M", regime:"2", vinculos_distintos:"1",
+             agravo_limitacao_fluxo:"1", agravo_tuberculose:"1", agravo_cancer:"2", agravo_artrite:"2", agravo_tireoidite:"2", agravo_outras:"2",
+             exposicao_silica:"1", exposicao_asbesto:"2", exposicao_poeiras_carvao:"2", exposicao_poeiras_mistas:"1", exposicao_metais_duros:"2", exposicao_poeiras_abrasivos:"2", exposicao_berilio:"2", exposicao_poeiras_organicas:"2",
+             hab_fumar:"1", tempo_tabaco_tipo:"4",
+             conf_radio:"1", conf_biopsia:"2", conf_tomografia:"1", conf_outro:"2",
+             outros_trab:"2", avaliacao_funcional:"1", resultado_avaliacao:"2",
+             conduta_afastamento_risco:"1", conduta_mudanca_organizacao:"2", conduta_protecao_coletiva:"2", conduta_afastamento_local:"1", conduta_protecao_individual:"1", conduta_nenhum:"2", conduta_outros:"2",
+             evolucao:"3", cat:"1"}
+  }
+];

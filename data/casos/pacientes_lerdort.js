@@ -1,0 +1,91 @@
+// SINAN -- Pacientes fictícios -- LER/DORT
+// Casos didáticos para a ficha sinan_lerdort.html
+window.FAKE_PATIENTS = [
+  {
+    label: "Mariana Souza, 34 anos",
+    sub: "LER/DORT em punho · digitadora · São Paulo/SP",
+    fields: {
+      f_data_notif:"2025-10-14", f_data_diag:"2025-10-08",
+      f_nome_un:"CEREST CENTRO", f_cnes:"6123456",
+      f_mun_notif:"SAO PAULO", f_uf_notif:"SP", f_ibge_notif:"355030",
+      f_nome:"MARIANA SOUZA LIMA", f_nasc:"1991-05-20", f_raca:"1", f_escol:"6",
+      f_sus:"706012300000047", f_mae:"APARECIDA SOUZA",
+      f_mun_res:"SAO PAULO", f_uf_res:"SP", f_ibge_res:"355030",
+      f_bairro_res:"VILA MARIANA", f_logr_res:"RUA DOMINGOS DE MORAIS", f_num_res:"2100",
+      f_cep:"04010-000", f_tel_res:"(11) 99876-5432", f_zona_res:"1",
+      f_ocupacao:"DIGITADOR",
+      f_sit_mercado:"01", f_tempo_trab_val:"8", f_tempo_trab_tipo:"4",
+      f_emp_nome:"EMPRESA DE TECNOLOGIA SA", f_emp_cnae:"6201500",
+      f_emp_uf:"SP", f_emp_mun:"SAO PAULO",
+      f_diag_cid:"M75.1",
+      f_tempo_exp_val:"8", f_tempo_exp_tipo:"4"
+    },
+    radios: {sexo:"F", regime:"2",
+             agravo_hipertensao:"2", agravo_diabetes:"2", agravo_hanseniase:"2", agravo_transtorno_mental:"2", agravo_tuberculose:"2", agravo_asma:"2", agravo_outras:"2",
+             sintoma_alteracao_sensibilidade:"1", sintoma_diminuicao_forca:"1", sintoma_diminuicao_movimento:"2", sintoma_limitacao_movimentos:"1", sintoma_sinais_flogisticos:"2", sintoma_dor:"1", sintoma_outro:"2",
+             limitacao_incapacidade:"1",
+             exposicao_premios_producao:"2", exposicao_movimentos_repetitivos:"1", exposicao_ambiente_estressante:"1", exposicao_tempo_pausas:"1", exposicao_jornada_6h:"1",
+             afastamento_trat:"1", tempo_afast_tipo:"4", afastamento_result:"1",
+             outros_trab:"1",
+             conduta_afastamento_risco:"1", conduta_mudanca_organizacao:"1", conduta_protecao_coletiva:"2", conduta_afastamento_local:"2", conduta_protecao_individual:"1", conduta_nenhum:"2", conduta_outros:"2",
+             evolucao:"3", cat:"1"}
+  },
+  {
+    label: "Carlos Henrique, 45 anos",
+    sub: "LER/DORT em ombro · montador de estruturas metálicas · Curitiba/PR",
+    fields: {
+      f_data_notif:"2025-11-05", f_data_diag:"2025-10-30",
+      f_nome_un:"CEREST CURITIBA", f_cnes:"4123456",
+      f_mun_notif:"CURITIBA", f_uf_notif:"PR", f_ibge_notif:"410690",
+      f_nome:"CARLOS HENRIQUE OLIVEIRA", f_nasc:"1980-02-14", f_raca:"2", f_escol:"5",
+      f_sus:"706012300000048", f_mae:"MARIA OLIVEIRA",
+      f_mun_res:"CURITIBA", f_uf_res:"PR", f_ibge_res:"410690",
+      f_bairro_res:"BOQUEIRAO", f_logr_res:"AVENIDA MARECHAL FLORIANO", f_num_res:"3200",
+      f_cep:"80000-000", f_tel_res:"(41) 98765-4321", f_zona_res:"1",
+      f_ocupacao:"MONTADOR DE ESTRUTURAS METALICAS",
+      f_sit_mercado:"01", f_tempo_trab_val:"12", f_tempo_trab_tipo:"4",
+      f_emp_nome:"INDUSTRIA AUTOMOTIVA PARANAENSE LTDA", f_emp_cnae:"2910701",
+      f_emp_uf:"PR", f_emp_mun:"CURITIBA",
+      f_diag_cid:"M75.4",
+      f_tempo_exp_val:"12", f_tempo_exp_tipo:"4"
+    },
+    radios: {sexo:"M", regime:"2",
+             agravo_hipertensao:"1", agravo_diabetes:"2", agravo_hanseniase:"2", agravo_transtorno_mental:"2", agravo_tuberculose:"2", agravo_asma:"2", agravo_outras:"2",
+             sintoma_alteracao_sensibilidade:"2", sintoma_diminuicao_forca:"1", sintoma_diminuicao_movimento:"1", sintoma_limitacao_movimentos:"1", sintoma_sinais_flogisticos:"2", sintoma_dor:"1", sintoma_outro:"2",
+             limitacao_incapacidade:"1",
+             exposicao_premios_producao:"1", exposicao_movimentos_repetitivos:"1", exposicao_ambiente_estressante:"1", exposicao_tempo_pausas:"1", exposicao_jornada_6h:"1",
+             afastamento_trat:"1", tempo_afast_tipo:"3", afastamento_result:"1",
+             outros_trab:"1",
+             conduta_afastamento_risco:"1", conduta_mudanca_organizacao:"1", conduta_protecao_coletiva:"1", conduta_afastamento_local:"2", conduta_protecao_individual:"1", conduta_nenhum:"2", conduta_outros:"2",
+             evolucao:"3", cat:"1"}
+  },
+  {
+    label: "Lucas Pereira, 27 anos",
+    sub: "Tendinite punho/cotovelo · entregador motociclista de aplicativo · Recife/PE",
+    fields: {
+      f_data_notif:"2026-03-12", f_data_diag:"2026-03-08",
+      f_nome_un:"CEREST METROPOLITANO RECIFE", f_cnes:"3140070",
+      f_mun_notif:"RECIFE", f_uf_notif:"PE", f_ibge_notif:"261160",
+      f_nome:"LUCAS PEREIRA DA CONCEICAO", f_nasc:"1998-07-22", f_raca:"4", f_escol:"6",
+      f_sus:"706012300000301", f_mae:"JOANA PEREIRA",
+      f_mun_res:"RECIFE", f_uf_res:"PE", f_ibge_res:"261160",
+      f_bairro_res:"BOA VIAGEM", f_logr_res:"RUA BARAO DE SOUZA LEAO", f_num_res:"450",
+      f_cep:"51030-300", f_tel_res:"(81) 98712-3344", f_zona_res:"1",
+      f_ocupacao:"MOTOCICLISTA NO TRANSPORTE DE DOCUMENTOS E PEQUENOS VOLUMES",
+      f_sit_mercado:"03", f_tempo_trab_val:"3", f_tempo_trab_tipo:"4",
+      f_emp_nome:"AUTONOMO PLATAFORMA DE ENTREGAS",
+      f_emp_uf:"PE", f_emp_mun:"RECIFE",
+      f_diag_cid:"M77.9",
+      f_tempo_exp_val:"3", f_tempo_exp_tipo:"4"
+    },
+    radios: {sexo:"M", regime:"2",
+             agravo_hipertensao:"2", agravo_diabetes:"2", agravo_hanseniase:"2", agravo_transtorno_mental:"2", agravo_tuberculose:"2", agravo_asma:"2", agravo_outras:"2",
+             sintoma_alteracao_sensibilidade:"1", sintoma_diminuicao_forca:"1", sintoma_diminuicao_movimento:"1", sintoma_limitacao_movimentos:"1", sintoma_sinais_flogisticos:"1", sintoma_dor:"1", sintoma_outro:"2",
+             limitacao_incapacidade:"1",
+             exposicao_premios_producao:"1", exposicao_movimentos_repetitivos:"1", exposicao_ambiente_estressante:"1", exposicao_tempo_pausas:"1", exposicao_jornada_6h:"2",
+             afastamento_trat:"2",
+             outros_trab:"1",
+             conduta_afastamento_risco:"2", conduta_mudanca_organizacao:"2", conduta_protecao_coletiva:"2", conduta_afastamento_local:"2", conduta_protecao_individual:"1", conduta_nenhum:"1", conduta_outros:"2",
+             evolucao:"1", cat:"2"}
+  }
+];

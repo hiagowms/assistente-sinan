@@ -13,26 +13,6 @@
   gtag('config', 'G-XBCCJ6GTG6');
 </script>
 <link rel="stylesheet" href="shared.css">
-<style>
-/* Estilos exclusivos da ficha de Acidente de Trabalho */
-.rf-toggle-btn{background:transparent;border:1.5px dashed var(--border);color:var(--text2);padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s;white-space:nowrap;margin-bottom:12px}
-.rf-toggle-btn:hover,.rf-toggle-btn.active{border-color:#2563eb;color:#2563eb;background:rgba(37,99,235,.06);border-style:solid}
-.rf-panel{background:var(--bg-hover);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:16px;display:none}
-.rf-instr{font-size:12px;color:var(--text2);margin:0 0 10px;line-height:1.5}
-.rf-instr kbd{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:11px;font-family:monospace}
-.rf-textarea{width:100%;min-height:90px;resize:vertical;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:12px;font-family:monospace;background:var(--bg-card);color:var(--text);box-sizing:border-box;line-height:1.4}
-.rf-textarea:focus{outline:none;border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
-.rf-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
-.rf-cnae-warn{background:#fffbeb;border:1px solid #fbbf24;border-radius:8px;padding:9px 12px;margin-bottom:8px;font-size:12px;color:#92400e;line-height:1.5}
-[data-theme="dark"] .rf-cnae-warn{background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.35);color:#fcd34d}
-.rf-cnae-warn strong{font-weight:700}
-.rf-cnae-sugs{display:flex;flex-direction:column;gap:5px;margin-top:8px}
-.rf-cnae-sug-item{background:var(--bg-card);border:1.5px solid var(--border);border-radius:7px;padding:7px 11px;cursor:pointer;display:flex;align-items:baseline;gap:10px;transition:border-color .15s}
-.rf-cnae-sug-item:hover{border-color:#2563eb}
-.rf-cnae-sug-code{font-size:12px;font-weight:700;color:#2563eb;white-space:nowrap;flex-shrink:0}
-.rf-cnae-sug-name{font-size:11px;color:var(--text);line-height:1.3}
-.rf-instr a{color:#2563eb;text-decoration:underline}
-</style>
 </head>
 <body>
 <script>
@@ -960,6 +940,7 @@ function toggleDarkMode(){
 <script src="data/tb_ocupacao.js"></script>
 <script src="data/cbo_sinonimos_map.js"></script>
 <script src="data/tb_cnae.js"></script>
+<script src="data/casos/pacientes_acidente.js"></script>
 <script src="lib/pdf-lib.min.js"></script>
 
 <script>
@@ -997,81 +978,6 @@ window.FICHA_MOBILE_TEL_IDS = ['f_tel_res','f_emp_tel'];
 window.FICHA_TRANSFER_MUN_SUFS = ['notif','res'];
 window.FICHA_UNIT_IDS = ['f_mun_notif','f_uf_notif','f_ibge_notif','f_nome_un','f_cnes'];
 window.FICHA_HIDDEN_BOXES = ['row_gest','box_obito','box_emp_terc','box_atendimento','box_outros_quantos'];
-/*==========================================================
-  PACIENTES FICTÍCIOS
-==========================================================*/
-window.FAKE_PATIENTS = [
-  {
-    label: "João da Silva, 32 anos",
-    sub: "Acidente típico · queda de altura · construção civil · São Paulo/SP",
-    fields: {
-      f_data_notif:"2025-11-10", f_data_acidente:"2025-11-09",
-      f_nome_un:"HOSPITAL MUNICIPAL", f_cnes:"6123456",
-      f_mun_notif:"SAO PAULO", f_uf_notif:"SP", f_ibge_notif:"355030",
-      f_nome:"JOAO DA SILVA", f_nasc:"1993-05-15", f_raca:"4", f_escol:"5",
-      f_sus:"706012300000049", f_mae:"MARIA DA SILVA",
-      f_mun_res:"SAO PAULO", f_uf_res:"SP", f_ibge_res:"355030",
-      f_bairro_res:"VILA PRUDENTE", f_logr_res:"RUA DOS TRABALHADORES", f_num_res:"100",
-      f_cep:"03100-000", f_tel_res:"(11) 99876-5432", f_zona_res:"1",
-      f_ocupacao:"PEDREIRO",
-      f_sit_mercado:"01", f_tempo_trab_val:"8", f_tempo_trab_tipo:"4",
-      f_local_acidente:"1",
-      f_emp_nome:"CONSTRUTORA PAULISTA LTDA", f_emp_cnae:"4120400",
-      f_emp_uf:"SP", f_emp_mun:"SAO PAULO",
-      f_hora_acidente_hh:"10", f_hora_acidente_mm:"30",
-      f_horas_jornada_hh:"3", f_horas_jornada_mm:"30",
-      f_mun_acidente:"SAO PAULO", f_uf_acidente:"SP", f_ibge_acidente:"355030",
-      f_acidente_causa_cid:"W01",
-      f_tipo_acidente:"1",
-      f_outros_atingidos:"2",
-      f_atend_medico:"1",
-      f_data_atend:"2025-11-09", f_atend_uf:"SP", f_atend_mun:"SAO PAULO", f_atend_ibge:"355030",
-      f_atend_unidade_nome:"HOSPITAL MUNICIPAL", f_atend_unidade_cod:"001",
-      f_corpo_atingido_1:"06", f_corpo_atingido_2:"07",
-      f_diag_lesao_cid:"S62.0",
-      f_regime:"1",
-      f_evolucao:"2",
-      f_cat:"1",
-      f_descricao_acidente:"TRABALHADOR CAIU DE ANDAIME A 3 METROS DE ALTURA DURANTE ATIVIDADE DE REBOCO."
-    },
-    radios: {sexo:"M", raca:"4", local_acidente:"1", tipo_acidente:"1", outros_atingidos:"2", atend_medico:"1", regime:"1", evolucao:"2", cat:"1"}
-  },
-  {
-    label: "Maria Oliveira, 28 anos",
-    sub: "Acidente de trajeto · atropelamento · Belo Horizonte/MG",
-    fields: {
-      f_data_notif:"2025-11-12", f_data_acidente:"2025-11-11",
-      f_nome_un:"UPA CENTRO", f_cnes:"3140070",
-      f_mun_notif:"BELO HORIZONTE", f_uf_notif:"MG", f_ibge_notif:"310620",
-      f_nome:"MARIA OLIVEIRA SANTOS", f_nasc:"1997-08-22", f_raca:"2", f_escol:"6",
-      f_sus:"706012300000050", f_mae:"ANA OLIVEIRA",
-      f_mun_res:"BELO HORIZONTE", f_uf_res:"MG", f_ibge_res:"310620",
-      f_bairro_res:"CENTRO", f_logr_res:"AVENIDA AFONSO PENA", f_num_res:"1500",
-      f_cep:"30100-000", f_tel_res:"(31) 98765-4321", f_zona_res:"1",
-      f_ocupacao:"VENDEDORA",
-      f_sit_mercado:"01", f_tempo_trab_val:"3", f_tempo_trab_tipo:"4",
-      f_local_acidente:"2",
-      f_emp_nome:"LOJAS AMERICANAS SA", f_emp_cnae:"4713001",
-      f_emp_uf:"MG", f_emp_mun:"BELO HORIZONTE",
-      f_hora_acidente_hh:"18", f_hora_acidente_mm:"15",
-      f_horas_jornada_hh:"0", f_horas_jornada_mm:"0",
-      f_mun_acidente:"BELO HORIZONTE", f_uf_acidente:"MG", f_ibge_acidente:"310620",
-      f_acidente_causa_cid:"V03",
-      f_tipo_acidente:"2",
-      f_outros_atingidos:"2",
-      f_atend_medico:"1",
-      f_data_atend:"2025-11-11", f_atend_uf:"MG", f_atend_mun:"BELO HORIZONTE", f_atend_ibge:"310620",
-      f_atend_unidade_nome:"UPA CENTRO", f_atend_unidade_cod:"002",
-      f_corpo_atingido_1:"08", f_corpo_atingido_2:"04",
-      f_diag_lesao_cid:"S82.0",
-      f_regime:"2",
-      f_evolucao:"2",
-      f_cat:"1",
-      f_descricao_acidente:"VÍTIMA FOI ATROPELADA POR MOTO AO ATRAVESSAR A RUA NO CAMINHO DO TRABALHO."
-    },
-    radios: {sexo:"F", raca:"2", local_acidente:"2", tipo_acidente:"2", outros_atingidos:"2", atend_medico:"1", regime:"2", evolucao:"2", cat:"1"}
-  }
-];
 
 /*==========================================================
   CONDICIONAIS
@@ -1141,185 +1047,6 @@ window._onPostCarregarPaciente = function(p){
     if(cidMatch){ cidLesaoHint.textContent=cidMatch.nome; cidLesaoHint.style.display='block'; }
   }
 };
-
-/*==========================================================
-  RECEITA FEDERAL — EXTRAÇÃO DE CNPJ (idêntico ao PAIR)
-==========================================================*/
-function rfTogglePanel(){
-  var panel = document.getElementById('rf-panel');
-  var btn   = document.getElementById('rf-toggle-btn');
-  var open  = panel.style.display === 'block';
-  panel.style.display = open ? 'none' : 'block';
-  btn.classList.toggle('active', !open);
-}
-
-function extractCompanyInfo(text){
-  var r = {};
-  var cnpjM = text.match(/\d{2}[\.\s]?\d{3}[\.\s]?\d{3}[\/\s]?\d{4}[-\s]?\d{2}/);
-  r.cnpj = cnpjM ? cnpjM[0].replace(/\s/g,'') : '';
-  function getVal(labelRe){
-    var re1 = new RegExp(labelRe+'[^:\\n\\r]*:[\\t ]*([^\\n\\r]+)','i');
-    var re2 = new RegExp(labelRe+'[^\\n\\r]*[\\n\\r]+(?:[ \\t]*[\\n\\r]+)*[ \\t]*([^\\n\\r]+)','i');
-    var m = text.match(re1) || text.match(re2);
-    return m ? m[1].trim() : '';
-  }
-  r.razaoSocial = getVal('NOME EMPRESARIAL') || getVal('Raz[aã]o\\s+Social');
-  var cnaeM = text.match(/CNAE[^\n:]*:?\s*([\d]{2}\.[\d]{2}-[\d](?:-[\d]{2})?)\s*[-–]\s*([^\n\r]+)/i);
-  if(!cnaeM){
-    var actBlock = text.match(/ATIVIDADE\s+ECON[ÔO]MICA[^\n]*\n([\s\S]{1,300})/i);
-    if(actBlock) cnaeM = actBlock[1].match(/([\d]{2}\.[\d]{2}-[\d](?:-[\d]{2})?)\s*[-–]\s*([^\n\r]+)/);
-  }
-  if(!cnaeM) cnaeM = text.match(/([\d]{2}\.[\d]{2}-[\d]-[\d]{2})\s*[-–]\s*([^\n\r]+)/);
-  r.cnaeCode      = cnaeM ? cnaeM[1].trim() : '';
-  r.ramoAtividade = cnaeM ? cnaeM[2].trim() : '';
-  var logr  = getVal('LOGRADOURO');
-  var compl = getVal('COMPLEMENTO');
-  var complVal = (compl && !/^\*+$/.test(compl)) ? compl : '';
-  r.logradouro = complVal ? logr + ' ' + complVal : logr;
-  r.numero = getVal('N[ÚU]MERO(?!\\s+DE\\s)');
-  r.bairro = getVal('BAIRRO[\\s\\/]DISTRITO') || getVal('Bairro');
-  r.municipio = getVal('MUNIC.PIO');
-  var ufRaw = getVal('\\bUF\\b');
-  r.uf = (ufRaw && /^[A-Za-z]{2}/.test(ufRaw)) ? ufRaw.substring(0,2).toUpperCase() : '';
-  if(!r.uf){ var ufM = text.match(/\bUF[:\s]+([A-Za-z]{2})\b/i); r.uf = ufM ? ufM[1].toUpperCase() : ''; }
-  var telBlock = getVal('TELEFONE');
-  var telM = telBlock.match(/\(?\d{2}\)?\s*\d{4,5}[-\s]?\d{4}/);
-  r.telefone = telM ? telM[0].replace(/\s+/g,' ').trim() : '';
-  return r;
-}
-
-function normCnaeRF(s){ return (s||'').replace(/[.\-\/\s]/g,''); }
-
-function rfFillCnae(sinanEntry, rfCode){
-  var inp  = document.getElementById('f_emp_cnae');
-  var hint = document.getElementById('f_emp_cnae_hint');
-  var displayCode = rfCode || sinanEntry.codigo;
-  if(inp){
-    inp.value = displayCode;
-    inp.dataset.sinanCnae = sinanEntry.codigo;
-  }
-  if(hint){
-    var hintText = rfCode && rfCode !== sinanEntry.codigo
-      ? rfCode + ' (RF) \u2192 SINAN: ' + sinanEntry.codigo + ' \u2014 ' + sinanEntry.nome
-      : sinanEntry.nome;
-    hint.textContent = hintText;
-    hint.style.display = 'block';
-  }
-}
-
-function rfMatchCnae(rfCode){
-  if(!rfCode || !window.SINAN_CNAES) return null;
-  var normExt = normCnaeRF(rfCode);
-  var found = window.SINAN_CNAES.find(function(c){ return normCnae(c.codigo) === normExt; });
-  if(found) return found;
-  found = window.SINAN_CNAES.find(function(c){
-    var nc = normCnae(c.codigo);
-    return nc.length < normExt.length && normExt.indexOf(nc) === 0;
-  });
-  return found || null;
-}
-
-function cnaeSemantic(query, topN){
-  if(!window.SINAN_CNAES || !query) return [];
-  var words = query.toUpperCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-    .replace(/[^A-Z0-9\s]/g,' ')
-    .split(/\s+/).filter(function(w){ return w.length > 3; });
-  if(!words.length) return [];
-  var scored = window.SINAN_CNAES.map(function(c){
-    var nome = c.nome.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-    var sc = 0; words.forEach(function(w){ if(nome.indexOf(w) >= 0) sc++; });
-    return {c:c, sc:sc};
-  }).filter(function(x){ return x.sc > 0; });
-  scored.sort(function(a,b){ return b.sc - a.sc; });
-  return scored.slice(0, topN||3).map(function(x){ return x.c; });
-}
-
-function rfExtrair(){
-  var text = document.getElementById('rf-textarea').value;
-  if(!text.trim()){ showToast('Cole o texto da Receita Federal antes de extrair.','warn'); return; }
-  var info = extractCompanyInfo(text);
-
-  if(info.cnpj)        _setField('f_emp_reg',    info.cnpj);
-  if(info.razaoSocial) _setField('f_emp_nome',   info.razaoSocial);
-  if(info.logradouro)  _setField('f_emp_end',    info.logradouro);
-  if(info.numero)      _setField('f_emp_num',    info.numero);
-  if(info.bairro){     _setField('f_emp_bairro', info.bairro);
-                       _setField('f_emp_dist',   info.bairro); }
-  if(info.uf) _setField('f_emp_uf', info.uf);
-  if(info.municipio){
-    var munNorm = info.municipio.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-    var munFound = (window.SINAN_MUNICIPIOS||[]).find(function(m){
-      return m.nome.normalize('NFD').replace(/[\u0300-\u036f]/g,'') === munNorm;
-    });
-    if(munFound){
-      _setField('f_emp_mun', munFound.nome);
-      var ibgeEl = document.getElementById('f_emp_ibge');
-      if(ibgeEl){ ibgeEl.value = munFound.ibge; ibgeEl.dispatchEvent(new Event('change',{bubbles:true})); }
-      if(!info.uf){ var empUfEl = document.getElementById('f_emp_uf'); if(empUfEl) empUfEl.value = munFound.uf; }
-    } else {
-      _setField('f_emp_mun', info.municipio);
-    }
-  }
-  if(info.telefone) _setField('f_emp_tel', info.telefone);
-
-  var cnaeOk = false;
-  if(info.cnaeCode || info.ramoAtividade){
-    var matched = rfMatchCnae(info.cnaeCode);
-    if(matched){ rfFillCnae(matched, info.cnaeCode); cnaeOk = true; }
-  }
-
-  var warn = document.getElementById('rf-cnae-warn');
-  if(!cnaeOk){
-    if(warn){
-      document.getElementById('rf-cnae-warn-code').textContent = info.cnaeCode || '(não identificado)';
-      document.getElementById('rf-cnae-warn-ramo').textContent = info.ramoAtividade ? ' \u2014 ' + info.ramoAtividade : '';
-      var sug = cnaeSemantic(info.ramoAtividade || info.cnaeCode, 3);
-      var rfCodeEsc = (info.cnaeCode || '').replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-      var html = sug.map(function(c){
-        return '<div class="rf-cnae-sug-item" onclick="rfSelectCnaeSug(\''+c.codigo.replace(/'/g,"\\'")+'\',\''+rfCodeEsc+'\')">'
-             + '<span class="rf-cnae-sug-code">'+c.codigo+'</span>'
-             + '<span class="rf-cnae-sug-name">'+c.nome+'</span></div>';
-      }).join('');
-      document.getElementById('rf-cnae-sugs').innerHTML = html;
-      warn.style.display = 'block';
-    }
-    showToast('Demais campos preenchidos. Escolha o CNAE manualmente.','warn',4000);
-  } else {
-    if(warn) warn.style.display = 'none';
-    showToast('Dados da empresa preenchidos com sucesso.','ok');
-  }
-  document.getElementById('rf-panel').style.display = 'none';
-  document.getElementById('rf-toggle-btn').classList.remove('active');
-  updateProgress();
-}
-
-function rfSelectCnaeSug(codigo, rfCode){
-  var found = (window.SINAN_CNAES||[]).find(function(c){ return c.codigo === codigo; });
-  if(found) rfFillCnae(found, rfCode || found.codigo);
-  var warn = document.getElementById('rf-cnae-warn');
-  if(warn) warn.style.display = 'none';
-  showToast('CNAE selecionado.','ok');
-  updateProgress();
-}
-
-function sinanCnaeVal(){
-  var el = document.getElementById('f_emp_cnae');
-  if(!el) return '';
-  if(el.dataset && el.dataset.sinanCnae) return el.dataset.sinanCnae;
-  return el.value.replace(/-\d{2}$/, '').trim();
-}
-
-(function(){
-  var el = document.getElementById('f_emp_cnae');
-  if(el) el.addEventListener('input', function(){
-    if(this.dataset) delete this.dataset.sinanCnae;
-    if(this.value.trim()){
-      var w = document.getElementById('rf-cnae-warn');
-      if(w) w.style.display = 'none';
-    }
-  });
-})();
 
 /*==========================================================
   GERAR PDF
@@ -1468,6 +1195,7 @@ async function gerarPDF(){
   btn.innerHTML='📄 Gerar PDF';
 }
 </script>
+<script src="rf_parser.js"></script>
 <script src="shared.js"></script>
 
 </body>
