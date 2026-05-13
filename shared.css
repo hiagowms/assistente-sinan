@@ -118,7 +118,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f3f4f
 .col-3{grid-column:span 3}
 
 .fld{display:flex;flex-direction:column;gap:5px}
-.fld label{font-size:13px;font-weight:700;color:#374151;line-height:1.4;white-space:nowrap}
+.fld label{font-size:13px;font-weight:700;color:#374151;line-height:1.4}
 .fld label .req{color:#c0392b;font-size:15px;line-height:1}
 .fld label .cn{font-size:11px;color:#9ca3af;font-weight:600;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;vertical-align:middle}
 .fld label .cn .tip-wrap{margin-left:0;vertical-align:unset}
