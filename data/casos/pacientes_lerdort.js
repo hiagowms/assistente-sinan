@@ -18,9 +18,11 @@ window.FAKE_PATIENTS = [
       f_emp_nome:"EMPRESA DE TECNOLOGIA SA", f_emp_cnae:"6201500",
       f_emp_uf:"SP", f_emp_mun:"SAO PAULO",
       f_diag_cid:"M75.1",
-      f_tempo_exp_val:"8", f_tempo_exp_tipo:"4"
+      f_tempo_exp_val:"8", f_tempo_exp_tipo:"4",
+      f_tempo_afast_val:"1"
     },
-    radios: {sexo:"F", regime:"2",
+    radios: {sexo:"F", gest:"5", raca:"1", escol:"6", regime:"2",
+             emp_terc:"2",
              agravo_hipertensao:"2", agravo_diabetes:"2", agravo_hanseniase:"2", agravo_transtorno_mental:"2", agravo_tuberculose:"2", agravo_asma:"2", agravo_outras:"2",
              sintoma_alteracao_sensibilidade:"1", sintoma_diminuicao_forca:"1", sintoma_diminuicao_movimento:"2", sintoma_limitacao_movimentos:"1", sintoma_sinais_flogisticos:"2", sintoma_dor:"1", sintoma_outro:"2",
              limitacao_incapacidade:"1",
@@ -47,9 +49,11 @@ window.FAKE_PATIENTS = [
       f_emp_nome:"INDUSTRIA AUTOMOTIVA PARANAENSE LTDA", f_emp_cnae:"2910701",
       f_emp_uf:"PR", f_emp_mun:"CURITIBA",
       f_diag_cid:"M75.4",
-      f_tempo_exp_val:"12", f_tempo_exp_tipo:"4"
+      f_tempo_exp_val:"12", f_tempo_exp_tipo:"4",
+      f_tempo_afast_val:"3"
     },
-    radios: {sexo:"M", regime:"2",
+    radios: {sexo:"M", gest:"6", raca:"2", escol:"5", regime:"2",
+             emp_terc:"2",
              agravo_hipertensao:"1", agravo_diabetes:"2", agravo_hanseniase:"2", agravo_transtorno_mental:"2", agravo_tuberculose:"2", agravo_asma:"2", agravo_outras:"2",
              sintoma_alteracao_sensibilidade:"2", sintoma_diminuicao_forca:"1", sintoma_diminuicao_movimento:"1", sintoma_limitacao_movimentos:"1", sintoma_sinais_flogisticos:"2", sintoma_dor:"1", sintoma_outro:"2",
              limitacao_incapacidade:"1",
@@ -78,7 +82,8 @@ window.FAKE_PATIENTS = [
       f_diag_cid:"M77.9",
       f_tempo_exp_val:"3", f_tempo_exp_tipo:"4"
     },
-    radios: {sexo:"M", regime:"2",
+    radios: {sexo:"M", gest:"6", raca:"4", escol:"6", regime:"2",
+             emp_terc:"3",
              agravo_hipertensao:"2", agravo_diabetes:"2", agravo_hanseniase:"2", agravo_transtorno_mental:"2", agravo_tuberculose:"2", agravo_asma:"2", agravo_outras:"2",
              sintoma_alteracao_sensibilidade:"1", sintoma_diminuicao_forca:"1", sintoma_diminuicao_movimento:"1", sintoma_limitacao_movimentos:"1", sintoma_sinais_flogisticos:"1", sintoma_dor:"1", sintoma_outro:"2",
              limitacao_incapacidade:"1",

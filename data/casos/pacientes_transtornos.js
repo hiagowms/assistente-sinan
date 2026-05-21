@@ -20,7 +20,8 @@ window.FAKE_PATIENTS = [
       f_diag_cid:"F41.2",
       f_tempo_exp_val:"12", f_tempo_exp_tipo:"4"
     },
-    radios: {sexo:"M", regime:"2",
+    radios: {sexo:"M", gest:"6", raca:"1", escol:"6", regime:"2",
+             emp_terc:"2",
              hab_alcool:"2", hab_drogas:"2", hab_psicofarmacos:"1", hab_fumar:"2",
              conduta_afastamento_desgaste:"1", conduta_mudanca_organizacao:"1", conduta_protecao_coletiva:"2", conduta_afastamento_local:"2", conduta_protecao_individual:"2", conduta_nenhum:"2", conduta_outros:"2",
              outros_trab:"2", encaminhamento_caps:"1",
@@ -45,7 +46,8 @@ window.FAKE_PATIENTS = [
       f_diag_cid:"F32.2",
       f_tempo_exp_val:"4", f_tempo_exp_tipo:"4"
     },
-    radios: {sexo:"F", regime:"2", gest:"5",
+    radios: {sexo:"F", gest:"5", raca:"4", escol:"5", regime:"2",
+             emp_terc:"2",
              hab_alcool:"1", hab_drogas:"2", hab_psicofarmacos:"1", hab_fumar:"1",
              tempo_tabaco_tipo:"4",
              conduta_afastamento_desgaste:"1", conduta_mudanca_organizacao:"2", conduta_protecao_coletiva:"2", conduta_afastamento_local:"1", conduta_protecao_individual:"2", conduta_nenhum:"2", conduta_outros:"2",
@@ -71,7 +73,8 @@ window.FAKE_PATIENTS = [
       f_diag_cid:"Z73.0",
       f_tempo_exp_val:"5", f_tempo_exp_tipo:"4"
     },
-    radios: {sexo:"F", regime:"2", gest:"5",
+    radios: {sexo:"F", gest:"5", raca:"2", escol:"7", regime:"2",
+             emp_terc:"3",
              hab_alcool:"2", hab_drogas:"2", hab_psicofarmacos:"1", hab_fumar:"2",
              conduta_afastamento_desgaste:"2", conduta_mudanca_organizacao:"1", conduta_protecao_coletiva:"2", conduta_afastamento_local:"2", conduta_protecao_individual:"2", conduta_nenhum:"1", conduta_outros:"2",
              outros_trab:"1", encaminhamento_caps:"1",

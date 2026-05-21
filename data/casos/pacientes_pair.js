@@ -18,10 +18,12 @@ window.FAKE_PATIENTS = [
       f_tempo_trab_val:"15", f_tempo_trab_tipo:"4",
       f_emp_nome:"METALURGICA SAO PAULO INDUSTRIA LTDA", f_emp_cnae:"2539000",
       f_emp_uf:"SP", f_emp_mun:"SAO PAULO",
-      f_diag_cid:"H83.3"
+      f_diag_cid:"H83.3",
+      f_tempo_afast_val:"3"
     },
-    radios: {sexo:"M", regime:"1", tipo_ruido:"1",
-             afastamento_trat:"1", afastamento_result:"1",
+    radios: {sexo:"M", gest:"6", raca:"1", escol:"3", regime:"1", tipo_ruido:"1",
+             emp_terc:"2",
+             afastamento_trat:"1", tempo_afast_tipo:"3", afastamento_result:"1",
              outros_trab:"1", cat:"1",
              sintoma_zumbido:"1", sintoma_tontura:"2", sintoma_dificuldade_fala:"1", sintoma_cefaleia:"2", sintoma_outros:"2",
              exposicao_solvente_tolueno:"2", exposicao_metais_pesados:"2", exposicao_medicamentos_ototoxicos:"2", exposicao_gases_toxicos:"2", exposicao_outros:"2",
@@ -47,7 +49,8 @@ window.FAKE_PATIENTS = [
       f_emp_uf:"MG", f_emp_mun:"BETIM",
       f_diag_cid:"H83.3"
     },
-    radios: {sexo:"F", regime:"1", tipo_ruido:"1",
+    radios: {sexo:"F", gest:"6", raca:"4", escol:"2", regime:"1", tipo_ruido:"1",
+             emp_terc:"2",
              afastamento_trat:"2",
              outros_trab:"1", cat:"2",
              sintoma_zumbido:"1", sintoma_tontura:"1", sintoma_dificuldade_fala:"1", sintoma_cefaleia:"2", sintoma_outros:"2",
@@ -74,7 +77,8 @@ window.FAKE_PATIENTS = [
       f_emp_uf:"BA", f_emp_mun:"SALVADOR",
       f_diag_cid:"H83.3"
     },
-    radios: {sexo:"M", regime:"2", tipo_ruido:"1",
+    radios: {sexo:"M", gest:"6", raca:"4", escol:"7", regime:"2", tipo_ruido:"1",
+             emp_terc:"2",
              afastamento_trat:"2",
              outros_trab:"2", cat:"1",
              sintoma_zumbido:"1", sintoma_tontura:"2", sintoma_dificuldade_fala:"1", sintoma_cefaleia:"1", sintoma_outros:"2",

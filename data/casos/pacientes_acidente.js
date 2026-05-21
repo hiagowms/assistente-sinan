@@ -34,7 +34,7 @@ window.FAKE_PATIENTS = [
       f_cat:"1",
       f_descricao_acidente:"TRABALHADOR CAIU DE ANDAIME A 3 METROS DE ALTURA DURANTE ATIVIDADE DE REBOCO."
     },
-    radios: {sexo:"M", raca:"4", local_acidente:"1", tipo_acidente:"1", outros_atingidos:"2", atend_medico:"1", regime:"1", evolucao:"2", cat:"1"}
+    radios: {sexo:"M", gest:"6", raca:"4", escol:"5", local_acidente:"1", tipo_acidente:"1", outros_atingidos:"2", atend_medico:"1", regime:"1", emp_terc:"2", evolucao:"2", cat:"1"}
   },
   {
     label: "Maria Oliveira, 28 anos",
@@ -69,7 +69,7 @@ window.FAKE_PATIENTS = [
       f_cat:"1",
       f_descricao_acidente:"VITIMA FOI ATROPELADA POR MOTO AO ATRAVESSAR A RUA NO CAMINHO DO TRABALHO."
     },
-    radios: {sexo:"F", raca:"2", local_acidente:"2", tipo_acidente:"2", outros_atingidos:"2", atend_medico:"1", regime:"2", evolucao:"2", cat:"1"}
+    radios: {sexo:"F", gest:"5", raca:"2", escol:"6", local_acidente:"2", tipo_acidente:"2", outros_atingidos:"2", atend_medico:"1", regime:"2", emp_terc:"2", evolucao:"2", cat:"1"}
   },
   {
     label: "Adriana Conceição, 31 anos",
@@ -104,6 +104,6 @@ window.FAKE_PATIENTS = [
       f_cat:"2",
       f_descricao_acidente:"TRABALHADORA TERCEIRIZADA ESCORREGOU EM ESCADA MOLHADA SEM SINALIZACAO DURANTE LIMPEZA. FRATURA DE TIBIA E LESAO DE TORNOZELO."
     },
-    radios: {sexo:"F", raca:"2", local_acidente:"1", tipo_acidente:"1", outros_atingidos:"2", atend_medico:"1", regime:"3", evolucao:"2", cat:"2"}
+    radios: {sexo:"F", gest:"5", raca:"2", escol:"4", local_acidente:"1", tipo_acidente:"1", outros_atingidos:"2", atend_medico:"1", regime:"3", emp_terc:"1", evolucao:"2", cat:"2"}
   }
 ];

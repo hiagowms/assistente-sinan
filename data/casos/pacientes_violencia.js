@@ -28,7 +28,7 @@ window.FAKE_PATIENTS = [
       f_violencia_trabalho:"2",
       f_circunstancia_cid:"Y04"
     },
-    radios: {sexo:"F", gest:"5", raca:"4", sit_conjugal:"2", orient_sexual:"1", ident_genero:"8",
+    radios: {sexo:"F", gest:"5", raca:"4", escol:"6", sit_conjugal:"2", orient_sexual:"1", ident_genero:"8",
              possui_deficiencia:"2",
              zona_res:"1", zona_ocorrencia:"1",
              ocorrencia_repetida:"1", lesao_autoprovocada:"2",
@@ -67,7 +67,7 @@ window.FAKE_PATIENTS = [
       f_violencia_trabalho:"2",
       f_circunstancia_cid:"Y09"
     },
-    radios: {sexo:"M", raca:"4", sit_conjugal:"1", orient_sexual:"2", ident_genero:"8",
+    radios: {sexo:"M", gest:"6", raca:"4", escol:"7", sit_conjugal:"1", orient_sexual:"2", ident_genero:"8",
              possui_deficiencia:"2",
              zona_res:"1", zona_ocorrencia:"1",
              ocorrencia_repetida:"2", lesao_autoprovocada:"2",
@@ -106,7 +106,7 @@ window.FAKE_PATIENTS = [
       f_violencia_trabalho:"1",
       f_circunstancia_cid:"Y35"
     },
-    radios: {sexo:"M", raca:"2", sit_conjugal:"1", orient_sexual:"3", ident_genero:"2",
+    radios: {sexo:"M", gest:"6", raca:"2", escol:"5", sit_conjugal:"1", orient_sexual:"3", ident_genero:"2",
              possui_deficiencia:"2",
              zona_res:"1", zona_ocorrencia:"1",
              ocorrencia_repetida:"1", lesao_autoprovocada:"2",

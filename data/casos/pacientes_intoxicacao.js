@@ -33,7 +33,7 @@ window.FAKE_PATIENTS = [
       f_cat:"3",
       f_data_encerramento:"2025-12-02"
     },
-    radios: {sexo:"F", gest:"5", raca:"1",
+    radios: {sexo:"F", gest:"5", raca:"1", escol:"6",
              exposicao_zona:"1",
              exposicao_trabalho:"2", tipo_exposicao:"1",
              tempo_decorrido_tipo:"1", tipo_atendimento:"1", hospitalizacao:"1",
@@ -76,7 +76,7 @@ window.FAKE_PATIENTS = [
       f_cat:"1",
       f_data_encerramento:"2025-12-05"
     },
-    radios: {sexo:"M", raca:"4",
+    radios: {sexo:"M", gest:"6", raca:"4", escol:"2",
              exposicao_zona:"2",
              exposicao_trabalho:"1", tipo_exposicao:"1",
              tempo_decorrido_tipo:"1", tipo_atendimento:"1", hospitalizacao:"2",
@@ -118,7 +118,7 @@ window.FAKE_PATIENTS = [
       f_cat:"1",
       f_data_encerramento:"2026-04-13"
     },
-    radios: {sexo:"M", raca:"4",
+    radios: {sexo:"M", gest:"6", raca:"4", escol:"5",
              exposicao_zona:"1",
              exposicao_trabalho:"1", tipo_exposicao:"1",
              tempo_decorrido_tipo:"1", tipo_atendimento:"1", hospitalizacao:"1",

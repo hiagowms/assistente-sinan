@@ -21,7 +21,8 @@ window.FAKE_PATIENTS = [
       f_tempo_exp_val:"25", f_tempo_exp_tipo:"4",
       f_regime:"2"
     },
-    radios: {sexo:"M", raca:"4", regime:"2",
+    radios: {sexo:"M", gest:"6", raca:"4", escol:"3", regime:"2",
+             emp_terc:"2",
              exp_asbesto:"1", exp_silica:"2", exp_aminas:"2", exp_benzeno:"2", exp_alcatrao:"2", exp_hidrocarbonetos:"2", exp_oleos:"2", exp_berilio:"2", exp_cadmio:"2", exp_cromo:"2", exp_niquel:"2", exp_rad_ionizantes:"2", exp_rad_nao_ionizantes:"2", exp_hormonios:"2", exp_antineoplasicos:"2", exp_outros:"2",
              hab_fumar:"1", tempo_tabaco_tipo:"4",
              outros_trab:"2",
@@ -47,7 +48,8 @@ window.FAKE_PATIENTS = [
       f_tempo_exp_val:"20", f_tempo_exp_tipo:"4",
       f_regime:"1"
     },
-    radios: {sexo:"F", gest:"6", raca:"2", regime:"1",
+    radios: {sexo:"F", gest:"6", raca:"2", escol:"2", regime:"1",
+             emp_terc:"2",
              exp_asbesto:"2", exp_silica:"1", exp_aminas:"2", exp_benzeno:"2", exp_alcatrao:"2", exp_hidrocarbonetos:"2", exp_oleos:"2", exp_berilio:"2", exp_cadmio:"2", exp_cromo:"2", exp_niquel:"2", exp_rad_ionizantes:"2", exp_rad_nao_ionizantes:"2", exp_hormonios:"2", exp_antineoplasicos:"2", exp_outros:"2",
              hab_fumar:"2",
              outros_trab:"1",
@@ -73,7 +75,8 @@ window.FAKE_PATIENTS = [
       f_tempo_exp_val:"30", f_tempo_exp_tipo:"4",
       f_regime:"2"
     },
-    radios: {sexo:"M", raca:"4", regime:"2",
+    radios: {sexo:"M", gest:"6", raca:"4", escol:"1", regime:"2",
+             emp_terc:"2",
              exp_asbesto:"2", exp_silica:"2", exp_aminas:"2", exp_benzeno:"1", exp_alcatrao:"2", exp_hidrocarbonetos:"1", exp_oleos:"2", exp_berilio:"2", exp_cadmio:"2", exp_cromo:"2", exp_niquel:"2", exp_rad_ionizantes:"2", exp_rad_nao_ionizantes:"1", exp_hormonios:"2", exp_antineoplasicos:"2", exp_outros:"1",
              hab_fumar:"2",
              outros_trab:"2",

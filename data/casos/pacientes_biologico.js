@@ -25,7 +25,8 @@ window.FAKE_PATIENTS = [
       f_evolucao:"2",
       f_cat:"1"
     },
-    radios: {sexo:"F", gest:"5", raca:"1",
+    radios: {sexo:"F", gest:"5", raca:"1", escol:"8",
+             emp_terc:"2",
              exposicao_percutanea:"1", exposicao_mucosa:"2", exposicao_pele_integra:"2", exposicao_pele_nao_integra:"2", exposicao_outros:"2",
              epi_luva:"1", epi_avental:"1", epi_oculos:"2", epi_mascara:"2", epi_protecao_facial:"2", epi_bota:"2",
              vacina_hepb:"1",
@@ -59,7 +60,8 @@ window.FAKE_PATIENTS = [
       f_evolucao:"2",
       f_cat:"1"
     },
-    radios: {sexo:"M", raca:"2",
+    radios: {sexo:"M", gest:"6", raca:"2", escol:"6",
+             emp_terc:"2",
              exposicao_percutanea:"2", exposicao_mucosa:"1", exposicao_pele_integra:"2", exposicao_pele_nao_integra:"2", exposicao_outros:"2",
              epi_luva:"1", epi_avental:"1", epi_oculos:"2", epi_mascara:"1", epi_protecao_facial:"2", epi_bota:"2",
              vacina_hepb:"1",
@@ -92,7 +94,8 @@ window.FAKE_PATIENTS = [
       f_evolucao:"2",
       f_cat:"2"
     },
-    radios: {sexo:"F", gest:"5", raca:"4",
+    radios: {sexo:"F", gest:"5", raca:"4", escol:"6",
+             emp_terc:"2",
              exposicao_percutanea:"2", exposicao_mucosa:"2", exposicao_pele_integra:"1", exposicao_pele_nao_integra:"2", exposicao_outros:"1",
              epi_luva:"2", epi_avental:"2", epi_oculos:"2", epi_mascara:"2", epi_protecao_facial:"2", epi_bota:"2",
              vacina_hepb:"1",

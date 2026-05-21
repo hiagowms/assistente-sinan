@@ -20,7 +20,8 @@ window.FAKE_PATIENTS = [
       f_diag_cid:"J62.8",
       f_tempo_exp_val:"30", f_tempo_exp_tipo:"4"
     },
-    radios: {sexo:"M", regime:"2", vinculos_distintos:"2",
+    radios: {sexo:"M", gest:"6", raca:"4", escol:"2", regime:"2", vinculos_distintos:"2",
+             emp_terc:"2",
              agravo_limitacao_fluxo:"1", agravo_tuberculose:"2", agravo_cancer:"2", agravo_artrite:"2", agravo_tireoidite:"2", agravo_outras:"2",
              exposicao_silica:"1", exposicao_asbesto:"2", exposicao_poeiras_carvao:"2", exposicao_poeiras_mistas:"1", exposicao_metais_duros:"2", exposicao_poeiras_abrasivos:"2", exposicao_berilio:"2", exposicao_poeiras_organicas:"2",
              hab_fumar:"1", tempo_tabaco_tipo:"4",
@@ -48,7 +49,8 @@ window.FAKE_PATIENTS = [
       f_diag_cid:"J61",
       f_tempo_exp_val:"20", f_tempo_exp_tipo:"4"
     },
-    radios: {sexo:"M", regime:"2", vinculos_distintos:"1",
+    radios: {sexo:"M", gest:"6", raca:"2", escol:"3", regime:"2", vinculos_distintos:"1",
+             emp_terc:"2",
              agravo_limitacao_fluxo:"1", agravo_tuberculose:"2", agravo_cancer:"2", agravo_artrite:"2", agravo_tireoidite:"2", agravo_outras:"2",
              exposicao_silica:"2", exposicao_asbesto:"1", exposicao_poeiras_carvao:"2", exposicao_poeiras_mistas:"2", exposicao_metais_duros:"2", exposicao_poeiras_abrasivos:"2", exposicao_berilio:"2", exposicao_poeiras_organicas:"2",
              hab_fumar:"2",
@@ -76,7 +78,8 @@ window.FAKE_PATIENTS = [
       f_diag_cid:"J62.8",
       f_tempo_exp_val:"22", f_tempo_exp_tipo:"4"
     },
-    radios: {sexo:"M", regime:"2", vinculos_distintos:"1",
+    radios: {sexo:"M", gest:"6", raca:"4", escol:"1", regime:"2", vinculos_distintos:"1",
+             emp_terc:"3",
              agravo_limitacao_fluxo:"1", agravo_tuberculose:"1", agravo_cancer:"2", agravo_artrite:"2", agravo_tireoidite:"2", agravo_outras:"2",
              exposicao_silica:"1", exposicao_asbesto:"2", exposicao_poeiras_carvao:"2", exposicao_poeiras_mistas:"1", exposicao_metais_duros:"2", exposicao_poeiras_abrasivos:"2", exposicao_berilio:"2", exposicao_poeiras_organicas:"2",
              hab_fumar:"1", tempo_tabaco_tipo:"4",
