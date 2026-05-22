@@ -117,9 +117,9 @@ Apenas CSS **exclusivo da ficha** deve ficar em `<style>` inline. O restante vem
 - `lib/pdf-lib.min.js` — manipulação de PDF (AcroForms)
 - `lib/pdf.min.js` + `lib/pdf.worker.min.js` — leitura de PDF (Mozilla pdf.js)
 
-## Google Analytics
+## Privacidade e rastreamento
 
-Todo arquivo HTML novo deve incluir o snippet GA4 (`G-XBCCJ6GTG6`) logo após `<meta name="viewport">`.
+**Não incluir** Google Analytics, Google Tag Manager nem qualquer outro tracker de terceiros nos arquivos HTML. A aplicação lida com dados pessoais sensíveis de saúde e deve garantir que nenhuma informação saia do dispositivo do usuário (conformidade LGPD).
 
 ## Mapeamento AcroForm
 
