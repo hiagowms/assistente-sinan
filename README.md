@@ -20,11 +20,11 @@
 </p>
 
 <p align="center">
+  <a href="https://hiagowms.github.io/assistente-sinan/"><strong>🌐 Acessar o app</strong></a> •
   <a href="#-para-quem-é">Para quem é</a> •
   <a href="#-fichas-suportadas">Fichas</a> •
   <a href="#-como-usar">Como usar</a> •
   <a href="#-arquitetura-técnica">Arquitetura</a> •
-  <a href="#-estrutura-do-projeto">Estrutura</a> •
   <a href="#-privacidade--lgpd">LGPD</a>
 </p>
 
@@ -67,11 +67,17 @@ Cada ficha tem um PDF AcroForm oficial em `fichas/*_editavel.pdf` e um mapeament
 
 ## 🚀 Como usar
 
-### Pela web (recomendado)
+### 🌐 Acesso online (recomendado)
 
-Hospede em qualquer servidor estático (GitHub Pages, Netlify, Vercel, Apache, Nginx). Não precisa de backend.
+**👉 [https://hiagowms.github.io/assistente-sinan/](https://hiagowms.github.io/assistente-sinan/)**
 
-### Localmente
+Basta abrir o link no navegador. Não precisa instalar nada, não precisa cadastro, não precisa login. Funciona em desktop e celular.
+
+A aplicação roda inteiramente no seu navegador (100% client-side) — mesmo hospedada no GitHub Pages, **nenhum dado de paciente sai do seu dispositivo**.
+
+### 💻 Rodar localmente (opcional — sua própria cópia)
+
+Caso queira hospedar internamente (servidor do CEREST, intranet do serviço) ou estudar/modificar o código:
 
 ```bash
 git clone https://github.com/hiagowms/assistente-sinan.git
@@ -83,10 +89,12 @@ python -m http.server 8000
 npx serve .
 ```
 
-Abra `http://localhost:8000` no navegador. Pronto.
+Abra `http://localhost:8000` no navegador.
 
 > **Por que servidor HTTP e não abrir o `index.html` direto?**
 > O navegador bloqueia leitura de PDFs locais via `file://`. Qualquer servidor estático resolve.
+
+Você também pode publicar sua cópia em GitHub Pages, Netlify, Vercel, Apache, Nginx — não precisa de backend.
 
 ### Fluxo de uso
 
