@@ -49,19 +49,19 @@ Nada é enviado para servidor. Tudo roda no seu navegador.
 
 11 assistentes, cobrindo as principais notificações de **Saúde do Trabalhador (DRT)** e o agravo de **Violência Interpessoal/Autoprovocada**:
 
-| Categoria | Ficha | Arquivo |
-|---|---|---|
-| 🟣 Violência | Violência Interpessoal/Autoprovocada | `sinan_violencia.html` |
-| 🟠 Acidente | Acidente de Trabalho Grave | `sinan_acidente.html` |
-| 🟣 Biológico | Acidente de Trabalho com Material Biológico | `sinan_acidente_biologico.html` |
-| 🟤 Intoxicação | Intoxicação Exógena | `sinan_intoxicacao.html` |
-| 🔵 DRT | LER/DORT | `sinan_lerdort.html` |
-| 🔵 DRT | Transtornos Mentais Relacionados ao Trabalho | `sinan_transtornos.html` |
-| 🔵 DRT | PAIR (Perda Auditiva Induzida por Ruído) | `sinan_pair.html` |
-| 🔵 DRT | Pneumoconioses | `sinan_pneumoconioses.html` |
-| 🔵 DRT | Dermatoses Ocupacionais | `sinan_dermatoses.html` |
-| 🔵 DRT | Câncer Relacionado ao Trabalho | `sinan_cancer.html` |
-| 🔵 DRT | Distúrbios de Voz Relacionados ao Trabalho | `sinan_disturbios_voz.html` |
+| Ficha | Arquivo |
+|---|---|
+| Violência Interpessoal/Autoprovocada | `sinan_violencia.html` |
+| Acidente de Trabalho Grave | `sinan_acidente.html` |
+| Acidente de Trabalho com Material Biológico | `sinan_acidente_biologico.html` |
+| Intoxicação Exógena | `sinan_intoxicacao.html` |
+| LER/DORT | `sinan_lerdort.html` |
+| Transtornos Mentais Relacionados ao Trabalho | `sinan_transtornos.html` |
+| PAIR (Perda Auditiva Induzida por Ruído) | `sinan_pair.html` |
+| Pneumoconioses | `sinan_pneumoconioses.html` |
+| Dermatoses Ocupacionais | `sinan_dermatoses.html` |
+| Câncer Relacionado ao Trabalho | `sinan_cancer.html` |
+| Distúrbios de Voz Relacionados ao Trabalho | `sinan_disturbios_voz.html` |
 
 Cada ficha tem um PDF AcroForm oficial em `fichas/*_editavel.pdf` e um mapeamento autoritativo de campos em `fichas/*_editavel.md`.
 
