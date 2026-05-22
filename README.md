@@ -30,7 +30,9 @@
 
 ---
 
-**Assistente SINAN** é uma aplicação web **100% client-side** que ajuda profissionais de saúde do **PET-Saúde / I&SD** a preencher as fichas de notificação do **SINAN NET** (Sistema de Informação de Agravos de Notificação). Você abre o site, preenche um formulário guiado com validação em tempo real, autocomplete de tabelas oficiais (município, UF, CBO, CNAE, CID-10) — e baixa o PDF editável da ficha já preenchido, pronto para entregar.
+**Assistente SINAN** é uma aplicação web **100% client-side** que ajuda profissionais de saúde do **PET-Saúde / Informação e Saúde Digital (I&SD)** a **preparar** as fichas de notificação do **SINAN** (Sistema de Informação de Agravos de Notificação). Você abre o site, preenche um formulário guiado com validação em tempo real, autocomplete de tabelas oficiais (município, UF, CBO, CNAE, CID-10) — e baixa o **PDF editável da ficha já preenchido**, pronto para impressão, assinatura e entrega ao serviço responsável pela digitação no SINAN NET.
+
+> ⚠️ **O Assistente SINAN não envia, não transmite e não insere dados no SINAN NET.** Ele apenas gera o PDF da ficha preenchida. A inserção no sistema oficial continua sendo feita pelo profissional habilitado, no SINAN NET, conforme o fluxo institucional.
 
 Nada é enviado para servidor. Tudo roda no seu navegador.
 
@@ -38,10 +40,10 @@ Nada é enviado para servidor. Tudo roda no seu navegador.
 
 ## 🩺 Para quem é
 
-- **Profissionais de saúde** (médicos, enfermeiros, técnicos) que preenchem fichas SINAN no dia a dia.
-- **Equipes do CEREST** e da Vigilância em Saúde do Trabalhador.
-- **Estudantes do PET-Saúde / Interprofissionalidade & Saúde Digital (I&SD)** usando casos didáticos.
-- Qualquer um que precise gerar um PDF SINAN preenchido **sem digitar campo a campo no Adobe Reader**.
+- **Profissionais de saúde** (médicos, enfermeiros, técnicos) que preparam fichas SINAN no dia a dia.
+- **Equipes do CEREST Botucatu** e da Vigilância em Saúde do Trabalhador.
+- **Estudantes do PET-Saúde / Informação e Saúde Digital (I&SD)** usando casos didáticos.
+- Qualquer um que precise gerar um PDF de ficha SINAN preenchido **sem digitar campo a campo no Adobe Reader**.
 
 ## 📋 Fichas suportadas
 
@@ -174,7 +176,7 @@ assistente-sinan/
 │   ├── pdf.min.js
 │   └── pdf.worker.min.js
 │
-├── assets/img/                      Logos PET-Saúde / CEREST
+├── assets/img/                      Logos PET-Saúde / CEREST Botucatu
 ├── CLAUDE.md                        Guia técnico (convenções, padrões)
 ├── LICENSE                          MIT
 └── README.md                        (este arquivo)
@@ -214,7 +216,7 @@ Detalhes completos em [`CLAUDE.md`](./CLAUDE.md).
 
 ## 🤝 Contexto institucional
 
-Projeto desenvolvido no âmbito do **PET-Saúde / Interprofissionalidade & Saúde Digital (I&SD)** em parceria com o **CEREST** (Centro de Referência em Saúde do Trabalhador), para apoiar o ensino e a prática da notificação compulsória de agravos via SINAN NET.
+Projeto desenvolvido no âmbito do **PET-Saúde / Informação e Saúde Digital (I&SD)** em parceria com o **CEREST Botucatu** (Centro de Referência em Saúde do Trabalhador), para apoiar o ensino e a prática do preenchimento das fichas de notificação compulsória de agravos do SINAN. A digitação final no SINAN NET segue o fluxo institucional do serviço responsável.
 
 ## 📄 Licença
 
@@ -223,5 +225,5 @@ Projeto desenvolvido no âmbito do **PET-Saúde / Interprofissionalidade & Saúd
 ---
 
 <p align="center">
-  Feito com ☕ por <a href="https://github.com/hiagowms">Hiago</a> — PET-Saúde/I&SD
+  Feito com ☕ por <a href="https://github.com/hiagowms">Hiago</a> — PET-Saúde / Informação e Saúde Digital (I&SD) · CEREST Botucatu
 </p>
