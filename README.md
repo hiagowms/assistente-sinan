@@ -1,7 +1,7 @@
 <p align="center">
-  <img src="assets/img/pet-saude-logo-png.png" height="90" alt="PET-Saúde" />
+  <img src="assets/img/pet-logo-branca.png" height="90" alt="PET-Saúde" />
   &nbsp;&nbsp;&nbsp;
-  <img src="assets/img/cerest.png" height="90" alt="CEREST" />
+  <img src="assets/img/cerest-logo-branca.png" height="90" alt="CEREST" />
 </p>
 
 <h1 align="center">Assistente SINAN</h1>
