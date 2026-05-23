@@ -44,6 +44,8 @@ Desenvolvido no **PET-Saúde / Informação e Saúde Digital (I&SD)** em parceri
 
 - 🔍 **Autocomplete de tabelas oficiais offline**: Município (IBGE), UF, CBO (com sinônimos), CNAE, CID-10 — todas as tabelas vivem em `data/*.js` como arrays globais. Sem chamadas de rede.
 
+- 🗂️ **Dados de referência extraídos do SINAN NET**: As tabelas de municípios (códigos IBGE), ocupações (CBO — código e descrição), agravos e CNAEs utilizadas no assistente foram extraídas diretamente dos arquivos de instalação do SINAN NET, garantindo que esses dados de referência sejam **idênticos aos do sistema oficial**.
+
 - ✅ **Validação em tempo real e gamificação de progresso**: Campos essenciais marcados, barra de progresso, modais de validação amigáveis, toasts de feedback. Caps lock automático com remoção de acentos (exigência do SINAN NET).
 
 - 🔄 **Transferência entre fichas**: Paciente atendido em múltiplos agravos? Dados comuns (identificação, residência, ocupação) são transferidos entre fichas via `sessionStorage`.
