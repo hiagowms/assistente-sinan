@@ -1,53 +1,66 @@
 <p align="center">
   <img src="assets/img/pet-logo-branca.png" height="90" alt="PET-Saúde" />
   &nbsp;&nbsp;&nbsp;
-  <img src="assets/img/cerest-logo-branca.png" height="90" alt="CEREST" />
+  <img src="assets/img/cerest-logo-branca.png" height="90" alt="CEREST Botucatu" />
 </p>
 
-<h1 align="center">Assistente SINAN</h1>
+# Assistente SINAN 🩺
 
-<p align="center">
-  <strong>Preencha fichas do SINAN sem dor de cabeça — direto no navegador, sem instalar nada.</strong>
-</p>
+![GitHub stars](https://img.shields.io/github/stars/hiagowms/assistente-sinan?style=social)
+![GitHub forks](https://img.shields.io/github/forks/hiagowms/assistente-sinan?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/hiagowms/assistente-sinan?style=social)
+![GitHub repo size](https://img.shields.io/github/repo-size/hiagowms/assistente-sinan)
+![GitHub language count](https://img.shields.io/github/languages/count/hiagowms/assistente-sinan)
+![GitHub top language](https://img.shields.io/github/languages/top/hiagowms/assistente-sinan)
+![GitHub last commit](https://img.shields.io/github/last-commit/hiagowms/assistente-sinan?color=red)
+[![License: MIT](https://img.shields.io/github/license/hiagowms/assistente-sinan?color=blue)](LICENSE)
+![Zero build](https://img.shields.io/badge/build-zero-blue)
+![Offline first](https://img.shields.io/badge/offline-first-success)
+![LGPD](https://img.shields.io/badge/LGPD-compliant-brightgreen)
 
-<p align="center">
-  <a href="https://github.com/hiagowms/assistente-sinan/stargazers"><img src="https://img.shields.io/github/stars/hiagowms/assistente-sinan?style=flat&color=yellow" alt="Stars"></a>
-  <a href="https://github.com/hiagowms/assistente-sinan/commits/main"><img src="https://img.shields.io/github/last-commit/hiagowms/assistente-sinan?style=flat" alt="Last Commit"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/hiagowms/assistente-sinan?style=flat" alt="License"></a>
-  <img src="https://img.shields.io/badge/build-zero-blue?style=flat" alt="Zero build">
-  <img src="https://img.shields.io/badge/offline-first-success?style=flat" alt="Offline first">
-  <img src="https://img.shields.io/badge/LGPD-compliant-brightgreen?style=flat" alt="LGPD">
-</p>
+**Assistente SINAN é uma aplicação web 100% client-side, gratuita e auditável, criada para apoiar profissionais e estudantes de saúde no preenchimento das fichas de notificação do SINAN.** Você abre o site, preenche um formulário guiado com validação em tempo real e autocomplete de tabelas oficiais (município, UF, CBO, CNAE, CID-10) — e baixa o **PDF editável da ficha já preenchido**, pronto para impressão, assinatura e entrega ao serviço responsável pela digitação no SINAN NET.
 
-<p align="center">
-  <a href="https://hiagowms.github.io/assistente-sinan/"><strong>🌐 Acessar o app</strong></a> •
-  <a href="#-para-quem-é">Para quem é</a> •
-  <a href="#-fichas-suportadas">Fichas</a> •
-  <a href="#-como-usar">Como usar</a> •
-  <a href="#-arquitetura-técnica">Arquitetura</a> •
-  <a href="#-privacidade--lgpd">LGPD</a>
-</p>
+Desenvolvido no **PET-Saúde / Informação e Saúde Digital (I&SD)** em parceria com o **CEREST Botucatu**.
 
----
+🌐 **Acesse agora:** [https://hiagowms.github.io/assistente-sinan/](https://hiagowms.github.io/assistente-sinan/)
 
-**Assistente SINAN** é uma aplicação web **100% client-side** que ajuda profissionais de saúde do **PET-Saúde / Informação e Saúde Digital (I&SD)** a **preparar** as fichas de notificação do **SINAN** (Sistema de Informação de Agravos de Notificação). Você abre o site, preenche um formulário guiado com validação em tempo real, autocomplete de tabelas oficiais (município, UF, CBO, CNAE, CID-10) — e baixa o **PDF editável da ficha já preenchido**, pronto para impressão, assinatura e entrega ao serviço responsável pela digitação no SINAN NET.
+> [!WARNING]
+> **O Assistente SINAN não envia, não transmite e não insere dados no SINAN NET.** Ele apenas gera o PDF da ficha preenchida. A inserção no sistema oficial continua sendo feita pelo profissional habilitado, no SINAN NET, conforme o fluxo institucional.
 
-> ⚠️ **O Assistente SINAN não envia, não transmite e não insere dados no SINAN NET.** Ele apenas gera o PDF da ficha preenchida. A inserção no sistema oficial continua sendo feita pelo profissional habilitado, no SINAN NET, conforme o fluxo institucional.
+> [!TIP]
+> Nada é enviado para servidor. Tudo roda no seu navegador — mesmo hospedado no GitHub Pages, **nenhum dado de paciente sai do seu dispositivo**.
 
-Nada é enviado para servidor. Tudo roda no seu navegador.
+## Principais Recursos ⭐
 
----
+- 🚀 **Zero instalação**: Abra o link no navegador e use. Sem cadastro, sem login, sem download. Funciona em desktop e celular.
 
-## 🩺 Para quem é
+- 🔒 **100% client-side e LGPD-compliant**: A aplicação inteira roda no navegador. Sem backend, sem trackers, sem Google Analytics, sem cookies de rastreamento, sem CDNs externas. Dados sensíveis de saúde **nunca** saem do dispositivo do usuário.
 
-- **Profissionais de saúde** (médicos, enfermeiros, técnicos) que preparam fichas SINAN no dia a dia.
-- **Equipes do CEREST Botucatu** e da Vigilância em Saúde do Trabalhador.
-- **Estudantes do PET-Saúde / Informação e Saúde Digital (I&SD)** usando casos didáticos.
-- Qualquer um que precise gerar um PDF de ficha SINAN preenchido **sem digitar campo a campo no Adobe Reader**.
+- 📋 **11 fichas SINAN cobertas**: Violência Interpessoal/Autoprovocada e 10 fichas de Saúde do Trabalhador (DRT) — Acidente de Trabalho Grave, Acidente com Material Biológico, Intoxicação Exógena, LER/DORT, Transtornos Mentais, PAIR, Pneumoconioses, Dermatoses, Câncer Relacionado ao Trabalho e Distúrbios de Voz.
 
-## 📋 Fichas suportadas
+- 📄 **Geração de PDF AcroForm**: Cada ficha tem um PDF oficial editável em `fichas/*_editavel.pdf`. O formulário HTML preenche os campos AcroForm via [`pdf-lib`](https://pdf-lib.js.org/) e devolve um PDF **ainda editável** — ajustes finais podem ser feitos no Adobe Reader antes da assinatura.
 
-11 assistentes, cobrindo as principais notificações de **Saúde do Trabalhador (DRT)** e o agravo de **Violência Interpessoal/Autoprovocada**:
+- 🤖 **Importação Receita Federal (CNPJ)**: Cole o texto do "Comprovante de Inscrição e de Situação Cadastral" → CNAE, razão social, endereço e dados da empresa são preenchidos automaticamente. Motor próprio (`rf_parser.js`) trata máscaras, CNAEs secundários multi-linha, MATRIZ/FILIAL e formatação de CEP/telefone/UF.
+
+- 🔍 **Autocomplete de tabelas oficiais offline**: Município (IBGE), UF, CBO (com sinônimos), CNAE, CID-10 — todas as tabelas vivem em `data/*.js` como arrays globais. Sem chamadas de rede.
+
+- ✅ **Validação em tempo real e gamificação de progresso**: Campos essenciais marcados, barra de progresso, modais de validação amigáveis, toasts de feedback. Caps lock automático com remoção de acentos (exigência do SINAN NET).
+
+- 🔄 **Transferência entre fichas**: Paciente atendido em múltiplos agravos? Dados comuns (identificação, residência, ocupação) são transferidos entre fichas via `sessionStorage`.
+
+- 🎓 **Casos didáticos**: Menu de **pacientes fictícios** por ficha (em `data/casos/`) para ensino/treinamento sem dados reais.
+
+- 🌙 **Dark mode**: Toggle no header com persistência via `localStorage`.
+
+- 📱 **Mobile-first responsivo**: Layout adapta a celular/tablet, com `inputmode` apropriado por campo (numeric/tel).
+
+- 🛠️ **Padrões SINAN respeitados**: Pills com valores numéricos (Gestante `1=1ºTrimestre`...`9=Ignorado`, Escolaridade `0=Analfabeto`...`10=Não se aplica`, unidades de tempo `1=Hora`/`2=Dia`/`3=Mês`/`4=Ano`), sem abreviações nos rótulos, mapeamento autoritativo de campos em `.md` por ficha.
+
+- 📦 **Zero build, zero framework**: HTML + CSS + JS vanilla. Sem React, sem Vue, sem bundler, sem `node_modules`. Abra qualquer `.html` num servidor estático e funciona.
+
+- 🌐 **Offline-first**: Todas as bibliotecas (`pdf-lib`, `pdf.js`) vivem em `lib/`. Nenhuma CDN remota.
+
+## Fichas Suportadas 📋
 
 | Ficha | Arquivo |
 |---|---|
@@ -65,19 +78,17 @@ Nada é enviado para servidor. Tudo roda no seu navegador.
 
 Cada ficha tem um PDF AcroForm oficial em `fichas/*_editavel.pdf` e um mapeamento autoritativo de campos em `fichas/*_editavel.md`.
 
-## 🚀 Como usar
+## Como Usar 🚀
 
-### 🌐 Acesso online (recomendado)
+### Acesso online (recomendado) 🌐
 
 **👉 [https://hiagowms.github.io/assistente-sinan/](https://hiagowms.github.io/assistente-sinan/)**
 
-Basta abrir o link no navegador. Não precisa instalar nada, não precisa cadastro, não precisa login. Funciona em desktop e celular.
+Basta abrir no navegador. Sem instalação, cadastro ou login. Funciona em desktop e celular.
 
-A aplicação roda inteiramente no seu navegador (100% client-side) — mesmo hospedada no GitHub Pages, **nenhum dado de paciente sai do seu dispositivo**.
+### Rodar localmente 💻
 
-### 💻 Rodar localmente (opcional — sua própria cópia)
-
-Caso queira hospedar internamente (servidor do CEREST, intranet do serviço) ou estudar/modificar o código:
+Para hospedar internamente (servidor do CEREST, intranet do serviço) ou estudar/modificar o código:
 
 ```bash
 git clone https://github.com/hiagowms/assistente-sinan.git
@@ -91,10 +102,10 @@ npx serve .
 
 Abra `http://localhost:8000` no navegador.
 
-> **Por que servidor HTTP e não abrir o `index.html` direto?**
-> O navegador bloqueia leitura de PDFs locais via `file://`. Qualquer servidor estático resolve.
+> [!NOTE]
+> **Por que servidor HTTP e não abrir o `index.html` direto?** O navegador bloqueia leitura de PDFs locais via `file://`. Qualquer servidor estático resolve.
 
-Você também pode publicar sua cópia em GitHub Pages, Netlify, Vercel, Apache, Nginx — não precisa de backend.
+Você também pode publicar sua cópia em GitHub Pages, Netlify, Vercel, Apache ou Nginx — não precisa de backend.
 
 ### Fluxo de uso
 
@@ -104,7 +115,7 @@ Você também pode publicar sua cópia em GitHub Pages, Netlify, Vercel, Apache,
 4. Clique **Gerar PDF** → baixa o PDF preenchido (mantém AcroForms editáveis).
 5. Opcional: **Transferir dados** entre fichas (paciente atendido em múltiplos agravos) ou carregar **paciente fictício** para fins didáticos.
 
-## ⚙️ Arquitetura técnica
+## Arquitetura Técnica ⚙️
 
 ```
 ┌──────────────────────────────────────────────────────────┐
@@ -144,7 +155,7 @@ Cada ficha define seus **globals de configuração** (`window.FICHA_NOME`, `wind
 - **Sem abreviações**: rótulos sempre por extenso ("Ensino Fundamental completo", nunca "EF completo").
 - **Campos geo e código de logradouro nunca no HTML**: ficam em branco no PDF (preenchimento manual posterior, se necessário).
 
-## 📁 Estrutura do projeto
+## Estrutura do Projeto 📁
 
 ```
 assistente-sinan/
@@ -190,7 +201,7 @@ assistente-sinan/
 └── README.md                        (este arquivo)
 ```
 
-## 🔒 Privacidade & LGPD
+## Privacidade & LGPD 🔒
 
 A aplicação lida com **dados pessoais sensíveis de saúde**. Por isso:
 
@@ -202,7 +213,7 @@ A aplicação lida com **dados pessoais sensíveis de saúde**. Por isso:
 
 Em conformidade com a **Lei Geral de Proteção de Dados (LGPD — Lei 13.709/2018)**.
 
-## 🛠️ Adicionar uma nova ficha
+## Adicionar uma Nova Ficha 🛠️
 
 1. Copie um assistente existente (ex: `sinan_transtornos.html`) como base.
 2. Adapte os campos do formulário para a ficha SINAN alvo.
@@ -214,7 +225,7 @@ Em conformidade com a **Lei Geral de Proteção de Dados (LGPD — Lei 13.709/20
 
 Detalhes completos em [`CLAUDE.md`](./CLAUDE.md).
 
-## 📜 Convenções
+## Convenções 📜
 
 - **Idioma**: HTML, labels, placeholders e comentários em **português brasileiro**.
 - **Commits**: em português, prefixo convencional (`feat:`, `fix:`, `refactor:`, `ui:`, `revert:`).
@@ -222,16 +233,28 @@ Detalhes completos em [`CLAUDE.md`](./CLAUDE.md).
 - **AcroForm**: nomes descritivos (`paciente_nome`, `empresa_razao_social`).
 - **Mapeamento autoritativo**: o `.md` da ficha — **não** ler o PDF binário para descobrir campos.
 
-## 🤝 Contexto institucional
+## Contexto Institucional 🤝
 
 Projeto desenvolvido no âmbito do **PET-Saúde / Informação e Saúde Digital (I&SD)** em parceria com o **CEREST Botucatu** (Centro de Referência em Saúde do Trabalhador), para apoiar o ensino e a prática do preenchimento das fichas de notificação compulsória de agravos do SINAN. A digitação final no SINAN NET segue o fluxo institucional do serviço responsável.
 
-## 📄 Licença
+## Licença 📄
 
 [MIT](./LICENSE) — uso, modificação e distribuição livres, com atribuição.
 
+## Suporte 💬
+
+Dúvidas, sugestões ou problemas? Abra uma [issue no GitHub](https://github.com/hiagowms/assistente-sinan/issues).
+
+## Star History
+
+<a href="https://star-history.com/#hiagowms/assistente-sinan&Date">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=hiagowms/assistente-sinan&type=Date&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=hiagowms/assistente-sinan&type=Date" />
+    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=hiagowms/assistente-sinan&type=Date" />
+  </picture>
+</a>
+
 ---
 
-<p align="center">
-  Feito com ☕ por <a href="https://github.com/hiagowms">Hiago</a> — PET-Saúde / Informação e Saúde Digital (I&SD) · CEREST Botucatu
-</p>
+Feito com ☕ por [Hiago](https://github.com/hiagowms) — PET-Saúde / Informação e Saúde Digital (I&SD) · CEREST Botucatu 💪
